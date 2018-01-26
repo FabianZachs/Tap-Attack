@@ -22,14 +22,15 @@ import java.util.ArrayList;
 
 public class MainMenuActivity extends AppCompatActivity {
 
-    private SharedPreferences soundImg;
     private ArrayList<MediaPlayer> mediaPlayers; // these players loop -> turn of onStop()
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mediaPlayers = new ArrayList<MediaPlayer>();
+        prefs = getSharedPreferences("playerPrefs", MODE_PRIVATE);
 
         // to make app fullscreen
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -94,13 +95,19 @@ public class MainMenuActivity extends AppCompatActivity {
 
     }
 
+    // plays sound if sound is ON
     private void playSound(int sound, boolean repeat) {
-        MediaPlayer mp = MediaPlayer.create(this, sound);
-        if (repeat == true) {
-            mp.setLooping(true);
-            mediaPlayers.add(mp);
+
+        final SharedPreferences prefs = getSharedPreferences("playerPrefs", MODE_PRIVATE);
+
+        if (soundOn(prefs)) {
+            MediaPlayer mp = MediaPlayer.create(this, sound);
+            if (repeat) {
+                mp.setLooping(true);
+                mediaPlayers.add(mp);
+            }
+            mp.start();
         }
-        mp.start();
     }
 
     public boolean soundOn(SharedPreferences prefs) {
@@ -131,8 +138,11 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        final SharedPreferences prefs = getSharedPreferences("playerPrefs", MODE_PRIVATE);
+
         for (MediaPlayer mp : mediaPlayers) {
-            mp.start();
+            if (soundOn(prefs))
+                mp.start();
         }
     }
 

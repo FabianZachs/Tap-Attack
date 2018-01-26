@@ -9,7 +9,7 @@
     android:background="@drawable/dialog_shape">
 
     <TextView
-        android:text="SOUND"
+        android:text="@string/sound"
         android:fontFamily="@font/undinaru"
         android:textSize="50sp"
         android:layout_width="wrap_content"
@@ -20,11 +20,12 @@
         android:id="@+id/sound_setting"
         android:textStyle="bold"
         android:fontFamily="@font/undinaru"
-        android:text="ON"
-        android:textColor="#42b4db"
+        android:text="OFF"
+        android:textColor="@color/soundoff"
         android:textSize="50sp"
         android:soundEffectsEnabled="false"
-        android:layout_margin="20sp"
+        android:layout_margin="10sp"
+        android:padding="5sp"
         android:layout_width="wrap_content"
         android:layout_height="70sp"/>
 
@@ -32,7 +33,7 @@
     <TextView
         android:id="@+id/ok_button"
         android:fontFamily="@font/undinaru"
-        android:text="OK"
+        android:text="@string/ok"
         android:textColor="#000000"
         android:textSize="40sp"
         android:soundEffectsEnabled="false"

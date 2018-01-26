@@ -55,37 +55,13 @@
                 android:onClick="settingsClick"
                 android:gravity="center"
                 android:layout_weight="1.3"
-                android:text="SETTINGS"
+                android:text="@string/settings"
                 android:textSize="45sp"
                 android:fontFamily="@font/undinaru"
                 android:textColor="#374a4a"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content" />
 
-            <!--j
-            <ImageView
-                android:id="@+id/store_img"
-                android:adjustViewBounds="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleY=".6"
-                android:scaleX=".6"
-                android:layout_weight="2"
-                android:src="@drawable/storethintext"/>
-
-            <ImageView
-                android:id="@+id/settings_img"
-                android:soundEffectsEnabled="false"
-                android:onClick="settingsClick"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleY=".9"
-                android:scaleX=".9"
-                android:layout_weight="2"
-                android:src="@drawable/settingstext"/>
-                -->
         </LinearLayout>
     </LinearLayout>
 
