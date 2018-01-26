@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#FF4081</color>
     <color name="blackbackground">#000000</color>
-    <color name="settingsbackground">#374a4a</color>
+    <!-- <color name="settingsbackground">#374a4a</color> -->
+    <color name="settingsbackground">#f3f3f3ff</color>
+    <color name="soundon">#42b4db</color>
+    <color name="soundoff">#d93b3b</color>
     <!-- <color name="settingsbackground">#2c2c2c</color> -->
 </resources>

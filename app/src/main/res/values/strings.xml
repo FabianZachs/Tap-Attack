@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Tap Attack</string>
+    <string name="settings">SETTINGS</string>
+    <string name="ok">OK</string>
+    <string name="on">ON</string>
+    <string name="sound">SOUND</string>
 </resources>

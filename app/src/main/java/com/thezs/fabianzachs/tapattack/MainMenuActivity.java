@@ -14,19 +14,23 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class MainMenuActivity extends AppCompatActivity {
 
-    private SharedPreferences soundImg;
     private ArrayList<MediaPlayer> mediaPlayers; // these players loop -> turn of onStop()
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mediaPlayers = new ArrayList<MediaPlayer>();
+        prefs = getSharedPreferences("playerPrefs", MODE_PRIVATE);
 
         // to make app fullscreen
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -34,37 +38,40 @@ public class MainMenuActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_main_menu);
-        playSound(R.raw.mainmenu, true);
+        initMusic(R.raw.mainmenu);
     }
 
     // shows the settings alert dialog
     public void settingsClick(View view) {
 
         // play settings click noise
-        playSound(R.raw.opensettings, false);
+        playSound(R.raw.opensettings);
 
         // create a builder for the alert
         AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
         View alertView = getLayoutInflater().inflate(R.layout.dialog_settings, null);
 
         // define the views inside the layout
-        final ImageView soundButt = (ImageView) alertView.findViewById(R.id.sound_setting);
+        final TextView soundText = (TextView) alertView.findViewById(R.id.sound_setting);
 
         // depending on the current sound setting- set to ON or OFF img
-        final SharedPreferences prefs = getSharedPreferences("playerPrefs", MODE_PRIVATE);
-        setSoundImg(prefs, soundButt);
+        setSoundText(soundText);
 
 
-        // on click of the soundButt, set to opposite img
-        soundButt.setOnClickListener(new View.OnClickListener() {
+        // on click of the soundText, set to opposite img
+        soundText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (soundOn(prefs)) {
-                    setSoundPrefAndImg(false, prefs, soundButt);
+                if (soundOn()) {
+                    // set OFF
+                    setSoundPrefAndText(false, soundText);
+                    repeatMpStop();
                 } else {
-                    setSoundPrefAndImg(true, prefs, soundButt);
+                    // set ON
+                    setSoundPrefAndText(true, soundText);
+                    repeatMpResume();
                 }
-                playSound(R.raw.settingsswitch, false);
+                playSound(R.raw.settingsswitch);
             }
         });
 
@@ -76,66 +83,84 @@ public class MainMenuActivity extends AppCompatActivity {
 
 
         // for OK button
-        ImageView okButt = (ImageView) alertView.findViewById(R.id.ok_button);
+        TextView okButt = (TextView) alertView.findViewById(R.id.ok_button);
+
         okButt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playSound(R.raw.closesettings, false);
+                playSound(R.raw.closesettings);
                 dialog.dismiss();
             }
         });
 
         dialog.show();
-
-
     }
 
-    private void playSound(int sound, boolean repeat) {
+    // plays music
+    private void initMusic(int sound) {
         MediaPlayer mp = MediaPlayer.create(this, sound);
-        if (repeat == true) {
-            mp.setLooping(true);
-            mediaPlayers.add(mp);
-        }
-        mp.start();
+        mp.setLooping(true);
+        mediaPlayers.add(mp);
+        if (soundOn()) mp.start();
     }
 
-    public boolean soundOn(SharedPreferences prefs) {
+    // plays sound if sound is ON
+    private void playSound(int sound) {
+
+        if (soundOn()) {
+            MediaPlayer mp = MediaPlayer.create(this, sound);
+            mp.start();
+        }
+    }
+
+    public boolean soundOn() {
         return prefs.getBoolean("sound", true);
     }
 
-    public void setSoundImg(SharedPreferences prefs, ImageView soundButt) {
-        if (soundOn(prefs)) {
+    public void setSoundText(TextView soundText) {
+        if (soundOn()) {
             // set ON img
-            soundButt.setImageResource(R.drawable.soundon);
+            soundText.setText("ON");
+            soundText.setTextColor(getResources().getColor(R.color.soundon));
         } else {
             // set OFF toggle
-            soundButt.setImageResource(R.drawable.soundoff);
+            soundText.setText("OFF");
+            soundText.setTextColor(getResources().getColor(R.color.soundoff));
         }
     }
 
-    private void setSoundPrefAndImg(boolean onOrOff, SharedPreferences prefs, ImageView soundButt) {
+    private void setSoundPrefAndText(boolean onOrOff, TextView soundText) {
         SharedPreferences.Editor prefsEditior = prefs.edit();
         prefsEditior.putBoolean("sound", onOrOff);
         prefsEditior.apply();
-        setSoundImg(prefs, soundButt);
-
+        setSoundText(soundText);
     }
+
+    public void repeatMpStop() {
+        for (MediaPlayer mp : mediaPlayers) {
+                mp.pause();
+        }
+    }
+
+    public void repeatMpResume() {
+        for (MediaPlayer mp : mediaPlayers) {
+            if (soundOn())
+                mp.start();
+        }
+    }
+
 
     // when app opens up again
     @Override
     protected void onResume() {
         super.onResume();
-        for (MediaPlayer mp : mediaPlayers) {
-            mp.start();
-        }
+        repeatMpResume();
     }
 
     // when app is closed
     @Override
     protected void onStop() {
         super.onStop();
-        for (MediaPlayer mp : mediaPlayers) {
-            mp.pause();
-        }
+        repeatMpStop();
     }
 }
