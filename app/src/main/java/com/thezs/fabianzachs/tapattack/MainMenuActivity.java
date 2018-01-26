@@ -63,9 +63,13 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (soundOn()) {
+                    // set OFF
                     setSoundPrefAndText(false, soundText);
+                    repeatMpStop();
                 } else {
+                    // set ON
                     setSoundPrefAndText(true, soundText);
+                    repeatMpResume();
                 }
                 playSound(R.raw.settingsswitch, false);
             }
@@ -128,23 +132,31 @@ public class MainMenuActivity extends AppCompatActivity {
         setSoundText(soundText);
     }
 
-    // when app opens up again
-    @Override
-    protected void onResume() {
-        super.onResume();
+    public void repeatMpStop() {
+        for (MediaPlayer mp : mediaPlayers) {
+                mp.pause();
+        }
+    }
 
+    public void repeatMpResume() {
         for (MediaPlayer mp : mediaPlayers) {
             if (soundOn())
                 mp.start();
         }
     }
 
+
+    // when app opens up again
+    @Override
+    protected void onResume() {
+        super.onResume();
+        repeatMpResume();
+    }
+
     // when app is closed
     @Override
     protected void onStop() {
         super.onStop();
-        for (MediaPlayer mp : mediaPlayers) {
-            mp.pause();
-        }
+        repeatMpStop();
     }
 }
