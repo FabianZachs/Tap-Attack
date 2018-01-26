@@ -33,15 +33,6 @@
             android:scaleX=".4"
             android:src="@drawable/startbluebluered"/>
 
-        <!--
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TAP ATTACK"
-            android:fontFamily="@font/undinaru"
-            android:textStyle="bold"
-            android:textColor="#d93b3b"/>
-        -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -61,6 +52,7 @@
 
             <TextView
                 android:id="@+id/settings_text"
+                android:onClick="settingsClick"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="SETTINGS"
