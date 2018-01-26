@@ -55,18 +55,17 @@ public class MainMenuActivity extends AppCompatActivity {
         final TextView soundText = (TextView) alertView.findViewById(R.id.sound_setting);
 
         // depending on the current sound setting- set to ON or OFF img
-        final SharedPreferences prefs = getSharedPreferences("playerPrefs", MODE_PRIVATE);
-        setSoundText(prefs, soundText);
+        setSoundText(soundText);
 
 
         // on click of the soundText, set to opposite img
         soundText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (soundOn(prefs)) {
-                    setSoundPrefAndText(false, prefs, soundText);
+                if (soundOn()) {
+                    setSoundPrefAndText(false, soundText);
                 } else {
-                    setSoundPrefAndText(true, prefs, soundText);
+                    setSoundPrefAndText(true, soundText);
                 }
                 playSound(R.raw.settingsswitch, false);
             }
@@ -91,16 +90,12 @@ public class MainMenuActivity extends AppCompatActivity {
         });
 
         dialog.show();
-
-
     }
 
     // plays sound if sound is ON
     private void playSound(int sound, boolean repeat) {
 
-        final SharedPreferences prefs = getSharedPreferences("playerPrefs", MODE_PRIVATE);
-
-        if (soundOn(prefs)) {
+        if (soundOn()) {
             MediaPlayer mp = MediaPlayer.create(this, sound);
             if (repeat) {
                 mp.setLooping(true);
@@ -110,12 +105,12 @@ public class MainMenuActivity extends AppCompatActivity {
         }
     }
 
-    public boolean soundOn(SharedPreferences prefs) {
+    public boolean soundOn() {
         return prefs.getBoolean("sound", true);
     }
 
-    public void setSoundText(SharedPreferences prefs, TextView soundText) {
-        if (soundOn(prefs)) {
+    public void setSoundText(TextView soundText) {
+        if (soundOn()) {
             // set ON img
             soundText.setText("ON");
             soundText.setTextColor(getResources().getColor(R.color.soundon));
@@ -126,22 +121,20 @@ public class MainMenuActivity extends AppCompatActivity {
         }
     }
 
-    private void setSoundPrefAndText(boolean onOrOff, SharedPreferences prefs, TextView soundText) {
+    private void setSoundPrefAndText(boolean onOrOff, TextView soundText) {
         SharedPreferences.Editor prefsEditior = prefs.edit();
         prefsEditior.putBoolean("sound", onOrOff);
         prefsEditior.apply();
-        setSoundText(prefs, soundText);
-
+        setSoundText(soundText);
     }
 
     // when app opens up again
     @Override
     protected void onResume() {
         super.onResume();
-        final SharedPreferences prefs = getSharedPreferences("playerPrefs", MODE_PRIVATE);
 
         for (MediaPlayer mp : mediaPlayers) {
-            if (soundOn(prefs))
+            if (soundOn())
                 mp.start();
         }
     }
