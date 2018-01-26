@@ -38,14 +38,14 @@ public class MainMenuActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_main_menu);
-        playSound(R.raw.mainmenu, true);
+        initMusic(R.raw.mainmenu);
     }
 
     // shows the settings alert dialog
     public void settingsClick(View view) {
 
         // play settings click noise
-        playSound(R.raw.opensettings, false);
+        playSound(R.raw.opensettings);
 
         // create a builder for the alert
         AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
@@ -71,7 +71,7 @@ public class MainMenuActivity extends AppCompatActivity {
                     setSoundPrefAndText(true, soundText);
                     repeatMpResume();
                 }
-                playSound(R.raw.settingsswitch, false);
+                playSound(R.raw.settingsswitch);
             }
         });
 
@@ -88,7 +88,7 @@ public class MainMenuActivity extends AppCompatActivity {
         okButt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playSound(R.raw.closesettings, false);
+                playSound(R.raw.closesettings);
                 dialog.dismiss();
             }
         });
@@ -96,15 +96,19 @@ public class MainMenuActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    // plays music
+    private void initMusic(int sound) {
+        MediaPlayer mp = MediaPlayer.create(this, sound);
+        mp.setLooping(true);
+        mediaPlayers.add(mp);
+        if (soundOn()) mp.start();
+    }
+
     // plays sound if sound is ON
-    private void playSound(int sound, boolean repeat) {
+    private void playSound(int sound) {
 
         if (soundOn()) {
             MediaPlayer mp = MediaPlayer.create(this, sound);
-            if (repeat) {
-                mp.setLooping(true);
-                mediaPlayers.add(mp);
-            }
             mp.start();
         }
     }
