@@ -8,32 +8,36 @@
     android:layout_height="wrap_content"
     android:background="@drawable/dialog_shape">
 
-    <ImageView
+    <TextView
+        android:text="SOUND"
+        android:fontFamily="@font/undinaru"
+        android:textSize="50sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/soundtext"
-        android:adjustViewBounds="true"
-        android:scaleX=".5"
-        android:scaleY=".5"/>
+        android:adjustViewBounds="true"/>
 
-    <ImageView
+    <TextView
         android:id="@+id/sound_setting"
+        android:textStyle="bold"
+        android:fontFamily="@font/undinaru"
+        android:text="ON"
+        android:textColor="#42b4db"
+        android:textSize="50sp"
         android:soundEffectsEnabled="false"
-        android:maxWidth="120sp"
-        android:layout_margin="40sp"
+        android:layout_margin="20sp"
         android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:src="@drawable/soundoff"/>
-    <ImageView
+        android:layout_height="70sp"/>
+
+
+    <TextView
         android:id="@+id/ok_button"
+        android:fontFamily="@font/undinaru"
+        android:text="OK"
+        android:textColor="#000000"
+        android:textSize="40sp"
         android:soundEffectsEnabled="false"
-        android:maxWidth="50sp"
-        android:layout_weight="5"
-        android:src="@drawable/oktext"
-        android:adjustViewBounds="true"
         android:layout_width="wrap_content"
-        android:layout_height="0dp" />
+        android:layout_height="wrap_content"/>
+
 
 </LinearLayout>

@@ -53,8 +53,8 @@
             <TextView
                 android:id="@+id/settings_text"
                 android:onClick="settingsClick"
-                android:layout_gravity="center"
-                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_weight="1.3"
                 android:text="SETTINGS"
                 android:textSize="45sp"
                 android:fontFamily="@font/undinaru"

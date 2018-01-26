@@ -14,6 +14,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -48,21 +51,21 @@ public class MainMenuActivity extends AppCompatActivity {
         View alertView = getLayoutInflater().inflate(R.layout.dialog_settings, null);
 
         // define the views inside the layout
-        final ImageView soundButt = (ImageView) alertView.findViewById(R.id.sound_setting);
+        final TextView soundText = (TextView) alertView.findViewById(R.id.sound_setting);
 
         // depending on the current sound setting- set to ON or OFF img
         final SharedPreferences prefs = getSharedPreferences("playerPrefs", MODE_PRIVATE);
-        setSoundImg(prefs, soundButt);
+        setSoundText(prefs, soundText);
 
 
-        // on click of the soundButt, set to opposite img
-        soundButt.setOnClickListener(new View.OnClickListener() {
+        // on click of the soundText, set to opposite img
+        soundText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (soundOn(prefs)) {
-                    setSoundPrefAndImg(false, prefs, soundButt);
+                    setSoundPrefAndText(false, prefs, soundText);
                 } else {
-                    setSoundPrefAndImg(true, prefs, soundButt);
+                    setSoundPrefAndText(true, prefs, soundText);
                 }
                 playSound(R.raw.settingsswitch, false);
             }
@@ -76,7 +79,8 @@ public class MainMenuActivity extends AppCompatActivity {
 
 
         // for OK button
-        ImageView okButt = (ImageView) alertView.findViewById(R.id.ok_button);
+        TextView okButt = (TextView) alertView.findViewById(R.id.ok_button);
+
         okButt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,21 +107,23 @@ public class MainMenuActivity extends AppCompatActivity {
         return prefs.getBoolean("sound", true);
     }
 
-    public void setSoundImg(SharedPreferences prefs, ImageView soundButt) {
+    public void setSoundText(SharedPreferences prefs, TextView soundText) {
         if (soundOn(prefs)) {
             // set ON img
-            soundButt.setImageResource(R.drawable.soundon);
+            soundText.setText("ON");
+            soundText.setTextColor(getResources().getColor(R.color.soundon));
         } else {
             // set OFF toggle
-            soundButt.setImageResource(R.drawable.soundoff);
+            soundText.setText("OFF");
+            soundText.setTextColor(getResources().getColor(R.color.soundoff));
         }
     }
 
-    private void setSoundPrefAndImg(boolean onOrOff, SharedPreferences prefs, ImageView soundButt) {
+    private void setSoundPrefAndText(boolean onOrOff, SharedPreferences prefs, TextView soundText) {
         SharedPreferences.Editor prefsEditior = prefs.edit();
         prefsEditior.putBoolean("sound", onOrOff);
         prefsEditior.apply();
-        setSoundImg(prefs, soundButt);
+        setSoundText(prefs, soundText);
 
     }
 
