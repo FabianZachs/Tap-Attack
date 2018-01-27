@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:src="@drawable/titletext"
         android:layout_weight="2"
+        android:layout_marginTop="5sp"
         />
 
     <RelativeLayout
@@ -24,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/startbutton3"
+            android:src="@drawable/startbutton4"
             />
 
         <TextView
@@ -36,7 +37,8 @@
             android:text="Classic"
             android:textColor="#b0faff"
             android:fontFamily="@font/undinaru"
-            android:textSize="25sp"
+            android:textSize="30sp"
+            android:layout_marginTop="5sp"
             />
 
         <TextView
@@ -46,7 +48,7 @@
             android:text="STORE"
             android:textColor="#fefa1b"
             android:fontFamily="@font/undinaru"
-            android:textSize="30sp"
+            android:textSize="45sp"
             android:layout_marginStart="20sp"
             android:layout_marginLeft="20sp"
             android:layout_alignParentBottom="true"
@@ -55,13 +57,14 @@
             />
 
         <TextView
+            android:onClick="settingsClick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/gamemode_title"
             android:text="MENU"
             android:textColor="#374a4a"
             android:fontFamily="@font/undinaru"
-            android:textSize="30sp"
+            android:textSize="45sp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="20sp"
