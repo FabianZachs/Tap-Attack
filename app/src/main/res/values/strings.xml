@@ -1,6 +1,19 @@
 <resources>
     <string name="app_name">Tap Attack</string>
     <string name="settings">SETTINGS</string>
+
+    <string name="tap_attack">
+ <![CDATA[ <b><font color=#000000>TAP<font color=#0000ff>ATTACK</b>]]>
+  </string>
+
+    <string name="any_text">
+ <![CDATA[ <b><font color=#ff0000>write</b> your <b><font color=#0000ff>text</b> here .
+
+]]>
+  </string>
+
+    <string name="styled_welcome_message">We are <b><i>so</i></b> glad to see you.</string>
+
     <string name="ok">OK</string>
     <string name="on">ON</string>
     <string name="sound">SOUND</string>
