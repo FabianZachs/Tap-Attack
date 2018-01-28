@@ -1,5 +1,6 @@
 package com.thezs.fabianzachs.tapattack;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -162,5 +163,11 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         repeatMpStop();
+    }
+
+    public void playButton(View view) {
+        Intent intent = new Intent(this, PlayActivity.class);
+        intent.putExtra("gamemode", "classic");
+        startActivity(intent);
     }
 }

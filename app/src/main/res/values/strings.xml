@@ -17,4 +17,8 @@
     <string name="ok">OK</string>
     <string name="on">ON</string>
     <string name="sound">SOUND</string>
+
+    <string name="title_activity_play">PlayActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
