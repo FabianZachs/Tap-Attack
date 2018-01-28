@@ -29,6 +29,7 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
 
         mediaPlayers = new ArrayList<MediaPlayer>();
         prefs = getSharedPreferences("playerPrefs", MODE_PRIVATE);
