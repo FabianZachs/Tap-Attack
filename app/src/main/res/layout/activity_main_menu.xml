@@ -78,26 +78,6 @@
             android:text="@string/menu"
             android:textColor="#374a4a"
             android:textSize="45sp" />
-        <!--
-        <TextView
-            android:onClick="settingsClick"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/gamemode_title"
-            android:text="MENU"
-            android:textColor="#374a4a"
-            android:fontFamily="@font/undinaru"
-            android:textSize="45sp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="20sp"
-            android:layout_marginEnd="20sp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            />
-
-        -->
-
 
     </RelativeLayout>
 
