@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.google.android.gms.ads.MobileAds;
 
 import org.w3c.dom.Text;
 
