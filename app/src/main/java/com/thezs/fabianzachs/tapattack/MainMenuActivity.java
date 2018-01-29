@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.media.MediaPlayer;
@@ -36,7 +37,6 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
 
         mediaPlayers = new ArrayList<MediaPlayer>();
