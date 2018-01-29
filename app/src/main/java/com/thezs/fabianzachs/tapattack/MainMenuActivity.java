@@ -34,6 +34,9 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // ads
+        MobileAds.initialize(this, "YOUR_ADMOB_APP_ID");
+
         mediaPlayers = new ArrayList<MediaPlayer>();
         prefs = getSharedPreferences("playerPrefs", MODE_PRIVATE);
 

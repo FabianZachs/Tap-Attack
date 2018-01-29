@@ -21,13 +21,12 @@
         >
 
         <ImageView
-            android:onClick="playButton"
             android:id="@+id/play_button"
             android:layout_width="125dp"
             android:layout_height="125dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/startbluebluered"
-            />
+            android:onClick="playButton"
+            android:src="@drawable/startbluebluered" />
 
         <TextView
             android:id="@+id/gamemode_title"
@@ -43,20 +42,34 @@
             />
 
         <TextView
+            android:id="@+id/store_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/gamemode_title"
-            android:text="STORE"
-            android:textColor="#fefa1b"
-            android:fontFamily="@font/undinaru"
-            android:textSize="45sp"
-            android:layout_marginStart="20sp"
             android:layout_marginLeft="20sp"
-            android:layout_alignParentBottom="true"
-            android:gravity="bottom"
-            android:layout_marginBottom="10dp"
-            />
+            android:layout_marginStart="20sp"
+            android:fontFamily="@font/undinaru"
+            android:text="STORE"
+            android:layout_marginTop="15dp"
+            android:textColor="#fefa1b"
+            android:textSize="45sp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gamemode_title"
+            android:layout_alignRight="@+id/store_text"
+            android:layout_alignEnd="@id/store_text"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/undinaru"
+            android:onClick="settingsClick"
+            android:text="MENU"
+            android:textColor="#374a4a"
+            android:textSize="45sp" />
+        <!--
         <TextView
             android:onClick="settingsClick"
             android:layout_width="wrap_content"
@@ -71,9 +84,22 @@
             android:layout_marginRight="20sp"
             android:layout_marginEnd="20sp"
             android:layout_alignParentBottom="true"
-            android:gravity="bottom"
             android:layout_marginBottom="10dp"
             />
+
+        -->
+
+
     </RelativeLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:layout_gravity="center"
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+    </com.google.android.gms.ads.AdView>
 
 </LinearLayout>
