@@ -15,7 +15,8 @@
 
         <activity
             android:name=".MainMenuActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,6 +28,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_play"
             android:theme="@style/FullscreenTheme" />
+        <activity android:name=".Play2Activity"></activity>
     </application>
 
 </manifest>

@@ -23,4 +23,6 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
     <string name="title_activity_menu_fullscreen">MenuFullscreenActivity</string>
+
+    <string name="title_activity_fullscreen_main">FullscreenMainActivity</string>
 </resources>
