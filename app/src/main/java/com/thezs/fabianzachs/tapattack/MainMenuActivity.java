@@ -19,6 +19,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import org.w3c.dom.Text;
 
@@ -28,14 +30,14 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private ArrayList<MediaPlayer> mediaPlayers; // these players loop -> turn of onStop()
     private SharedPreferences prefs;
+    private AdView mAdView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // ads
-        MobileAds.initialize(this, "YOUR_ADMOB_APP_ID");
+
 
         mediaPlayers = new ArrayList<MediaPlayer>();
         prefs = getSharedPreferences("playerPrefs", MODE_PRIVATE);
@@ -43,6 +45,15 @@ public class MainMenuActivity extends AppCompatActivity {
         makeFullscreen();
 
         setContentView(R.layout.activity_main_menu);
+
+
+        // ads (below setContentView)
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
         initMusic(R.raw.mainmenu);
     }
 
@@ -64,7 +75,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     // shows the settings alert dialog
-    public void settingsClick(View view) {
+    public void menuClick(View view) {
 
         // play settings click noise
         playSound(R.raw.opensettings);

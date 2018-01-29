@@ -20,11 +20,19 @@
         android:layout_weight="1"
         >
 
+        <View
+            android:id="@+id/anchor"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"/>
+
+
         <ImageView
             android:id="@+id/play_button"
+            android:layout_alignBottom="@+id/anchor"
             android:layout_width="125dp"
             android:layout_height="125dp"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:onClick="playButton"
             android:src="@drawable/startbluebluered" />
 
@@ -49,12 +57,13 @@
             android:layout_marginLeft="20sp"
             android:layout_marginStart="20sp"
             android:fontFamily="@font/undinaru"
-            android:text="STORE"
+            android:text="@string/store"
             android:layout_marginTop="15dp"
             android:textColor="#fefa1b"
             android:textSize="45sp" />
 
         <TextView
+            android:id="@+id/menu_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/gamemode_title"
@@ -65,8 +74,8 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/undinaru"
-            android:onClick="settingsClick"
-            android:text="MENU"
+            android:onClick="menuClick"
+            android:text="@string/menu"
             android:textColor="#374a4a"
             android:textSize="45sp" />
         <!--
