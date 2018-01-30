@@ -36,7 +36,7 @@
             android:layout_width="125dp"
             android:layout_height="125dp"
             android:layout_centerHorizontal="true"
-            android:onClick="playButton"
+            android:onClick="playButtonClick"
             android:src="@drawable/startbluebluered" />
 
         <TextView

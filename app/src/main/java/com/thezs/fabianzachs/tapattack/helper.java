@@ -10,7 +10,7 @@ import android.view.View;
 public class helper {
 
 
-    private void makeFullscreen(Activity activity) {
+    public static void makeFullscreen(Activity activity) {
         // task bar
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
