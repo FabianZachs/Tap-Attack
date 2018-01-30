@@ -41,6 +41,7 @@
 
         <TextView
             android:id="@+id/gamemode_title"
+            android:soundEffectsEnabled="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/play_button"
@@ -78,6 +79,7 @@
             android:layout_marginTop="15dp"
             android:fontFamily="@font/undinaru"
             android:onClick="menuClick"
+            android:soundEffectsEnabled="false"
             android:text="@string/menu"
             android:textColor="#374a4a"
             android:textSize="45sp" />

@@ -23,12 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".PlayActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_play"
-            android:theme="@style/FullscreenTheme" />
-        <activity android:name=".Play2Activity"></activity>
+        <activity android:name=".Play2Activity" />
+        <activity android:name=".GameActivity"></activity>
     </application>
 
 </manifest>
