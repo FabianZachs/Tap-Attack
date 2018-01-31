@@ -55,16 +55,60 @@ public class MainMenuActivity extends  GeneralParent {
     }
 
 
+
+
     // shows the settings alert dialog
     public void menuClick(View view) {
 
         // play settings click noise
         playSound(R.raw.opensettings);
 
-        // create a builder for the alert
-        AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
+        // inflate the dialog layout
         View alertView = getLayoutInflater().inflate(R.layout.dialog_settings, null);
 
+        soundTogglerSetup(alertView);
+
+        // create a builder for the alert
+        AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
+
+        dbuilder.setView(alertView);
+        final AlertDialog dialog = dbuilder.create();
+
+        okButtonSetup(alertView, dialog);
+
+        dialogFullscreen(dialog);
+    }
+
+    private void dialogFullscreen(AlertDialog dialog) {
+
+        // to remove square edges from custom dialog shape
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        //Set the dialog to not focusable (makes navigation ignore us adding the window)
+        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+        dialog.show();
+        //Set the dialog to immersive
+        dialog.getWindow().getDecorView().setSystemUiVisibility(
+                this.getWindow().getDecorView().getSystemUiVisibility());
+
+        //Clear the not focusable flag from the window
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+    }
+
+    private void okButtonSetup(View alertView, final AlertDialog dialog) {
+
+        TextView okButt = (TextView) alertView.findViewById(R.id.ok_button);
+
+        okButt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playSound(R.raw.closesettings);
+                dialog.dismiss();
+            }
+        });
+    }
+
+    private void soundTogglerSetup(View alertView) {
         // sound toggler view
         final TextView soundText = (TextView) alertView.findViewById(R.id.sound_setting);
 
@@ -87,39 +131,7 @@ public class MainMenuActivity extends  GeneralParent {
                 playSound(R.raw.settingsswitch);
             }
         });
-
-
-        dbuilder.setView(alertView);
-        final AlertDialog dialog = dbuilder.create();
-
-        // to remove square edges from custom dialog shape
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-
-        // for OK button
-        TextView okButt = (TextView) alertView.findViewById(R.id.ok_button);
-
-        okButt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playSound(R.raw.closesettings);
-                dialog.dismiss();
-            }
-        });
-
-        // dialog fullscreen
-        //Set the dialog to not focusable (makes navigation ignore us adding the window)
-        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-        dialog.show();
-        //Set the dialog to immersive
-        dialog.getWindow().getDecorView().setSystemUiVisibility(
-                this.getWindow().getDecorView().getSystemUiVisibility());
-
-//Clear the not focusable flag from the window
-        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
     }
-
-
 
     // plays music
     private void initMusic(int sound) {
