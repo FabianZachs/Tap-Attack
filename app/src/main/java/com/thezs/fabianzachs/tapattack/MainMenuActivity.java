@@ -30,7 +30,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class MainMenuActivity extends AppCompatActivity {
+public class MainMenuActivity extends  GeneralParent {
 
     private ArrayList<MediaPlayer> mediaPlayers; // these players loop -> turn of onStop()
     private SharedPreferences prefs;
@@ -48,15 +48,6 @@ public class MainMenuActivity extends AppCompatActivity {
         helper.makeFullscreen(this);
 
         setContentView(R.layout.activity_main_menu);
-
-        // TextView menuText = (TextView) findViewById(R.id.menu_text);
-        //menuText.setPaintFlags(menuText.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
-        //menuText.setText(Html.fromHtml("<u>MENU</u>", Html.FROM_HTML_MODE_COMPACT));
-/*
-        SpannableString content = new SpannableString(getString(R.string.menu));
-        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
-        menuText.setText(content);
-*/
 
         // ads (below setContentView)
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
@@ -197,19 +188,6 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            this.getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        }
-    }
 
 
     // when app is closed
