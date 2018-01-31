@@ -3,6 +3,10 @@ package com.thezs.fabianzachs.tapattack;
 import android.app.Activity;
 import android.view.View;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 /**
  * Created by fabianzachs on 29/01/18.
  */
@@ -27,4 +31,11 @@ public class helper {
         decorView.setSystemUiVisibility(uiOptions);
     }
 
+    public static void bannerAdSetup(Activity activity, AdView AdView) {
+        // ads (below setContentView)
+        MobileAds.initialize(activity, "ca-app-pub-3940256099942544~3347511713");
+        AdView = (AdView) activity.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        AdView.loadAd(adRequest);
+    }
 }

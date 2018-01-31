@@ -49,12 +49,7 @@ public class MainMenuActivity extends  GeneralParent {
 
         setContentView(R.layout.activity_main_menu);
 
-        // ads (below setContentView)
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
-        mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
+        helper.bannerAdSetup(this, mAdView);
 
         initMusic(R.raw.mainmenu);
     }
