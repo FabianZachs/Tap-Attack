@@ -55,8 +55,6 @@ public class MainMenuActivity extends  GeneralParent {
     }
 
 
-
-
     // shows the settings alert dialog
     public void menuClick(View view) {
 
@@ -95,6 +93,7 @@ public class MainMenuActivity extends  GeneralParent {
         dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
     }
 
+
     private void okButtonSetup(View alertView, final AlertDialog dialog) {
 
         TextView okButt = (TextView) alertView.findViewById(R.id.ok_button);
@@ -107,6 +106,7 @@ public class MainMenuActivity extends  GeneralParent {
             }
         });
     }
+
 
     private void soundTogglerSetup(View alertView) {
         // sound toggler view
@@ -133,6 +133,7 @@ public class MainMenuActivity extends  GeneralParent {
         });
     }
 
+
     // plays music
     private void initMusic(int sound) {
         MediaPlayer mp = MediaPlayer.create(this, sound);
@@ -140,6 +141,7 @@ public class MainMenuActivity extends  GeneralParent {
         mediaPlayers.add(mp);
         if (soundOn()) mp.start();
     }
+
 
     // plays sound if sound is ON
     private void playSound(int sound) {
@@ -150,9 +152,11 @@ public class MainMenuActivity extends  GeneralParent {
         }
     }
 
+
     public boolean soundOn() {
         return prefs.getBoolean("sound", true);
     }
+
 
     public void setSoundText(TextView soundText) {
         if (soundOn()) {
@@ -166,6 +170,7 @@ public class MainMenuActivity extends  GeneralParent {
         }
     }
 
+
     private void setSoundPrefAndText(boolean onOrOff, TextView soundText) {
         SharedPreferences.Editor prefsEditior = prefs.edit();
         prefsEditior.putBoolean("sound", onOrOff);
@@ -173,11 +178,13 @@ public class MainMenuActivity extends  GeneralParent {
         setSoundText(soundText);
     }
 
+
     public void repeatMpStop() {
         for (MediaPlayer mp : mediaPlayers) {
                 mp.pause();
         }
     }
+
 
     public void repeatMpResume() {
         for (MediaPlayer mp : mediaPlayers) {
@@ -195,14 +202,13 @@ public class MainMenuActivity extends  GeneralParent {
     }
 
 
-
-
     // when app is closed
     @Override
     protected void onStop() {
         super.onStop();
         repeatMpStop();
     }
+
 
     public void playButtonClick(View view) {
         Intent intent = new Intent(this, GameActivity.class);
