@@ -1,9 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.thezs.fabianzachs.tapattack.GameActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_weight="5"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SCORE: 100"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STREAK: 100"/>
+        </LinearLayout>
+
+        <com.beardedhen.androidbootstrap.BootstrapProgressBar
+            android:layout_weight="10"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            app:bootstrapProgress="28"
+            app:striped="true"
+            app:animated="true"
+            app:roundedCorners="true"
+            app:bootstrapBrand="info"/>
+
+        <!-- CONTRIBUTE TO LICENSE:
+        https://github.com/Templarian/MaterialDesign/blob/master/license.txt -->
+        <ImageView
+            android:layout_margin="3dp"
+            android:scaleY="1.2"
+            android:scaleX="1.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pause_circle_outline"/>
+
+
+    </LinearLayout>
+
+    <!--
+    <com.thezs.fabianzachs.tapattack.GameCanvas
+        android:layout_weight=".1"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+        -->
+
+</LinearLayout>

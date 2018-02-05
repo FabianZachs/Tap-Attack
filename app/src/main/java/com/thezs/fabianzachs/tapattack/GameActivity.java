@@ -13,4 +13,10 @@ public class GameActivity extends GeneralParent {
         setContentView(R.layout.activity_game);
     }
 
+    // code to update progress bar
+    // code to update streak & score
+    // code for pause button
+    // code for entire background
+    // code for warning color
+
 }
