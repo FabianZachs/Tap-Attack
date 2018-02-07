@@ -9,6 +9,13 @@ import com.thezs.fabianzachs.tapattack.Game.Scene;
  */
 
 public class ClassicGameScene implements Scene {
+
+    public boolean gameOver;
+
+    public ClassicGameScene() {
+
+    }
+
     @Override
     public void update() {
 
