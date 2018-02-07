@@ -32,6 +32,7 @@
 
         <ImageView
             android:id="@+id/play_button"
+            android:soundEffectsEnabled="false"
             android:layout_alignBottom="@+id/anchor"
             android:layout_width="125dp"
             android:layout_height="125dp"
