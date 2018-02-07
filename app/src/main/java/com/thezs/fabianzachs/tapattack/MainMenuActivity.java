@@ -52,8 +52,7 @@ public class MainMenuActivity extends  GeneralParent {
         Constants.SCREEN_WIDTH = dm.widthPixels;
         Constants.SCREEN_HEIGHT = dm.heightPixels;
 
-        Constants.SHAPE_HEIGHT = Constants.SCREEN_WIDTH/10;
-        Constants.SHAPE_WIDTH = Constants.SHAPE_WIDTH;
+        Constants.SHAPE_WIDTH = Constants.SHAPE_HEIGHT = Constants.SCREEN_WIDTH/5;
 
         Constants.SHAPE_SPACING = 5;
     }
