@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -27,6 +28,9 @@ public class MainMenuActivity extends  GeneralParent {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // set up Constants
+        initializeConstants();
+
         // method instantiation
         mediaPlayers = new ArrayList<MediaPlayer>();
         prefs = getSharedPreferences("playerPrefs", MODE_PRIVATE);
@@ -38,6 +42,20 @@ public class MainMenuActivity extends  GeneralParent {
         helper.bannerAdSetup(this, mAdView);
 
         initMusic(R.raw.mainmenu);
+    }
+
+    private void initializeConstants() {
+
+        // get screen dimensions stored
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        Constants.SCREEN_WIDTH = dm.widthPixels;
+        Constants.SCREEN_HEIGHT = dm.heightPixels;
+
+        Constants.SHAPE_HEIGHT = Constants.SCREEN_WIDTH/10;
+        Constants.SHAPE_WIDTH = Constants.SHAPE_WIDTH;
+
+        Constants.SHAPE_SPACING = 5;
     }
 
 
