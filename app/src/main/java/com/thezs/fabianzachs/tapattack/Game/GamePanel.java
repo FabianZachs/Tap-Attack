@@ -5,8 +5,11 @@ import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Toast;
 
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.R;
 
 /**
  * Created by fabianzachs on 07/02/18.
@@ -62,6 +65,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     // TODO
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            StyleableToast.makeText(Constants.CURRENT_CONTEXT, "THINGS ACTUALLY WORK", R.style.successtoast).show();
+
+
+        }
 
         return super.onTouchEvent(event);
     }

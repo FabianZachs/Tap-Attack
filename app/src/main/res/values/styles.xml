@@ -36,4 +36,21 @@
         <item name="android:background">@color/black_overlay</item>
     </style>
 
+    <!-- for custom success toast -->
+    <style name="successtoast">
+        <item name="textBold">true</item>
+        <item name="textColor">#fff</item>
+        <item name="textFont">@font/undinaru</item>
+        <item name="textSize">18sp</item>
+        <item name="colorBackground">#a4f442</item>
+        <item name="solidBackground">true</item>
+        <item name="strokeWidth">3dp</item>     API 21+
+        <item name="strokeColor">#a4f442</item>    API 21+
+        <item name="iconLeft">@drawable/greencheckmark</item>
+        <item name="length">LONG</item>         ENUM: LONG | SHORT
+        <item name="cornerRadius">5dp</item>
+    </style>
+
+
+
 </resources>
