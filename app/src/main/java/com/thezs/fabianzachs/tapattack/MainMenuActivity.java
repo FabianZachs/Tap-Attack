@@ -13,7 +13,8 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdView;
-import com.thezs.fabianzachs.tapattack.Game.GameActivity;
+import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
+import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
 
 import java.util.ArrayList;
 
@@ -214,8 +215,8 @@ public class MainMenuActivity extends  GeneralParent {
 
 
     public void playButtonClick(View view) {
-        Intent intent = new Intent(this, GameActivity.class);
+        Intent intent = new Intent(this, MainGameActivity.class);
         intent.putExtra("gamemode", "classic");
-        startActivity(intent);
+        this.startActivity(intent);
     }
 }
