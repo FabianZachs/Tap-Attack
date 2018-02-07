@@ -1,6 +1,8 @@
-package com.thezs.fabianzachs.tapattack.Game;
+package com.thezs.fabianzachs.tapattack.Game.GameModeScenes;
 
 import android.graphics.Canvas;
+
+import com.thezs.fabianzachs.tapattack.Game.Scene;
 
 /**
  * Created by fabianzachs on 07/02/18.

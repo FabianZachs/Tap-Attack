@@ -3,6 +3,8 @@ package com.thezs.fabianzachs.tapattack.Game;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
+import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
+
 import java.util.ArrayList;
 
 /**
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 public class SceneManager {
 
     private ArrayList<Scene> scenes = new ArrayList<>();
-    public static int ACTIVE_SCENE;
+    private static int ACTIVE_SCENE;
 
     // TODO update to take game mode x (ACTIVE_SCENE is specified before)
     public SceneManager() {
@@ -30,5 +32,9 @@ public class SceneManager {
 
     public void draw(Canvas canvas) {
         scenes.get(ACTIVE_SCENE).draw(canvas);
+    }
+
+    public void setActiveScene(int sceneNumber) {
+        ACTIVE_SCENE = sceneNumber;
     }
 }
