@@ -1,8 +1,12 @@
-package com.thezs.fabianzachs.tapattack;
+package com.thezs.fabianzachs.tapattack.Game;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.thezs.fabianzachs.tapattack.GeneralParent;
+import com.thezs.fabianzachs.tapattack.R;
+import com.thezs.fabianzachs.tapattack.helper;
 
 public class GameActivity extends GeneralParent {
 
