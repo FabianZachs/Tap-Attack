@@ -58,7 +58,6 @@ public class ShapesManager {
     }
 
     public void draw(Canvas canvas) {
-        Log.d("HELPTAG", "draw: THIS RAN");
         for (ShapeObject shape : shapes) {
             shape.draw(canvas);
         }
