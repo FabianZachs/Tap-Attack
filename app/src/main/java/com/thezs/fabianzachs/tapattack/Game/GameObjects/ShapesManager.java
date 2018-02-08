@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,18 @@ public class ShapesManager {
     }
 
     public void recieveTouch(MotionEvent event) {
+        boolean shapeInteractment = false; // used to see if user interacted with shape.
 
+        for (ShapeObject shape : shapes) {
+            if (shape.getBitmapHolder().contains((int) event.getX(), (int) event.getY())) {
+                shape.recieveTouch(event);
+                shapeInteractment = true;
+            }
+        }
+
+        // if user ACTION_DOWNs and not onto a shape
+        if (!shapeInteractment && event.getAction() == MotionEvent.ACTION_DOWN)
+            ClassicGameScene.gameOver = true;
     }
 
     public void update() {

@@ -5,10 +5,10 @@ import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.Toast;
 
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
 import com.thezs.fabianzachs.tapattack.R;
 
 /**
@@ -18,6 +18,7 @@ import com.thezs.fabianzachs.tapattack.R;
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     private MainThread thread;
+    private SceneManager sceneManager;
 
     //private SceneManager manager;
 
@@ -28,7 +29,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         Constants.CURRENT_CONTEXT = context;
 
-        // manager = new SceneManager();
+        sceneManager = new SceneManager();
 
         setFocusable(true);
     }
@@ -67,12 +68,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public boolean onTouchEvent(MotionEvent event) {
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            StyleableToast.makeText(Constants.CURRENT_CONTEXT, "THINGS ACTUALLY WORK", R.style.successtoast).show();
-
-
+            StyleableToast.makeText(Constants.CURRENT_CONTEXT, ClassicGameScene.gameOver + "", R.style.successtoast).show();
         }
+        //sceneManager.recieveTouch(event);
 
-        return super.onTouchEvent(event);
+        return true;
+        //return super.onTouchEvent(event);
     }
 
     // TODO

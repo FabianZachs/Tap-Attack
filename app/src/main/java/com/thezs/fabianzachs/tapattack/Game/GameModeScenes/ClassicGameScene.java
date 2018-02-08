@@ -12,10 +12,11 @@ import com.thezs.fabianzachs.tapattack.Game.Scene;
 
 public class ClassicGameScene implements Scene {
 
-    public boolean gameOver;
+    public static boolean gameOver;
     private ShapesManager shapesManager;
 
     public ClassicGameScene() {
+        this.gameOver = false; // TODO or/and on reset?
 
     }
 

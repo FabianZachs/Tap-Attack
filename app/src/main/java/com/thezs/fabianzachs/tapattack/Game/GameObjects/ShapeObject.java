@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.view.MotionEvent;
 
 /**
  * Created by fabianzachs on 07/02/18.
@@ -39,6 +40,14 @@ public abstract class ShapeObject {
         // if time alive > durationAlive, object should be removed
         // AND if it still has lives
         return !(System.currentTimeMillis() - initTime > durationAlive) && lives > 0;
+    }
+
+    public Rect getBitmapHolder() {
+        return bitmapHolder;
+    }
+
+    public void recieveTouch(MotionEvent event) {
+
     }
 
 
