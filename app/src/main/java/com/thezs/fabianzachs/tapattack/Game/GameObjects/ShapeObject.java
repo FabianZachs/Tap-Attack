@@ -32,7 +32,6 @@ public abstract class ShapeObject {
         this.points = 1; // all shapes are worth one point?
         this.initTime = System.currentTimeMillis();
         // code to make rectangle for holding the shape, then have subclasses call super for this?
-        //this.bitmapHolder =
     }
 
 
@@ -42,20 +41,62 @@ public abstract class ShapeObject {
         return !(System.currentTimeMillis() - initTime > durationAlive) && lives > 0;
     }
 
-    public Rect getBitmapHolder() {
-        return bitmapHolder;
-    }
+
+
 
     public void recieveTouch(MotionEvent event) {
-
+        // all shapes need to 1) if motionDown : reduce live
     }
 
+    // SETTERS & GETTERS
 
+    public void setBitmapHolder(Rect rect) {
+        this.bitmapHolder = rect;
+    }
 
+    public Rect getBitmapHolder() {
+        return this.bitmapHolder;
+    }
 
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
 
+    public int getLives() {
+        return this.lives;
+    }
 
+    public void setDurationAlive(float durationAlive) {
+        this.durationAlive = durationAlive;
+    }
 
+    public float getDurationAlive() {
+        return this.durationAlive;
+    }
+
+    public void setInitTime(long initTime) {
+        this.initTime = initTime;
+    }
+
+    public long getInitTime() {
+        return this.initTime;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getColor() {
+        return this.color;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public int getPoints() {
+        return this.points;
+    }
 
 
 }

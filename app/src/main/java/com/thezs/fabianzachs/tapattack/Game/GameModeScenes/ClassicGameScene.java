@@ -31,6 +31,8 @@ public class ClassicGameScene implements Scene {
 
     @Override
     public void draw(Canvas canvas) {
+        // set background color canvas.drawARGB(..);
+        shapesManager.draw(canvas);
 
     }
 

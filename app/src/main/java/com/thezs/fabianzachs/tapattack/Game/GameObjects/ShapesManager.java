@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
@@ -24,6 +25,9 @@ public class ShapesManager {
     private int score;
 
     public ShapesManager() {
+        // testing: creating a circle shape:
+        Circle testCircle = new Circle(5, "red");
+        shapes.add(testCircle);
 
     }
 
@@ -54,6 +58,10 @@ public class ShapesManager {
     }
 
     public void draw(Canvas canvas) {
+        Log.d("HELPTAG", "draw: THIS RAN");
+        for (ShapeObject shape : shapes) {
+            shape.draw(canvas);
+        }
 
     }
 }
