@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 
 import android.graphics.Canvas;
+import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 
@@ -25,6 +26,10 @@ public class ShapesManager {
 
     }
 
+    public void recieveTouch(MotionEvent event) {
+
+    }
+
     public void update() {
         /*
         for shape in shapes {
@@ -33,7 +38,6 @@ public class ShapesManager {
             else shape.update()
          */
 
-        // make arrow objects flicks
     }
 
     public void draw(Canvas canvas) {

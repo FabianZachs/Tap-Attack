@@ -17,9 +17,23 @@ public abstract class ShapeObject {
     private int points;
     private int lives;
 
+    // TODO
+    // for arrow shape make at least a little direction movement neccessary (small flick)  , so that
+    // a simple press (with fractional vertical/ horizontal movement doesnt trigger fail/sucess
+
 
     public abstract void draw(Canvas canvas);
     public abstract void update();
+
+    public ShapeObject(float durationAlive, String color) {
+        this.durationAlive = durationAlive;
+        this.color = color;
+        this.points = 1; // all shapes are worth one point?
+        this.initTime = System.currentTimeMillis();
+        // code to make rectangle for holding the shape, then have subclasses call super for this?
+        //this.bitmapHolder =
+    }
+
 
     private boolean isAlive() {
         // if time alive > durationAlive, object should be removed

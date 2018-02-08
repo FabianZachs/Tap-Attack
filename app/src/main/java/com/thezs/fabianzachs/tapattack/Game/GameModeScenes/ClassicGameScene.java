@@ -1,7 +1,9 @@
 package com.thezs.fabianzachs.tapattack.Game.GameModeScenes;
 
 import android.graphics.Canvas;
+import android.view.MotionEvent;
 
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
 import com.thezs.fabianzachs.tapattack.Game.Scene;
 
 /**
@@ -11,6 +13,7 @@ import com.thezs.fabianzachs.tapattack.Game.Scene;
 public class ClassicGameScene implements Scene {
 
     public boolean gameOver;
+    private ShapesManager shapesManager;
 
     public ClassicGameScene() {
 
@@ -32,8 +35,16 @@ public class ClassicGameScene implements Scene {
     }
 
     @Override
-    public void recieveTouch() {
+    public void recieveTouch(MotionEvent event) {
         // pass action to shapesmanager so it can assign the touch to the specific shape
         // then the shape will update depending on that touch
+        if (!gameOver) {
+            shapesManager.recieveTouch(event);
+        }
+    }
+
+    // what happens when game is over (possibly game over screen before reset)
+    public void reset() {
+
     }
 }

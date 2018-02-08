@@ -23,7 +23,7 @@ public class SceneManager {
     }
 
     public void recieveTouch(MotionEvent event) {
-        scenes.get(ACTIVE_SCENE).recieveTouch();
+        scenes.get(ACTIVE_SCENE).recieveTouch(event);
     }
 
     public void update() {
