@@ -12,9 +12,10 @@ public abstract class ShapeObject {
 
     private float durationAlive;
     private Rect bitmapHolder;  // rectangle to hold bitmap ?? needed??
-    private int points;
     private long initTime;
     private String color;  // will be used to find correct bitmap img
+    private int points;
+    private int lives;
 
 
     public abstract void draw(Canvas canvas);
@@ -22,7 +23,8 @@ public abstract class ShapeObject {
 
     private boolean isAlive() {
         // if time alive > durationAlive, object should be removed
-        return !(System.currentTimeMillis() - initTime > durationAlive);
+        // AND if it still has lives
+        return !(System.currentTimeMillis() - initTime > durationAlive) && lives > 0;
     }
 
 

@@ -33,6 +33,7 @@ public class ClassicGameScene implements Scene {
 
     @Override
     public void recieveTouch() {
-
+        // pass action to shapesmanager so it can assign the touch to the specific shape
+        // then the shape will update depending on that touch
     }
 }

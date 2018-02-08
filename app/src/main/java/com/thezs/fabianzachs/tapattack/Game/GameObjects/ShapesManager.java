@@ -26,7 +26,14 @@ public class ShapesManager {
     }
 
     public void update() {
+        /*
+        for shape in shapes {
+            if shape.life == 0
+                remove it
+            else shape.update()
+         */
 
+        // make arrow objects flicks
     }
 
     public void draw(Canvas canvas) {
