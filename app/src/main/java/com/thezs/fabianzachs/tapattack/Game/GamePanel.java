@@ -70,7 +70,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             StyleableToast.makeText(Constants.CURRENT_CONTEXT, ClassicGameScene.gameOver + "", R.style.successtoast).show();
         }
-        //sceneManager.recieveTouch(event);
+        sceneManager.recieveTouch(event);
 
         return true;
         //return super.onTouchEvent(event);

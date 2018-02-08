@@ -39,9 +39,11 @@ public class ClassicGameScene implements Scene {
     public void recieveTouch(MotionEvent event) {
         // pass action to shapesmanager so it can assign the touch to the specific shape
         // then the shape will update depending on that touch
+        /*
         if (!gameOver) {
             shapesManager.recieveTouch(event);
         }
+        */
     }
 
     // what happens when game is over (possibly game over screen before reset)
