@@ -3,8 +3,11 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.app.Activity;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
+        import android.view.SurfaceView;
         import android.view.View;
+        import android.widget.LinearLayout;
 
+        import com.thezs.fabianzachs.tapattack.R;
         import com.thezs.fabianzachs.tapattack.helper;
 
 /**
@@ -18,8 +21,13 @@ public class MainGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         helper.makeFullscreen(this);
 
-        // depending on the game mode they selected we can create the needed game scene
-        setContentView(new GamePanel(this));
+        setContentView(R.layout.activity_game);
+
+        LinearLayout viewForGamePanel = (LinearLayout) findViewById(R.id.game_panel_surface);
+        viewForGamePanel.addView(new GamePanel(this));
+
+        // below works for setting entire screen the view
+        // setContentView(new GamePanel(this));
 
     }
 

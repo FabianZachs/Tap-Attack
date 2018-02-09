@@ -5,10 +5,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.thezs.fabianzachs.tapattack.Game.GameActivity">
+    tools:context="com.thezs.fabianzachs.tapattack.Game.MainGameActivity">
 
     <LinearLayout
-        android:layout_weight="1"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -30,7 +29,6 @@
         </LinearLayout>
 
         <com.beardedhen.androidbootstrap.BootstrapProgressBar
-            android:layout_weight="10"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             app:bootstrapProgress="28"
@@ -51,9 +49,16 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/game_panel_surface"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
     <!--
-    <com.thezs.fabianzachs.tapattack.GameCanvas
-        android:layout_weight=".1"
+    <com.thezs.fabianzachs.tapattack.Game.GamePanel
+        android:id="@+id/game_panel"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -62,5 +67,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
         -->
+
 
 </LinearLayout>
