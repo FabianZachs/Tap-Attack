@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 
 public abstract class ShapeObject {
 
+    private int progressBarAddition;
     private float durationAlive;
     private Rect bitmapHolder;  // rectangle to hold bitmap ?? needed??
     private long initTime;
@@ -31,6 +32,7 @@ public abstract class ShapeObject {
         this.color = color;
         this.points = 1; // all shapes are worth one point?
         this.initTime = System.currentTimeMillis();
+        this.progressBarAddition = progressBarAddition;
         // code to make rectangle for holding the shape, then have subclasses call super for this?
     }
 
@@ -49,6 +51,14 @@ public abstract class ShapeObject {
     }
 
     // SETTERS & GETTERS
+
+    public void setProgressBarAddition(int progressBarAddition) {
+        this.progressBarAddition = progressBarAddition;
+    }
+
+    public int getProgressBarAddition() {
+        return this.progressBarAddition;
+    }
 
     public void setBitmapHolder(Rect rect) {
         this.bitmapHolder = rect;

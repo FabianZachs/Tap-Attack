@@ -21,6 +21,7 @@ public class Circle extends ShapeObject {
        // call super(durationAlive, color) then in super also make the rect to hold bitmap
         super(durationAlive, color);
         setLives(1);
+        setProgressBarAddition(10);
         setBitmapHolder(new Rect(100,100,400,400));
         // make the animation
 
@@ -36,7 +37,6 @@ public class Circle extends ShapeObject {
     @Override
     public void draw(Canvas canvas) {
         // test drawing shape to canvas
-        //Log.d("HELPME", "draw: THIS METHOD RAN");
         Paint paint = new Paint();
         paint.setColor(Color.RED);
 
