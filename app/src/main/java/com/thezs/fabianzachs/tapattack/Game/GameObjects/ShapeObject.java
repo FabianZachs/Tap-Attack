@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 
@@ -18,6 +19,7 @@ public abstract class ShapeObject {
     private String color;  // will be used to find correct bitmap img
     private int points;
     private int lives;
+    private Point centerLocation;
 
     // TODO
     // for arrow shape make at least a little direction movement neccessary (small flick)  , so that
@@ -27,9 +29,10 @@ public abstract class ShapeObject {
     public abstract void draw(Canvas canvas);
     public abstract void update();
 
-    public ShapeObject(float durationAlive, String color) {
+    public ShapeObject(float durationAlive, String color, Point centerLocation) {
         this.durationAlive = durationAlive;
         this.color = color;
+        this.centerLocation = centerLocation;
         this.points = 1; // all shapes are worth one point?
         this.initTime = System.currentTimeMillis();
         this.progressBarAddition = progressBarAddition;

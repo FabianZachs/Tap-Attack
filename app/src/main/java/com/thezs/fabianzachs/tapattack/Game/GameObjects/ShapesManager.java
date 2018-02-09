@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 
 import android.graphics.Canvas;
+import android.graphics.Point;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -24,10 +25,14 @@ public class ShapesManager {
 
     private int score;
 
+    private float shapeProportionOfView = .2f;
+
     public ShapesManager() {
+        setShapeDimensions();
         // testing: creating a circle shape:
-        Circle testCircle = new Circle(5, "red");
+        Circle testCircle = new Circle(5, "red", new Point(100,100));
         shapes.add(testCircle);
+
 
     }
 
@@ -62,5 +67,12 @@ public class ShapesManager {
             shape.draw(canvas);
         }
 
+    }
+
+    private void setShapeDimensions() {
+        // setting dimen. of shapes depending on if height or width of view is bigger
+        Constants.SHAPE_WIDTH = Constants.SHAPE_HEIGHT = Constants.GAME_VIEW_HEIGHT >
+                Constants.GAME_VIEW_WIDTH ? (int) (Constants.GAME_VIEW_HEIGHT * shapeProportionOfView)
+                : (int) (Constants.GAME_VIEW_WIDTH * shapeProportionOfView);
     }
 }
