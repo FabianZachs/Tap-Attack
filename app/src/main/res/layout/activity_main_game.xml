@@ -1,9 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/soundoff"
     tools:context="com.thezs.fabianzachs.tapattack.Game.MainGameActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/score_streak_text"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/score_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SCORE"
+                android:fontFamily="@font/undinaru"
+                />
+
+            <TextView
+                android:id="@+id/streak_text"
+                android:layout_below="@+id/score_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STREAK"
+                android:fontFamily="@font/undinaru"
+                />
+
+        </RelativeLayout>
+
+
+        <com.beardedhen.androidbootstrap.BootstrapWell
+            android:id="@+id/well"
+
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_toRightOf="@+id/score_streak_text"
+            android:layout_toLeftOf="@+id/pause_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.beardedhen.androidbootstrap.BootstrapProgressBar
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                app:bootstrapProgress="100"
+                app:striped="true"
+                app:animated="true"
+                app:roundedCorners="true"
+                app:bootstrapBrand="info"
+                />
+
+        </com.beardedhen.androidbootstrap.BootstrapWell>
+
+
+        <ImageView
+            android:id="@+id/pause_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/pause_circle_outline"
+            />
+
+        <LinearLayout
+            android:id="@+id/game_panel_surface"
+            android:layout_below="@+id/well"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

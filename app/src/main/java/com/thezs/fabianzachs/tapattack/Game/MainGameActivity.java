@@ -21,7 +21,7 @@ public class MainGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         helper.makeFullscreen(this);
 
-        setContentView(R.layout.activity_game);
+        setContentView(R.layout.activity_main_game);
 
         LinearLayout viewForGamePanel = (LinearLayout) findViewById(R.id.game_panel_surface);
         viewForGamePanel.addView(new GamePanel(this));
