@@ -85,6 +85,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
+        Constants.GAME_VIEW_HEIGHT = canvas.getHeight();
+        Constants.GAME_VIEW_WIDTH = canvas.getWidth();
         sceneManager.draw(canvas);
     }
 }

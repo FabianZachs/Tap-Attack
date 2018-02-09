@@ -9,6 +9,8 @@ import android.content.Context;
 public class Constants {
     public static int SCREEN_HEIGHT;
     public static int SCREEN_WIDTH;
+    public static int GAME_VIEW_HEIGHT;
+    public static int GAME_VIEW_WIDTH;
     public static int SHAPE_HEIGHT;
     public static int SHAPE_WIDTH;
     public static int SHAPE_SPACING;
