@@ -35,7 +35,10 @@ public class Circle extends ShapeObject {
 
     @Override
     public void recieveTouch(MotionEvent event) {
-        super.recieveTouch(event);
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            reduceLives();
+        }
+
     }
 
     @Override

@@ -26,6 +26,7 @@ public class ClassicGameScene implements Scene {
 
     @Override
     public void update() {
+        shapesManager.update();
 
     }
 

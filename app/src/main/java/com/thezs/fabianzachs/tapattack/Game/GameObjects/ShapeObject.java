@@ -47,10 +47,12 @@ public abstract class ShapeObject {
     }
 
 
-
-
     public void recieveTouch(MotionEvent event) {
         // all shapes need to 1) if motionDown : reduce live
+    }
+
+    public void reduceLives() {
+        this.lives -= 1;
     }
 
     // SETTERS & GETTERS

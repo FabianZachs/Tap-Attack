@@ -28,7 +28,6 @@ public class ShapesManager {
     private float shapeProportionOfView = .2f;
 
     public ShapesManager() {
-        setShapeDimensions();
         // testing: creating a circle shape:
         Circle testCircle = new Circle(5, "red", new Point(100,100));
         shapes.add(testCircle);
@@ -53,13 +52,13 @@ public class ShapesManager {
     }
 
     public void update() {
-        /*
-        for shape in shapes {
-            if shape.life == 0
-                remove it
-            else shape.update()
-         */
 
+        for (ShapeObject shape : shapes) {
+            if (shape.getLives() <= 0)
+                shapes.remove(shape);
+                // TODO add one shape.getPoints to the score -- and streak
+            else shape.update();
+        }
     }
 
     public void draw(Canvas canvas) {
@@ -69,10 +68,4 @@ public class ShapesManager {
 
     }
 
-    private void setShapeDimensions() {
-        // setting dimen. of shapes depending on if height or width of view is bigger
-        Constants.SHAPE_WIDTH = Constants.SHAPE_HEIGHT = Constants.GAME_VIEW_HEIGHT >
-                Constants.GAME_VIEW_WIDTH ? (int) (Constants.GAME_VIEW_HEIGHT * shapeProportionOfView)
-                : (int) (Constants.GAME_VIEW_WIDTH * shapeProportionOfView);
-    }
 }
