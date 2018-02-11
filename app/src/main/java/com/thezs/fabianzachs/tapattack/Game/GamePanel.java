@@ -63,7 +63,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
-    // TODO
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
@@ -76,15 +75,19 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         //return super.onTouchEvent(event);
     }
 
-    // TODO
     public void update() {
         sceneManager.update();
     }
 
-    // TODO
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
         sceneManager.draw(canvas);
+    }
+
+    // TODO code here for drawing the ready screen
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
     }
 }
