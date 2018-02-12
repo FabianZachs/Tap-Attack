@@ -6,6 +6,7 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.view.SurfaceView;
         import android.view.View;
         import android.widget.LinearLayout;
+        import android.widget.RelativeLayout;
 
         import com.thezs.fabianzachs.tapattack.R;
         import com.thezs.fabianzachs.tapattack.helper;
@@ -22,6 +23,11 @@ public class MainGameActivity extends Activity {
         helper.makeFullscreen(this);
 
         setContentView(R.layout.activity_main_game);
+
+        // TODO make a class for this to call from all over code
+        RelativeLayout parentLayout = (RelativeLayout) findViewById(R.id.parent_layout);
+        parentLayout.setBackground(getResources().getDrawable(R.drawable.blueneonbackground));
+
 
         LinearLayout viewForGamePanel = (LinearLayout) findViewById(R.id.game_panel_surface);
         viewForGamePanel.addView(new GamePanel(this));
