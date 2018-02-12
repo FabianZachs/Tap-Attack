@@ -47,8 +47,8 @@ public class ShapesManager {
         }
 
          // if user ACTION_DOWNs and not onto a shape
-        if (!shapeInteractment && event.getAction() == MotionEvent.ACTION_DOWN)
-            ClassicGameScene.gameOver = true;
+        //if (!shapeInteractment && event.getAction() == MotionEvent.ACTION_DOWN)
+            //ClassicGameScene.gameOver = true;
     }
 
     public void update() {

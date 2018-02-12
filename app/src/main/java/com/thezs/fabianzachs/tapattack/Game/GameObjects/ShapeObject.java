@@ -4,7 +4,12 @@ import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.support.v4.view.GestureDetectorCompat;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
+
+import com.thezs.fabianzachs.tapattack.Constants;
 
 /**
  * Created by fabianzachs on 07/02/18.
@@ -20,6 +25,9 @@ public abstract class ShapeObject {
     private int points;
     private int lives;
     private Point centerLocation;
+
+    private GestureDetectorCompat mDetector;
+
 
     // TODO
     // for arrow shape make at least a little direction movement neccessary (small flick)  , so that
@@ -37,6 +45,11 @@ public abstract class ShapeObject {
         this.initTime = System.currentTimeMillis();
         this.progressBarAddition = progressBarAddition;
         // code to make rectangle for holding the shape, then have subclasses call super for this?
+
+
+        // handling touch events:
+        mDetector = new GestureDetectorCompat(Constants.CURRENT_CONTEXT, new MyGestureListener());
+
     }
 
 
@@ -48,7 +61,7 @@ public abstract class ShapeObject {
 
 
     public void recieveTouch(MotionEvent event) {
-        // all shapes need to 1) if motionDown : reduce live
+        this.mDetector.onTouchEvent(event);
     }
 
     public void reduceLives() {
@@ -113,5 +126,24 @@ public abstract class ShapeObject {
         return this.points;
     }
 
+
+
+    // listens for specific touch events
+    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+        private static final String DEBUG_TAG = "Gestures";
+
+        @Override
+        public boolean onDown(MotionEvent event) {
+            Log.d(DEBUG_TAG,"onDown: " + event.toString());
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent event1, MotionEvent event2,
+                               float velocityX, float velocityY) {
+            Log.d(DEBUG_TAG, "onFling: " + event1.toString() + event2.toString());
+            return true;
+        }
+    }
 
 }
