@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.R;
 
 /**
  * Created by fabianzachs on 07/02/18.
@@ -132,6 +134,7 @@ public abstract class ShapeObject {
     class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
         private static final String DEBUG_TAG = "Gestures";
 
+
         @Override
         public boolean onDown(MotionEvent event) {
             Log.d(DEBUG_TAG,"onDown: " + event.toString());
@@ -141,9 +144,48 @@ public abstract class ShapeObject {
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2,
                                float velocityX, float velocityY) {
+            StyleableToast.makeText(Constants.CURRENT_CONTEXT,  "fling", R.style.successtoast).show();
             Log.d(DEBUG_TAG, "onFling: " + event1.toString() + event2.toString());
             return true;
         }
+
+        // The user has performed a down MotionEvent and not performed a move or up yet.
+        @Override
+        public void onShowPress(MotionEvent event) {
+            Log.d(DEBUG_TAG, "onShowPress: " + event.toString());
+        }
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent event) {
+            StyleableToast.makeText(Constants.CURRENT_CONTEXT,  "tap", R.style.successtoast).show();
+            Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
+            return true;
+        }
+
+        @Override
+        public boolean onDoubleTap(MotionEvent event) {
+            Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
+            return true;
+        }
+
+        @Override
+        public boolean onDoubleTapEvent(MotionEvent event) {
+            Log.d(DEBUG_TAG, "onDoubleTapEvent: " + event.toString());
+            return true;
+        }
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent event) {
+            Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
+            return true;
+        }
+
+        // we want to put shape back to original state
+        @Override
+        public void onLongPress(MotionEvent event) {
+            Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
+        }
+
     }
 
 }
