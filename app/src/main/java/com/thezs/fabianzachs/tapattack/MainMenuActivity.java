@@ -13,10 +13,12 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdView;
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
 import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainMenuActivity extends  GeneralParent {
 
@@ -56,6 +58,10 @@ public class MainMenuActivity extends  GeneralParent {
         Constants.SHAPE_WIDTH = Constants.SHAPE_HEIGHT = Constants.SCREEN_WIDTH/7;
 
         Constants.SHAPE_SPACING = 5;
+
+        // put colors for all theme packs
+        Constants.COLORS = new HashMap<>();
+        Constants.COLORS.put("neon", Constants.NEONCOLORS);
     }
 
 
@@ -218,5 +224,15 @@ public class MainMenuActivity extends  GeneralParent {
         Intent intent = new Intent(this, MainGameActivity.class);
         intent.putExtra("gamemode", "classic");
         this.startActivity(intent);
+    }
+
+    public void storeClick(View view) {
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString("theme", "neon");
+        prefsEditor.apply();
+
+
+
+        StyleableToast.makeText(this,  prefs.getString("theme","error-no theme"), R.style.successtoast).show();
     }
 }

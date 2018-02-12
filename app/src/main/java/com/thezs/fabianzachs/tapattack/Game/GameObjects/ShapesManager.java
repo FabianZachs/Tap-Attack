@@ -1,14 +1,21 @@
 package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
+import com.thezs.fabianzachs.tapattack.Animation.Animation;
+import com.thezs.fabianzachs.tapattack.Animation.AnimationManager;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
+import com.thezs.fabianzachs.tapattack.R;
 
 import java.util.ArrayList;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by fabianzachs on 07/02/18.
@@ -28,9 +35,24 @@ public class ShapesManager {
     private float shapeProportionOfView = .2f;
 
     public ShapesManager() {
+
+        // TODO code to initialize all needed bitmaps into shape manager for selected color scheme
+        initializeAnimations();
+
+
         // testing: creating a circle shape:
         Circle testCircle = new Circle(5, "red", new Point(100,100));
         shapes.add(testCircle);
+
+
+    }
+
+    private void initializeAnimations() {
+        SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerPrefs", MODE_PRIVATE);
+
+        String theme = prefs.getString("theme", "error: no theme");
+
+        AnimationManager animationManager = new AnimationManager(theme);
 
 
     }

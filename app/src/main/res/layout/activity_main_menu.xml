@@ -63,6 +63,7 @@
             android:layout_marginStart="20sp"
             android:fontFamily="@font/undinaru"
             android:text="@string/store"
+            android:onClick="storeClick"
             android:layout_marginTop="15dp"
             android:textColor="#fefa1b"
             android:textSize="45sp" />

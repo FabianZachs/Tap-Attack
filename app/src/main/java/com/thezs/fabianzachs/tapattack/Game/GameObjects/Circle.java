@@ -27,33 +27,12 @@ public class Circle extends ShapeObject {
         super(durationAlive, color, centerLocation);
         setLives(1);
         setProgressBarAddition(10);
-        setBitmapHolder(new Rect((int) (centerLocation.x - (0.5f * Constants.SHAPE_WIDTH)), (int) (centerLocation.y - (.5 * Constants.SHAPE_HEIGHT)),
-                (int) (centerLocation.x + (0.5f * Constants.SHAPE_WIDTH)), (int) (centerLocation.y + (0.5f) * Constants.SHAPE_HEIGHT)));
 
 
-        // TODO use String color to get correct R.drawable.bitmap
-        // animation setup -- should this be done individually for each shape?
-        BitmapFactory bf = new BitmapFactory();
-        Bitmap idleImg = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.blueneon);
-        Bitmap onTouchImg = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(),R.drawable.blueneonclick);
 
         // any animation time is fine, itll just switch to the same img
-        idle = new Animation(new Bitmap[] {idleImg}, 2);
-        onTouch = new Animation(new Bitmap[] {onTouchImg}, 2);
+        // TODO create all animations before game starts (for each color and shape)
     }
-
-
-/*
-    @Override
-    public void recieveTouch(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            // play onClick animation
-            //reduceLives();
-        }
-
-    }
-*/
-
 
 
     @Override
@@ -72,7 +51,7 @@ public class Circle extends ShapeObject {
 
     // ANIMATIONS
     private Animation idle;
-    private Animation onTouch;
+    private Animation onTouch; // for onDown
     private Animation onDisappear; // fade out if not clicked
 
 

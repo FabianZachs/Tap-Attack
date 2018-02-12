@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -20,6 +21,8 @@ import com.thezs.fabianzachs.tapattack.R;
 public abstract class ShapeObject {
 
     private int progressBarAddition;
+    private Bitmap shapeImg;
+    private Bitmap shapeClickImg;
     private float durationAlive;
     private Rect bitmapHolder;  // rectangle to hold bitmap ?? needed??
     private long initTime;
@@ -46,8 +49,8 @@ public abstract class ShapeObject {
         this.points = 1; // all shapes are worth one point?
         this.initTime = System.currentTimeMillis();
         this.progressBarAddition = progressBarAddition;
-        // code to make rectangle for holding the shape, then have subclasses call super for this?
-
+        setBitmapHolder(new Rect((int) (centerLocation.x - (0.5f * Constants.SHAPE_WIDTH)), (int) (centerLocation.y - (.5 * Constants.SHAPE_HEIGHT)),
+                (int) (centerLocation.x + (0.5f * Constants.SHAPE_WIDTH)), (int) (centerLocation.y + (0.5f) * Constants.SHAPE_HEIGHT)));
 
         // handling touch events:
         mDetector = new GestureDetectorCompat(Constants.CURRENT_CONTEXT, new MyGestureListener());
