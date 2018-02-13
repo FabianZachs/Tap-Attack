@@ -38,7 +38,19 @@ public class Circle extends ShapeObject {
     @Override
     public void draw(Canvas canvas) {
         // test drawing shape to canvas
-        canvas.drawBitmap(getShapeClickImg(), null, getBitmapHolder(),new Paint());
+        scaleRect();
+        canvas.drawBitmap(getCurrentShapeImg(), null, getBitmapHolder(),new Paint());
+    }
+
+    private void scaleRect() {
+        Rect rect = getBitmapHolder();
+        float widthHeightRatio = (float) (getCurrentShapeImg().getWidth())/getCurrentShapeImg().getHeight();
+        if (rect.width() > rect.height())
+            rect.left = rect.right - (int) (rect.height() * widthHeightRatio);
+        else
+            rect.top = rect.bottom - (int) (rect.width() * (1/widthHeightRatio));
+
+        setBitmapHolder(rect);
     }
 
     @Override

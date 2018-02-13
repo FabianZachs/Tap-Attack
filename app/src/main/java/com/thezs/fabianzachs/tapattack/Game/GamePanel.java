@@ -92,7 +92,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         Drawable d = getResources().getDrawable(R.drawable.blueneonbackground);
         d.setBounds(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-        d.draw(canvas);
+        //d.draw(canvas);
 
         sceneManager.draw(canvas);
     }

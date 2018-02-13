@@ -21,8 +21,8 @@ import com.thezs.fabianzachs.tapattack.R;
 public abstract class ShapeObject {
 
     private int progressBarAddition;
-    private Bitmap shapeImg;
-    private Bitmap shapeClickImg;
+    private Bitmap[] shapeImages;
+    private int stateAnimation = 0;
     private float durationAlive;
     private Rect bitmapHolder;  // rectangle to hold bitmap ?? needed??
     private long initTime;
@@ -30,6 +30,8 @@ public abstract class ShapeObject {
     private int points;
     private int lives;
     private Point centerLocation;
+
+    private float shapeScaling = .8f;
 
     private GestureDetectorCompat mDetector;
 
@@ -49,10 +51,9 @@ public abstract class ShapeObject {
         this.points = 1; // all shapes are worth one point?
         this.initTime = System.currentTimeMillis();
         this.progressBarAddition = progressBarAddition;
-        this.shapeImg = shapeImg;
-        this.shapeClickImg = shapeClickImg;
-        setBitmapHolder(new Rect((int) (centerLocation.x - (0.5f * Constants.SHAPE_WIDTH)), (int) (centerLocation.y - (.5 * Constants.SHAPE_HEIGHT)),
-                (int) (centerLocation.x + (0.5f * Constants.SHAPE_WIDTH)), (int) (centerLocation.y + (0.5f) * Constants.SHAPE_HEIGHT)));
+        this.shapeImages = new Bitmap[] {shapeImg, shapeClickImg};
+        setBitmapHolder(new Rect((int) (centerLocation.x - (shapeScaling * Constants.SHAPE_WIDTH)), (int) (centerLocation.y - (shapeScaling * Constants.SHAPE_HEIGHT)),
+                (int) (centerLocation.x + (shapeScaling * Constants.SHAPE_WIDTH)), (int) (centerLocation.y + (shapeScaling) * Constants.SHAPE_HEIGHT)));
 
         // handling touch events:
         mDetector = new GestureDetectorCompat(Constants.CURRENT_CONTEXT, new MyGestureListener());
@@ -77,12 +78,16 @@ public abstract class ShapeObject {
 
     // SETTERS & GETTERS
 
+    public Bitmap getCurrentShapeImg() {
+        return this.shapeImages[getState()];
+    }
+
     public Bitmap getShapeImg() {
-        return this.shapeImg;
+        return this.shapeImages[0];
     }
 
     public Bitmap getShapeClickImg() {
-        return this.shapeClickImg;
+        return this.shapeImages[1];
     }
 
 
@@ -142,6 +147,14 @@ public abstract class ShapeObject {
         return this.points;
     }
 
+    private void setState(int state) {
+        this.stateAnimation = state;
+    }
+
+    private int getState() {
+        return this.stateAnimation;
+    }
+
 
 
     // listens for specific touch events
@@ -152,6 +165,7 @@ public abstract class ShapeObject {
         @Override
         public boolean onDown(MotionEvent event) {
             Log.d(DEBUG_TAG,"onDown: " + event.toString());
+            setState(1);
             return true;
         }
 
@@ -173,6 +187,7 @@ public abstract class ShapeObject {
         public boolean onSingleTapUp(MotionEvent event) {
             StyleableToast.makeText(Constants.CURRENT_CONTEXT,  "tap", R.style.successtoast).show();
             Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
+            reduceLives();
             return true;
         }
 
@@ -198,6 +213,7 @@ public abstract class ShapeObject {
         @Override
         public void onLongPress(MotionEvent event) {
             Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
+            setState(0);
         }
 
     }

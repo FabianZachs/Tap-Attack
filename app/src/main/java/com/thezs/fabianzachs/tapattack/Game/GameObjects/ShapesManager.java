@@ -35,7 +35,6 @@ public class ShapesManager {
 
     private int score;
 
-    private float shapeProportionOfView = .2f;
 
     public ShapesManager() {
 
@@ -53,7 +52,7 @@ public class ShapesManager {
         // TODO use creational design pattern for each shape in shapesmanager https://sourcemaking.com/design_patterns/creational_patterns
         Bitmap img = animationManager.getBitmap("circle", "blue", false);
         Bitmap clickedImg = animationManager.getBitmap("circle", "blue", true);
-        Circle testCircle = new Circle(5, "blue", new Point(100,100),clickedImg,img);
+        Circle testCircle = new Circle(5, "blue", new Point(300,300),clickedImg,img);
         shapes.add(testCircle);
     }
 
