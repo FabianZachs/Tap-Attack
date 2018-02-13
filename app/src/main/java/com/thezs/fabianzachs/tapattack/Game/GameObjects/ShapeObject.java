@@ -31,7 +31,7 @@ public abstract class ShapeObject {
     private int lives;
     private Point centerLocation;
 
-    private float shapeScaling = .8f;
+    private float shapeScaling = .6f;
 
     private GestureDetectorCompat mDetector;
 
@@ -61,10 +61,10 @@ public abstract class ShapeObject {
     }
 
 
-    private boolean isAlive() {
+    public boolean isAlive() {
         // if time alive > durationAlive, object should be removed
         // AND if it still has lives
-        return !(System.currentTimeMillis() - initTime > durationAlive) && lives > 0;
+        return !(System.currentTimeMillis() - initTime > durationAlive * 1000) && lives > 0;
     }
 
 
@@ -165,7 +165,6 @@ public abstract class ShapeObject {
         @Override
         public boolean onDown(MotionEvent event) {
             Log.d(DEBUG_TAG,"onDown: " + event.toString());
-            setState(1);
             return true;
         }
 
@@ -180,6 +179,7 @@ public abstract class ShapeObject {
         // The user has performed a down MotionEvent and not performed a move or up yet.
         @Override
         public void onShowPress(MotionEvent event) {
+            setState(1);
             Log.d(DEBUG_TAG, "onShowPress: " + event.toString());
         }
 

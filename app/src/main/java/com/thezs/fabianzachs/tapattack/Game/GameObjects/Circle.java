@@ -10,6 +10,7 @@ import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Animation.Animation;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.R;
@@ -27,43 +28,35 @@ public class Circle extends ShapeObject {
         super(durationAlive, color, centerLocation, shapeImg, shapeClickImg);
         setLives(1);
         setProgressBarAddition(10);
-
-
-
-        // any animation time is fine, itll just switch to the same img
-        // TODO create all animations before game starts (for each color and shape)
     }
 
 
     @Override
     public void draw(Canvas canvas) {
-        // test drawing shape to canvas
-        scaleRect();
-        canvas.drawBitmap(getCurrentShapeImg(), null, getBitmapHolder(),new Paint());
+
+        Paint alphaPaint = new Paint();
+        // if lifespan of shape - time alive = time left < 1
+        alphaPaint.setAlpha(255);
+
+        if (timeLeft() < 1000 ) {
+            //alphaPaint.setAlpha( (int) ((255/1000) * getDurationAlive()*1000 - (System.currentTimeMillis() - getInitTime())));
+            alphaPaint.setAlpha( (int) ((255/1000) * timeLeft()));
+
+            StyleableToast.makeText(Constants.CURRENT_CONTEXT, "NOw", R.style.successtoast).show();
+
+        }
+
+        canvas.drawBitmap(getCurrentShapeImg(), null, getBitmapHolder(),alphaPaint);
+        //canvas.drawBitmap(getCurrentShapeImg(), null, getBitmapHolder(),new Paint());
+    }
+    public long timeLeft() {
+        return  (int) getDurationAlive() * 1000 - (System.currentTimeMillis() - getInitTime());
     }
 
-    private void scaleRect() {
-        Rect rect = getBitmapHolder();
-        float widthHeightRatio = (float) (getCurrentShapeImg().getWidth())/getCurrentShapeImg().getHeight();
-        if (rect.width() > rect.height())
-            rect.left = rect.right - (int) (rect.height() * widthHeightRatio);
-        else
-            rect.top = rect.bottom - (int) (rect.width() * (1/widthHeightRatio));
-
-        setBitmapHolder(rect);
-    }
 
     @Override
     public void update() {
 
     }
-
-    // ANIMATIONS
-    private Animation idle;
-    private Animation onTouch; // for onDown
-    private Animation onDisappear; // fade out if not clicked
-
-
-
 
 }

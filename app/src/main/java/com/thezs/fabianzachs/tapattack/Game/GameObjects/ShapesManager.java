@@ -38,7 +38,6 @@ public class ShapesManager {
 
     public ShapesManager() {
 
-        // TODO code to initialize all needed bitmaps into shape manager for selected color scheme
         initializeAnimations();
 
         populateShapes();
@@ -84,9 +83,9 @@ public class ShapesManager {
     public void update() {
 
         for (ShapeObject shape : shapes) {
-            if (shape.getLives() <= 0)
+            if (!shape.isAlive())
                 shapes.remove(shape);
-                // TODO add one shape.getPoints to the score -- and streak
+                // TODO add one shape.getPoints to the score -- and streak (add this when we find out lives = 0
             else shape.update();
         }
     }
