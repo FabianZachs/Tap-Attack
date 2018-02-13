@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.util.Log;
@@ -26,6 +27,8 @@ public class ShapesManager {
     private ArrayList<ShapeObject> shapes = new ArrayList<>();
     private int shape_spacing = Constants.SHAPE_SPACING;
 
+    private AnimationManager animationManager;
+
     private long initTime;   // initialization of game scene
     private long startTime;  // time of update. startTime - initTime = time passed (good for difficulty)
                              // use sqrt function for difficulty
@@ -39,12 +42,19 @@ public class ShapesManager {
         // TODO code to initialize all needed bitmaps into shape manager for selected color scheme
         initializeAnimations();
 
+        populateShapes();
+
+    }
+
+    private void populateShapes() {
+
 
         // testing: creating a circle shape:
-        Circle testCircle = new Circle(5, "red", new Point(100,100));
+        // TODO use creational design pattern for each shape in shapesmanager https://sourcemaking.com/design_patterns/creational_patterns
+        Bitmap img = animationManager.getBitmap("circle", "blue", false);
+        Bitmap clickedImg = animationManager.getBitmap("circle", "blue", true);
+        Circle testCircle = new Circle(5, "blue", new Point(100,100),clickedImg,img);
         shapes.add(testCircle);
-
-
     }
 
     private void initializeAnimations() {
@@ -52,8 +62,7 @@ public class ShapesManager {
 
         String theme = prefs.getString("theme", "error: no theme");
 
-        AnimationManager animationManager = new AnimationManager(theme);
-
+        this.animationManager = new AnimationManager(theme);
 
     }
 

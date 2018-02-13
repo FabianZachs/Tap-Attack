@@ -42,13 +42,15 @@ public abstract class ShapeObject {
     public abstract void draw(Canvas canvas);
     public abstract void update();
 
-    public ShapeObject(float durationAlive, String color, Point centerLocation) {
+    public ShapeObject(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg) {
         this.durationAlive = durationAlive;
         this.color = color;
         this.centerLocation = centerLocation;
         this.points = 1; // all shapes are worth one point?
         this.initTime = System.currentTimeMillis();
         this.progressBarAddition = progressBarAddition;
+        this.shapeImg = shapeImg;
+        this.shapeClickImg = shapeClickImg;
         setBitmapHolder(new Rect((int) (centerLocation.x - (0.5f * Constants.SHAPE_WIDTH)), (int) (centerLocation.y - (.5 * Constants.SHAPE_HEIGHT)),
                 (int) (centerLocation.x + (0.5f * Constants.SHAPE_WIDTH)), (int) (centerLocation.y + (0.5f) * Constants.SHAPE_HEIGHT)));
 
@@ -74,6 +76,15 @@ public abstract class ShapeObject {
     }
 
     // SETTERS & GETTERS
+
+    public Bitmap getShapeImg() {
+        return this.shapeImg;
+    }
+
+    public Bitmap getShapeClickImg() {
+        return this.shapeClickImg;
+    }
+
 
     public void setProgressBarAddition(int progressBarAddition) {
         this.progressBarAddition = progressBarAddition;

@@ -18,17 +18,20 @@ import java.util.Map;
 public class AnimationManager {
 
     private Map<String, Bitmap> animations;
+    private String theme;
 
     public AnimationManager(String theme) {
+        this.theme = theme;
         animations = new HashMap<>();
         addBitmapsToMap(theme);
     }
 
 
     private void addBitmapsToMap(String theme) {
+        String[] colors = Constants.COLORS.get(theme);
         BitmapFactory bf = new BitmapFactory();
         for (String shape : Constants.SHAPES) {
-            for (String color : Constants.COLORS.get(theme)) {
+            for (String color : colors) {
                 // for non-click img
                 String mDrawableName = theme + shape + color;
                 int resID = Constants.CURRENT_CONTEXT.getResources().getIdentifier(mDrawableName , "drawable", Constants.CURRENT_CONTEXT.getPackageName());
@@ -42,6 +45,12 @@ public class AnimationManager {
                 animations.put(mDrawableName, img);
             }
         }
+    }
+
+    public Bitmap getBitmap(String shape, String color, boolean click) {
+        if (click)
+            return animations.get(theme+shape+color+"click");
+        return animations.get(theme+shape+color);
     }
 
 }

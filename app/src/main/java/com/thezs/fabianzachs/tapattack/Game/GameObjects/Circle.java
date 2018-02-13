@@ -22,9 +22,9 @@ public class Circle extends ShapeObject {
 
     //private Animation animation;  make the animation
 
-    public Circle(float durationAlive, String color, Point centerLocation) {
+    public Circle(float durationAlive, String color, Point centerLocation, Bitmap shapeClickImg, Bitmap shapeImg) {
        // call super(durationAlive, color) then in super also make the rect to hold bitmap
-        super(durationAlive, color, centerLocation);
+        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg);
         setLives(1);
         setProgressBarAddition(10);
 
@@ -38,10 +38,7 @@ public class Circle extends ShapeObject {
     @Override
     public void draw(Canvas canvas) {
         // test drawing shape to canvas
-        Paint paint = new Paint();
-        paint.setColor(Color.RED);
-
-        canvas.drawRect(getBitmapHolder(), paint);
+        canvas.drawBitmap(getShapeClickImg(), null, getBitmapHolder(),new Paint());
     }
 
     @Override
