@@ -65,8 +65,6 @@ public abstract class ShapeObject {
 
     // only for timing out
     public boolean isTimedOut() {
-        // if time alive > durationAlive, object should be removed
-        // AND if it still has lives
         //return !(System.currentTimeMillis() - initTime > durationAlive * 1000) && lives > 0;
         return (System.currentTimeMillis() - initTime > durationAlive * 1000);
     }
