@@ -35,19 +35,17 @@ public class Circle extends ShapeObject {
     public void draw(Canvas canvas) {
 
         Paint alphaPaint = new Paint();
-        // if lifespan of shape - time alive = time left < 1
-        //alphaPaint.setAlpha(255);
+        alphaPaint.setAlpha(255);
 
-        /*if (timeLeft() < 1000 ) {
-            //alphaPaint.setAlpha( (int) ((255/1000) * getDurationAlive()*1000 - (System.currentTimeMillis() - getInitTime())));
-            alphaPaint.setAlpha( (int) ((255/1000) * timeLeft()));
-
-            StyleableToast.makeText(Constants.CURRENT_CONTEXT, "NOw", R.style.successtoast).show();
-
-        }*/
+        // ERROR if time is below 150 - shape flashes
+        if (150 < timeLeft() && timeLeft() < 1000 ) {
+            alphaPaint.setAlpha( (int) ((255 * timeLeft())/1000));
+        }
+        else if (timeLeft() < 150)
+            alphaPaint.setAlpha(0);
 
         canvas.drawBitmap(getCurrentShapeImg(), null, getBitmapHolder(),alphaPaint);
-        //canvas.drawBitmap(getCurrentShapeImg(), null, getBitmapHolder(),new Paint());
+
     }
     public long timeLeft() {
         return  (int) getDurationAlive() * 1000 - (System.currentTimeMillis() - getInitTime());

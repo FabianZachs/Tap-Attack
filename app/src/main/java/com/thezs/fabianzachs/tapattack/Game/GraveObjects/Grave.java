@@ -54,10 +54,4 @@ public class Grave {
 
     }
 
-
-    public void update() {
-
-    }
-
-
 }

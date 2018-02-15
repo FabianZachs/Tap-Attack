@@ -57,7 +57,7 @@ public class ShapesManager {
 
         for (int i = 100 ; i < 1600; i = i + 400) {
             for (int j = 0; j < 1000; j = j + 400) {
-                Circle testCircle = new Circle(1000, "blue", new Point(i,j),clickedImg,img);
+                Circle testCircle = new Circle(3, "blue", new Point(i,j),clickedImg,img);
                 shapes.add(testCircle);
 
             }
@@ -95,11 +95,15 @@ public class ShapesManager {
 
         for (ShapeObject shape : shapes) {
 
-            if (!shape.isAlive()) {
+            // if deleted by click
+            if (shape.getLives() == 0) {
                 graves.add(new Grave(shape.getCenterLocation(), shape.getBitmapHolder(), shape.getShapeClickImg()));
                 shapes.remove(shape);
-
             }
+
+            else if (shape.isTimedOut())
+                shapes.remove(shape);
+
                 // TODO add one shape.getPoints to the score -- and streak (add this when we find out lives = 0
             else shape.update();
         }
