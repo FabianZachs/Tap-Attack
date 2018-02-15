@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
-import com.thezs.fabianzachs.tapattack.Animation.Animation;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.R;
 
@@ -21,7 +20,6 @@ import com.thezs.fabianzachs.tapattack.R;
 
 public class Circle extends ShapeObject {
 
-    //private Animation animation;  make the animation
 
     public Circle(float durationAlive, String color, Point centerLocation, Bitmap shapeClickImg, Bitmap shapeImg) {
        // call super(durationAlive, color) then in super also make the rect to hold bitmap

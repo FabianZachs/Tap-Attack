@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
-import com.thezs.fabianzachs.tapattack.Animation.Animation;
 import com.thezs.fabianzachs.tapattack.Animation.AnimationManager;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
