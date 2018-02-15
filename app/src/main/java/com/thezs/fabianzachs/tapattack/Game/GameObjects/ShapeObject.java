@@ -23,6 +23,7 @@ import static com.thezs.fabianzachs.tapattack.Game.MainThread.canvas;
 public abstract class ShapeObject {
 
     private int progressBarAddition;
+    private long distructionTime;
     private Bitmap[] shapeImages;
     private int stateAnimation = 0;
     private float durationAlive;
@@ -162,6 +163,7 @@ public abstract class ShapeObject {
     }
 
 
+
     // listens for specific touch events
     class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
         private static final String DEBUG_TAG = "Gestures";
@@ -170,9 +172,7 @@ public abstract class ShapeObject {
         @Override
         public boolean onDown(MotionEvent event) {
             //Log.d(DEBUG_TAG,"onDown: " + event.toString());
-            setState(1);
             reduceLives();
-            // start destruct
             return true;
         }
 
@@ -219,5 +219,6 @@ public abstract class ShapeObject {
         }
 
     }
+
 
 }

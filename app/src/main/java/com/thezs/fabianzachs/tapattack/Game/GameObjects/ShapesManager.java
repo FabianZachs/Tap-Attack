@@ -12,6 +12,7 @@ import com.thezs.fabianzachs.tapattack.Animation.Animation;
 import com.thezs.fabianzachs.tapattack.Animation.AnimationManager;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
+import com.thezs.fabianzachs.tapattack.Game.GraveObjects.Grave;
 import com.thezs.fabianzachs.tapattack.R;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import static com.thezs.fabianzachs.tapattack.Game.MainThread.canvas;
 public class ShapesManager {
 
     private ArrayList<ShapeObject> shapes = new ArrayList<>();
+    private ArrayList<Grave> graves = new ArrayList<>();
     private int shape_spacing = Constants.SHAPE_SPACING;
 
     private AnimationManager animationManager;
@@ -94,10 +96,17 @@ public class ShapesManager {
         for (ShapeObject shape : shapes) {
 
             if (!shape.isAlive()) {
+                graves.add(new Grave(shape.getCenterLocation(), shape.getBitmapHolder(), shape.getShapeClickImg()));
                 shapes.remove(shape);
+
             }
                 // TODO add one shape.getPoints to the score -- and streak (add this when we find out lives = 0
             else shape.update();
+        }
+
+        for (Grave grave : graves) {
+            if (grave.graveDestroyed())
+                graves.remove(grave);
         }
 
     }
@@ -106,6 +115,9 @@ public class ShapesManager {
         for (ShapeObject shape : shapes) {
             shape.draw(canvas);
         }
+
+        for (Grave grave : graves)
+            grave.draw(canvas);
 
     }
 
