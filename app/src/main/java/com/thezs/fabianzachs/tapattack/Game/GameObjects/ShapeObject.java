@@ -14,6 +14,8 @@ import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.R;
 
+import static com.thezs.fabianzachs.tapattack.Game.MainThread.canvas;
+
 /**
  * Created by fabianzachs on 07/02/18.
  */
@@ -57,7 +59,6 @@ public abstract class ShapeObject {
 
         // handling touch events:
         mDetector = new GestureDetectorCompat(Constants.CURRENT_CONTEXT, new MyGestureListener());
-
     }
 
 
@@ -68,15 +69,16 @@ public abstract class ShapeObject {
     }
 
 
-    public void recieveTouch(MotionEvent event) {
-        this.mDetector.onTouchEvent(event);
-    }
 
     public void reduceLives() {
         this.lives -= 1;
     }
 
     // SETTERS & GETTERS
+
+    public Point getCenterLocation() {
+        return this.centerLocation;
+    }
 
     public Bitmap getCurrentShapeImg() {
         return this.shapeImages[getState()];
@@ -151,10 +153,13 @@ public abstract class ShapeObject {
         this.stateAnimation = state;
     }
 
-    private int getState() {
+    public int getState() {
         return this.stateAnimation;
     }
 
+    public void recieveTouch(MotionEvent event) {
+        this.mDetector.onTouchEvent(event);
+    }
 
 
     // listens for specific touch events
@@ -164,30 +169,28 @@ public abstract class ShapeObject {
 
         @Override
         public boolean onDown(MotionEvent event) {
-            Log.d(DEBUG_TAG,"onDown: " + event.toString());
+            //Log.d(DEBUG_TAG,"onDown: " + event.toString());
+            setState(1);
+            reduceLives();
+            // start destruct
             return true;
         }
 
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2,
                                float velocityX, float velocityY) {
-            StyleableToast.makeText(Constants.CURRENT_CONTEXT,  "fling", R.style.successtoast).show();
-            Log.d(DEBUG_TAG, "onFling: " + event1.toString() + event2.toString());
             return true;
         }
 
         // The user has performed a down MotionEvent and not performed a move or up yet.
         @Override
         public void onShowPress(MotionEvent event) {
-            setState(1);
             Log.d(DEBUG_TAG, "onShowPress: " + event.toString());
         }
 
         @Override
         public boolean onSingleTapUp(MotionEvent event) {
-            StyleableToast.makeText(Constants.CURRENT_CONTEXT,  "tap", R.style.successtoast).show();
             Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
-            reduceLives();
             return true;
         }
 
@@ -213,7 +216,6 @@ public abstract class ShapeObject {
         @Override
         public void onLongPress(MotionEvent event) {
             Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
-            setState(0);
         }
 
     }

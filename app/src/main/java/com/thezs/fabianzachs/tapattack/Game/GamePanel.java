@@ -51,6 +51,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         thread.start();          // method in Thread class
     }
 
+
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
 
@@ -73,9 +74,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            //StyleableToast.makeText(Constants.CURRENT_CONTEXT, ClassicGameScene.gameOver + "", R.style.successtoast).show();
-        }
         sceneManager.recieveTouch(event);
 
         return true;
@@ -90,10 +88,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public void draw(Canvas canvas) {
         super.draw(canvas);
 
+        /*
         Drawable d = getResources().getDrawable(R.drawable.blueneonbackground);
         d.setBounds(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         d.draw(canvas);
-
+*/
         sceneManager.draw(canvas);
     }
 

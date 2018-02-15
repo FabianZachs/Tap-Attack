@@ -17,6 +17,7 @@ import com.thezs.fabianzachs.tapattack.R;
 import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.thezs.fabianzachs.tapattack.Game.MainThread.canvas;
 
 /**
  * Created by fabianzachs on 07/02/18.
@@ -51,10 +52,18 @@ public class ShapesManager {
         // TODO use creational design pattern for each shape in shapesmanager https://sourcemaking.com/design_patterns/creational_patterns
         Bitmap img = animationManager.getBitmap("circle", "blue", false);
         Bitmap clickedImg = animationManager.getBitmap("circle", "blue", true);
-        Circle testCircle = new Circle(5, "blue", new Point(300,300),clickedImg,img);
-        shapes.add(testCircle);
+
+        for (int i = 100 ; i < 1600; i = i + 400) {
+            for (int j = 0; j < 1000; j = j + 400) {
+                Circle testCircle = new Circle(1000, "blue", new Point(i,j),clickedImg,img);
+                shapes.add(testCircle);
+
+            }
+        }
+
     }
 
+    // TODO do this in the store menu so we dont have to do this everytime we startup game
     private void initializeAnimations() {
         SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerPrefs", MODE_PRIVATE);
 
@@ -83,11 +92,14 @@ public class ShapesManager {
     public void update() {
 
         for (ShapeObject shape : shapes) {
-            if (!shape.isAlive())
+
+            if (!shape.isAlive()) {
                 shapes.remove(shape);
+            }
                 // TODO add one shape.getPoints to the score -- and streak (add this when we find out lives = 0
             else shape.update();
         }
+
     }
 
     public void draw(Canvas canvas) {

@@ -36,15 +36,15 @@ public class Circle extends ShapeObject {
 
         Paint alphaPaint = new Paint();
         // if lifespan of shape - time alive = time left < 1
-        alphaPaint.setAlpha(255);
+        //alphaPaint.setAlpha(255);
 
-        if (timeLeft() < 1000 ) {
+        /*if (timeLeft() < 1000 ) {
             //alphaPaint.setAlpha( (int) ((255/1000) * getDurationAlive()*1000 - (System.currentTimeMillis() - getInitTime())));
             alphaPaint.setAlpha( (int) ((255/1000) * timeLeft()));
 
             StyleableToast.makeText(Constants.CURRENT_CONTEXT, "NOw", R.style.successtoast).show();
 
-        }
+        }*/
 
         canvas.drawBitmap(getCurrentShapeImg(), null, getBitmapHolder(),alphaPaint);
         //canvas.drawBitmap(getCurrentShapeImg(), null, getBitmapHolder(),new Paint());
@@ -56,7 +56,6 @@ public class Circle extends ShapeObject {
 
     @Override
     public void update() {
-
     }
 
 }
