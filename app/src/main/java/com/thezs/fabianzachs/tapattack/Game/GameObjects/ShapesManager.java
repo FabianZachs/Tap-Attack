@@ -3,13 +3,17 @@ package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.MotionEvent;
 
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Animation.AnimationManager;
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundHandler;
 import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
 import com.thezs.fabianzachs.tapattack.Game.GraveObjects.Grave;
 import com.thezs.fabianzachs.tapattack.R;
@@ -30,6 +34,7 @@ public class ShapesManager {
     private int shape_spacing = Constants.SHAPE_SPACING;
 
     private AnimationManager animationManager;
+    private BackgroundHandler backgroundHandler;
 
     private long initTime;   // initialization of game scene
     private long startTime;  // time of update. startTime - initTime = time passed (good for difficulty)
@@ -40,7 +45,7 @@ public class ShapesManager {
 
     public ShapesManager() {
 
-        initializeAnimations();
+        initializeAnimationsAndBackground();
 
         populateShapes();
 
@@ -65,12 +70,15 @@ public class ShapesManager {
     }
 
     // TODO do this in the store menu so we dont have to do this everytime we startup game
-    private void initializeAnimations() {
+    private void initializeAnimationsAndBackground() {
         SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerPrefs", MODE_PRIVATE);
 
+        // change error: no theme to basic colorscheme
         String theme = prefs.getString("theme", "error: no theme");
 
         this.animationManager = new AnimationManager(theme);
+
+        this.backgroundHandler = new BackgroundHandler(theme);
 
     }
 
@@ -112,9 +120,19 @@ public class ShapesManager {
                 graves.remove(grave);
         }
 
+
+
     }
 
     public void draw(Canvas canvas) {
+
+        // setting background
+        Bitmap background = backgroundHandler.getBackgroundBitmap("blue");
+
+        canvas.drawBitmap(background,0,0,null);
+        //canvas.drawBitmap(background, null, new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), null);
+
+
         for (ShapeObject shape : shapes) {
             shape.draw(canvas);
         }
@@ -122,6 +140,12 @@ public class ShapesManager {
         for (Grave grave : graves)
             grave.draw(canvas);
 
+
+        /*
+        Drawable d = getResources().getDrawable(R.drawable.blueneonbackground);
+        d.setBounds(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+        d.draw(canvas);
+*/
     }
 
 }

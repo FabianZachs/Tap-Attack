@@ -1,0 +1,43 @@
+package com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import com.thezs.fabianzachs.tapattack.Constants;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Created by fabianzachs on 16/02/18.
+ */
+
+public class BackgroundHandler {
+
+    // an arraylist: color -> Bitmap background
+    private Map<String, Bitmap> backgrounds;
+    private String theme;
+
+
+    public BackgroundHandler(String theme) {
+        this.theme = theme;
+        this.backgrounds = new HashMap<>();
+        addBackgroundsToMap(theme);
+    }
+
+    private void addBackgroundsToMap(String theme) {
+        String[] colors = Constants.COLORS.get(theme);
+        BitmapFactory bf = new BitmapFactory();
+        for (String color : colors) {
+            String backgroundName = theme + color + "background";
+            int resID = Constants.CURRENT_CONTEXT.getResources().getIdentifier(backgroundName, "drawable", Constants.CURRENT_CONTEXT.getPackageName());
+            Bitmap img = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), resID);
+            backgrounds.put(backgroundName, img);
+        }
+    }
+
+    public Bitmap getBackgroundBitmap(String color) {
+        return backgrounds.get(theme+color+"background");
+    }
+}

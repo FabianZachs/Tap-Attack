@@ -26,7 +26,7 @@ public class MainGameActivity extends Activity {
 
         // TODO make a class for this to call from all over code
         RelativeLayout parentLayout = (RelativeLayout) findViewById(R.id.parent_layout);
-        parentLayout.setBackground(getResources().getDrawable(R.drawable.blueneonbackground));
+        parentLayout.setBackground(getResources().getDrawable(R.drawable.neonbluebackground));
 
 
         LinearLayout viewForGamePanel = (LinearLayout) findViewById(R.id.game_panel_surface);
