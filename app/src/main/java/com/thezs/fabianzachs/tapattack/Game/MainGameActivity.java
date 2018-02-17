@@ -7,9 +7,13 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.view.View;
         import android.widget.LinearLayout;
         import android.widget.RelativeLayout;
+        import android.widget.TextView;
 
+        import com.thezs.fabianzachs.tapattack.Game.LayoutHeadingHandlers.LayoutHeadings;
         import com.thezs.fabianzachs.tapattack.R;
         import com.thezs.fabianzachs.tapattack.helper;
+
+        import org.w3c.dom.Text;
 
 /**
  * Created by fabianzachs on 07/02/18.
@@ -24,9 +28,7 @@ public class MainGameActivity extends Activity {
 
         setContentView(R.layout.activity_main_game);
 
-        // TODO make a class for this to call from all over code
-        RelativeLayout parentLayout = (RelativeLayout) findViewById(R.id.parent_layout);
-        parentLayout.setBackground(getResources().getDrawable(R.drawable.neonbluebackground));
+        createLayoutHeadings();
 
 
         LinearLayout viewForGamePanel = (LinearLayout) findViewById(R.id.game_panel_surface);
@@ -35,6 +37,21 @@ public class MainGameActivity extends Activity {
         // below works for setting entire screen the view
         // setContentView(new GamePanel(this));
 
+    }
+
+    private LayoutHeadings createLayoutHeadings() {
+
+        TextView score = (TextView) findViewById(R.id.score_text);
+        TextView streak = (TextView) findViewById(R.id.streak_text);
+        com.beardedhen.androidbootstrap.BootstrapProgressBar progressBar =
+                (com.beardedhen.androidbootstrap.BootstrapProgressBar) findViewById(R.id.progress_bar);
+        RelativeLayout parentLayout = (RelativeLayout) findViewById(R.id.parent_layout);
+
+
+
+
+        LayoutHeadings layoutHeadings = new LayoutHeadings(this, score, streak, progressBar, parentLayout);
+        return  layoutHeadings;
     }
 
 
