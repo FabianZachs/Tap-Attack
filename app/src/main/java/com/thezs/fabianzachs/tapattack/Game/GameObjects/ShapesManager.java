@@ -127,7 +127,7 @@ public class ShapesManager {
     public void draw(Canvas canvas) {
 
         // setting background
-        Bitmap background = backgroundHandler.getBackgroundBitmap("blue");
+        Bitmap background = backgroundHandler.getBackgroundBitmap("green");
 
         canvas.drawBitmap(background,0,0,null);
         //canvas.drawBitmap(background, null, new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), null);
@@ -140,12 +140,6 @@ public class ShapesManager {
         for (Grave grave : graves)
             grave.draw(canvas);
 
-
-        /*
-        Drawable d = getResources().getDrawable(R.drawable.blueneonbackground);
-        d.setBounds(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-        d.draw(canvas);
-*/
     }
 
 }
