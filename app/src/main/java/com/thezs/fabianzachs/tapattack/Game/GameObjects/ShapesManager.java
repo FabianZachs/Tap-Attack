@@ -66,7 +66,7 @@ public class ShapesManager {
 
         for (int i = 100 ; i < 1600; i = i + 400) {
             for (int j = 0; j < 1000; j = j + 400) {
-                Circle testCircle = new Circle(3, "blue", new Point(i,j),clickedImg,img);
+                Circle testCircle = new Circle(1000, "blue", new Point(i,j),clickedImg,img);
                 shapes.add(testCircle);
 
             }
@@ -111,6 +111,7 @@ public class ShapesManager {
             if (shape.getLives() == 0) {
                 graves.add(new Grave(shape.getCenterLocation(), shape.getBitmapHolder(), shape.getShapeClickImg()));
                 shapes.remove(shape);
+                layoutHeadings.increaseScoreAndStreak(shape.getPoints());
             }
 
             else if (shape.isTimedOut())
@@ -134,8 +135,7 @@ public class ShapesManager {
         // setting background
         Bitmap background = backgroundHandler.getBackgroundBitmap("green");
 
-        canvas.drawBitmap(background,0,0,null);
-        //canvas.drawBitmap(background, null, new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), null);
+        canvas.drawBitmap(background, null, new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), null);
 
         // TODO sets background of the parentlayout -- maybe only call this when background changes for efficency???
         layoutHeadings.setParentLayoutBackground(background);

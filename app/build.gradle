@@ -30,6 +30,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.beardedhen:androidbootstrap:2.3.2'
     implementation 'com.muddzdev:styleabletoast:2.0.2'
+
+    compile 'com.android.support:support-compat:26.1.0'
+    compile 'com.daimajia.easing:library:2.0@aar'
+    compile 'com.daimajia.androidanimations:library:2.3@aar'
 }
 
 

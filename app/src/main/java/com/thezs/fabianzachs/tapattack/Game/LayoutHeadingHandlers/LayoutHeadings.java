@@ -8,6 +8,8 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.R;
 
@@ -20,25 +22,69 @@ import org.w3c.dom.Text;
 public class LayoutHeadings {
 
     private Context context;
-    private TextView score;
-    private TextView streak;
+    private TextView scoreView;
+    private TextView streakView;
+    private int score;
+    private int streak;
     private com.beardedhen.androidbootstrap.BootstrapProgressBar progressBar;
     private RelativeLayout parentLayout;
 
     public LayoutHeadings(Context context, TextView score, TextView streak, com.beardedhen.androidbootstrap.BootstrapProgressBar progressBar, RelativeLayout parentLayout) {
         this.context = context;
-        this.score = score;
-        this.streak = streak;
+        this.scoreView = score;
+        this.streakView = streak;
         this.progressBar = progressBar;
         this.parentLayout = parentLayout;
+
+        this.score = 0;
+        this.streak = 0;
 
     }
 
     public void setParentLayoutBackground(Bitmap bitmap) {
-
         Drawable dr = new BitmapDrawable(context.getResources(), bitmap);
         parentLayout.setBackground(dr);
+    }
 
+    public void increaseScoreAndStreak(int amount) {
+
+
+
+
+
+        this.score += amount;
+        this.streak += amount;
+        this.streakView.setText(Integer.toString(streak));
+        this.scoreView.setText(Integer.toString(score));
+        /* implement animation for text
+        YoYo.with(Techniques.Tada)
+                .duration(700)
+                .repeat(5)
+                .playOn(streakView);
+               */
+    }
+
+    public void increaseScore(int amount) {
+        this.score += amount;
+        this.scoreView.setText(Integer.toString(score));
+    }
+
+
+    public void resetScore() {
+        this.score = 0;
+        this.scoreView.setText("SCORE");
+    }
+
+
+    public void increaseStreak (int amount) {
+        this.streak += amount;
+        streakView.setText(Integer.toString(streak));
+    }
+
+
+    public void resetStreak() {
+        this.streak = 0;
+        this.streakView.setText("STREAK");
     }
 
 }
