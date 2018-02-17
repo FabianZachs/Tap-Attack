@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
+import com.thezs.fabianzachs.tapattack.Game.LayoutHeadingHandlers.LayoutHeadings;
 
 import java.util.ArrayList;
 
@@ -17,9 +18,9 @@ public class SceneManager {
     private static int ACTIVE_SCENE;
 
     // TODO update to take game mode x (ACTIVE_SCENE is specified before)
-    public SceneManager() {
+    public SceneManager(LayoutHeadings layoutHeadings) {
         ACTIVE_SCENE = 0;
-        scenes.add(new ClassicGameScene());
+        scenes.add(new ClassicGameScene(layoutHeadings));
     }
 
     public void recieveTouch(MotionEvent event) {

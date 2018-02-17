@@ -16,6 +16,7 @@ import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundHandler;
 import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
 import com.thezs.fabianzachs.tapattack.Game.GraveObjects.Grave;
+import com.thezs.fabianzachs.tapattack.Game.LayoutHeadingHandlers.LayoutHeadings;
 import com.thezs.fabianzachs.tapattack.R;
 
 import java.util.ArrayList;
@@ -36,6 +37,8 @@ public class ShapesManager {
     private AnimationManager animationManager;
     private BackgroundHandler backgroundHandler;
 
+    private LayoutHeadings layoutHeadings;
+
     private long initTime;   // initialization of game scene
     private long startTime;  // time of update. startTime - initTime = time passed (good for difficulty)
                              // use sqrt function for difficulty
@@ -43,7 +46,9 @@ public class ShapesManager {
     private int score;
 
 
-    public ShapesManager() {
+    public ShapesManager(LayoutHeadings layoutHeadings) {
+
+        this.layoutHeadings = layoutHeadings;
 
         initializeAnimationsAndBackground();
 
@@ -132,6 +137,8 @@ public class ShapesManager {
         canvas.drawBitmap(background,0,0,null);
         //canvas.drawBitmap(background, null, new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), null);
 
+        // TODO sets background of the parentlayout -- maybe only call this when background changes for efficency???
+        layoutHeadings.setParentLayoutBackground(background);
 
         for (ShapeObject shape : shapes) {
             shape.draw(canvas);

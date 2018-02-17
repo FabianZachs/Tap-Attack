@@ -1,6 +1,9 @@
 package com.thezs.fabianzachs.tapattack.Game.LayoutHeadingHandlers;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,11 +19,26 @@ import org.w3c.dom.Text;
 
 public class LayoutHeadings {
 
-    public LayoutHeadings(Context context, TextView score, TextView streak, com.beardedhen.androidbootstrap.BootstrapProgressBar progressBar, RelativeLayout parentLayout) {
-        score.setText("WORKS");
+    private Context context;
+    private TextView score;
+    private TextView streak;
+    private com.beardedhen.androidbootstrap.BootstrapProgressBar progressBar;
+    private RelativeLayout parentLayout;
 
-        // TODO make a class for this to call from all over code
-        parentLayout.setBackground(context.getResources().getDrawable(R.drawable.neongreenbackground));
+    public LayoutHeadings(Context context, TextView score, TextView streak, com.beardedhen.androidbootstrap.BootstrapProgressBar progressBar, RelativeLayout parentLayout) {
+        this.context = context;
+        this.score = score;
+        this.streak = streak;
+        this.progressBar = progressBar;
+        this.parentLayout = parentLayout;
+
+    }
+
+    public void setParentLayoutBackground(Bitmap bitmap) {
+
+        Drawable dr = new BitmapDrawable(context.getResources(), bitmap);
+        parentLayout.setBackground(dr);
+
     }
 
 }

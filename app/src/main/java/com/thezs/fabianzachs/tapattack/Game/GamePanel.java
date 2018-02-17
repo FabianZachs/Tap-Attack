@@ -16,6 +16,7 @@ import android.view.SurfaceView;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
+import com.thezs.fabianzachs.tapattack.Game.LayoutHeadingHandlers.LayoutHeadings;
 import com.thezs.fabianzachs.tapattack.R;
 
 /**
@@ -29,14 +30,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     //private SceneManager manager;
 
-    public GamePanel(Context context) {
+    public GamePanel(Context context, LayoutHeadings layoutHeadings) {
         super(context);
 
         getHolder().addCallback(this);
 
         Constants.CURRENT_CONTEXT = context;
 
-        sceneManager = new SceneManager();
+        sceneManager = new SceneManager(layoutHeadings);
 
         setFocusable(true);
     }

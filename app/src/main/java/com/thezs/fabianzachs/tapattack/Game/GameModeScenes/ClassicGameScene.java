@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
+import com.thezs.fabianzachs.tapattack.Game.LayoutHeadingHandlers.LayoutHeadings;
 import com.thezs.fabianzachs.tapattack.Game.Scene;
 
 import static android.content.ContentValues.TAG;
@@ -18,9 +19,9 @@ public class ClassicGameScene implements Scene {
     public static boolean gameOver;
     private ShapesManager shapesManager;
 
-    public ClassicGameScene() {
+    public ClassicGameScene(LayoutHeadings layoutHeadings) {
         this.gameOver = false; // TODO or/and on reset?
-        shapesManager = new ShapesManager();
+        shapesManager = new ShapesManager(layoutHeadings);
 
     }
 
