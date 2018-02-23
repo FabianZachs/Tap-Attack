@@ -18,9 +18,9 @@ public class SceneManager {
     private static int ACTIVE_SCENE;
 
     // TODO update to take game mode x (ACTIVE_SCENE is specified before)
-    public SceneManager(LayoutHeadings layoutHeadings) {
+    public SceneManager() {
         ACTIVE_SCENE = 0;
-        scenes.add(new ClassicGameScene(layoutHeadings));
+        scenes.add(new ClassicGameScene());
     }
 
     public void recieveTouch(MotionEvent event) {

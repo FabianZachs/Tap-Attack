@@ -30,7 +30,7 @@ public class MainGameActivity extends Activity {
 
 
         LinearLayout viewForGamePanel = (LinearLayout) findViewById(R.id.game_panel_surface);
-        viewForGamePanel.addView(new GamePanel(this, createLayoutHeadings()));
+        viewForGamePanel.addView(new GamePanel(this));
 
         // below works for setting entire screen the view
         // setContentView(new GamePanel(this));
@@ -44,8 +44,6 @@ public class MainGameActivity extends Activity {
         com.beardedhen.androidbootstrap.BootstrapProgressBar progressBar =
                 (com.beardedhen.androidbootstrap.BootstrapProgressBar) findViewById(R.id.progress_bar);
         RelativeLayout parentLayout = (RelativeLayout) findViewById(R.id.parent_layout);
-
-
 
 
         LayoutHeadings layoutHeadings = new LayoutHeadings(this, score, streak, progressBar, parentLayout);

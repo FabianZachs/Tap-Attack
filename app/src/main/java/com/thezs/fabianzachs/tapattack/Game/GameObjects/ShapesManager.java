@@ -37,7 +37,6 @@ public class ShapesManager {
     private AnimationManager animationManager;
     private BackgroundHandler backgroundHandler;
 
-    private LayoutHeadings layoutHeadings;
 
     private long initTime;   // initialization of game scene
     private long startTime;  // time of update. startTime - initTime = time passed (good for difficulty)
@@ -46,9 +45,7 @@ public class ShapesManager {
     private int score;
 
 
-    public ShapesManager(LayoutHeadings layoutHeadings) {
-
-        this.layoutHeadings = layoutHeadings;
+    public ShapesManager() {
 
         initializeAnimationsAndBackground();
 
@@ -112,7 +109,6 @@ public class ShapesManager {
                 graves.add(new Grave(shape.getCenterLocation(), shape.getBitmapHolder(), shape.getShapeClickImg()));
                 // TODO make a seperate method which handles everything when a shape is removed (progress bar, streak, score)
                 shapes.remove(shape);
-                layoutHeadings.increaseScoreAndStreak(shape.getPoints());
             }
 
             else if (shape.isTimedOut())
@@ -138,8 +134,6 @@ public class ShapesManager {
 
         canvas.drawBitmap(background, null, new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), null);
 
-        // TODO sets background of the parentlayout -- maybe only call this when background changes for efficency???
-        layoutHeadings.setParentLayoutBackground(background);
 
         for (ShapeObject shape : shapes) {
             shape.draw(canvas);

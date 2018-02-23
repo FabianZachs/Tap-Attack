@@ -19,9 +19,9 @@ public class ClassicGameScene implements Scene {
     public static boolean gameOver;
     private ShapesManager shapesManager;
 
-    public ClassicGameScene(LayoutHeadings layoutHeadings) {
+    public ClassicGameScene() {
         this.gameOver = false; // TODO or/and on reset?
-        shapesManager = new ShapesManager(layoutHeadings);
+        shapesManager = new ShapesManager();
 
     }
 
