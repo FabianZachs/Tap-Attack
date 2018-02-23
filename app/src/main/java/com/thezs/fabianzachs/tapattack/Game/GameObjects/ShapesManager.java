@@ -110,6 +110,7 @@ public class ShapesManager {
             // if deleted by click
             if (shape.getLives() == 0) {
                 graves.add(new Grave(shape.getCenterLocation(), shape.getBitmapHolder(), shape.getShapeClickImg()));
+                // TODO make a seperate method which handles everything when a shape is removed (progress bar, streak, score)
                 shapes.remove(shape);
                 layoutHeadings.increaseScoreAndStreak(shape.getPoints());
             }
@@ -133,7 +134,7 @@ public class ShapesManager {
     public void draw(Canvas canvas) {
 
         // setting background
-        Bitmap background = backgroundHandler.getBackgroundBitmap("green");
+        Bitmap background = backgroundHandler.getBackgroundBitmap("blue");
 
         canvas.drawBitmap(background, null, new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), null);
 

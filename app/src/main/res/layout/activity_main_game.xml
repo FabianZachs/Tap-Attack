@@ -23,7 +23,7 @@
                 android:id="@+id/score_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SCORE"
+                android:text="SCORE1"
                 android:fontFamily="@font/undinaru"
                 />
 
@@ -32,7 +32,7 @@
                 android:layout_below="@+id/score_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="STREAK"
+                android:text="STREAK1"
                 android:fontFamily="@font/undinaru"
                 />
 
