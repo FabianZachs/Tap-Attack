@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -62,7 +63,7 @@ public class ShapesManager {
         Bitmap clickedImg = animationManager.getBitmap("circle", "blue", true);
 
         for (int i = 100 ; i < 1600; i = i + 400) {
-            for (int j = 0; j < 1000; j = j + 400) {
+            for (int j = 100; j < 1000; j = j + 400) {
                 Circle testCircle = new Circle(1000, "blue", new Point(i,j),clickedImg,img);
                 shapes.add(testCircle);
 
@@ -86,6 +87,13 @@ public class ShapesManager {
 
     public void recieveTouch(MotionEvent event) {
         boolean shapeInteractment = false; // used to see if user interacted with shape.
+        new StyleableToast
+                .Builder(Constants.CURRENT_CONTEXT)
+                .text("Hello world!")
+                .textColor(Color.WHITE)
+                .backgroundColor(Color.BLUE)
+                .show();
+
 
 
         for (ShapeObject shape : shapes) {
@@ -132,7 +140,8 @@ public class ShapesManager {
         // setting background
         Bitmap background = backgroundHandler.getBackgroundBitmap("blue");
 
-        canvas.drawBitmap(background, null, new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), null);
+        // TODO bug: SCREEN_HEIGHT NOT FULL HEIGHT OF SCREEN
+        canvas.drawBitmap(background, null, new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT+200), null);
 
 
         for (ShapeObject shape : shapes) {
