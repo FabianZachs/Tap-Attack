@@ -64,7 +64,7 @@ public class ShapesManager {
 
         for (int i = 100 ; i < 1600; i = i + 400) {
             for (int j = 100; j < 1000; j = j + 400) {
-                Circle testCircle = new Circle(3, "blue", new Point(i,j),clickedImg,img);
+                Square testCircle = new Square(3, "blue", new Point(i,j),clickedImg,img);
                 shapes.add(testCircle);
 
             }

@@ -50,8 +50,25 @@ public class Grave {
 
         }*/
 
-        canvas.drawBitmap(graveImg, null, this.bitmapHolder, this.paint);
+        canvas.drawBitmap(graveImg, null, this.bitmapHolder, getAlphaPaint());
 
     }
 
+
+    public Paint getAlphaPaint() {
+        Paint alphaPaint = new Paint();
+        alphaPaint.setAlpha(255);
+
+        // ERROR if time is below 150 - shape flashes
+        if (150 < getTimeLeft() && getTimeLeft() < 1000) {
+            alphaPaint.setAlpha((int) ((255 * getTimeLeft()) / 1000));
+        } else if (getTimeLeft() < 150)
+            alphaPaint.setAlpha(0);
+
+        return alphaPaint;
+    }
+
+    public long getTimeLeft() {
+        return  (int) duration * 1000 - (System.currentTimeMillis() - initTime);
+    }
 }
