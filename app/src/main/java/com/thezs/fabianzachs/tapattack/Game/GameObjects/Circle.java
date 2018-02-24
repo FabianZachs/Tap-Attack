@@ -7,7 +7,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
@@ -26,32 +28,79 @@ public class Circle extends ShapeObject {
         super(durationAlive, color, centerLocation, shapeImg, shapeClickImg);
         setLives(1);
         setProgressBarAddition(10);
+
+
+        // handling touch events
+        setmDetector(new GestureDetectorCompat(Constants.CURRENT_CONTEXT, new MyGestureListener()));
+
     }
 
 
     @Override
     public void draw(Canvas canvas) {
-
-        Paint alphaPaint = new Paint();
-        alphaPaint.setAlpha(255);
-
-        // ERROR if time is below 150 - shape flashes
-        if (150 < timeLeft() && timeLeft() < 1000 ) {
-            alphaPaint.setAlpha( (int) ((255 * timeLeft())/1000));
-        }
-        else if (timeLeft() < 150)
-            alphaPaint.setAlpha(0);
-
-        canvas.drawBitmap(getCurrentShapeImg(), null, getBitmapHolder(),alphaPaint);
-
-    }
-    public long timeLeft() {
-        return  (int) getDurationAlive() * 1000 - (System.currentTimeMillis() - getInitTime());
+        super.draw(canvas);
     }
 
 
     @Override
     public void update() {
     }
+
+
+    // listens for specific touch events
+    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+        private static final String DEBUG_TAG = "Gestures";
+
+
+        @Override
+        public boolean onDown(MotionEvent event) {
+            //Log.d(DEBUG_TAG,"onDown: " + event.toString());
+            reduceLives();
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent event1, MotionEvent event2,
+                               float velocityX, float velocityY) {
+            return true;
+        }
+
+        // The user has performed a down MotionEvent and not performed a move or up yet.
+        @Override
+        public void onShowPress(MotionEvent event) {
+            Log.d(DEBUG_TAG, "onShowPress: " + event.toString());
+        }
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent event) {
+            Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
+            return true;
+        }
+
+        @Override
+        public boolean onDoubleTap(MotionEvent event) {
+            Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
+            return true;
+        }
+
+        @Override
+        public boolean onDoubleTapEvent(MotionEvent event) {
+            Log.d(DEBUG_TAG, "onDoubleTapEvent: " + event.toString());
+            return true;
+        }
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent event) {
+            Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
+            return true;
+        }
+
+        // we want to put shape back to original state
+        @Override
+        public void onLongPress(MotionEvent event) {
+            Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
+        }
+    }
+
 
 }
