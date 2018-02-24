@@ -5,7 +5,6 @@ import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
-import com.thezs.fabianzachs.tapattack.Game.LayoutHeadingHandlers.LayoutHeadings;
 
 import java.util.ArrayList;
 
@@ -25,7 +24,7 @@ public class SceneManager {
     }
 
     public void recieveTouch(MotionEvent event) {
-        if (Constants.gameBoundary.contains((int) event.getX(), (int) event.getY()))
+        if (Constants.GAMEBOUNDARY.contains((int) event.getX(), (int) event.getY()))
             scenes.get(ACTIVE_SCENE).recieveTouch(event);
     }
 

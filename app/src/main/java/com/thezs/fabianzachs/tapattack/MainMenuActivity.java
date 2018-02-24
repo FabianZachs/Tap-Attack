@@ -2,7 +2,6 @@ package com.thezs.fabianzachs.tapattack;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
@@ -10,15 +9,12 @@ import android.media.MediaPlayer;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdView;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
-import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
 import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
 
 import java.util.ArrayList;
@@ -69,7 +65,7 @@ public class MainMenuActivity extends  GeneralParent {
         Constants.COLORS.put("neon", Constants.NEONCOLORS);
 
         // TODO find pixel height of top bar and replace below
-        Constants.gameBoundary = new Rect(5, 200, Constants.SCREEN_WIDTH - 5, Constants.SCREEN_HEIGHT - 5);
+        Constants.GAMEBOUNDARY = new Rect(5, 200, Constants.SCREEN_WIDTH - 5, Constants.SCREEN_HEIGHT - 5);
     }
 
 

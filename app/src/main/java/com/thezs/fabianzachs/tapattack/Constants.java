@@ -24,6 +24,6 @@ public class Constants {
     public static String[] NEONCOLORS = {"blue","green"};
     public static Map<String, String[]> COLORS;
 
-    public static Rect gameBoundary;
+    public static Rect GAMEBOUNDARY;
 
 }
