@@ -140,8 +140,7 @@ public class ShapesManager {
         // setting background
         Bitmap background = backgroundHandler.getBackgroundBitmap("blue");
 
-        // TODO bug: SCREEN_HEIGHT NOT FULL HEIGHT OF SCREEN
-        canvas.drawBitmap(background, null, new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT+200), null);
+        canvas.drawBitmap(background, null, new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), null);
 
 
         for (ShapeObject shape : shapes) {
