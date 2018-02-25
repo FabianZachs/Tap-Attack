@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack.Game.GameObjects;
+package com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes;
 
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;

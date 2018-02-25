@@ -39,4 +39,5 @@ public class SceneManager {
     public void setActiveScene(int sceneNumber) {
         ACTIVE_SCENE = sceneNumber;
     }
+
 }

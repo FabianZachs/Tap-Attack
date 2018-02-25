@@ -4,11 +4,8 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
@@ -16,14 +13,14 @@ import com.thezs.fabianzachs.tapattack.Animation.AnimationManager;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundHandler;
 import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
 import com.thezs.fabianzachs.tapattack.Game.GraveObjects.Grave;
-import com.thezs.fabianzachs.tapattack.Game.LayoutHeadingHandlers.LayoutHeadings;
-import com.thezs.fabianzachs.tapattack.R;
 
 import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.thezs.fabianzachs.tapattack.Game.MainThread.canvas;
 
 /**
  * Created by fabianzachs on 07/02/18.
@@ -104,8 +101,8 @@ public class ShapesManager {
         }
 
          // if user ACTION_DOWNs and not onto a shape
-        //if (!shapeInteractment && event.getAction() == MotionEvent.ACTION_DOWN)
-            //ClassicGameScene.gameOver = true;
+        if (!shapeInteractment && event.getAction() == MotionEvent.ACTION_DOWN)
+            ClassicGameScene.gameOver = true;
     }
 
     public void update() {

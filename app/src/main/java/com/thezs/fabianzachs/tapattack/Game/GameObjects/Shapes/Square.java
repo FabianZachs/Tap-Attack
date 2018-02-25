@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack.Game.GameObjects;
+package com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -14,7 +14,7 @@ import com.thezs.fabianzachs.tapattack.Constants;
  * Created by fabianzachs on 24/02/18.
  */
 
-public class Square extends ShapeObject{
+public class Square extends ShapeObject {
 
 
     public Square(float durationAlive, String color, Point centerLocation, Bitmap shapeClickImg, Bitmap shapeImg) {
