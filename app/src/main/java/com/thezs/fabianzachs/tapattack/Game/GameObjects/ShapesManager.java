@@ -33,7 +33,6 @@ public class ShapesManager {
     private ArrayList<Grave> graves = new ArrayList<>();
     private int shape_spacing = Constants.SHAPE_SPACING;
 
-    //private AnimationManager animationManager;
     private ShapeBuilder shapeBuilder;
     private BackgroundHandler backgroundHandler;
 
@@ -46,6 +45,8 @@ public class ShapesManager {
 
 
     public ShapesManager() {
+
+        // will be moved to ShapesPopulator
         shapeBuilder = new ShapeBuilder(initTime);
 
         initializeAnimationsAndBackground();
@@ -59,7 +60,7 @@ public class ShapesManager {
         for (int i = 100 ; i < 1600; i = i + 400) {
             for (int j = 100; j < 1000; j = j + 400) {
                 //Square testCircle = new Square(8, "blue", new Point(i,j),clickedImg,img);
-                shapes.add(shapeBuilder.buildCircle("blue", new Point(i,j)));
+                shapes.add(shapeBuilder.buildCross("blue", new Point(i,j)));
 
 
             }
@@ -102,7 +103,7 @@ public class ShapesManager {
             // if deleted by click
             if (shape.getLives() == 0) {
                 // TODO maybe better to add method .isGraveable() to see whether shape leaves grave
-                // grave for square does not seem smooth
+                // grave for square does not seem smooth and not needed for corss
                 if (shape instanceof Circle)
                     graves.add(new Grave(shape.getCenterLocation(), shape.getBitmapHolder(), shape.getShapeClickImg()));
                 // TODO make a seperate method which handles everything when a shape is removed (progress bar, streak, score)

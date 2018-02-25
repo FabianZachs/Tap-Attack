@@ -21,7 +21,6 @@ public class ShapeBuilder {
     private AnimationManager animationManager;
 
     public ShapeBuilder(long initTime) {
-        // creates the animation manager
         // decides durationAlive depending on initTime & current time
         initializeAnimations();
     }
@@ -36,9 +35,18 @@ public class ShapeBuilder {
 
     }
 
-    //public Square buildSquare(Point centerLocation){}
+    public Square buildSquare(String color, Point centerLocation) {
+        return new Square(8, color, centerLocation,
+                animationManager.getBitmap("square", color, false),
+                animationManager.getBitmap("square", color, true));
 
-    //public Cross buildCross(Point centerLocation){}
+    }
+
+    public Cross buildCross(String color, Point centerLocation) {
+        return new Cross(8, color, centerLocation,
+                animationManager.getBitmap("cross", color, false),
+                animationManager.getBitmap("cross", color, true));
+    }
 
     private void initializeAnimations() {
 

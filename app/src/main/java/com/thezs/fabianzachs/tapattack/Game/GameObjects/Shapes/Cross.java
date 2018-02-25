@@ -17,6 +17,7 @@ import com.thezs.fabianzachs.tapattack.Game.SceneManager;
 
 public class Cross extends ShapeObject {
 
+    // TODO make cross flash (like in piano game) when clicked
     public Cross(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg) {
         // call super(durationAlive, color) then in super also make the rect to hold bitmap
         super(durationAlive, color, centerLocation, shapeImg, shapeClickImg);
