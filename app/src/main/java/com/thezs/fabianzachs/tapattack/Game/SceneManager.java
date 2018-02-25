@@ -30,7 +30,7 @@ public class SceneManager {
     public void recieveTouch(MotionEvent event) {
         new StyleableToast
                 .Builder(Constants.CURRENT_CONTEXT)
-                .text(String.valueOf(ClassicGameScene.gameOver))
+                .text(String.valueOf(scenes.get(ACTIVE_SCENE).getGameOver()))
                 .textColor(Color.WHITE)
                 .backgroundColor(Color.BLUE)
                 .show();

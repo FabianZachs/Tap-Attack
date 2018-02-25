@@ -15,4 +15,5 @@ public interface Scene {
     public void terminate();
     public void recieveTouch(MotionEvent event);
     public void setGameOver(Boolean gameOver);
+    public Boolean getGameOver();
 }

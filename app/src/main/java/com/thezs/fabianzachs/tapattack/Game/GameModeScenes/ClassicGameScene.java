@@ -16,7 +16,7 @@ import static android.content.ContentValues.TAG;
 
 public class ClassicGameScene implements Scene {
 
-    public static boolean gameOver;
+    private static boolean gameOver;
     private ShapesManager shapesManager;
 
     public ClassicGameScene() {
@@ -55,6 +55,11 @@ public class ClassicGameScene implements Scene {
     @Override
     public void setGameOver(Boolean gameOver) {
         this.gameOver = gameOver;
+    }
+
+    @Override
+    public Boolean getGameOver() {
+        return this.gameOver;
     }
 
 
