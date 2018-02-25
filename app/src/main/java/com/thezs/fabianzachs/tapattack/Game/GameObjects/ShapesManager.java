@@ -33,7 +33,8 @@ public class ShapesManager {
     private ArrayList<Grave> graves = new ArrayList<>();
     private int shape_spacing = Constants.SHAPE_SPACING;
 
-    private AnimationManager animationManager;
+    //private AnimationManager animationManager;
+    private ShapeBuilder shapeBuilder;
     private BackgroundHandler backgroundHandler;
 
 
@@ -45,6 +46,7 @@ public class ShapesManager {
 
 
     public ShapesManager() {
+        shapeBuilder = new ShapeBuilder(initTime);
 
         initializeAnimationsAndBackground();
 
@@ -54,16 +56,11 @@ public class ShapesManager {
 
     private void populateShapes() {
 
-
-        // testing: creating a circle shape:
-        // TODO use creational design pattern for each shape in shapesmanager https://sourcemaking.com/design_patterns/creational_patterns
-        Bitmap img = animationManager.getBitmap("square", "blue", false);
-        Bitmap clickedImg = animationManager.getBitmap("square", "blue", true);
-
         for (int i = 100 ; i < 1600; i = i + 400) {
             for (int j = 100; j < 1000; j = j + 400) {
-                Square testCircle = new Square(8, "blue", new Point(i,j),clickedImg,img);
-                shapes.add(testCircle);
+                //Square testCircle = new Square(8, "blue", new Point(i,j),clickedImg,img);
+                shapes.add(shapeBuilder.buildCircle("blue", new Point(i,j)));
+
 
             }
         }
@@ -76,8 +73,6 @@ public class ShapesManager {
 
         // change error: no theme to basic colorscheme
         String theme = prefs.getString("theme", "error: no theme");
-
-        this.animationManager = new AnimationManager(theme);
 
         this.backgroundHandler = new BackgroundHandler(theme);
 

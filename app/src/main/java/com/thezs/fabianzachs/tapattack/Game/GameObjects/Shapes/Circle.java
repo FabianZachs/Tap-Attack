@@ -18,7 +18,7 @@ import com.thezs.fabianzachs.tapattack.Game.SceneManager;
 public class Circle extends ShapeObject {
 
 
-    public Circle(float durationAlive, String color, Point centerLocation, Bitmap shapeClickImg, Bitmap shapeImg) {
+    public Circle(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg) {
        // call super(durationAlive, color) then in super also make the rect to hold bitmap
         super(durationAlive, color, centerLocation, shapeImg, shapeClickImg);
         setLives(1);
