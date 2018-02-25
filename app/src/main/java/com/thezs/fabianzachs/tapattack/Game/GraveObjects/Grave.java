@@ -50,7 +50,7 @@ public class Grave {
 
         }*/
 
-        canvas.drawBitmap(graveImg, null, this.bitmapHolder, getAlphaPaint());
+        canvas.drawBitmap(graveImg, null, this.bitmapHolder, this.paint);
 
     }
 

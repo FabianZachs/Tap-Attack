@@ -177,7 +177,7 @@ public abstract class ShapeObject {
         return this.points;
     }
 
-    private void setState(int state) {
+    public void setState(int state) {
         this.stateAnimation = state;
     }
 

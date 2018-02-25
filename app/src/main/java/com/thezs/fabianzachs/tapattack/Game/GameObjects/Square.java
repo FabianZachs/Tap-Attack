@@ -20,7 +20,7 @@ public class Square extends ShapeObject{
     public Square(float durationAlive, String color, Point centerLocation, Bitmap shapeClickImg, Bitmap shapeImg) {
         // call super(durationAlive, color) then in super also make the rect to hold bitmap
         super(durationAlive, color, centerLocation, shapeImg, shapeClickImg);
-        setLives(1);
+        setLives(2);
         setProgressBarAddition(15);
 
 
@@ -49,6 +49,8 @@ public class Square extends ShapeObject{
         @Override
         public boolean onDown(MotionEvent event) {
             //Log.d(DEBUG_TAG,"onDown: " + event.toString());
+            setState(1);
+            reduceLives();
             return true;
         }
 
@@ -73,7 +75,6 @@ public class Square extends ShapeObject{
         @Override
         public boolean onDoubleTap(MotionEvent event) {
             Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
-            reduceLives();
             return true;
         }
 

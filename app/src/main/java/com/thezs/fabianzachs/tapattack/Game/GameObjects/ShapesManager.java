@@ -59,12 +59,12 @@ public class ShapesManager {
 
         // testing: creating a circle shape:
         // TODO use creational design pattern for each shape in shapesmanager https://sourcemaking.com/design_patterns/creational_patterns
-        Bitmap img = animationManager.getBitmap("circle", "blue", false);
-        Bitmap clickedImg = animationManager.getBitmap("circle", "blue", true);
+        Bitmap img = animationManager.getBitmap("square", "blue", false);
+        Bitmap clickedImg = animationManager.getBitmap("square", "blue", true);
 
         for (int i = 100 ; i < 1600; i = i + 400) {
             for (int j = 100; j < 1000; j = j + 400) {
-                Square testCircle = new Square(3, "blue", new Point(i,j),clickedImg,img);
+                Square testCircle = new Square(8, "blue", new Point(i,j),clickedImg,img);
                 shapes.add(testCircle);
 
             }
@@ -114,7 +114,10 @@ public class ShapesManager {
 
             // if deleted by click
             if (shape.getLives() == 0) {
-                graves.add(new Grave(shape.getCenterLocation(), shape.getBitmapHolder(), shape.getShapeClickImg()));
+                // TODO maybe better to add method .isGraveable() to see whether shape leaves grave
+                // grave for square does not seem smooth
+                if (shape instanceof Circle)
+                    graves.add(new Grave(shape.getCenterLocation(), shape.getBitmapHolder(), shape.getShapeClickImg()));
                 // TODO make a seperate method which handles everything when a shape is removed (progress bar, streak, score)
                 shapes.remove(shape);
             }
