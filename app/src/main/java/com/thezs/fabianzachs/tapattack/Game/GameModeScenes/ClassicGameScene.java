@@ -52,6 +52,12 @@ public class ClassicGameScene implements Scene {
         }
     }
 
+    @Override
+    public void setGameOver(Boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
+
     // what happens when game is over (possibly game over screen before reset)
     public void reset() {
 

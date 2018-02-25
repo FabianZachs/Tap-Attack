@@ -17,6 +17,7 @@ import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
 import com.thezs.fabianzachs.tapattack.Game.GraveObjects.Grave;
+import com.thezs.fabianzachs.tapattack.Game.SceneManager;
 
 import java.util.ArrayList;
 
@@ -84,12 +85,6 @@ public class ShapesManager {
 
     public void recieveTouch(MotionEvent event) {
         boolean shapeInteractment = false; // used to see if user interacted with shape.
-        new StyleableToast
-                .Builder(Constants.CURRENT_CONTEXT)
-                .text("Hello world!")
-                .textColor(Color.WHITE)
-                .backgroundColor(Color.BLUE)
-                .show();
 
 
 
@@ -102,7 +97,7 @@ public class ShapesManager {
 
          // if user ACTION_DOWNs and not onto a shape
         if (!shapeInteractment && event.getAction() == MotionEvent.ACTION_DOWN)
-            ClassicGameScene.gameOver = true;
+            SceneManager.setGameOver(true);
     }
 
     public void update() {

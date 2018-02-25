@@ -9,6 +9,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.SceneManager;
 
 /**
  * Created by fabianzachs on 07/02/18.
@@ -56,6 +57,7 @@ public class Circle extends ShapeObject {
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2,
                                float velocityX, float velocityY) {
+            SceneManager.setGameOver(true);
             return true;
         }
 

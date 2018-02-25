@@ -9,6 +9,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.SceneManager;
 
 /**
  * Created by fabianzachs on 25/02/18.
@@ -49,6 +50,7 @@ public class Cross extends ShapeObject {
         @Override
         public boolean onDown(MotionEvent event) {
             //Log.d(DEBUG_TAG,"onDown: " + event.toString());
+            SceneManager.setGameOver(true);
             return true;
         }
 

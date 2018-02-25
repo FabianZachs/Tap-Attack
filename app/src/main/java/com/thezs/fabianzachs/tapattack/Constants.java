@@ -3,6 +3,8 @@ package com.thezs.fabianzachs.tapattack;
 import android.content.Context;
 import android.graphics.Rect;
 
+import com.thezs.fabianzachs.tapattack.Game.Scene;
+
 import java.util.Map;
 
 /**
