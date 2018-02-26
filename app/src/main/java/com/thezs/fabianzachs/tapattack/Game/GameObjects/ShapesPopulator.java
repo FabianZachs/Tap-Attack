@@ -1,8 +1,10 @@
 package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 
+import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.util.Log;
 
+import com.thezs.fabianzachs.tapattack.Animation.AnimationManager;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
 
@@ -33,18 +35,16 @@ public class ShapesPopulator {
 
         Random rand = new Random();
 
-        int  i = rand.nextInt(500) + 50;
-        int  j = rand.nextInt(500) + 50;
+        int  i = rand.nextInt(1000) + 100;
+        int  j = rand.nextInt(1000) + 100;
 
-        // TODO PROBLEM LIES WITH THE setmDetector in each of the shapes
-        // "Can't create handler inside thread that has not called Looper.prepare()"
-        Square square = shapeBuilder.buildSquare("blue", new Point(i,j));
-        //shapes.add(shapeBuilder.buildSquare("blue", new Point(i,j)));
+
+        shapes.add(shapeBuilder.buildSquare("blue", new Point(i,j)));
         return shapes;
     }
 
     private int maxNumberOfShapes() {
-        int number = (int) (getGameTime()/1000)/UNIT_TIME_PER_SHAPE_ADDITION;
+        int number = (int) (getGameTime()/1000)/UNIT_TIME_PER_SHAPE_ADDITION + 1;
         return number;
     }
 

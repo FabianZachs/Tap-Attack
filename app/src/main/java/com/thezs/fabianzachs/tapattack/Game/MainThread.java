@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.Game;
 
 import android.graphics.Canvas;
+import android.os.Looper;
 import android.view.SurfaceHolder;
 
 /**
@@ -40,6 +41,11 @@ public class MainThread extends Thread {
         long targetTime = 1000/MAX_FPS;
 
         while (running) {
+
+            if (Looper.myLooper() == null)
+                Looper.prepare();
+
+
             startTime = System.nanoTime();
             canvas = null;
 
