@@ -37,6 +37,7 @@ public class ShapesPopulator {
         int  j = rand.nextInt(500) + 50;
 
         // TODO PROBLEM LIES WITH THE setmDetector in each of the shapes
+        // "Can't create handler inside thread that has not called Looper.prepare()"
         Square square = shapeBuilder.buildSquare("blue", new Point(i,j));
         //shapes.add(shapeBuilder.buildSquare("blue", new Point(i,j)));
         return shapes;
