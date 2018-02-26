@@ -30,7 +30,7 @@ public class ShapeBuilder {
     // one method to create each shape obj
 
     public Circle buildCircle(String color, Point centerLocation) {
-        return new Circle(8, color, centerLocation,
+        return new Circle(3, color, centerLocation,
                 animationManager.getBitmap("circle", color, false),
                 animationManager.getBitmap("circle", color, true));
 

@@ -47,9 +47,10 @@ public class ClassicGameScene implements Scene {
     public void recieveTouch(MotionEvent event) {
         // pass action to shapesmanager so it can assign the touch to the specific shape
         // then the shape will update depending on that touch
-        if (!gameOver) {
-            shapesManager.recieveTouch(event);
-        }
+        //if (!gameOver) {
+            //shapesManager.recieveTouch(event);
+        //}
+        shapesManager.recieveTouch(event);
     }
 
     @Override

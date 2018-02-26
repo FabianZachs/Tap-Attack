@@ -12,7 +12,7 @@ import android.graphics.Rect;
 
 public class Grave {
 
-    private float duration = 0.1f;
+    private float duration = 0.05f;
     private long initTime;
     private Point centerLocation;
     private Rect bitmapHolder;

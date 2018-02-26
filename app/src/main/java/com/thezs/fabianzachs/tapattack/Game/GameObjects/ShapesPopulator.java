@@ -36,7 +36,7 @@ public class ShapesPopulator {
         Random rand = new Random();
 
         int  i = rand.nextInt(1000) + 100;
-        int  j = rand.nextInt(1000) + 100;
+        int  j = rand.nextInt(1000) + 200;
 
 
         shapes.add(shapeBuilder.buildSquare("blue", new Point(i,j)));

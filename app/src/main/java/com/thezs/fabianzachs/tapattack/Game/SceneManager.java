@@ -28,12 +28,6 @@ public class SceneManager {
     }
 
     public void recieveTouch(MotionEvent event) {
-        new StyleableToast
-                .Builder(Constants.CURRENT_CONTEXT)
-                .text(String.valueOf(scenes.get(ACTIVE_SCENE).getGameOver()))
-                .textColor(Color.WHITE)
-                .backgroundColor(Color.BLUE)
-                .show();
         if (Constants.GAMEBOUNDARY.contains((int) event.getX(), (int) event.getY()))
             scenes.get(ACTIVE_SCENE).recieveTouch(event);
     }
