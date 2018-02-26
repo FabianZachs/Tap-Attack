@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 
 import android.content.SharedPreferences;
 import android.graphics.Point;
+import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.Animation.AnimationManager;
 import com.thezs.fabianzachs.tapattack.Constants;
@@ -36,9 +37,12 @@ public class ShapeBuilder {
     }
 
     public Square buildSquare(String color, Point centerLocation) {
-        return new Square(8, color, centerLocation,
+        Square square = new Square(8, color, centerLocation,
                 animationManager.getBitmap("square", color, false),
                 animationManager.getBitmap("square", color, true));
+
+        Log.d("buildcalled", "buildSquare: build vcalled");
+        return square;
 
     }
 

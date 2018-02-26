@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
@@ -33,7 +34,7 @@ public class ShapesManager {
     private ArrayList<Grave> graves = new ArrayList<>();
     private int shape_spacing = Constants.SHAPE_SPACING;
 
-    private ShapeBuilder shapeBuilder;
+    private ShapesPopulator shapesPopulator;
     private BackgroundHandler backgroundHandler;
 
 
@@ -46,15 +47,15 @@ public class ShapesManager {
 
     public ShapesManager() {
 
-        // will be moved to ShapesPopulator
-        shapeBuilder = new ShapeBuilder(initTime);
+        this.initTime = System.currentTimeMillis();
+        this.shapesPopulator = new ShapesPopulator(initTime);
 
         initializeAnimationsAndBackground();
 
-        populateShapes();
+        //populateShapes();
 
     }
-
+/*
     private void populateShapes() {
 
         for (int i = 100 ; i < 1600; i = i + 400) {
@@ -67,7 +68,7 @@ public class ShapesManager {
         }
 
     }
-
+*/
     // TODO do this in the store menu so we dont have to do this everytime we startup game
     private void initializeAnimationsAndBackground() {
         SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerPrefs", MODE_PRIVATE);
@@ -121,6 +122,7 @@ public class ShapesManager {
             if (grave.graveDestroyed())
                 graves.remove(grave);
         }
+        shapes = shapesPopulator.update(shapes);
 
 
 
