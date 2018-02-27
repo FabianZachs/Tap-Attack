@@ -56,9 +56,8 @@ public class MainMenuActivity extends  GeneralParent {
         // TODO bug: screen height from dm is incorrect for pixel
         Constants.SCREEN_HEIGHT = dm.heightPixels;
 
-        Constants.SHAPE_WIDTH = Constants.SHAPE_HEIGHT = Constants.SCREEN_WIDTH/7;
+        Constants.SHAPE_WIDTH = Constants.SHAPE_HEIGHT = Constants.SCREEN_WIDTH/11;
 
-        Constants.SHAPE_SPACING = 5;
 
         // put colors for all theme packs
         Constants.COLORS = new HashMap<>();

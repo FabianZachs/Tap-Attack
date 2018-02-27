@@ -32,7 +32,6 @@ public class ShapesManager {
 
     private ArrayList<ShapeObject> shapes = new ArrayList<>();
     private ArrayList<Grave> graves = new ArrayList<>();
-    private int shape_spacing = Constants.SHAPE_SPACING;
 
     private ShapesPopulator shapesPopulator;
     private BackgroundHandler backgroundHandler;

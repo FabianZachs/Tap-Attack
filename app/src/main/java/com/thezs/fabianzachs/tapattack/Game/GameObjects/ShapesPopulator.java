@@ -18,7 +18,8 @@ import java.util.Random;
 public class ShapesPopulator {
 
     // settings
-    private final int UNIT_TIME_PER_SHAPE_ADDITION = 5; // every x seconds one more max shape
+    private final int UNIT_TIME_PER_SHAPE_ADDITION = 2; // every x seconds one more max shape
+    private final int SHAPE_SPACING = 5; // space between shapes
 
     private long initTime;
     private ShapeBuilder shapeBuilder;
@@ -33,15 +34,42 @@ public class ShapesPopulator {
         if (maxNumberOfShapes() == shapes.size())
             return shapes;
 
-        Random rand = new Random();
-
-        int  i = rand.nextInt(1000) + 100;
-        int  j = rand.nextInt(1000) + 200;
+        // TODO might return a null location (if all locations taken.. shouldnt happen???
+        Point newShapeLocation = getValidNewShapeLocation(shapes);
 
 
-        shapes.add(shapeBuilder.buildSquare("blue", new Point(i,j)));
+        shapes.add(shapeBuilder.buildSquare("blue", newShapeLocation));
+
         return shapes;
     }
+
+
+    // TODO find the right bounds for location for shape
+    private Point getValidNewShapeLocation(ArrayList<ShapeObject> shapes) {
+        Random rand = new Random();
+
+        int i = rand.nextInt(1000) + 100;
+        int j = rand.nextInt(1000) + 200;
+
+        while(locationUsedByAnotherShape(shapes,i,j)) {
+
+            i = rand.nextInt(1000) + 100;
+            j = rand.nextInt(1000) + 200;
+
+        }
+        return new Point(i,j);
+
+    }
+
+    // TODO add SHAPE_SPACING???
+    private boolean locationUsedByAnotherShape(ArrayList<ShapeObject> shapes, int i, int j) {
+        for (ShapeObject shape : shapes) {
+            if (shape.getBitmapHolder().contains(i,j))
+                return true;
+        }
+        return false;
+    }
+
 
     private int maxNumberOfShapes() {
         int number = (int) (getGameTime()/1000)/UNIT_TIME_PER_SHAPE_ADDITION + 1;

@@ -35,7 +35,6 @@ public abstract class ShapeObject {
     private int lives;
     private Point centerLocation;
 
-    private float shapeScaling = .6f;
 
     private GestureDetectorCompat mDetector;
 
@@ -59,8 +58,8 @@ public abstract class ShapeObject {
         this.initTime = System.currentTimeMillis();
         this.progressBarAddition = progressBarAddition;
         this.shapeImages = new Bitmap[] {shapeImg, shapeClickImg};
-        setBitmapHolder(new Rect((int) (centerLocation.x - (shapeScaling * Constants.SHAPE_WIDTH)), (int) (centerLocation.y - (shapeScaling * Constants.SHAPE_HEIGHT)),
-                (int) (centerLocation.x + (shapeScaling * Constants.SHAPE_WIDTH)), (int) (centerLocation.y + (shapeScaling) * Constants.SHAPE_HEIGHT)));
+        setBitmapHolder(new Rect((int) (centerLocation.x - (Constants.SHAPE_WIDTH)), (int) (centerLocation.y - (Constants.SHAPE_HEIGHT)),
+                (int) (centerLocation.x + (Constants.SHAPE_WIDTH)), (int) (centerLocation.y + (Constants.SHAPE_HEIGHT))));
     }
 
 
