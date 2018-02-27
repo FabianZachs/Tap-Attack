@@ -13,6 +13,7 @@ import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Created by fabianzachs on 25/02/18.
@@ -36,7 +37,7 @@ public class ShapesPopulator {
         this.shapeBuilder = new ShapeBuilder(initTime);
     }
 
-    public ArrayList<ShapeObject> update(ArrayList<ShapeObject> shapes) {
+    public CopyOnWriteArrayList update(CopyOnWriteArrayList shapes) {
 
         if (maxNumberOfShapes() == shapes.size())
             return shapes;
@@ -52,7 +53,7 @@ public class ShapesPopulator {
 
 
     // TODO find the right bounds for location for shape
-    private Point getValidNewShapeLocation(ArrayList<ShapeObject> shapes) {
+    private Point getValidNewShapeLocation(CopyOnWriteArrayList shapes) {
 
         int i = rand.nextInt(1000) + 100;
         int j = rand.nextInt(1000) + 200;
@@ -62,19 +63,20 @@ public class ShapesPopulator {
             i = rand.nextInt(1000) + 100;
             j = rand.nextInt(1000) + 200;
 
-        }*/
+        }
+        */
         return new Point(i,j);
 
     }
 
-    // TODO add SHAPE_SPACING???
-    private boolean locationUsedByAnotherShape(ArrayList<ShapeObject> shapes, int i, int j) {
+    private boolean locationUsedByAnotherShape(CopyOnWriteArrayList shapes, int i, int j) {
         //Rect newShapeArea = new Rect(i - Constants.SCREEN_WIDTH - this.SHAPE_SPACING,j - Constants.SHAPE_HEIGHT - this.SHAPE_SPACING,i + Constants.SCREEN_WIDTH + this.SHAPE_SPACING, j + Constants.SHAPE_HEIGHT + this.SHAPE_SPACING);
         this.newShapeArea.left = i - Constants.SCREEN_WIDTH - this.SHAPE_SPACING;
         this.newShapeArea.top = j - Constants.SHAPE_HEIGHT - this.SHAPE_SPACING;
         this.newShapeArea.right = i + Constants.SCREEN_WIDTH + this.SHAPE_SPACING;
         this.newShapeArea.bottom = j + Constants.SHAPE_HEIGHT + this.SHAPE_SPACING;
-        for (ShapeObject shape : shapes) {
+        for (Object shapeObj : shapes) {
+            ShapeObject shape = (ShapeObject) shapeObj;
             if (Rect.intersects(shape.getBitmapHolder(), this.newShapeArea))
                 return true;
         }

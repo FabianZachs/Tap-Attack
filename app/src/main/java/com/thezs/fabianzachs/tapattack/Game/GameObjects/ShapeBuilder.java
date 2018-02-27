@@ -41,7 +41,6 @@ public class ShapeBuilder {
                 animationManager.getBitmap("square", color, false),
                 animationManager.getBitmap("square", color, true));
 
-        Log.d("buildcalled", "buildSquare: build vcalled");
         return square;
 
     }

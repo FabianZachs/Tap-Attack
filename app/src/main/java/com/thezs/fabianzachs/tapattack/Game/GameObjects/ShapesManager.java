@@ -21,6 +21,7 @@ import com.thezs.fabianzachs.tapattack.Game.GraveObjects.Grave;
 import com.thezs.fabianzachs.tapattack.Game.SceneManager;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -30,7 +31,9 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ShapesManager {
 
-    private ArrayList<ShapeObject> shapes = new ArrayList<>();
+    //private ArrayList<ShapeObject> shapes = new ArrayList<>();
+    CopyOnWriteArrayList<ShapeObject> shapes = new CopyOnWriteArrayList<>();
+
     private ArrayList<Grave> graves = new ArrayList<>();
 
     private ShapesPopulator shapesPopulator;
