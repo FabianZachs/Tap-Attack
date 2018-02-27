@@ -45,6 +45,7 @@ public class ShapesPopulator {
         CopyOnWriteArrayList<ShapeObject> mShapes = shapes;
 
         // TODO integrate the lastTimeShapeAdded with the progress bar to make sure ppl are able to get enough points
+        // TODO possibly reduce time between added shapes when progress bar gets lower and lower. ex. if <10% have no timeout for adding shapes
         if (maxNumberOfShapes() == shapes.size() || (lastTimeShapeAdded() < 500 && shapes.size() != 0))
             return shapes;
 
