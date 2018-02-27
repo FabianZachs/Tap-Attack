@@ -22,8 +22,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class ShapesPopulator {
 
     // settings
-    private final int UNIT_TIME_PER_SHAPE_ADDITION = 2; // every x seconds one more max shape
+    private final int UNIT_TIME_PER_SHAPE_ADDITION = 5; // every x seconds one more max shape
     private final int SHAPE_SPACING = 5; // space between shapes
+
+    private long timeOfLastShapeAddition;
 
     private long initTime;
     private Rect newShapeArea; // instead of creating a new rect for every shape we want to create
@@ -31,6 +33,7 @@ public class ShapesPopulator {
     private ShapeBuilder shapeBuilder;
 
     public ShapesPopulator(long initTime) {
+        this.timeOfLastShapeAddition = 0;
         this.initTime = initTime;
         this.newShapeArea = new Rect(300,300,300,300);
         rand = new Random(); // TODO make attribute?
@@ -39,32 +42,42 @@ public class ShapesPopulator {
 
     public CopyOnWriteArrayList update(CopyOnWriteArrayList shapes) {
 
-        if (maxNumberOfShapes() == shapes.size())
+        CopyOnWriteArrayList<ShapeObject> mShapes = shapes;
+
+        if (maxNumberOfShapes() == shapes.size() || (lastTimeShapeAdded() < 500 && shapes.size() != 0))
             return shapes;
 
         // TODO might return a null location (if all locations taken.. shouldnt happen???
-        Point newShapeLocation = getValidNewShapeLocation(shapes);
+        Point newShapeLocation = getValidNewShapeLocation(mShapes);
 
 
-        shapes.add(shapeBuilder.buildSquare("blue", newShapeLocation));
+        mShapes.add(shapeBuilder.buildCircle("blue", newShapeLocation));
+        timeOfLastShapeAddition = System.currentTimeMillis();
 
-        return shapes;
+        return mShapes;
+    }
+
+    private long lastTimeShapeAdded() {
+        return System.currentTimeMillis() - timeOfLastShapeAddition;
     }
 
 
     // TODO find the right bounds for location for shape
     private Point getValidNewShapeLocation(CopyOnWriteArrayList shapes) {
 
-        int i = rand.nextInt(1000) + 100;
-        int j = rand.nextInt(1000) + 200;
+        // TODO incorporate with GAMEBOUNDARY
+        int i = rand.nextInt(Constants.SCREEN_WIDTH);
+        int j = rand.nextInt(Constants.SCREEN_HEIGHT ) + 50;
 
-        /*while(locationUsedByAnotherShape(shapes,i,j)) {
+        while(locationUsedByAnotherShape(shapes,i,j)) {
 
-            i = rand.nextInt(1000) + 100;
-            j = rand.nextInt(1000) + 200;
+            i = rand.nextInt(Constants.SCREEN_WIDTH);
+            j = rand.nextInt(Constants.SCREEN_HEIGHT ) + 50;
+            Log.d("LOCATIONFINDER", "tryingtogetlocation");
 
         }
-        */
+        Log.d("LOCATIONFINDER", "LOCATIONFOUND");
+
         return new Point(i,j);
 
     }
@@ -86,7 +99,7 @@ public class ShapesPopulator {
 
     private int maxNumberOfShapes() {
         int number = (int) (getGameTime()/1000)/UNIT_TIME_PER_SHAPE_ADDITION + 1;
-        return number;
+        return number = number < 6 ? number : 5;
     }
 
 

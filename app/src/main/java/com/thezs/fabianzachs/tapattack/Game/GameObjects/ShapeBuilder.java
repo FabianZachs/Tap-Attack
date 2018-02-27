@@ -37,7 +37,7 @@ public class ShapeBuilder {
     }
 
     public Square buildSquare(String color, Point centerLocation) {
-        Square square = new Square(8, color, centerLocation,
+        Square square = new Square(3, color, centerLocation,
                 animationManager.getBitmap("square", color, false),
                 animationManager.getBitmap("square", color, true));
 
@@ -46,7 +46,7 @@ public class ShapeBuilder {
     }
 
     public Cross buildCross(String color, Point centerLocation) {
-        return new Cross(8, color, centerLocation,
+        return new Cross(3, color, centerLocation,
                 animationManager.getBitmap("cross", color, false),
                 animationManager.getBitmap("cross", color, true));
     }
