@@ -5,10 +5,12 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.support.annotation.Nullable;
         import android.view.SurfaceView;
         import android.view.View;
+        import android.widget.FrameLayout;
         import android.widget.LinearLayout;
         import android.widget.RelativeLayout;
         import android.widget.TextView;
 
+        import com.thezs.fabianzachs.tapattack.Constants;
         import com.thezs.fabianzachs.tapattack.Game.LayoutHeadingHandlers.LayoutHeadings;
         import com.thezs.fabianzachs.tapattack.R;
         import com.thezs.fabianzachs.tapattack.helper;
@@ -28,6 +30,8 @@ public class MainGameActivity extends Activity {
 
         setContentView(R.layout.activity_main_game);
 
+        Constants.progressBar = (com.beardedhen.androidbootstrap.BootstrapProgressBar) findViewById(R.id.progress_bar);
+        Constants.progressBar.setLayoutParams(new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2,50));
 
         LinearLayout viewForGamePanel = (LinearLayout) findViewById(R.id.game_panel_surface);
         viewForGamePanel.addView(new GamePanel(this));

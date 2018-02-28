@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack;
 import android.content.Context;
 import android.graphics.Rect;
 
+import com.beardedhen.androidbootstrap.BootstrapProgressBar;
 import com.thezs.fabianzachs.tapattack.Game.Scene;
 
 import java.util.Map;
@@ -27,4 +28,5 @@ public class Constants {
 
     public static Rect GAMEBOUNDARY;
 
+    public static BootstrapProgressBar progressBar;
 }

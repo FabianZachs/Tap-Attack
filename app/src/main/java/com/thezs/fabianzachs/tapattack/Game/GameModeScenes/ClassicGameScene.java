@@ -38,6 +38,7 @@ public class ClassicGameScene implements Scene {
         initializeBackgroundHandler();
         score = new Score();
         streak = new Streak();
+        progressBar = new ProgressBar();
 
     }
 
@@ -65,6 +66,8 @@ public class ClassicGameScene implements Scene {
         // set background color canvas.drawARGB(..);
         Bitmap background = backgroundHandler.getBackgroundBitmap("blue");
         canvas.drawBitmap(background, null, new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), null);
+
+        progressBar.draw(canvas);
 
         // TODO draw score drawtext via score.draw(canvas)
         // TODO same for streak
