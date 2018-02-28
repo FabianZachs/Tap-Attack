@@ -28,6 +28,7 @@ public class ClassicGameScene implements Scene {
     public ClassicGameScene() {
         this.gameOver = false; // TODO or/and on reset?
         shapesManager = new ShapesManager();
+        score = new Score();
 
     }
 
@@ -44,6 +45,7 @@ public class ClassicGameScene implements Scene {
         // set background color canvas.drawARGB(..);
         // TODO draw score drawtext via score.draw(canvas)
         // TODO same for streak
+        score.draw(canvas);
         shapesManager.draw(canvas);
 
     }

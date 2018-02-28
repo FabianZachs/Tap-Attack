@@ -19,9 +19,10 @@ public class Streak implements GameUIComponent {
 
     private int xLocation;
     private int yLocation;
-    private Paint scorePaint;
+    private Paint streakPaint;
 
     public Streak() {
+        this.streak = 0;
         setupSTREAK_COLORS();
         setupPaint();
 
@@ -29,7 +30,7 @@ public class Streak implements GameUIComponent {
     }
 
     private void setupPaint() {
-        scorePaint.setTextSize(30);
+        streakPaint.setTextSize(30);
     }
 
     private void setupSTREAK_COLORS() {

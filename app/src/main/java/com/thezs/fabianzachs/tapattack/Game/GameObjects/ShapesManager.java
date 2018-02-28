@@ -135,7 +135,8 @@ public class ShapesManager {
         // setting background
         Bitmap background = backgroundHandler.getBackgroundBitmap("blue");
 
-        canvas.drawBitmap(background, null, new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), null);
+        // commented out for now because score is behind it
+        //canvas.drawBitmap(background, null, new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), null);
 
 
         for (ShapeObject shape : shapes) {
