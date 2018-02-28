@@ -37,7 +37,7 @@ public class ShapesManager {
     private ArrayList<Grave> graves = new ArrayList<>();
 
     private ShapesPopulator shapesPopulator;
-    private BackgroundHandler backgroundHandler;
+    //private BackgroundHandler backgroundHandler;
 
 
     private long initTime;   // initialization of game scene
@@ -53,7 +53,7 @@ public class ShapesManager {
         this.shapesPopulator = new ShapesPopulator(initTime);
         this.score = 0;
 
-        initializeAnimationsAndBackground();
+        //initializeAnimationsAndBackground();
 
         //populateShapes();
 
@@ -72,6 +72,7 @@ public class ShapesManager {
 
     }
 */
+/*
     // TODO do this in the store menu so we dont have to do this everytime we startup game
     private void initializeAnimationsAndBackground() {
         SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerPrefs", MODE_PRIVATE);
@@ -82,6 +83,7 @@ public class ShapesManager {
         this.backgroundHandler = new BackgroundHandler(theme);
 
     }
+    */
 
     public void recieveTouch(MotionEvent event) {
         boolean shapeInteractment = false; // used to see if user interacted with shape.
@@ -135,7 +137,7 @@ public class ShapesManager {
     public void draw(Canvas canvas) {
 
         // setting background
-        Bitmap background = backgroundHandler.getBackgroundBitmap("blue");
+        //Bitmap background = backgroundHandler.getBackgroundBitmap("blue");
 
         // commented out for now because score is behind it
         //canvas.drawBitmap(background, null, new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), null);
