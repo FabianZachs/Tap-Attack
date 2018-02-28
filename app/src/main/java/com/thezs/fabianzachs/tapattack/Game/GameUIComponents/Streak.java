@@ -3,6 +3,9 @@ package com.thezs.fabianzachs.tapattack.Game.GameUIComponents;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
+
+import com.thezs.fabianzachs.tapattack.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +27,25 @@ public class Streak implements GameUIComponent {
     public Streak() {
         this.streak = 0;
         setupSTREAK_COLORS();
+        // TODO do this relative to screen height and width
+        this.xLocation = 40;
+        this.yLocation = 130;
         setupPaint();
 
 
     }
 
     private void setupPaint() {
-        streakPaint.setTextSize(30);
+        streakPaint = new Paint();
+
+        // for font
+        Typeface plain = Typeface.createFromAsset(Constants.CURRENT_CONTEXT.getAssets(), "undinaru.ttf");
+        Typeface bold = Typeface.create(plain, Typeface.BOLD);
+        streakPaint.setTypeface(bold);
+
+
+        streakPaint.setTextSize(40);
+        streakPaint.setColor(Color.RED);
     }
 
     private void setupSTREAK_COLORS() {
@@ -49,7 +64,7 @@ public class Streak implements GameUIComponent {
 
     @Override
     public void draw(Canvas canvas) {
-
+        canvas.drawText(getStringStreak(), xLocation, yLocation, streakPaint);
     }
 
     public void setStreak(int streak) {

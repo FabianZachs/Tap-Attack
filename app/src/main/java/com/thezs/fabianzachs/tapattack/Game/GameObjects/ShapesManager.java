@@ -45,6 +45,7 @@ public class ShapesManager {
                              // use sqrt function for difficulty
 
     private int score;
+    private int streak;
 
 
     public ShapesManager() {
@@ -115,10 +116,13 @@ public class ShapesManager {
                 // TODO make a seperate method which handles everything when a shape is removed (progress bar, streak, score)
                 shapes.remove(shape);
                 score += shape.getPoints();
+                streak+= 1;
             }
 
-            else if (shape.isTimedOut())
+            else if (shape.isTimedOut()) {
                 shapes.remove(shape);
+                streak = 0;
+            }
 
                 // TODO add one shape.getPoints to the score -- and streak (add this when we find out lives = 0
             else shape.update();
@@ -154,5 +158,8 @@ public class ShapesManager {
 
     public int getScore() {
         return score;
+    }
+    public int getStreak() {
+        return streak;
     }
 }

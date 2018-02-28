@@ -21,7 +21,8 @@ public class Score implements GameUIComponent {
     private Paint scorePaint;
 
     public Score() {
-        this.score = 1;
+        this.score = 0;
+        // TODO do this relative to screen height and width
         this.xLocation = 40;
         this.yLocation = 80;
         setupPaint();

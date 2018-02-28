@@ -37,6 +37,7 @@ public class ClassicGameScene implements Scene {
         shapesManager = new ShapesManager();
         initializeBackgroundHandler();
         score = new Score();
+        streak = new Streak();
 
     }
 
@@ -54,6 +55,7 @@ public class ClassicGameScene implements Scene {
         // TODO update Score via score.setScore(shapesManager.getScore())
         // TODO same for streak
         score.setScore(shapesManager.getScore());
+        streak.setStreak(shapesManager.getStreak());
         shapesManager.update();
 
     }
@@ -67,6 +69,7 @@ public class ClassicGameScene implements Scene {
         // TODO draw score drawtext via score.draw(canvas)
         // TODO same for streak
         score.draw(canvas);
+        streak.draw(canvas);
         shapesManager.draw(canvas);
 
     }
