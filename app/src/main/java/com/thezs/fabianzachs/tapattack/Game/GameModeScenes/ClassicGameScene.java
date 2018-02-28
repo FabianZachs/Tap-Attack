@@ -57,6 +57,8 @@ public class ClassicGameScene implements Scene {
         // TODO same for streak
         score.setScore(shapesManager.getScore());
         streak.setStreak(shapesManager.getStreak());
+        // TODO implement THIS NEXT
+        //progressBar.update(shapesManager.getProgress);
         shapesManager.update();
 
     }
@@ -67,7 +69,6 @@ public class ClassicGameScene implements Scene {
         Bitmap background = backgroundHandler.getBackgroundBitmap("blue");
         canvas.drawBitmap(background, null, new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), null);
 
-        progressBar.draw(canvas);
 
         // TODO draw score drawtext via score.draw(canvas)
         // TODO same for streak

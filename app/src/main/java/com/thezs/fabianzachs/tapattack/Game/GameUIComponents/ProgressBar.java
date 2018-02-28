@@ -18,6 +18,7 @@ import com.thezs.fabianzachs.tapattack.Constants;
 public class ProgressBar implements GameUIComponent {
 
     private BootstrapProgressBar progressBar;
+    private int progress;
 
     public ProgressBar() {
         //progressBar = new BootstrapProgressBar(Constants.CURRENT_CONTEXT);
@@ -29,6 +30,7 @@ public class ProgressBar implements GameUIComponent {
 
     @Override
     public void update() {
+        progressBar.setProgress(progress);
 
     }
 
@@ -55,4 +57,5 @@ public class ProgressBar implements GameUIComponent {
        //progressBar.draw(canvas);
 
     }
+
 }
