@@ -3,6 +3,10 @@ package com.thezs.fabianzachs.tapattack.Game.GameUIComponents;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
+
+import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.R;
 
 /**
  * Created by fabianzachs on 28/02/18.
@@ -17,16 +21,23 @@ public class Score implements GameUIComponent {
     private Paint scorePaint;
 
     public Score() {
-        this.score = 0;
-        this.xLocation = 10;
-        this.yLocation = 10;
+        this.score = 1;
+        this.xLocation = 40;
+        this.yLocation = 80;
         setupPaint();
 
     }
 
     private void setupPaint() {
         scorePaint = new Paint();
-        scorePaint.setTextSize(30);
+
+        // for font
+        Typeface plain = Typeface.createFromAsset(Constants.CURRENT_CONTEXT.getAssets(), "undinaru.ttf");
+        Typeface bold = Typeface.create(plain, Typeface.BOLD);
+        scorePaint.setTypeface(bold);
+
+
+        scorePaint.setTextSize(40);
         scorePaint.setColor(Color.RED);
     }
 

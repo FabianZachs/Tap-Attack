@@ -51,6 +51,7 @@ public class ShapesManager {
 
         this.initTime = System.currentTimeMillis();
         this.shapesPopulator = new ShapesPopulator(initTime);
+        this.score = 0;
 
         initializeAnimationsAndBackground();
 
@@ -111,6 +112,7 @@ public class ShapesManager {
                     graves.add(new Grave(shape.getCenterLocation(), shape.getBitmapHolder(), shape.getShapeClickImg()));
                 // TODO make a seperate method which handles everything when a shape is removed (progress bar, streak, score)
                 shapes.remove(shape);
+                score += shape.getPoints();
             }
 
             else if (shape.isTimedOut())
@@ -148,4 +150,7 @@ public class ShapesManager {
 
     }
 
+    public int getScore() {
+        return score;
+    }
 }
