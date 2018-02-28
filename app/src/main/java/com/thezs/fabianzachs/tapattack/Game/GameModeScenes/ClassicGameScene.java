@@ -5,6 +5,9 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
+import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
+import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
+import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
 import com.thezs.fabianzachs.tapattack.Game.LayoutHeadingHandlers.LayoutHeadings;
 import com.thezs.fabianzachs.tapattack.Game.Scene;
 
@@ -18,6 +21,9 @@ public class ClassicGameScene implements Scene {
 
     private static boolean gameOver;
     private ShapesManager shapesManager;
+    private Score score;
+    private Streak streak;
+    private ProgressBar progressBar;
 
     public ClassicGameScene() {
         this.gameOver = false; // TODO or/and on reset?
