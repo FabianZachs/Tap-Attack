@@ -7,6 +7,14 @@ import android.graphics.Canvas;
  */
 
 public class Score implements GameUIComponent {
+
+    private int score;
+
+    public Score() {
+        this.score = 0;
+    }
+
+
     @Override
     public void update() {
 
@@ -16,4 +24,9 @@ public class Score implements GameUIComponent {
     public void draw(Canvas canvas) {
 
     }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
 }

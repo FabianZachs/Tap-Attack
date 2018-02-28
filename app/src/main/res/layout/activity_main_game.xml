@@ -14,6 +14,7 @@
         android:orientation="horizontal">
     </LinearLayout>
 
+    <!--
     <RelativeLayout
         android:layout_margin="5dp"
         android:layout_width="match_parent"
@@ -83,6 +84,7 @@
             android:src="@drawable/pause_circle_outline"
             />
     </RelativeLayout>
+    -->
 
 
 

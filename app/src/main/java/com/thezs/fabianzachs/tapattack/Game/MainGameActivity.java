@@ -37,6 +37,7 @@ public class MainGameActivity extends Activity {
 
     }
 
+    /*
     private LayoutHeadings createLayoutHeadings() {
 
         TextView score = (TextView) findViewById(R.id.score_text);
@@ -48,7 +49,7 @@ public class MainGameActivity extends Activity {
 
         LayoutHeadings layoutHeadings = new LayoutHeadings(this, score, streak, progressBar, parentLayout);
         return  layoutHeadings;
-    }
+    }*/
 
 
     @Override
