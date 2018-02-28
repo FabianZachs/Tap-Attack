@@ -112,7 +112,7 @@ public class ShapesPopulator {
 
     private int maxNumberOfShapes() {
         int number = (int) (getGameTime()/1000)/UNIT_TIME_PER_SHAPE_ADDITION + 1;
-        return number = number <= MAX_SHAPES ? number : MAX_SHAPES;
+        return number <= MAX_SHAPES ? number : MAX_SHAPES;
     }
 
 
