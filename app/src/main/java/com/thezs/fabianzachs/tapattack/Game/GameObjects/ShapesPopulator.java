@@ -25,6 +25,7 @@ public class ShapesPopulator {
     private final int UNIT_TIME_PER_SHAPE_ADDITION = 5; // every x seconds one more max shape
     private final int SHAPE_SPACING = 5; // space between shapes
     private final int MAX_SHAPES = 6;
+    private final int MAX_NUMBER_LOOPS = 20;
 
     private long timeOfLastShapeAddition;
 
@@ -52,6 +53,10 @@ public class ShapesPopulator {
 
         Point newShapeLocation = getValidNewShapeLocation(mShapes);
 
+        // no new location findable
+        if(newShapeLocation == null)
+            return mShapes;
+
 
         mShapes.add(shapeBuilder.buildCircle("blue", newShapeLocation));
         timeOfLastShapeAddition = System.currentTimeMillis();
@@ -70,15 +75,21 @@ public class ShapesPopulator {
         // TODO incorporate with GAMEBOUNDARY
         int i = rand.nextInt(Constants.SCREEN_WIDTH);
         int j = rand.nextInt(Constants.SCREEN_HEIGHT - 300) + 300;
+        int iterationNumber = 0;
 
         while(locationUsedByAnotherShape(shapes,i,j)) {
 
+
             i = rand.nextInt(Constants.SCREEN_WIDTH);
             j = rand.nextInt(Constants.SCREEN_HEIGHT -300) + 300;
-            Log.d("LOCATIONFINDER", "tryingtogetlocation");
+            iterationNumber++;
+
+            // break out of it if we cant find a location
+            if (iterationNumber > MAX_NUMBER_LOOPS) {
+                return null;
+            }
 
         }
-        Log.d("LOCATIONFINDER", "LOCATIONFOUND");
 
         return new Point(i,j);
 
