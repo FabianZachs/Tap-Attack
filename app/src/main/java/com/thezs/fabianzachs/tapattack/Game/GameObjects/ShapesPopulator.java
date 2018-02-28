@@ -24,6 +24,7 @@ public class ShapesPopulator {
     // settings
     private final int UNIT_TIME_PER_SHAPE_ADDITION = 5; // every x seconds one more max shape
     private final int SHAPE_SPACING = 5; // space between shapes
+    private final int MAX_SHAPES = 6;
 
     private long timeOfLastShapeAddition;
 
@@ -46,10 +47,9 @@ public class ShapesPopulator {
 
         // TODO integrate the lastTimeShapeAdded with the progress bar to make sure ppl are able to get enough points
         // TODO possibly reduce time between added shapes when progress bar gets lower and lower. ex. if <10% have no timeout for adding shapes
-        if (maxNumberOfShapes() == shapes.size() || (lastTimeShapeAdded() < 500 && shapes.size() != 0))
+        if (maxNumberOfShapes() == shapes.size() || (lastTimeShapeAdded() < 200 && shapes.size() != 0))
             return shapes;
 
-        // TODO might return a null location (if all locations taken.. shouldnt happen???
         Point newShapeLocation = getValidNewShapeLocation(mShapes);
 
 
@@ -69,12 +69,12 @@ public class ShapesPopulator {
 
         // TODO incorporate with GAMEBOUNDARY
         int i = rand.nextInt(Constants.SCREEN_WIDTH);
-        int j = rand.nextInt(Constants.SCREEN_HEIGHT ) + 50;
+        int j = rand.nextInt(Constants.SCREEN_HEIGHT - 300) + 300;
 
         while(locationUsedByAnotherShape(shapes,i,j)) {
 
             i = rand.nextInt(Constants.SCREEN_WIDTH);
-            j = rand.nextInt(Constants.SCREEN_HEIGHT ) + 50;
+            j = rand.nextInt(Constants.SCREEN_HEIGHT -300) + 300;
             Log.d("LOCATIONFINDER", "tryingtogetlocation");
 
         }
@@ -101,7 +101,7 @@ public class ShapesPopulator {
 
     private int maxNumberOfShapes() {
         int number = (int) (getGameTime()/1000)/UNIT_TIME_PER_SHAPE_ADDITION + 1;
-        return number = number < 6 ? number : 5;
+        return number = number <= MAX_SHAPES ? number : MAX_SHAPES;
     }
 
 

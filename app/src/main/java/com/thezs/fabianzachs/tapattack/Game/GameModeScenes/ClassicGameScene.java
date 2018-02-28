@@ -27,6 +27,8 @@ public class ClassicGameScene implements Scene {
 
     @Override
     public void update() {
+        // TODO update Score via score.setScore(shapesManager.getScore())
+        // TODO same for streak
         shapesManager.update();
 
     }
@@ -34,6 +36,8 @@ public class ClassicGameScene implements Scene {
     @Override
     public void draw(Canvas canvas) {
         // set background color canvas.drawARGB(..);
+        // TODO draw score drawtext via score.draw(canvas)
+        // TODO same for streak
         shapesManager.draw(canvas);
 
     }
