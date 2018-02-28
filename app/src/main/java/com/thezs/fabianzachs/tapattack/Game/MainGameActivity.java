@@ -66,6 +66,7 @@ public class MainGameActivity extends Activity {
         }
     }
 
+    // TODO make this pause button size relative to screen size
     public void pauseClick(View view) {
         finish();
     }
