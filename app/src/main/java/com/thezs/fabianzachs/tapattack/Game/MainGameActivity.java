@@ -33,19 +33,7 @@ public class MainGameActivity extends Activity {
 
         setContentView(R.layout.activity_main_game);
 
-        Constants.progressBar = (com.beardedhen.androidbootstrap.BootstrapProgressBar) findViewById(R.id.progress_bar);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2,50);
-        params.gravity = Gravity.CENTER;
-        Constants.progressBar.setLayoutParams(params);
-        //Constants.progressBar.setLayoutParams(new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2,50), Gravity.CENTER);
-
-        com.beardedhen.androidbootstrap.BootstrapWell well = (com.beardedhen.androidbootstrap.BootstrapWell) findViewById(R.id.well);
-        well.setMinimumWidth(Constants.SCREEN_WIDTH * 15 / 24);
-
-        YoYo.with(Techniques.FadeIn)
-                .duration(1500)
-                .repeat(0)
-                .playOn(well);
+        bootstrapViewSetup();
 
         LinearLayout viewForGamePanel = (LinearLayout) findViewById(R.id.game_panel_surface);
         viewForGamePanel.addView(new GamePanel(this));
@@ -53,6 +41,24 @@ public class MainGameActivity extends Activity {
         // below works for setting entire screen the view
         // setContentView(new GamePanel(this));
 
+    }
+
+    private void bootstrapViewSetup() {
+        Constants.progressBar = (com.beardedhen.androidbootstrap.BootstrapProgressBar) findViewById(R.id.progress_bar);
+
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2,50);
+        params.gravity = Gravity.CENTER;
+
+        Constants.progressBar.setLayoutParams(params);
+
+        // we scale it to account for shake
+        com.beardedhen.androidbootstrap.BootstrapWell well = (com.beardedhen.androidbootstrap.BootstrapWell) findViewById(R.id.well);
+        well.setMinimumWidth(Constants.SCREEN_WIDTH * 15 / 24);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1500)
+                .repeat(0)
+                .playOn(well);
     }
 
     /*

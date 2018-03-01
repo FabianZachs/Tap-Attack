@@ -30,12 +30,11 @@ public class ProgressBar implements GameUIComponent {
         progressBar = Constants.progressBar;
         progressBar.setProgress(10);
 
-        /* landing --> FadeIn
-        YoYo.with(Techniques.Shake)
-                .duration(1000)
-                .repeat(2)
+        YoYo.with(Techniques.FadeIn)
+                .duration(1500)
+                .repeat(0)
                 .playOn(progressBar);
-                */
+
         YoYo.with(Techniques.Shake)
                 .duration(1500)
                 .repeat(5)
