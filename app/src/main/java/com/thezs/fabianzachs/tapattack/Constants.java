@@ -1,5 +1,6 @@
 package com.thezs.fabianzachs.tapattack;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
 
@@ -29,4 +30,5 @@ public class Constants {
     public static Rect GAMEBOUNDARY;
 
     public static BootstrapProgressBar progressBar;
+    public static Activity GAME_ACTIVITY;
 }

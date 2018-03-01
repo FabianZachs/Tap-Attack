@@ -34,6 +34,7 @@ public class MainGameActivity extends Activity {
         setContentView(R.layout.activity_main_game);
 
         bootstrapViewSetup();
+        Constants.GAME_ACTIVITY = this;
 
         LinearLayout viewForGamePanel = (LinearLayout) findViewById(R.id.game_panel_surface);
         viewForGamePanel.addView(new GamePanel(this));

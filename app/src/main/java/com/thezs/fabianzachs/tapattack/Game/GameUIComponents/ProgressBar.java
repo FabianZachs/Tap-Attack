@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
@@ -22,13 +23,18 @@ public class ProgressBar implements GameUIComponent {
 
     private BootstrapProgressBar progressBar;
     private int progress;
+    private float TIME_PER_REDUCE = 0.2f;
+    private int PROGRESS_REDUCE_PER_UNIT_TIME = -1;
+    private long timeOfLastReduce;
 
     public ProgressBar() {
+        timeOfLastReduce = System.currentTimeMillis();
         //progressBar = new BootstrapProgressBar(Constants.CURRENT_CONTEXT);
         //progressBar.setProgress(100);
         //progressBar.setBootstrapSize(100);
+        this.progress = 100;
         progressBar = Constants.progressBar;
-        progressBar.setProgress(10);
+        progressBar.setProgress(progress);
 
         YoYo.with(Techniques.FadeIn)
                 .duration(1500)
@@ -37,13 +43,37 @@ public class ProgressBar implements GameUIComponent {
 
         YoYo.with(Techniques.Shake)
                 .duration(1500)
-                .repeat(5)
+                .repeat(0)
                 .playOn(progressBar);
+
+
+
+
     }
 
     @Override
     public void update() {
-        progressBar.setProgress(progress);
+        Thread timer = new Thread() {
+            public void run() {
+                try {
+                    Constants.GAME_ACTIVITY.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            timedReduce();
+                            progressBar.setProgress(getProgress());
+                        }
+                    });
+                    Thread.sleep(100);
+
+                } catch (InterruptedException e) {
+                    Log.d("running", "run: error");
+                    e.printStackTrace();
+                }
+            }
+        };
+        timer.start();
+        //timedReduce();
+        //progressBar.setProgress(this.progress);
 
     }
 
@@ -51,24 +81,23 @@ public class ProgressBar implements GameUIComponent {
     public void draw(Canvas canvas) {
 
 
+    }
 
-        /*
-        Rect rect = new Rect();
-        rect.set(100, 100, 500, 200);
+    private void timedReduce() {
+        if (System.currentTimeMillis() - timeOfLastReduce > TIME_PER_REDUCE * 1000) {
+            changeProgressBy(PROGRESS_REDUCE_PER_UNIT_TIME);
+            timeOfLastReduce = System.currentTimeMillis();
+        }
 
-        //Lay the view out with the known dimensions
-        progressBar.layout (0, 0, rect.width(), rect.height());
+    }
 
-//Translate the canvas so the view is drawn at the proper coordinates
-        canvas.save();
-        canvas.translate(rect.left, rect.top);
+    public void changeProgressBy(int amount) {
+        this.progress = (progress + amount > 0)  && (progress + amount <= 100) ? progress += amount : progress;
+    }
 
-//Draw the View and clear the translation
-        progressBar.draw(canvas);
-        canvas.restore();
-        */
-       //progressBar.draw(canvas);
-
+    public int getProgress() {
+        // TODO if this <0 gameOver
+        return this.progress;
     }
 
 }
