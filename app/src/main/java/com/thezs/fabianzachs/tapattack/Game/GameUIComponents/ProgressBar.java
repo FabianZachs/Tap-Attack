@@ -59,6 +59,7 @@ public class ProgressBar {
                             public void run() {
                                 timedReduce();
                                 progressBar.setProgress(getProgress());
+                                if (getProgress() <= 0) running = false;
                             }
                         });
                         Thread.sleep(100);
@@ -98,8 +99,18 @@ public class ProgressBar {
                     .playOn(progressBar);
         }
 
-        this.progress = (progress + amount > 0)  && (progress + amount <= 100) ? progress += amount : progress;
-        if (progress <= 0) running = false;
+        if (progress + amount >= 100)
+            this.progress = 100;
+        else if (progress + amount <= 0)
+            this.progress = 0;
+        else progress += amount;
+        //this.progress = (progress + amount > 0)  && (progress + amount <= 100) ? progress + amount : progress;
+        //this.progress = progress + amount >= 100 ? 100 : progress + amount;
+        //this.progress = progress + amount <= 0   ? 0   : progress + amount;
+        //this.progress = progress + amount > 100 ? 100 : progress + amount;
+        //this.progress = progress + amount <= 0 ? 0 : progress + amount;
+        //this.progress = progress + amount >= 100 ? 100 : progress + amount;
+        //if (progress <= 0) running = false;
     }
 
     public int getProgress() {

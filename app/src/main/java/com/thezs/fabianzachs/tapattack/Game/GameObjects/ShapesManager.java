@@ -106,8 +106,10 @@ public class ShapesManager {
         }
 
          // if user ACTION_DOWNs and not onto a shape
-        if (!shapeInteractment && event.getAction() == MotionEvent.ACTION_DOWN)
+        if (!shapeInteractment && event.getAction() == MotionEvent.ACTION_DOWN) {
             progressBarObserver.changeProgressBy(-20); // TODO make this relative to time
+            streakObserver.resetStreak();
+        }
             //SceneManager.setGameOver(true);
     }
 
