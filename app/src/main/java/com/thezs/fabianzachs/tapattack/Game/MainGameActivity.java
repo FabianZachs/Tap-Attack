@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.app.Activity;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
+        import android.view.Gravity;
         import android.view.SurfaceView;
         import android.view.View;
         import android.widget.FrameLayout;
@@ -10,6 +11,8 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.widget.RelativeLayout;
         import android.widget.TextView;
 
+        import com.daimajia.androidanimations.library.Techniques;
+        import com.daimajia.androidanimations.library.YoYo;
         import com.thezs.fabianzachs.tapattack.Constants;
         import com.thezs.fabianzachs.tapattack.Game.LayoutHeadingHandlers.LayoutHeadings;
         import com.thezs.fabianzachs.tapattack.R;
@@ -31,7 +34,18 @@ public class MainGameActivity extends Activity {
         setContentView(R.layout.activity_main_game);
 
         Constants.progressBar = (com.beardedhen.androidbootstrap.BootstrapProgressBar) findViewById(R.id.progress_bar);
-        Constants.progressBar.setLayoutParams(new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2,50));
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2,50);
+        params.gravity = Gravity.CENTER;
+        Constants.progressBar.setLayoutParams(params);
+        //Constants.progressBar.setLayoutParams(new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2,50), Gravity.CENTER);
+
+        com.beardedhen.androidbootstrap.BootstrapWell well = (com.beardedhen.androidbootstrap.BootstrapWell) findViewById(R.id.well);
+        well.setMinimumWidth(Constants.SCREEN_WIDTH * 15 / 24);
+
+        YoYo.with(Techniques.FadeIn)
+                .duration(1500)
+                .repeat(0)
+                .playOn(well);
 
         LinearLayout viewForGamePanel = (LinearLayout) findViewById(R.id.game_panel_surface);
         viewForGamePanel.addView(new GamePanel(this));

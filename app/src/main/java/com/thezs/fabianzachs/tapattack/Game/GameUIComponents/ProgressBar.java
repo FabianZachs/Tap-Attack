@@ -9,12 +9,15 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.beardedhen.androidbootstrap.BootstrapProgressBar;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.thezs.fabianzachs.tapattack.Constants;
 
 /**
  * Created by fabianzachs on 28/02/18.
  */
 
+// TODO set progress bar color depending on how low it is
 public class ProgressBar implements GameUIComponent {
 
     private BootstrapProgressBar progressBar;
@@ -26,6 +29,17 @@ public class ProgressBar implements GameUIComponent {
         //progressBar.setBootstrapSize(100);
         progressBar = Constants.progressBar;
         progressBar.setProgress(10);
+
+        /* landing --> FadeIn
+        YoYo.with(Techniques.Shake)
+                .duration(1000)
+                .repeat(2)
+                .playOn(progressBar);
+                */
+        YoYo.with(Techniques.Shake)
+                .duration(1500)
+                .repeat(5)
+                .playOn(progressBar);
     }
 
     @Override
