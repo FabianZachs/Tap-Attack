@@ -93,7 +93,7 @@ public class ProgressBar {
     public void changeProgressBy(int amount) {
         if (amount < -10) {
             YoYo.with(Techniques.Shake)
-                    .duration(1500)
+                    .duration(750)
                     .repeat(0)
                     .playOn(progressBar);
         }
