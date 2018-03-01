@@ -48,9 +48,6 @@ public class Score {
     }
 
 
-    public void update() {
-
-    }
 
     public void draw(Canvas canvas) {
         canvas.drawText(getStringScore(), xLocation, yLocation, scorePaint);
@@ -59,6 +56,10 @@ public class Score {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public void incScore(int amount) {
+        this.score += amount;
     }
 
 

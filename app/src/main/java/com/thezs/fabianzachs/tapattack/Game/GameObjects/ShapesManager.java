@@ -51,15 +51,15 @@ public class ShapesManager {
     private long startTime;  // time of update. startTime - initTime = time passed (good for difficulty)
                              // use sqrt function for difficulty
 
-    private int score;
-    private int streak;
+    //private int score;
+    //private int streak;
 
 
     public ShapesManager() {
 
         this.initTime = System.currentTimeMillis();
         this.shapesPopulator = new ShapesPopulator(initTime);
-        this.score = 0;
+        //this.score = 0;
 
         //initializeAnimationsAndBackground();
 
@@ -122,13 +122,16 @@ public class ShapesManager {
                     graves.add(new Grave(shape.getCenterLocation(), shape.getBitmapHolder(), shape.getShapeClickImg()));
                 // TODO make a seperate method which handles everything when a shape is removed (progress bar, streak, score)
                 shapes.remove(shape);
-                score += shape.getPoints();
-                streak+= 1;
+                scoreObserver.incScore(shape.getPoints());
+                streakObserver.incStreak(1);
+                //score += shape.getPoints();
+                //streak+= 1;
             }
 
             else if (shape.isTimedOut()) {
                 shapes.remove(shape);
-                streak = 0;
+                streakObserver.resetStreak();
+                //streak = 0;
             }
 
                 // TODO add one shape.getPoints to the score -- and streak (add this when we find out lives = 0
@@ -163,12 +166,14 @@ public class ShapesManager {
 
     }
 
+    /*
     public int getScore() {
         return score;
-    }
+    }*/
+    /*
     public int getStreak() {
         return streak;
-    }
+    }*/
 
 
     public void attachScoreObserver(Score scoreObserver) {

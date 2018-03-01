@@ -61,9 +61,6 @@ public class Streak {
         this.STREAK_COLORS.add(Color.RED);
     }
 
-    public void update() {
-
-    }
 
     public void draw(Canvas canvas) {
         canvas.drawText(getStringStreak(), xLocation, yLocation, streakPaint);
@@ -71,6 +68,14 @@ public class Streak {
 
     public void setStreak(int streak) {
         this.streak = streak;
+    }
+
+    public void incStreak(int amount) {
+        this.streak += amount;
+    }
+
+    public void resetStreak() {
+        this.streak = 0;
     }
 
     private String getStringStreak() {
