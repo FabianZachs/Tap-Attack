@@ -78,8 +78,6 @@ public class ProgressBar {
         };
         timer.start();
 
-
-
     }
 
 
@@ -99,8 +97,10 @@ public class ProgressBar {
                     .playOn(progressBar);
         }
 
-        if (progress + amount >= 100)
+        if (progress + amount >= 100) {
             this.progress = 100;
+            timeOfLastReduce = System.currentTimeMillis() + 200;
+        }
         else if (progress + amount <= 0)
             this.progress = 0;
         else progress += amount;
