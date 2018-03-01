@@ -17,6 +17,9 @@ import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
+import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
+import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
+import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
 import com.thezs.fabianzachs.tapattack.Game.GraveObjects.Grave;
 import com.thezs.fabianzachs.tapattack.Game.SceneManager;
 
@@ -38,6 +41,10 @@ public class ShapesManager {
 
     private ShapesPopulator shapesPopulator;
     //private BackgroundHandler backgroundHandler;
+
+    private Score scoreObserver;
+    private Streak streakObserver;
+    private ProgressBar progressBarObserver;
 
 
     private long initTime;   // initialization of game scene
@@ -161,5 +168,18 @@ public class ShapesManager {
     }
     public int getStreak() {
         return streak;
+    }
+
+
+    public void attachScoreObserver(Score scoreObserver) {
+        this.scoreObserver = scoreObserver;
+    }
+
+    public void attachStreakObserver(Streak streakObserver) {
+        this.streakObserver = streakObserver;
+    }
+
+    public void attachProgressBarObserver(ProgressBar progressBarObserver) {
+        this.progressBarObserver = progressBarObserver;
     }
 }

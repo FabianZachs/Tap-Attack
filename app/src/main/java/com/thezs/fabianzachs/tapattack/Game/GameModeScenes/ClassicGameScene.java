@@ -36,16 +36,16 @@ public class ClassicGameScene implements Scene {
         this.gameOver = false; // TODO or/and on reset?
         shapesManager = new ShapesManager();
         initializeBackgroundHandler();
-        score = new Score();
-        streak = new Streak();
-        progressBar = new ProgressBar();
+        score = new Score(shapesManager);
+        streak = new Streak(shapesManager);
+        progressBar = new ProgressBar(shapesManager);
 
     }
 
     private void initializeBackgroundHandler() {
         SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerPrefs", MODE_PRIVATE);
 
-        // change error: no theme to basic colorscheme
+        // TODO change error: no theme to basic colorscheme
         String theme = prefs.getString("theme", "error: no theme");
 
         this.backgroundHandler = new BackgroundHandler(theme);

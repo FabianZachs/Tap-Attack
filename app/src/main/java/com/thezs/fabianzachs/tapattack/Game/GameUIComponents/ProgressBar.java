@@ -13,6 +13,7 @@ import com.beardedhen.androidbootstrap.BootstrapProgressBar;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
 
 /**
  * Created by fabianzachs on 28/02/18.
@@ -20,6 +21,8 @@ import com.thezs.fabianzachs.tapattack.Constants;
 
 // TODO set progress bar color depending on how low it is
 public class ProgressBar {
+
+    private ShapesManager shapesManager;
 
     private BootstrapProgressBar progressBar;
     private int progress;
@@ -29,7 +32,9 @@ public class ProgressBar {
 
     private boolean running = true;
 
-    public ProgressBar() {
+    public ProgressBar(ShapesManager shapesManager) {
+        this.shapesManager = shapesManager;
+        this.shapesManager.attachProgressBarObserver(this);
         timeOfLastReduce = System.currentTimeMillis();
         //progressBar = new BootstrapProgressBar(Constants.CURRENT_CONTEXT);
         //progressBar.setProgress(100);

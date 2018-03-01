@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
 import com.thezs.fabianzachs.tapattack.R;
 
 /**
@@ -14,13 +15,17 @@ import com.thezs.fabianzachs.tapattack.R;
 
 public class Score {
 
+    private ShapesManager shapesManager;
+
     private int score;
 
     private int xLocation;
     private int yLocation;
     private Paint scorePaint;
 
-    public Score() {
+    public Score(ShapesManager shapesManager) {
+        this.shapesManager = shapesManager;
+        this.shapesManager.attachScoreObserver(this);
         this.score = 0;
         // TODO do this relative to screen height and width
         this.xLocation = 40;

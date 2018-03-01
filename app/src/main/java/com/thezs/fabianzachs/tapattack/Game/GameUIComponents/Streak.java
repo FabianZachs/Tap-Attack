@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 
 public class Streak {
 
+    private ShapesManager shapesManager;
     private final List<Integer> STREAK_COLORS = new ArrayList<>();
 
     private int streak;
@@ -24,7 +26,9 @@ public class Streak {
     private int yLocation;
     private Paint streakPaint;
 
-    public Streak() {
+    public Streak(ShapesManager shapesManager) {
+        this.shapesManager = shapesManager;
+        this.shapesManager.attachStreakObserver(this);
         this.streak = 0;
         setupSTREAK_COLORS();
         // TODO do this relative to screen height and width
