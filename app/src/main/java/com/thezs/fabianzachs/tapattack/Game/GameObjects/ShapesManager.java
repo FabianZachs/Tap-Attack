@@ -107,7 +107,8 @@ public class ShapesManager {
 
          // if user ACTION_DOWNs and not onto a shape
         if (!shapeInteractment && event.getAction() == MotionEvent.ACTION_DOWN)
-            SceneManager.setGameOver(true);
+            progressBarObserver.changeProgressBy(-20); // TODO make this relative to time
+            //SceneManager.setGameOver(true);
     }
 
     public void update() {
