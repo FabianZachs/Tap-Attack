@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.beardedhen.androidbootstrap.BootstrapProgressBar;
+import com.beardedhen.androidbootstrap.api.defaults.DefaultBootstrapBrand;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.thezs.fabianzachs.tapattack.Constants;
@@ -59,6 +60,10 @@ public class ProgressBar {
                             public void run() {
                                 timedReduce();
                                 progressBar.setProgress(getProgress());
+
+                                if (getProgress() < 25) {
+                                    progressBar.setBootstrapBrand(DefaultBootstrapBrand.DANGER);
+                                } else progressBar.setBootstrapBrand(DefaultBootstrapBrand.INFO);
                                 if (getProgress() <= 0) running = false;
                             }
                         });
@@ -77,7 +82,7 @@ public class ProgressBar {
 
     }
 
-    public void update(int newProgress) {
+    public void update() {
 
 
     }
