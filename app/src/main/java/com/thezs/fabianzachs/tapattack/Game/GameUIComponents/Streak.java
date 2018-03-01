@@ -14,7 +14,7 @@ import java.util.List;
  * Created by fabianzachs on 28/02/18.
  */
 
-public class Streak implements GameUIComponent {
+public class Streak {
 
     private final List<Integer> STREAK_COLORS = new ArrayList<>();
 
@@ -57,12 +57,10 @@ public class Streak implements GameUIComponent {
         this.STREAK_COLORS.add(Color.RED);
     }
 
-    @Override
     public void update() {
 
     }
 
-    @Override
     public void draw(Canvas canvas) {
         canvas.drawText(getStringStreak(), xLocation, yLocation, streakPaint);
     }

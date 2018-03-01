@@ -19,7 +19,7 @@ import com.thezs.fabianzachs.tapattack.Constants;
  */
 
 // TODO set progress bar color depending on how low it is
-public class ProgressBar implements GameUIComponent {
+public class ProgressBar {
 
     private BootstrapProgressBar progressBar;
     private int progress;
@@ -43,10 +43,6 @@ public class ProgressBar implements GameUIComponent {
                 .repeat(0)
                 .playOn(progressBar);
 
-        YoYo.with(Techniques.Shake)
-                .duration(1500)
-                .repeat(0)
-                .playOn(progressBar);
 
         // TODO make sure thread is disposed of properly at end
         Thread timer = new Thread() {
@@ -75,19 +71,11 @@ public class ProgressBar implements GameUIComponent {
 
     }
 
-    // need to have while running???
-    @Override
-    public void update() {
-        //timedReduce();
-        //progressBar.setProgress(this.progress);
-
-    }
-
-    @Override
-    public void draw(Canvas canvas) {
+    public void update(int newProgress) {
 
 
     }
+
 
     private void timedReduce() {
         if (System.currentTimeMillis() - timeOfLastReduce > TIME_PER_REDUCE * 1000) {
@@ -98,6 +86,13 @@ public class ProgressBar implements GameUIComponent {
     }
 
     public void changeProgressBy(int amount) {
+        if (amount < -10) {
+            YoYo.with(Techniques.Shake)
+                    .duration(1500)
+                    .repeat(0)
+                    .playOn(progressBar);
+        }
+
         this.progress = (progress + amount > 0)  && (progress + amount <= 100) ? progress += amount : progress;
         if (progress <= 0) running = false;
     }

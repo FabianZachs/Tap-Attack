@@ -12,7 +12,7 @@ import com.thezs.fabianzachs.tapattack.R;
  * Created by fabianzachs on 28/02/18.
  */
 
-public class Score implements GameUIComponent {
+public class Score {
 
     private int score;
 
@@ -43,12 +43,10 @@ public class Score implements GameUIComponent {
     }
 
 
-    @Override
     public void update() {
 
     }
 
-    @Override
     public void draw(Canvas canvas) {
         canvas.drawText(getStringScore(), xLocation, yLocation, scorePaint);
 

@@ -57,7 +57,7 @@ public class ClassicGameScene implements Scene {
         // TODO same for streak
         score.setScore(shapesManager.getScore());
         streak.setStreak(shapesManager.getStreak());
-        progressBar.update();
+
         // TODO implement THIS NEXT
         //progressBar.update(shapesManager.getProgress);
         shapesManager.update();
