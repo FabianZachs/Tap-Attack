@@ -82,11 +82,6 @@ public class ProgressBar {
 
     }
 
-    public void update() {
-
-
-    }
-
 
     private void timedReduce() {
         if (System.currentTimeMillis() - timeOfLastReduce > TIME_PER_REDUCE * 1000) {
