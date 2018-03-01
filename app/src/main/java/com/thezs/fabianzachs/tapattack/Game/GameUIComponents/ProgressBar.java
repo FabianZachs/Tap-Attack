@@ -27,6 +27,8 @@ public class ProgressBar implements GameUIComponent {
     private int PROGRESS_REDUCE_PER_UNIT_TIME = -1;
     private long timeOfLastReduce;
 
+    private boolean running = true;
+
     public ProgressBar() {
         timeOfLastReduce = System.currentTimeMillis();
         //progressBar = new BootstrapProgressBar(Constants.CURRENT_CONTEXT);
@@ -46,32 +48,36 @@ public class ProgressBar implements GameUIComponent {
                 .repeat(0)
                 .playOn(progressBar);
 
+        // TODO make sure thread is disposed of properly at end
+        Thread timer = new Thread() {
+            public void run() {
+                while (running) {
+                    try {
+                        Constants.GAME_ACTIVITY.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                timedReduce();
+                                progressBar.setProgress(getProgress());
+                            }
+                        });
+                        Thread.sleep(100);
+
+                    } catch (InterruptedException e) {
+                        Log.d("running", "run: error");
+                        e.printStackTrace();
+                    }
+                }
+        }
+        };
+        timer.start();
 
 
 
     }
 
+    // need to have while running???
     @Override
     public void update() {
-        Thread timer = new Thread() {
-            public void run() {
-                try {
-                    Constants.GAME_ACTIVITY.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            timedReduce();
-                            progressBar.setProgress(getProgress());
-                        }
-                    });
-                    Thread.sleep(100);
-
-                } catch (InterruptedException e) {
-                    Log.d("running", "run: error");
-                    e.printStackTrace();
-                }
-            }
-        };
-        timer.start();
         //timedReduce();
         //progressBar.setProgress(this.progress);
 
@@ -93,6 +99,7 @@ public class ProgressBar implements GameUIComponent {
 
     public void changeProgressBy(int amount) {
         this.progress = (progress + amount > 0)  && (progress + amount <= 100) ? progress += amount : progress;
+        if (progress <= 0) running = false;
     }
 
     public int getProgress() {
