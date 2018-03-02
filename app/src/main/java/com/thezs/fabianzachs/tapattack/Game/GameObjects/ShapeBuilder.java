@@ -55,7 +55,7 @@ public class ShapeBuilder {
         Log.d("location", "buildArrow: NEW ARROW");
         return new Arrow(40, color, centerLocation,
                 animationManager.getBitmap("arrow", color, false),
-                animationManager.getBitmap("arrow", color, true), "DOWN");
+                animationManager.getBitmap("arrow", color, true), "UP");
     }
 
 

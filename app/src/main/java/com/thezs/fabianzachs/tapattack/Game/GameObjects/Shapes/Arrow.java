@@ -26,6 +26,11 @@ public class Arrow extends ShapeObject {
     private int lastUpdateYLocation;
 
 
+    // TODO BUGS: 1) is arrow too small when flicking? user scroll wont be registered to arrow if its outside it
+    // TODO       2) fling needs to go to destination in grave object
+    // TODO       3) angle 0 and pi dont work since its (+) to (-)
+    // TODO       4) should shape return to origonalPoint if untouched?
+    // TODO       5) make grave just simply take another x distance fading out in that diration instead of until final distination?
 
 
     public Arrow(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, String intendendedFlickDirection) {
@@ -93,6 +98,7 @@ public class Arrow extends ShapeObject {
         Log.d("location", "current: " + getCenterLocation());
         Log.d("location", "target: " + destinationPoint);
 
+        // TODO IF UP && CURRENTLOCATION Y < DESTINATION --- simpler CHANGE BELOW IMPLEMENTATION
         // UP
         if (lastUpdateYLocation > destinationPoint.y && destinationPoint.y >= getCenterLocation().y)
             reduceLives();
