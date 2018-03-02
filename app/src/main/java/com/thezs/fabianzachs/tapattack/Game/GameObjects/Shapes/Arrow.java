@@ -16,11 +16,12 @@ import com.thezs.fabianzachs.tapattack.Constants;
 
 public class Arrow extends ShapeObject {
 
-    private int intendedFlickDirectionInDegrees; // unit circle time degrees
+    private int intendedFlickDirectionInDegrees; //[-180, 180]
     private final int FLICK_DIRECTION_ERROR_ALLOWANCE = 20;
     private final Point originalPoint;
     private final Point destinationPoint;
     private final int ARROW_TRAVEL_DISTANCE = 30;
+
 
 
 
@@ -29,11 +30,14 @@ public class Arrow extends ShapeObject {
         super(durationAlive, color, centerLocation, shapeImg, shapeClickImg);
 
 
-        this.originalPoint = centerLocation;
-        this.destinationPoint = centerLocation;  // TODO use ARROW_TRAVEL_DISTANCE to see where arrow needs to get
-
-
         setIntendedFlickDirection(intendedFlickDirectionInDegrees);
+        this.originalPoint = centerLocation;
+        this.destinationPoint = getDestinationPoint();  // TODO use ARROW_TRAVEL_DISTANCE to see where arrow needs to get
+
+
+        Log.d("arrow", "Arrow: start: " + originalPoint);
+        Log.d("arrow", "Arrow: end: " + destinationPoint);
+
         setLives(1);
         setProgressBarAddition(15);
 
@@ -41,6 +45,19 @@ public class Arrow extends ShapeObject {
         // handling touch events
         setmDetector(new GestureDetectorCompat(Constants.CURRENT_CONTEXT, new MyGestureListener()));
 
+    }
+
+    public Point getDestinationPoint() {
+
+        int x = (int) (originalPoint.x + (Math.cos(Math.toRadians(intendedFlickDirectionInDegrees)) *
+                                            ARROW_TRAVEL_DISTANCE));
+
+        int y = (int) (originalPoint.y - (Math.sin(Math.toRadians(intendedFlickDirectionInDegrees)) *
+                ARROW_TRAVEL_DISTANCE));
+
+        Log.d("arrow", "y: " + Math.sin(Math.toRadians(intendedFlickDirectionInDegrees)));
+
+        return new Point(x,y);
     }
 
 
@@ -52,11 +69,13 @@ public class Arrow extends ShapeObject {
 
     @Override
     public void update() {
+        // TODO check if it is at destinationPoint
     }
 
     private void setIntendedFlickDirection(int direction) {
-        this.intendedFlickDirectionInDegrees = direction % 360;
+        this.intendedFlickDirectionInDegrees = direction;
     }
+
 
 
     // TODO reset arrow to original point if user scrolls out of error region
@@ -79,6 +98,7 @@ public class Arrow extends ShapeObject {
             if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY()))
                 ;
                 //reduceLives(); // TODO arrow grave should move in flick direction
+                // TODO set flicked to true so that draw can show it move and dissapear
             else
                 ; // TODO implement decriment to progress bar (add wrong flick attribute to decriment progress bar)
 
@@ -94,8 +114,17 @@ public class Arrow extends ShapeObject {
                     angle <= intendedFlickDirectionInDegrees + FLICK_DIRECTION_ERROR_ALLOWANCE);
         }
 
+        // TODO maybe use this if someone slowly drags in direction
+        @Override
+        public boolean onScroll(MotionEvent event1, MotionEvent event2, float distanceX,
+                                float distanceY) {
+            //Log.d(DEBUG_TAG, "onScroll: " + event1.toString() + event2.toString());
+            if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY()))
+                setCenterLocation((int) event2.getX(), (int) event2.getY());
+            // TODO use angle instead of actual x y to go along line
 
-
+            return true;
+        }
 
 
         // The user has performed a down MotionEvent and not performed a move or up yet.
@@ -135,17 +164,6 @@ public class Arrow extends ShapeObject {
             Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
         }
 
-        // TODO maybe use this if someone slowly drags in direction
-        @Override
-        public boolean onScroll(MotionEvent event1, MotionEvent event2, float distanceX,
-                                float distanceY) {
-            Log.d(DEBUG_TAG, "onScroll: " + event1.toString() + event2.toString());
-            if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY()))
-                setCenterLocation((int) event2.getX(), (int) event2.getY());
-                // use angle instead of actual x y to go along line
-
-            return true;
-        }
     }
 
 
