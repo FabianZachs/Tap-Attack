@@ -22,7 +22,7 @@ public class Cross extends ShapeObject {
         // call super(durationAlive, color) then in super also make the rect to hold bitmap
         super(durationAlive, color, centerLocation, shapeImg, shapeClickImg);
         setLives(1);
-        setProgressBarAddition(10);
+        setProgressBarAddition(-100);
 
 
         // handling touch events
@@ -51,7 +51,8 @@ public class Cross extends ShapeObject {
         @Override
         public boolean onDown(MotionEvent event) {
             //Log.d(DEBUG_TAG,"onDown: " + event.toString());
-            SceneManager.setGameOver(true);
+            //SceneManager.setGameOver(true);
+            reduceLives();
             return true;
         }
 

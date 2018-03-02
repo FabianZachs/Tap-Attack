@@ -58,7 +58,7 @@ public class ShapesPopulator {
             return mShapes;
 
 
-        mShapes.add(shapeBuilder.buildCircle("blue", newShapeLocation));
+        mShapes.add(shapeBuilder.buildCross("blue", newShapeLocation));
         timeOfLastShapeAddition = System.currentTimeMillis();
 
         return mShapes;
