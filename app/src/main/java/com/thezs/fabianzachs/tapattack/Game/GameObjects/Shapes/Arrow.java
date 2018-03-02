@@ -18,10 +18,12 @@ public class Arrow extends ShapeObject {
 
     private double intendedFlickDirectionRadians;
     private String intendedFlickDirectionString;
-    private final double FLICK_DIRECTION_ERROR_ALLOWANCE = Math.PI/8;
+    private final double FLICK_DIRECTION_ERROR_ALLOWANCE = Math.PI/4;
     private final Point originalPoint;
     private final Point destinationPoint;
-    private final int ARROW_TRAVEL_DISTANCE = 30;
+    private final int ARROW_TRAVEL_DISTANCE = 90;
+    private int lastUpdateXLocation;
+    private int lastUpdateYLocation;
 
 
 
@@ -35,11 +37,13 @@ public class Arrow extends ShapeObject {
         this.intendedFlickDirectionString = intendendedFlickDirection;
         setIntendedFlickDirectionRadians(intendedFlickDirectionString);
         this.originalPoint = centerLocation;
-        this.destinationPoint = getDestinationPoint(intendedFlickDirectionString);
+        this.destinationPoint = getDestinationPoint();
 
 
-        Log.d("arrow", "Arrow: start: " + originalPoint);
-        Log.d("arrow", "Arrow: end: " + destinationPoint);
+        lastUpdateXLocation = getCenterLocation().x;
+        lastUpdateYLocation = getCenterLocation().y;
+        //Log.d("arrow", "Arrow: start: " + originalPoint);
+        //Log.d("arrow", "Arrow: end: " + destinationPoint);
 
 
 
@@ -49,7 +53,7 @@ public class Arrow extends ShapeObject {
     }
 
     // TODO use this to see if we can create a arrow at a specific location?? or just make arrow spawn further from edge
-    public Point getDestinationPoint(String direction) {
+    public Point getDestinationPoint() {
 
         int x = 0;
         int y = 0;
@@ -86,9 +90,25 @@ public class Arrow extends ShapeObject {
     @Override
     public void update() {
         // TODO check if it is at destinationPoint
-        //if (getCenterLocation() == getDestinationPoint())
-            //reduceLives();
-          //  ;
+        Log.d("location", "current: " + getCenterLocation());
+        Log.d("location", "target: " + destinationPoint);
+
+        // UP
+        if (lastUpdateYLocation > destinationPoint.y && destinationPoint.y >= getCenterLocation().y)
+            reduceLives();
+        // DOWN
+        else if (lastUpdateYLocation < destinationPoint.y && destinationPoint.y <= getCenterLocation().y)
+            reduceLives();
+        // RIGHT
+        else if (lastUpdateXLocation < destinationPoint.x && destinationPoint.x <= getCenterLocation().x)
+            reduceLives();
+        // LEFT
+        else if (lastUpdateXLocation > destinationPoint.x && destinationPoint.x >= getCenterLocation().x)
+            reduceLives();
+
+        lastUpdateXLocation = getCenterLocation().x;
+        lastUpdateYLocation = getCenterLocation().y;
+
     }
 
     private void setIntendedFlickDirectionRadians(String direction) {
@@ -104,7 +124,7 @@ public class Arrow extends ShapeObject {
                 intendedFlickDirectionRadians = 0;
                 break;
             case "DOWN":
-                intendedFlickDirectionRadians = -Math.PI;
+                intendedFlickDirectionRadians = -Math.PI/2;
                 break;
         }
     }
@@ -129,9 +149,8 @@ public class Arrow extends ShapeObject {
             Log.d(DEBUG_TAG, "onFling: " + event1.toString() + event2.toString());
 
             if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY()))
-                ;
-                //reduceLives(); // TODO arrow grave should move in flick direction
-                // TODO set flicked to true so that draw can show it move and dissapear
+                reduceLives(); // TODO arrow grave should move in flick direction
+                // TODO set flicked to true so that draw can show it move and dissapear to final destination
             else
                 ;
                 // TODO implement decriment to progress bar (add wrong flick attribute to decriment progress bar)
@@ -153,21 +172,25 @@ public class Arrow extends ShapeObject {
         public boolean onScroll(MotionEvent event1, MotionEvent event2, float distanceX,
                                 float distanceY) {
             //Log.d(DEBUG_TAG, "onScroll: " + event1.toString() + event2.toString());
-            if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY())) {
-                int x = getCenterLocation().x;
-                int y = getCenterLocation().y;
+            try {
+                if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY())) {
+                    int x = getCenterLocation().x;
+                    int y = getCenterLocation().y;
 
-                switch (intendedFlickDirectionString) {
-                    case "UP":
-                    case "DOWN":
-                        y = (int) event2.getY();
-                        break;
-                    case "LEFT":
-                    case "RIGHT":
-                        x = (int) event2.getX();
-                        break;
+                    switch (intendedFlickDirectionString) {
+                        case "UP":
+                        case "DOWN":
+                            y = (int) event2.getY();
+                            break;
+                        case "LEFT":
+                        case "RIGHT":
+                            x = (int) event2.getX();
+                            break;
+                    }
+                    setCenterLocation(x, y);
                 }
-                setCenterLocation(x,y);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
             return true;
