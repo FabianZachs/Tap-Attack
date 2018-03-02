@@ -142,30 +142,36 @@ public class Arrow extends ShapeObject {
 
         private boolean isCorrectFlick(float x1, float y1, float x2, float y2) {
             Double angle = Math.atan2(y1 - y2, x2 - x1);
-            Log.d("flickdebug", "isCorrectFlick angle: " + angle);
 
             return (angle >= intendedFlickDirectionRadians - FLICK_DIRECTION_ERROR_ALLOWANCE &&
                     angle <= intendedFlickDirectionRadians + FLICK_DIRECTION_ERROR_ALLOWANCE);
         }
 
-        /*
+
         // TODO maybe use this if someone slowly drags in direction
         @Override
         public boolean onScroll(MotionEvent event1, MotionEvent event2, float distanceX,
                                 float distanceY) {
             //Log.d(DEBUG_TAG, "onScroll: " + event1.toString() + event2.toString());
             if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY())) {
-                int y = (int) (event2.getX() * Math.tan(Math.toRadians(-intendedFlickDirectionInDegrees)));
+                int x = getCenterLocation().x;
+                int y = getCenterLocation().y;
 
-                Log.d("arrow", "onScroll: x,y: " + event1.getX() +"  "+event2.getX()+"  "+y);
-
-                setCenterLocation((int) event2.getX(),
-                        y);
+                switch (intendedFlickDirectionString) {
+                    case "UP":
+                    case "DOWN":
+                        y = (int) event2.getY();
+                        break;
+                    case "LEFT":
+                    case "RIGHT":
+                        x = (int) event2.getX();
+                        break;
+                }
+                setCenterLocation(x,y);
             }
-            // TODO use angle instead of actual x y to go along line
 
             return true;
-        }*/
+        }
 
 
         // The user has performed a down MotionEvent and not performed a move or up yet.
