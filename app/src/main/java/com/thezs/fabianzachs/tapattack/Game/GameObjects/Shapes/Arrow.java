@@ -21,7 +21,7 @@ public class Arrow extends ShapeObject {
     private final double FLICK_DIRECTION_ERROR_ALLOWANCE = Math.PI/4;
     private final Point originalPoint;
     private final Point destinationPoint;
-    private final int ARROW_TRAVEL_DISTANCE = 90;
+    private final int ARROW_TRAVEL_DISTANCE = 30;
     private int lastUpdateXLocation;
     private int lastUpdateYLocation;
 
