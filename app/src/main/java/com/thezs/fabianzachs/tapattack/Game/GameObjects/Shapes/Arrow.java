@@ -20,7 +20,7 @@ public class Arrow extends ShapeObject {
     private final int FLICK_DIRECTION_ERROR_ALLOWANCE = 20;
     private final Point originalPoint;
     private final Point destinationPoint;
-    private final int ARROW_TRAVEL_DISTANCE = 30;
+    private final int ARROW_TRAVEL_DISTANCE = 90;
 
 
 
@@ -47,6 +47,7 @@ public class Arrow extends ShapeObject {
 
     }
 
+    // TODO use this to see if we can create a arrow at a specific location?? or just make arrow spawn further from edge
     public Point getDestinationPoint() {
 
         int x = (int) (originalPoint.x + (Math.cos(Math.toRadians(intendedFlickDirectionInDegrees)) *
@@ -70,6 +71,9 @@ public class Arrow extends ShapeObject {
     @Override
     public void update() {
         // TODO check if it is at destinationPoint
+        if (getCenterLocation() == getDestinationPoint())
+            //reduceLives();
+            ;
     }
 
     private void setIntendedFlickDirection(int direction) {
@@ -119,8 +123,11 @@ public class Arrow extends ShapeObject {
         public boolean onScroll(MotionEvent event1, MotionEvent event2, float distanceX,
                                 float distanceY) {
             //Log.d(DEBUG_TAG, "onScroll: " + event1.toString() + event2.toString());
-            if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY()))
-                setCenterLocation((int) event2.getX(), (int) event2.getY());
+            if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY())) {
+                int y = (int) (event2.getX() * Math.tan(Math.toRadians(intendedFlickDirectionInDegrees)));
+                setCenterLocation((int) event2.getX(),
+                        y);
+            }
             // TODO use angle instead of actual x y to go along line
 
             return true;
