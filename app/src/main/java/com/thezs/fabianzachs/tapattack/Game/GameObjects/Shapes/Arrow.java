@@ -45,8 +45,8 @@ public class Arrow extends ShapeObject {
         this.destinationPoint = getDestinationPoint();
 
 
-        lastUpdateXLocation = getCenterLocation().x;
-        lastUpdateYLocation = getCenterLocation().y;
+        //lastUpdateXLocation = getCenterLocation().x;
+        //lastUpdateYLocation = getCenterLocation().y;
         //Log.d("arrow", "Arrow: start: " + originalPoint);
         //Log.d("arrow", "Arrow: end: " + destinationPoint);
 
@@ -99,6 +99,15 @@ public class Arrow extends ShapeObject {
         Log.d("location", "target: " + destinationPoint);
 
         // TODO IF UP && CURRENTLOCATION Y < DESTINATION --- simpler CHANGE BELOW IMPLEMENTATION
+        if (intendedFlickDirectionString.equals("UP") && getCenterLocation().y <= destinationPoint.y)
+            reduceLives();
+        else if (intendedFlickDirectionString.equals("DOWN") && getCenterLocation().y >= destinationPoint.y)
+            reduceLives();
+        else if (intendedFlickDirectionString.equals("LEFT") && getCenterLocation().x <= destinationPoint.x)
+            reduceLives();
+        else if (intendedFlickDirectionString.equals("RIGHT") && getCenterLocation().x >= destinationPoint.x)
+            reduceLives();
+        /*
         // UP
         if (lastUpdateYLocation > destinationPoint.y && destinationPoint.y >= getCenterLocation().y)
             reduceLives();
@@ -111,9 +120,9 @@ public class Arrow extends ShapeObject {
         // LEFT
         else if (lastUpdateXLocation > destinationPoint.x && destinationPoint.x >= getCenterLocation().x)
             reduceLives();
-
-        lastUpdateXLocation = getCenterLocation().x;
-        lastUpdateYLocation = getCenterLocation().y;
+        */
+        //lastUpdateXLocation = getCenterLocation().x;
+        //lastUpdateYLocation = getCenterLocation().y;
 
     }
 
@@ -149,6 +158,7 @@ public class Arrow extends ShapeObject {
             return true;
         }
 
+        /*
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2,
                                float velocityX, float velocityY) {
@@ -163,7 +173,7 @@ public class Arrow extends ShapeObject {
 
             return true;
 
-        }
+        }*/
 
         private boolean isCorrectFlick(float x1, float y1, float x2, float y2) {
             Double angle = Math.atan2(y1 - y2, x2 - x1);
