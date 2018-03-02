@@ -19,6 +19,7 @@ public class Streak {
 
     private ShapesManager shapesManager;
     private final List<Integer> STREAK_COLORS = new ArrayList<>();
+    private final int STREAK_POINTS_PER_COLOR = 5;
 
     private int streak;
 
@@ -49,20 +50,28 @@ public class Streak {
 
 
         streakPaint.setTextSize(40);
-        streakPaint.setColor(Color.RED);
+        streakPaint.setColor(STREAK_COLORS.get(0));
     }
 
     private void setupSTREAK_COLORS() {
-        this.STREAK_COLORS.add(Color.WHITE);
-        this.STREAK_COLORS.add(Color.BLUE);
-        this.STREAK_COLORS.add(Color.CYAN);
-        this.STREAK_COLORS.add(Color.GREEN);
-        this.STREAK_COLORS.add(Color.YELLOW);
-        this.STREAK_COLORS.add(Color.RED);
+        this.STREAK_COLORS.add(Color.argb(255,252,218,155));
+        this.STREAK_COLORS.add(Color.argb(255,249,218,99));
+        this.STREAK_COLORS.add(Color.argb(255,248,218,54));
+        this.STREAK_COLORS.add(Color.argb(255,248,218,46));
+        this.STREAK_COLORS.add(Color.argb(255,249,195,41));
+        this.STREAK_COLORS.add(Color.argb(255,251,168,38));
+        this.STREAK_COLORS.add(Color.argb(255,251,140,34));
+        this.STREAK_COLORS.add(Color.argb(255,252,114,31));
+        this.STREAK_COLORS.add(Color.argb(255,253,88,28));
+        this.STREAK_COLORS.add(Color.argb(255,253,65,26));
+        this.STREAK_COLORS.add(Color.argb(255,253,44,25));
+        this.STREAK_COLORS.add(Color.argb(255,254,32,25));
     }
 
 
     public void draw(Canvas canvas) {
+        int index = streak/STREAK_POINTS_PER_COLOR> STREAK_COLORS.size() - 1 ? STREAK_COLORS.size() - 1 : streak/STREAK_POINTS_PER_COLOR;
+        streakPaint.setColor(STREAK_COLORS.get(index));
         canvas.drawText(getStringStreak(), xLocation, yLocation, streakPaint);
     }
 

@@ -44,7 +44,7 @@ public class Score {
 
 
         scorePaint.setTextSize(40);
-        scorePaint.setColor(Color.RED);
+        scorePaint.setColor(Color.WHITE);
     }
 
 
