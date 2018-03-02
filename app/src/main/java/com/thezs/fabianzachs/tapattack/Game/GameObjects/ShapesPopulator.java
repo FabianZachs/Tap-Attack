@@ -24,7 +24,7 @@ public class ShapesPopulator {
     // settings
     private final int UNIT_TIME_PER_SHAPE_ADDITION = 5; // every x seconds one more max shape
     private final int SHAPE_SPACING = 5; // space between shapes
-    private final int MAX_SHAPES = 6;
+    private final int MAX_SHAPES = 1;
     private final int MAX_NUMBER_LOOPS = 20;
 
     private long timeOfLastShapeAddition;
@@ -59,7 +59,7 @@ public class ShapesPopulator {
 
 
         // TODO use factory design pattern? so instead of .buildCross, pass "cross" in parameter
-        mShapes.add(shapeBuilder.buildCross("blue", newShapeLocation));
+        mShapes.add(shapeBuilder.buildArrow("blue", newShapeLocation));
         timeOfLastShapeAddition = System.currentTimeMillis();
 
         return mShapes;

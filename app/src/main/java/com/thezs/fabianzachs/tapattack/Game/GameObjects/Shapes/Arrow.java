@@ -67,7 +67,8 @@ public class Arrow extends ShapeObject {
             Log.d(DEBUG_TAG, "onFling: " + event1.toString() + event2.toString());
 
             if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY()))
-                reduceLives(); // TODO arrow grave should move in flick direction
+                ;
+                //reduceLives(); // TODO arrow grave should move in flick direction
             else
                 ; // TODO implement decriment to progress bar (add wrong flick attribute to decriment progress bar)
 
@@ -77,6 +78,7 @@ public class Arrow extends ShapeObject {
 
         private boolean isCorrectFlick(float x1, float y1, float x2, float y2) {
             Double angle = Math.toDegrees(Math.atan2(y1 - y2, x2 - x1));
+            Log.d("flickdebug", "isCorrectFlick angle: " + angle);
 
             return (angle >= intendedFlickDirectionInDegrees - FLICK_DIRECTION_ERROR_ALLOWANCE &&
                     angle <= intendedFlickDirectionInDegrees + FLICK_DIRECTION_ERROR_ALLOWANCE);

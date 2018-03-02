@@ -7,6 +7,7 @@ import android.util.Log;
 import com.thezs.fabianzachs.tapattack.Animation.AnimationManager;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundHandler;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Arrow;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Cross;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
@@ -50,6 +51,13 @@ public class ShapeBuilder {
                 animationManager.getBitmap("cross", color, false),
                 animationManager.getBitmap("cross", color, true));
     }
+
+    public Arrow buildArrow(String color, Point centerLocation) {
+        return new Arrow(3, color, centerLocation,
+                animationManager.getBitmap("arrow", color, false),
+                animationManager.getBitmap("arrow", color, true), 90);
+    }
+
 
     private void initializeAnimations() {
 

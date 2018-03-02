@@ -23,7 +23,7 @@ public class Constants {
     //public static String[] SHAPES = {"circle", "square", "star", "cross", "triangle",
     //                                    "arrow"};
 
-    public static String[] SHAPES = {"circle", "square", "cross"};
+    public static String[] SHAPES = {"circle", "square", "cross", "arrow"};
     public static String[] NEONCOLORS = {"blue","green"};
     public static Map<String, String[]> COLORS;
 
