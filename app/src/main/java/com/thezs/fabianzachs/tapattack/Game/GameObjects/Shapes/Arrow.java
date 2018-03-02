@@ -128,6 +128,10 @@ public class Arrow extends ShapeObject {
         public boolean onScroll(MotionEvent event1, MotionEvent event2, float distanceX,
                                 float distanceY) {
             Log.d(DEBUG_TAG, "onScroll: " + event1.toString() + event2.toString());
+            if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY()))
+                setCenterLocation((int) event2.getX(), (int) event2.getY());
+                // use angle instead of actual x y to go along line
+
             return true;
         }
     }
