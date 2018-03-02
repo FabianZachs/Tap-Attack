@@ -18,12 +18,21 @@ public class Arrow extends ShapeObject {
 
     private int intendedFlickDirectionInDegrees; // unit circle time degrees
     private final int FLICK_DIRECTION_ERROR_ALLOWANCE = 20;
+    private final Point originalPoint;
+    private final Point destinationPoint;
+    private final int ARROW_TRAVEL_DISTANCE = 30;
 
 
 
     public Arrow(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, int intendedFlickDirectionInDegrees) {
         // call super(durationAlive, color) then in super also make the rect to hold bitmap
         super(durationAlive, color, centerLocation, shapeImg, shapeClickImg);
+
+
+        this.originalPoint = centerLocation;
+        this.destinationPoint = centerLocation;  // TODO use ARROW_TRAVEL_DISTANCE to see where arrow needs to get
+
+
         setIntendedFlickDirection(intendedFlickDirectionInDegrees);
         setLives(1);
         setProgressBarAddition(15);
@@ -50,6 +59,7 @@ public class Arrow extends ShapeObject {
     }
 
 
+    // TODO reset arrow to original point if user scrolls out of error region
     // listens for specific touch events
     class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
         private static final String DEBUG_TAG = "Gestures";
@@ -100,9 +110,11 @@ public class Arrow extends ShapeObject {
             return true;
         }
 
+        // TODO this is called if arrow double tapped then scrolled (called instead of scrolled)
         @Override
         public boolean onDoubleTap(MotionEvent event) {
             Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
+            //onScroll(event, event, 0,0);
             return true;
         }
 
