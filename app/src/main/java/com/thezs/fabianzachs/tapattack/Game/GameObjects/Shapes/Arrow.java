@@ -16,30 +16,31 @@ import com.thezs.fabianzachs.tapattack.Constants;
 
 public class Arrow extends ShapeObject {
 
-    private int intendedFlickDirectionInDegrees; //[-180, 180]
-    private final int FLICK_DIRECTION_ERROR_ALLOWANCE = 20;
+    private double intendedFlickDirectionRadians;
+    private String intendedFlickDirectionString;
+    private final double FLICK_DIRECTION_ERROR_ALLOWANCE = Math.PI/8;
     private final Point originalPoint;
     private final Point destinationPoint;
-    private final int ARROW_TRAVEL_DISTANCE = 90;
+    private final int ARROW_TRAVEL_DISTANCE = 30;
 
 
 
 
-    public Arrow(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, int intendedFlickDirectionInDegrees) {
+    public Arrow(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, String intendendedFlickDirection) {
         // call super(durationAlive, color) then in super also make the rect to hold bitmap
         super(durationAlive, color, centerLocation, shapeImg, shapeClickImg);
+        setLives(1);
+        setProgressBarAddition(15);
 
-
-        setIntendedFlickDirection(intendedFlickDirectionInDegrees);
+        this.intendedFlickDirectionString = intendendedFlickDirection;
+        setIntendedFlickDirectionRadians(intendedFlickDirectionString);
         this.originalPoint = centerLocation;
-        this.destinationPoint = getDestinationPoint();  // TODO use ARROW_TRAVEL_DISTANCE to see where arrow needs to get
+        this.destinationPoint = getDestinationPoint(intendedFlickDirectionString);
 
 
         Log.d("arrow", "Arrow: start: " + originalPoint);
         Log.d("arrow", "Arrow: end: " + destinationPoint);
 
-        setLives(1);
-        setProgressBarAddition(15);
 
 
         // handling touch events
@@ -48,14 +49,29 @@ public class Arrow extends ShapeObject {
     }
 
     // TODO use this to see if we can create a arrow at a specific location?? or just make arrow spawn further from edge
-    public Point getDestinationPoint() {
+    public Point getDestinationPoint(String direction) {
 
-        int x = (int) (originalPoint.x + (Math.cos(Math.toRadians(intendedFlickDirectionInDegrees)) *
-                                            ARROW_TRAVEL_DISTANCE));
+        int x = 0;
+        int y = 0;
 
-        int y = (int) (originalPoint.y - (Math.sin(Math.toRadians(intendedFlickDirectionInDegrees)) *
-                ARROW_TRAVEL_DISTANCE));
-
+        switch (intendedFlickDirectionString) {
+            case "UP":
+                x = originalPoint.x;
+                y = originalPoint.y - ARROW_TRAVEL_DISTANCE;
+                break;
+            case "LEFT":
+                x = originalPoint.x - ARROW_TRAVEL_DISTANCE;
+                y = originalPoint.y;
+                break;
+            case "RIGHT":
+                x = originalPoint.x + ARROW_TRAVEL_DISTANCE;
+                y = originalPoint.y;
+                break;
+            case "DOWN":
+                x = originalPoint.x;
+                y = originalPoint.y + ARROW_TRAVEL_DISTANCE;
+                break;
+        }
 
         return new Point(x,y);
     }
@@ -70,13 +86,27 @@ public class Arrow extends ShapeObject {
     @Override
     public void update() {
         // TODO check if it is at destinationPoint
-        if (getCenterLocation() == getDestinationPoint())
+        //if (getCenterLocation() == getDestinationPoint())
             //reduceLives();
-            ;
+          //  ;
     }
 
-    private void setIntendedFlickDirection(int direction) {
-        this.intendedFlickDirectionInDegrees = direction;
+    private void setIntendedFlickDirectionRadians(String direction) {
+
+        switch (direction) {
+            case "UP":
+                intendedFlickDirectionRadians = Math.PI/2;
+                break;
+            case "LEFT":
+                intendedFlickDirectionRadians = Math.PI;
+                break;
+            case "RIGHT":
+                intendedFlickDirectionRadians = 0;
+                break;
+            case "DOWN":
+                intendedFlickDirectionRadians = -Math.PI;
+                break;
+        }
     }
 
 
@@ -103,20 +133,22 @@ public class Arrow extends ShapeObject {
                 //reduceLives(); // TODO arrow grave should move in flick direction
                 // TODO set flicked to true so that draw can show it move and dissapear
             else
-                ; // TODO implement decriment to progress bar (add wrong flick attribute to decriment progress bar)
+                ;
+                // TODO implement decriment to progress bar (add wrong flick attribute to decriment progress bar)
 
             return true;
 
         }
 
         private boolean isCorrectFlick(float x1, float y1, float x2, float y2) {
-            Double angle = Math.toDegrees(Math.atan2(y1 - y2, x2 - x1));
+            Double angle = Math.atan2(y1 - y2, x2 - x1);
             Log.d("flickdebug", "isCorrectFlick angle: " + angle);
 
-            return (angle >= intendedFlickDirectionInDegrees - FLICK_DIRECTION_ERROR_ALLOWANCE &&
-                    angle <= intendedFlickDirectionInDegrees + FLICK_DIRECTION_ERROR_ALLOWANCE);
+            return (angle >= intendedFlickDirectionRadians - FLICK_DIRECTION_ERROR_ALLOWANCE &&
+                    angle <= intendedFlickDirectionRadians + FLICK_DIRECTION_ERROR_ALLOWANCE);
         }
 
+        /*
         // TODO maybe use this if someone slowly drags in direction
         @Override
         public boolean onScroll(MotionEvent event1, MotionEvent event2, float distanceX,
@@ -133,7 +165,7 @@ public class Arrow extends ShapeObject {
             // TODO use angle instead of actual x y to go along line
 
             return true;
-        }
+        }*/
 
 
         // The user has performed a down MotionEvent and not performed a move or up yet.
