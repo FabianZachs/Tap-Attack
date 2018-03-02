@@ -109,24 +109,19 @@ public abstract class ShapeObject {
 
     public void setCenterLocation(int x, int y) {
         this.centerLocation.set(x,y);
-        updateBitmapHolderLocation(x,y);
+        updateBitmapHolderLocation();
     }
 
-    private void updateBitmapHolderLocation(int x, int y) {
+    private void updateBitmapHolderLocation() {
         // TODO create method will update the bitmapholder by using the current set centerLocation
         Rect newBitmapHolder = getBitmapHolder();
         newBitmapHolder.left = (int) (centerLocation.x - (Constants.SHAPE_WIDTH));
-        newBitmapHolder.top = (int) (centerLocation.y - (Constants.SHAPE_HEIGHT));  i
-       Rect rect = new Rect()
+        newBitmapHolder.top = (int) (centerLocation.y - (Constants.SHAPE_HEIGHT));
+        newBitmapHolder.right = (int) (centerLocation.x + (Constants.SHAPE_WIDTH));
+        newBitmapHolder.bottom = (int) (centerLocation.y + (Constants.SHAPE_HEIGHT));
 
-        setBitmapHolder(getBitmapHolder().;
-        getBitmapHolder().s
+        setBitmapHolder(newBitmapHolder);
     }
-
-
-    setBitmapHolder(new Rect((int) (centerLocation.x - (Constants.SHAPE_WIDTH)), (int) (centerLocation.y - (Constants.SHAPE_HEIGHT)),
-            (int) (centerLocation.x + (Constants.SHAPE_WIDTH)), (int) (centerLocation.y + (Constants.SHAPE_HEIGHT))));
-
 
 
     public Bitmap getCurrentShapeImg() {
