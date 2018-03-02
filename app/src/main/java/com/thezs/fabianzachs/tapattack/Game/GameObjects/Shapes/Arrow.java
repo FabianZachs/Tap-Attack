@@ -56,7 +56,6 @@ public class Arrow extends ShapeObject {
         int y = (int) (originalPoint.y - (Math.sin(Math.toRadians(intendedFlickDirectionInDegrees)) *
                 ARROW_TRAVEL_DISTANCE));
 
-        Log.d("arrow", "y: " + Math.sin(Math.toRadians(intendedFlickDirectionInDegrees)));
 
         return new Point(x,y);
     }
@@ -124,7 +123,10 @@ public class Arrow extends ShapeObject {
                                 float distanceY) {
             //Log.d(DEBUG_TAG, "onScroll: " + event1.toString() + event2.toString());
             if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY())) {
-                int y = (int) (event2.getX() * Math.tan(Math.toRadians(intendedFlickDirectionInDegrees)));
+                int y = (int) (event2.getX() * Math.tan(Math.toRadians(-intendedFlickDirectionInDegrees)));
+
+                Log.d("arrow", "onScroll: x,y: " + event1.getX() +"  "+event2.getX()+"  "+y);
+
                 setCenterLocation((int) event2.getX(),
                         y);
             }
