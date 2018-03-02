@@ -38,6 +38,14 @@ public class Grave {
 
     public void draw(Canvas canvas) {
 
+        // TODO maybe use factory design pattern for creating the right kind of grave: below is blinking for cross
+        /*
+        if(System.currentTimeMillis() - blinkStart >= 150 && blink) {
+    blink = false;
+    lastUpdateTime = System.currentTimeMillis();
+        }
+         */
+
         // TODO use opasityPaint to fade out
         // if lifespan of shape - time alive = time left < 1
         //alphaPaint.setAlpha(255);

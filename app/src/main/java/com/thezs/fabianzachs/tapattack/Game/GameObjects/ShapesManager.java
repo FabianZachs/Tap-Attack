@@ -15,6 +15,7 @@ import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundHandler;
 import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Cross;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
@@ -121,7 +122,7 @@ public class ShapesManager {
             if (shape.getLives() == 0) {
                 // TODO maybe better to add method .isGraveable() to see whether shape leaves grave
                 // grave for square does not seem smooth and not needed for corss
-                if (shape instanceof Circle)
+                if (shape instanceof Circle || shape instanceof Cross)
                     graves.add(new Grave(shape.getCenterLocation(), shape.getBitmapHolder(), shape.getShapeClickImg()));
                 // TODO make a seperate method which handles everything when a shape is removed (progress bar, streak, score)
                 shapes.remove(shape);
