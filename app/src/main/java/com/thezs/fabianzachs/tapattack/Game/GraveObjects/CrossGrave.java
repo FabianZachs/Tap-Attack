@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.Game.GraveObjects;
 
 import android.graphics.Canvas;
 
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Cross;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 
 /**
@@ -14,21 +15,13 @@ public class CrossGrave extends GraveObject {
     private long timeOfBlinkSwitch;
     private boolean blinkOn;
 
-    public CrossGrave(ShapeObject shapeToCreateGraveFrom) {
+    public CrossGrave(Cross shapeToCreateGraveFrom) {
         super(shapeToCreateGraveFrom);
         setDURATION(5);
         this.blinkOn = false;
         timeOfBlinkSwitch = System.currentTimeMillis();
 
     }
-
-
-        /*
-        if(System.currentTimeMillis() - blinkStart >= 150 && blink) {
-    blink = false;
-    lastUpdateTime = System.currentTimeMillis();
-        }
-         */
 
     public void draw(Canvas canvas) {
         if (System.currentTimeMillis() - timeOfBlinkSwitch > BLINK_TIME * 1000) {

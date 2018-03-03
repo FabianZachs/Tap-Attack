@@ -252,6 +252,10 @@ public class Arrow extends ShapeObject {
 
     }
 
+    public String getIntendedFlickDirectionString() {
+        return this.intendedFlickDirectionString;
+    }
+
 
 
 }

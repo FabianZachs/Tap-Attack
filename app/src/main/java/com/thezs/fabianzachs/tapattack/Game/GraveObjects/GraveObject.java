@@ -5,7 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.util.Log;
 
+import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 
 /**
@@ -35,7 +37,9 @@ public abstract class GraveObject {
 
     public boolean graveDestroyed() {
         // grave destroyed if time elapsed is greater then how long grave should be alive
-        return (System.currentTimeMillis() - initTime > DURATION * 1000);
+        Boolean destroyed =System.currentTimeMillis() - initTime > DURATION * 1000;
+        Log.d("grave", "graveDestroyed: " +destroyed);
+        return (destroyed);
     }
 
 
@@ -91,11 +95,30 @@ public abstract class GraveObject {
         return this.bitmapHolder;
     }
 
+    public void setBitmapHolder(Rect rect) {
+        this.bitmapHolder = rect;
+    }
+
+    public void setBitmapHolderLocation(Point newLocation) {
+        Rect newBitmapHolder = getBitmapHolder();
+
+        newBitmapHolder.left = (int) (centerLocation.x - (Constants.SHAPE_WIDTH));
+        newBitmapHolder.top = (int) (centerLocation.y - (Constants.SHAPE_HEIGHT));
+        newBitmapHolder.right = (int) (centerLocation.x + (Constants.SHAPE_WIDTH));
+        newBitmapHolder.bottom = (int) (centerLocation.y + (Constants.SHAPE_HEIGHT));
+
+        setBitmapHolder(newBitmapHolder);
+    }
+
     public Paint getPaint() {
         return this.paint;
     }
 
     public void setDURATION(float duration) {
         this.DURATION = duration;
+    }
+
+    public float getDURATION() {
+        return this.DURATION;
     }
 }
