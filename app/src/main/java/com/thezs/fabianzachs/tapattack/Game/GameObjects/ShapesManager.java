@@ -113,7 +113,6 @@ public class ShapesManager {
             if (shape.getLives() == 0) {
                 // TODO maybe better to add method .isGraveable() to see whether shape leaves grave
                 // TODO better yet, graveFactory.buildGrave(shape) returns null if shape doesnt have grave (like square)
-                // grave for square does not seem smooth and not needed for corss
                 if (shape instanceof Circle || shape instanceof Cross)
                     graveObjects.add(graveFactory.buildGrave(shape));
                     //  graveObjects.add(new GraveObject(shape.getCenterLocation(), shape.getBitmapHolder(), shape.getShapeClickImg()));

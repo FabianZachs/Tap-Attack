@@ -23,6 +23,7 @@ public abstract class GraveObject {
 
     private float shapeScaling;
 
+
     public GraveObject(ShapeObject shapeToCreateGraveFrom) {
         this.initTime = System.currentTimeMillis();
         this.centerLocation = shapeToCreateGraveFrom.getCenterLocation();
@@ -92,5 +93,9 @@ public abstract class GraveObject {
 
     public Paint getPaint() {
         return this.paint;
+    }
+
+    public void setDURATION(float duration) {
+        this.DURATION = duration;
     }
 }

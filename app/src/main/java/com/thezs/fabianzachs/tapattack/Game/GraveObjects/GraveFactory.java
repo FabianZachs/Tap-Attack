@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.Game.GraveObjects;
 
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Cross;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 
 /**
@@ -15,6 +16,10 @@ public class GraveFactory {
 
         if (shapeToCreateGraveFrom instanceof Circle) {
             return new CircleGrave((Circle) shapeToCreateGraveFrom);
+        }
+
+        else if (shapeToCreateGraveFrom instanceof Cross) {
+            return new CrossGrave((Cross) shapeToCreateGraveFrom);
         }
         return null;
 
