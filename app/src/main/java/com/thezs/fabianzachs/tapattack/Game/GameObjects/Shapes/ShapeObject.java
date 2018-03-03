@@ -23,6 +23,8 @@ import static com.thezs.fabianzachs.tapattack.Game.MainThread.canvas;
 
 public abstract class ShapeObject {
 
+    private boolean graveAble;
+
     private int progressBarAddition;
     private long distructionTime;
     private Bitmap[] shapeImages;
@@ -51,6 +53,7 @@ public abstract class ShapeObject {
     public abstract void update();
 
     public ShapeObject(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg) {
+        this.graveAble = true;
         this.durationAlive = durationAlive;
         this.color = color;
         this.centerLocation = centerLocation;
@@ -199,6 +202,14 @@ public abstract class ShapeObject {
 
     public int getState() {
         return this.stateAnimation;
+    }
+
+    public void setGraveAble(boolean bool) {
+        this.graveAble = bool;
+    }
+
+    public boolean getGravable() {
+        return this.graveAble;
     }
 
     public void recieveTouch(MotionEvent event) {

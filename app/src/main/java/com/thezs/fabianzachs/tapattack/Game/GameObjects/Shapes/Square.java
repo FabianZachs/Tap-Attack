@@ -24,6 +24,7 @@ public class Square extends ShapeObject {
         super(durationAlive, color, centerLocation, shapeImg, shapeClickImg);
         setLives(2);
         setProgressBarAddition(15);
+        setGraveAble(false);
 
 
         // handling touch events

@@ -21,6 +21,7 @@ public class GraveFactory {
         else if (shapeToCreateGraveFrom instanceof Cross) {
             return new CrossGrave((Cross) shapeToCreateGraveFrom);
         }
+
         return null;
 
     }

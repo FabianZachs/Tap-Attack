@@ -59,7 +59,7 @@ public class ShapesPopulator {
 
 
         // TODO use factory design pattern? so instead of .buildCross, pass "cross" in parameter
-        mShapes.add(shapeBuilder.buildCross("blue", newShapeLocation));
+        mShapes.add(shapeBuilder.buildSquare("blue", newShapeLocation));
         timeOfLastShapeAddition = System.currentTimeMillis();
 
         return mShapes;

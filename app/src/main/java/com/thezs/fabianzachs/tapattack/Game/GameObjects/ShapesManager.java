@@ -111,9 +111,8 @@ public class ShapesManager {
 
             // if deleted by click
             if (shape.getLives() == 0) {
-                // TODO maybe better to add method .isGraveable() to see whether shape leaves grave
-                // TODO better yet, graveFactory.buildGrave(shape) returns null if shape doesnt have grave (like square)
-                if (shape instanceof Circle || shape instanceof Cross)
+
+                if (shape.getGravable())
                     graveObjects.add(graveFactory.buildGrave(shape));
                     //  graveObjects.add(new GraveObject(shape.getCenterLocation(), shape.getBitmapHolder(), shape.getShapeClickImg()));
                 // TODO make a seperate method which handles everything when a shape is removed (progress bar, streak, score)
