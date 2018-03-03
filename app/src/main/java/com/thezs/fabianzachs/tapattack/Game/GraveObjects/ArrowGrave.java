@@ -2,11 +2,14 @@ package com.thezs.fabianzachs.tapattack.Game.GraveObjects;
 
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Arrow;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 
 import java.util.Vector;
+
+import javax.xml.datatype.Duration;
 
 /**
  * Created by fabianzachs on 03/03/18.
@@ -18,8 +21,10 @@ public class ArrowGrave extends GraveObject {
     private Point startPoint;
     private Point endPoint;
     private Point currentLocation;
-    private final int TRAVEL_DISTANCE = 900;
+    private final int TRAVEL_DISTANCE = 200;
     private int[] TRAVEL_VECTOR;
+    private float slopeOfTravel;
+    private float constantOfTravel;
 
     public ArrowGrave(Arrow shapeToCreateGraveFrom) {
         super(shapeToCreateGraveFrom);
@@ -28,18 +33,35 @@ public class ArrowGrave extends GraveObject {
         this.startPoint = shapeToCreateGraveFrom.getCenterLocation();
         setupEndPointAndTRAVELVECTOR();
         this.currentLocation = startPoint;
-        setDURATION(5);
+        //this.slopeOfTravel = findSlopeOfTravel();
+        //this.constantOfTravel = findConstantOfTravel();
+        setDURATION(0.6f);
 
+        Log.d("arrowgrave", "startlocation" + startPoint );
+    }
+
+    private float findConstantOfTravel() {
+        return  -startPoint.y - slopeOfTravel * startPoint.x;
+    }
+
+    private float findSlopeOfTravel() {
+        return (-endPoint.y + startPoint.y) / (endPoint.x - startPoint.x);
     }
 
 
+    @Override
     public void draw(Canvas canvas) {
+        super.draw(canvas);
+    }
+
+
+    @Override
+    public void update() {
         this.currentLocation = getCurrentLocation();
         setBitmapHolderLocation(currentLocation);
+        setPaint(getAlphaPaint());
 
 
-
-        canvas.drawBitmap(getGraveImg(),null,getBitmapHolder(), getPaint());
     }
 
     private void setupEndPointAndTRAVELVECTOR() {
@@ -52,29 +74,36 @@ public class ArrowGrave extends GraveObject {
                 y = startPoint.y - TRAVEL_DISTANCE;
                 TRAVEL_VECTOR[0] = 0;
                 TRAVEL_VECTOR[1] = -TRAVEL_DISTANCE;
+                break;
             case "DOWN":
                 x = startPoint.x;
                 y = startPoint.y + TRAVEL_DISTANCE;
                 TRAVEL_VECTOR[0] = 0;
                 TRAVEL_VECTOR[1] = TRAVEL_DISTANCE;
+                break;
             case "LEFT":
                 x = startPoint.x - TRAVEL_DISTANCE;
                 y = startPoint.y;
                 TRAVEL_VECTOR[0] = -TRAVEL_DISTANCE;
                 TRAVEL_VECTOR[1] = 0;
+                break;
             case "RIGHT":
                 x = startPoint.x + TRAVEL_DISTANCE;
                 y = startPoint.y;
                 TRAVEL_VECTOR[0] = TRAVEL_DISTANCE;
                 TRAVEL_VECTOR[1] = 0;
+                break;
         }
         this.endPoint = new Point(x,y);
     }
 
     public Point getCurrentLocation() {
         // TODO based on time left
-        int x = (int) (endPoint.x - getTimeLeft() * TRAVEL_VECTOR[0]);
-        int y = (int) (endPoint.y - getTimeLeft() * TRAVEL_VECTOR[1]);
+        Log.d("times", "duration: " + getDURATION() + " timeleft: " + getTimeLeft());
+        //float one =getTimeLeft()/(getDURATION()*1000);
+        int x = (int) (endPoint.x - (getTimeLeft()/ (getDURATION()*1000)) * TRAVEL_VECTOR[0]);
+        int y = (int) (endPoint.y - (getTimeLeft()/ (getDURATION()*1000)) * TRAVEL_VECTOR[1]);
+        Log.d("locationo", "getCurrentLocation: x:" +x +" y: " + y);
         return new Point(x,y);
     }
 }

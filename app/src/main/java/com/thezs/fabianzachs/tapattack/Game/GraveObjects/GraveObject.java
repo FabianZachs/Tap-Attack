@@ -69,22 +69,32 @@ public abstract class GraveObject {
 
     }
 
+    public void update() {};
+
 
     public Paint getAlphaPaint() {
         Paint alphaPaint = new Paint();
-        alphaPaint.setAlpha(255);
+        //alphaPaint.setAlpha(255);
 
+        /*
         // ERROR if time is below 150 - shape flashes
         if (150 < getTimeLeft() && getTimeLeft() < 1000) {
             alphaPaint.setAlpha((int) ((255 * getTimeLeft()) / 1000));
         } else if (getTimeLeft() < 150)
             alphaPaint.setAlpha(0);
+        */
+
+
+        if (getTimeLeft() < 1000) {
+            alphaPaint.setAlpha((int) ((255 * getTimeLeft()) / 1000));
+        }
+
 
         return alphaPaint;
     }
 
     public long getTimeLeft() {
-        return  (int) DURATION * 1000 - (System.currentTimeMillis() - initTime);
+        return  (long) (getDURATION() * 1000) - (System.currentTimeMillis() - initTime);
     }
 
     public Bitmap getGraveImg() {
@@ -102,16 +112,20 @@ public abstract class GraveObject {
     public void setBitmapHolderLocation(Point newLocation) {
         Rect newBitmapHolder = getBitmapHolder();
 
-        newBitmapHolder.left = (int) (centerLocation.x - (Constants.SHAPE_WIDTH));
-        newBitmapHolder.top = (int) (centerLocation.y - (Constants.SHAPE_HEIGHT));
-        newBitmapHolder.right = (int) (centerLocation.x + (Constants.SHAPE_WIDTH));
-        newBitmapHolder.bottom = (int) (centerLocation.y + (Constants.SHAPE_HEIGHT));
+        newBitmapHolder.left = (int) (newLocation.x - (Constants.SHAPE_WIDTH));
+        newBitmapHolder.top = (int) (newLocation.y - (Constants.SHAPE_HEIGHT));
+        newBitmapHolder.right = (int) (newLocation.x + (Constants.SHAPE_WIDTH));
+        newBitmapHolder.bottom = (int) (newLocation.y + (Constants.SHAPE_HEIGHT));
 
         setBitmapHolder(newBitmapHolder);
     }
 
     public Paint getPaint() {
         return this.paint;
+    }
+
+    public void setPaint(Paint paint) {
+        this.paint = paint;
     }
 
     public void setDURATION(float duration) {

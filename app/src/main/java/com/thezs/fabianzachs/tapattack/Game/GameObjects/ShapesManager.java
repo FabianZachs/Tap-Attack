@@ -138,6 +138,8 @@ public class ShapesManager {
         for (GraveObject graveObject : graveObjects) {
             if (graveObject.graveDestroyed())
                 graveObjects.remove(graveObject);
+            else
+                graveObject.update();
         }
         shapes = shapesPopulator.update(shapes);
 

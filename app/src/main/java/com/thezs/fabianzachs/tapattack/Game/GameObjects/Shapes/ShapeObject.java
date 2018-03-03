@@ -89,20 +89,24 @@ public abstract class ShapeObject {
     }
 
     public long getTimeLeft() {
-        return  (int) getDurationAlive() * 1000 - (System.currentTimeMillis() - getInitTime());
+        return  (int) (getDurationAlive() * 1000) - (System.currentTimeMillis() - getInitTime());
     }
 
     public Paint getAlphaPaint() {
         Paint alphaPaint = new Paint();
-        alphaPaint.setAlpha(255);
+        //alphaPaint.setAlpha(255);
 
+        /*
         // ERROR if time is below 150 - shape flashes
         if (150 < getTimeLeft() && getTimeLeft() < 1000 ) {
             alphaPaint.setAlpha( (int) ((255 * getTimeLeft())/1000));
         }
         else if (getTimeLeft() < 150)
             alphaPaint.setAlpha(0);
-
+*/
+        if (getTimeLeft() < 1000 ) {
+            alphaPaint.setAlpha( (int) ((255 * getTimeLeft())/1000));
+        }
         return alphaPaint;
     }
 
