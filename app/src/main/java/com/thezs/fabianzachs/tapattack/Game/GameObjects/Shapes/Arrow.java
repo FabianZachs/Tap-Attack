@@ -174,7 +174,10 @@ public class Arrow extends ShapeObject {
         private boolean isCorrectFlick(float x1, float y1, float x2, float y2) {
             Double angle = Math.atan2(y1 - y2, x2 - x1);
             Log.d("angle", "angle: " + Math.toDegrees(angle));
-            if (angle < 0 - FLICK_DIRECTION_ERROR_ALLOWANCE)
+            //if (angle < 0 - FLICK_DIRECTION_ERROR_ALLOWANCE)
+           //     angle = (2 * Math.PI) + angle;
+
+            if (angle < -(Math.PI/2)  - FLICK_DIRECTION_ERROR_ALLOWANCE)
                 angle = (2 * Math.PI) + angle;
 
             Log.d("angle", "angle after: " + Math.toDegrees(angle));

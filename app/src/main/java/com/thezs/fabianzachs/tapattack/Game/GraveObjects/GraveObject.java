@@ -74,7 +74,7 @@ public abstract class GraveObject {
 
     public Paint getAlphaPaint() {
         Paint alphaPaint = new Paint();
-        //alphaPaint.setAlpha(255);
+        alphaPaint.setAlpha(255);
 
         /*
         // ERROR if time is below 150 - shape flashes

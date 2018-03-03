@@ -1,6 +1,8 @@
 package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.graphics.Point;
 import android.util.Log;
 
@@ -29,6 +31,10 @@ public class ShapeBuilder {
     }
 
     public ShapeObject buildShape(String shape, String color, Point centerLocation) {
+        return buildShape(shape,color,centerLocation,"UP");
+    }
+
+    public ShapeObject buildShape(String shape, String color, Point centerLocation, String direction) {
 
         switch (shape) {
             case "circle":
@@ -48,11 +54,33 @@ public class ShapeBuilder {
 
             case "arrow":
                 return new Arrow(3, color, centerLocation,
-                        animationManager.getBitmap("arrow", color, false),
-                        animationManager.getBitmap("arrow", color, true), "RIGHT");
+                        translateBitmap(direction,color,false),
+                        translateBitmap(direction,color,true),direction);
         }
 
         return null;
+    }
+
+    private Bitmap translateBitmap(String direction, String color, boolean click) {
+
+        Bitmap origonalBitmap = animationManager.getBitmap("arrow", color, click);
+        Matrix rotationMatrix = new Matrix();
+
+        switch (direction) {
+            case "UP":
+                break;
+            case "LEFT":
+                rotationMatrix.postRotate(-90);
+                break;
+            case "RIGHT":
+                rotationMatrix.postRotate(90);
+                break;
+            case "DOWN":
+                rotationMatrix.postRotate(180);
+                break;
+
+        }
+        return Bitmap.createBitmap(origonalBitmap, 0, 0, origonalBitmap.getWidth(), origonalBitmap.getHeight(), rotationMatrix, true);
     }
 
 
