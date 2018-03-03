@@ -6,13 +6,15 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
+
 /**
  * Created by fabianzachs on 15/02/18.
  */
 
-public class Grave {
+public abstract class GraveObject {
 
-    private float duration = 0.05f;
+    private float DURATION = 0.05f;
     private long initTime;
     private Point centerLocation;
     private Rect bitmapHolder;
@@ -21,18 +23,18 @@ public class Grave {
 
     private float shapeScaling;
 
-    public Grave(Point centerLocation, Rect bitmapHolder, Bitmap graveImg) {
+    public GraveObject(ShapeObject shapeToCreateGraveFrom) {
         this.initTime = System.currentTimeMillis();
-        this.centerLocation = centerLocation;
-        this.bitmapHolder = bitmapHolder;
-        this.graveImg = graveImg;
+        this.centerLocation = shapeToCreateGraveFrom.getCenterLocation();
+        this.bitmapHolder = shapeToCreateGraveFrom.getBitmapHolder();
+        this.graveImg = shapeToCreateGraveFrom.getShapeClickImg();
 
-        paint = new Paint();
+        this.paint = new Paint();
     }
 
     public boolean graveDestroyed() {
         // grave destroyed if time elapsed is greater then how long grave should be alive
-        return (System.currentTimeMillis() - initTime > duration * 1000);
+        return (System.currentTimeMillis() - initTime > DURATION * 1000);
     }
 
 
@@ -77,6 +79,18 @@ public class Grave {
     }
 
     public long getTimeLeft() {
-        return  (int) duration * 1000 - (System.currentTimeMillis() - initTime);
+        return  (int) DURATION * 1000 - (System.currentTimeMillis() - initTime);
+    }
+
+    public Bitmap getGraveImg() {
+        return this.graveImg;
+    }
+
+    public Rect getBitmapHolder() {
+        return this.bitmapHolder;
+    }
+
+    public Paint getPaint() {
+        return this.paint;
     }
 }

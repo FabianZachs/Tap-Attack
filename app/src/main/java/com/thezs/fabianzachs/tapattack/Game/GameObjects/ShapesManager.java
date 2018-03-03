@@ -1,33 +1,19 @@
 package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Point;
-import android.graphics.Rect;
-import android.util.Log;
 import android.view.MotionEvent;
 
-import com.muddzdev.styleabletoastlibrary.StyleableToast;
-import com.thezs.fabianzachs.tapattack.Animation.AnimationManager;
-import com.thezs.fabianzachs.tapattack.Constants;
-import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundHandler;
-import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Cross;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
-import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
-import com.thezs.fabianzachs.tapattack.Game.GraveObjects.Grave;
-import com.thezs.fabianzachs.tapattack.Game.SceneManager;
+import com.thezs.fabianzachs.tapattack.Game.GraveObjects.GraveFactory;
+import com.thezs.fabianzachs.tapattack.Game.GraveObjects.GraveObject;
 
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by fabianzachs on 07/02/18.
@@ -38,7 +24,8 @@ public class ShapesManager {
     //private ArrayList<ShapeObject> shapes = new ArrayList<>();
     CopyOnWriteArrayList<ShapeObject> shapes = new CopyOnWriteArrayList<>();
 
-    private ArrayList<Grave> graves = new ArrayList<>();
+    private ArrayList<GraveObject> graveObjects = new ArrayList<>();
+    private GraveFactory graveFactory;
 
     private ShapesPopulator shapesPopulator;
     //private BackgroundHandler backgroundHandler;
@@ -60,6 +47,7 @@ public class ShapesManager {
 
         this.initTime = System.currentTimeMillis();
         this.shapesPopulator = new ShapesPopulator(initTime);
+        //this.graveFactory = new GraveFactory();
         //this.score = 0;
 
         //initializeAnimationsAndBackground();
@@ -123,7 +111,8 @@ public class ShapesManager {
                 // TODO maybe better to add method .isGraveable() to see whether shape leaves grave
                 // grave for square does not seem smooth and not needed for corss
                 if (shape instanceof Circle || shape instanceof Cross)
-                    graves.add(new Grave(shape.getCenterLocation(), shape.getBitmapHolder(), shape.getShapeClickImg()));
+                    //graveFactory.buildGrave(shape);
+                    //graveObjects.add(new GraveObject(shape.getCenterLocation(), shape.getBitmapHolder(), shape.getShapeClickImg()));
                 // TODO make a seperate method which handles everything when a shape is removed (progress bar, streak, score)
                 shapes.remove(shape);
                 scoreObserver.incScore(shape.getPoints());
@@ -143,9 +132,9 @@ public class ShapesManager {
             else shape.update();
         }
 
-        for (Grave grave : graves) {
-            if (grave.graveDestroyed())
-                graves.remove(grave);
+        for (GraveObject graveObject : graveObjects) {
+            if (graveObject.graveDestroyed())
+                graveObjects.remove(graveObject);
         }
         shapes = shapesPopulator.update(shapes);
 
@@ -166,8 +155,8 @@ public class ShapesManager {
             shape.draw(canvas);
         }
 
-        for (Grave grave : graves)
-            grave.draw(canvas);
+        for (GraveObject graveObject : graveObjects)
+            graveObject.draw(canvas);
 
     }
 
