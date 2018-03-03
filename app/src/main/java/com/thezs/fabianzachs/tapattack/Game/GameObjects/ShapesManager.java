@@ -24,8 +24,8 @@ public class ShapesManager {
     //private ArrayList<ShapeObject> shapes = new ArrayList<>();
     CopyOnWriteArrayList<ShapeObject> shapes = new CopyOnWriteArrayList<>();
 
-    private ArrayList<GraveObject> graveObjects = new ArrayList<>();
-    private GraveFactory graveFactory;
+    //private ArrayList<GraveObject> graveObjects = new ArrayList<>();
+    //private GraveFactory graveFactory;
 
     private ShapesPopulator shapesPopulator;
     //private BackgroundHandler backgroundHandler;
@@ -132,10 +132,11 @@ public class ShapesManager {
             else shape.update();
         }
 
+        /*
         for (GraveObject graveObject : graveObjects) {
             if (graveObject.graveDestroyed())
                 graveObjects.remove(graveObject);
-        }
+        }*/
         shapes = shapesPopulator.update(shapes);
 
 
@@ -155,9 +156,10 @@ public class ShapesManager {
             shape.draw(canvas);
         }
 
+        /*
         for (GraveObject graveObject : graveObjects)
             graveObject.draw(canvas);
-
+*/
     }
 
     /*

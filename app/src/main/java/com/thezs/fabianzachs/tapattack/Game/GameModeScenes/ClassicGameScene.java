@@ -66,9 +66,6 @@ public class ClassicGameScene implements Scene {
 
     @Override
     public void draw(Canvas canvas) {
-        Bitmap background = backgroundHandler.getBackgroundBitmap("blue");
-
-
         canvas.drawBitmap(backgroundHandler.getBackgroundBitmap("blue"), null,
                 new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), null);
 
