@@ -24,8 +24,8 @@ public class ShapesManager {
     //private ArrayList<ShapeObject> shapes = new ArrayList<>();
     CopyOnWriteArrayList<ShapeObject> shapes = new CopyOnWriteArrayList<>();
 
-    //private ArrayList<GraveObject> graveObjects = new ArrayList<>();
-    //private GraveFactory graveFactory;
+    private ArrayList<GraveObject> graveObjects = new ArrayList<>();
+    private GraveFactory graveFactory;
 
     private ShapesPopulator shapesPopulator;
     //private BackgroundHandler backgroundHandler;
@@ -47,7 +47,10 @@ public class ShapesManager {
 
         this.initTime = System.currentTimeMillis();
         this.shapesPopulator = new ShapesPopulator(initTime);
-        //this.graveFactory = new GraveFactory();
+        this.graveFactory = new GraveFactory();
+
+
+
         //this.score = 0;
 
         //initializeAnimationsAndBackground();
@@ -109,10 +112,11 @@ public class ShapesManager {
             // if deleted by click
             if (shape.getLives() == 0) {
                 // TODO maybe better to add method .isGraveable() to see whether shape leaves grave
+                // TODO better yet, graveFactory.buildGrave(shape) returns null if shape doesnt have grave (like square)
                 // grave for square does not seem smooth and not needed for corss
                 if (shape instanceof Circle || shape instanceof Cross)
-                    //graveFactory.buildGrave(shape);
-                    //graveObjects.add(new GraveObject(shape.getCenterLocation(), shape.getBitmapHolder(), shape.getShapeClickImg()));
+                    graveObjects.add(graveFactory.buildGrave(shape));
+                    //  graveObjects.add(new GraveObject(shape.getCenterLocation(), shape.getBitmapHolder(), shape.getShapeClickImg()));
                 // TODO make a seperate method which handles everything when a shape is removed (progress bar, streak, score)
                 shapes.remove(shape);
                 scoreObserver.incScore(shape.getPoints());
@@ -132,11 +136,11 @@ public class ShapesManager {
             else shape.update();
         }
 
-        /*
+
         for (GraveObject graveObject : graveObjects) {
             if (graveObject.graveDestroyed())
                 graveObjects.remove(graveObject);
-        }*/
+        }
         shapes = shapesPopulator.update(shapes);
 
 
@@ -156,10 +160,10 @@ public class ShapesManager {
             shape.draw(canvas);
         }
 
-        /*
+
         for (GraveObject graveObject : graveObjects)
             graveObject.draw(canvas);
-*/
+
     }
 
     /*
