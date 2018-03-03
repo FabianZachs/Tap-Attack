@@ -49,7 +49,7 @@ public class ShapeBuilder {
             case "arrow":
                 return new Arrow(3, color, centerLocation,
                         animationManager.getBitmap("arrow", color, false),
-                        animationManager.getBitmap("arrow", color, true), "UP");
+                        animationManager.getBitmap("arrow", color, true), "RIGHT");
         }
 
         return null;
