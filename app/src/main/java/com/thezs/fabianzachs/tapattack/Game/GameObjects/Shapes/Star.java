@@ -18,7 +18,8 @@ import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 
 public class Star extends ShapeObject {
 
-    private Score scoreObserver;
+    private final float TIME_OF_CLICK_IMG = 0.08f;
+    private long timeSetState;
     private final int ROTATION_ANGLE = 90;
     private final float TIME_PER_ROATION = 0.5f;
     private Matrix rotationMatrix;
@@ -44,13 +45,17 @@ public class Star extends ShapeObject {
     @Override
     public void update() {
 
+        if (System.currentTimeMillis() - timeSetState > TIME_OF_CLICK_IMG * 1000)
+            setState(0);
+
+        /*
         if (System.currentTimeMillis() - timeOfLastRotation> TIME_PER_ROATION * 1000) {
             //rotationMatrix.postRotate(ROTATION_ANGLE);
             timeOfLastRotation = System.currentTimeMillis();
             setShapeImages(0, Bitmap.createBitmap(getShapeImg(), 0, 0, getShapeImg().getWidth(), getShapeImg().getHeight(), rotationMatrix, true));
             // TODO rotate bitmap holder as well
             //setBitmapHolder(getBitmapHolder().);
-        }
+        }*/
 /*
         Matrix m = new Matrix();
 // point is the point about which to rotate.
@@ -104,7 +109,8 @@ public class Star extends ShapeObject {
         @Override
         public boolean onDown(MotionEvent event) {
             //Log.d(DEBUG_TAG,"onDown: " + event.toString());
-            //setState(1); // TODO only briefly
+            setState(1); // TODO only briefly
+            timeSetState = System.currentTimeMillis();
             getScoreObserver().incScore(getPoints());
             return true;
         }
