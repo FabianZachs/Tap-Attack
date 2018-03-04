@@ -7,6 +7,7 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.view.SurfaceView;
         import android.view.View;
         import android.widget.FrameLayout;
+        import android.widget.ImageView;
         import android.widget.LinearLayout;
         import android.widget.RelativeLayout;
         import android.widget.TextView;
@@ -45,21 +46,58 @@ public class MainGameActivity extends Activity {
     }
 
     private void bootstrapViewSetup() {
+
+
+        // progressbarbackground
+        RelativeLayout.LayoutParams barBackgroundParams = new RelativeLayout.LayoutParams(Constants.SCREEN_WIDTH/2 + 20, Constants.SCREEN_HEIGHT/50 + 10); //150
+        //barBackgroundParams.gravity = (Gravity.CENTER|Gravity.TOP);
+        //barBackgroundParams.topMargin = Constants.SCREEN_HEIGHT/50;
+        //barBackgroundParams.addRule(RelativeLayout.CENTER_IN_PARENT,RelativeLayout.TRUE);
+        barBackgroundParams.addRule(RelativeLayout.CENTER_HORIZONTAL,RelativeLayout.TRUE);
+        barBackgroundParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+        barBackgroundParams.addRule(RelativeLayout.ALIGN_TOP, RelativeLayout.TRUE);
+        barBackgroundParams.topMargin = Constants.SCREEN_HEIGHT/50 - 10;
+        ImageView progressBarBackground = (ImageView) findViewById(R.id.progress_bar_background);
+
+
+        progressBarBackground.setLayoutParams(barBackgroundParams);
+
+
+
+
+
         Constants.progressBar = (com.beardedhen.androidbootstrap.BootstrapProgressBar) findViewById(R.id.progress_bar);
 
+
+        RelativeLayout.LayoutParams par = new RelativeLayout.LayoutParams(Constants.SCREEN_WIDTH/2,Constants.SCREEN_HEIGHT/50); //50
+        par.alignWithParent = true;
+        par.topMargin = Constants.SCREEN_HEIGHT/50;
+        par.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+
+        Constants.progressBar.setLayoutParams(par);
+
+
+        /*
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2,50);
-        params.gravity = Gravity.CENTER;
+        params.gravity = (Gravity.CENTER| Gravity.TOP);
+        //params.topMargin = 40;
 
+        params.topMargin = Constants.SCREEN_HEIGHT/50;
         Constants.progressBar.setLayoutParams(params);
-
+*/
         // we scale it to account for shake
-        com.beardedhen.androidbootstrap.BootstrapWell well = (com.beardedhen.androidbootstrap.BootstrapWell) findViewById(R.id.well);
-        well.setMinimumWidth(Constants.SCREEN_WIDTH * 15 / 24);
-
+        //com.beardedhen.androidbootstrap.BootstrapWell well = (com.beardedhen.androidbootstrap.BootstrapWell) findViewById(R.id.well);
+        //well.setMinimumWidth(Constants.SCREEN_WIDTH * 15 / 24);
+/*
         YoYo.with(Techniques.FadeIn)
                 .duration(1500)
                 .repeat(0)
                 .playOn(well);
+        */
+
+
+
+
     }
 
     /*

@@ -24,39 +24,46 @@
         android:layout_marginRight="10dp"/>
 
     <RelativeLayout
-        android:layout_gravity="center|top"
-        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="top"
+        android:id="@+id/UI_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.beardedhen.androidbootstrap.BootstrapWell
-            android:id="@+id/well"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center|top"
+        <View
+            android:layout_width="0dp"
+            android:id="@+id/relationView"
+            android:layout_toLeftOf="@+id/progress_bar"
+            android:layout_height="0dp">
+
+        </View>
+        <ImageView
+            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="100dp"
+            android:id="@+id/progress_bar_background"
+            android:src="@drawable/progressbar"/>
 
-            <com.beardedhen.androidbootstrap.BootstrapProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                app:bootstrapProgress="100"
-                app:striped="true"
-                app:animated="true"
-                app:roundedCorners="true"
-                app:bootstrapBrand="info"
-                />
-
-        </com.beardedhen.androidbootstrap.BootstrapWell>
-
-        <com.beardedhen.androidbootstrap.BootstrapWell
-            android:layout_below="@+id/well"
+        <com.beardedhen.androidbootstrap.BootstrapProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_gravity="top|center"
+            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            app:bootstrapProgress="100"
+            app:striped="true"
+            app:animated="true"
+            app:roundedCorners="true"
+            app:bootstrapBrand="info"
+            />
 
-        </com.beardedhen.androidbootstrap.BootstrapWell>
 
     </RelativeLayout>
+
+
+
+
 
 
     <!--
