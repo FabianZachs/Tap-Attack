@@ -23,40 +23,34 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"/>
 
-    <RelativeLayout
-        android:layout_gravity="center|top"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/bar_background"
+        android:layout_gravity="top"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:src="@drawable/barbackground"/>
+    <!--
+    <ImageView
+        android:layout_gravity="top"
+        android:layout_marginTop="50dp"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:src="@drawable/barbackground2"/>
+    -->
+        <com.beardedhen.androidbootstrap.BootstrapProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            app:bootstrapProgress="100"
+            app:striped="true"
+            app:animated="true"
+            app:roundedCorners="true"
+            app:bootstrapBrand="info"
+            />
 
-        <com.beardedhen.androidbootstrap.BootstrapWell
-            android:id="@+id/well"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center|top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
-            <com.beardedhen.androidbootstrap.BootstrapProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                app:bootstrapProgress="100"
-                app:striped="true"
-                app:animated="true"
-                app:roundedCorners="true"
-                app:bootstrapBrand="info"
-                />
 
-        </com.beardedhen.androidbootstrap.BootstrapWell>
 
-        <com.beardedhen.androidbootstrap.BootstrapWell
-            android:layout_below="@+id/well"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </com.beardedhen.androidbootstrap.BootstrapWell>
-
-    </RelativeLayout>
 
 
     <!--

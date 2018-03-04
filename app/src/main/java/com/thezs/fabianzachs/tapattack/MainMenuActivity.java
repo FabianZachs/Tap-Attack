@@ -1,14 +1,20 @@
 package com.thezs.fabianzachs.tapattack;
 
+import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -31,6 +37,8 @@ public class MainMenuActivity extends  GeneralParent {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        helper.makeFullscreen(this);
+
         // set up Constants
         initializeConstants();
 
@@ -38,7 +46,6 @@ public class MainMenuActivity extends  GeneralParent {
         mediaPlayers = new ArrayList<MediaPlayer>();
         prefs = getSharedPreferences("playerPrefs", MODE_PRIVATE);
 
-        helper.makeFullscreen(this);
 
         setContentView(R.layout.activity_main_menu);
 
@@ -49,12 +56,12 @@ public class MainMenuActivity extends  GeneralParent {
 
     private void initializeConstants() {
 
+        Point screenDimension = screenResolution();
         // get screen dimensions stored
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        Constants.SCREEN_WIDTH = dm.widthPixels;
+        Constants.SCREEN_WIDTH = screenDimension.x;
         // TODO bug: screen height from dm is incorrect for pixel
-        Constants.SCREEN_HEIGHT = dm.heightPixels;
+        Constants.SCREEN_HEIGHT = screenDimension.y;
+        Log.d("height", "initializeConstants: height: " + Constants.SCREEN_HEIGHT );
 
         Constants.SHAPE_WIDTH = Constants.SHAPE_HEIGHT = Constants.SCREEN_WIDTH/11;
 
@@ -65,6 +72,21 @@ public class MainMenuActivity extends  GeneralParent {
 
         // TODO find pixel height of top bar and replace below
         Constants.GAMEBOUNDARY = new Rect(5, 200, Constants.SCREEN_WIDTH - 5, Constants.SCREEN_HEIGHT - 5);
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private Point screenResolution() {
+        WindowManager windowManager =
+                (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        Point screenResolution = new Point();
+
+        if (Build.VERSION.SDK_INT < 14)
+            throw new RuntimeException("Unsupported Android version.");
+        display.getRealSize(screenResolution);
+
+        return screenResolution;
     }
 
 

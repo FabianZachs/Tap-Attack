@@ -1,12 +1,21 @@
 package com.thezs.fabianzachs.tapattack.Game;
 
+        import android.annotation.TargetApi;
         import android.app.Activity;
+        import android.content.Context;
+        import android.graphics.Point;
+        import android.os.Build;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
+        import android.util.DisplayMetrics;
+        import android.util.Log;
+        import android.view.Display;
         import android.view.Gravity;
         import android.view.SurfaceView;
         import android.view.View;
+        import android.view.WindowManager;
         import android.widget.FrameLayout;
+        import android.widget.ImageView;
         import android.widget.LinearLayout;
         import android.widget.RelativeLayout;
         import android.widget.TextView;
@@ -31,6 +40,7 @@ public class MainGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         helper.makeFullscreen(this);
 
+
         setContentView(R.layout.activity_main_game);
 
         bootstrapViewSetup();
@@ -44,22 +54,29 @@ public class MainGameActivity extends Activity {
 
     }
 
+    private void initializeRemainingConstants() {
+    }
+
     private void bootstrapViewSetup() {
         Constants.progressBar = (com.beardedhen.androidbootstrap.BootstrapProgressBar) findViewById(R.id.progress_bar);
 
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2,50);
-        params.gravity = Gravity.CENTER;
+        params.gravity = (Gravity.CENTER|Gravity.TOP);
+        params.topMargin = 40;
+
 
         Constants.progressBar.setLayoutParams(params);
 
-        // we scale it to account for shake
-        com.beardedhen.androidbootstrap.BootstrapWell well = (com.beardedhen.androidbootstrap.BootstrapWell) findViewById(R.id.well);
-        well.setMinimumWidth(Constants.SCREEN_WIDTH * 15 / 24);
+        FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2 + 20, 75);
 
-        YoYo.with(Techniques.FadeIn)
-                .duration(1500)
-                .repeat(0)
-                .playOn(well);
+        ImageView progBackground = (ImageView) findViewById(R.id.bar_background);
+        params1.gravity = (Gravity.CENTER|Gravity.TOP);
+        params1.topMargin = 30;
+        progBackground.setLayoutParams(params1);
+
+        // id barbackground
+
+        // we scale it to account for shake
     }
 
     /*
@@ -95,4 +112,7 @@ public class MainGameActivity extends Activity {
     public void pauseClick(View view) {
         finish();
     }
+
+
+
 }
