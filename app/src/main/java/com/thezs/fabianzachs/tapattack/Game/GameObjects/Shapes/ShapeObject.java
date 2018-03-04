@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
+import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
 import com.thezs.fabianzachs.tapattack.R;
 
@@ -29,6 +30,7 @@ public abstract class ShapeObject {
 
     private boolean graveAble;
 
+    private Score scoreObserver;
     private Streak streakObserver;
     private ProgressBar progressBarObserver;
 
@@ -79,6 +81,10 @@ public abstract class ShapeObject {
         return (System.currentTimeMillis() - initTime > durationAlive * 1000);
     }
 
+    public void attachScoreObserver(Score scoreObserver) {
+        this.scoreObserver = scoreObserver;
+    }
+
     public void attachStreakObserver(Streak streakObserver) {
         this.streakObserver = streakObserver;
     }
@@ -86,6 +92,16 @@ public abstract class ShapeObject {
 
     public void attachProgressBarObserver(ProgressBar progressBarObserver) {
         this.progressBarObserver = progressBarObserver;
+    }
+
+    public void attachAllObservers(Score scoreObserver, Streak streakObserver, ProgressBar progressBarObserver) {
+        attachScoreObserver(scoreObserver);
+        attachStreakObserver(streakObserver);
+        attachProgressBarObserver(progressBarObserver);
+    }
+
+    public Score getScoreObserver() {
+        return this.scoreObserver;
     }
 
     public Streak getStreakObserver() {
@@ -156,6 +172,9 @@ public abstract class ShapeObject {
         setBitmapHolder(newBitmapHolder);
     }
 
+    public void setShapeImages(int index, Bitmap img) {
+        this.shapeImages[index] = img;
+    }
 
     public Bitmap getCurrentShapeImg() {
         return this.shapeImages[getState()];

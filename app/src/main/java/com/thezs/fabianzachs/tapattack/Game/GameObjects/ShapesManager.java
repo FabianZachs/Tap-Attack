@@ -176,8 +176,10 @@ public class ShapesManager {
     }*/
 
 
+
     public void attachScoreObserver(Score scoreObserver) {
         this.scoreObserver = scoreObserver;
+        this.shapesPopulator.attachScoreObserver(scoreObserver);
     }
 
     public void attachStreakObserver(Streak streakObserver) {
@@ -189,4 +191,5 @@ public class ShapesManager {
         this.progressBarObserver = progressBarObserver;
         this.shapesPopulator.attachProgressBarObserver(progressBarObserver);
     }
+
 }

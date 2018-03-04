@@ -11,6 +11,7 @@ import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
+import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ShapesPopulator {
 
+    private Score scoreObserver;
     private Streak streakObserver;
     private ProgressBar progressBarObserver;
 
@@ -66,8 +68,7 @@ public class ShapesPopulator {
         // TODO use factory design pattern? so instead of .buildCross, pass "cross" in parameter
         //mShapes.add(shapeBuilder.buildArrow("blue", newShapeLocation));
         ShapeObject newShape = shapeBuilder.buildShape("star","blue", newShapeLocation,"LEFT") ;
-        newShape.attachStreakObserver(streakObserver);
-        newShape.attachProgressBarObserver(progressBarObserver);
+        newShape.attachAllObservers(scoreObserver,streakObserver,progressBarObserver);
         mShapes.add(newShape);
         timeOfLastShapeAddition = System.currentTimeMillis();
 
@@ -128,6 +129,10 @@ public class ShapesPopulator {
 
     public long getGameTime() {
         return System.currentTimeMillis() - initTime;
+    }
+
+    public void attachScoreObserver(Score scoreObserver) {
+        this.scoreObserver= scoreObserver;
     }
 
     public void attachStreakObserver(Streak streakObserver) {
