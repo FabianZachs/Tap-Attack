@@ -89,6 +89,7 @@ public class ProgressBar {
 
     }
 
+    // TODO maybe have a multiplier for decreasing amount after time
     public void changeProgressBy(int amount) {
         if (amount < -10) {
             YoYo.with(Techniques.Shake)

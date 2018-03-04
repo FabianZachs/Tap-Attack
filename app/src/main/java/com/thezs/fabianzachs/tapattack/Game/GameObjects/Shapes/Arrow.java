@@ -24,6 +24,7 @@ public class Arrow extends ShapeObject {
     private final int ARROW_TRAVEL_DISTANCE = 30;
     private int lastUpdateXLocation;
     private int lastUpdateYLocation;
+    private long timeOfLastPenalty;
 
 
     // TODO       3) angle 0 and pi dont work since its (+) to (-)
@@ -39,6 +40,7 @@ public class Arrow extends ShapeObject {
         setIntendedFlickDirectionRadians(intendedFlickDirectionString);
         this.originalPoint = centerLocation;
         this.destinationPoint = getDestinationPoint();
+        this.timeOfLastPenalty = 0;
 
 
         //lastUpdateXLocation = getCenterLocation().x;
@@ -208,6 +210,12 @@ public class Arrow extends ShapeObject {
                     }
                     setCenterLocation(x, y);
                 }
+                else if (System.currentTimeMillis() - timeOfLastPenalty > 1000) {
+                    getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
+                    getStreakObserver().resetStreak();
+                    timeOfLastPenalty = System.currentTimeMillis();
+
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -225,17 +233,18 @@ public class Arrow extends ShapeObject {
         @Override
         public boolean onSingleTapUp(MotionEvent event) {
             Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
+            getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
+            getStreakObserver().resetStreak();
+            return true;
+        }
+
+        @Override
+        public boolean onDoubleTap(MotionEvent event) {
+            Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
             return true;
         }
 
         // TODO this is called if arrow double tapped then scrolled (called instead of scrolled)
-        @Override
-        public boolean onDoubleTap(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
-            //onScroll(event, event, 0,0);
-            return true;
-        }
-
         @Override
         public boolean onDoubleTapEvent(MotionEvent event) {
             Log.d(DEBUG_TAG, "onDoubleTapEvent: " + event.toString());
@@ -245,6 +254,7 @@ public class Arrow extends ShapeObject {
         @Override
         public boolean onSingleTapConfirmed(MotionEvent event) {
             Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
+            getProgressBarObserver().changeProgressBy(-1);
             return true;
         }
 

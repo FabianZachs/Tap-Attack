@@ -25,6 +25,8 @@ import static com.thezs.fabianzachs.tapattack.Game.MainThread.canvas;
 
 public abstract class ShapeObject {
 
+    public int PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH = -15;
+
     private boolean graveAble;
 
     private Streak streakObserver;

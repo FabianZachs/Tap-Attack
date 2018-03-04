@@ -57,7 +57,9 @@ public class Circle extends ShapeObject {
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2,
                                float velocityX, float velocityY) {
-            SceneManager.setGameOver(true);
+            getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
+            getStreakObserver().resetStreak();
+            //SceneManager.setGameOver(true);
             return true;
         }
 

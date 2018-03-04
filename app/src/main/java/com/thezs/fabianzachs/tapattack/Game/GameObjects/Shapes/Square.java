@@ -7,6 +7,7 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.ViewConfiguration;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.Scene;
@@ -18,6 +19,7 @@ import com.thezs.fabianzachs.tapattack.Game.SceneManager;
 
 public class Square extends ShapeObject {
 
+    private long timeSetState;
 
     public Square(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg) {
         // call super(durationAlive, color) then in super also make the rect to hold bitmap
@@ -41,6 +43,8 @@ public class Square extends ShapeObject {
 
     @Override
     public void update() {
+        if (System.currentTimeMillis() - timeSetState > ViewConfiguration.getTapTimeout())
+            setState(0);
     }
 
 
@@ -51,53 +55,58 @@ public class Square extends ShapeObject {
 
         @Override
         public boolean onDown(MotionEvent event) {
-            //Log.d(DEBUG_TAG,"onDown: " + event.toString());
+            Log.d(DEBUG_TAG,"onDown: " + event.toString());
             setState(1);
-            reduceLives();
+            timeSetState = System.currentTimeMillis();
             return true;
         }
 
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2,
                                float velocityX, float velocityY) {
-            SceneManager.setGameOver(true);
+            getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
+            getStreakObserver().resetStreak();
             return true;
         }
 
         // The user has performed a down MotionEvent and not performed a move or up yet.
         @Override
         public void onShowPress(MotionEvent event) {
-            //Log.d(DEBUG_TAG, "onShowPress: " + event.toString());
+            Log.d(DEBUG_TAG, "onShowPress: " + event.toString());
         }
 
         @Override
         public boolean onSingleTapUp(MotionEvent event) {
-            //Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
+            Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
             return true;
         }
 
         @Override
         public boolean onDoubleTap(MotionEvent event) {
-            //Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
+            Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
+            reduceLives();
+            reduceLives();
             return true;
         }
 
         @Override
         public boolean onDoubleTapEvent(MotionEvent event) {
-            //Log.d(DEBUG_TAG, "onDoubleTapEvent: " + event.toString());
+            Log.d(DEBUG_TAG, "onDoubleTapEvent: " + event.toString());
             return true;
         }
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent event) {
-            //Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
+            Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
+            getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
+            getStreakObserver().resetStreak();
             return true;
         }
 
         // we want to put shape back to original state
         @Override
         public void onLongPress(MotionEvent event) {
-            //Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
+            Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
         }
     }
 
