@@ -43,7 +43,7 @@ public class Square extends ShapeObject {
 
     @Override
     public void update() {
-        if (System.currentTimeMillis() - timeSetState > ViewConfiguration.getTapTimeout())
+        if (System.currentTimeMillis() - timeSetState > 350/*ViewConfiguration.getTapTimeout()*/)
             setState(0);
     }
 
