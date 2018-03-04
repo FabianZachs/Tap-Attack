@@ -14,6 +14,7 @@ import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Cross;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Star;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -56,6 +57,8 @@ public class ShapeBuilder {
                 return new Arrow(3, color, centerLocation,
                         translateBitmap(direction,color,false),
                         translateBitmap(direction,color,true),direction);
+            case "star":
+                return new Star(3, "yellow", centerLocation, animationManager.getBitmap("star", "yellow", false), animationManager.getBitmap("star", "yellow", true)); // have it always take color gold
         }
 
         return null;
