@@ -58,7 +58,7 @@ public class ShapeBuilder {
                         translateBitmap(direction,color,false),
                         translateBitmap(direction,color,true),direction);
             case "star":
-                return new Star(40, "yellow", centerLocation, animationManager.getBitmap("star", "yellow", false), animationManager.getBitmap("star", "yellow", true)); // have it always take color gold
+                return new Star(2, "yellow", centerLocation, animationManager.getBitmap("star", "yellow", false), animationManager.getBitmap("star", "yellow", true)); // have it always take color gold
         }
 
         return null;
