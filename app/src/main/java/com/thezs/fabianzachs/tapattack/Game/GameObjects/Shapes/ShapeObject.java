@@ -13,6 +13,8 @@ import android.view.MotionEvent;
 
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
+import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
 import com.thezs.fabianzachs.tapattack.R;
 
 import static com.thezs.fabianzachs.tapattack.Game.MainThread.canvas;
@@ -24,6 +26,9 @@ import static com.thezs.fabianzachs.tapattack.Game.MainThread.canvas;
 public abstract class ShapeObject {
 
     private boolean graveAble;
+
+    private Streak streakObserver;
+    private ProgressBar progressBarObserver;
 
     private int progressBarAddition;
     private long distructionTime;
@@ -71,6 +76,25 @@ public abstract class ShapeObject {
         //return !(System.currentTimeMillis() - initTime > durationAlive * 1000) && lives > 0;
         return (System.currentTimeMillis() - initTime > durationAlive * 1000);
     }
+
+    public void attachStreakObserver(Streak streakObserver) {
+        this.streakObserver = streakObserver;
+    }
+
+
+    public void attachProgressBarObserver(ProgressBar progressBarObserver) {
+        this.progressBarObserver = progressBarObserver;
+    }
+
+    public Streak getStreakObserver() {
+        return this.streakObserver;
+    }
+
+    public ProgressBar getProgressBarObserver() {
+        return this.progressBarObserver;
+    }
+
+
 
 
 

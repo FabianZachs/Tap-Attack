@@ -182,9 +182,11 @@ public class ShapesManager {
 
     public void attachStreakObserver(Streak streakObserver) {
         this.streakObserver = streakObserver;
+        this.shapesPopulator.attachStreakObserver(streakObserver);
     }
 
     public void attachProgressBarObserver(ProgressBar progressBarObserver) {
         this.progressBarObserver = progressBarObserver;
+        this.shapesPopulator.attachProgressBarObserver(progressBarObserver);
     }
 }

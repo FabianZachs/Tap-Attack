@@ -10,6 +10,8 @@ import com.thezs.fabianzachs.tapattack.Animation.AnimationManager;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
+import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
+import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,6 +22,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 
 public class ShapesPopulator {
+
+    private Streak streakObserver;
+    private ProgressBar progressBarObserver;
 
     // settings
     private final int UNIT_TIME_PER_SHAPE_ADDITION = 5; // every x seconds one more max shape
@@ -60,10 +65,13 @@ public class ShapesPopulator {
 
         // TODO use factory design pattern? so instead of .buildCross, pass "cross" in parameter
         //mShapes.add(shapeBuilder.buildArrow("blue", newShapeLocation));
-        mShapes.add(shapeBuilder.buildShape("arrow","blue", newShapeLocation,"LEFT"));
+        ShapeObject newShape = shapeBuilder.buildShape("arrow","blue", newShapeLocation,"LEFT") ;
+        newShape.attachStreakObserver(streakObserver);
+        newShape.attachProgressBarObserver(progressBarObserver);
+        mShapes.add(newShape);
         timeOfLastShapeAddition = System.currentTimeMillis();
 
-        return mShapes;
+        return mShapes; // TODO remember we need the whole list of shapes to know what next shapes we should add
     }
 
     private long lastTimeShapeAdded() {
@@ -120,5 +128,13 @@ public class ShapesPopulator {
 
     public long getGameTime() {
         return System.currentTimeMillis() - initTime;
+    }
+
+    public void attachStreakObserver(Streak streakObserver) {
+        this.streakObserver = streakObserver;
+    }
+
+    public void attachProgressBarObserver(ProgressBar progressBarObserver) {
+        this.progressBarObserver = progressBarObserver;
     }
 }
