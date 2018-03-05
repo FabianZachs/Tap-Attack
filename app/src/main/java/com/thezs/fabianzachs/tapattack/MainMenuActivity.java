@@ -12,7 +12,6 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -76,8 +75,10 @@ public class MainMenuActivity extends  GeneralParent {
         Constants.progressBarHolderAndWarningHolderColors.put("green",Constants.holderGreen);
         // TODO do rest ...
 
-        // TODO find pixel height of top bar and replace below
-        Constants.GAMEBOUNDARY = new Rect(5, 200, Constants.SCREEN_WIDTH - 5, Constants.SCREEN_HEIGHT - 5);
+        // top based on where warning color is
+        Constants.CLICK_AREA = new Rect(5, 30 + (Constants.SCREEN_HEIGHT/40 +25) + 20 + Constants.SCREEN_WIDTH/15 + 10, Constants.SCREEN_WIDTH - 5, Constants.SCREEN_HEIGHT - 5);
+        Constants.SHAPE_CREATION_AREA = new Rect(Constants.CLICK_AREA.left + Constants.SHAPE_WIDTH/2,Constants.CLICK_AREA.top + Constants.SHAPE_HEIGHT/2,
+                                                Constants.CLICK_AREA.right - Constants.SHAPE_WIDTH/2, Constants.CLICK_AREA.bottom - Constants.SHAPE_HEIGHT/2);
     }
 
 

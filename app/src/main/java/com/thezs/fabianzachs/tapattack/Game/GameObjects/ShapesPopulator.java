@@ -83,16 +83,16 @@ public class ShapesPopulator {
     // TODO find the right bounds for location for shape
     private Point getValidNewShapeLocation(CopyOnWriteArrayList shapes) {
 
-        // TODO incorporate with GAMEBOUNDARY
-        int i = rand.nextInt(Constants.SCREEN_WIDTH);
-        int j = rand.nextInt(Constants.SCREEN_HEIGHT - 300) + 300;
+        // TODO incorporate with CLICK_AREA
+        int i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left;
+        int j = rand.nextInt(Constants.SHAPE_CREATION_AREA.bottom - Constants.SHAPE_CREATION_AREA.top) + Constants.SHAPE_CREATION_AREA.top;
         int iterationNumber = 0;
 
         while(locationUsedByAnotherShape(shapes,i,j)) {
 
 
-            i = rand.nextInt(Constants.SCREEN_WIDTH);
-            j = rand.nextInt(Constants.SCREEN_HEIGHT -300) + 300;
+            i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left;
+            j = rand.nextInt(Constants.SHAPE_CREATION_AREA.bottom - Constants.SHAPE_CREATION_AREA.top) + Constants.SHAPE_CREATION_AREA.top;
             iterationNumber++;
 
             // break out of it if we cant find a location

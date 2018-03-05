@@ -1,10 +1,8 @@
 package com.thezs.fabianzachs.tapattack.Game;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.view.MotionEvent;
 
-import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
 
@@ -28,7 +26,7 @@ public class SceneManager {
     }
 
     public void recieveTouch(MotionEvent event) {
-        if (Constants.GAMEBOUNDARY.contains((int) event.getX(), (int) event.getY()))
+        if (Constants.CLICK_AREA.contains((int) event.getX(), (int) event.getY()))
             scenes.get(ACTIVE_SCENE).recieveTouch(event);
     }
 
