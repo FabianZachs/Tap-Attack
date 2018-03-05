@@ -37,6 +37,12 @@
         android:layout_marginTop="100dp"
         android:src="@drawable/warningcomponent"
         />
+    <ImageView
+        android:id="@+id/warning_color"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/warningcolor"
+        android:layout_gravity="center"/>
     <!--
     <ImageView
         android:layout_gravity="top"

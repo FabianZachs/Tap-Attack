@@ -3,11 +3,17 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.annotation.TargetApi;
         import android.app.Activity;
         import android.content.Context;
+        import android.content.res.Resources;
+        import android.graphics.Color;
         import android.graphics.Point;
+        import android.graphics.PorterDuff;
+        import android.graphics.PorterDuffColorFilter;
+        import android.graphics.drawable.Drawable;
         import android.media.Image;
         import android.os.Build;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
+        import android.support.annotation.RequiresApi;
         import android.util.DisplayMetrics;
         import android.util.Log;
         import android.view.Display;
@@ -58,6 +64,7 @@ public class MainGameActivity extends Activity {
     private void initializeRemainingConstants() {
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void bootstrapViewSetup() {
         Constants.progressBar = (com.beardedhen.androidbootstrap.BootstrapProgressBar) findViewById(R.id.progress_bar);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2,Constants.SCREEN_HEIGHT/40);
@@ -74,11 +81,17 @@ public class MainGameActivity extends Activity {
         params1.topMargin = 30;
         progressBarHolder.setLayoutParams(params1);
 
+
         ImageView warningComponent = (ImageView) findViewById(R.id.warning_component);
         FrameLayout.LayoutParams params2 = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/15,Constants.SCREEN_WIDTH/15);
         params2.gravity = (Gravity.CENTER|Gravity.TOP);
         params2.topMargin = (30) + (Constants.SCREEN_HEIGHT/40 + 25) + 20;
         warningComponent.setLayoutParams(params2);
+
+
+        Resources res = getResources();
+        Drawable warningColor = res.getDrawable(R.drawable.warningcolor);
+        warningColor.setColorFilter(new PorterDuffColorFilter(getColor(R.color.soundoff), PorterDuff.Mode.SRC_IN));
 
     }
 

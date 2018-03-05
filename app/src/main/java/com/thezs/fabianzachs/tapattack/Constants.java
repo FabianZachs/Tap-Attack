@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
+import android.widget.ImageView;
 
 import com.beardedhen.androidbootstrap.BootstrapProgressBar;
 import com.thezs.fabianzachs.tapattack.Game.Scene;
@@ -30,5 +31,7 @@ public class Constants {
     public static Rect GAMEBOUNDARY;
 
     public static BootstrapProgressBar progressBar;
+    public static ImageView warningColor;
+    public static ImageView warningHolder;
     public static Activity GAME_ACTIVITY;
 }
