@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.LayerDrawable;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 
@@ -18,13 +19,16 @@ public class BackgroundHandler {
     // an arraylist: color -> Bitmap background
     private Map<String, Bitmap> backgrounds;
     private String theme;
+    private LayerDrawable warningComponent; // TODO
 
 
     public BackgroundHandler(String theme) {
         this.theme = theme;
         this.backgrounds = new HashMap<>();
+        this.warningComponent = Constants.warningComponent; // TODO
         addBackgroundsToMap(theme);
     }
+
 
     private void addBackgroundsToMap(String theme) {
         String[] colors = Constants.COLORS.get(theme);
@@ -37,6 +41,7 @@ public class BackgroundHandler {
         }
     }
 
+    // TODO when we get a new background we update the warning colorholder and warning color
     public Bitmap getBackgroundBitmap(String color) {
         return backgrounds.get(theme+color+"background");
     }

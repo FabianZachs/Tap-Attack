@@ -94,6 +94,9 @@ public class MainGameActivity extends Activity {
 
 
         // ==== MESSING WITH DRAWABLE COLOR SETTING ====
+        Constants.warningComponent = (LayerDrawable) warningComponent.getDrawable();
+
+
         LayerDrawable layeredCompnent = (LayerDrawable) warningComponent.getDrawable();
         GradientDrawable replacewarning = (GradientDrawable) getResources().getDrawable(R.drawable.warningcolor);
         replacewarning.setColor(Color.BLACK);
