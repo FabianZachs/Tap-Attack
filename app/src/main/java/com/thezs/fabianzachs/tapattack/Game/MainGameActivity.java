@@ -74,7 +74,7 @@ public class MainGameActivity extends Activity {
         params1.topMargin = 30;
         progBackground.setLayoutParams(params1);
 
-        // id barbackground
+        // id progressbarholder
 
         // we scale it to account for shake
     }

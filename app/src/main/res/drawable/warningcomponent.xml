@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!--
+    <item>
+        <shape android:shape="oval" >
+            <gradient
+                android:angle="90"
+                android:endColor="#00bcfe"
+                android:startColor="#0040ff"
+                />
+
+        </shape>
+    </item>
+    -->
+    <item android:drawable="@drawable/warningholder"></item>
+    <item android:drawable="@drawable/warningcolor"
+        android:bottom="5dp"
+        android:left="5dp"
+        android:right="5dp"
+        android:top="5dp">
+
+    </item>
+    <!--
+    <item
+        android:bottom="5dp"
+        android:left="5dp"
+        android:right="5dp"
+        android:top="5dp">
+        <shape android:shape="oval" >
+            <solid android:color="#6aed6a" />
+        </shape>
+    </item>
+    -->
+
+</layer-list>
+
+
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <gradient
+        android:endColor="#6aed6a"
+        android:startColor="#37d537"
+        android:angle="90" />
+    <corners
+        android:radius="50dp" />
+    <padding
+        android:left="50dp"
+        android:top="50dp"
+        android:right="40dp"
+        android:bottom="50dp" />
+    <stroke android:width="10dp" android:color="@color/soundoff">
+
+    </stroke>
+</shape>
+-->
