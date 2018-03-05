@@ -70,6 +70,11 @@ public class MainMenuActivity extends  GeneralParent {
         Constants.COLORS = new HashMap<>();
         Constants.COLORS.put("neon", Constants.NEONCOLORS);
 
+        // holder colors
+        Constants.progressBarHolderAndWarningHolderColors = new HashMap<>();
+        Constants.progressBarHolderAndWarningHolderColors.put("blue",Constants.holderBlue);
+        // TODO do rest ...
+
         // TODO find pixel height of top bar and replace below
         Constants.GAMEBOUNDARY = new Rect(5, 200, Constants.SCREEN_WIDTH - 5, Constants.SCREEN_HEIGHT - 5);
     }

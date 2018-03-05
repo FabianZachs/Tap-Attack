@@ -68,100 +68,38 @@ public class MainGameActivity extends Activity {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void bootstrapViewSetup() {
+
+        // Layout Settings
+
         Constants.progressBar = (com.beardedhen.androidbootstrap.BootstrapProgressBar) findViewById(R.id.progress_bar);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2,Constants.SCREEN_HEIGHT/40);
-        Log.d("TEST", "bootstrapViewSetup: " + Constants.SCREEN_HEIGHT/40);
+        FrameLayout.LayoutParams progressBarParameters = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2,Constants.SCREEN_HEIGHT/40);
         //FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2,50);
-        params.gravity = (Gravity.CENTER|Gravity.TOP);
-        params.topMargin = 40;
-        Constants.progressBar.setLayoutParams(params);
+        progressBarParameters.gravity = (Gravity.CENTER|Gravity.TOP);
+        progressBarParameters.topMargin = 40;
+        Constants.progressBar.setLayoutParams(progressBarParameters);
+
 
         ImageView progressBarHolder = (ImageView) findViewById(R.id.bar_background);
         Constants.progressBarHolder = progressBarHolder;
-        FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2 + Constants.SCREEN_WIDTH/12, Constants.SCREEN_HEIGHT/40 + 25);
+        FrameLayout.LayoutParams progressBarHolderParameters = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2 + Constants.SCREEN_WIDTH/12, Constants.SCREEN_HEIGHT/40 + 25);
         //FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2 + 20, 75);
-        params1.gravity = (Gravity.CENTER|Gravity.TOP);
-        params1.topMargin = 30;
-        progressBarHolder.setLayoutParams(params1);
+        progressBarHolderParameters.gravity = (Gravity.CENTER|Gravity.TOP);
+        progressBarHolderParameters.topMargin = 30;
+        progressBarHolder.setLayoutParams(progressBarHolderParameters);
 
 
         ImageView warningComponent = (ImageView) findViewById(R.id.warning_component);
-        FrameLayout.LayoutParams params2 = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/15,Constants.SCREEN_WIDTH/15);
-        params2.gravity = (Gravity.CENTER|Gravity.TOP);
-        params2.topMargin = (30) + (Constants.SCREEN_HEIGHT/40 + 25) + 20;
-        warningComponent.setLayoutParams(params2);
+        FrameLayout.LayoutParams warningComponentParameters = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/15,Constants.SCREEN_WIDTH/15);
+        warningComponentParameters.gravity = (Gravity.CENTER|Gravity.TOP);
+        warningComponentParameters.topMargin = (30) + (Constants.SCREEN_HEIGHT/40 + 25) + 20;
+        warningComponent.setLayoutParams(warningComponentParameters);
 
-
-
-        // ==== MESSING WITH DRAWABLE COLOR SETTING ====
         Constants.warningComponent = (LayerDrawable) warningComponent.getDrawable();
 
-
-        LayerDrawable layeredCompnent = (LayerDrawable) warningComponent.getDrawable();
-        GradientDrawable replacewarning = (GradientDrawable) getResources().getDrawable(R.drawable.warningcolor);
-        replacewarning.setColor(Color.BLACK);
-
-        boolean testFactor = layeredCompnent.setDrawableByLayerId(R.id.warning, replacewarning);
-        //////////
-
-
-        GradientDrawable replaceHolder = (GradientDrawable) getResources().getDrawable(R.drawable.warningholder);
-
-        int colors[] = { 0xff000000, 0xffffffff};
-        replaceHolder.setColors(colors);
-        // set to gradient:
-        //replaceHolder.setColor(0xff0040ff);
-
-        // 0xff_______
-
-
-        boolean testFactor2 = layeredCompnent.setDrawableByLayerId(R.id.holder, replaceHolder/*replacing drawable*/);
-        /*
-        GradientDrawable replaceHolder = (GradientDrawable) getResources().getDrawable(R.drawable.warningholder);
-
-
-        int colors[] = { 0xff255779, 0xffa6c0cd };
-
-        GradientDrawable gradientDrawable = new GradientDrawable(
-                GradientDrawable.Orientation.TOP_BOTTOM, colors);
-
-        replaceHolder.setBackgroundDrawable(gradientDrawable);
-
-        boolean othertestFactor = layeredCompnent.setDrawableByLayerId(R.id.holder,replaceHolder);
-        */
-
-        // ======================================
-
-
-
-
-        // WORKS FOR CONSTANT COLOR
-        //get the image button by id
-        //ImageView myImg = (ImageView) findViewById(R.id.warning_color);
-
-        //get drawable from image button
-        //GradientDrawable drawable = (GradientDrawable) myImg.getDrawable();
-
-        //set color
-        //drawable.setColor(Color.RED);
+        // boolean testFactor = layeredCompnent.setDrawableByLayerId(R.id.warning, replacewarning);
 
 
     }
-
-    /*
-    private LayoutHeadings createLayoutHeadings() {
-
-        TextView score = (TextView) findViewById(R.id.score_text);
-        TextView streak = (TextView) findViewById(R.id.streak_text);
-        com.beardedhen.androidbootstrap.BootstrapProgressBar progressBar =
-                (com.beardedhen.androidbootstrap.BootstrapProgressBar) findViewById(R.id.progress_bar);
-        RelativeLayout parentLayout = (RelativeLayout) findViewById(R.id.parent_layout);
-
-
-        LayoutHeadings layoutHeadings = new LayoutHeadings(this, score, streak, progressBar, parentLayout);
-        return  layoutHeadings;
-    }*/
-
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

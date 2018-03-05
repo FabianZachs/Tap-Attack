@@ -30,9 +30,14 @@ public class Constants {
     public static String[] NEONCOLORS = {"blue","green","yellow"};
     public static Map<String, String[]> COLORS;
 
+
+    public static Map<String, int[]> progressBarHolderAndWarningHolderColors;
+    public static int[] holderBlue = {0xff0040ff, 0xff00bcfe};
+
     public static Rect GAMEBOUNDARY;
 
     public static BootstrapProgressBar progressBar;
+
     public static LayerDrawable warningComponent;
     public static ImageView progressBarHolder;
     public static Activity GAME_ACTIVITY;
