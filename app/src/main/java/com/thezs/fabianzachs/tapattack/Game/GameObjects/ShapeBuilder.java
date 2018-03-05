@@ -39,7 +39,7 @@ public class ShapeBuilder {
 
         switch (shape) {
             case "circle":
-                return new Circle(3, color, centerLocation,
+                return new Circle(8, color, centerLocation,
                         animationManager.getBitmap("circle", color, false),
                         animationManager.getBitmap("circle", color, true));
 
