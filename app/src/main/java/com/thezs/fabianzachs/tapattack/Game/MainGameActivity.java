@@ -4,6 +4,7 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.app.Activity;
         import android.content.Context;
         import android.graphics.Point;
+        import android.media.Image;
         import android.os.Build;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
@@ -66,16 +67,19 @@ public class MainGameActivity extends Activity {
         params.topMargin = 40;
         Constants.progressBar.setLayoutParams(params);
 
-        ImageView progBackground = (ImageView) findViewById(R.id.bar_background);
+        ImageView progressBarHolder = (ImageView) findViewById(R.id.bar_background);
         FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2 + 20, Constants.SCREEN_HEIGHT/40 + 25);
         //FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2 + 20, 75);
         params1.gravity = (Gravity.CENTER|Gravity.TOP);
         params1.topMargin = 30;
-        progBackground.setLayoutParams(params1);
+        progressBarHolder.setLayoutParams(params1);
 
-        // id progressbarholder
+        ImageView warningComponent = (ImageView) findViewById(R.id.warning_component);
+        FrameLayout.LayoutParams params2 = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/15,Constants.SCREEN_WIDTH/15);
+        params2.gravity = (Gravity.CENTER|Gravity.TOP);
+        params2.topMargin = (30) + (Constants.SCREEN_HEIGHT/40 + 25) + 20;
+        warningComponent.setLayoutParams(params2);
 
-        // we scale it to account for shake
     }
 
     /*
