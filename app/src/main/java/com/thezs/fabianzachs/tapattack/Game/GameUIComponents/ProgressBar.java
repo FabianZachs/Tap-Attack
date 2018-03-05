@@ -53,6 +53,11 @@ public class ProgressBar {
                 .repeat(0)
                 .playOn(progressBar);
 
+        YoYo.with(Techniques.FadeIn)
+                .duration(1500)
+                .repeat(0)
+                .playOn(progressBarHolder);
+
 
         // TODO make sure thread is disposed of properly at end
         Thread timer = new Thread() {
