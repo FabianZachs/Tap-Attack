@@ -31,8 +31,8 @@
         android:src="@drawable/progressbarholder"/>
 
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_marginTop="100dp"
         android:src="@drawable/warningcomponent"
         />

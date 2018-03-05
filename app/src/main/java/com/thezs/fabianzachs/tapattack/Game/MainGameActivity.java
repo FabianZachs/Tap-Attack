@@ -59,17 +59,16 @@ public class MainGameActivity extends Activity {
 
     private void bootstrapViewSetup() {
         Constants.progressBar = (com.beardedhen.androidbootstrap.BootstrapProgressBar) findViewById(R.id.progress_bar);
-
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2,50);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2,Constants.SCREEN_HEIGHT/40);
+        Log.d("TEST", "bootstrapViewSetup: " + Constants.SCREEN_HEIGHT/40);
+        //FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2,50);
         params.gravity = (Gravity.CENTER|Gravity.TOP);
         params.topMargin = 40;
-
-
         Constants.progressBar.setLayoutParams(params);
 
-        FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2 + 20, 75);
-
         ImageView progBackground = (ImageView) findViewById(R.id.bar_background);
+        FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2 + 20, Constants.SCREEN_HEIGHT/40 + 25);
+        //FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2 + 20, 75);
         params1.gravity = (Gravity.CENTER|Gravity.TOP);
         params1.topMargin = 30;
         progBackground.setLayoutParams(params1);

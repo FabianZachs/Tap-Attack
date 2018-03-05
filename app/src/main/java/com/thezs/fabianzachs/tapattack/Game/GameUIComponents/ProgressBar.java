@@ -23,6 +23,8 @@ import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
 // TODO set progress bar color depending on how low it is
 public class ProgressBar {
 
+    private ProgressBarHolder progressBarHolder;
+
     private ShapesManager shapesManager;
 
     private BootstrapProgressBar progressBar;
@@ -37,6 +39,7 @@ public class ProgressBar {
         this.shapesManager = shapesManager;
         this.shapesManager.attachProgressBarObserver(this);
         timeOfLastReduce = System.currentTimeMillis();
+        this.progressBarHolder = new ProgressBarHolder();
         //progressBar = new BootstrapProgressBar(Constants.CURRENT_CONTEXT);
         //progressBar.setProgress(100);
         //progressBar.setBootstrapSize(100);
