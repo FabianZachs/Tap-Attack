@@ -70,8 +70,8 @@ public abstract class ShapeObject {
         this.initTime = System.currentTimeMillis();
         this.progressBarAddition = progressBarAddition;
         this.shapeImages = new Bitmap[] {shapeImg, shapeClickImg};
-        setBitmapHolder(new Rect((int) (centerLocation.x - (Constants.SHAPE_WIDTH)), (int) (centerLocation.y - (Constants.SHAPE_HEIGHT)),
-                (int) (centerLocation.x + (Constants.SHAPE_WIDTH)), (int) (centerLocation.y + (Constants.SHAPE_HEIGHT))));
+        setBitmapHolder(new Rect((int) (centerLocation.x - (Constants.SHAPE_WIDTH/2)), (int) (centerLocation.y - (Constants.SHAPE_HEIGHT/2)),
+                (int) (centerLocation.x + (Constants.SHAPE_WIDTH/2)), (int) (centerLocation.y + (Constants.SHAPE_HEIGHT/2))));
     }
 
 

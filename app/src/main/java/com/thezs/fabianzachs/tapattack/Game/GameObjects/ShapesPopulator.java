@@ -108,10 +108,10 @@ public class ShapesPopulator {
 
     private boolean locationUsedByAnotherShape(CopyOnWriteArrayList shapes, int i, int j) {
         //Rect newShapeArea = new Rect(i - Constants.SCREEN_WIDTH - this.SHAPE_SPACING,j - Constants.SHAPE_HEIGHT - this.SHAPE_SPACING,i + Constants.SCREEN_WIDTH + this.SHAPE_SPACING, j + Constants.SHAPE_HEIGHT + this.SHAPE_SPACING);
-        this.newShapeArea.left = i - (Constants.SHAPE_WIDTH) - this.SHAPE_SPACING;
-        this.newShapeArea.top = j - (Constants.SHAPE_HEIGHT) - this.SHAPE_SPACING;
-        this.newShapeArea.right = i + (Constants.SHAPE_WIDTH) + this.SHAPE_SPACING;
-        this.newShapeArea.bottom = j + (Constants.SHAPE_HEIGHT) + this.SHAPE_SPACING;
+        this.newShapeArea.left = i - (Constants.SHAPE_WIDTH/2) - this.SHAPE_SPACING;
+        this.newShapeArea.top = j - (Constants.SHAPE_HEIGHT/2) - this.SHAPE_SPACING;
+        this.newShapeArea.right = i + (Constants.SHAPE_WIDTH/2) + this.SHAPE_SPACING;
+        this.newShapeArea.bottom = j + (Constants.SHAPE_HEIGHT/2) + this.SHAPE_SPACING;
         for (Object shapeObj : shapes) {
             ShapeObject shape = (ShapeObject) shapeObj;
             if (Rect.intersects(shape.getBitmapHolder(), this.newShapeArea))
