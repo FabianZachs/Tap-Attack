@@ -33,6 +33,7 @@ public class Constants {
 
     public static Map<String, int[]> progressBarHolderAndWarningHolderColors;
     public static int[] holderBlue = {0xff0040ff, 0xff00bcfe};
+    public static int[] holderGreen = {0xff6aed6a, 0xff37d537};
 
     public static Rect GAMEBOUNDARY;
 

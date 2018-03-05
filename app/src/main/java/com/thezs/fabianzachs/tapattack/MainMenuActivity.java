@@ -73,6 +73,7 @@ public class MainMenuActivity extends  GeneralParent {
         // holder colors
         Constants.progressBarHolderAndWarningHolderColors = new HashMap<>();
         Constants.progressBarHolderAndWarningHolderColors.put("blue",Constants.holderBlue);
+        Constants.progressBarHolderAndWarningHolderColors.put("green",Constants.holderGreen);
         // TODO do rest ...
 
         // TODO find pixel height of top bar and replace below
