@@ -63,10 +63,7 @@ public class MainGameActivity extends Activity {
 
     }
 
-    private void initializeRemainingConstants() {
-    }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     private void bootstrapViewSetup() {
 
         // Layout Settings
