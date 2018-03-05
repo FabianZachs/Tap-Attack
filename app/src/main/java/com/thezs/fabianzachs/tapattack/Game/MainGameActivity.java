@@ -77,7 +77,8 @@ public class MainGameActivity extends Activity {
         Constants.progressBar.setLayoutParams(params);
 
         ImageView progressBarHolder = (ImageView) findViewById(R.id.bar_background);
-        FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2 + 20, Constants.SCREEN_HEIGHT/40 + 25);
+        Constants.progressBarHolder = progressBarHolder;
+        FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2 + Constants.SCREEN_WIDTH/12, Constants.SCREEN_HEIGHT/40 + 25);
         //FrameLayout.LayoutParams params1 = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2 + 20, 75);
         params1.gravity = (Gravity.CENTER|Gravity.TOP);
         params1.topMargin = 30;
@@ -89,7 +90,6 @@ public class MainGameActivity extends Activity {
         params2.gravity = (Gravity.CENTER|Gravity.TOP);
         params2.topMargin = (30) + (Constants.SCREEN_HEIGHT/40 + 25) + 20;
         warningComponent.setLayoutParams(params2);
-
 
 
 
@@ -137,13 +137,13 @@ public class MainGameActivity extends Activity {
 
         // WORKS FOR CONSTANT COLOR
         //get the image button by id
-        ImageView myImg = (ImageView) findViewById(R.id.warning_color);
+        //ImageView myImg = (ImageView) findViewById(R.id.warning_color);
 
         //get drawable from image button
-        GradientDrawable drawable = (GradientDrawable) myImg.getDrawable();
+        //GradientDrawable drawable = (GradientDrawable) myImg.getDrawable();
 
         //set color
-        drawable.setColor(Color.RED);
+        //drawable.setColor(Color.RED);
 
 
     }

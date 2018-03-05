@@ -34,5 +34,6 @@ public class Constants {
 
     public static BootstrapProgressBar progressBar;
     public static LayerDrawable warningComponent;
+    public static ImageView progressBarHolder;
     public static Activity GAME_ACTIVITY;
 }

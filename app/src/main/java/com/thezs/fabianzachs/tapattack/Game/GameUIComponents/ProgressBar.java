@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.beardedhen.androidbootstrap.BootstrapProgressBar;
@@ -23,7 +24,7 @@ import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
 // TODO set progress bar color depending on how low it is
 public class ProgressBar {
 
-    private ProgressBarHolder progressBarHolder;
+    private ImageView progressBarHolder;
 
     private ShapesManager shapesManager;
 
@@ -36,10 +37,10 @@ public class ProgressBar {
     private boolean running = true;
 
     public ProgressBar(ShapesManager shapesManager) {
+        this.progressBarHolder = Constants.progressBarHolder;
         this.shapesManager = shapesManager;
         this.shapesManager.attachProgressBarObserver(this);
         timeOfLastReduce = System.currentTimeMillis();
-        this.progressBarHolder = new ProgressBarHolder();
         //progressBar = new BootstrapProgressBar(Constants.CURRENT_CONTEXT);
         //progressBar.setProgress(100);
         //progressBar.setBootstrapSize(100);
@@ -99,6 +100,10 @@ public class ProgressBar {
                     .duration(750)
                     .repeat(0)
                     .playOn(progressBar);
+            YoYo.with(Techniques.Shake)
+                    .duration(750)
+                    .repeat(0)
+                    .playOn(progressBarHolder);
         }
 
         if (progress + amount >= 100) {
