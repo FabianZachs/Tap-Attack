@@ -112,10 +112,10 @@ public abstract class GraveObject {
     public void setBitmapHolderLocation(Point newLocation) {
         Rect newBitmapHolder = getBitmapHolder();
 
-        newBitmapHolder.left = (int) (newLocation.x - (Constants.SHAPE_WIDTH));
-        newBitmapHolder.top = (int) (newLocation.y - (Constants.SHAPE_HEIGHT));
-        newBitmapHolder.right = (int) (newLocation.x + (Constants.SHAPE_WIDTH));
-        newBitmapHolder.bottom = (int) (newLocation.y + (Constants.SHAPE_HEIGHT));
+        newBitmapHolder.left = (int) (newLocation.x - (Constants.SHAPE_WIDTH/2));
+        newBitmapHolder.top = (int) (newLocation.y - (Constants.SHAPE_HEIGHT/2));
+        newBitmapHolder.right = (int) (newLocation.x + (Constants.SHAPE_WIDTH/2));
+        newBitmapHolder.bottom = (int) (newLocation.y + (Constants.SHAPE_HEIGHT/2));
 
         setBitmapHolder(newBitmapHolder);
     }

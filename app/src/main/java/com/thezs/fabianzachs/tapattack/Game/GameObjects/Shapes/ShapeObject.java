@@ -164,10 +164,10 @@ public abstract class ShapeObject {
     private void updateBitmapHolderLocation() {
         // TODO create method will update the bitmapholder by using the current set centerLocation
         Rect newBitmapHolder = getBitmapHolder();
-        newBitmapHolder.left = (int) (centerLocation.x - (Constants.SHAPE_WIDTH));
-        newBitmapHolder.top = (int) (centerLocation.y - (Constants.SHAPE_HEIGHT));
-        newBitmapHolder.right = (int) (centerLocation.x + (Constants.SHAPE_WIDTH));
-        newBitmapHolder.bottom = (int) (centerLocation.y + (Constants.SHAPE_HEIGHT));
+        newBitmapHolder.left = (int) (centerLocation.x - (Constants.SHAPE_WIDTH/2));
+        newBitmapHolder.top = (int) (centerLocation.y - (Constants.SHAPE_HEIGHT/2));
+        newBitmapHolder.right = (int) (centerLocation.x + (Constants.SHAPE_WIDTH/2));
+        newBitmapHolder.bottom = (int) (centerLocation.y + (Constants.SHAPE_HEIGHT/2));
 
         setBitmapHolder(newBitmapHolder);
     }
