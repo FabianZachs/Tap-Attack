@@ -110,7 +110,7 @@ public class ShapesManager {
         for (ShapeObject shape : shapes) {
 
             // if deleted by click
-            if (shape.getLives() == 0) {
+            if (shape.getLives() <= 0) {
 
                 if (shape.getGravable())
                     graveObjects.add(graveFactory.buildGrave(shape));

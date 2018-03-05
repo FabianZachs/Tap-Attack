@@ -31,8 +31,8 @@ public class ShapesPopulator {
     // settings
     private final int UNIT_TIME_PER_SHAPE_ADDITION = 1; // every x seconds one more max shape
     private final int SHAPE_SPACING = 5; // space between shapes
-    private final int MAX_SHAPES = 100;
-    private final int MAX_NUMBER_LOOPS = 20;
+    private final int MAX_SHAPES = 4;
+    private final int MAX_NUMBER_LOOPS = 5;
 
     private long timeOfLastShapeAddition;
 
@@ -83,7 +83,6 @@ public class ShapesPopulator {
     // TODO find the right bounds for location for shape
     private Point getValidNewShapeLocation(CopyOnWriteArrayList shapes) {
 
-        // TODO incorporate with CLICK_AREA
         int i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left;
         int j = rand.nextInt(Constants.SHAPE_CREATION_AREA.bottom - Constants.SHAPE_CREATION_AREA.top) + Constants.SHAPE_CREATION_AREA.top;
         int iterationNumber = 0;

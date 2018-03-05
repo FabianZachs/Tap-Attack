@@ -20,14 +20,10 @@ public class Arrow extends ShapeObject {
     private String intendedFlickDirectionString;
     private final double FLICK_DIRECTION_ERROR_ALLOWANCE = Math.PI/4;
     private final Point originalPoint;
-    private final Point destinationPoint;
+    //private final Point destinationPoint;
     private final int ARROW_TRAVEL_DISTANCE = 30;
-    private int lastUpdateXLocation;
-    private int lastUpdateYLocation;
     private long timeOfLastPenalty;
 
-
-    // TODO       3) angle 0 and pi dont work since its (+) to (-)
 
 
     public Arrow(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, String intendendedFlickDirection) {
@@ -39,7 +35,7 @@ public class Arrow extends ShapeObject {
         this.intendedFlickDirectionString = intendendedFlickDirection;
         setIntendedFlickDirectionRadians(intendedFlickDirectionString);
         this.originalPoint = centerLocation;
-        this.destinationPoint = getDestinationPoint();
+        //this.destinationPoint = getDestinationPoint();
         this.timeOfLastPenalty = 0;
 
 
@@ -93,10 +89,11 @@ public class Arrow extends ShapeObject {
     @Override
     public void update() {
         // TODO check if it is at destinationPoint
-        Log.d("location", "current: " + getCenterLocation());
-        Log.d("location", "target: " + destinationPoint);
+        //Log.d("location", "current: " + getCenterLocation());
+        //Log.d("location", "target: " + destinationPoint);
 
         // TODO IF UP && CURRENTLOCATION Y < DESTINATION --- simpler CHANGE BELOW IMPLEMENTATION
+        /*
         if (intendedFlickDirectionString.equals("UP") && getCenterLocation().y <= destinationPoint.y)
             reduceLives();
         else if (intendedFlickDirectionString.equals("DOWN") && getCenterLocation().y >= destinationPoint.y)
@@ -105,6 +102,7 @@ public class Arrow extends ShapeObject {
             reduceLives();
         else if (intendedFlickDirectionString.equals("RIGHT") && getCenterLocation().x >= destinationPoint.x)
             reduceLives();
+        */
         /*
         // UP
         if (lastUpdateYLocation > destinationPoint.y && destinationPoint.y >= getCenterLocation().y)
@@ -175,14 +173,10 @@ public class Arrow extends ShapeObject {
 
         private boolean isCorrectFlick(float x1, float y1, float x2, float y2) {
             Double angle = Math.atan2(y1 - y2, x2 - x1);
-            Log.d("angle", "angle: " + Math.toDegrees(angle));
-            //if (angle < 0 - FLICK_DIRECTION_ERROR_ALLOWANCE)
-           //     angle = (2 * Math.PI) + angle;
 
             if (angle < -(Math.PI/2)  - FLICK_DIRECTION_ERROR_ALLOWANCE)
                 angle = (2 * Math.PI) + angle;
 
-            Log.d("angle", "angle after: " + Math.toDegrees(angle));
             return (angle >= intendedFlickDirectionRadians - FLICK_DIRECTION_ERROR_ALLOWANCE &&
                     angle <= intendedFlickDirectionRadians + FLICK_DIRECTION_ERROR_ALLOWANCE);
         }
@@ -192,9 +186,13 @@ public class Arrow extends ShapeObject {
         @Override
         public boolean onScroll(MotionEvent event1, MotionEvent event2, float distanceX,
                                 float distanceY) {
-            //Log.d(DEBUG_TAG, "onScroll: " + event1.toString() + event2.toString());
             try {
+                Log.d(DEBUG_TAG, "onScroll: " + event1.toString() + event2.toString());
                 if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY())) {
+                    reduceLives();
+
+                    Log.d(DEBUG_TAG, "onScroll: killed & lives="+getLives());
+                    /*
                     int x = getCenterLocation().x;
                     int y = getCenterLocation().y;
 
@@ -209,6 +207,7 @@ public class Arrow extends ShapeObject {
                             break;
                     }
                     setCenterLocation(x, y);
+                    */
                 }
                 else if (System.currentTimeMillis() - timeOfLastPenalty > 1000) {
                     getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
@@ -227,12 +226,12 @@ public class Arrow extends ShapeObject {
         // The user has performed a down MotionEvent and not performed a move or up yet.
         @Override
         public void onShowPress(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onShowPress: " + event.toString());
+            //Log.d(DEBUG_TAG, "onShowPress: " + event.toString());
         }
 
         @Override
         public boolean onSingleTapUp(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
+            //Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
             getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
             getStreakObserver().resetStreak();
             return true;
@@ -240,27 +239,27 @@ public class Arrow extends ShapeObject {
 
         @Override
         public boolean onDoubleTap(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
+            //Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
             return true;
         }
 
         // TODO this is called if arrow double tapped then scrolled (called instead of scrolled)
         @Override
         public boolean onDoubleTapEvent(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onDoubleTapEvent: " + event.toString());
+            //Log.d(DEBUG_TAG, "onDoubleTapEvent: " + event.toString());
             return true;
         }
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
+            //Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
             getProgressBarObserver().changeProgressBy(-1);
             return true;
         }
 
         @Override
         public void onLongPress(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
+            //Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
         }
 
     }
