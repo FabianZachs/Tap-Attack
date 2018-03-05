@@ -13,8 +13,10 @@
         </shape>
     </item>
     -->
-    <item android:drawable="@drawable/warningholder"></item>
+    <item android:drawable="@drawable/warningholder"
+        android:id="@+id/holder"></item>
     <item android:drawable="@drawable/warningcolor"
+        android:id="@+id/warning"
         android:bottom="2dp"
         android:left="2dp"
         android:right="2dp"

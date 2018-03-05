@@ -9,6 +9,8 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.graphics.PorterDuff;
         import android.graphics.PorterDuffColorFilter;
         import android.graphics.drawable.Drawable;
+        import android.graphics.drawable.GradientDrawable;
+        import android.graphics.drawable.LayerDrawable;
         import android.media.Image;
         import android.os.Build;
         import android.os.Bundle;
@@ -89,9 +91,57 @@ public class MainGameActivity extends Activity {
         warningComponent.setLayoutParams(params2);
 
 
-        Resources res = getResources();
-        Drawable warningColor = res.getDrawable(R.drawable.warningcolor);
-        warningColor.setColorFilter(new PorterDuffColorFilter(getColor(R.color.soundoff), PorterDuff.Mode.SRC_IN));
+
+
+        // ==== MESSING WITH DRAWABLE COLOR SETTING ====
+        LayerDrawable layeredCompnent = (LayerDrawable) warningComponent.getDrawable();
+        GradientDrawable replacewarning = (GradientDrawable) getResources().getDrawable(R.drawable.warningcolor);
+        replacewarning.setColor(Color.BLACK);
+
+        boolean testFactor = layeredCompnent.setDrawableByLayerId(R.id.warning, replacewarning);
+        //////////
+
+
+        GradientDrawable replaceHolder = (GradientDrawable) getResources().getDrawable(R.drawable.warningholder);
+
+        int colors[] = { 0xff000000, 0xffffffff};
+        replaceHolder.setColors(colors);
+        // set to gradient:
+        //replaceHolder.setColor(0xff0040ff);
+
+        // 0xff_______
+
+
+        boolean testFactor2 = layeredCompnent.setDrawableByLayerId(R.id.holder, replaceHolder/*replacing drawable*/);
+        /*
+        GradientDrawable replaceHolder = (GradientDrawable) getResources().getDrawable(R.drawable.warningholder);
+
+
+        int colors[] = { 0xff255779, 0xffa6c0cd };
+
+        GradientDrawable gradientDrawable = new GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM, colors);
+
+        replaceHolder.setBackgroundDrawable(gradientDrawable);
+
+        boolean othertestFactor = layeredCompnent.setDrawableByLayerId(R.id.holder,replaceHolder);
+        */
+
+        // ======================================
+
+
+
+
+        // WORKS FOR CONSTANT COLOR
+        //get the image button by id
+        ImageView myImg = (ImageView) findViewById(R.id.warning_color);
+
+        //get drawable from image button
+        GradientDrawable drawable = (GradientDrawable) myImg.getDrawable();
+
+        //set color
+        drawable.setColor(Color.RED);
+
 
     }
 
