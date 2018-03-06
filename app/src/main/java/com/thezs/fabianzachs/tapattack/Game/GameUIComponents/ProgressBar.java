@@ -34,9 +34,10 @@ public class ProgressBar {
     private int PROGRESS_REDUCE_PER_UNIT_TIME = -1;
     private long timeOfLastReduce;
 
-    private boolean running = true;
+    public static boolean running = true;
 
     public ProgressBar(ShapesManager shapesManager) {
+        running = true;
         this.progressBarHolder = Constants.progressBarHolder;
         this.shapesManager = shapesManager;
         this.shapesManager.attachProgressBarObserver(this);

@@ -26,6 +26,7 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.widget.FrameLayout;
         import android.widget.ImageView;
         import android.widget.LinearLayout;
+        import android.widget.ProgressBar;
         import android.widget.RelativeLayout;
         import android.widget.TextView;
 
@@ -115,6 +116,7 @@ public class MainGameActivity extends Activity {
 
     // TODO make this pause button size relative to screen size
     public void pauseClick(View view) {
+        com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar.running = false;
         finish();
     }
 

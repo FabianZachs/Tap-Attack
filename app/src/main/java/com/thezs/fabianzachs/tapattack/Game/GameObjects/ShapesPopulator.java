@@ -41,12 +41,16 @@ public class ShapesPopulator {
     private Random rand;
     private ShapeBuilder shapeBuilder;
 
+    private String[] shapeColors = {"blue","yellow","red","purple","green"};
+    private Random colorFinder;
+
     public ShapesPopulator(long initTime) {
         this.timeOfLastShapeAddition = 0;
         this.initTime = initTime;
         this.newShapeArea = new Rect(300,300,300,300);
         rand = new Random(); // TODO make attribute?
         this.shapeBuilder = new ShapeBuilder(initTime);
+        this.colorFinder = new Random();
     }
 
     public CopyOnWriteArrayList update(CopyOnWriteArrayList shapes) {
@@ -67,7 +71,7 @@ public class ShapesPopulator {
 
         // TODO use factory design pattern? so instead of .buildCross, pass "cross" in parameter
         //mShapes.add(shapeBuilder.buildArrow("blue", newShapeLocation));
-        ShapeObject newShape = shapeBuilder.buildShape("square","blue", newShapeLocation,"LEFT") ;
+        ShapeObject newShape = shapeBuilder.buildShape("circle",getColor(), newShapeLocation,"LEFT") ;
         newShape.attachAllObservers(scoreObserver,streakObserver,progressBarObserver);
         shapes.add(newShape);
         timeOfLastShapeAddition = System.currentTimeMillis();
@@ -140,5 +144,9 @@ public class ShapesPopulator {
 
     public void attachProgressBarObserver(ProgressBar progressBarObserver) {
         this.progressBarObserver = progressBarObserver;
+    }
+
+    public String getColor() {
+        return shapeColors[colorFinder.nextInt(4)];
     }
 }

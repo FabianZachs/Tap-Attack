@@ -174,6 +174,8 @@ public abstract class ShapeObject {
         setBitmapHolder(newBitmapHolder);
     }
 
+
+
     public void setShapeImages(int index, Bitmap img) {
         this.shapeImages[index] = img;
     }
