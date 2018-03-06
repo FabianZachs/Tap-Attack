@@ -37,9 +37,7 @@ public abstract class GraveObject {
 
     public boolean graveDestroyed() {
         // grave destroyed if time elapsed is greater then how long grave should be alive
-        Boolean destroyed =System.currentTimeMillis() - initTime > DURATION * 1000;
-        Log.d("grave", "graveDestroyed: " +destroyed);
-        return (destroyed);
+        return System.currentTimeMillis() - initTime > DURATION * 1000;
     }
 
 
@@ -72,8 +70,7 @@ public abstract class GraveObject {
     public void update() {};
 
 
-    public Paint getAlphaPaint() {
-        Paint alphaPaint = new Paint();
+    public Paint setAlphaPaint(Paint alphaPaint) {
         alphaPaint.setAlpha(255);
 
         /*
@@ -83,6 +80,7 @@ public abstract class GraveObject {
         } else if (getTimeLeft() < 150)
             alphaPaint.setAlpha(0);
         */
+
 
 
         if (getTimeLeft() < 1000) {

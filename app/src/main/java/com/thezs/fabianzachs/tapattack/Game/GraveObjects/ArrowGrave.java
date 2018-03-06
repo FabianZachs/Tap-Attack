@@ -31,7 +31,7 @@ public class ArrowGrave extends GraveObject {
         this.startPoint = shapeToCreateGraveFrom.getCenterLocation();
         setupEndPointAndTRAVELVECTOR();
         this.currentLocation = startPoint;
-        setDURATION(0.6f);
+        setDURATION(0.3f);
     }
 
 
@@ -45,7 +45,7 @@ public class ArrowGrave extends GraveObject {
     public void update() {
         this.currentLocation = getCurrentLocation();
         setBitmapHolderLocation(currentLocation);
-        setPaint(getAlphaPaint());
+        setPaint(setAlphaPaint(getPaint()));
     }
 
 

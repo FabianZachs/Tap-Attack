@@ -120,8 +120,6 @@ public class ShapesManager {
                 scoreObserver.incScore(shape.getPoints());
                 streakObserver.incStreak(1);
                 progressBarObserver.changeProgressBy(shape.getProgressBarAddition());
-                //score += shape.getPoints();
-                //streak+= 1;
             }
 
             else if (shape.isTimedOut()) {

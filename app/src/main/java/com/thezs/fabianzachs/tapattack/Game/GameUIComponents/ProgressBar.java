@@ -48,6 +48,7 @@ public class ProgressBar {
         progressBar = Constants.progressBar;
         progressBar.setProgress(progress);
 
+
         YoYo.with(Techniques.FadeIn)
                 .duration(1500)
                 .repeat(0)
@@ -87,6 +88,7 @@ public class ProgressBar {
         };
         timer.start();
 
+
     }
 
 
@@ -100,6 +102,7 @@ public class ProgressBar {
 
     // TODO maybe have a multiplier for decreasing amount after time
     public void changeProgressBy(int amount) {
+
         if (amount < -10) {
             YoYo.with(Techniques.Shake)
                     .duration(750)
@@ -110,6 +113,7 @@ public class ProgressBar {
                     .repeat(0)
                     .playOn(progressBarHolder);
         }
+
 
         if (progress + amount >= 100) {
             this.progress = 100;

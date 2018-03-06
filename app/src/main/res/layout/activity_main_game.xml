@@ -40,16 +40,18 @@
         android:layout_height="30dp"
         android:src="@drawable/barbackground2"/>
     -->
+
         <com.beardedhen.androidbootstrap.BootstrapProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             app:bootstrapProgress="100"
             app:striped="true"
-            app:animated="true"
             app:roundedCorners="true"
             app:bootstrapBrand="info"
             />
+
+    <!--app:animated="true" -->
 
     <ImageView
         android:layout_width="wrap_content"

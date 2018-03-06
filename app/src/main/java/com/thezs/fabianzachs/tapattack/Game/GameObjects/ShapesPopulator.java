@@ -29,7 +29,7 @@ public class ShapesPopulator {
     private ProgressBar progressBarObserver;
 
     // settings
-    private final int UNIT_TIME_PER_SHAPE_ADDITION = 1; // every x seconds one more max shape
+    private final int UNIT_TIME_PER_SHAPE_ADDITION = 3; // every x seconds one more max shape
     private final int SHAPE_SPACING = 5; // space between shapes
     private final int MAX_SHAPES = 4;
     private final int MAX_NUMBER_LOOPS = 5;
@@ -51,28 +51,28 @@ public class ShapesPopulator {
 
     public CopyOnWriteArrayList update(CopyOnWriteArrayList shapes) {
 
-        CopyOnWriteArrayList<ShapeObject> mShapes = shapes;
+        //CopyOnWriteArrayList<ShapeObject> mShapes = shapes;
 
         // TODO integrate the lastTimeShapeAdded with the progress bar to make sure ppl are able to get enough points
         // TODO possibly reduce time between added shapes when progress bar gets lower and lower. ex. if <10% have no timeout for adding shapes
         if (maxNumberOfShapes() == shapes.size() || (lastTimeShapeAdded() < 200 && shapes.size() != 0))
             return shapes;
 
-        Point newShapeLocation = getValidNewShapeLocation(mShapes);
+        Point newShapeLocation = getValidNewShapeLocation(shapes);
 
         // no new location findable
         if(newShapeLocation == null)
-            return mShapes;
+            return shapes;
 
 
         // TODO use factory design pattern? so instead of .buildCross, pass "cross" in parameter
         //mShapes.add(shapeBuilder.buildArrow("blue", newShapeLocation));
-        ShapeObject newShape = shapeBuilder.buildShape("arrow","blue", newShapeLocation,"LEFT") ;
+        ShapeObject newShape = shapeBuilder.buildShape("square","blue", newShapeLocation,"LEFT") ;
         newShape.attachAllObservers(scoreObserver,streakObserver,progressBarObserver);
-        mShapes.add(newShape);
+        shapes.add(newShape);
         timeOfLastShapeAddition = System.currentTimeMillis();
 
-        return mShapes; // TODO remember we need the whole list of shapes to know what next shapes we should add
+        return shapes; // TODO remember we need the whole list of shapes to know what next shapes we should add
     }
 
     private long lastTimeShapeAdded() {

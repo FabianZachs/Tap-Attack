@@ -34,6 +34,8 @@ public abstract class ShapeObject {
     private Streak streakObserver;
     private ProgressBar progressBarObserver;
 
+    private Paint alphaPaint;
+
     private int progressBarAddition;
     private long distructionTime;
     private Bitmap[] shapeImages;
@@ -62,6 +64,7 @@ public abstract class ShapeObject {
     public abstract void update();
 
     public ShapeObject(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg) {
+        this.alphaPaint = new Paint();
         this.graveAble = true;
         this.durationAlive = durationAlive;
         this.color = color;
@@ -135,7 +138,6 @@ public abstract class ShapeObject {
     }
 
     public Paint getAlphaPaint() {
-        Paint alphaPaint = new Paint();
         //alphaPaint.setAlpha(255);
 
         /*
