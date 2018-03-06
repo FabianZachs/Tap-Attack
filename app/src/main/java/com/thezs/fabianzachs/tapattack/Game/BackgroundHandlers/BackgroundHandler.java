@@ -24,6 +24,7 @@ public class BackgroundHandler {
     private String theme;
     private GradientDrawable progressBarHolderDrawable;
     private GradientDrawable warningHolderDrawable; // TODO
+    private String lastColor;
 
 
     public BackgroundHandler(String theme) {
@@ -32,6 +33,7 @@ public class BackgroundHandler {
         this.theme = theme;
         this.backgrounds = new HashMap<>();
         addBackgroundsToMap(theme);
+        this.lastColor = "null";
     }
 
     private void changeProgressBarBackground(String color) {
@@ -54,8 +56,12 @@ public class BackgroundHandler {
 
     // TODO when we get a new background we update the warning colorholder and warning color
     public Bitmap getBackgroundBitmap(String color) {
-        changeProgressBarBackground(color);
-        changeWarningHolderColor(color);
+
+        if (!lastColor.equals(color)) {
+            changeProgressBarBackground(color);
+            changeWarningHolderColor(color);
+            lastColor = color;
+        }
         return backgrounds.get(theme+color+"background");
     }
 
