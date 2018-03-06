@@ -147,6 +147,6 @@ public class ShapesPopulator {
     }
 
     public String getColor() {
-        return shapeColors[colorFinder.nextInt(4)];
+        return shapeColors[colorFinder.nextInt(5)];
     }
 }
