@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.Game.GameUIComponents;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 
@@ -52,17 +53,4 @@ public class WarningColor {
         return this.currentColor;
     }
 
-    public void setCurrentColorExcluding(String color) {
-        //List<String> list = new ArrayList<String>(Arrays.asList(colorSelection));
-        //list.remove(color);
-        //setCurrentColor(list.get(randColorFinder.nextInt(list.size())));
-        setCurrentColor("blue");
-    }
-
-    /*
-    public void changeWarningColor(String color) {
-        //setColor(colorSelection[randColorFinder.nextInt(colorSelection.length)]);
-        setColor(color);
-    }
-    */
 }
