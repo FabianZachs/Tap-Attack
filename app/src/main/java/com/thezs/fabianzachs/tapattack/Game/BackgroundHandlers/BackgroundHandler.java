@@ -48,6 +48,7 @@ public class BackgroundHandler {
             warningColorComponent.setNextColor();
             lastColor = color;
         }
+        // TODO store background here to eliminate constant char[] calls
         return backgrounds.get(theme+color+"background");
     }
 
