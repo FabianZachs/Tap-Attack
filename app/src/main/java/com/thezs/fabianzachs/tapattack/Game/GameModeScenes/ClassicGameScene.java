@@ -16,6 +16,10 @@ import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
 import com.thezs.fabianzachs.tapattack.Game.LayoutHeadingHandlers.LayoutHeadings;
 import com.thezs.fabianzachs.tapattack.Game.Scene;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Random;
+
 import static android.content.ContentValues.TAG;
 import static android.content.Context.MODE_PRIVATE;
 
@@ -33,6 +37,10 @@ public class ClassicGameScene implements Scene {
     private BackgroundHandler backgroundHandler;
 
     public ClassicGameScene() {
+        // shuffle colors
+        Constants.NEONCOLORS = RandomizeArray(Constants.NEONCOLORS);
+
+
         this.gameOver = false; // TODO or/and on reset?
         shapesManager = new ShapesManager();
         initializeBackgroundHandler();
@@ -107,5 +115,19 @@ public class ClassicGameScene implements Scene {
     // what happens when game is over (possibly game over screen before reset)
     public void reset() {
 
+    }
+
+
+    public static String[] RandomizeArray(String[] array){
+        Random rgen = new Random();  // Random number generator
+
+        for (int i=0; i<array.length; i++) {
+            int randomPosition = rgen.nextInt(array.length);
+            String temp = array[i];
+            array[i] = array[randomPosition];
+            array[randomPosition] = temp;
+        }
+
+        return array;
     }
 }

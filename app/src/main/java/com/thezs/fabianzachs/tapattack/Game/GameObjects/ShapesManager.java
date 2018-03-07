@@ -92,6 +92,14 @@ public class ShapesManager {
 
         for (ShapeObject shape : shapes) {
             if (shape.getBitmapHolder().contains((int) event.getX(), (int) event.getY())) {
+                // TODO
+                /*
+                   if (shape.color.equals(WarningComponent.currentColor)
+                        color.reduceLives(shape.getLives);
+                        progressBarObserver.changeProgressBy(-50);
+
+                   else
+                 */
                 shape.recieveTouch(event);
                 shapeInteractment = true;
             }
@@ -99,7 +107,7 @@ public class ShapesManager {
 
          // if user ACTION_DOWNs and not onto a shape
         if (!shapeInteractment && event.getAction() == MotionEvent.ACTION_DOWN) {
-            progressBarObserver.changeProgressBy(-20); // TODO make this relative to time
+            progressBarObserver.changeProgressBy(-40); // TODO make this relative to time
             streakObserver.resetStreak();
         }
             //SceneManager.setGameOver(true);

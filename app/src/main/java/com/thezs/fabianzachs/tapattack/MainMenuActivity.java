@@ -73,6 +73,9 @@ public class MainMenuActivity extends  GeneralParent {
         Constants.progressBarHolderAndWarningHolderColors = new HashMap<>();
         Constants.progressBarHolderAndWarningHolderColors.put("blue",Constants.holderBlue);
         Constants.progressBarHolderAndWarningHolderColors.put("green",Constants.holderGreen);
+        Constants.progressBarHolderAndWarningHolderColors.put("yellow",Constants.holderYellow);
+        Constants.progressBarHolderAndWarningHolderColors.put("purple",Constants.holderPurple);
+        Constants.progressBarHolderAndWarningHolderColors.put("red",Constants.holderRed);
         // TODO do rest ...
 
         // top based on where warning color is

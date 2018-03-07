@@ -7,6 +7,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.WarningColor;
 import com.thezs.fabianzachs.tapattack.R;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class BackgroundHandler {
     private GradientDrawable progressBarHolderDrawable;
     private GradientDrawable warningHolderDrawable; // TODO
     private String lastColor;
+    private WarningColor warningColorComponent;
 
 
     public BackgroundHandler(String theme) {
@@ -34,6 +36,23 @@ public class BackgroundHandler {
         this.backgrounds = new HashMap<>();
         addBackgroundsToMap(theme);
         this.lastColor = "null";
+        this.warningColorComponent = new WarningColor();
+    }
+
+    // TODO when we get a new background we update the warning colorholder and warning color
+    public Bitmap getBackgroundBitmap(String color) {
+
+        if (!lastColor.equals(color)) {
+            changeProgressBarBackground(color);
+            changeWarningHolderColor(color);
+            warningColorComponent.setNextColor();
+            lastColor = color;
+        }
+        return backgrounds.get(theme+color+"background");
+    }
+
+    private void changeWarningHolderColor(String color) {
+        warningHolderDrawable.setColors(Constants.progressBarHolderAndWarningHolderColors.get(color));
     }
 
     private void changeProgressBarBackground(String color) {
@@ -41,7 +60,6 @@ public class BackgroundHandler {
         //replacer.setColors(colors);
         progressBarHolderDrawable.setColors(Constants.progressBarHolderAndWarningHolderColors.get(color));
     }
-
 
     private void addBackgroundsToMap(String theme) {
         String[] colors = Constants.COLORS.get(theme);
@@ -54,18 +72,8 @@ public class BackgroundHandler {
         }
     }
 
-    // TODO when we get a new background we update the warning colorholder and warning color
-    public Bitmap getBackgroundBitmap(String color) {
-
-        if (!lastColor.equals(color)) {
-            changeProgressBarBackground(color);
-            changeWarningHolderColor(color);
-            lastColor = color;
-        }
-        return backgrounds.get(theme+color+"background");
+    public WarningColor getWarningColorComponent() {
+        return this.warningColorComponent;
     }
 
-    private void changeWarningHolderColor(String color) {
-        warningHolderDrawable.setColors(Constants.progressBarHolderAndWarningHolderColors.get(color));
-    }
 }
