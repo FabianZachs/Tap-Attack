@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
