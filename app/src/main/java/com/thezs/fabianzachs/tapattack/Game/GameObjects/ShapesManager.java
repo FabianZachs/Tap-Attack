@@ -126,7 +126,8 @@ public class ShapesManager {
 
                 if (shape.getGravable())
                     graveObjects.add(graveFactory.buildGrave(shape));
-                    //  graveObjects.add(new GraveObject(shape.getCenterLocation(), shape.getBitmapHolder(), shape.getShapeClickImg()));
+                else
+                    sharedPaint.freePaint(shape.getPaintObj());
                 // TODO make a seperate method which handles everything when a shape is removed (progress bar, streak, score)
                 shapes.remove(shape);
                 scoreObserver.incScore(shape.getPoints());
