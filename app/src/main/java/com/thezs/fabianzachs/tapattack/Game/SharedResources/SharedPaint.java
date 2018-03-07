@@ -36,6 +36,7 @@ public class SharedPaint {
     }
 
     public void freePaint(Paint paint) {
+        paint.setAlpha(255);
         unUsedPaints.add(paint);
         usedPaints.remove(paint);
     }

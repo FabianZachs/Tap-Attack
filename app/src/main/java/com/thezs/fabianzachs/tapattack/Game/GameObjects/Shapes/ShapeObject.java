@@ -63,8 +63,8 @@ public abstract class ShapeObject {
 
     public abstract void update();
 
-    public ShapeObject(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg) {
-        this.alphaPaint = new Paint();
+    public ShapeObject(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint) {
+        this.alphaPaint = paint;
         this.graveAble = true;
         this.durationAlive = durationAlive;
         this.color = color;
@@ -152,6 +152,10 @@ public abstract class ShapeObject {
             alphaPaint.setAlpha( (int) ((255 * getTimeLeft())/1000));
         }
         return alphaPaint;
+    }
+
+    public Paint getPaintObj() {
+        return this.alphaPaint;
     }
 
     public Point getCenterLocation() {

@@ -90,6 +90,7 @@ public abstract class GraveObject {
         return alphaPaint;
     }
 
+
     public long getTimeLeft() {
         return  (long) (getDURATION() * 1000) - (System.currentTimeMillis() - initTime);
     }

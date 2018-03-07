@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
@@ -21,9 +22,9 @@ public class Square extends ShapeObject {
 
     private long timeSetState;
 
-    public Square(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg) {
+    public Square(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint) {
         // call super(durationAlive, color) then in super also make the rect to hold bitmap
-        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg);
+        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint);
         setLives(2);
         setProgressBarAddition(15);
         setGraveAble(false);

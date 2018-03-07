@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.Log;
@@ -32,9 +33,9 @@ public class ShapesPopulator {
     private ProgressBar progressBarObserver;
 
     // settings
-    private final int UNIT_TIME_PER_SHAPE_ADDITION = 2; // every x seconds one more max shape
+    private final int UNIT_TIME_PER_SHAPE_ADDITION = 1; // every x seconds one more max shape
     private final int SHAPE_SPACING = 5; // space between shapes
-    private final int MAX_SHAPES = 5;
+    private final int MAX_SHAPES = 1;
     private final int MAX_NUMBER_LOOPS = 5;
 
     private long timeOfLastShapeAddition;
@@ -59,6 +60,11 @@ public class ShapesPopulator {
 
     public CopyOnWriteArrayList update(CopyOnWriteArrayList shapes) {
 
+        Paint paint = sharedPaint.getUnUsedPaint();
+        if (paint.equals(null)){
+            Log.d("paintnull", "update: null");
+            return shapes;
+        }
 
         // TODO integrate the lastTimeShapeAdded with the progress bar to make sure ppl are able to get enough points
         // TODO possibly reduce time between added shapes when progress bar gets lower and lower. ex. if <10% have no timeout for adding shapes
@@ -74,7 +80,7 @@ public class ShapesPopulator {
 
         // TODO use factory design pattern? so instead of .buildCross, pass "cross" in parameter
         //mShapes.add(shapeBuilder.buildArrow("blue", newShapeLocation));
-        ShapeObject newShape = shapeBuilder.buildShape("arrow",/*getColor()*/ "blue", newShapeLocation,"LEFT") ;
+        ShapeObject newShape = shapeBuilder.buildShape("circle",/*getColor()*/ "blue", newShapeLocation,paint,"LEFT") ;
         newShape.attachAllObservers(scoreObserver,streakObserver,progressBarObserver);
         shapes.add(newShape);
         timeOfLastShapeAddition = System.currentTimeMillis();

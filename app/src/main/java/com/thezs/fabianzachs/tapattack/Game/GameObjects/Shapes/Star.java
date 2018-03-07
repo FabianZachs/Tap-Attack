@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
@@ -25,8 +26,8 @@ public class Star extends ShapeObject {
     private Matrix rotationMatrix;
     private long timeOfLastRotation;
 
-    public Star(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg) {
-        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg);
+    public Star(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint) {
+        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint);
         setLives(1);
         setProgressBarAddition(0);
         setGraveAble(false);

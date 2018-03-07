@@ -135,6 +135,7 @@ public class ShapesManager {
 
             else if (shape.isTimedOut()) {
                 shapes.remove(shape);
+                sharedPaint.freePaint(shape.getPaintObj());
                 streakObserver.resetStreak();
                 //streak = 0;
             }
@@ -145,8 +146,10 @@ public class ShapesManager {
 
 
         for (GraveObject graveObject : graveObjects) {
-            if (graveObject.graveDestroyed())
+            if (graveObject.graveDestroyed()) {
                 graveObjects.remove(graveObject);
+                sharedPaint.freePaint(graveObject.getPaint());
+            }
             else
                 graveObject.update();
         }
