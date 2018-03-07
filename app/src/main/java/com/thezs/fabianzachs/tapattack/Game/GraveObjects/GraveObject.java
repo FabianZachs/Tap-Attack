@@ -31,7 +31,7 @@ public abstract class GraveObject {
         this.centerLocation = shapeToCreateGraveFrom.getCenterLocation();
         this.bitmapHolder = shapeToCreateGraveFrom.getBitmapHolder();
         this.graveImg = shapeToCreateGraveFrom.getShapeClickImg();
-        this.paint = shapeToCreateGraveFrom.getAlphaPaint();
+        this.paint = shapeToCreateGraveFrom.getPaintObj();
     }
 
     public boolean graveDestroyed() {
