@@ -29,9 +29,9 @@ public class ShapesPopulator {
     private ProgressBar progressBarObserver;
 
     // settings
-    private final int UNIT_TIME_PER_SHAPE_ADDITION = 3; // every x seconds one more max shape
+    private final int UNIT_TIME_PER_SHAPE_ADDITION = 2; // every x seconds one more max shape
     private final int SHAPE_SPACING = 5; // space between shapes
-    private final int MAX_SHAPES = 4;
+    private final int MAX_SHAPES = 5;
     private final int MAX_NUMBER_LOOPS = 5;
 
     private long timeOfLastShapeAddition;
