@@ -11,6 +11,7 @@ import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
 import com.thezs.fabianzachs.tapattack.Game.GraveObjects.GraveFactory;
 import com.thezs.fabianzachs.tapattack.Game.GraveObjects.GraveObject;
+import com.thezs.fabianzachs.tapattack.Game.SharedResources.SharedPaint;
 
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -26,6 +27,7 @@ public class ShapesManager {
 
     private ArrayList<GraveObject> graveObjects = new ArrayList<>();
     private GraveFactory graveFactory;
+    private SharedPaint sharedPaint;
 
     private ShapesPopulator shapesPopulator;
     //private BackgroundHandler backgroundHandler;
@@ -45,8 +47,9 @@ public class ShapesManager {
 
     public ShapesManager() {
 
+        this.sharedPaint = new SharedPaint();
         this.initTime = System.currentTimeMillis();
-        this.shapesPopulator = new ShapesPopulator(initTime);
+        this.shapesPopulator = new ShapesPopulator(initTime,sharedPaint);
         this.graveFactory = new GraveFactory();
 
 

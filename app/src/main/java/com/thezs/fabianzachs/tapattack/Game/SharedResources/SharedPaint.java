@@ -12,7 +12,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 public class SharedPaint {
 
-    private final int MAX_NUMBER_OF_PAINTS = 5;
+    private final int MAX_NUMBER_OF_PAINTS = 5; // TODO this is tied to max number of shapes in shapesPopulator
     //private HashMap<Boolean, ArrayBlockingQueue<Paint>> mapOfPaints;
     private ArrayBlockingQueue<Paint> unUsedPaints;
     private ArrayList<Paint> usedPaints;
@@ -32,7 +32,7 @@ public class SharedPaint {
         if (paint!=null)
             usedPaints.add(paint);
 
-        return paint; // TODO returns null if empty,  HANDLE THIS
+        return paint; // TODO returns null if empty,  HANDLE THIS (if null, dont create a new shape wait for next iteration
     }
 
     public void freePaint(Paint paint) {

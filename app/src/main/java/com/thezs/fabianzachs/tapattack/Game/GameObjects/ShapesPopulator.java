@@ -13,6 +13,7 @@ import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
+import com.thezs.fabianzachs.tapattack.Game.SharedResources.SharedPaint;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -23,6 +24,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 
 public class ShapesPopulator {
+
+    private SharedPaint sharedPaint;
 
     private Score scoreObserver;
     private Streak streakObserver;
@@ -44,7 +47,8 @@ public class ShapesPopulator {
     private String[] shapeColors = {"blue","yellow","red","purple","green"};
     private Random colorFinder;
 
-    public ShapesPopulator(long initTime) {
+    public ShapesPopulator(long initTime, SharedPaint sharedPaint) {
+        this.sharedPaint = sharedPaint;
         this.timeOfLastShapeAddition = 0;
         this.initTime = initTime;
         this.newShapeArea = new Rect(300,300,300,300);
