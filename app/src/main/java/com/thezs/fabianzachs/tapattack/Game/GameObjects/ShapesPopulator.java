@@ -15,6 +15,7 @@ import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
 import com.thezs.fabianzachs.tapattack.Game.SharedResources.SharedPaint;
+import com.thezs.fabianzachs.tapattack.Game.SharedResources.SharedRect;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -27,6 +28,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class ShapesPopulator {
 
     private SharedPaint sharedPaint;
+    private SharedRect sharedRect;
 
     private Score scoreObserver;
     private Streak streakObserver;
@@ -48,8 +50,9 @@ public class ShapesPopulator {
     private String[] shapeColors = {"blue","yellow","red","purple","green"};
     private Random colorFinder;
 
-    public ShapesPopulator(long initTime, SharedPaint sharedPaint) {
+    public ShapesPopulator(long initTime, SharedPaint sharedPaint, SharedRect sharedRect) {
         this.sharedPaint = sharedPaint;
+        this.sharedRect = sharedRect;
         this.timeOfLastShapeAddition = 0;
         this.initTime = initTime;
         this.newShapeArea = new Rect(300,300,300,300);
@@ -67,8 +70,9 @@ public class ShapesPopulator {
             return shapes;
 
         Paint paint = sharedPaint.getUnUsedPaint();
+        Rect bitmapHolder = sharedRect.getUnUsedRect();
         //if (paint.equals(null)){
-        if (paint == null){
+        if (paint == null || bitmapHolder == null){
             //Log.d("paintnull", "update: null");
             return shapes;
         }
@@ -81,7 +85,7 @@ public class ShapesPopulator {
 
         // TODO use factory design pattern? so instead of .buildCross, pass "cross" in parameter
         //mShapes.add(shapeBuilder.buildArrow("blue", newShapeLocation));
-        ShapeObject newShape = shapeBuilder.buildShape("square",/*getColor()*/"blue", newShapeLocation,paint,"LEFT") ;
+        ShapeObject newShape = shapeBuilder.buildShape("circle",/*getColor()*/"blue", newShapeLocation,paint,bitmapHolder,"LEFT") ;
         newShape.attachAllObservers(scoreObserver,streakObserver,progressBarObserver);
         shapes.add(newShape);
         timeOfLastShapeAddition = System.currentTimeMillis();

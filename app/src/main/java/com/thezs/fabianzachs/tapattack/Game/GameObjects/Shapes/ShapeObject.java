@@ -63,7 +63,7 @@ public abstract class ShapeObject {
 
     public abstract void update();
 
-    public ShapeObject(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint) {
+    public ShapeObject(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect rect) {
         this.alphaPaint = paint;
         this.graveAble = true;
         this.durationAlive = durationAlive;
@@ -73,8 +73,16 @@ public abstract class ShapeObject {
         this.initTime = System.currentTimeMillis();
         this.progressBarAddition = progressBarAddition;
         this.shapeImages = new Bitmap[] {shapeImg, shapeClickImg};
-        setBitmapHolder(new Rect((int) (centerLocation.x - (Constants.SHAPE_WIDTH/2)), (int) (centerLocation.y - (Constants.SHAPE_HEIGHT/2)),
-                (int) (centerLocation.x + (Constants.SHAPE_WIDTH/2)), (int) (centerLocation.y + (Constants.SHAPE_HEIGHT/2))));
+
+        rect.set((centerLocation.x - (Constants.SHAPE_WIDTH/2)),
+                (centerLocation.y - (Constants.SHAPE_HEIGHT/2)),
+                (centerLocation.x + (Constants.SHAPE_WIDTH/2)),
+                (centerLocation.y + (Constants.SHAPE_HEIGHT/2)));
+
+        setBitmapHolder(rect);
+
+        //setBitmapHolder(new Rect((int) (centerLocation.x - (Constants.SHAPE_WIDTH/2)), (int) (centerLocation.y - (Constants.SHAPE_HEIGHT/2)),
+          //      (int) (centerLocation.x + (Constants.SHAPE_WIDTH/2)), (int) (centerLocation.y + (Constants.SHAPE_HEIGHT/2))));
     }
 
 

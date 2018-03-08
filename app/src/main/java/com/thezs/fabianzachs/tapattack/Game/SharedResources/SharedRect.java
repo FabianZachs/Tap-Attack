@@ -32,7 +32,7 @@ public class SharedRect {
         return rect;
     }
 
-    public void freePaint(Rect rect) {
+    public void freeRect(Rect rect) {
         unUsedRects.add(rect);
         usedRects.remove(rect);
     }

@@ -13,6 +13,7 @@ import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
 import com.thezs.fabianzachs.tapattack.Game.GraveObjects.GraveFactory;
 import com.thezs.fabianzachs.tapattack.Game.GraveObjects.GraveObject;
 import com.thezs.fabianzachs.tapattack.Game.SharedResources.SharedPaint;
+import com.thezs.fabianzachs.tapattack.Game.SharedResources.SharedRect;
 
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -29,6 +30,7 @@ public class ShapesManager {
     private ArrayList<GraveObject> graveObjects = new ArrayList<>();
     private GraveFactory graveFactory;
     private SharedPaint sharedPaint;
+    private SharedRect sharedRect;
 
     private ShapesPopulator shapesPopulator;
     //private BackgroundHandler backgroundHandler;
@@ -49,8 +51,9 @@ public class ShapesManager {
     public ShapesManager() {
 
         this.sharedPaint = new SharedPaint();
+        this.sharedRect = new SharedRect();
         this.initTime = System.currentTimeMillis();
-        this.shapesPopulator = new ShapesPopulator(initTime,sharedPaint);
+        this.shapesPopulator = new ShapesPopulator(initTime,sharedPaint,sharedRect);
         this.graveFactory = new GraveFactory();
 
 
@@ -126,8 +129,10 @@ public class ShapesManager {
 
                 if (shape.getGravable())
                     graveObjects.add(graveFactory.buildGrave(shape));
-                else
+                else {
                     sharedPaint.freePaint(shape.getPaintObj());
+                    sharedRect.freeRect(shape.getBitmapHolder());
+                }
                 // TODO make a seperate method which handles everything when a shape is removed (progress bar, streak, score)
                 shapes.remove(shape);
                 scoreObserver.incScore(shape.getPoints());
@@ -138,6 +143,7 @@ public class ShapesManager {
             else if (shape.isTimedOut()) {
                 shapes.remove(shape);
                 sharedPaint.freePaint(shape.getPaintObj());
+                sharedRect.freeRect(shape.getBitmapHolder());
                 streakObserver.resetStreak();
                 //streak = 0;
             }
@@ -151,6 +157,7 @@ public class ShapesManager {
             if (graveObject.graveDestroyed()) {
                 graveObjects.remove(graveObject);
                 sharedPaint.freePaint(graveObject.getPaint());
+                sharedRect.freeRect(graveObject.getBitmapHolder());
             }
             else
                 graveObject.update();

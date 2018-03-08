@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -27,9 +28,9 @@ public class Arrow extends ShapeObject {
 
 
 
-    public Arrow(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, String intendendedFlickDirection, Paint paint) {
+    public Arrow(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, String intendendedFlickDirection, Paint paint, Rect bitmapHolder) {
         // call super(durationAlive, color) then in super also make the rect to hold bitmap
-        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint);
+        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder);
         setLives(1);
         setProgressBarAddition(15);
 

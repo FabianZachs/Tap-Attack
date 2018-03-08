@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.Rect;
 
 import com.thezs.fabianzachs.tapattack.Animation.AnimationManager;
 import com.thezs.fabianzachs.tapattack.Constants;
@@ -30,36 +31,36 @@ public class ShapeBuilder {
         initializeAnimations();
     }
 
-    public ShapeObject buildShape(String shape, String color, Point centerLocation, Paint paint) {
-        return buildShape(shape,color,centerLocation,paint,"UP");
+    public ShapeObject buildShape(String shape, String color, Point centerLocation, Paint paint, Rect bitmapHolder) {
+        return buildShape(shape,color,centerLocation,paint,bitmapHolder,"UP");
     }
 
-    public ShapeObject buildShape(String shape, String color, Point centerLocation, Paint paint, String direction) {
+    public ShapeObject buildShape(String shape, String color, Point centerLocation, Paint paint, Rect bitmapHolder ,String direction) {
 
         switch (shape) {
             case "circle":
                 return new Circle(8, color, centerLocation,
                         animationManager.getBitmap("circle", color, false),
-                        animationManager.getBitmap("circle", color, true), paint);
+                        animationManager.getBitmap("circle", color, true), paint, bitmapHolder);
 
             case "square":
                 return new Square(3, color, centerLocation,
                         animationManager.getBitmap("square", color, false),
-                        animationManager.getBitmap("square", color, true), paint);
+                        animationManager.getBitmap("square", color, true), paint, bitmapHolder);
 
             case "cross":
                 return new Cross(3, color, centerLocation,
                         animationManager.getBitmap("cross", color, false),
-                        animationManager.getBitmap("cross", color, true), paint);
+                        animationManager.getBitmap("cross", color, true), paint, bitmapHolder);
 
             case "arrow":
                 return new Arrow(3, color, centerLocation,
                         translateBitmap(direction,color,false),
-                        translateBitmap(direction,color,true),direction, paint);
+                        translateBitmap(direction,color,true),direction, paint, bitmapHolder);
             case "star":
                 return new Star(2, "yellow", centerLocation,
                         animationManager.getBitmap("star", "yellow", false),
-                        animationManager.getBitmap("star", "yellow", true), paint); // have it always take color gold
+                        animationManager.getBitmap("star", "yellow", true), paint, bitmapHolder); // have it always take color gold
         }
 
         return null;

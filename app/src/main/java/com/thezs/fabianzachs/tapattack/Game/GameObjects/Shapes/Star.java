@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -26,8 +27,8 @@ public class Star extends ShapeObject {
     private Matrix rotationMatrix;
     private long timeOfLastRotation;
 
-    public Star(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint) {
-        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint);
+    public Star(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder) {
+        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder);
         setLives(1);
         setProgressBarAddition(0);
         setGraveAble(false);
