@@ -2,15 +2,11 @@ package com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.WarningColor;
-import com.thezs.fabianzachs.tapattack.R;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,10 +18,11 @@ public class BackgroundHandler {
 
     // an arraylist: color -> Bitmap background
     private Map<String, Bitmap> backgrounds;
+    private Bitmap previousBitmap;
     private String theme;
     private GradientDrawable progressBarHolderDrawable;
     private GradientDrawable warningHolderDrawable; // TODO
-    private String lastColor;
+    private String previousColor;
     private WarningColor warningColorComponent;
 
 
@@ -35,21 +32,23 @@ public class BackgroundHandler {
         this.theme = theme;
         this.backgrounds = new HashMap<>();
         addBackgroundsToMap(theme);
-        this.lastColor = "null";
+        this.previousColor = "null";
+        this.previousBitmap = null;
         this.warningColorComponent = new WarningColor();
     }
 
     // TODO when we get a new background we update the warning colorholder and warning color
     public Bitmap getBackgroundBitmap(String color) {
 
-        if (!lastColor.equals(color)) {
+        if (!previousColor.equals(color)) {
             changeProgressBarBackground(color);
             changeWarningHolderColor(color);
             warningColorComponent.setNextColor();
-            lastColor = color;
+            previousColor = color;
+            previousBitmap = backgrounds.get(theme+color+"background");
         }
         // TODO store background here to eliminate constant char[] calls
-        return backgrounds.get(theme+color+"background");
+        return previousBitmap;
     }
 
     private void changeWarningHolderColor(String color) {
