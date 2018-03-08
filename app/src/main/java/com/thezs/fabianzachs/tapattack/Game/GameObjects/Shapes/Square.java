@@ -56,7 +56,7 @@ public class Square extends ShapeObject {
 
         @Override
         public boolean onDown(MotionEvent event) {
-            Log.d(DEBUG_TAG,"onDown: " + event.toString());
+            //Log.d(DEBUG_TAG,"onDown: " + event.toString());
             setState(1);
             timeSetState = System.currentTimeMillis();
             return true;
@@ -73,18 +73,18 @@ public class Square extends ShapeObject {
         // The user has performed a down MotionEvent and not performed a move or up yet.
         @Override
         public void onShowPress(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onShowPress: " + event.toString());
+            //Log.d(DEBUG_TAG, "onShowPress: " + event.toString());
         }
 
         @Override
         public boolean onSingleTapUp(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
+            //Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
             return true;
         }
 
         @Override
         public boolean onDoubleTap(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
+            //Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
             reduceLives();
             reduceLives();
             return true;
@@ -92,13 +92,13 @@ public class Square extends ShapeObject {
 
         @Override
         public boolean onDoubleTapEvent(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onDoubleTapEvent: " + event.toString());
+            //Log.d(DEBUG_TAG, "onDoubleTapEvent: " + event.toString());
             return true;
         }
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
+            //Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
             getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
             getStreakObserver().resetStreak();
             return true;
@@ -107,7 +107,7 @@ public class Square extends ShapeObject {
         // we want to put shape back to original state
         @Override
         public void onLongPress(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
+            //Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
         }
     }
 

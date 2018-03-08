@@ -188,11 +188,11 @@ public class Arrow extends ShapeObject {
         public boolean onScroll(MotionEvent event1, MotionEvent event2, float distanceX,
                                 float distanceY) {
             try {
-                Log.d(DEBUG_TAG, "onScroll: " + event1.toString() + event2.toString());
+                //Log.d(DEBUG_TAG, "onScroll: " + event1.toString() + event2.toString());
                 if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY())) {
                     reduceLives();
 
-                    Log.d(DEBUG_TAG, "onScroll: killed & lives="+getLives());
+                    //Log.d(DEBUG_TAG, "onScroll: killed & lives="+getLives());
                     /*
                     int x = getCenterLocation().x;
                     int y = getCenterLocation().y;

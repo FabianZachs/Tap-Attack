@@ -125,12 +125,12 @@ public class Star extends ShapeObject {
         // The user has performed a down MotionEvent and not performed a move or up yet.
         @Override
         public void onShowPress(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onShowPress: " + event.toString());
+            //Log.d(DEBUG_TAG, "onShowPress: " + event.toString());
         }
 
         @Override
         public boolean onSingleTapUp(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
+            //Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
             return true;
         }
 
@@ -142,19 +142,19 @@ public class Star extends ShapeObject {
 
         @Override
         public boolean onDoubleTapEvent(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onDoubleTapEvent: " + event.toString());
+            //Log.d(DEBUG_TAG, "onDoubleTapEvent: " + event.toString());
             return true;
         }
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
+            //Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
             return true;
         }
 
         @Override
         public void onLongPress(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
+            //Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
         }
     }
 
