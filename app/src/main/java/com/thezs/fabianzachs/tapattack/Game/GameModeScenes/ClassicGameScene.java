@@ -35,11 +35,12 @@ public class ClassicGameScene implements Scene {
     private Streak streak;
     private ProgressBar progressBar;
     private BackgroundHandler backgroundHandler;
+    private Rect entireScreenRect;
 
     public ClassicGameScene() {
         // shuffle colors
         Constants.NEONCOLORS = RandomizeArray(Constants.NEONCOLORS);
-
+        this.entireScreenRect = new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 
         this.gameOver = false; // TODO or/and on reset?
         shapesManager = new ShapesManager();
@@ -75,7 +76,7 @@ public class ClassicGameScene implements Scene {
     @Override
     public void draw(Canvas canvas) {
         canvas.drawBitmap(backgroundHandler.getBackgroundBitmap("blue"), null,
-                new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), null);
+                entireScreenRect, null);
 
 
         // TODO draw score drawtext via score.draw(canvas)
