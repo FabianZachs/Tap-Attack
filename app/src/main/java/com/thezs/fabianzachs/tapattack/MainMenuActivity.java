@@ -42,7 +42,7 @@ public class MainMenuActivity extends  GeneralParent {
         initializeConstants();
 
         // method instantiation
-        mediaPlayers = new ArrayList<MediaPlayer>();
+        //mediaPlayers = new ArrayList<MediaPlayer>();
         prefs = getSharedPreferences("playerPrefs", MODE_PRIVATE);
 
 
@@ -50,7 +50,7 @@ public class MainMenuActivity extends  GeneralParent {
 
         helper.bannerAdSetup(this, mAdView);
 
-        initMusic(R.raw.mainmenu);
+        //initMusic(R.raw.mainmenu);
     }
 
     private void initializeConstants() {
@@ -104,7 +104,7 @@ public class MainMenuActivity extends  GeneralParent {
     public void menuClick(View view) {
 
         // play settings click noise
-        playSound(R.raw.opensettings);
+        //playSound(R.raw.opensettings);
 
         // inflate the dialog layout
         View alertView = getLayoutInflater().inflate(R.layout.dialog_settings, null);
@@ -146,7 +146,7 @@ public class MainMenuActivity extends  GeneralParent {
         okButt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playSound(R.raw.closesettings);
+                //playSound(R.raw.closesettings);
                 dialog.dismiss();
             }
         });
@@ -158,7 +158,7 @@ public class MainMenuActivity extends  GeneralParent {
         final TextView soundText = (TextView) alertView.findViewById(R.id.sound_setting);
 
         // depending on the current sound setting- set to ON or OFF img
-        setSoundText(soundText);
+        //setSoundText(soundText);
 
         // on click of the soundText, set to opposite img
         soundText.setOnClickListener(new View.OnClickListener() {
@@ -167,13 +167,13 @@ public class MainMenuActivity extends  GeneralParent {
                 if (soundOn()) {
                     // set OFF
                     setSoundPrefAndText(false, soundText);
-                    repeatMpStop();
+                    //repeatMpStop();
                 } else {
                     // set ON
                     setSoundPrefAndText(true, soundText);
-                    repeatMpResume();
+                    //repeatMpResume();
                 }
-                playSound(R.raw.settingsswitch);
+                //playSound(R.raw.settingsswitch);
             }
         });
     }
@@ -223,27 +223,27 @@ public class MainMenuActivity extends  GeneralParent {
         setSoundText(soundText);
     }
 
-
+/*
     public void repeatMpStop() {
         for (MediaPlayer mp : mediaPlayers) {
                 mp.pause();
         }
-    }
+    }*/
 
 
-    public void repeatMpResume() {
+    /*public void repeatMpResume() {
         for (MediaPlayer mp : mediaPlayers) {
             if (soundOn())
                 mp.start();
         }
-    }
+    }*/
 
 
     // when app opens up again
     @Override
     protected void onResume() {
         super.onResume();
-        repeatMpResume();
+        //repeatMpResume();
     }
 
 
@@ -251,7 +251,7 @@ public class MainMenuActivity extends  GeneralParent {
     @Override
     protected void onStop() {
         super.onStop();
-        repeatMpStop();
+        //repeatMpStop();
     }
 
 
