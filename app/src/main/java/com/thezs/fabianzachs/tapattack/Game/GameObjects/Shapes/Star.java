@@ -136,7 +136,7 @@ public class Star extends ShapeObject {
 
         @Override
         public boolean onDoubleTap(MotionEvent event) {
-            Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
+            //Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
             return true;
         }
 
