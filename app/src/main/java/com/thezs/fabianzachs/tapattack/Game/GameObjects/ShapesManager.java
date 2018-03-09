@@ -142,11 +142,11 @@ public class ShapesManager {
                 // TODO make a seperate method which handles everything when a shape is removed (progress bar, streak, score)
                 shapes.remove(shape);
                 //scoreObserver.incScore(shape.getPoints());
-                mediator.incScore(shape.getPoints());
+                mediator.incScore(shape.getPoints(), shape.getColor());
                 //streakObserver.incStreak(1);
-                mediator.incStreak(1);
+                mediator.incStreak(1, shape.getColor());
                 //progressBarObserver.changeProgressBy(shape.getProgressBarAddition());
-                mediator.changeProgressBarBy(shape.getProgressBarAddition());
+                mediator.changeProgressBarBy(shape.getProgressBarAddition(), shape.getColor());
             }
 
             else if (shape.isTimedOut()) {

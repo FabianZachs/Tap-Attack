@@ -73,6 +73,7 @@ public class ClassicGameScene implements Scene {
         mediator.addObject(streak);
         mediator.addObject(progressBar);
         mediator.addObject(shapesManager);
+        mediator.addObject(warningColor);
 
     }
 

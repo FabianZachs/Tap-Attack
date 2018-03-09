@@ -1,10 +1,13 @@
 package com.thezs.fabianzachs.tapattack.Game.Mediator;
 
+import android.util.Log;
+
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
+import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.WarningColor;
 
 /**
  * Created by fabianzachs on 08/03/18.
@@ -16,6 +19,7 @@ public class CentralGameCommunication {
     private Score score;
     private Streak streak;
     private ProgressBar progressBar;
+    private WarningColor warningColor;
 
     /* Tasks:
     * recieve messages regarding destruction of shape, incorrect taps of shape, (passing required info)
@@ -26,6 +30,10 @@ public class CentralGameCommunication {
     }
 
     //  ===== PROGRESSBAR CALLS =====
+    public void changeProgressBarBy(int amount, String color) {
+        changeProgressBarBy(warningColor.getCurrentColor().equals(color) ? -amount : amount);
+    }
+
     public void changeProgressBarBy(int amount) {
         progressBar.changeProgressBy(amount);
     }
@@ -37,13 +45,21 @@ public class CentralGameCommunication {
         streak.resetStreak();
     }
 
-    public void incStreak(int amount) {
-        streak.incStreak(amount);
+    public void incStreak(int amount, String color) {
+        if (warningColor.getCurrentColor().equals(color))
+            streak.resetStreak();
+        else
+            streak.incStreak(amount);
     }
 
     //  ==============================
 
-    //  ===== PROGRESSBAR CALLS =====
+    //  ===== SCORE CALLS =====
+    public void incScore(int amount, String color) {
+        if (!warningColor.getCurrentColor().equals(color))
+            score.incScore(amount);
+    }
+
     public void incScore(int amount) {
         score.incScore(amount);
     }
@@ -66,6 +82,10 @@ public class CentralGameCommunication {
 
     public void addObject(ProgressBar progressBar) {
         this.progressBar = progressBar;
+    }
+
+    public void addObject(WarningColor warningColor) {
+        this.warningColor = warningColor;
     }
 
     //public void addObject(ShapeObject shape) {
