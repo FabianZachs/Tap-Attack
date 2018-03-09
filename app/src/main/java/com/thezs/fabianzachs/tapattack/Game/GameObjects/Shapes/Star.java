@@ -114,7 +114,8 @@ public class Star extends ShapeObject {
             //Log.d(DEBUG_TAG,"onDown: " + event.toString());
             setState(1); // TODO only briefly
             timeSetState = System.currentTimeMillis();
-            getScoreObserver().incScore(getPoints());
+            //getScoreObserver().incScore(getPoints());
+            mediator.incScore(getPoints());
             return true;
         }
 
