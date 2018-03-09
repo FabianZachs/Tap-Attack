@@ -25,10 +25,11 @@ public class BackgroundHandler {
     private String theme;
     private WarningColorHolder warningColorHolderObserver;
     private ProgressBarHolder progressBarHolderObserver;
+    private WarningColor warningColorObserver;
     //private GradientDrawable progressBarHolderDrawable;
     //private GradientDrawable warningHolderDrawable; // TODO
     private String previousColor;
-    private WarningColor warningColorComponent;
+    //private WarningColor warningColorComponent;
 
 
     public BackgroundHandler(String theme) {
@@ -39,7 +40,7 @@ public class BackgroundHandler {
         addBackgroundsToMap(theme);
         this.previousColor = "null";
         this.previousBitmap = null;
-        this.warningColorComponent = new WarningColor(); // TODO use observer instead
+        //this.warningColorComponent = new WarningColor(); // TODO use observer instead
     }
 
     // TODO when we get a new background we update the warning colorholder and warning color
@@ -48,7 +49,7 @@ public class BackgroundHandler {
         if (!previousColor.equals(color)) {
             progressBarHolderObserver.changeColor(color);
             warningColorHolderObserver.changeColor(color);
-            warningColorComponent.setNextColor();
+            warningColorObserver.setNextColor();
             previousColor = color;
             previousBitmap = backgrounds.get(theme+color+"background");
         }
@@ -79,9 +80,9 @@ public class BackgroundHandler {
         }
     }
 
-    public WarningColor getWarningColorComponent() {
+    /*public WarningColor getWarningColorComponent() {
         return this.warningColorComponent;
-    }
+    }*/
 
     public void attachWarningColorHolderObserver(WarningColorHolder warningColorHolder) {
         this.warningColorHolderObserver = warningColorHolder;
@@ -89,5 +90,9 @@ public class BackgroundHandler {
 
     public void attachProgressBarHolderObserver(ProgressBarHolder progressBarHolder) {
         this.progressBarHolderObserver = progressBarHolder;
+    }
+
+    public void attachWarningColorObserver(WarningColor warningColor) {
+        this.warningColorObserver = warningColor;
     }
 }

@@ -5,6 +5,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +31,8 @@ public class WarningColor {
     private Random randColorFinder;
     private int colorIndex;
 
-    public WarningColor() {
+    public WarningColor(BackgroundHandler backgroundHandler) {
+        backgroundHandler.attachWarningColorObserver(this);
         this.colorIndex = 0;
         this.warningDrawable = (GradientDrawable) Constants.warningComponent.getDrawable(1);
         this.colorSelection = Constants.NEONCOLORS;

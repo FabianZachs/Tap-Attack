@@ -15,6 +15,7 @@ import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.UIHolders.ProgressBarHolder;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.UIHolders.WarningColorHolder;
+import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.WarningColor;
 import com.thezs.fabianzachs.tapattack.Game.LayoutHeadingHandlers.LayoutHeadings;
 import com.thezs.fabianzachs.tapattack.Game.Scene;
 
@@ -35,6 +36,7 @@ public class ClassicGameScene implements Scene {
 
     private WarningColorHolder warningColorHolder; // TODO maybe set XML to clear by default in case game does not have this component?
     private ProgressBarHolder progressBarHolder;
+    private WarningColor warningColor;
     private BackgroundHandler backgroundHandler;
     private ShapesManager shapesManager;
     private ProgressBar progressBar;
@@ -55,6 +57,7 @@ public class ClassicGameScene implements Scene {
         initializeBackgroundHandler();
         this.warningColorHolder = new WarningColorHolder(backgroundHandler);
         this.progressBarHolder = new ProgressBarHolder(backgroundHandler);
+        this.warningColor = new WarningColor(backgroundHandler);
         this.score = new Score(shapesManager);
         this.streak = new Streak(shapesManager);
         this.progressBar = new ProgressBar(shapesManager);
