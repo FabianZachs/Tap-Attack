@@ -57,7 +57,7 @@ public class ShapesManager {
         this.sharedPaint = new SharedPaint();
         this.sharedRect = new SharedRect();
         this.initTime = System.currentTimeMillis();
-        this.shapesPopulator = new ShapesPopulator(initTime,sharedPaint,sharedRect);
+        this.shapesPopulator = new ShapesPopulator(mediator,initTime,sharedPaint,sharedRect);
         this.graveFactory = new GraveFactory();
 
 

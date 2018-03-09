@@ -11,7 +11,10 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 import com.thezs.fabianzachs.tapattack.Game.SceneManager;
+
+import java.security.KeyStore;
 
 /**
  * Created by fabianzachs on 07/02/18.
@@ -20,9 +23,9 @@ import com.thezs.fabianzachs.tapattack.Game.SceneManager;
 public class Circle extends ShapeObject {
 
 
-    public Circle(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder) {
+    public Circle(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
        // call super(durationAlive, color) then in super also make the rect to hold bitmap
-        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder);
+        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder, mediator);
         setLives(1);
         setProgressBarAddition(10);
 
@@ -59,8 +62,10 @@ public class Circle extends ShapeObject {
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2,
                                float velocityX, float velocityY) {
-            getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
-            getStreakObserver().resetStreak();
+            mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
+            //getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
+            mediator.resetStreak();
+            //getStreakObserver().resetStreak();
             //SceneManager.setGameOver(true);
             return true;
         }

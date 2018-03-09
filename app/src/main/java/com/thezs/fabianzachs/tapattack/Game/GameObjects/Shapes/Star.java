@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
+import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 
 /**
  * Created by fabianzachs on 04/03/18.
@@ -27,8 +28,8 @@ public class Star extends ShapeObject {
     private Matrix rotationMatrix;
     private long timeOfLastRotation;
 
-    public Star(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder) {
-        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder);
+    public Star(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
+        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder, mediator);
         setLives(1);
         setProgressBarAddition(0);
         setGraveAble(false);

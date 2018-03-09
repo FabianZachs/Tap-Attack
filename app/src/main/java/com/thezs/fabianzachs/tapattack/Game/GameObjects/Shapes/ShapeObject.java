@@ -16,6 +16,7 @@ import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
+import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 import com.thezs.fabianzachs.tapattack.R;
 
 import static com.thezs.fabianzachs.tapattack.Game.MainThread.canvas;
@@ -27,6 +28,8 @@ import static com.thezs.fabianzachs.tapattack.Game.MainThread.canvas;
 public abstract class ShapeObject {
 
     public int PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH = -15;
+
+    protected CentralGameCommunication mediator;
 
     private boolean graveAble;
 
@@ -63,7 +66,8 @@ public abstract class ShapeObject {
 
     public abstract void update();
 
-    public ShapeObject(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect rect) {
+    public ShapeObject(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect rect, CentralGameCommunication mediator) {
+        this.mediator = mediator;
         this.alphaPaint = paint;
         this.graveAble = true;
         this.durationAlive = durationAlive;

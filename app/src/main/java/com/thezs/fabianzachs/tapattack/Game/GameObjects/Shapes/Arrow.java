@@ -11,6 +11,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 
 /**
  * Created by fabianzachs on 02/03/18.
@@ -28,9 +29,9 @@ public class Arrow extends ShapeObject {
 
 
 
-    public Arrow(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, String intendendedFlickDirection, Paint paint, Rect bitmapHolder) {
+    public Arrow(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, String intendendedFlickDirection, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
         // call super(durationAlive, color) then in super also make the rect to hold bitmap
-        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder);
+        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder, mediator);
         setLives(1);
         setProgressBarAddition(15);
 
@@ -212,8 +213,10 @@ public class Arrow extends ShapeObject {
                     */
                 }
                 else if (System.currentTimeMillis() - timeOfLastPenalty > 1000) {
-                    getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
-                    getStreakObserver().resetStreak();
+                    //getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
+                    mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
+                    //getStreakObserver().resetStreak();
+                    mediator.resetStreak();
                     timeOfLastPenalty = System.currentTimeMillis();
 
                 }
@@ -234,8 +237,10 @@ public class Arrow extends ShapeObject {
         @Override
         public boolean onSingleTapUp(MotionEvent event) {
             //Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
-            getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
-            getStreakObserver().resetStreak();
+            //getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
+            mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
+            //getStreakObserver().resetStreak();
+            mediator.resetStreak();
             return true;
         }
 
@@ -255,7 +260,8 @@ public class Arrow extends ShapeObject {
         @Override
         public boolean onSingleTapConfirmed(MotionEvent event) {
             //Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
-            getProgressBarObserver().changeProgressBy(-1);
+            //getProgressBarObserver().changeProgressBy(-1);
+            mediator.changeProgressBarBy(-1);
             return true;
         }
 

@@ -15,6 +15,7 @@ import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Cross;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Star;
+import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -31,36 +32,36 @@ public class ShapeBuilder {
         initializeAnimations();
     }
 
-    public ShapeObject buildShape(String shape, String color, Point centerLocation, Paint paint, Rect bitmapHolder) {
-        return buildShape(shape,color,centerLocation,paint,bitmapHolder,"UP");
+    public ShapeObject buildShape(String shape, String color, Point centerLocation, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
+        return buildShape(shape,color,centerLocation,paint,bitmapHolder,mediator,"UP");
     }
 
-    public ShapeObject buildShape(String shape, String color, Point centerLocation, Paint paint, Rect bitmapHolder ,String direction) {
+    public ShapeObject buildShape(String shape, String color, Point centerLocation, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator ,String direction) {
 
         switch (shape) {
             case "circle":
                 return new Circle(8, color, centerLocation,
                         animationManager.getBitmap("circle", color, false),
-                        animationManager.getBitmap("circle", color, true), paint, bitmapHolder);
+                        animationManager.getBitmap("circle", color, true), paint, bitmapHolder, mediator);
 
             case "square":
                 return new Square(3, color, centerLocation,
                         animationManager.getBitmap("square", color, false),
-                        animationManager.getBitmap("square", color, true), paint, bitmapHolder);
+                        animationManager.getBitmap("square", color, true), paint, bitmapHolder, mediator);
 
             case "cross":
                 return new Cross(3, color, centerLocation,
                         animationManager.getBitmap("cross", color, false),
-                        animationManager.getBitmap("cross", color, true), paint, bitmapHolder);
+                        animationManager.getBitmap("cross", color, true), paint, bitmapHolder, mediator);
 
             case "arrow":
                 return new Arrow(3, color, centerLocation,
                         translateBitmap(direction,color,false),
-                        translateBitmap(direction,color,true),direction, paint, bitmapHolder);
+                        translateBitmap(direction,color,true),direction, paint, bitmapHolder, mediator);
             case "star":
                 return new Star(2, "yellow", centerLocation,
                         animationManager.getBitmap("star", "yellow", false),
-                        animationManager.getBitmap("star", "yellow", true), paint, bitmapHolder); // have it always take color gold
+                        animationManager.getBitmap("star", "yellow", true), paint, bitmapHolder, mediator); // have it always take color gold
         }
 
         return null;

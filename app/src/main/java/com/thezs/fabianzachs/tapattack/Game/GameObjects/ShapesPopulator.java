@@ -14,6 +14,7 @@ import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
+import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 import com.thezs.fabianzachs.tapattack.Game.SharedResources.SharedPaint;
 import com.thezs.fabianzachs.tapattack.Game.SharedResources.SharedRect;
 
@@ -26,6 +27,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 
 public class ShapesPopulator {
+
+    private CentralGameCommunication mediator;
 
     private SharedPaint sharedPaint;
     private SharedRect sharedRect;
@@ -50,7 +53,8 @@ public class ShapesPopulator {
     private String[] shapeColors = {"blue","yellow","red","purple","green"};
     private Random colorFinder;
 
-    public ShapesPopulator(long initTime, SharedPaint sharedPaint, SharedRect sharedRect) {
+    public ShapesPopulator(CentralGameCommunication mediator, long initTime, SharedPaint sharedPaint, SharedRect sharedRect) {
+        this.mediator = mediator;
         this.sharedPaint = sharedPaint;
         this.sharedRect = sharedRect;
         this.timeOfLastShapeAddition = 0;
@@ -85,7 +89,7 @@ public class ShapesPopulator {
 
         // TODO use factory design pattern? so instead of .buildCross, pass "cross" in parameter
         //mShapes.add(shapeBuilder.buildArrow("blue", newShapeLocation));
-        ShapeObject newShape = shapeBuilder.buildShape("circle", getColor(), newShapeLocation,paint,bitmapHolder,"LEFT") ;
+        ShapeObject newShape = shapeBuilder.buildShape("arrow", /*getColor()*/ "blue", newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         newShape.attachAllObservers(scoreObserver,streakObserver,progressBarObserver);
         shapes.add(newShape);
         timeOfLastShapeAddition = System.currentTimeMillis();

@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 import com.thezs.fabianzachs.tapattack.Game.Scene;
 import com.thezs.fabianzachs.tapattack.Game.SceneManager;
 
@@ -23,9 +24,9 @@ public class Square extends ShapeObject {
 
     private long timeSetState;
 
-    public Square(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder) {
+    public Square(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
         // call super(durationAlive, color) then in super also make the rect to hold bitmap
-        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder);
+        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder, mediator);
         setLives(2);
         setProgressBarAddition(15);
         setGraveAble(false);
