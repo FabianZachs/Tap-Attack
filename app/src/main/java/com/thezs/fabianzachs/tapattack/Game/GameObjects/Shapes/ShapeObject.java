@@ -33,9 +33,9 @@ public abstract class ShapeObject {
 
     private boolean graveAble;
 
-    private Score scoreObserver;
-    private Streak streakObserver;
-    private ProgressBar progressBarObserver;
+    //private Score scoreObserver;
+    //private Streak streakObserver;
+    //private ProgressBar progressBarObserver;
 
     private Paint alphaPaint;
 
@@ -96,6 +96,7 @@ public abstract class ShapeObject {
         return (System.currentTimeMillis() - initTime > durationAlive * 1000);
     }
 
+    /*
     public void attachScoreObserver(Score scoreObserver) {
         this.scoreObserver = scoreObserver;
     }
@@ -107,8 +108,9 @@ public abstract class ShapeObject {
 
     public void attachProgressBarObserver(ProgressBar progressBarObserver) {
         this.progressBarObserver = progressBarObserver;
-    }
+    }*/
 
+    /*
     public void attachAllObservers(Score scoreObserver, Streak streakObserver, ProgressBar progressBarObserver) {
         attachScoreObserver(scoreObserver);
         attachStreakObserver(streakObserver);
@@ -126,7 +128,7 @@ public abstract class ShapeObject {
     public ProgressBar getProgressBarObserver() {
         return this.progressBarObserver;
     }
-
+*/
 
 
 

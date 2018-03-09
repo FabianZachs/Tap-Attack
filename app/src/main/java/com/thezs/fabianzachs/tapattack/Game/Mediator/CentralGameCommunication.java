@@ -12,7 +12,7 @@ import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
 
 public class CentralGameCommunication {
 
-    private ShapesManager shapesManager;
+    private ShapesManager shapesManager; // TODO  do we need this??
     private Score score;
     private Streak streak;
     private ProgressBar progressBar;

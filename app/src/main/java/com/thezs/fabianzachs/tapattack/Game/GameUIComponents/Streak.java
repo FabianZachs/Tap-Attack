@@ -17,7 +17,7 @@ import java.util.List;
 
 public class Streak {
 
-    private ShapesManager shapesManager;
+    //private ShapesManager shapesManager;
     private final List<Integer> STREAK_COLORS = new ArrayList<>();
     private final int STREAK_POINTS_PER_COLOR = 5;
 
@@ -27,9 +27,9 @@ public class Streak {
     private int yLocation;
     private Paint streakPaint;
 
-    public Streak(ShapesManager shapesManager) {
-        this.shapesManager = shapesManager;
-        this.shapesManager.attachStreakObserver(this);
+    public Streak() {
+        //this.shapesManager = shapesManager;
+        //this.shapesManager.attachStreakObserver(this);
         this.streak = 0;
         setupSTREAK_COLORS();
         // TODO do this relative to screen height and width

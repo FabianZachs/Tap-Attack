@@ -89,8 +89,8 @@ public class ShapesPopulator {
 
         // TODO use factory design pattern? so instead of .buildCross, pass "cross" in parameter
         //mShapes.add(shapeBuilder.buildArrow("blue", newShapeLocation));
-        ShapeObject newShape = shapeBuilder.buildShape("star", /*getColor()*/ "blue", newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
-        newShape.attachAllObservers(scoreObserver,streakObserver,progressBarObserver);
+        ShapeObject newShape = shapeBuilder.buildShape("circle", getColor(), newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
+        //newShape.attachAllObservers(scoreObserver,streakObserver,progressBarObserver);
         shapes.add(newShape);
         timeOfLastShapeAddition = System.currentTimeMillis();
 
@@ -152,6 +152,7 @@ public class ShapesPopulator {
         return System.currentTimeMillis() - initTime;
     }
 
+    /*
     public void attachScoreObserver(Score scoreObserver) {
         this.scoreObserver= scoreObserver;
     }
@@ -162,7 +163,7 @@ public class ShapesPopulator {
 
     public void attachProgressBarObserver(ProgressBar progressBarObserver) {
         this.progressBarObserver = progressBarObserver;
-    }
+    }*/
 
     public String getColor() {
         return shapeColors[colorFinder.nextInt(5)];

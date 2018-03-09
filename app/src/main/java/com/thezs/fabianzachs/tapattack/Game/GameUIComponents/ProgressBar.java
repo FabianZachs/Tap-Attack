@@ -26,7 +26,7 @@ public class ProgressBar {
 
     private ImageView progressBarHolder;
 
-    private ShapesManager shapesManager;
+    //private ShapesManager shapesManager;
 
     private BootstrapProgressBar progressBar;
     private int progress;
@@ -36,11 +36,11 @@ public class ProgressBar {
 
     public static boolean running = true;
 
-    public ProgressBar(ShapesManager shapesManager) {
+    public ProgressBar() {
         running = true;
         this.progressBarHolder = Constants.progressBarHolder;
-        this.shapesManager = shapesManager;
-        this.shapesManager.attachProgressBarObserver(this);
+        //this.shapesManager = shapesManager;
+        //this.shapesManager.attachProgressBarObserver(this);
         timeOfLastReduce = System.currentTimeMillis();
         //progressBar = new BootstrapProgressBar(Constants.CURRENT_CONTEXT);
         //progressBar.setProgress(100);

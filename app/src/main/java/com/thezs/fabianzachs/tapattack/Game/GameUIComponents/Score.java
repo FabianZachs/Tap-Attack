@@ -15,7 +15,7 @@ import com.thezs.fabianzachs.tapattack.R;
 
 public class Score {
 
-    private ShapesManager shapesManager;   // TODO why is this attribute needed. Can't we just pass in as parameter and attach this
+    //private ShapesManager shapesManager;   // TODO why is this attribute needed. Can't we just pass in as parameter and attach this
 
     private int score;
 
@@ -23,9 +23,9 @@ public class Score {
     private int yLocation;
     private Paint scorePaint;
 
-    public Score(ShapesManager shapesManager) {
-        this.shapesManager = shapesManager;
-        this.shapesManager.attachScoreObserver(this);
+    public Score() {
+        //this.shapesManager = shapesManager;
+        //this.shapesManager.attachScoreObserver(this);
         this.score = 0;
         // TODO do this relative to screen height and width
         this.xLocation = 40;
