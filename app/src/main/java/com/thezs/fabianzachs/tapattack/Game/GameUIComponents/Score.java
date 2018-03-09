@@ -15,7 +15,7 @@ import com.thezs.fabianzachs.tapattack.R;
 
 public class Score {
 
-    private ShapesManager shapesManager;
+    private ShapesManager shapesManager;   // TODO why is this attribute needed. Can't we just pass in as parameter and attach this
 
     private int score;
 

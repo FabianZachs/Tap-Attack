@@ -13,6 +13,8 @@ import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
+import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.UIHolders.ProgressBarHolder;
+import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.UIHolders.WarningColorHolder;
 import com.thezs.fabianzachs.tapattack.Game.LayoutHeadingHandlers.LayoutHeadings;
 import com.thezs.fabianzachs.tapattack.Game.Scene;
 
@@ -30,24 +32,32 @@ import static android.content.Context.MODE_PRIVATE;
 public class ClassicGameScene implements Scene {
 
     private static boolean gameOver;
-    private ShapesManager shapesManager;
-    private Score score;
-    private Streak streak;
-    private ProgressBar progressBar;
+
+    private WarningColorHolder warningColorHolder; // TODO maybe set XML to clear by default in case game does not have this component?
+    private ProgressBarHolder progressBarHolder;
     private BackgroundHandler backgroundHandler;
+    private ShapesManager shapesManager;
+    private ProgressBar progressBar;
+    private Streak streak;
+    private Score score;
+
     private Rect entireScreenRect;
 
     public ClassicGameScene() {
         // shuffle colors
-        Constants.NEONCOLORS = RandomizeArray(Constants.NEONCOLORS);
+        Constants.NEONCOLORS = RandomizeArray(Constants.NEONCOLORS); // TODO make this responsive to any theme
         this.entireScreenRect = new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 
         this.gameOver = false; // TODO or/and on reset?
-        shapesManager = new ShapesManager();
+
+
+        this.shapesManager = new ShapesManager();
         initializeBackgroundHandler();
-        score = new Score(shapesManager);
-        streak = new Streak(shapesManager);
-        progressBar = new ProgressBar(shapesManager);
+        this.warningColorHolder = new WarningColorHolder(backgroundHandler);
+        this.progressBarHolder = new ProgressBarHolder(backgroundHandler);
+        this.score = new Score(shapesManager);
+        this.streak = new Streak(shapesManager);
+        this.progressBar = new ProgressBar(shapesManager);
 
     }
 
