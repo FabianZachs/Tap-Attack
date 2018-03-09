@@ -49,7 +49,7 @@ public class BackgroundHandler {
         if (!previousColor.equals(color)) {
             progressBarHolderObserver.changeColor(color);
             warningColorHolderObserver.changeColor(color);
-            warningColorObserver.setNextColor();
+            warningColorObserver.setNextColor(); //TODO next color should be 1 step ahead of bacground. so if background was blue and turns to green, the warning color was green. Or vice versa
             previousColor = color;
             previousBitmap = backgrounds.get(theme+color+"background");
         }
