@@ -12,6 +12,7 @@ import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
 import com.thezs.fabianzachs.tapattack.Game.GraveObjects.GraveFactory;
 import com.thezs.fabianzachs.tapattack.Game.GraveObjects.GraveObject;
+import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 import com.thezs.fabianzachs.tapattack.Game.SharedResources.SharedPaint;
 import com.thezs.fabianzachs.tapattack.Game.SharedResources.SharedRect;
 
@@ -24,6 +25,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ShapesManager {
 
+    private CentralGameCommunication mediator;
+
     //private ArrayList<ShapeObject> shapes = new ArrayList<>();
     CopyOnWriteArrayList<ShapeObject> shapes = new CopyOnWriteArrayList<>();
 
@@ -35,9 +38,9 @@ public class ShapesManager {
     private ShapesPopulator shapesPopulator;
     //private BackgroundHandler backgroundHandler;
 
-    private Score scoreObserver;
-    private Streak streakObserver;
-    private ProgressBar progressBarObserver;
+    //private Score scoreObserver;
+    //private Streak streakObserver;
+    //private ProgressBar progressBarObserver;
 
 
     private long initTime;   // initialization of game scene
@@ -48,8 +51,9 @@ public class ShapesManager {
     //private int streak;
 
 
-    public ShapesManager() {
+    public ShapesManager(CentralGameCommunication mediator) {
 
+        this.mediator = mediator;
         this.sharedPaint = new SharedPaint();
         this.sharedRect = new SharedRect();
         this.initTime = System.currentTimeMillis();
@@ -114,8 +118,10 @@ public class ShapesManager {
 
          // if user ACTION_DOWNs and not onto a shape
         if (!shapeInteractment && event.getAction() == MotionEvent.ACTION_DOWN) {
-            progressBarObserver.changeProgressBy(-40); // TODO make this relative to time
-            streakObserver.resetStreak();
+            //progressBarObserver.changeProgressBy(-40); // TODO make this relative to time
+            mediator.changeProgressBarBy(-40);
+            //streakObserver.resetStreak();
+            mediator.resetStreak();
         }
             //SceneManager.setGameOver(true);
     }
@@ -135,16 +141,20 @@ public class ShapesManager {
                 }
                 // TODO make a seperate method which handles everything when a shape is removed (progress bar, streak, score)
                 shapes.remove(shape);
-                scoreObserver.incScore(shape.getPoints());
-                streakObserver.incStreak(1);
-                progressBarObserver.changeProgressBy(shape.getProgressBarAddition());
+                //scoreObserver.incScore(shape.getPoints());
+                mediator.incScore(shape.getPoints());
+                //streakObserver.incStreak(1);
+                mediator.incStreak(1);
+                //progressBarObserver.changeProgressBy(shape.getProgressBarAddition());
+                mediator.changeProgressBarBy(shape.getProgressBarAddition());
             }
 
             else if (shape.isTimedOut()) {
                 shapes.remove(shape);
                 sharedPaint.freePaint(shape.getPaintObj());
                 sharedRect.freeRect(shape.getBitmapHolder());
-                streakObserver.resetStreak();
+                //streakObserver.resetStreak();
+                mediator.resetStreak();
                 //streak = 0;
             }
 
@@ -199,17 +209,17 @@ public class ShapesManager {
 
 
     public void attachScoreObserver(Score scoreObserver) {
-        this.scoreObserver = scoreObserver;
+        //this.scoreObserver = scoreObserver;
         this.shapesPopulator.attachScoreObserver(scoreObserver);
     }
 
     public void attachStreakObserver(Streak streakObserver) {
-        this.streakObserver = streakObserver;
+        //this.streakObserver = streakObserver;
         this.shapesPopulator.attachStreakObserver(streakObserver);
     }
 
     public void attachProgressBarObserver(ProgressBar progressBarObserver) {
-        this.progressBarObserver = progressBarObserver;
+        //this.progressBarObserver = progressBarObserver;
         this.shapesPopulator.attachProgressBarObserver(progressBarObserver);
     }
 

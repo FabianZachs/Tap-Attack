@@ -17,6 +17,7 @@ import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.UIHolders.ProgressB
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.UIHolders.WarningColorHolder;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.WarningColor;
 import com.thezs.fabianzachs.tapattack.Game.LayoutHeadingHandlers.LayoutHeadings;
+import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 import com.thezs.fabianzachs.tapattack.Game.Scene;
 
 import java.util.Arrays;
@@ -34,6 +35,8 @@ public class ClassicGameScene implements Scene {
 
     private static boolean gameOver;
 
+    private CentralGameCommunication mediator;
+
     private WarningColorHolder warningColorHolder; // TODO maybe set XML to clear by default in case game does not have this component?
     private ProgressBarHolder progressBarHolder;
     private WarningColor warningColor;
@@ -46,6 +49,10 @@ public class ClassicGameScene implements Scene {
     private Rect entireScreenRect;
 
     public ClassicGameScene() {
+        this.mediator = new CentralGameCommunication();
+
+
+
         // shuffle colors
         Constants.NEONCOLORS = RandomizeArray(Constants.NEONCOLORS); // TODO make this responsive to any theme
         this.entireScreenRect = new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
@@ -53,7 +60,7 @@ public class ClassicGameScene implements Scene {
         this.gameOver = false; // TODO or/and on reset?
 
 
-        this.shapesManager = new ShapesManager();
+        this.shapesManager = new ShapesManager(mediator);
         initializeBackgroundHandler();
         this.warningColorHolder = new WarningColorHolder(backgroundHandler);
         this.progressBarHolder = new ProgressBarHolder(backgroundHandler);
@@ -61,6 +68,11 @@ public class ClassicGameScene implements Scene {
         this.score = new Score(shapesManager);
         this.streak = new Streak(shapesManager);
         this.progressBar = new ProgressBar(shapesManager);
+
+        mediator.addObject(score);
+        mediator.addObject(streak);
+        mediator.addObject(progressBar);
+        mediator.addObject(shapesManager);
 
     }
 
