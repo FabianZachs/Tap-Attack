@@ -67,8 +67,10 @@ public class Square extends ShapeObject {
         @Override
         public boolean onFling(MotionEvent event1, MotionEvent event2,
                                float velocityX, float velocityY) {
-            getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
-            getStreakObserver().resetStreak();
+            //getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
+            mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
+            //getStreakObserver().resetStreak();
+            mediator.resetStreak();
             return true;
         }
 
@@ -101,8 +103,10 @@ public class Square extends ShapeObject {
         @Override
         public boolean onSingleTapConfirmed(MotionEvent event) {
             //Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
-            getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
-            getStreakObserver().resetStreak();
+            //getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
+            mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
+            //getStreakObserver().resetStreak();
+            mediator.resetStreak();
             return true;
         }
 
