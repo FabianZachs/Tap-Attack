@@ -29,39 +29,27 @@ public abstract class ShapeObject {
 
     protected CentralGameCommunication mediator;
 
-    public int PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH = -15;
+    public int PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH = -35;
 
 
-    private boolean graveAble;
 
     private Paint alphaPaint;
-
-    private int progressBarAddition;
-    private long distructionTime;
     private Bitmap[] shapeImages;
-    private int stateAnimation = 0;
     private float durationAlive;
     private Rect bitmapHolder;
     private long initTime;
     private String color;
-    private int points;
     private int lives;
     private Point centerLocation;
 
+    private int progressBarAddition;
+    private int stateAnimation = 0;
+    private int points;
+
+    private boolean graveAble;
 
     private GestureDetectorCompat mDetector;
 
-
-    // TODO
-    // for arrow shape make at least a little direction movement neccessary (small flick)  , so that
-    // a simple press (with fractional vertical/ horizontal movement doesnt trigger fail/sucess
-
-
-    public void draw(Canvas canvas) {
-        canvas.drawBitmap(getCurrentShapeImg(), null, getBitmapHolder(),getAlphaPaint());
-    }
-
-    public abstract void update();
 
     public ShapeObject(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect rect, CentralGameCommunication mediator) {
         this.mediator = mediator;
@@ -70,9 +58,9 @@ public abstract class ShapeObject {
         this.durationAlive = durationAlive;
         this.color = color;
         this.centerLocation = centerLocation;
-        this.points = 1; // all shapes are worth one point?
+        this.points = 1;
         this.initTime = System.currentTimeMillis();
-        this.progressBarAddition = progressBarAddition;
+        this.progressBarAddition = 10;
         this.shapeImages = new Bitmap[] {shapeImg, shapeClickImg};
 
         rect.set((centerLocation.x - (Constants.SHAPE_WIDTH/2)),
@@ -81,29 +69,23 @@ public abstract class ShapeObject {
                 (centerLocation.y + (Constants.SHAPE_HEIGHT/2)));
 
         setBitmapHolder(rect);
-
-        //setBitmapHolder(new Rect((int) (centerLocation.x - (Constants.SHAPE_WIDTH/2)), (int) (centerLocation.y - (Constants.SHAPE_HEIGHT/2)),
-          //      (int) (centerLocation.x + (Constants.SHAPE_WIDTH/2)), (int) (centerLocation.y + (Constants.SHAPE_HEIGHT/2))));
     }
 
+    public void draw(Canvas canvas) {
+        canvas.drawBitmap(getCurrentShapeImg(), null, getBitmapHolder(),getAlphaPaint());
+    }
 
-    // only for timing out
+    public abstract void update();
+
     public boolean isTimedOut() {
-        //return !(System.currentTimeMillis() - initTime > durationAlive * 1000) && lives > 0;
         return (System.currentTimeMillis() - initTime > durationAlive * 1000);
     }
-
 
     public void reduceLives() {
         this.lives -= 1;
     }
 
     // SETTERS & GETTERSgameBoundary
-
-    public GestureDetectorCompat getMDetector() {
-        return mDetector;
-    }
-
     public void setmDetector(GestureDetectorCompat mDetector) {
         this.mDetector = mDetector;
     }
@@ -113,19 +95,9 @@ public abstract class ShapeObject {
     }
 
     public Paint getAlphaPaint() {
-        //alphaPaint.setAlpha(255);
-
-        /*
-        // ERROR if time is below 150 - shape flashes
-        if (150 < getTimeLeft() && getTimeLeft() < 1000 ) {
+        alphaPaint.setAlpha(255);
+        if (getTimeLeft() < 1000 )
             alphaPaint.setAlpha( (int) ((255 * getTimeLeft())/1000));
-        }
-        else if (getTimeLeft() < 150)
-            alphaPaint.setAlpha(0);
-*/
-        if (getTimeLeft() < 1000 ) {
-            alphaPaint.setAlpha( (int) ((255 * getTimeLeft())/1000));
-        }
         return alphaPaint;
     }
 
@@ -137,13 +109,12 @@ public abstract class ShapeObject {
         return this.centerLocation;
     }
 
-    public void setCenterLocation(int x, int y) {
+    public void updateCenterLocation(int x, int y) {
         this.centerLocation.set(x,y);
         updateBitmapHolderLocation();
     }
 
     private void updateBitmapHolderLocation() {
-        // TODO create method will update the bitmapholder by using the current set centerLocation
         Rect newBitmapHolder = getBitmapHolder();
         newBitmapHolder.left = (int) (centerLocation.x - (Constants.SHAPE_WIDTH/2));
         newBitmapHolder.top = (int) (centerLocation.y - (Constants.SHAPE_HEIGHT/2));
@@ -152,8 +123,6 @@ public abstract class ShapeObject {
 
         setBitmapHolder(newBitmapHolder);
     }
-
-
 
     public void setShapeImages(int index, Bitmap img) {
         this.shapeImages[index] = img;
@@ -170,7 +139,6 @@ public abstract class ShapeObject {
     public Bitmap getShapeClickImg() {
         return this.shapeImages[1];
     }
-
 
     public void setProgressBarAddition(int progressBarAddition) {
         this.progressBarAddition = progressBarAddition;

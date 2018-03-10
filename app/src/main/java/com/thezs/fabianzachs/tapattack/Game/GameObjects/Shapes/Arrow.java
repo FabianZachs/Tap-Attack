@@ -21,7 +21,6 @@ public class Arrow extends ShapeObject {
 
     private double intendedFlickDirectionRadians;
     private String intendedFlickDirectionString;
-    private final double FLICK_DIRECTION_ERROR_ALLOWANCE = Math.PI/4;
     private final Point originalPoint;
     private final int ARROW_TRAVEL_DISTANCE = 30;
     private long timeOfLastPenalty;
@@ -87,11 +86,11 @@ public class Arrow extends ShapeObject {
         private boolean isCorrectFlick(float x1, float y1, float x2, float y2) {
             Double angle = Math.atan2(y1 - y2, x2 - x1);
 
-            if (angle < -(Math.PI/2)  - FLICK_DIRECTION_ERROR_ALLOWANCE)
+            if (angle < -(Math.PI/2)  - Math.PI/4)
                 angle = (2 * Math.PI) + angle;
 
-            return (angle >= intendedFlickDirectionRadians - FLICK_DIRECTION_ERROR_ALLOWANCE &&
-                    angle <= intendedFlickDirectionRadians + FLICK_DIRECTION_ERROR_ALLOWANCE);
+            return (angle >= intendedFlickDirectionRadians - Math.PI/4 &&
+                    angle <= intendedFlickDirectionRadians + Math.PI/4);
         }
 
 
@@ -140,7 +139,6 @@ public class Arrow extends ShapeObject {
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent event) {
-            mediator.changeProgressBarBy(-1);
             return true;
         }
 
