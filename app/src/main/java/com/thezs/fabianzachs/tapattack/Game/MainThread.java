@@ -1,7 +1,9 @@
 package com.thezs.fabianzachs.tapattack.Game;
 
 import android.graphics.Canvas;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.view.SurfaceHolder;
 
 /**

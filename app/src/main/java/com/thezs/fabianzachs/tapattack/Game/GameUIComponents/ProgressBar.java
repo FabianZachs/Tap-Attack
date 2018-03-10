@@ -4,6 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -24,6 +27,9 @@ import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
 // TODO set progress bar color depending on how low it is
 public class ProgressBar {
 
+    private Handler mHandler = new Handler();
+    private int YOYO_SHAKE = 1;
+
     private ImageView progressBarHolder;
 
     //private ShapesManager shapesManager;
@@ -37,6 +43,31 @@ public class ProgressBar {
     public static boolean running = true;
 
     public ProgressBar() {
+
+
+        // ===================
+        /*mHandler = new Handler(Looper.getMainLooper()) { // this handler is attached to UI thread (put this in progress bar??)
+
+            @Override
+            public void handleMessage(Message msg) {
+                //super.handleMessage(msg);
+                // TODO the yoyo shake
+                if (msg.what == YOYO_SHAKE) {
+                    YoYo.with(Techniques.Shake)
+                            .duration(750)
+                            .repeat(0)
+                            .playOn(progressBar);
+                    YoYo.with(Techniques.Shake)
+                            .duration(750)
+                            .repeat(0)
+                            .playOn(progressBarHolder);
+                }
+            }
+        };*/
+        // ===================
+
+
+
         running = true;
         this.progressBarHolder = Constants.progressBarHolder;
         //this.shapesManager = shapesManager;
@@ -102,8 +133,8 @@ public class ProgressBar {
     }
 
     // TODO maybe have a multiplier for decreasing amount after time
-    public void changeProgressBy(int amount) {
-
+    public void changeProgressBy(final int amount) {
+/*
         if (amount < -10) {
             YoYo.with(Techniques.Shake)
                     .duration(750)
@@ -113,8 +144,30 @@ public class ProgressBar {
                     .duration(750)
                     .repeat(0)
                     .playOn(progressBarHolder);
-        }
+        }*/
 
+        /*if (amount < -10) {
+            Message msg = mHandler.obtainMessage();
+            msg.what = YOYO_SHAKE;
+            msg.arg1 = amount;
+            mHandler.sendMessage(msg);
+        }*/
+
+        if (amount <= -10) {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    YoYo.with(Techniques.Shake)
+                            .duration(750)
+                            .repeat(0)
+                            .playOn(progressBar);
+                    YoYo.with(Techniques.Shake)
+                            .duration(750)
+                            .repeat(0)
+                            .playOn(progressBarHolder);
+                }
+            });
+        }
 
         if (progress + amount >= 100) {
             this.progress = 100;

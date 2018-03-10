@@ -31,7 +31,7 @@ public class CentralGameCommunication {
 
     //  ===== PROGRESSBAR CALLS =====
     public void changeProgressBarBy(int amount, String color) {
-        changeProgressBarBy(warningColor.getCurrentColor().equals(color) ? -amount : amount);
+        changeProgressBarBy(warningColor.getCurrentColor().equals(color) ? -amount : amount); // TODO doesnt trigger shake since called from update in thread.. maybe add shake to ui thread like for progress bar but not a while loop
     }
 
     public void changeProgressBarBy(int amount) {
@@ -55,7 +55,7 @@ public class CentralGameCommunication {
     //  ==============================
 
     //  ===== SCORE CALLS =====
-    public void incScore(int amount, String color) {
+    public void incScore(int amount, String color) { // TODO make ternary operation like above
         if (!warningColor.getCurrentColor().equals(color))
             score.incScore(amount);
     }
