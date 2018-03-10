@@ -27,15 +27,12 @@ import static com.thezs.fabianzachs.tapattack.Game.MainThread.canvas;
 
 public abstract class ShapeObject {
 
-    public int PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH = -15;
-
     protected CentralGameCommunication mediator;
 
-    private boolean graveAble;
+    public int PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH = -15;
 
-    //private Score scoreObserver;
-    //private Streak streakObserver;
-    //private ProgressBar progressBarObserver;
+
+    private boolean graveAble;
 
     private Paint alphaPaint;
 
@@ -44,9 +41,9 @@ public abstract class ShapeObject {
     private Bitmap[] shapeImages;
     private int stateAnimation = 0;
     private float durationAlive;
-    private Rect bitmapHolder;  // rectangle to hold bitmap ?? needed??
+    private Rect bitmapHolder;
     private long initTime;
-    private String color;  // will be used to find correct bitmap img
+    private String color;
     private int points;
     private int lives;
     private Point centerLocation;
@@ -95,42 +92,6 @@ public abstract class ShapeObject {
         //return !(System.currentTimeMillis() - initTime > durationAlive * 1000) && lives > 0;
         return (System.currentTimeMillis() - initTime > durationAlive * 1000);
     }
-
-    /*
-    public void attachScoreObserver(Score scoreObserver) {
-        this.scoreObserver = scoreObserver;
-    }
-
-    public void attachStreakObserver(Streak streakObserver) {
-        this.streakObserver = streakObserver;
-    }
-
-
-    public void attachProgressBarObserver(ProgressBar progressBarObserver) {
-        this.progressBarObserver = progressBarObserver;
-    }*/
-
-    /*
-    public void attachAllObservers(Score scoreObserver, Streak streakObserver, ProgressBar progressBarObserver) {
-        attachScoreObserver(scoreObserver);
-        attachStreakObserver(streakObserver);
-        attachProgressBarObserver(progressBarObserver);
-    }
-
-    public Score getScoreObserver() {
-        return this.scoreObserver;
-    }
-
-    public Streak getStreakObserver() {
-        return this.streakObserver;
-    }
-
-    public ProgressBar getProgressBarObserver() {
-        return this.progressBarObserver;
-    }
-*/
-
-
 
 
     public void reduceLives() {

@@ -2,22 +2,12 @@ package com.thezs.fabianzachs.tapattack.Game;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PixelFormat;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Constants;
-import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
-import com.thezs.fabianzachs.tapattack.Game.LayoutHeadingHandlers.LayoutHeadings;
-import com.thezs.fabianzachs.tapattack.R;
+import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.SceneManager;
 
 /**
  * Created by fabianzachs on 07/02/18.

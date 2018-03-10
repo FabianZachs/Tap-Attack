@@ -33,41 +33,36 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ClassicGameScene implements Scene {
 
-    private static boolean gameOver;
+    private static boolean gameOver; // TODO private???
 
     private CentralGameCommunication mediator;
 
-    private WarningColorHolder warningColorHolder; // TODO maybe set XML to clear by default in case game does not have this component?
+    private WarningColorHolder warningColorHolder;
     private ProgressBarHolder progressBarHolder;
     private WarningColor warningColor;
-    private BackgroundHandler backgroundHandler;
-    private ShapesManager shapesManager;
     private ProgressBar progressBar;
     private Streak streak;
     private Score score;
 
-    private Rect entireScreenRect;
+    private BackgroundHandler backgroundHandler;
+    private ShapesManager shapesManager;
+
 
     public ClassicGameScene() {
+        this.gameOver = false; // TODO or/and on reset?
         this.mediator = new CentralGameCommunication();
 
-
-
-        // shuffle colors
         Constants.NEONCOLORS = RandomizeArray(Constants.NEONCOLORS); // TODO make this responsive to any theme
-        this.entireScreenRect = new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-
-        this.gameOver = false; // TODO or/and on reset?
-
 
         this.shapesManager = new ShapesManager(mediator);
-        initializeBackgroundHandler();
+        this.backgroundHandler = new BackgroundHandler(Constants.CURRENT_THEME);
+
         this.warningColorHolder = new WarningColorHolder(backgroundHandler);
         this.progressBarHolder = new ProgressBarHolder(backgroundHandler);
         this.warningColor = new WarningColor(backgroundHandler);
-        this.score = new Score();
-        this.streak = new Streak();
         this.progressBar = new ProgressBar();
+        this.streak = new Streak();
+        this.score = new Score();
 
         mediator.addObject(score);
         mediator.addObject(streak);
@@ -77,36 +72,15 @@ public class ClassicGameScene implements Scene {
 
     }
 
-    private void initializeBackgroundHandler() {
-        SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerPrefs", MODE_PRIVATE);
-
-        // TODO change error: no theme to basic colorscheme
-        String theme = prefs.getString("theme", "error: no theme");
-
-        this.backgroundHandler = new BackgroundHandler(theme);
-    }
-
     @Override
     public void update() {
-        // TODO update Score via score.setScore(shapesManager.getScore())
-        // TODO same for streak
-        //score.setScore(shapesManager.getScore());
-        //streak.setStreak(shapesManager.getStreak());
-
-        // TODO implement THIS NEXT
-        //progressBar.update(shapesManager.getProgress);
         shapesManager.update();
 
     }
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(backgroundHandler.getBackgroundBitmap("blue"), null,
-                entireScreenRect, null);
-
-
-        // TODO draw score drawtext via score.draw(canvas)
-        // TODO same for streak
+        backgroundHandler.draw(canvas, "blue");
         score.draw(canvas);
         streak.draw(canvas);
         shapesManager.draw(canvas);
@@ -120,8 +94,6 @@ public class ClassicGameScene implements Scene {
 
     @Override
     public void recieveTouch(MotionEvent event) {
-        // pass action to shapesmanager so it can assign the touch to the specific shape
-        // then the shape will update depending on that touch
         //if (!gameOver) {
             //shapesManager.recieveTouch(event);
         //}
@@ -145,7 +117,7 @@ public class ClassicGameScene implements Scene {
     }
 
 
-    public static String[] RandomizeArray(String[] array){
+    private static String[] RandomizeArray(String[] array){
         Random rgen = new Random();  // Random number generator
 
         for (int i=0; i<array.length; i++) {
@@ -154,7 +126,6 @@ public class ClassicGameScene implements Scene {
             array[i] = array[randomPosition];
             array[randomPosition] = temp;
         }
-
         return array;
     }
 }

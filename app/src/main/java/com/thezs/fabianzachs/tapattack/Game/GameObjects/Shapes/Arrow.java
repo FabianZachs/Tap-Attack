@@ -23,14 +23,12 @@ public class Arrow extends ShapeObject {
     private String intendedFlickDirectionString;
     private final double FLICK_DIRECTION_ERROR_ALLOWANCE = Math.PI/4;
     private final Point originalPoint;
-    //private final Point destinationPoint;
     private final int ARROW_TRAVEL_DISTANCE = 30;
     private long timeOfLastPenalty;
 
 
 
     public Arrow(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, String intendendedFlickDirection, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
-        // call super(durationAlive, color) then in super also make the rect to hold bitmap
         super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder, mediator);
         setLives(1);
         setProgressBarAddition(15);
@@ -38,48 +36,11 @@ public class Arrow extends ShapeObject {
         this.intendedFlickDirectionString = intendendedFlickDirection;
         setIntendedFlickDirectionRadians(intendedFlickDirectionString);
         this.originalPoint = centerLocation;
-        //this.destinationPoint = getDestinationPoint();
         this.timeOfLastPenalty = 0;
 
 
-        //lastUpdateXLocation = getCenterLocation().x;
-        //lastUpdateYLocation = getCenterLocation().y;
-        //Log.d("arrow", "Arrow: start: " + originalPoint);
-        //Log.d("arrow", "Arrow: end: " + destinationPoint);
-
-
-
-        // handling touch events
         setmDetector(new GestureDetectorCompat(Constants.CURRENT_CONTEXT, new MyGestureListener()));
 
-    }
-
-    // TODO use this to see if we can create a arrow at a specific location?? or just make arrow spawn further from edge
-    public Point getDestinationPoint() {
-
-        int x = 0;
-        int y = 0;
-
-        switch (intendedFlickDirectionString) {
-            case "UP":
-                x = originalPoint.x;
-                y = originalPoint.y - ARROW_TRAVEL_DISTANCE;
-                break;
-            case "LEFT":
-                x = originalPoint.x - ARROW_TRAVEL_DISTANCE;
-                y = originalPoint.y;
-                break;
-            case "RIGHT":
-                x = originalPoint.x + ARROW_TRAVEL_DISTANCE;
-                y = originalPoint.y;
-                break;
-            case "DOWN":
-                x = originalPoint.x;
-                y = originalPoint.y + ARROW_TRAVEL_DISTANCE;
-                break;
-        }
-
-        return new Point(x,y);
     }
 
 
@@ -90,40 +51,7 @@ public class Arrow extends ShapeObject {
 
 
     @Override
-    public void update() {
-        // TODO check if it is at destinationPoint
-        //Log.d("location", "current: " + getCenterLocation());
-        //Log.d("location", "target: " + destinationPoint);
-
-        // TODO IF UP && CURRENTLOCATION Y < DESTINATION --- simpler CHANGE BELOW IMPLEMENTATION
-        /*
-        if (intendedFlickDirectionString.equals("UP") && getCenterLocation().y <= destinationPoint.y)
-            reduceLives();
-        else if (intendedFlickDirectionString.equals("DOWN") && getCenterLocation().y >= destinationPoint.y)
-            reduceLives();
-        else if (intendedFlickDirectionString.equals("LEFT") && getCenterLocation().x <= destinationPoint.x)
-            reduceLives();
-        else if (intendedFlickDirectionString.equals("RIGHT") && getCenterLocation().x >= destinationPoint.x)
-            reduceLives();
-        */
-        /*
-        // UP
-        if (lastUpdateYLocation > destinationPoint.y && destinationPoint.y >= getCenterLocation().y)
-            reduceLives();
-        // DOWN
-        else if (lastUpdateYLocation < destinationPoint.y && destinationPoint.y <= getCenterLocation().y)
-            reduceLives();
-        // RIGHT
-        else if (lastUpdateXLocation < destinationPoint.x && destinationPoint.x <= getCenterLocation().x)
-            reduceLives();
-        // LEFT
-        else if (lastUpdateXLocation > destinationPoint.x && destinationPoint.x >= getCenterLocation().x)
-            reduceLives();
-        */
-        //lastUpdateXLocation = getCenterLocation().x;
-        //lastUpdateYLocation = getCenterLocation().y;
-
-    }
+    public void update() {}
 
     private void setIntendedFlickDirectionRadians(String direction) {
 
@@ -153,26 +81,8 @@ public class Arrow extends ShapeObject {
 
         @Override
         public boolean onDown(MotionEvent event) {
-            //Log.d(DEBUG_TAG,"onDown: " + event.toString());
             return true;
         }
-
-        /*
-        @Override
-        public boolean onFling(MotionEvent event1, MotionEvent event2,
-                               float velocityX, float velocityY) {
-            Log.d(DEBUG_TAG, "onFling: " + event1.toString() + event2.toString());
-
-            if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY()))
-                reduceLives(); // TODO arrow grave should move in flick direction
-                // TODO set flicked to true so that draw can show it move and dissapear to final destination
-            else
-                ;
-                // TODO implement decriment to progress bar (add wrong flick attribute to decriment progress bar)
-
-            return true;
-
-        }*/
 
         private boolean isCorrectFlick(float x1, float y1, float x2, float y2) {
             Double angle = Math.atan2(y1 - y2, x2 - x1);
@@ -190,32 +100,11 @@ public class Arrow extends ShapeObject {
         public boolean onScroll(MotionEvent event1, MotionEvent event2, float distanceX,
                                 float distanceY) {
             try {
-                //Log.d(DEBUG_TAG, "onScroll: " + event1.toString() + event2.toString());
                 if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY())) {
                     reduceLives();
-
-                    //Log.d(DEBUG_TAG, "onScroll: killed & lives="+getLives());
-                    /*
-                    int x = getCenterLocation().x;
-                    int y = getCenterLocation().y;
-
-                    switch (intendedFlickDirectionString) {
-                        case "UP":
-                        case "DOWN":
-                            y = (int) event2.getY();
-                            break;
-                        case "LEFT":
-                        case "RIGHT":
-                            x = (int) event2.getX();
-                            break;
-                    }
-                    setCenterLocation(x, y);
-                    */
                 }
                 else if (System.currentTimeMillis() - timeOfLastPenalty > 1000) {
-                    //getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
                     mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
-                    //getStreakObserver().resetStreak();
                     mediator.resetStreak();
                     timeOfLastPenalty = System.currentTimeMillis();
 
@@ -223,51 +112,40 @@ public class Arrow extends ShapeObject {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             return true;
         }
 
 
-        // The user has performed a down MotionEvent and not performed a move or up yet.
         @Override
         public void onShowPress(MotionEvent event) {
-            //Log.d(DEBUG_TAG, "onShowPress: " + event.toString());
         }
 
         @Override
         public boolean onSingleTapUp(MotionEvent event) {
-            //Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
-            //getProgressBarObserver().changeProgressBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
             mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
-            //getStreakObserver().resetStreak();
             mediator.resetStreak();
             return true;
         }
 
         @Override
         public boolean onDoubleTap(MotionEvent event) {
-            //Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
             return true;
         }
 
         // TODO this is called if arrow double tapped then scrolled (called instead of scrolled)
         @Override
         public boolean onDoubleTapEvent(MotionEvent event) {
-            //Log.d(DEBUG_TAG, "onDoubleTapEvent: " + event.toString());
             return true;
         }
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent event) {
-            //Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
-            //getProgressBarObserver().changeProgressBy(-1);
             mediator.changeProgressBarBy(-1);
             return true;
         }
 
         @Override
         public void onLongPress(MotionEvent event) {
-            //Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
         }
 
     }

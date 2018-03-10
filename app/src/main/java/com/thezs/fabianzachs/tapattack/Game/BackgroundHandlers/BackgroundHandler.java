@@ -2,6 +2,8 @@ package com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
 
 import com.thezs.fabianzachs.tapattack.Constants;
@@ -19,31 +21,32 @@ import java.util.Map;
 
 public class BackgroundHandler {
 
-    // an arraylist: color -> Bitmap background
-    private Map<String, Bitmap> backgrounds;
+    private Map<String, Bitmap> backgrounds; // color -> bitmap
     private Bitmap previousBitmap;
+    private String previousColor;
     private String theme;
+
+    private Rect entireScreenRect;
+
     private WarningColorHolder warningColorHolderObserver;
     private ProgressBarHolder progressBarHolderObserver;
     private WarningColor warningColorObserver;
-    //private GradientDrawable progressBarHolderDrawable;
-    //private GradientDrawable warningHolderDrawable; // TODO
-    private String previousColor;
-    //private WarningColor warningColorComponent;
 
 
     public BackgroundHandler(String theme) {
-        //this.progressBarHolderDrawable = (GradientDrawable) Constants.progressBarHolder.getDrawable();
-        //this.warningHolderDrawable = (GradientDrawable) Constants.warningComponent.getDrawable(0);
-        this.theme = theme;
         this.backgrounds = new HashMap<>();
+        this.theme = theme;
+        this.entireScreenRect = new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         addBackgroundsToMap(theme);
         this.previousColor = "null";
         this.previousBitmap = null;
-        //this.warningColorComponent = new WarningColor(); // TODO use observer instead
     }
 
-    // TODO when we get a new background we update the warning colorholder and warning color
+    public void draw(Canvas canvas, String blue) {
+        canvas.drawBitmap(getBackgroundBitmap("blue"), null,
+                entireScreenRect, null);
+    }
+
     public Bitmap getBackgroundBitmap(String color) {
 
         if (!previousColor.equals(color)) {
@@ -53,21 +56,9 @@ public class BackgroundHandler {
             previousColor = color;
             previousBitmap = backgrounds.get(theme+color+"background");
         }
-        // TODO store background here to eliminate constant char[] calls
         return previousBitmap;
     }
 
-    /*
-    private void changeWarningHolderColor(String color) {
-        warningHolderDrawable.setColors(Constants.progressBarHolderAndWarningHolderColors.get(color));
-    }*/
-
-    /*
-    private void changeProgressBarBackground(String color) {
-        //GradientDrawable replacer = (GradientDrawable) Constants.CURRENT_CONTEXT.getResources().getDrawable(R.drawable.progressbarholder);
-        //replacer.setColors(colors);
-        progressBarHolderDrawable.setColors(Constants.progressBarHolderAndWarningHolderColors.get(color));
-    }*/
 
     private void addBackgroundsToMap(String theme) {
         String[] colors = Constants.COLORS.get(theme);
@@ -80,10 +71,6 @@ public class BackgroundHandler {
         }
     }
 
-    /*public WarningColor getWarningColorComponent() {
-        return this.warningColorComponent;
-    }*/
-
     public void attachWarningColorHolderObserver(WarningColorHolder warningColorHolder) {
         this.warningColorHolderObserver = warningColorHolder;
     }
@@ -95,4 +82,5 @@ public class BackgroundHandler {
     public void attachWarningColorObserver(WarningColor warningColor) {
         this.warningColorObserver = warningColor;
     }
+
 }

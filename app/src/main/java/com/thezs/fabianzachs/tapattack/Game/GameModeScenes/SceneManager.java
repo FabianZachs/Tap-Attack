@@ -1,12 +1,16 @@
-package com.thezs.fabianzachs.tapattack.Game;
+package com.thezs.fabianzachs.tapattack.Game.GameModeScenes;
 
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
+import com.thezs.fabianzachs.tapattack.Game.Scene;
 
 import java.util.ArrayList;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by fabianzachs on 07/02/18.
@@ -20,6 +24,7 @@ public class SceneManager {
 
     // TODO update to take game mode x (ACTIVE_SCENE is specified before)
     public SceneManager() {
+        setCurrentTheme();
         ACTIVE_SCENE = 0;
         scenes.add(new ClassicGameScene());
         CURRENT_SCENE = scenes.get(ACTIVE_SCENE);
@@ -46,4 +51,9 @@ public class SceneManager {
         CURRENT_SCENE.setGameOver(true);
     }
 
+    public void setCurrentTheme() {
+        SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerPrefs", MODE_PRIVATE);
+
+        Constants.CURRENT_THEME = prefs.getString("theme", "neon");
+    }
 }

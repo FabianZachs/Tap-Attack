@@ -6,13 +6,11 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.support.v4.view.GestureDetectorCompat;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
-import com.thezs.fabianzachs.tapattack.Game.SceneManager;
 
 /**
  * Created by fabianzachs on 25/02/18.
