@@ -100,6 +100,10 @@ public abstract class ShapeObject {
         return alphaPaint;
     }
 
+    public final void incorrectTouch() {
+
+    }
+
     public Paint getPaintObj() {
         return this.alphaPaint;
     }

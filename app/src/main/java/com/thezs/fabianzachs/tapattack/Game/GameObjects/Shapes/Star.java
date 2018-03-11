@@ -1,11 +1,14 @@
 package com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -14,6 +17,7 @@ import android.view.MotionEvent;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
+import com.thezs.fabianzachs.tapattack.R;
 
 /**
  * Created by fabianzachs on 04/03/18.
@@ -51,14 +55,14 @@ public class Star extends ShapeObject {
         if (System.currentTimeMillis() - timeSetState > TIME_OF_CLICK_IMG * 1000)
             setState(0);
 
-        /*
+
         if (System.currentTimeMillis() - timeOfLastRotation> TIME_PER_ROATION * 1000) {
             //rotationMatrix.postRotate(ROTATION_ANGLE);
             timeOfLastRotation = System.currentTimeMillis();
             setShapeImages(0, Bitmap.createBitmap(getShapeImg(), 0, 0, getShapeImg().getWidth(), getShapeImg().getHeight(), rotationMatrix, true));
             // TODO rotate bitmap holder as well
             //setBitmapHolder(getBitmapHolder().);
-        }*/
+        }
 /*
         Matrix m = new Matrix();
 // point is the point about which to rotate.
@@ -86,7 +90,20 @@ public class Star extends ShapeObject {
 
     @Override
     public void draw(Canvas canvas) {
-        super.draw(canvas);
+        //super.draw(canvas);
+
+        //Bitmap star = BitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.star);
+        /*Drawable star = Constants.CURRENT_CONTEXT.getDrawable(R.drawable.star);
+        star.setColorFilter(0xff52ff, PorterDuff.Mode.DST);
+
+        star.setBounds(getBitmapHolder().left, getBitmapHolder().top, getBitmapHolder().right, getBitmapHolder().bottom);
+
+        star.draw(canvas);
+*/
+        //canvas.drawBitmap(getCurrentShapeImg().,null,getBitmapHolder(),new Paint());
+
+
+
         /*
         canvas.save(Canvas.ALL_SAVE_FLAG);
         canvas.rotate(-ROTATION_ANGLE);
@@ -104,61 +121,17 @@ public class Star extends ShapeObject {
 
 
 
-    // listens for specific touch events
     class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
         private static final String DEBUG_TAG = "Gestures";
 
-
         @Override
         public boolean onDown(MotionEvent event) {
-            //Log.d(DEBUG_TAG,"onDown: " + event.toString());
-            setState(1); // TODO only briefly
+            setState(1);
             timeSetState = System.currentTimeMillis();
-            //getScoreObserver().incScore(getPoints());
             mediator.incScore(getPoints());
             return true;
         }
 
-        @Override
-        public boolean onFling(MotionEvent event1, MotionEvent event2,
-                               float velocityX, float velocityY) {
-            return true;
-        }
-
-        // The user has performed a down MotionEvent and not performed a move or up yet.
-        @Override
-        public void onShowPress(MotionEvent event) {
-            //Log.d(DEBUG_TAG, "onShowPress: " + event.toString());
-        }
-
-        @Override
-        public boolean onSingleTapUp(MotionEvent event) {
-            //Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
-            return true;
-        }
-
-        @Override
-        public boolean onDoubleTap(MotionEvent event) {
-            //Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
-            return true;
-        }
-
-        @Override
-        public boolean onDoubleTapEvent(MotionEvent event) {
-            //Log.d(DEBUG_TAG, "onDoubleTapEvent: " + event.toString());
-            return true;
-        }
-
-        @Override
-        public boolean onSingleTapConfirmed(MotionEvent event) {
-            //Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
-            return true;
-        }
-
-        @Override
-        public void onLongPress(MotionEvent event) {
-            //Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
-        }
     }
 
 }

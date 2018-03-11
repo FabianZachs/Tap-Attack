@@ -32,14 +32,12 @@ public class Arrow extends ShapeObject {
         setLives(1);
         setProgressBarAddition(15);
 
-        this.intendedFlickDirectionString = intendendedFlickDirection;
-        setIntendedFlickDirectionRadians(intendedFlickDirectionString);
         this.originalPoint = centerLocation;
         this.timeOfLastPenalty = 0;
-
+        this.intendedFlickDirectionString = intendendedFlickDirection;
+        setIntendedFlickDirectionRadians(intendedFlickDirectionString);
 
         setmDetector(new GestureDetectorCompat(Constants.CURRENT_CONTEXT, new MyGestureListener()));
-
     }
 
 
@@ -70,31 +68,28 @@ public class Arrow extends ShapeObject {
         }
     }
 
+    private boolean isCorrectFlick(float x1, float y1, float x2, float y2) {
+        Double angle = Math.atan2(y1 - y2, x2 - x1);
+
+        if (angle < -(Math.PI/2)  - Math.PI/4)
+            angle = (2 * Math.PI) + angle;
+
+        return (angle >= intendedFlickDirectionRadians - Math.PI/4 &&
+                angle <= intendedFlickDirectionRadians + Math.PI/4);
+    }
+
+    public String getIntendedFlickDirectionString() {
+        return this.intendedFlickDirectionString;
+    }
 
 
-    // TODO reset arrow to original point if user scrolls out of error region
-    // listens for specific touch events
     class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
-        private static final String DEBUG_TAG = "Gestures";
-
 
         @Override
         public boolean onDown(MotionEvent event) {
             return true;
         }
 
-        private boolean isCorrectFlick(float x1, float y1, float x2, float y2) {
-            Double angle = Math.atan2(y1 - y2, x2 - x1);
-
-            if (angle < -(Math.PI/2)  - Math.PI/4)
-                angle = (2 * Math.PI) + angle;
-
-            return (angle >= intendedFlickDirectionRadians - Math.PI/4 &&
-                    angle <= intendedFlickDirectionRadians + Math.PI/4);
-        }
-
-
-        // TODO maybe use this if someone slowly drags in direction
         @Override
         public boolean onScroll(MotionEvent event1, MotionEvent event2, float distanceX,
                                 float distanceY) {
@@ -114,11 +109,6 @@ public class Arrow extends ShapeObject {
             return true;
         }
 
-
-        @Override
-        public void onShowPress(MotionEvent event) {
-        }
-
         @Override
         public boolean onSingleTapUp(MotionEvent event) {
             mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
@@ -136,22 +126,7 @@ public class Arrow extends ShapeObject {
         public boolean onDoubleTapEvent(MotionEvent event) {
             return true;
         }
-
-        @Override
-        public boolean onSingleTapConfirmed(MotionEvent event) {
-            return true;
-        }
-
-        @Override
-        public void onLongPress(MotionEvent event) {
-        }
-
     }
-
-    public String getIntendedFlickDirectionString() {
-        return this.intendedFlickDirectionString;
-    }
-
 
 
 }
