@@ -30,38 +30,37 @@ public abstract class ShapeObject {
     protected CentralGameCommunication mediator;
 
     public int PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH = -35;
+    private int PROGRESSBAR_ADDITION = 10;
 
-
-
-    private Paint alphaPaint;
+    private Point centerLocation;
     private Bitmap[] shapeImages;
     private float durationAlive;
     private Rect bitmapHolder;
+    private boolean graveAble;
+    private Paint alphaPaint;
     private long initTime;
     private String color;
-    private int lives;
-    private Point centerLocation;
-
-    private int progressBarAddition;
-    private int stateAnimation = 0;
     private int points;
+    private int lives;
 
-    private boolean graveAble;
+    private int stateAnimation = 0;
+
 
     private GestureDetectorCompat mDetector;
 
 
     public ShapeObject(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect rect, CentralGameCommunication mediator) {
         this.mediator = mediator;
-        this.alphaPaint = paint;
-        this.graveAble = true;
-        this.durationAlive = durationAlive;
-        this.color = color;
+
         this.centerLocation = centerLocation;
-        this.points = 1;
-        this.initTime = System.currentTimeMillis();
-        this.progressBarAddition = 10;
         this.shapeImages = new Bitmap[] {shapeImg, shapeClickImg};
+        this.durationAlive = durationAlive;
+        this.graveAble = true;
+        this.alphaPaint = paint;
+        this.initTime = System.currentTimeMillis();
+        this.color = color;
+        this.points = 1;
+        this.lives = 1;
 
         rect.set((centerLocation.x - (Constants.SHAPE_WIDTH/2)),
                 (centerLocation.y - (Constants.SHAPE_HEIGHT/2)),
@@ -75,7 +74,6 @@ public abstract class ShapeObject {
         canvas.drawBitmap(getCurrentShapeImg(), null, getBitmapHolder(),getAlphaPaint());
     }
 
-    public abstract void update();
 
     public boolean isTimedOut() {
         return (System.currentTimeMillis() - initTime > durationAlive * 1000);
@@ -85,7 +83,8 @@ public abstract class ShapeObject {
         this.lives -= 1;
     }
 
-    // SETTERS & GETTERSgameBoundary
+    public abstract void update();
+
     public void setmDetector(GestureDetectorCompat mDetector) {
         this.mDetector = mDetector;
     }
@@ -109,21 +108,6 @@ public abstract class ShapeObject {
         return this.centerLocation;
     }
 
-    public void updateCenterLocation(int x, int y) {
-        this.centerLocation.set(x,y);
-        updateBitmapHolderLocation();
-    }
-
-    private void updateBitmapHolderLocation() {
-        Rect newBitmapHolder = getBitmapHolder();
-        newBitmapHolder.left = (int) (centerLocation.x - (Constants.SHAPE_WIDTH/2));
-        newBitmapHolder.top = (int) (centerLocation.y - (Constants.SHAPE_HEIGHT/2));
-        newBitmapHolder.right = (int) (centerLocation.x + (Constants.SHAPE_WIDTH/2));
-        newBitmapHolder.bottom = (int) (centerLocation.y + (Constants.SHAPE_HEIGHT/2));
-
-        setBitmapHolder(newBitmapHolder);
-    }
-
     public void setShapeImages(int index, Bitmap img) {
         this.shapeImages[index] = img;
     }
@@ -141,11 +125,11 @@ public abstract class ShapeObject {
     }
 
     public void setProgressBarAddition(int progressBarAddition) {
-        this.progressBarAddition = progressBarAddition;
+        this.PROGRESSBAR_ADDITION= progressBarAddition;
     }
 
     public int getProgressBarAddition() {
-        return this.progressBarAddition;
+        return this.PROGRESSBAR_ADDITION;
     }
 
     public void setBitmapHolder(Rect rect) {
