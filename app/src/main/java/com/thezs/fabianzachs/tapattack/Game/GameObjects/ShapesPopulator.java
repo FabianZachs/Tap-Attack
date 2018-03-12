@@ -40,7 +40,7 @@ public class ShapesPopulator {
     // settings
     private final int UNIT_TIME_PER_SHAPE_ADDITION = 1; // every x seconds one more max shape
     private final int SHAPE_SPACING = 5; // space between shapes
-    private final int MAX_SHAPES = 6;
+    private final int MAX_SHAPES = 1;
     private final int MAX_NUMBER_LOOPS = 5;
 
     private long timeOfLastShapeAddition;

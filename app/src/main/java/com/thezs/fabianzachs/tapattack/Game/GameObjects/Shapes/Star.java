@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
@@ -34,6 +35,8 @@ public class Star extends ShapeObject {
     private final float TIME_PER_ROATION = 0.5f;
     private Matrix rotationMatrix;
     private long timeOfLastRotation;
+
+    private int colorIndex = 0;
 
     public Star(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
         super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder, mediator);
@@ -93,13 +96,21 @@ public class Star extends ShapeObject {
 
     @Override
     public void draw(Canvas canvas) {
-        //super.draw(canvas);
-        Bitmap bm = getCurrentShapeImg();
 
+        // tODO fix colors
+        //super.draw(canvas);
+
+        float[] hsv = {colorIndex,0.9f,1f};
+        Log.d("color", "draw: colow: " + colorIndex);
+        colorIndex++;
+        //colorIndex = colorIndex > 359 ? 0 : colorIndex++;
+
+        int myRGBColor = Color.HSVToColor(255, hsv);
 
         Paint paint = new Paint();
-        //ColorFilter filter = new PorterDuffColorFilter(ContextCompat.getColor(Constants.CURRENT_CONTEXT, R.color.settingsbackground), PorterDuff.Mode.SRC_IN);
-        ColorFilter filter = new PorterDuffColorFilter(0xff00ffff,PorterDuff.Mode.SRC_IN);
+        ColorFilter filter = new PorterDuffColorFilter(myRGBColor,PorterDuff.Mode.SRC_IN);
+
+
         paint.setColorFilter(filter);
 
 
