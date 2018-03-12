@@ -3,12 +3,15 @@ package com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -91,6 +94,16 @@ public class Star extends ShapeObject {
     @Override
     public void draw(Canvas canvas) {
         //super.draw(canvas);
+        Bitmap bm = getCurrentShapeImg();
+
+
+        Paint paint = new Paint();
+        //ColorFilter filter = new PorterDuffColorFilter(ContextCompat.getColor(Constants.CURRENT_CONTEXT, R.color.settingsbackground), PorterDuff.Mode.SRC_IN);
+        ColorFilter filter = new PorterDuffColorFilter(0xff00ffff,PorterDuff.Mode.SRC_IN);
+        paint.setColorFilter(filter);
+
+
+        canvas.drawBitmap(getCurrentShapeImg(),null, getBitmapHolder(), paint);
 
         //Bitmap star = BitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.star);
         /*Drawable star = Constants.CURRENT_CONTEXT.getDrawable(R.drawable.star);
