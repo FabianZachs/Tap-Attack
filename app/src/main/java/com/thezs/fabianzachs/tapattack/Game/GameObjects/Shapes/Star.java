@@ -37,7 +37,7 @@ public class Star extends ShapeObject {
     private Matrix rotationMatrix;
     private long timeOfLastRotation;
 
-    private int colorIndex = 0;
+    private int colorIndex = 0; // TODO start at random index and if warning colow matches color of star -- reduce progress
 
     public Star(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
         super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder, mediator);
@@ -59,9 +59,11 @@ public class Star extends ShapeObject {
     @Override
     public void update() {
 
+        /*
         if (System.currentTimeMillis() - timeSetState > TIME_OF_CLICK_IMG * 1000)
             setState(0);
-
+*/
+        /*
 
         if (System.currentTimeMillis() - timeOfLastRotation> TIME_PER_ROATION * 1000) {
             //rotationMatrix.postRotate(ROTATION_ANGLE);
@@ -70,6 +72,7 @@ public class Star extends ShapeObject {
             // TODO rotate bitmap holder as well
             //setBitmapHolder(getBitmapHolder().);
         }
+*/
 /*
         Matrix m = new Matrix();
 // point is the point about which to rotate.
@@ -151,6 +154,7 @@ public class Star extends ShapeObject {
         @Override
         public boolean onDown(MotionEvent event) {
             //setState(1);
+            setShapeImages(0, Bitmap.createBitmap(getShapeImg(), 0, 0, getShapeImg().getWidth(), getShapeImg().getHeight(), rotationMatrix, true));
             colorIndex+=50;
             timeSetState = System.currentTimeMillis();
             mediator.incScore(getPoints());

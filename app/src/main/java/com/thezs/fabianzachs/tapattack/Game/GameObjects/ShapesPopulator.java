@@ -33,15 +33,11 @@ public class ShapesPopulator {
     private SharedPaint sharedPaint;
     private SharedRect sharedRect;
 
-    private Score scoreObserver;
-    private Streak streakObserver;
-    private ProgressBar progressBarObserver;
-
     // settings
-    private final int UNIT_TIME_PER_SHAPE_ADDITION = 1; // every x seconds one more max shape
-    private final int SHAPE_SPACING = 5; // space between shapes
-    private final int MAX_SHAPES = 1;
+    private final int UNIT_TIME_PER_SHAPE_ADDITION = 2; // every x seconds one more max shape
     private final int MAX_NUMBER_LOOPS = 5;
+    private final int SHAPE_SPACING = 5; // space between shapes
+    private final int MAX_SHAPES = 5;
 
     private long timeOfLastShapeAddition;
 
@@ -156,18 +152,6 @@ public class ShapesPopulator {
         return System.currentTimeMillis() - initTime;
     }
 
-    /*
-    public void attachScoreObserver(Score scoreObserver) {
-        this.scoreObserver= scoreObserver;
-    }
-
-    public void attachStreakObserver(Streak streakObserver) {
-        this.streakObserver = streakObserver;
-    }
-
-    public void attachProgressBarObserver(ProgressBar progressBarObserver) {
-        this.progressBarObserver = progressBarObserver;
-    }*/
 
     public String getColor() {
         return shapeColors[colorFinder.nextInt(5)];
