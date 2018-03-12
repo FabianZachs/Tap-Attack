@@ -43,47 +43,10 @@ public class Circle extends ShapeObject {
     // listens for specific touch events
     class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
 
-
         @Override
         public boolean onDown(MotionEvent event) {
             reduceLives();
             return true;
-        }
-
-        @Override
-        public boolean onFling(MotionEvent event1, MotionEvent event2,
-                               float velocityX, float velocityY) {
-            mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
-            mediator.resetStreak();
-            return true;
-        }
-
-        @Override
-        public void onShowPress(MotionEvent event) {
-        }
-
-        @Override
-        public boolean onSingleTapUp(MotionEvent event) {
-            return true;
-        }
-
-        @Override
-        public boolean onDoubleTap(MotionEvent event) {
-            return true;
-        }
-
-        @Override
-        public boolean onDoubleTapEvent(MotionEvent event) {
-            return true;
-        }
-
-        @Override
-        public boolean onSingleTapConfirmed(MotionEvent event) {
-            return true;
-        }
-
-        @Override
-        public void onLongPress(MotionEvent event) {
         }
     }
 

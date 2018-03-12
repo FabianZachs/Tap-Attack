@@ -2,8 +2,12 @@ package com.thezs.fabianzachs.tapattack.Game.GraveObjects;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.util.Log;
 
@@ -61,6 +65,22 @@ public abstract class GraveObject {
             StyleableToast.makeText(Constants.CURRENT_CONTEXT, "NOw", R.style.successtoast).show();
 
         }*/
+/*
+        //testing
+        float[] hsv = {155,1f,1f};
+
+        int myRGBColor = Color.HSVToColor(255, hsv);
+
+        Paint paint = new Paint();
+        ColorFilter filter = new PorterDuffColorFilter(myRGBColor, PorterDuff.Mode.SRC_IN);
+
+        paint.setColorFilter(filter);
+
+
+        canvas.drawBitmap(graveImg, null, getBitmapHolder(),paint);
+
+        //testing
+*/
 
         canvas.drawBitmap(graveImg, null, this.bitmapHolder, this.paint);
 

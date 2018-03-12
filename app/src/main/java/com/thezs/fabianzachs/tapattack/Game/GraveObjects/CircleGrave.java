@@ -15,6 +15,7 @@ public class CircleGrave extends GraveObject {
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(getGraveImg(), null, getBitmapHolder(), getPaint());
+        super.draw(canvas);
+        //canvas.drawBitmap(getGraveImg(), null, getBitmapHolder(), getPaint());
     }
 }

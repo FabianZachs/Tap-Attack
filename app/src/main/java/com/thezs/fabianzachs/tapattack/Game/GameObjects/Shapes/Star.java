@@ -29,10 +29,11 @@ import com.thezs.fabianzachs.tapattack.R;
 
 public class Star extends ShapeObject {
 
-    private final float TIME_OF_CLICK_IMG = 0.08f;
+    private final float TIME_OF_CLICK_IMG = 1f;
+    //private final float TIME_OF_CLICK_IMG = 0.08f;
     private long timeSetState;
     private final int ROTATION_ANGLE = 90;
-    private final float TIME_PER_ROATION = 0.5f;
+    private final float TIME_PER_ROATION = 0.4f;
     private Matrix rotationMatrix;
     private long timeOfLastRotation;
 
@@ -100,10 +101,8 @@ public class Star extends ShapeObject {
         // tODO fix colors
         //super.draw(canvas);
 
-        float[] hsv = {colorIndex,0.9f,1f};
+        float[] hsv = {colorIndex,1f,1f};
         Log.d("color", "draw: colow: " + colorIndex);
-        colorIndex++;
-        //colorIndex = colorIndex > 359 ? 0 : colorIndex++;
 
         int myRGBColor = Color.HSVToColor(255, hsv);
 
@@ -113,8 +112,10 @@ public class Star extends ShapeObject {
 
         paint.setColorFilter(filter);
 
-
         canvas.drawBitmap(getCurrentShapeImg(),null, getBitmapHolder(), paint);
+        Log.d("center", "draw: location " + getBitmapHolder().top + " " + getBitmapHolder().left + " " + getBitmapHolder().bottom + " " + getBitmapHolder().right);
+        colorIndex += 10;
+        colorIndex = colorIndex > 350 ? 0 : colorIndex++;
 
         //Bitmap star = BitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.star);
         /*Drawable star = Constants.CURRENT_CONTEXT.getDrawable(R.drawable.star);
@@ -146,11 +147,11 @@ public class Star extends ShapeObject {
 
 
     class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
-        private static final String DEBUG_TAG = "Gestures";
 
         @Override
         public boolean onDown(MotionEvent event) {
-            setState(1);
+            //setState(1);
+            colorIndex+=50;
             timeSetState = System.currentTimeMillis();
             mediator.incScore(getPoints());
             return true;
