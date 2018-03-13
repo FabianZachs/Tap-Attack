@@ -56,10 +56,17 @@ public class ShapeBuilder {
 */
             case "square":
                 return new Square(3, color, centerLocation,
+                        neonShapes.getShapeBitmap(shape,color,false),
+                        neonShapes.getShapeBitmap(shape,color,true),
+                        neonShapes.getShapePaint(paint,color), bitmapHolder, mediator);
+
+                /*
+            case "square":
+                return new Square(3, color, centerLocation,
                         animationManager.getBitmap("square", color, false),
                         animationManager.getBitmap("square", color, true),
                         paint, bitmapHolder, mediator);
-
+*/
             case "cross":
                 return new Cross(3, color, centerLocation,
                         animationManager.getBitmap("cross", color, false),
@@ -68,9 +75,16 @@ public class ShapeBuilder {
 
             case "arrow":
                 return new Arrow(3, color, centerLocation,
+                        translateBitmap(direction,neonShapes.getShapeBitmap(shape,color,false)),
+                        null,
+                        direction, neonShapes.getShapePaint(paint,color), bitmapHolder, mediator);
+                /*
+            case "arrow":
+                return new Arrow(3, color, centerLocation,
                         translateBitmap(direction,color,false),
                         translateBitmap(direction,color,true),
                         direction, paint, bitmapHolder, mediator);
+                        */
             case "star":
                 return new Star(5, "yellow", centerLocation,
                         animationManager.getBitmap("star", "yellow", false),
@@ -81,6 +95,27 @@ public class ShapeBuilder {
         return null;
     }
 
+    private Bitmap translateBitmap(String direction, Bitmap origonalBitmap) {
+
+        Matrix rotationMatrix = new Matrix();
+
+        switch (direction) {
+            case "UP":
+                break;
+            case "LEFT":
+                rotationMatrix.postRotate(-90);
+                break;
+            case "RIGHT":
+                rotationMatrix.postRotate(90);
+                break;
+            case "DOWN":
+                rotationMatrix.postRotate(180);
+                break;
+
+        }
+        return Bitmap.createBitmap(origonalBitmap, 0, 0, origonalBitmap.getWidth(), origonalBitmap.getHeight(), rotationMatrix, true);
+    }
+    /*
     private Bitmap translateBitmap(String direction, String color, boolean click) {
 
         Bitmap origonalBitmap = animationManager.getBitmap("arrow", color, click);
@@ -101,7 +136,7 @@ public class ShapeBuilder {
 
         }
         return Bitmap.createBitmap(origonalBitmap, 0, 0, origonalBitmap.getWidth(), origonalBitmap.getHeight(), rotationMatrix, true);
-    }
+    }*/
 
 
     private void initializeAnimations() {

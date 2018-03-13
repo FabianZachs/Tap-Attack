@@ -28,7 +28,7 @@ public class Arrow extends ShapeObject {
 
 
     public Arrow(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, String intendendedFlickDirection, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
-        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder, mediator);
+        super(durationAlive, color, centerLocation, shapeImg, shapeImg, paint, bitmapHolder, mediator);
         setLives(1);
         setProgressBarAddition(15);
 
