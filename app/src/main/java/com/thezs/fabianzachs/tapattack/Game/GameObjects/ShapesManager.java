@@ -37,17 +37,12 @@ public class ShapesManager {
     private SharedRect sharedRect;
 
 
-    private long initTime;
-    private long startTime;  // time of update. startTime - initTime = time passed (good for difficulty)
-                             // use sqrt function for difficulty
 
-
-    public ShapesManager(CentralGameCommunication mediator) {
+    public ShapesManager(CentralGameCommunication mediator, long initTime) {
 
         this.mediator = mediator;
         this.sharedPaint = new SharedPaint();
         this.sharedRect = new SharedRect();
-        this.initTime = System.currentTimeMillis();
         this.shapesPopulator = new ShapesPopulator(mediator,initTime,sharedPaint,sharedRect);
         this.graveFactory = new GraveFactory();
     }

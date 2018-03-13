@@ -23,33 +23,41 @@ import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 import com.thezs.fabianzachs.tapattack.R;
 
+import java.util.Random;
+
 /**
  * Created by fabianzachs on 04/03/18.
  */
 
 public class Star extends ShapeObject {
 
-    private final float TIME_OF_CLICK_IMG = 1f;
-    //private final float TIME_OF_CLICK_IMG = 0.08f;
-    private long timeSetState;
     private final int ROTATION_ANGLE = 90;
-    private final float TIME_PER_ROATION = 0.4f;
+    private boolean clicked = false;
+    private long timeOfLastColorChange;
+    //private float[] hsv = {0,1f,1f};
     private Matrix rotationMatrix;
-    private long timeOfLastRotation;
+    private float TIME_PER_COLOR = 0.5f;
+    //private int COLOR_INTERVAL = 5;
+    //private String[] colors = Constants.COLORS.get(Constants.CURRENT_THEME);
+    private int[] colors = Constants.neonColorsInt;
 
     private int colorIndex = 0; // TODO start at random index and if warning colow matches color of star -- reduce progress
 
     public Star(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
         super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder, mediator);
-        setLives(1);
         setProgressBarAddition(0);
         setGraveAble(false);
+        setLives(1);
+
+        timeOfLastColorChange = 0;
+
+        Random randIndex = new Random();
+        colorIndex = randIndex.nextInt(color.length());
+        //hsv[0] = colorIndex;
 
         rotationMatrix = new Matrix();
         rotationMatrix.postRotate(ROTATION_ANGLE);
-        timeOfLastRotation = System.currentTimeMillis();
 
-        // handling touch events
         setmDetector(new GestureDetectorCompat(Constants.CURRENT_CONTEXT, new MyGestureListener()));
 
     }
@@ -59,43 +67,14 @@ public class Star extends ShapeObject {
     @Override
     public void update() {
 
-        /*
-        if (System.currentTimeMillis() - timeSetState > TIME_OF_CLICK_IMG * 1000)
-            setState(0);
-*/
-        /*
-
-        if (System.currentTimeMillis() - timeOfLastRotation> TIME_PER_ROATION * 1000) {
-            //rotationMatrix.postRotate(ROTATION_ANGLE);
-            timeOfLastRotation = System.currentTimeMillis();
-            setShapeImages(0, Bitmap.createBitmap(getShapeImg(), 0, 0, getShapeImg().getWidth(), getShapeImg().getHeight(), rotationMatrix, true));
-            // TODO rotate bitmap holder as well
-            //setBitmapHolder(getBitmapHolder().);
+        if (System.currentTimeMillis() - timeOfLastColorChange > TIME_PER_COLOR * 1000 && !clicked) {
+            timeOfLastColorChange = System.currentTimeMillis();
+            //colorIndex += COLOR_INTERVAL;
+            colorIndex++;
         }
-*/
-/*
-        Matrix m = new Matrix();
-// point is the point about which to rotate.
-        m.setRotate(degrees, point.x, point.y);
-        m.mapRect(r);*/
-
-/*
-        Matrix matrix = new Matrix();
-        matrix.setRotate(ROTATION_ANGLE, getBitmapHolder().centerX(), getBitmapHolder().centerY());
-        mcanvas.drawBitmap(yourBitmap, matrix, null);
-*/
-        //canvas.drawBitmap(getCurrentShapeImg(), null, getBitmapHolder(),getAlphaPaint());
-/*
-        mcanvas.save(Canvas.MATRIX_SAVE_FLAG); //Saving the canvas and later restoring it so only this image will be rotated.
-        2
-        mcanvas.rotate(-angle);
-        3
-        mcanvas.drawBitmap(yourBitmap, left, top, null);
-        4
-        mcanvas.restore();
-        */
-
-
+        colorIndex = colorIndex%(colors.length-1);
+        //colorIndex = colorIndex%360;
+        //hsv[0] = colorIndex;
     }
 
     @Override
@@ -104,22 +83,19 @@ public class Star extends ShapeObject {
         // tODO fix colors
         //super.draw(canvas);
 
-        float[] hsv = {colorIndex,1f,1f};
-        Log.d("color", "draw: colow: " + colorIndex);
-
-        int myRGBColor = Color.HSVToColor(255, hsv);
-
-        Paint paint = new Paint();
-        ColorFilter filter = new PorterDuffColorFilter(myRGBColor,PorterDuff.Mode.SRC_IN);
 
 
-        paint.setColorFilter(filter);
+        //ColorFilter filter = new PorterDuffColorFilter(Color.HSVToColor(255,hsv),PorterDuff.Mode.SRC_IN);
+        ColorFilter filter = new PorterDuffColorFilter(colors[colorIndex],PorterDuff.Mode.SRC_IN);
 
-        canvas.drawBitmap(getCurrentShapeImg(),null, getBitmapHolder(), paint);
-        Log.d("center", "draw: location " + getBitmapHolder().top + " " + getBitmapHolder().left + " " + getBitmapHolder().bottom + " " + getBitmapHolder().right);
-        colorIndex += 10;
-        colorIndex = colorIndex > 350 ? 0 : colorIndex++;
 
+        getAlphaPaint().setColorFilter(filter);
+
+        canvas.drawBitmap(getCurrentShapeImg(),null, getBitmapHolder(), getAlphaPaint());
+        //colorIndex += 5;
+        //colorIndex = colorIndex > 355 ? 0 : colorIndex++;
+
+        //canvas.drawBitmap(getCurrentShapeImg(),null, getBitmapHolder(),getAlphaPaint());
         //Bitmap star = BitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.star);
         /*Drawable star = Constants.CURRENT_CONTEXT.getDrawable(R.drawable.star);
         star.setColorFilter(0xff52ff, PorterDuff.Mode.DST);
@@ -153,11 +129,10 @@ public class Star extends ShapeObject {
 
         @Override
         public boolean onDown(MotionEvent event) {
-            //setState(1);
+            clicked = true;
             setShapeImages(0, Bitmap.createBitmap(getShapeImg(), 0, 0, getShapeImg().getWidth(), getShapeImg().getHeight(), rotationMatrix, true));
-            colorIndex+=50;
-            timeSetState = System.currentTimeMillis();
-            mediator.incScore(getPoints());
+            mediator.incScore(getPoints() /*get string based Color based on index of color*/);
+            // if hit warning color, reduce lives of shape and progressbar, otherwise make it unable inc score with that color maintained
             return true;
         }
 

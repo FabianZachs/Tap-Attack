@@ -30,6 +30,9 @@ public class Constants {
     public static String CURRENT_THEME;
 
 
+
+    public static int[] neonColorsInt = {0xff0040ff,0xff6aed6a,0xffffff00,0xffff0000,0xff9d00ff};
+    // NEON
     public static Map<String, int[]> progressBarHolderAndWarningHolderColors;
     public static int[] holderBlue = {0xff0040ff, 0xff00bcfe};
     public static int[] holderGreen = {0xff6aed6a, 0xff37d537};

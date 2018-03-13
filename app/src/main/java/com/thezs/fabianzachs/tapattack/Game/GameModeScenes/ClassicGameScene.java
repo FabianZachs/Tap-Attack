@@ -43,18 +43,20 @@ public class ClassicGameScene implements Scene {
     private ProgressBar progressBar;
     private Streak streak;
     private Score score;
+    private long initTime;
 
     private BackgroundHandler backgroundHandler;
     private ShapesManager shapesManager;
 
 
     public ClassicGameScene() {
+        this.initTime = System.currentTimeMillis();
         this.gameOver = false; // TODO or/and on reset?
         this.mediator = new CentralGameCommunication();
 
         Constants.NEONCOLORS = RandomizeArray(Constants.NEONCOLORS); // TODO make this responsive to any theme
 
-        this.shapesManager = new ShapesManager(mediator);
+        this.shapesManager = new ShapesManager(mediator, initTime);
         this.backgroundHandler = new BackgroundHandler(Constants.CURRENT_THEME);
 
         this.warningColorHolder = new WarningColorHolder(backgroundHandler);
