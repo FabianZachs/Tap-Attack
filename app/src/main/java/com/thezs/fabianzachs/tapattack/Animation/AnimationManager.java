@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack.Animation;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.ColorFilter;
 import android.graphics.Rect;
 
 import com.thezs.fabianzachs.tapattack.Constants;
@@ -18,6 +19,7 @@ import java.util.Map;
 public class AnimationManager {
 
     private Map<String, Bitmap> animations;
+    ColorFilter filter;
     private String theme;
 
     public AnimationManager(String theme) {

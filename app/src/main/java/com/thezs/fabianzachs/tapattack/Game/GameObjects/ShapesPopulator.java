@@ -37,7 +37,7 @@ public class ShapesPopulator {
     private final int UNIT_TIME_PER_SHAPE_ADDITION = 2; // every x seconds one more max shape
     private final int MAX_NUMBER_LOOPS = 5;
     private final int SHAPE_SPACING = 5; // space between shapes
-    private final int MAX_SHAPES = 1;
+    private final int MAX_SHAPES = 5;
 
     private long timeOfLastShapeAddition;
 
@@ -86,10 +86,10 @@ public class ShapesPopulator {
         // TODO use factory design pattern? so instead of .buildCross, pass "cross" in parameter
         //mShapes.add(shapeBuilder.buildArrow("blue", newShapeLocation));
         //ShapeObject newShape = shapeBuilder.buildShape("arrow", "blue" , newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
-        //ShapeObject newShape = shapeBuilder.buildShape("circle", getColor() , newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
+        ShapeObject newShape = shapeBuilder.buildShape("circle", getColor() , newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //ShapeObject newShape = shapeBuilder.buildShape("cross", "blue" , newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //ShapeObject newShape = shapeBuilder.buildShape("square", "blue", newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
-        ShapeObject newShape = shapeBuilder.buildShape("star", "blue", newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
+        //ShapeObject newShape = shapeBuilder.buildShape("star", "blue", newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //newShape.attachAllObservers(scoreObserver,streakObserver,progressBarObserver);
         shapes.add(newShape);
         timeOfLastShapeAddition = System.currentTimeMillis();

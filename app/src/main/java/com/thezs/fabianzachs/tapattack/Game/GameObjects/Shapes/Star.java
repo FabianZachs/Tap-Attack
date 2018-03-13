@@ -72,7 +72,7 @@ public class Star extends ShapeObject {
             //colorIndex += COLOR_INTERVAL;
             colorIndex++;
         }
-        colorIndex = colorIndex%(colors.length-1);
+        colorIndex = colorIndex%(colors.length);
         //colorIndex = colorIndex%360;
         //hsv[0] = colorIndex;
     }
@@ -87,6 +87,8 @@ public class Star extends ShapeObject {
 
         //ColorFilter filter = new PorterDuffColorFilter(Color.HSVToColor(255,hsv),PorterDuff.Mode.SRC_IN);
         ColorFilter filter = new PorterDuffColorFilter(colors[colorIndex],PorterDuff.Mode.SRC_IN);
+        Log.d("colorindex", "update: colorindex: " + colorIndex);
+
 
 
         getAlphaPaint().setColorFilter(filter);
