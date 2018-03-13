@@ -39,6 +39,7 @@ public class ShapeBuilder {
         return buildShape(shape,color,centerLocation,paint,bitmapHolder,mediator,"UP");
     }
 
+    // TODO refactor star and arrow which dont take 2 bitmaps
     public ShapeObject buildShape(String shape, String color, Point centerLocation, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator ,String direction) {
 
         switch (shape) {
@@ -85,11 +86,19 @@ public class ShapeBuilder {
                         translateBitmap(direction,color,true),
                         direction, paint, bitmapHolder, mediator);
                         */
+
+            case "star":
+                return new Star(5, color, centerLocation,
+                        neonShapes.getShapeBitmap(shape,color,false),
+                        null,
+                        neonShapes.getShapePaint(paint,color), bitmapHolder, mediator); // have it always take color gold
+                /*
             case "star":
                 return new Star(5, "yellow", centerLocation,
                         animationManager.getBitmap("star", "yellow", false),
                         animationManager.getBitmap("star", "yellow", true),
                         paint, bitmapHolder, mediator); // have it always take color gold
+                        */
         }
 
         return null;
