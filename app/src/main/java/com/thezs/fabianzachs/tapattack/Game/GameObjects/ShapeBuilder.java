@@ -8,7 +8,9 @@ import android.graphics.Point;
 import android.graphics.Rect;
 
 import com.thezs.fabianzachs.tapattack.Animation.AnimationManager;
-import com.thezs.fabianzachs.tapattack.Animation.Themes.NeonShapes;
+import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.FlatTheme;
+import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.NeonTheme;
+import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.VibrantTheme;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Arrow;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
@@ -26,28 +28,29 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ShapeBuilder {
 
-    private AnimationManager animationManager;
-    private NeonShapes neonShapes;
+    //private AnimationManager animationManager;
+    //private NeonTheme neonTheme;
+    private VibrantTheme neonTheme;
 
     public ShapeBuilder(long initTime) {
         // decides durationAlive depending on initTime & current time
-        initializeAnimations();
-        neonShapes = new NeonShapes();
+        //initializeAnimations();
+        neonTheme = new VibrantTheme("curved");
     }
 
     public ShapeObject buildShape(String shape, String color, Point centerLocation, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
         return buildShape(shape,color,centerLocation,paint,bitmapHolder,mediator,"UP");
     }
 
-    // TODO refactor star and arrow which dont take 2 bitmaps
+    // TODO refactor star and cross which dont take 2 bitmaps
     public ShapeObject buildShape(String shape, String color, Point centerLocation, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator ,String direction) {
 
         switch (shape) {
             case "circle":
                 return new Circle(6, color, centerLocation,
-                        neonShapes.getShapeBitmap(shape,color,false),
-                        neonShapes.getShapeBitmap(shape,color,true),
-                        neonShapes.getShapePaint(paint,color), bitmapHolder, mediator);
+                        neonTheme.getShapeBitmap(shape,color,false),
+                        neonTheme.getShapeBitmap(shape,color,true),
+                        neonTheme.getShapePaint(paint,color), bitmapHolder, mediator);
             /*
             case "circle":
                 return new Circle(8, color, centerLocation,
@@ -57,9 +60,9 @@ public class ShapeBuilder {
 */
             case "square":
                 return new Square(3, color, centerLocation,
-                        neonShapes.getShapeBitmap(shape,color,false),
-                        neonShapes.getShapeBitmap(shape,color,true),
-                        neonShapes.getShapePaint(paint,color), bitmapHolder, mediator);
+                        neonTheme.getShapeBitmap(shape,color,false),
+                        neonTheme.getShapeBitmap(shape,color,true),
+                        neonTheme.getShapePaint(paint,color), bitmapHolder, mediator);
 
                 /*
             case "square":
@@ -68,17 +71,18 @@ public class ShapeBuilder {
                         animationManager.getBitmap("square", color, true),
                         paint, bitmapHolder, mediator);
 */
+                /*
             case "cross":
                 return new Cross(3, color, centerLocation,
                         animationManager.getBitmap("cross", color, false),
                         animationManager.getBitmap("cross", color, true),
                         paint, bitmapHolder, mediator);
-
+*/
             case "arrow":
                 return new Arrow(3, color, centerLocation,
-                        translateBitmap(direction,neonShapes.getShapeBitmap(shape,color,false)),
+                        translateBitmap(direction, neonTheme.getShapeBitmap(shape,color,false)),
                         null,
-                        direction, neonShapes.getShapePaint(paint,color), bitmapHolder, mediator);
+                        direction, neonTheme.getShapePaint(paint,color), bitmapHolder, mediator);
                 /*
             case "arrow":
                 return new Arrow(3, color, centerLocation,
@@ -89,9 +93,9 @@ public class ShapeBuilder {
 
             case "star":
                 return new Star(5, color, centerLocation,
-                        neonShapes.getShapeBitmap(shape,color,false),
+                        neonTheme.getShapeBitmap(shape,color,false),
                         null,
-                        neonShapes.getShapePaint(paint,color), bitmapHolder, mediator); // have it always take color gold
+                        neonTheme.getShapePaint(paint,color), bitmapHolder, mediator); // have it always take color gold
                 /*
             case "star":
                 return new Star(5, "yellow", centerLocation,
@@ -148,6 +152,7 @@ public class ShapeBuilder {
     }*/
 
 
+    /*
     private void initializeAnimations() {
 
         SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerPrefs", MODE_PRIVATE);
@@ -156,5 +161,5 @@ public class ShapeBuilder {
         String theme = prefs.getString("theme", "error: no theme");
 
         this.animationManager = new AnimationManager(theme);
-    }
+    }*/
 }
