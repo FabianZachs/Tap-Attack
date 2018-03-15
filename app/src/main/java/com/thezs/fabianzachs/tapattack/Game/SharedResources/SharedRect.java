@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.Game.SharedResources;
 
 import android.graphics.Rect;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -33,6 +34,7 @@ public class SharedRect {
     }
 
     public void freeRect(Rect rect) {
+        Log.d("paint", "freePaint: rect freed");
         unUsedRects.add(rect);
         usedRects.remove(rect);
     }

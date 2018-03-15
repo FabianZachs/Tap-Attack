@@ -28,7 +28,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ShapeBuilder {
 
-    //private AnimationManager animationManager;
+    private AnimationManager animationManager;
     //private NeonTheme neonTheme;
     private VibrantTheme neonTheme;
 
@@ -46,12 +46,15 @@ public class ShapeBuilder {
     public ShapeObject buildShape(String shape, String color, Point centerLocation, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator ,String direction) {
 
         switch (shape) {
+
             case "circle":
                 return new Circle(6, color, centerLocation,
                         neonTheme.getShapeBitmap(shape,color,false),
                         neonTheme.getShapeBitmap(shape,color,true),
                         neonTheme.getShapePaint(paint,color), bitmapHolder, mediator);
-            /*
+
+
+/*
             case "circle":
                 return new Circle(8, color, centerLocation,
                         animationManager.getBitmap("circle", color, false),
@@ -152,7 +155,7 @@ public class ShapeBuilder {
     }*/
 
 
-    /*
+
     private void initializeAnimations() {
 
         SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerPrefs", MODE_PRIVATE);
@@ -161,5 +164,5 @@ public class ShapeBuilder {
         String theme = prefs.getString("theme", "error: no theme");
 
         this.animationManager = new AnimationManager(theme);
-    }*/
+    }
 }

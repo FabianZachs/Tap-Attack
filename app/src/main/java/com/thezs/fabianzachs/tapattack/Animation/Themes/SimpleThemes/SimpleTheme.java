@@ -6,6 +6,7 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemeObject;
 import com.thezs.fabianzachs.tapattack.Constants;
@@ -27,6 +28,7 @@ public abstract class SimpleTheme extends ThemeObject {
     }
 
     public Paint getShapePaint(Paint paint, String color) {
+        Log.d("paint", "getShapePaint: color needed: " + color);
         ColorFilter filter = new PorterDuffColorFilter(getColorToInt(color), PorterDuff.Mode.SRC_IN);
         paint.setColorFilter(filter);
 

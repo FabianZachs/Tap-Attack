@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.Animation.AnimationManager;
+import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
@@ -37,7 +38,7 @@ public class ShapesPopulator {
     private final int UNIT_TIME_PER_SHAPE_ADDITION = 1; // every x seconds one more max shape
     private final int MAX_NUMBER_LOOPS = 5;
     private final int SHAPE_SPACING = 5; // space between shapes
-    private final int MAX_SHAPES = 5;
+    private final int MAX_SHAPES = 2;
 
     private long timeOfLastShapeAddition;
 
@@ -46,10 +47,12 @@ public class ShapesPopulator {
     private Random rand;
     private ShapeBuilder shapeBuilder;
 
-    private String[] shapeColors = {"blue","yellow","red","purple","green"};
+    private String[] shapeColors;
     private Random colorFinder;
 
     public ShapesPopulator(CentralGameCommunication mediator, long initTime, SharedPaint sharedPaint, SharedRect sharedRect) {
+        Log.d("paint", "ShapesPopulator: theme: " + Constants.CURRENT_THEME);
+        this.shapeColors = ThemesManager.getStrColors(Constants.CURRENT_THEME);
         this.mediator = mediator;
         this.sharedPaint = sharedPaint;
         this.sharedRect = sharedRect;
@@ -70,12 +73,15 @@ public class ShapesPopulator {
             return shapes;
 
         Paint paint = sharedPaint.getUnUsedPaint();
+        if (paint == null)
+            return shapes;
+
         Rect bitmapHolder = sharedRect.getUnUsedRect();
-        //if (paint.equals(null)){
-        if (paint == null || bitmapHolder == null){
-            //Log.d("paintnull", "update: null");
+        if (bitmapHolder == null) {
+            sharedPaint.freePaint(paint);
             return shapes;
         }
+
         Point newShapeLocation = getValidNewShapeLocation(shapes);
 
         // no new location findable

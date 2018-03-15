@@ -8,22 +8,21 @@ public class NeonTheme extends SimpleTheme {
 
     // TODO we ask for a shape & color and get it --
     // TODO WHEN REUSING PAINT WE NEED TO RESET THE COLORFILTER!!-- or do we since for all shapes we change it again
-    public static Integer c1 = 0xff00ffff;
-    public static Integer c2 = 0xff00ff00;
-    public static Integer c3 = 0xffffff00;
-    public static Integer c4 = 0xffff0000;
-    public static Integer c5 = 0xffff0000;
+    public static Integer[] intColors = {0xff00ffff,0xff00ff00,0xffffff00,0xffff0000,0xffff0000};
+    public static String[] strColors = {"blue","green","yellow","red","purple"};
+
 
     public NeonTheme(String shapeType) {
         super();
         setThemeTitle(shapeType);
         addBitmapsToMap();
 
-        addToColorsMap("blue",c1);
-        addToColorsMap("green",c2);
-        addToColorsMap("yellow",c3);
-        addToColorsMap("red",c4);
-        addToColorsMap("purple",c5);
+        // TODO make this a method in super class
+        addToColorsMap(strColors[0],intColors[0]);
+        addToColorsMap(strColors[1],intColors[1]);
+        addToColorsMap(strColors[2],intColors[2]);
+        addToColorsMap(strColors[3],intColors[3]);
+        addToColorsMap(strColors[4],intColors[4]);
     }
 
 

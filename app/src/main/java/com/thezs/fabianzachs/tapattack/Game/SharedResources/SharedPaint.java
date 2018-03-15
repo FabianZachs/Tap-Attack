@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.Game.SharedResources;
 
 import android.graphics.Paint;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +35,7 @@ public class SharedPaint {
     }
 
     public void freePaint(Paint paint) {
+        Log.d("paint", "freePaint: paint freed");
         paint.setAlpha(255);
         unUsedPaints.add(paint);
         usedPaints.remove(paint);
