@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.Backgrounds.Triangular;
 
 import android.graphics.Bitmap;
+import android.provider.Contacts;
 
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.Backgrounds.GameBackground;
 
@@ -10,9 +11,10 @@ import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.Backgrounds.GameB
 
 public class BlueTriangular extends GameBackground {
 
-    public static Integer[] UIHolderColors = {0xff0040ff, 0xff00bcfe};
+    public static int[] UIHolderColors = {0xff0040ff, 0xff00bcfe};
 
     public BlueTriangular() {
         super("backgroundtriangleblue");
+        setupHolders(UIHolderColors);
     }
 }
