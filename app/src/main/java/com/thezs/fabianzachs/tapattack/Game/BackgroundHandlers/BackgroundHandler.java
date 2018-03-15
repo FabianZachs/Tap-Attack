@@ -37,7 +37,8 @@ public class BackgroundHandler {
         this.backgrounds = new HashMap<>();
         this.theme = theme;
         this.entireScreenRect = new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-        addBackgroundsToMap(theme);
+        //addBackgroundsToMap(theme);
+
         this.previousColor = "null";
         this.previousBitmap = null;
     }
