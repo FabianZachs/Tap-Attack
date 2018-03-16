@@ -37,7 +37,7 @@ public class BackgroundHandler {
         this.backgrounds = new HashMap<>();
         this.theme = theme;
         this.entireScreenRect = new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-        //addBackgroundsToMap(theme);
+        addBackgroundsToMap(theme);
 
         this.previousColor = "null";
         this.previousBitmap = null;
@@ -62,7 +62,8 @@ public class BackgroundHandler {
 
 
     private void addBackgroundsToMap(String theme) {
-        String[] colors = Constants.COLORS.get(theme);
+        //String[] colors = Constants.COLORS.get(theme);
+        String[] colors = {"blue","yellow","red","purple","green"};
         BitmapFactory bf = new BitmapFactory();
         for (String color : colors) {
             String backgroundName = theme + color + "background";

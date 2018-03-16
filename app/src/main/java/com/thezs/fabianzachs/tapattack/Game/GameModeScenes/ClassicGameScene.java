@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundHandler;
+import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundManager;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
@@ -37,15 +38,16 @@ public class ClassicGameScene implements Scene {
 
     private CentralGameCommunication mediator;
 
-    private WarningColorHolder warningColorHolder;
-    private ProgressBarHolder progressBarHolder;
+    //private WarningColorHolder warningColorHolder; // takeout
+    //private ProgressBarHolder progressBarHolder; // takeout
     private WarningColor warningColor;
     private ProgressBar progressBar;
     private Streak streak;
     private Score score;
     private long initTime;
 
-    private BackgroundHandler backgroundHandler;
+    //private BackgroundHandler backgroundHandler; // takeout
+    private BackgroundManager backgroundManager;
     private ShapesManager shapesManager;
 
 
@@ -57,11 +59,13 @@ public class ClassicGameScene implements Scene {
         Constants.NEONCOLORS = RandomizeArray(Constants.NEONCOLORS); // TODO make this responsive to any theme
 
         this.shapesManager = new ShapesManager(mediator, initTime);
-        this.backgroundHandler = new BackgroundHandler(Constants.CURRENT_THEME);
+        this.backgroundManager = new BackgroundManager("backgroundtriangleblue");
+        //this.backgroundManager = new BackgroundManager(Constants.CURRENT_BACKGROUND);
+        //this.backgroundHandler = new BackgroundHandler(Constants.CURRENT_THEME);
 
-        this.warningColorHolder = new WarningColorHolder(backgroundHandler);
-        this.progressBarHolder = new ProgressBarHolder(backgroundHandler);
-        this.warningColor = new WarningColor(backgroundHandler);
+        //this.warningColorHolder = new WarningColorHolder(backgroundHandler);
+        //this.progressBarHolder = new ProgressBarHolder(backgroundHandler);
+        //this.warningColor = new WarningColor(backgroundHandler);
         this.progressBar = new ProgressBar();
         this.streak = new Streak();
         this.score = new Score();
@@ -82,7 +86,8 @@ public class ClassicGameScene implements Scene {
 
     @Override
     public void draw(Canvas canvas) {
-        backgroundHandler.draw(canvas, "blue");
+        //backgroundHandler.draw(canvas, "blue");
+        backgroundManager.draw(canvas);
         score.draw(canvas);
         streak.draw(canvas);
         shapesManager.draw(canvas);
