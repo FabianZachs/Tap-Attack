@@ -18,8 +18,9 @@ public abstract class GameBackground {
     private WarningColorHolder warningColorHolder;
     private ProgressBarHolder progressBarHolder;
 
-    public GameBackground(String bitmapName) {
+    public GameBackground(String bitmapName, int[] UIHolderColors) {
         setupBitmap(bitmapName);
+        setupHolders(UIHolderColors);
         this.warningColorHolder = new WarningColorHolder();
         this.progressBarHolder = new ProgressBarHolder();
 
