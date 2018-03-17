@@ -56,22 +56,16 @@ public class WarningColor {
             setNextColor();
     }
 
-/*
-    public void setCurrentColor(String color) {
-        this.currentColor = color;
-        warningDrawable.setColor(Constants.progressBarHolderAndWarningHolderColors.get(color)[0]);
-        //warningDrawable.setColor(Constants.holderBlue[1]);
-    }*/
 
     public void setNextColor() {
         colorIndex = colorIndex >= intColors.length ? 0 : colorIndex;
         warningDrawable.setColor(intColors[colorIndex]);
-        //setCurrentColor(colorSelection[colorIndex]);
         colorIndex++;
     }
 
     public String getCurrentColor() {
-        return this.currentColor;
+        Log.d("warningcolor", "getCurrentcolor: color: " + strColors[colorIndex]);
+        return strColors[colorIndex];
     }
 
 
