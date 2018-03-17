@@ -64,7 +64,7 @@ public class WarningColor {
     }
 
     public String getCurrentColor() {
-        Log.d("warningcolor", "getCurrentcolor: color: " + strColors[colorIndex]);
+        Log.d("warningcolor", "getCurrentcolor: colorWarning: " + strColors[colorIndex]);
         return strColors[colorIndex];
     }
 
