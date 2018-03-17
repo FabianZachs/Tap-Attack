@@ -1,12 +1,14 @@
 package com.thezs.fabianzachs.tapattack.Game.GameModeScenes;
 
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundHandler;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundManager;
@@ -60,7 +62,7 @@ public class ClassicGameScene implements Scene {
 
         this.shapesManager = new ShapesManager(mediator, initTime);
         this.backgroundManager = new BackgroundManager("backgroundtriangleblue");
-        //this.warningColor = new WarningColor();
+        this.warningColor = new WarningColor(ThemesManager.getStrColors(Constants.CURRENT_THEME), ThemesManager.getIntColors(Constants.CURRENT_THEME));
         //this.backgroundManager = new BackgroundManager(Constants.CURRENT_BACKGROUND);
         //this.backgroundHandler = new BackgroundHandler(Constants.CURRENT_THEME);
 
@@ -111,8 +113,8 @@ public class ClassicGameScene implements Scene {
             shapesManager.recieveTouch(event);
         else if (Constants.WARNING_COLOR_CLICK_AREA.contains((int) event.getX(), (int) event.getY()))
             //Log.d("warningtoucharea", "recieveTouch: warning");
-            //warningColor.recieveTouch(event);
-            ;
+            warningColor.recieveTouch(event);
+
 
     }
 

@@ -39,7 +39,7 @@ public class ShapeBuilder {
         // decides durationAlive depending on initTime & current time
         //initializeAnimations();
         themesManager = new ThemesManager();
-        gameTheme = themesManager.buildTheme("neon", "curved");
+        gameTheme = themesManager.buildTheme("vibrant", "curved");
     }
 
     public ShapeObject buildShape(String shape, String color, Point centerLocation, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {

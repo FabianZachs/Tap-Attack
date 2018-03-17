@@ -13,12 +13,15 @@ public class VibrantTheme extends SimpleTheme {
         super();
         setThemeTitle(shapeType);
         addBitmapsToMap();
+        addToColorsMap(strColors, intColors);
 
 
+        /*
         addToColorsMap(strColors[0],intColors[0]);
         addToColorsMap(strColors[1],intColors[1]);
         addToColorsMap(strColors[2],intColors[2]);
         addToColorsMap(strColors[3],intColors[3]);
         addToColorsMap(strColors[4],intColors[4]);
+        */
     }
 }

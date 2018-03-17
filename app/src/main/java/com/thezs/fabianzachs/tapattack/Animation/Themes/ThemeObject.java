@@ -62,6 +62,12 @@ public abstract class ThemeObject {
         this.colorsMap.put(colorName,colorInt);
     }
 
+    protected void addToColorsMap(String[] strColors, Integer[] intColors) {
+        for (int i = 0; i < strColors.length; i++) {
+            this.colorsMap.put(strColors[i], intColors[i]);
+        }
+    }
+
 
 
 

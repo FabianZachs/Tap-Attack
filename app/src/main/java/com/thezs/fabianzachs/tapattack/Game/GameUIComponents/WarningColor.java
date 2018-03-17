@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack.Game.GameUIComponents;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.util.Log;
+import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundHandler;
@@ -26,11 +27,13 @@ import java.util.Random;
 public class WarningColor {
 
     private GradientDrawable warningDrawable;
-    private String[] colorSelection;
     private String currentColor;
-    private Random randColorFinder;
     private int colorIndex;
 
+    private String[] strColors;
+    private Integer[] intColors;
+
+    /*
     // TODO old constructor --remove--
     public WarningColor(BackgroundHandler backgroundHandler) {
         backgroundHandler.attachWarningColorObserver(this);
@@ -38,29 +41,55 @@ public class WarningColor {
         this.warningDrawable = (GradientDrawable) Constants.warningComponent.getDrawable(1);
         this.colorSelection = Constants.NEONCOLORS;
         this.currentColor = "null";
-    }
+    }*/
 
-    public WarningColor(String[] colors) {
+    public WarningColor(String[] strColors, Integer[] intColors) {
         this.colorIndex = 0;
         this.warningDrawable = (GradientDrawable) Constants.warningComponent.getDrawable(1);
-        // TODO get the color selection from themes
+        setAndRandomizeArrays(strColors,intColors);
+        setNextColor();
     }
 
+    public void recieveTouch(MotionEvent event) {
+        // TODO handle scrolling
+        if (event.getAction() == MotionEvent.ACTION_DOWN)
+            setNextColor();
+    }
 
+/*
     public void setCurrentColor(String color) {
         this.currentColor = color;
         warningDrawable.setColor(Constants.progressBarHolderAndWarningHolderColors.get(color)[0]);
         //warningDrawable.setColor(Constants.holderBlue[1]);
-    }
+    }*/
 
     public void setNextColor() {
-        setCurrentColor(colorSelection[colorIndex]);
+        colorIndex = colorIndex >= intColors.length ? 0 : colorIndex;
+        warningDrawable.setColor(intColors[colorIndex]);
+        //setCurrentColor(colorSelection[colorIndex]);
         colorIndex++;
-        colorIndex = colorIndex >= colorSelection.length ? 0 : colorIndex;
     }
 
     public String getCurrentColor() {
         return this.currentColor;
     }
 
+
+    private void setAndRandomizeArrays(String[] strColors, Integer[] intColors){
+        Random rgen = new Random();  // Random number generator
+
+        for (int i=0; i<strColors.length; i++) {
+            int randomPosition = rgen.nextInt(strColors.length);
+            String strTemp = strColors[i];
+            Integer intTemp = intColors[i];
+
+            strColors[i] = strColors[randomPosition];
+            intColors[i] = intColors[randomPosition];
+
+            strColors[randomPosition] = strTemp;
+            intColors[randomPosition] = intTemp;
+        }
+        this.strColors = strColors;
+        this.intColors = intColors;
+    }
 }

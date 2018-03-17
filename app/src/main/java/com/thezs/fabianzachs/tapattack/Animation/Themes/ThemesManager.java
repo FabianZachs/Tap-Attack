@@ -34,6 +34,22 @@ public class ThemesManager {
                 return NeonTheme.strColors;
             case "vibrant":
                 return VibrantTheme.strColors;
+            case "flat":
+                return FlatTheme.strColors;
+
+        }
+        return null;
+    }
+
+    public static Integer[] getIntColors(String theme) {
+
+        switch (theme) {
+            case "neon":
+                return NeonTheme.intColors;
+            case "vibrant":
+                return VibrantTheme.intColors;
+            case "flat":
+                return FlatTheme.intColors;
 
         }
         return null;
