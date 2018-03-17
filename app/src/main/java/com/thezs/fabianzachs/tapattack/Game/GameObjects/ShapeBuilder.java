@@ -11,6 +11,8 @@ import com.thezs.fabianzachs.tapattack.Animation.AnimationManager;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.FlatTheme;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.NeonTheme;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.VibrantTheme;
+import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemeObject;
+import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Arrow;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
@@ -30,12 +32,14 @@ public class ShapeBuilder {
 
     private AnimationManager animationManager;
     //private NeonTheme neonTheme;
-    private VibrantTheme neonTheme;
+    private ThemesManager themesManager; //TODO do we need this as an attribute?
+    private ThemeObject gameTheme;
 
     public ShapeBuilder(long initTime) {
         // decides durationAlive depending on initTime & current time
         //initializeAnimations();
-        neonTheme = new VibrantTheme("curved");
+        themesManager = new ThemesManager();
+        gameTheme = themesManager.buildTheme("neon", "curved");
     }
 
     public ShapeObject buildShape(String shape, String color, Point centerLocation, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
@@ -49,7 +53,8 @@ public class ShapeBuilder {
 
             case "circle":
                 return new Circle(6, color, centerLocation,
-                        neonTheme.getShapeBitmap(shape,color,false),
+                        // TODO somehow call correct method of subclass (SimpleTheme)
+                        gameTheme.getShapeBitmap(shape,color,false),
                         neonTheme.getShapeBitmap(shape,color,true),
                         neonTheme.getShapePaint(paint,color), bitmapHolder, mediator);
 

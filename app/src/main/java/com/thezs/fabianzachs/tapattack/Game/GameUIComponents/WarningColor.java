@@ -31,6 +31,7 @@ public class WarningColor {
     private Random randColorFinder;
     private int colorIndex;
 
+    // TODO old constructor --remove--
     public WarningColor(BackgroundHandler backgroundHandler) {
         backgroundHandler.attachWarningColorObserver(this);
         this.colorIndex = 0;
@@ -38,6 +39,13 @@ public class WarningColor {
         this.colorSelection = Constants.NEONCOLORS;
         this.currentColor = "null";
     }
+
+    public WarningColor(String[] colors) {
+        this.colorIndex = 0;
+        this.warningDrawable = (GradientDrawable) Constants.warningComponent.getDrawable(1);
+        // TODO get the color selection from themes
+    }
+
 
     public void setCurrentColor(String color) {
         this.currentColor = color;

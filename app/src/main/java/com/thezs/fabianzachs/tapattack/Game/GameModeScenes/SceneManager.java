@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
-import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.ClassicGameScene;
 import com.thezs.fabianzachs.tapattack.Game.Scene;
 
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class SceneManager {
     }
 
     public void recieveTouch(MotionEvent event) {
-        if (Constants.CLICK_AREA.contains((int) event.getX(), (int) event.getY()))
+        if (Constants.SHAPE_CLICK_AREA.contains((int) event.getX(), (int) event.getY()) || Constants.WARNING_COLOR_CLICK_AREA.contains((int) event.getX(), (int) event.getY()))
             scenes.get(ACTIVE_SCENE).recieveTouch(event);
     }
 

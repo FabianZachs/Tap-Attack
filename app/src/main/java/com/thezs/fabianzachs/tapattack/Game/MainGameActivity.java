@@ -8,6 +8,7 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.graphics.Point;
         import android.graphics.PorterDuff;
         import android.graphics.PorterDuffColorFilter;
+        import android.graphics.Rect;
         import android.graphics.drawable.Drawable;
         import android.graphics.drawable.GradientDrawable;
         import android.graphics.drawable.LayerDrawable;
@@ -112,6 +113,11 @@ public class MainGameActivity extends Activity {
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
+
+        ImageView warningComponent = (ImageView) findViewById(R.id.warning_component);
+        int[] location = new int[2];
+        warningComponent.getLocationInWindow(location);
+        Constants.WARNING_COLOR_CLICK_AREA = new Rect(location[0] - Constants.SHAPE_WIDTH, 10, location[0] + Constants.SHAPE_WIDTH, Constants.SHAPE_CLICK_AREA.top);
     }
 
     // TODO make this pause button size relative to screen size
