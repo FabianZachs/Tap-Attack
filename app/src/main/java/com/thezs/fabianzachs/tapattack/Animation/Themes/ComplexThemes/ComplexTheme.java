@@ -8,7 +8,7 @@ import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemeObject;
  * Created by fabianzachs on 14/03/18.
  */
 
-public class ComplexTheme extends ThemeObject {
+public abstract class ComplexTheme extends ThemeObject {
 
     // TODO use altering bitmap by pixels
 

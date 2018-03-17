@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.Animation.Themes;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -25,6 +26,9 @@ public abstract class ThemeObject {
         this.bitmapsMap = new HashMap<>();
         this.colorsMap = new HashMap<>();
     }
+
+    public abstract Bitmap getShapeBitmap(String shape, String color, boolean click);
+    public abstract Paint getShapePaint(Paint paint, String color);
 
     // BITMAPS
     protected void addToBitmapsMap(String name, Bitmap bitmap) {
@@ -57,6 +61,7 @@ public abstract class ThemeObject {
     protected void addToColorsMap(String colorName, Integer colorInt) {
         this.colorsMap.put(colorName,colorInt);
     }
+
 
 
 

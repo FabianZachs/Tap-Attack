@@ -60,7 +60,7 @@ public class ClassicGameScene implements Scene {
 
         this.shapesManager = new ShapesManager(mediator, initTime);
         this.backgroundManager = new BackgroundManager("backgroundtriangleblue");
-        this.warningColor = new WarningColor()
+        //this.warningColor = new WarningColor();
         //this.backgroundManager = new BackgroundManager(Constants.CURRENT_BACKGROUND);
         //this.backgroundHandler = new BackgroundHandler(Constants.CURRENT_THEME);
 
@@ -111,7 +111,8 @@ public class ClassicGameScene implements Scene {
             shapesManager.recieveTouch(event);
         else if (Constants.WARNING_COLOR_CLICK_AREA.contains((int) event.getX(), (int) event.getY()))
             //Log.d("warningtoucharea", "recieveTouch: warning");
-            warningColor.recieveTouch(event);
+            //warningColor.recieveTouch(event);
+            ;
 
     }
 

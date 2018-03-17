@@ -24,6 +24,7 @@ public class ThemesManager {
             case "vibrant":
                 return new VibrantTheme(shapeType);
         }
+        return null;
     }
 
     public static String[] getStrColors(String theme) {

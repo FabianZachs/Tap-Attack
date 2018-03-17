@@ -55,8 +55,8 @@ public class ShapeBuilder {
                 return new Circle(6, color, centerLocation,
                         // TODO somehow call correct method of subclass (SimpleTheme)
                         gameTheme.getShapeBitmap(shape,color,false),
-                        neonTheme.getShapeBitmap(shape,color,true),
-                        neonTheme.getShapePaint(paint,color), bitmapHolder, mediator);
+                        gameTheme.getShapeBitmap(shape,color,true),
+                        gameTheme.getShapePaint(paint,color), bitmapHolder, mediator);
 
 
 /*
@@ -68,9 +68,9 @@ public class ShapeBuilder {
 */
             case "square":
                 return new Square(3, color, centerLocation,
-                        neonTheme.getShapeBitmap(shape,color,false),
-                        neonTheme.getShapeBitmap(shape,color,true),
-                        neonTheme.getShapePaint(paint,color), bitmapHolder, mediator);
+                        gameTheme.getShapeBitmap(shape,color,false),
+                        gameTheme.getShapeBitmap(shape,color,true),
+                        gameTheme.getShapePaint(paint,color), bitmapHolder, mediator);
 
                 /*
             case "square":
@@ -88,9 +88,9 @@ public class ShapeBuilder {
 */
             case "arrow":
                 return new Arrow(3, color, centerLocation,
-                        translateBitmap(direction, neonTheme.getShapeBitmap(shape,color,false)),
+                        translateBitmap(direction, gameTheme.getShapeBitmap(shape,color,false)),
                         null,
-                        direction, neonTheme.getShapePaint(paint,color), bitmapHolder, mediator);
+                        direction, gameTheme.getShapePaint(paint,color), bitmapHolder, mediator);
                 /*
             case "arrow":
                 return new Arrow(3, color, centerLocation,
@@ -101,9 +101,9 @@ public class ShapeBuilder {
 
             case "star":
                 return new Star(5, color, centerLocation,
-                        neonTheme.getShapeBitmap(shape,color,false),
+                        gameTheme.getShapeBitmap(shape,color,false),
                         null,
-                        neonTheme.getShapePaint(paint,color), bitmapHolder, mediator); // have it always take color gold
+                        gameTheme.getShapePaint(paint,color), bitmapHolder, mediator); // have it always take color gold
                 /*
             case "star":
                 return new Star(5, "yellow", centerLocation,
