@@ -46,7 +46,9 @@ public class WarningColor {
     public WarningColor(String[] strColors, Integer[] intColors) {
         this.colorIndex = 0;
         this.warningDrawable = (GradientDrawable) Constants.warningComponent.getDrawable(1);
-        setAndRandomizeArrays(strColors,intColors);
+        //setAndRandomizeArrays(strColors,intColors);
+        this.strColors = strColors;
+        this.intColors = intColors;
         setNextColor();
     }
 
@@ -58,13 +60,12 @@ public class WarningColor {
 
 
     public void setNextColor() {
+        colorIndex++;
         colorIndex = colorIndex >= intColors.length ? 0 : colorIndex;
         warningDrawable.setColor(intColors[colorIndex]);
-        colorIndex++;
     }
 
     public String getCurrentColor() {
-        Log.d("warningcolor", "getCurrentcolor: colorWarning: " + strColors[colorIndex]);
         return strColors[colorIndex];
     }
 
