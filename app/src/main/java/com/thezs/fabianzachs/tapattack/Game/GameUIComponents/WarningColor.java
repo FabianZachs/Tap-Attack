@@ -46,9 +46,7 @@ public class WarningColor {
     public WarningColor(String[] strColors, Integer[] intColors) {
         this.colorIndex = 0;
         this.warningDrawable = (GradientDrawable) Constants.warningComponent.getDrawable(1);
-        //setAndRandomizeArrays(strColors,intColors);
-        this.strColors = strColors;
-        this.intColors = intColors;
+        setAndRandomizeArrays(strColors,intColors);
         setNextColor();
     }
 
@@ -56,6 +54,8 @@ public class WarningColor {
         // TODO handle scrolling
         if (event.getAction() == MotionEvent.ACTION_DOWN)
             setNextColor();
+
+        // TODO or scrolling, set lives == rand(10-40) then reduce lives per scroll -- if lives <= 0, setNextColor() & set lives == rand(10-40)
     }
 
 
