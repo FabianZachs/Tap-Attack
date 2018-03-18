@@ -8,7 +8,9 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,10 +23,34 @@ public abstract class ThemeObject {
     private Map<String, Bitmap> bitmapsMap;
     private Map<String, Integer> colorsMap;
     private String themeTitle;
+    public Integer[] intColors;
+    public String[] strColors;
 
     public ThemeObject() {
         this.bitmapsMap = new HashMap<>();
         this.colorsMap = new HashMap<>();
+    }
+
+    // TODO call these from super and use super to initialize all the code from theme subclasses
+    // TODO think about how we want to store the data -- map & seperate [] for strColors and intColors or just a map
+    public void setIntColors(Integer[] intColors) {
+        this.intColors = intColors;
+    }
+
+    public Integer[] getIntColors() {
+        return this.intColors;
+    }
+
+    public void setStrColors(String[] strColors) {
+        this.strColors = strColors;
+    }
+
+    public String[] getStrColors() {
+        return this.strColors;
+    }
+
+    public Map<String, Integer> getColorsMap() {
+        return this.colorsMap;
     }
 
     public abstract Bitmap getShapeBitmap(String shape, String color, boolean click);
@@ -49,6 +75,7 @@ public abstract class ThemeObject {
         }
         return colorStr;
     }
+
 
     public Set getColorsStr() {
         return this.colorsMap.keySet();

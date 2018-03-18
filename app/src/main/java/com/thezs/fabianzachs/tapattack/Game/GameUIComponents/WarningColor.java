@@ -27,21 +27,11 @@ import java.util.Random;
 public class WarningColor {
 
     private GradientDrawable warningDrawable;
-    private String currentColor;
     private int colorIndex;
 
     private String[] strColors;
     private Integer[] intColors;
 
-    /*
-    // TODO old constructor --remove--
-    public WarningColor(BackgroundHandler backgroundHandler) {
-        backgroundHandler.attachWarningColorObserver(this);
-        this.colorIndex = 0;
-        this.warningDrawable = (GradientDrawable) Constants.warningComponent.getDrawable(1);
-        this.colorSelection = Constants.NEONCOLORS;
-        this.currentColor = "null";
-    }*/
 
     public WarningColor(String[] strColors, Integer[] intColors) {
         this.colorIndex = 0;

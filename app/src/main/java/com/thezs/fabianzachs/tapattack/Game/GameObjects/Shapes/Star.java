@@ -23,7 +23,9 @@ import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 import com.thezs.fabianzachs.tapattack.R;
 
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Created by fabianzachs on 04/03/18.
@@ -39,20 +41,23 @@ public class Star extends ShapeObject {
     private float TIME_PER_COLOR = 0.5f;
     //private int COLOR_INTERVAL = 5;
     //private String[] colors = Constants.COLORS.get(Constants.CURRENT_THEME);
-    private int[] colors = Constants.neonColorsInt;
+    //private int[] colors = Constants.neonColorsInt;
+    private Integer[] intColors;
 
     private int colorIndex = 0; // TODO start at random index and if warning colow matches color of star -- reduce progress
 
-    public Star(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
+    public Star(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, Integer[] intColors, CentralGameCommunication mediator) {
         super(durationAlive, color, centerLocation, shapeImg, shapeImg, paint, bitmapHolder, mediator);
         setProgressBarAddition(0);
         setGraveAble(false);
         setLives(1);
+        this.intColors = intColors;
 
         timeOfLastColorChange = 0;
 
         Random randIndex = new Random();
-        colorIndex = randIndex.nextInt(color.length());
+        //colorIndex = randIndex.nextInt(color.length());
+        colorIndex = randIndex.nextInt(intColors.length);
         //hsv[0] = colorIndex;
 
         rotationMatrix = new Matrix();

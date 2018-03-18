@@ -33,13 +33,14 @@ public class ShapeBuilder {
     private AnimationManager animationManager;
     //private NeonTheme neonTheme;
     private ThemesManager themesManager; //TODO do we need this as an attribute?
-    private ThemeObject gameTheme;
+    //private ThemeObject gameTheme;
 
     public ShapeBuilder(long initTime) {
         // decides durationAlive depending on initTime & current time
         //initializeAnimations();
         themesManager = new ThemesManager();
-        gameTheme = themesManager.buildTheme("vibrant", "curved");
+        //gameTheme = themesManager.buildTheme("vibrant", "curved");
+        themesManager.setCurrentTheme(themesManager.buildTheme("vibrant", "curved"));
     }
 
     public ShapeObject buildShape(String shape, String color, Point centerLocation, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
@@ -54,9 +55,9 @@ public class ShapeBuilder {
             case "circle":
                 return new Circle(6, color, centerLocation,
                         // TODO somehow call correct method of subclass (SimpleTheme)
-                        gameTheme.getShapeBitmap(shape,color,false),
-                        gameTheme.getShapeBitmap(shape,color,true),
-                        gameTheme.getShapePaint(paint,color), bitmapHolder, mediator);
+                        themesManager.getCurrentTheme().getShapeBitmap(shape,color,false),
+                        themesManager.getCurrentTheme().getShapeBitmap(shape,color,true),
+                        themesManager.getCurrentTheme().getShapePaint(paint,color), bitmapHolder, mediator);
 
 
 /*
@@ -68,9 +69,9 @@ public class ShapeBuilder {
 */
             case "square":
                 return new Square(3, color, centerLocation,
-                        gameTheme.getShapeBitmap(shape,color,false),
-                        gameTheme.getShapeBitmap(shape,color,true),
-                        gameTheme.getShapePaint(paint,color), bitmapHolder, mediator);
+                        themesManager.getCurrentTheme().getShapeBitmap(shape,color,false),
+                        themesManager.getCurrentTheme().getShapeBitmap(shape,color,true),
+                        themesManager.getCurrentTheme().getShapePaint(paint,color), bitmapHolder, mediator);
 
                 /*
             case "square":
@@ -88,9 +89,9 @@ public class ShapeBuilder {
 */
             case "arrow":
                 return new Arrow(3, color, centerLocation,
-                        translateBitmap(direction, gameTheme.getShapeBitmap(shape,color,false)),
+                        translateBitmap(direction, themesManager.getCurrentTheme().getShapeBitmap(shape,color,false)),
                         null,
-                        direction, gameTheme.getShapePaint(paint,color), bitmapHolder, mediator);
+                        direction, themesManager.getCurrentTheme().getShapePaint(paint,color), bitmapHolder, mediator);
                 /*
             case "arrow":
                 return new Arrow(3, color, centerLocation,
@@ -101,9 +102,9 @@ public class ShapeBuilder {
 
             case "star":
                 return new Star(5, color, centerLocation,
-                        gameTheme.getShapeBitmap(shape,color,false),
+                        themesManager.getCurrentTheme().getShapeBitmap(shape,color,false),
                         null,
-                        gameTheme.getShapePaint(paint,color), bitmapHolder, mediator); // have it always take color gold
+                        themesManager.getCurrentTheme().getShapePaint(paint,color), bitmapHolder, themesManager.getCurrentTheme().intColors , mediator);
                 /*
             case "star":
                 return new Star(5, "yellow", centerLocation,

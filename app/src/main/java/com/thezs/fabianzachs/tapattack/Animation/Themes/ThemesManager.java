@@ -10,8 +10,18 @@ import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.VibrantThem
 
 public class ThemesManager {
 
+    private ThemeObject currentTheme;
+
     public ThemesManager() {
 
+    }
+
+    public void setCurrentTheme(ThemeObject theme) {
+        this.currentTheme = theme;
+    }
+
+    public ThemeObject getCurrentTheme() {
+        return this.currentTheme;
     }
 
     // TODO put a theme builder here and store it for access
