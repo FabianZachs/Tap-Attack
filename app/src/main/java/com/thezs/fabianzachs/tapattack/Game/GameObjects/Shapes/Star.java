@@ -23,6 +23,7 @@ import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 import com.thezs.fabianzachs.tapattack.R;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -42,11 +43,11 @@ public class Star extends ShapeObject {
     //private int COLOR_INTERVAL = 5;
     //private String[] colors = Constants.COLORS.get(Constants.CURRENT_THEME);
     //private int[] colors = Constants.neonColorsInt;
-    private Integer[] intColors;
+    private ArrayList<Integer> intColors;
 
     private int colorIndex = 0; // TODO start at random index and if warning colow matches color of star -- reduce progress
 
-    public Star(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, Integer[] intColors, CentralGameCommunication mediator) {
+    public Star(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, ArrayList<Integer> intColors, CentralGameCommunication mediator) {
         super(durationAlive, color, centerLocation, shapeImg, shapeImg, paint, bitmapHolder, mediator);
         setProgressBarAddition(0);
         setGraveAble(false);
@@ -57,7 +58,7 @@ public class Star extends ShapeObject {
 
         Random randIndex = new Random();
         //colorIndex = randIndex.nextInt(color.length());
-        colorIndex = randIndex.nextInt(intColors.length);
+        colorIndex = randIndex.nextInt(intColors.size());
         //hsv[0] = colorIndex;
 
         rotationMatrix = new Matrix();
@@ -77,7 +78,7 @@ public class Star extends ShapeObject {
             //colorIndex += COLOR_INTERVAL;
             colorIndex++;
         }
-        colorIndex = colorIndex%(colors.length);
+        colorIndex = colorIndex%(intColors.size());
         //colorIndex = colorIndex%360;
         //hsv[0] = colorIndex;
     }
@@ -91,7 +92,7 @@ public class Star extends ShapeObject {
 
 
         //ColorFilter filter = new PorterDuffColorFilter(Color.HSVToColor(255,hsv),PorterDuff.Mode.SRC_IN);
-        ColorFilter filter = new PorterDuffColorFilter(colors[colorIndex],PorterDuff.Mode.SRC_IN);
+        ColorFilter filter = new PorterDuffColorFilter(intColors.get(colorIndex),PorterDuff.Mode.SRC_IN);
         Log.d("colorindex", "update: colorindex: " + colorIndex);
 
 

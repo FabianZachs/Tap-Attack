@@ -104,7 +104,7 @@ public class ShapeBuilder {
                 return new Star(5, color, centerLocation,
                         themesManager.getCurrentTheme().getShapeBitmap(shape,color,false),
                         null,
-                        themesManager.getCurrentTheme().getShapePaint(paint,color), bitmapHolder, themesManager.getCurrentTheme().intColors , mediator);
+                        themesManager.getCurrentTheme().getShapePaint(paint,color), bitmapHolder, themesManager.getCurrentTheme().getIntColors(), mediator);
                 /*
             case "star":
                 return new Star(5, "yellow", centerLocation,

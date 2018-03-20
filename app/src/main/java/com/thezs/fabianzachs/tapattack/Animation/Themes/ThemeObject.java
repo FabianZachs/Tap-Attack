@@ -23,8 +23,8 @@ public abstract class ThemeObject {
     private Map<String, Bitmap> bitmapsMap;
     private Map<String, Integer> colorsMap;
     private String themeTitle;
-    public Integer[] intColors;
-    public String[] strColors;
+    //public Integer[] intColors;
+    //public String[] strColors;
 
     public ThemeObject() {
         this.bitmapsMap = new HashMap<>();
@@ -33,21 +33,31 @@ public abstract class ThemeObject {
 
     // TODO call these from super and use super to initialize all the code from theme subclasses
     // TODO think about how we want to store the data -- map & seperate [] for strColors and intColors or just a map
+    /*
     public void setIntColors(Integer[] intColors) {
         this.intColors = intColors;
-    }
+    }*/
 
-    public Integer[] getIntColors() {
+    /*public Integer[] getIntColors() {
         return this.intColors;
+    }*/
+
+    public ArrayList<Integer> getIntColors() {
+        ArrayList<Integer> intColors = new ArrayList<>();
+
+        for (String strColor : colorsMap.keySet())
+            intColors.add(colorsMap.get(strColor));
+
+        return intColors;
     }
 
-    public void setStrColors(String[] strColors) {
+    /*public void setStrColors(String[] strColors) {
         this.strColors = strColors;
-    }
+    }*/
 
-    public String[] getStrColors() {
+    /*public String[] getStrColors() {
         return this.strColors;
-    }
+    }*/
 
     public Map<String, Integer> getColorsMap() {
         return this.colorsMap;
