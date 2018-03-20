@@ -26,6 +26,8 @@ public class Square extends ShapeObject {
         setProgressBarAddition(15);
         setGraveAble(false);
 
+        timeSetState = 0;
+
         setmDetector(new GestureDetectorCompat(Constants.CURRENT_CONTEXT, new MyGestureListener()));
 
     }
@@ -50,6 +52,7 @@ public class Square extends ShapeObject {
         public boolean onDown(MotionEvent event) {
             setState(1);
             timeSetState = System.currentTimeMillis();
+            setDurationAlive(getDurationAlive() + 0.25f);
             return true;
         }
 
