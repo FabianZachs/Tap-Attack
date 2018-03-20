@@ -8,15 +8,10 @@ import android.graphics.Point;
 import android.graphics.Rect;
 
 import com.thezs.fabianzachs.tapattack.Animation.AnimationManager;
-import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.FlatTheme;
-import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.NeonTheme;
-import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.VibrantTheme;
-import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemeObject;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Arrow;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
-import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Cross;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Star;
@@ -104,7 +99,8 @@ public class ShapeBuilder {
                 return new Star(5, color, centerLocation,
                         themesManager.getCurrentTheme().getShapeBitmap(shape,color,false),
                         null,
-                        themesManager.getCurrentTheme().getShapePaint(paint,color), bitmapHolder, themesManager.getCurrentTheme().getIntColors(), mediator);
+                        themesManager.getCurrentTheme().getShapePaint(paint,color), bitmapHolder, themesManager.getCurrentTheme().getIntColors(),
+                        themesManager.getCurrentTheme().getStrColors(), mediator);
                 /*
             case "star":
                 return new Star(5, "yellow", centerLocation,

@@ -44,17 +44,20 @@ public class Star extends ShapeObject {
     //private String[] colors = Constants.COLORS.get(Constants.CURRENT_THEME);
     //private int[] colors = Constants.neonColorsInt;
     private ArrayList<Integer> intColors;
+    private ArrayList<String> strColors;
 
     private int colorIndex = 0; // TODO start at random index and if warning colow matches color of star -- reduce progress
 
-    public Star(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, ArrayList<Integer> intColors, CentralGameCommunication mediator) {
+    public Star(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, ArrayList<Integer> intColors, ArrayList<String> strColors,CentralGameCommunication mediator) {
         super(durationAlive, color, centerLocation, shapeImg, shapeImg, paint, bitmapHolder, mediator);
         setProgressBarAddition(0);
         setGraveAble(false);
         setLives(1);
         this.intColors = intColors;
+        this.strColors = strColors;
 
         timeOfLastColorChange = 0;
+        setProgressBarAddition(10); // TODO called when we reduce lives of star ie when wrong color hit
 
         Random randIndex = new Random();
         //colorIndex = randIndex.nextInt(color.length());
@@ -79,6 +82,7 @@ public class Star extends ShapeObject {
             colorIndex++;
         }
         colorIndex = colorIndex%(intColors.size());
+        setColor(this.strColors.get(colorIndex));
         //colorIndex = colorIndex%360;
         //hsv[0] = colorIndex;
     }
@@ -139,7 +143,12 @@ public class Star extends ShapeObject {
         public boolean onDown(MotionEvent event) {
             clicked = true;
             setShapeImages(0, Bitmap.createBitmap(getShapeImg(), 0, 0, getShapeImg().getWidth(), getShapeImg().getHeight(), rotationMatrix, true));
-            mediator.incScore(getPoints() /*get string based Color based on index of color*/);
+            if (mediator.getIntWarningColor().equals(intColors.get(colorIndex))) {
+                reduceLives();
+            }
+            else
+                mediator.incScore(getPoints() /*get string based Color based on index of color*/);
+
             // if hit warning color, reduce lives of shape and progressbar, otherwise make it unable inc score with that color maintained
             return true;
         }

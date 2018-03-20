@@ -51,6 +51,12 @@ public abstract class ThemeObject {
         return intColors;
     }
 
+    public ArrayList<String> getStrColors() {
+        ArrayList<String> list = new ArrayList<>();
+        list.addAll(this.colorsMap.keySet());
+        return list;
+    }
+
     /*public void setStrColors(String[] strColors) {
         this.strColors = strColors;
     }*/
@@ -87,9 +93,6 @@ public abstract class ThemeObject {
     }
 
 
-    public Set getColorsStr() {
-        return this.colorsMap.keySet();
-    }
 
     public Integer getColorToInt(String colorName) {
         return this.colorsMap.get(colorName);

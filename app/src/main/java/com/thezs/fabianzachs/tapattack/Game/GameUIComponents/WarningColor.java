@@ -55,10 +55,13 @@ public class WarningColor {
         warningDrawable.setColor(intColors[colorIndex]);
     }
 
-    public String getCurrentColor() {
+    public String getCurrentStrColor() {
         return strColors[colorIndex];
     }
 
+    public Integer getCurrentIntColor() {
+        return intColors[colorIndex];
+    }
 
     private void setAndRandomizeArrays(String[] strColors, Integer[] intColors){
         Random rgen = new Random();  // Random number generator

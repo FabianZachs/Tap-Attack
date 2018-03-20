@@ -2,7 +2,6 @@ package com.thezs.fabianzachs.tapattack.Game.Mediator;
 
 import android.util.Log;
 
-import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
@@ -29,10 +28,14 @@ public class CentralGameCommunication {
 
     }
 
+    public Integer getIntWarningColor() {
+        return this.warningColor.getCurrentIntColor();
+    }
+
     //  ===== PROGRESSBAR CALLS =====
     public void changeProgressBarBy(int amount, String color) {
         Log.d("warningcolor", "changeProgressBarBy: color clicked: " + color);
-        changeProgressBarBy(warningColor.getCurrentColor().equals(color) ? -amount * 3 : amount); // TODO doesnt trigger shake since called from update in thread.. maybe add shake to ui thread like for progress bar but not a while loop
+        changeProgressBarBy(warningColor.getCurrentStrColor().equals(color) ? -amount * 2 : amount);
     }
 
     public void changeProgressBarBy(int amount) {
@@ -47,7 +50,7 @@ public class CentralGameCommunication {
     }
 
     public void incStreak(int amount, String color) {
-        if (warningColor.getCurrentColor().equals(color))
+        if (warningColor.getCurrentStrColor().equals(color))
             streak.resetStreak();
         else
             streak.incStreak(amount);
@@ -57,7 +60,7 @@ public class CentralGameCommunication {
 
     //  ===== SCORE CALLS =====
     public void incScore(int amount, String color) { // TODO make ternary operation like above
-        if (!warningColor.getCurrentColor().equals(color))
+        if (!warningColor.getCurrentStrColor().equals(color))
             score.incScore(amount);
     }
 

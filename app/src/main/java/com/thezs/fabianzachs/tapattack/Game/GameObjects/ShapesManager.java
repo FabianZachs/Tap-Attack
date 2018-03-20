@@ -85,7 +85,7 @@ public class ShapesManager {
             else if (shape.isTimedOut()) {
                 shapes.remove(shape);
                 freeResources(shape.getPaintObj(), shape.getBitmapHolder());
-                mediator.resetStreak();
+                mediator.resetStreak(); // TODO even for star????
             }
 
             else shape.update();
