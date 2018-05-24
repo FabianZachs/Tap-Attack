@@ -12,12 +12,12 @@ import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
 
 public class ProgressBarHolder {
 
-    private GradientDrawable progressBarHolderDrawable;
-
+    //private GradientDrawable progressBarHolderDrawable;
+/*
     // TODO remove once old background handler removed
     public ProgressBarHolder(BackgroundHandler backgroundHandler) {
-        backgroundHandler.attachProgressBarHolderObserver(this);
-        this.progressBarHolderDrawable = (GradientDrawable) Constants.progressBarHolder.getDrawable();
+        //backgroundHandler.attachProgressBarHolderObserver(this);
+        //this.progressBarHolderDrawable = (GradientDrawable) Constants.progressBarHolder.getDrawable();
     }
 
     public ProgressBarHolder() {
@@ -32,5 +32,5 @@ public class ProgressBarHolder {
     public void setColor(int[] colors) {
         progressBarHolderDrawable.setColors(colors);
 
-    }
+    }*/
 }

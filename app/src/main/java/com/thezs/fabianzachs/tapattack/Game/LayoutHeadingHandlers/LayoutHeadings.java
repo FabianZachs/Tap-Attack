@@ -34,7 +34,7 @@ public class LayoutHeadings {
         this.context = context;
         this.scoreView = score;
         this.streakView = streak;
-        this.progressBar = progressBar;
+        //this.progressBar = progressBar;
         this.parentLayout = parentLayout;
 
         this.score = 0;

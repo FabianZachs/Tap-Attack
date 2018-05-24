@@ -69,13 +69,13 @@ public class ClassicGameScene implements Scene {
         //this.warningColorHolder = new WarningColorHolder(backgroundHandler);
         //this.progressBarHolder = new ProgressBarHolder(backgroundHandler);
         //this.warningColor = new WarningColor(backgroundHandler);
-        this.progressBar = new ProgressBar();
+        //this.progressBar = new ProgressBar();
         this.streak = new Streak();
         this.score = new Score();
 
         mediator.addObject(score);
         mediator.addObject(streak);
-        mediator.addObject(progressBar);
+        //mediator.addObject(progressBar);
         mediator.addObject(shapesManager);
         mediator.addObject(warningColor);
 

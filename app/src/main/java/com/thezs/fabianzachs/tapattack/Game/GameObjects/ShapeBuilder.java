@@ -25,7 +25,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ShapeBuilder {
 
-    private AnimationManager animationManager;
+    //private AnimationManager animationManager;
     //private NeonTheme neonTheme;
     private ThemesManager themesManager; //TODO do we need this as an attribute?
     //private ThemeObject gameTheme;
@@ -156,7 +156,7 @@ public class ShapeBuilder {
         return Bitmap.createBitmap(origonalBitmap, 0, 0, origonalBitmap.getWidth(), origonalBitmap.getHeight(), rotationMatrix, true);
     }*/
 
-
+/*
 
     private void initializeAnimations() {
 
@@ -166,5 +166,5 @@ public class ShapeBuilder {
         String theme = prefs.getString("theme", "error: no theme");
 
         this.animationManager = new AnimationManager(theme);
-    }
+    }*/
 }

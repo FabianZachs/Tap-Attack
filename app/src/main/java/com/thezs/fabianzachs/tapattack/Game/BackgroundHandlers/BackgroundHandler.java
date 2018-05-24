@@ -29,7 +29,7 @@ public class BackgroundHandler {
     private Rect entireScreenRect;
 
     private WarningColorHolder warningColorHolderObserver;
-    private ProgressBarHolder progressBarHolderObserver;
+    //private ProgressBarHolder progressBarHolderObserver;
     private WarningColor warningColorObserver;
 
 
@@ -51,7 +51,7 @@ public class BackgroundHandler {
     public Bitmap getBackgroundBitmap(String color) {
 
         if (!previousColor.equals(color)) {
-            progressBarHolderObserver.changeColor(color);
+            //progressBarHolderObserver.changeColor(color);
             warningColorHolderObserver.changeColor(color);
             warningColorObserver.setNextColor(); //TODO next color should be 1 step ahead of bacground. so if background was blue and turns to green, the warning color was green. Or vice versa
             previousColor = color;
@@ -76,11 +76,11 @@ public class BackgroundHandler {
     public void attachWarningColorHolderObserver(WarningColorHolder warningColorHolder) {
         this.warningColorHolderObserver = warningColorHolder;
     }
-
+/*
     public void attachProgressBarHolderObserver(ProgressBarHolder progressBarHolder) {
-        this.progressBarHolderObserver = progressBarHolder;
+        //this.progressBarHolderObserver = progressBarHolder;
     }
-
+*/
     public void attachWarningColorObserver(WarningColor warningColor) {
         this.warningColorObserver = warningColor;
     }

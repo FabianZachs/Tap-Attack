@@ -50,14 +50,14 @@ public class Star extends ShapeObject {
 
     public Star(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, ArrayList<Integer> intColors, ArrayList<String> strColors,CentralGameCommunication mediator) {
         super(durationAlive, color, centerLocation, shapeImg, shapeImg, paint, bitmapHolder, mediator);
-        setProgressBarAddition(0);
+        //setProgressBarAddition(0);
         setGraveAble(false);
         setLives(1);
         this.intColors = intColors;
         this.strColors = strColors;
 
         timeOfLastColorChange = 0;
-        setProgressBarAddition(10); // TODO called when we reduce lives of star ie when wrong color hit
+        //setProgressBarAddition(10); // TODO called when we reduce lives of star ie when wrong color hit
 
         Random randIndex = new Random();
         //colorIndex = randIndex.nextInt(color.length());

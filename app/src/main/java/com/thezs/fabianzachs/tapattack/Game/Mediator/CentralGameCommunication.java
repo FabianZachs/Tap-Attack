@@ -17,7 +17,7 @@ public class CentralGameCommunication {
     private ShapesManager shapesManager; // TODO  do we need this??
     private Score score;
     private Streak streak;
-    private ProgressBar progressBar;
+    //private ProgressBar progressBar;
     private WarningColor warningColor;
 
     /* Tasks:
@@ -32,15 +32,16 @@ public class CentralGameCommunication {
         return this.warningColor.getCurrentIntColor();
     }
 
+    /*
     //  ===== PROGRESSBAR CALLS =====
     public void changeProgressBarBy(int amount, String color) {
         Log.d("warningcolor", "changeProgressBarBy: color clicked: " + color);
         changeProgressBarBy(warningColor.getCurrentStrColor().equals(color) ? -amount * 2 : amount);
-    }
+    }*/
 
-    public void changeProgressBarBy(int amount) {
+    /*public void changeProgressBarBy(int amount) {
         progressBar.changeProgressBy(amount);
-    }
+    }*/
 
     //  ==============================
 
@@ -83,11 +84,11 @@ public class CentralGameCommunication {
     public void addObject(Streak streak) {
         this.streak = streak;
     }
-
+/*
     public void addObject(ProgressBar progressBar) {
-        this.progressBar = progressBar;
+        //this.progressBar = progressBar;
     }
-
+*/
     public void addObject(WarningColor warningColor) {
         this.warningColor = warningColor;
     }

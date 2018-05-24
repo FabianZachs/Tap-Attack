@@ -98,7 +98,7 @@ public class Arrow extends ShapeObject {
                     reduceLives();
                 }
                 else if (System.currentTimeMillis() - timeOfLastPenalty > 1000) {
-                    mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
+                    //mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
                     mediator.resetStreak();
                     timeOfLastPenalty = System.currentTimeMillis();
 
@@ -111,7 +111,7 @@ public class Arrow extends ShapeObject {
 
         @Override
         public boolean onSingleTapUp(MotionEvent event) {
-            mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
+            //mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
             mediator.resetStreak();
             return true;
         }

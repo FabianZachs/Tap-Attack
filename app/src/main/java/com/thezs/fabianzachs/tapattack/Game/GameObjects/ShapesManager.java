@@ -60,7 +60,7 @@ public class ShapesManager {
 
          // if user ACTION_DOWNs and not onto a shape
         if (!shapeInteractment && event.getAction() == MotionEvent.ACTION_DOWN) {
-            mediator.changeProgressBarBy(-40);
+            //mediator.changeProgressBarBy(-40);
             mediator.resetStreak();
         }
     }
@@ -79,7 +79,7 @@ public class ShapesManager {
                 shapes.remove(shape);
                 mediator.incScore(shape.getPoints(), shape.getColor());
                 mediator.incStreak(1, shape.getColor());
-                mediator.changeProgressBarBy(shape.getProgressBarAddition(), shape.getColor());
+                //mediator.changeProgressBarBy(shape.getProgressBarAddition(), shape.getColor());
             }
 
             else if (shape.isTimedOut()) {
