@@ -1,34 +1,20 @@
 package com.thezs.fabianzachs.tapattack.Game.GameModeScenes;
 
-import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Rect;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
 import com.thezs.fabianzachs.tapattack.Constants;
-import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundHandler;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundManager;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
-import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.UIHolders.ProgressBarHolder;
-import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.UIHolders.WarningColorHolder;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.WarningColor;
-import com.thezs.fabianzachs.tapattack.Game.LayoutHeadingHandlers.LayoutHeadings;
 import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 import com.thezs.fabianzachs.tapattack.Game.Scene;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Random;
-
-import static android.content.ContentValues.TAG;
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by fabianzachs on 07/02/18.
@@ -111,10 +97,11 @@ public class ClassicGameScene implements Scene {
         // TODO if touch in shape creation region
         if (Constants.SHAPE_CLICK_AREA.contains((int) event.getX(), (int) event.getY()))
             shapesManager.recieveTouch(event);
-        else if (Constants.WARNING_COLOR_CLICK_AREA.contains((int) event.getX(), (int) event.getY()))
+        else if (Constants.WARNING_COLOR_CLICK_AREA_LEFT.contains((int) event.getX(), (int) event.getY()))
             //Log.d("warningtoucharea", "recieveTouch: warning");
-            warningColor.recieveTouch(event);
-
+            warningColor.recieveTouch(event, "left");
+        else if(Constants.WARNING_COLOR_CLICK_AREA_RIGHT.contains((int) event.getX(), (int) event.getY()))
+            warningColor.recieveTouch(event, "right");
 
     }
 

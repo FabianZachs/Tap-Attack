@@ -1,44 +1,19 @@
 package com.thezs.fabianzachs.tapattack.Game;
 
-        import android.annotation.TargetApi;
         import android.app.Activity;
-        import android.content.Context;
-        import android.content.res.Resources;
-        import android.graphics.Color;
-        import android.graphics.Point;
-        import android.graphics.PorterDuff;
-        import android.graphics.PorterDuffColorFilter;
         import android.graphics.Rect;
-        import android.graphics.drawable.Drawable;
-        import android.graphics.drawable.GradientDrawable;
         import android.graphics.drawable.LayerDrawable;
-        import android.media.Image;
-        import android.os.Build;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
-        import android.support.annotation.RequiresApi;
-        import android.util.DisplayMetrics;
-        import android.util.Log;
-        import android.view.Display;
         import android.view.Gravity;
-        import android.view.SurfaceView;
         import android.view.View;
-        import android.view.WindowManager;
         import android.widget.FrameLayout;
         import android.widget.ImageView;
         import android.widget.LinearLayout;
-        import android.widget.ProgressBar;
-        import android.widget.RelativeLayout;
-        import android.widget.TextView;
 
-        import com.daimajia.androidanimations.library.Techniques;
-        import com.daimajia.androidanimations.library.YoYo;
         import com.thezs.fabianzachs.tapattack.Constants;
-        import com.thezs.fabianzachs.tapattack.Game.LayoutHeadingHandlers.LayoutHeadings;
         import com.thezs.fabianzachs.tapattack.R;
         import com.thezs.fabianzachs.tapattack.helper;
-
-        import org.w3c.dom.Text;
 
 /**
  * Created by fabianzachs on 07/02/18.
@@ -93,7 +68,7 @@ public class MainGameActivity extends Activity {
         ImageView warningComponent = (ImageView) findViewById(R.id.warning_component);
         FrameLayout.LayoutParams warningComponentParameters = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2,Constants.SCREEN_WIDTH/15);
         warningComponentParameters.gravity = (Gravity.CENTER|Gravity.TOP);
-        warningComponentParameters.topMargin = /*(30)*/ + (Constants.SCREEN_HEIGHT/40 + 25) + 10;
+        warningComponentParameters.topMargin = /*(30)*/ + (Constants.SCREEN_HEIGHT/40 );
         warningComponent.setLayoutParams(warningComponentParameters);
 
         Constants.warningComponent = (LayerDrawable) warningComponent.getDrawable();
@@ -120,7 +95,10 @@ public class MainGameActivity extends Activity {
         ImageView warningComponent = (ImageView) findViewById(R.id.warning_component);
         int[] location = new int[2];
         warningComponent.getLocationInWindow(location);
-        Constants.WARNING_COLOR_CLICK_AREA = new Rect(location[0] - Constants.SHAPE_WIDTH, 10, location[0] + Constants.SHAPE_WIDTH, Constants.SHAPE_CLICK_AREA.top);
+        //Constants.WARNING_COLOR_CLICK_AREA_LEFT = new Rect(location[0] - Constants.SHAPE_WIDTH, 10, location[0] + Constants.SHAPE_WIDTH, Constants.SHAPE_CLICK_AREA.top);
+        Constants.WARNING_COLOR_CLICK_AREA_LEFT = new Rect(0,30 + (Constants.SCREEN_HEIGHT/40 +25) + 20 + Constants.SCREEN_WIDTH/15 + 10 + Constants.SHAPE_HEIGHT/2,Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT);
+        Constants.WARNING_COLOR_CLICK_AREA_RIGHT = new Rect(Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH/20,30 + (Constants.SCREEN_HEIGHT/40 +25) + 20 + Constants.SCREEN_WIDTH/15 + 10 + Constants.SHAPE_HEIGHT/2,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+        Constants.SHAPE_CLICK_AREA = new Rect(Constants.SCREEN_WIDTH/20, 30 + (Constants.SCREEN_HEIGHT/40 +25) + 20 + Constants.SCREEN_WIDTH/15 + 10 + Constants.SHAPE_HEIGHT/2, Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT - 1);
     }
 
     // TODO make this pause button size relative to screen size

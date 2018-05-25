@@ -30,7 +30,7 @@ public class SceneManager {
     }
 
     public void recieveTouch(MotionEvent event) {
-        if (Constants.SHAPE_CLICK_AREA.contains((int) event.getX(), (int) event.getY()) || Constants.WARNING_COLOR_CLICK_AREA.contains((int) event.getX(), (int) event.getY()))
+        if (Constants.SHAPE_CLICK_AREA.contains((int) event.getX(), (int) event.getY()) || Constants.WARNING_COLOR_CLICK_AREA_LEFT.contains((int) event.getX(), (int) event.getY()) || Constants.WARNING_COLOR_CLICK_AREA_RIGHT.contains((int) event.getX(), (int) event.getY()))
             scenes.get(ACTIVE_SCENE).recieveTouch(event);
     }
 

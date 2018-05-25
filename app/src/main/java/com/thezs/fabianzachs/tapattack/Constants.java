@@ -41,7 +41,8 @@ public class Constants {
     public static int[] holderRed = {0xffff0000, 0xffff3300};
     public static int[] holderPurple = {0xff9d00ff, 0xffcc00ff};
 
-    public static Rect WARNING_COLOR_CLICK_AREA;
+    public static Rect WARNING_COLOR_CLICK_AREA_RIGHT;
+    public static Rect WARNING_COLOR_CLICK_AREA_LEFT;
     public static Rect SHAPE_CLICK_AREA;
     public static Rect SHAPE_CREATION_AREA;
 

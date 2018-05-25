@@ -40,8 +40,6 @@ public class WarningColor {
 
     public static boolean running = true;
 
-    private boolean shake;
-
 
     public WarningColor(String[] strColors, Integer[] intColors) {
         this.colorIndex = 0;
@@ -86,18 +84,24 @@ public class WarningColor {
     }
 
 
-    public void recieveTouch(MotionEvent event) {
+    public void recieveTouch(MotionEvent event, String side) {
         // TODO handle scrolling
-        if (event.getAction() == MotionEvent.ACTION_DOWN)
+        if (event.getAction() == MotionEvent.ACTION_DOWN && side.equals("right"))
             setNextColor();
-
-        // TODO or scrolling, set lives == rand(10-40) then reduce lives per scroll -- if lives <= 0, setNextColor() & set lives == rand(10-40)
+        else if (event.getAction() == MotionEvent.ACTION_DOWN && side.equals("left"))
+            setPreviousColor();
     }
 
 
     public void setNextColor() {
         colorIndex++;
         colorIndex = colorIndex >= intColors.length ? 0 : colorIndex;
+        warningDrawable.setColor(intColors[colorIndex]);
+    }
+    // TODO maybe not needed
+    public void setPreviousColor() {
+        colorIndex--;
+        colorIndex = colorIndex < 0 ? intColors.length - 1 : colorIndex;
         warningDrawable.setColor(intColors[colorIndex]);
     }
 
