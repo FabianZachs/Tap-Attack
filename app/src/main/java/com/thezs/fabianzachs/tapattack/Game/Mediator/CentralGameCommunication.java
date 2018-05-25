@@ -51,8 +51,11 @@ public class CentralGameCommunication {
     }
 
     public void incStreak(int amount, String color) {
-        if (warningColor.getCurrentStrColor().equals(color))
+        if (warningColor.getCurrentStrColor().equals(color)) {
+
             streak.resetStreak();
+            warningColor.shake();
+        }
         else
             streak.incStreak(amount);
     }
@@ -91,6 +94,10 @@ public class CentralGameCommunication {
 */
     public void addObject(WarningColor warningColor) {
         this.warningColor = warningColor;
+    }
+
+    public void warningComponentShake() {
+        this.warningColor.shake();
     }
 
     //public void addObject(ShapeObject shape) {

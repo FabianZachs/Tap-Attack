@@ -50,4 +50,5 @@ public class Constants {
     public static LayerDrawable warningComponent;
     public static ImageView progressBarHolder;
     public static Activity GAME_ACTIVITY;
+    public static ImageView warningComponentImg;
 }

@@ -91,12 +91,13 @@ public class MainGameActivity extends Activity {
 
 
         ImageView warningComponent = (ImageView) findViewById(R.id.warning_component);
-        FrameLayout.LayoutParams warningComponentParameters = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/15,Constants.SCREEN_WIDTH/15);
+        FrameLayout.LayoutParams warningComponentParameters = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/2,Constants.SCREEN_WIDTH/15);
         warningComponentParameters.gravity = (Gravity.CENTER|Gravity.TOP);
-        warningComponentParameters.topMargin = (30) + (Constants.SCREEN_HEIGHT/40 + 25) + 20;
+        warningComponentParameters.topMargin = /*(30)*/ + (Constants.SCREEN_HEIGHT/40 + 25) + 10;
         warningComponent.setLayoutParams(warningComponentParameters);
 
         Constants.warningComponent = (LayerDrawable) warningComponent.getDrawable();
+        Constants.warningComponentImg = warningComponent; // FOR SHAKE
 
         // boolean testFactor = layeredCompnent.setDrawableByLayerId(R.id.warning, replacewarning);
 

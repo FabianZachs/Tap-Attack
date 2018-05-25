@@ -2,9 +2,13 @@ package com.thezs.fabianzachs.tapattack.Game.GameUIComponents;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.widget.ImageView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundHandler;
 
@@ -26,11 +30,17 @@ import java.util.Random;
      */
 public class WarningColor {
 
+    private Handler mHandler = new Handler();
+    private ImageView warningComponent;
     private GradientDrawable warningDrawable;
     private int colorIndex;
 
     private String[] strColors;
     private Integer[] intColors;
+
+    public static boolean running = true;
+
+    private boolean shake;
 
 
     public WarningColor(String[] strColors, Integer[] intColors) {
@@ -38,7 +48,43 @@ public class WarningColor {
         this.warningDrawable = (GradientDrawable) Constants.warningComponent.getDrawable(1);
         setAndRandomizeArrays(strColors,intColors);
         setNextColor();
+
+
+
+
+        running = true;
+        this.warningComponent= Constants.warningComponentImg;
+        YoYo.with(Techniques.FadeIn)
+                .duration(1500)
+                .repeat(0)
+                .playOn(warningComponent);
+
+        // TODO make sure thread is disposed of properly at end
+        Thread timer = new Thread() {
+            public void run() {
+                while (running) {
+                    try {
+                        Constants.GAME_ACTIVITY.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //if (shake == true)
+
+                            }
+                        });
+                        Thread.sleep(100);
+
+                    } catch (InterruptedException e) {
+                        Log.d("running", "run: error");
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        timer.start();
+
+
     }
+
 
     public void recieveTouch(MotionEvent event) {
         // TODO handle scrolling
@@ -79,5 +125,23 @@ public class WarningColor {
         }
         this.strColors = strColors;
         this.intColors = intColors;
+    }
+
+    public void shake() {
+        /*
+        YoYo.with(Techniques.Shake)
+                .duration(750)
+                .repeat(0)
+                .playOn(Constants.warningComponentImg);
+        shake = true; */
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                YoYo.with(Techniques.Shake)
+                        .duration(750)
+                        .repeat(0)
+                        .playOn(warningComponent);
+            }
+        });
     }
 }

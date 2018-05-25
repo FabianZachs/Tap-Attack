@@ -61,6 +61,7 @@ public class ShapesManager {
          // if user ACTION_DOWNs and not onto a shape
         if (!shapeInteractment && event.getAction() == MotionEvent.ACTION_DOWN) {
             //mediator.changeProgressBarBy(-40);
+            mediator.warningComponentShake();
             mediator.resetStreak();
         }
     }
