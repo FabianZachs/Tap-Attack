@@ -37,8 +37,8 @@ public class ShapesPopulator {
     // settings
     private final int UNIT_TIME_PER_SHAPE_ADDITION = 1; // every x seconds one more max shape
     private final int MAX_NUMBER_LOOPS = 5;
-    private final int SHAPE_SPACING = 5; // space between shapes
-    private final int MAX_SHAPES = 2;
+    private final int SHAPE_SPACING = Constants.SCREEN_HEIGHT/10; // space between shapes
+    private final int MAX_SHAPES = 5;
 
     private long timeOfLastShapeAddition;
 
@@ -51,7 +51,6 @@ public class ShapesPopulator {
     private Random colorFinder;
 
     public ShapesPopulator(CentralGameCommunication mediator, long initTime, SharedPaint sharedPaint, SharedRect sharedRect) {
-        Log.d("paint", "ShapesPopulator: theme: " + Constants.CURRENT_THEME);
         this.shapeColors = ThemesManager.getStrColors(Constants.CURRENT_THEME);
         this.mediator = mediator;
         this.sharedPaint = sharedPaint;
@@ -97,7 +96,7 @@ public class ShapesPopulator {
         ShapeObject newShape = shapeBuilder.buildShape("square", getColor(), newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //ShapeObject newShape = shapeBuilder.buildShape("star", getColor(), newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //newShape.attachAllObservers(scoreObserver,streakObserver,progressBarObserver);
-        shapes.add(newShape);
+        shapes.add(0, newShape);
         timeOfLastShapeAddition = System.currentTimeMillis();
 
         return shapes; // TODO remember we need the whole list of shapes to know what next shapes we should add
@@ -111,14 +110,15 @@ public class ShapesPopulator {
     // TODO find the right bounds for location for shape
     private Point getValidNewShapeLocation(CopyOnWriteArrayList shapes) {
 
-        int i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left;
+        int i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_WIDTH/2 - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left + Constants.SHAPE_WIDTH/2;
         int j = rand.nextInt(Constants.SHAPE_CREATION_AREA.bottom - Constants.SHAPE_CREATION_AREA.top) + Constants.SHAPE_CREATION_AREA.top;
         int iterationNumber = 0;
 
         while(locationUsedByAnotherShape(shapes,i,j)) {
 
 
-            i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left;
+           // i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left;
+            i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_WIDTH/2 - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left + Constants.SHAPE_WIDTH/2;
             j = rand.nextInt(Constants.SHAPE_CREATION_AREA.bottom - Constants.SHAPE_CREATION_AREA.top) + Constants.SHAPE_CREATION_AREA.top;
             iterationNumber++;
 

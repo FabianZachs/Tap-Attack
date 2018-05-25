@@ -63,7 +63,7 @@ public class ShapeBuilder {
                         paint, bitmapHolder, mediator);
 */
             case "square":
-                return new Square(3, color, centerLocation,
+                return new Square(100, color, centerLocation,
                         themesManager.getCurrentTheme().getShapeBitmap(shape,color,false),
                         themesManager.getCurrentTheme().getShapeBitmap(shape,color,true),
                         themesManager.getCurrentTheme().getShapePaint(paint,color), bitmapHolder, mediator);
