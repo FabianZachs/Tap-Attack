@@ -1,6 +1,8 @@
 package com.thezs.fabianzachs.tapattack.Game.GameUIComponents;
 
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Handler;
 import android.util.Log;
@@ -40,10 +42,15 @@ public class WarningColor {
 
     public static boolean running = true;
 
+    private Paint[] warningColorButtonPaints;
+
 
     public WarningColor(String[] strColors, Integer[] intColors) {
         this.colorIndex = 0;
         this.warningDrawable = (GradientDrawable) Constants.warningComponent.getDrawable(1);
+        Paint leftPaint = new Paint();
+        Paint rightPaint = new Paint();
+        this.warningColorButtonPaints = new Paint[] {leftPaint, rightPaint};
         setAndRandomizeArrays(strColors,intColors);
         setNextColor();
 
@@ -98,11 +105,25 @@ public class WarningColor {
         colorIndex = colorIndex >= intColors.length ? 0 : colorIndex;
         warningDrawable.setColor(intColors[colorIndex]);
     }
-    // TODO maybe not needed
+
     public void setPreviousColor() {
         colorIndex--;
         colorIndex = colorIndex < 0 ? intColors.length - 1 : colorIndex;
         warningDrawable.setColor(intColors[colorIndex]);
+    }
+
+    public Integer getNextIntColor() {
+        //int nextIntColor = colorIndex + 1;
+        //nextIntColor = nextIntColor >= intColors.length ? 0 : nextIntColor;
+        int nextIntColor = colorIndex + 1 >= intColors.length ? 0 : colorIndex + 1;
+        return intColors[nextIntColor];
+    }
+
+    public Integer getPreviousIntColor() {
+        //int previousIntColor = colorIndex - 1;
+        //previousIntColor = previousIntColor < 0 ? intColors.length - 1 : previousIntColor;
+        int previousIntColor = colorIndex - 1 < 0 ? intColors.length - 1 : colorIndex - 1;
+        return intColors[previousIntColor];
     }
 
     public String getCurrentStrColor() {
@@ -147,5 +168,12 @@ public class WarningColor {
                         .playOn(warningComponent);
             }
         });
+    }
+
+    public void draw(Canvas canvas) {
+        warningColorButtonPaints[0].setColor(getPreviousIntColor());
+        warningColorButtonPaints[1].setColor(getNextIntColor());
+        canvas.drawRect(Constants.WARNING_COLOR_CLICK_AREA_LEFT, warningColorButtonPaints[0]);
+        canvas.drawRect(Constants.WARNING_COLOR_CLICK_AREA_RIGHT, warningColorButtonPaints[1]);
     }
 }

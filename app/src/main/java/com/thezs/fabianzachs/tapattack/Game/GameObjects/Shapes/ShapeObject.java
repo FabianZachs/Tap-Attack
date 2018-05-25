@@ -83,6 +83,11 @@ public abstract class ShapeObject {
         return (System.currentTimeMillis() - initTime > durationAlive * 1000);
     }
 
+    public void incrementY(float amount) {
+        bitmapHolder.top += amount;
+        bitmapHolder.bottom += amount;
+    }
+
     public void reduceLives() {
         this.lives -= 1;
     }
