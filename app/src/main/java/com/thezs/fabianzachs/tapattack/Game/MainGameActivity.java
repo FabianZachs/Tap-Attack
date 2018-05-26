@@ -88,8 +88,8 @@ public class MainGameActivity extends Activity {
         // boolean testFactor = layeredCompnent.setDrawableByLayerId(R.id.warning, replacewarning);
 
         // TODO find the right place to change these color
-        //Constants.warningComponentButtonLeft = warningColorChangeButtonLeft;
-        //Constants.warningComponentButtonRight = warningColorChangeButtonRight;
+        Constants.warningComponentButtonLeft = /*(LayerDrawable)*/ warningColorChangeButtonLeft.getDrawable();
+        Constants.warningComponentButtonRight = /*(LayerDrawable)*/ warningColorChangeButtonRight.getDrawable();
 
 
     }

@@ -40,6 +40,7 @@ public class ShapesPopulator {
     private final int SHAPE_SPACING = Constants.SCREEN_HEIGHT/10; // space between shapes
     private final int MAX_SHAPES = 5;
 
+
     private long timeOfLastShapeAddition;
 
     private long initTime;
@@ -49,6 +50,7 @@ public class ShapesPopulator {
 
     private String[] shapeColors;
     private Random colorFinder;
+    private String direction;
 
     public ShapesPopulator(CentralGameCommunication mediator, long initTime, SharedPaint sharedPaint, SharedRect sharedRect) {
         this.shapeColors = ThemesManager.getStrColors(Constants.CURRENT_THEME);
@@ -69,9 +71,9 @@ public class ShapesPopulator {
         // TODO integrate the lastTimeShapeAdded with the progress bar to make sure ppl are able to get enough points
         // TODO possibly reduce time between added shapes when progress bar gets lower and lower. ex. if <10% have no timeout for adding shapes
         //if (maxNumberOfShapes() == shapes.size() || (lastTimeShapeAdded() < 100 && shapes.size() != 0))
-            //return shapes;
+        //return shapes;
 
-        if (shapes.size() >= 1 && shapes.get(0).getBitmapHolder().top - SHAPE_SPACING < 0 )
+        if (shapes.size() >= 1 && shapes.get(0).getBitmapHolder().top - SHAPE_SPACING < 0)
             return shapes;
 
         Paint paint = sharedPaint.getUnUsedPaint();
@@ -87,18 +89,19 @@ public class ShapesPopulator {
         Point newShapeLocation = getValidNewShapeLocation(shapes);
 
         // no new location findable
-        if(newShapeLocation == null)
+        if (newShapeLocation == null)
             return shapes;
 
 
         // TODO use factory design pattern? so instead of .buildCross, pass "cross" in parameter
         //mShapes.add(shapeBuilder.buildArrow("blue", newShapeLocation));
-        //ShapeObject newShape = shapeBuilder.buildShape("arrow", getColor(), newShapeLocation,paint,bitmapHolder,mediator,"RIGHT") ;
+        //ShapeObject newShape = shapeBuilder.buildShape("arrow", getColor(), newShapeLocation,paint,bitmapHolder,mediator, getDirection()) ;
         //ShapeObject newShape = shapeBuilder.buildShape("circle", getColor() , newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
-        //ShapeObject newShape = shapeBuilder.buildShape("cross", "blue" , newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
-        ShapeObject newShape = shapeBuilder.buildShape("square", getColor(), newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
+        //ShapeObject newShape = shapeBuilder.buildShape("cross", getColor() , newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
+        //ShapeObject newShape = shapeBuilder.buildShape("square", getColor(), newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //ShapeObject newShape = shapeBuilder.buildShape("star", getColor(), newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //newShape.attachAllObservers(scoreObserver,streakObserver,progressBarObserver);
+        ShapeObject newShape = shapeBuilder.buildShape(getShape(), getColor(), newShapeLocation, paint, bitmapHolder, mediator, getDirection());
         shapes.add(0, newShape);
         timeOfLastShapeAddition = System.currentTimeMillis();
 
@@ -172,5 +175,43 @@ public class ShapesPopulator {
 
     public String getColor() {
         return shapeColors[colorFinder.nextInt(5)];
+    }
+
+    private String getShape() {
+        int i = rand.nextInt(100);
+        //Log.d("intindex", "getShape: int" + i);
+
+
+        if (i<10)
+            return "cross";
+        else if (i<20)
+            return "star";
+        else if (i<40)
+            return "square";
+        else if (i<70)
+            return "arrow";
+        else
+            return "circle";
+
+
+    }
+
+    public String getDirection() {
+        int i = rand.nextInt(4);
+
+        switch (i) {
+            case 0:
+                return "LEFT";
+            case 1:
+                return "RIGHT";
+            case 2:
+                return "UP";
+            case 3:
+                return "DOWN";
+        }
+
+        throw new RuntimeException("getDirection failed");
+
+
     }
 }

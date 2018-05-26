@@ -19,7 +19,7 @@ public class ShapeMover {
     private float RATE_OF_SPEED_INCREASE; // TODO use log(x+1) function
 
     public ShapeMover() {
-        Log.d("speed", "previous speed: " + Constants.SCREEN_HEIGHT/5000.0f);
+        //Log.d("speed", "previous speed: " + Constants.SCREEN_HEIGHT/5000.0f);
         this.startTime = System.currentTimeMillis();
         this.initTime = System.currentTimeMillis();
     }
@@ -31,7 +31,7 @@ public class ShapeMover {
         startTime = System.currentTimeMillis();
         //float speed = Constants.SCREEN_HEIGHT/5000.0f;
 
-        Log.d("speed", "now speed: " + getSpeed(elapsedTime));
+        //Log.d("speed", "now speed: " + getSpeed(elapsedTime));
         for (ShapeObject shape : shapes) {
             shape.incrementY((float) getSpeed(elapsedTime) * elapsedTime);
 
@@ -42,7 +42,7 @@ public class ShapeMover {
 
     public double getSpeed(int elapsedTime) {
         long currentGameTime = System.currentTimeMillis() - initTime;
-        Log.d("speed", "getSpeed: currenttime" + currentGameTime);
+        //Log.d("speed", "getSpeed: currenttime" + currentGameTime);
         double denominator = (10000* (1/(Math.log(50000 * currentGameTime+ 100)))) + 5000;
         return Constants.SCREEN_HEIGHT/ denominator;
     }

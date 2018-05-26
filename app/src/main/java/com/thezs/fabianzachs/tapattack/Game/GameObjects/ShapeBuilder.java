@@ -6,12 +6,14 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.Animation.AnimationManager;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Arrow;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Cross;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Star;
@@ -75,6 +77,13 @@ public class ShapeBuilder {
                         animationManager.getBitmap("square", color, true),
                         paint, bitmapHolder, mediator);
 */
+            case "cross":
+                Log.d("crosscolor", "buildShape: color"+color);
+
+                return new Cross(100, color, centerLocation,
+                        themesManager.getCurrentTheme().getShapeBitmap(shape,color,false),
+                        themesManager.getCurrentTheme().getShapeBitmap(shape,color,true),
+                        themesManager.getCurrentTheme().getShapePaint(paint,color), bitmapHolder, mediator);
                 /*
             case "cross":
                 return new Cross(3, color, centerLocation,

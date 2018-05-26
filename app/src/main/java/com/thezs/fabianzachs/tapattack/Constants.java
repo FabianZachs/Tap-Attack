@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.widget.ImageView;
@@ -52,5 +53,6 @@ public class Constants {
     public static ImageView progressBarHolder;
     public static Activity GAME_ACTIVITY;
     public static ImageView warningComponentImg;
-    public static ImageView warningComponentButtonRight;
+    public static Drawable /*LayerDrawable*/ warningComponentButtonRight;
+    public static Drawable/*LayerDrawable*/ warningComponentButtonLeft;
 }
