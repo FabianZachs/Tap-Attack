@@ -37,7 +37,7 @@ public class ShapesPopulator {
     // settings
     private final int UNIT_TIME_PER_SHAPE_ADDITION = 1; // every x seconds one more max shape
     private final int MAX_NUMBER_LOOPS = 5;
-    private final int SHAPE_SPACING = Constants.SCREEN_HEIGHT/10; // space between shapes
+    private final int SHAPE_SPACING = Constants.SCREEN_HEIGHT/20; // space between shapes
     private final int MAX_SHAPES = 5;
 
     private long timeOfLastShapeAddition;
@@ -110,16 +110,24 @@ public class ShapesPopulator {
     // TODO find the right bounds for location for shape
     private Point getValidNewShapeLocation(CopyOnWriteArrayList shapes) {
 
-        int i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_WIDTH/2 - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left + Constants.SHAPE_WIDTH/2;
+        //int i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_WIDTH/2 - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left + Constants.SHAPE_WIDTH/2;
         int j = rand.nextInt(Constants.SHAPE_CREATION_AREA.bottom - Constants.SHAPE_CREATION_AREA.top) + Constants.SHAPE_CREATION_AREA.top;
+        int i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left;
         int iterationNumber = 0;
 
         while(locationUsedByAnotherShape(shapes,i,j)) {
 
+            //Log.d("location", "getValidNewShapeLocation: 0 to left" +(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_WIDTH/2 - Constants.SHAPE_CREATION_AREA.left) );
+            //Log.d("location", "getValidNewShapeLocation: shift" +(Constants.SHAPE_CREATION_AREA.left + Constants.SHAPE_WIDTH/2) );
+            //Log.d("location", "getValidNewShapeLocation: left shape creation: " + Constants.SHAPE_CREATION_AREA.left);
+            //Log.d("location", "getValidNewShapeLocation: right shape creation: " + Constants.SHAPE_CREATION_AREA.right);
 
            // i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left;
-            i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_WIDTH/2 - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left + Constants.SHAPE_WIDTH/2;
+
+            //i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_WIDTH/2 - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left + Constants.SHAPE_WIDTH/2;
+            //j = rand.nextInt(Constants.SHAPE_CREATION_AREA.bottom - Constants.SHAPE_CREATION_AREA.top) + Constants.SHAPE_CREATION_AREA.top;
             j = rand.nextInt(Constants.SHAPE_CREATION_AREA.bottom - Constants.SHAPE_CREATION_AREA.top) + Constants.SHAPE_CREATION_AREA.top;
+            i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left;
             iterationNumber++;
 
             // break out of it if we cant find a location
