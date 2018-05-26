@@ -37,7 +37,7 @@ public class ShapesPopulator {
     // settings
     private final int UNIT_TIME_PER_SHAPE_ADDITION = 1; // every x seconds one more max shape
     private final int MAX_NUMBER_LOOPS = 5;
-    private final int SHAPE_SPACING = Constants.SCREEN_HEIGHT/20; // space between shapes
+    private final int SHAPE_SPACING = Constants.SCREEN_HEIGHT/10; // space between shapes
     private final int MAX_SHAPES = 5;
 
     private long timeOfLastShapeAddition;
@@ -63,12 +63,15 @@ public class ShapesPopulator {
         this.colorFinder = new Random();
     }
 
-    public CopyOnWriteArrayList update(CopyOnWriteArrayList shapes) {
+    public CopyOnWriteArrayList update(CopyOnWriteArrayList<ShapeObject> shapes) {
 
 
         // TODO integrate the lastTimeShapeAdded with the progress bar to make sure ppl are able to get enough points
         // TODO possibly reduce time between added shapes when progress bar gets lower and lower. ex. if <10% have no timeout for adding shapes
-        if (maxNumberOfShapes() == shapes.size() || (lastTimeShapeAdded() < 200 && shapes.size() != 0))
+        //if (maxNumberOfShapes() == shapes.size() || (lastTimeShapeAdded() < 100 && shapes.size() != 0))
+            //return shapes;
+
+        if (shapes.size() >= 1 && shapes.get(0).getBitmapHolder().top - SHAPE_SPACING < 0 )
             return shapes;
 
         Paint paint = sharedPaint.getUnUsedPaint();

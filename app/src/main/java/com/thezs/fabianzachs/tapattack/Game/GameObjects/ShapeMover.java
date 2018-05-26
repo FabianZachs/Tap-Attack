@@ -14,7 +14,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class ShapeMover {
 
     private long startTime;
-    private float RATE_OF_SPEED_INCREASE;
+    private float RATE_OF_SPEED_INCREASE; // TODO use log(x+1) function
 
     public ShapeMover() {
         startTime = System.currentTimeMillis();
@@ -25,7 +25,7 @@ public class ShapeMover {
     public void update(CopyOnWriteArrayList<ShapeObject> shapes) {
         int elapsedTime = (int) (System.currentTimeMillis() - startTime);
         startTime = System.currentTimeMillis();
-        float speed = Constants.SCREEN_HEIGHT/10000.0f;
+        float speed = Constants.SCREEN_HEIGHT/5000.0f;
 
         for (ShapeObject shape : shapes) {
             shape.incrementY(speed * elapsedTime);

@@ -12,7 +12,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 public class SharedRect {
 
-    private final int MAX_NUMBER_OF_RECTS = 5; // TODO this is tied to max number of shapes in shapesPopulator
+    private final int MAX_NUMBER_OF_RECTS = 9; // TODO this is tied to max number of shapes in shapesPopulator
     private ArrayBlockingQueue<Rect> unUsedRects;
     private ArrayList<Rect> usedRects;
 

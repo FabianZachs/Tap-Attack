@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Cross;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
@@ -85,10 +86,17 @@ public class ShapesManager {
                 //mediator.changeProgressBarBy(shape.getProgressBarAddition(), shape.getColor());
             }
 
+            // TODO wont happen anymore
             else if (shape.isTimedOut()) {
                 shapes.remove(shape);
                 freeResources(shape.getPaintObj(), shape.getBitmapHolder());
                 mediator.resetStreak(); // TODO even for star????
+            }
+            // TODO this will end game
+            else if (shape.getBitmapHolder().top> Constants.SCREEN_HEIGHT) {
+                shapes.remove(shape);
+                freeResources(shape.getPaintObj(), shape.getBitmapHolder());
+                mediator.resetStreak();
             }
 
             else shape.update();

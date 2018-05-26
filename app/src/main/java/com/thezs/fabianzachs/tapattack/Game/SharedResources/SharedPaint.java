@@ -13,7 +13,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 public class SharedPaint {
 
-    private final int MAX_NUMBER_OF_PAINTS = 5; // TODO this is tied to max number of shapes in shapesPopulator
+    private final int MAX_NUMBER_OF_PAINTS = 9; // TODO this is tied to max number of shapes in shapesPopulator
     private ArrayBlockingQueue<Paint> unUsedPaints;
     private ArrayList<Paint> usedPaints;
 
