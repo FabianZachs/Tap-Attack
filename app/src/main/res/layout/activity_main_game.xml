@@ -38,6 +38,19 @@
         android:src="@drawable/warningcomponent2"
         />
 
+    <ImageView
+        android:id="@+id/warning_color_change_button_left"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="left"
+        android:src="@drawable/warningcolorchangebuttonleft"/>
+    <ImageView
+        android:id="@+id/warning_color_change_button_right"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="right"
+        android:src="@drawable/warningcolorchangebuttonright"/>
+
     <!--
         <com.beardedhen.androidbootstrap.BootstrapProgressBar
             android:id="@+id/progress_bar"

@@ -2,7 +2,10 @@ package com.thezs.fabianzachs.tapattack.Game.GameUIComponents;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Shader;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Handler;
 import android.util.Log;
@@ -163,7 +166,7 @@ public class WarningColor {
             @Override
             public void run() {
                 YoYo.with(Techniques.Shake)
-                        .duration(750)
+                        .duration(950)
                         .repeat(0)
                         .playOn(warningComponent);
             }
@@ -171,9 +174,12 @@ public class WarningColor {
     }
 
     public void draw(Canvas canvas) {
-        warningColorButtonPaints[0].setColor(getPreviousIntColor());
-        warningColorButtonPaints[1].setColor(getNextIntColor());
-        canvas.drawRect(Constants.WARNING_COLOR_CLICK_AREA_LEFT, warningColorButtonPaints[0]);
-        canvas.drawRect(Constants.WARNING_COLOR_CLICK_AREA_RIGHT, warningColorButtonPaints[1]);
+        //warningColorButtonPaints[0].setColor(getPreviousIntColor());
+        //warningColorButtonPaints[1].setColor(getNextIntColor());
+        //canvas.drawRect(Constants.WARNING_COLOR_CLICK_AREA_LEFT, warningColorButtonPaints[0]);
+        //canvas.drawRect(Constants.WARNING_COLOR_CLICK_AREA_RIGHT, warningColorButtonPaints[1]);
+        //Paint leftPaint = new Paint();
+        //leftPaint.setShader(new LinearGradient(0,0,0,Constants.WARNING_COLOR_CLICK_AREA_LEFT.bottom,Color.BLACK, Color.WHITE, Shader.TileMode.MIRROR));
+        //canvas.drawRect(Constants.WARNING_COLOR_CLICK_AREA_LEFT,leftPaint);
     }
 }

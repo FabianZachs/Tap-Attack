@@ -52,4 +52,5 @@ public class Constants {
     public static ImageView progressBarHolder;
     public static Activity GAME_ACTIVITY;
     public static ImageView warningComponentImg;
+    public static ImageView warningComponentButtonRight;
 }

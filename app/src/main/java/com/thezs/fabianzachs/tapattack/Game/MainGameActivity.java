@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.app.Activity;
         import android.graphics.Rect;
         import android.graphics.drawable.LayerDrawable;
+        import android.media.Image;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
         import android.view.Gravity;
@@ -74,7 +75,21 @@ public class MainGameActivity extends Activity {
         Constants.warningComponent = (LayerDrawable) warningComponent.getDrawable();
         Constants.warningComponentImg = warningComponent; // FOR SHAKE
 
+        ImageView warningColorChangeButtonLeft = (ImageView) findViewById(R.id.warning_color_change_button_left);
+        FrameLayout.LayoutParams colorChangeParamsLeft = new FrameLayout.LayoutParams(Constants.WARNING_COLOR_CLICK_AREA_LEFT.width(), Constants.WARNING_COLOR_CLICK_AREA_LEFT.height());
+        colorChangeParamsLeft.gravity = (Gravity.LEFT|Gravity.BOTTOM);
+        warningColorChangeButtonLeft.setLayoutParams(colorChangeParamsLeft);
+
+
+        ImageView warningColorChangeButtonRight = (ImageView) findViewById(R.id.warning_color_change_button_right);
+        FrameLayout.LayoutParams colorChangeParamsRight = new FrameLayout.LayoutParams(Constants.WARNING_COLOR_CLICK_AREA_RIGHT.width(), Constants.WARNING_COLOR_CLICK_AREA_RIGHT.height());
+        colorChangeParamsRight.gravity = (Gravity.RIGHT|Gravity.BOTTOM);
+        warningColorChangeButtonRight.setLayoutParams(colorChangeParamsRight);
         // boolean testFactor = layeredCompnent.setDrawableByLayerId(R.id.warning, replacewarning);
+
+        // TODO find the right place to change these color
+        //Constants.warningComponentButtonLeft = warningColorChangeButtonLeft;
+        //Constants.warningComponentButtonRight = warningColorChangeButtonRight;
 
 
     }
