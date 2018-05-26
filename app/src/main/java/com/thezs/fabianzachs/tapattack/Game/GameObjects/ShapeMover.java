@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 
 import android.graphics.drawable.shapes.Shape;
+import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
@@ -14,10 +15,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class ShapeMover {
 
     private long startTime;
+    private long initTime;
     private float RATE_OF_SPEED_INCREASE; // TODO use log(x+1) function
 
     public ShapeMover() {
-        startTime = System.currentTimeMillis();
+        Log.d("speed", "previous speed: " + Constants.SCREEN_HEIGHT/5000.0f);
+        this.startTime = System.currentTimeMillis();
+        this.initTime = System.currentTimeMillis();
     }
 
     public void updateShapeLocation(Shape shape) {}
@@ -25,13 +29,21 @@ public class ShapeMover {
     public void update(CopyOnWriteArrayList<ShapeObject> shapes) {
         int elapsedTime = (int) (System.currentTimeMillis() - startTime);
         startTime = System.currentTimeMillis();
-        float speed = Constants.SCREEN_HEIGHT/5000.0f;
+        //float speed = Constants.SCREEN_HEIGHT/5000.0f;
 
+        Log.d("speed", "now speed: " + getSpeed(elapsedTime));
         for (ShapeObject shape : shapes) {
-            shape.incrementY(speed * elapsedTime);
+            shape.incrementY((float) getSpeed(elapsedTime) * elapsedTime);
 
         }
 
 
+    }
+
+    public double getSpeed(int elapsedTime) {
+        long currentGameTime = System.currentTimeMillis() - initTime;
+        Log.d("speed", "getSpeed: currenttime" + currentGameTime);
+        double denominator = (10000* (1/(Math.log(50000 * currentGameTime+ 100)))) + 5000;
+        return Constants.SCREEN_HEIGHT/ denominator;
     }
 }
