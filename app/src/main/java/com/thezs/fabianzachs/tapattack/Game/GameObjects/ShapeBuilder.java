@@ -50,7 +50,7 @@ public class ShapeBuilder {
         switch (shape) {
 
             case "circle":
-                return new Circle(6, color, centerLocation,
+                return new Circle(100, color, centerLocation,
                         // TODO somehow call correct method of subclass (SimpleTheme)
                         themesManager.getCurrentTheme().getShapeBitmap(shape,color,false),
                         themesManager.getCurrentTheme().getShapeBitmap(shape,color,true),
@@ -92,7 +92,7 @@ public class ShapeBuilder {
                         paint, bitmapHolder, mediator);
 */
             case "arrow":
-                return new Arrow(3, color, centerLocation,
+                return new Arrow(100, color, centerLocation,
                         translateBitmap(direction, themesManager.getCurrentTheme().getShapeBitmap(shape,color,false)),
                         null,
                         direction, themesManager.getCurrentTheme().getShapePaint(paint,color), bitmapHolder, mediator);
@@ -105,7 +105,7 @@ public class ShapeBuilder {
                         */
 
             case "star":
-                return new Star(5, color, centerLocation,
+                return new Star(100, color, centerLocation,
                         themesManager.getCurrentTheme().getShapeBitmap(shape,color,false),
                         null,
                         themesManager.getCurrentTheme().getShapePaint(paint,color), bitmapHolder, themesManager.getCurrentTheme().getIntColors(),

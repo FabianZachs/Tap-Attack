@@ -96,7 +96,6 @@ public class ShapesManager {
             else if (shape.getBitmapHolder().top> Constants.SCREEN_HEIGHT) {
                 shapes.remove(shape);
                 freeResources(shape.getPaintObj(), shape.getBitmapHolder());
-                mediator.resetStreak();
             }
 
             else shape.update();

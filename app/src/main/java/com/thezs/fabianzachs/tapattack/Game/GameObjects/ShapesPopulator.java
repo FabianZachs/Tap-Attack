@@ -37,7 +37,7 @@ public class ShapesPopulator {
     // settings
     private final int UNIT_TIME_PER_SHAPE_ADDITION = 1; // every x seconds one more max shape
     private final int MAX_NUMBER_LOOPS = 5;
-    private final int SHAPE_SPACING = Constants.SCREEN_HEIGHT/10; // space between shapes
+    private final int SHAPE_SPACING = Constants.SCREEN_HEIGHT/20; // space between shapes
     private final int MAX_SHAPES = 5;
 
 
@@ -95,13 +95,13 @@ public class ShapesPopulator {
 
         // TODO use factory design pattern? so instead of .buildCross, pass "cross" in parameter
         //mShapes.add(shapeBuilder.buildArrow("blue", newShapeLocation));
-        //ShapeObject newShape = shapeBuilder.buildShape("arrow", getColor(), newShapeLocation,paint,bitmapHolder,mediator, getDirection()) ;
+        ShapeObject newShape = shapeBuilder.buildShape("arrow", getColor(), newShapeLocation,paint,bitmapHolder,mediator, getDirection()) ;
         //ShapeObject newShape = shapeBuilder.buildShape("circle", getColor() , newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //ShapeObject newShape = shapeBuilder.buildShape("cross", getColor() , newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //ShapeObject newShape = shapeBuilder.buildShape("square", getColor(), newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //ShapeObject newShape = shapeBuilder.buildShape("star", getColor(), newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //newShape.attachAllObservers(scoreObserver,streakObserver,progressBarObserver);
-        ShapeObject newShape = shapeBuilder.buildShape(getShape(), getColor(), newShapeLocation, paint, bitmapHolder, mediator, getDirection());
+        //ShapeObject newShape = shapeBuilder.buildShape(getShape(), getColor(), newShapeLocation, paint, bitmapHolder, mediator, getDirection());
         shapes.add(0, newShape);
         timeOfLastShapeAddition = System.currentTimeMillis();
 
@@ -173,22 +173,27 @@ public class ShapesPopulator {
     }
 
 
+    // 1/36 chance of getting warning color
     public String getColor() {
-        return shapeColors[colorFinder.nextInt(5)];
+        String warningColor = mediator.getStrWarningColor();
+        String selectedColor = shapeColors[colorFinder.nextInt(5)];
+        if (selectedColor.equals(warningColor))
+            selectedColor = shapeColors[colorFinder.nextInt(5)];
+        return selectedColor;
     }
 
     private String getShape() {
-        int i = rand.nextInt(100);
+        int i = rand.nextInt(900);
         //Log.d("intindex", "getShape: int" + i);
 
 
-        if (i<10)
+        if (i<25)
             return "cross";
-        else if (i<20)
+        else if (i<50)
             return "star";
-        else if (i<40)
+        else if (i<200)
             return "square";
-        else if (i<70)
+        else if (i<450)
             return "arrow";
         else
             return "circle";

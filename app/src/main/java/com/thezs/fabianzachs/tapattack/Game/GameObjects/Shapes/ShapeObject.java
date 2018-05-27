@@ -86,6 +86,7 @@ public abstract class ShapeObject {
     public void incrementY(float amount) {
         bitmapHolder.top += amount;
         bitmapHolder.bottom += amount;
+        centerLocation.y += amount;
     }
 
     public void reduceLives() {

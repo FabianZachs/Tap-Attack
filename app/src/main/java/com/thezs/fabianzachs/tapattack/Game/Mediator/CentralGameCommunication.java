@@ -32,6 +32,9 @@ public class CentralGameCommunication {
         return this.warningColor.getCurrentIntColor();
     }
 
+    public String getStrWarningColor() {
+        return this.warningColor.getCurrentStrColor();
+    }
     /*
     //  ===== PROGRESSBAR CALLS =====
     public void changeProgressBarBy(int amount, String color) {
@@ -99,6 +102,7 @@ public class CentralGameCommunication {
     public void warningComponentShake() {
         this.warningColor.shake();
     }
+
 
     //public void addObject(ShapeObject shape) {
         // TODO no need to add the shapes as an attribute, nobody tells shapes anything.. we just want to send messages
