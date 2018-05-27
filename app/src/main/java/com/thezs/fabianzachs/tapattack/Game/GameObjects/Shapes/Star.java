@@ -53,6 +53,8 @@ public class Star extends ShapeObject {
         //setProgressBarAddition(0);
         setGraveAble(false);
         setLives(1);
+        setPoints(30);
+        setGraveAble(false);
         this.intColors = intColors;
         this.strColors = strColors;
 
@@ -145,9 +147,13 @@ public class Star extends ShapeObject {
             setShapeImages(0, Bitmap.createBitmap(getShapeImg(), 0, 0, getShapeImg().getWidth(), getShapeImg().getHeight(), rotationMatrix, true));
             if (mediator.getIntWarningColor().equals(intColors.get(colorIndex))) {
                 reduceLives();
+                mediator.resetStreak();
             }
-            else
-                mediator.incScore(getPoints() /*get string based Color based on index of color*/);
+            else {
+                //mediator.incScore(getPoints());
+                reduceLives();
+                //mediator.incScore(getPoints() /*get string based Color based on index of color*/);
+            }
 
             // if hit warning color, reduce lives of shape and progressbar, otherwise make it unable inc score with that color maintained
             return true;

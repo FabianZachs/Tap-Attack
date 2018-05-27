@@ -62,7 +62,7 @@ public class MainMenuActivity extends  GeneralParent {
         Constants.SCREEN_HEIGHT = screenDimension.y;
         Log.d("height", "initializeConstants: height: " + Constants.SCREEN_HEIGHT );
 
-        Constants.SHAPE_WIDTH = Constants.SHAPE_HEIGHT = Constants.SCREEN_WIDTH/5;
+        Constants.SHAPE_WIDTH = Constants.SHAPE_HEIGHT = Constants.SCREEN_WIDTH/5 + Constants.SCREEN_WIDTH/25;
 
 
         // put colors for all theme packs
