@@ -183,7 +183,7 @@ public class ShapesPopulator {
     }
 
     private String getShape() {
-        int i = rand.nextInt(900);
+        int i = rand.nextInt(850);
         //Log.d("intindex", "getShape: int" + i);
 
 
