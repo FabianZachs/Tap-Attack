@@ -52,6 +52,8 @@ public class ShapesPopulator {
     private Random colorFinder;
     private String direction;
 
+    private ShapeColorPicker shapeColorPicker;
+
     public ShapesPopulator(CentralGameCommunication mediator, long initTime, SharedPaint sharedPaint, SharedRect sharedRect) {
         this.shapeColors = ThemesManager.getStrColors(Constants.CURRENT_THEME);
         this.mediator = mediator;
@@ -63,6 +65,10 @@ public class ShapesPopulator {
         rand = new Random(); // TODO make attribute?
         this.shapeBuilder = new ShapeBuilder(initTime);
         this.colorFinder = new Random();
+
+
+
+        this.shapeColorPicker = new ShapeColorPicker(initTime);
     }
 
     public CopyOnWriteArrayList update(CopyOnWriteArrayList<ShapeObject> shapes) {
@@ -72,6 +78,8 @@ public class ShapesPopulator {
         // TODO possibly reduce time between added shapes when progress bar gets lower and lower. ex. if <10% have no timeout for adding shapes
         //if (maxNumberOfShapes() == shapes.size() || (lastTimeShapeAdded() < 100 && shapes.size() != 0))
         //return shapes;
+
+        this.shapeColorPicker.getProbabilityOfWarningColor();
 
         if (shapes.size() >= 1 && shapes.get(0).getBitmapHolder().top - SHAPE_SPACING < 0)
             return shapes;
