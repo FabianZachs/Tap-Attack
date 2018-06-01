@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.Game.Mediator;
 
 import android.util.Log;
 
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapeColorPicker;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
@@ -19,6 +20,7 @@ public class CentralGameCommunication {
     private Streak streak;
     //private ProgressBar progressBar;
     private WarningColor warningColor;
+    private ShapeColorPicker shapeColorPicker;
 
     /* Tasks:
     * recieve messages regarding destruction of shape, incorrect taps of shape, (passing required info)
@@ -35,6 +37,8 @@ public class CentralGameCommunication {
     public String getStrWarningColor() {
         return this.warningColor.getCurrentStrColor();
     }
+
+
     /*
     //  ===== PROGRESSBAR CALLS =====
     public void changeProgressBarBy(int amount, String color) {
@@ -83,6 +87,8 @@ public class CentralGameCommunication {
         this.shapesManager = shapesManager;
     }
 
+    public void addObject(ShapeColorPicker shapeColorPicker) {this.shapeColorPicker = shapeColorPicker;}
+
     public void addObject(Score score) {
         this.score = score;
     }
@@ -101,6 +107,10 @@ public class CentralGameCommunication {
 
     public void warningComponentShake() {
         this.warningColor.shake();
+    }
+
+    public void warningColorChanged(String strColor) {
+        this.shapeColorPicker.setWarningColor(strColor);
     }
 
 

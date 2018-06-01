@@ -48,7 +48,7 @@ public class ClassicGameScene implements Scene {
 
         this.shapesManager = new ShapesManager(mediator, initTime);
         this.backgroundManager = new BackgroundManager("backgroundtriangleblue");
-        this.warningColor = new WarningColor(ThemesManager.getStrColors(Constants.CURRENT_THEME), ThemesManager.getIntColors(Constants.CURRENT_THEME));
+        this.warningColor = new WarningColor(mediator,ThemesManager.getStrColors(Constants.CURRENT_THEME), ThemesManager.getIntColors(Constants.CURRENT_THEME));
         //this.backgroundManager = new BackgroundManager(Constants.CURRENT_BACKGROUND);
         //this.backgroundHandler = new BackgroundHandler(Constants.CURRENT_THEME);
 

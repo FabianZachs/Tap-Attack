@@ -16,6 +16,7 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundHandler;
+import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +36,7 @@ import java.util.Random;
      */
 public class WarningColor {
 
+    private CentralGameCommunication mediator;
     private Handler mHandler = new Handler();
     private ImageView warningComponent;
     private GradientDrawable warningDrawable;
@@ -48,9 +50,10 @@ public class WarningColor {
     private Paint[] warningColorButtonPaints;
 
 
-    public WarningColor(String[] strColors, Integer[] intColors) {
+    public WarningColor(CentralGameCommunication mediator, String[] strColors, Integer[] intColors) {
         this.colorIndex = 0;
         this.warningDrawable = (GradientDrawable) Constants.warningComponent.getDrawable(1);
+        this.mediator = mediator;
         Paint leftPaint = new Paint();
         Paint rightPaint = new Paint();
         this.warningColorButtonPaints = new Paint[] {leftPaint, rightPaint};
@@ -107,12 +110,19 @@ public class WarningColor {
         colorIndex++;
         colorIndex = colorIndex >= intColors.length ? 0 : colorIndex;
         warningDrawable.setColor(intColors[colorIndex]);
+        updateAllWarningColorObservers(strColors[colorIndex]);
     }
 
     public void setPreviousColor() {
         colorIndex--;
         colorIndex = colorIndex < 0 ? intColors.length - 1 : colorIndex;
         warningDrawable.setColor(intColors[colorIndex]);
+        updateAllWarningColorObservers(strColors[colorIndex]);
+    }
+
+    private void updateAllWarningColorObservers(String strColor) {
+        this.mediator.warningColorChanged(strColor);
+
     }
 
     public Integer getNextIntColor() {
