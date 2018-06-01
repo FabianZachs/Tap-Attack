@@ -37,14 +37,14 @@ public class ShapeColorPicker {
 
     public String getColorForShape() {
 
-        float leftIf = randGenerator.nextFloat();
-        double rightIf = getProbabilityOfWarningColor();
+        //float leftIf = randGenerator.nextFloat();
+        //double rightIf = getProbabilityOfWarningColor();
         //Log.d("checkprob", "getColorForShape: " + leftIf + "/n" + rightIf);
 
 
         //Log.d("randomfloat", "getColorForShape: " + randGenerator.nextFloat());
-        //if (randGenerator.nextFloat() <= getProbabilityOfWarningColor()) {
-        if (leftIf<=rightIf) {
+        if (randGenerator.nextFloat() <= getProbabilityOfWarningColor()) {
+        //if (leftIf<=rightIf) {
             //Log.d("checkprob", "getColorForShape: warning color chosen");
             return warningColor;
 
