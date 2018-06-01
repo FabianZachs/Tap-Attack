@@ -82,6 +82,8 @@ public class ShapesPopulator {
 
         //this.shapeColorPicker.getProbabilityOfWarningColor();
 
+        String useless = shapeColorPicker.getColorForShape();
+
         if (shapes.size() >= 1 && shapes.get(0).getBitmapHolder().top - SHAPE_SPACING < 0)
             return shapes;
 
@@ -187,7 +189,7 @@ public class ShapesPopulator {
 
     // 1/36 chance of getting warning color
     public String getColor() {
-        shapeColorPicker.getColorForShape();
+        //shapeColorPicker.getColorForShape();
         String warningColor = mediator.getStrWarningColor();
         String selectedColor = shapeColors[colorFinder.nextInt(5)];
         if (selectedColor.equals(warningColor))

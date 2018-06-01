@@ -31,15 +31,21 @@ public class ShapeColorPicker {
 
     // TODO setup observer so that this is updated everytime warning color changes
     public void setWarningColor(String newWarningColor) {
-        Log.d("newwarningcolor", "setWarningColor: " + newWarningColor);
+        //Log.d("newwarningcolor", "setWarningColor: " + newWarningColor);
         this.warningColor = newWarningColor;
     }
 
     public String getColorForShape() {
 
+        float leftIf = randGenerator.nextFloat();
+        double rightIf = getProbabilityOfWarningColor();
+        //Log.d("checkprob", "getColorForShape: " + leftIf + "/n" + rightIf);
+
+
         //Log.d("randomfloat", "getColorForShape: " + randGenerator.nextFloat());
-        if (randGenerator.nextFloat() <= getProbabilityOfWarningColor()) {
-            Log.d("colorselection", "getColorForShape: warning color chosen");
+        //if (randGenerator.nextFloat() <= getProbabilityOfWarningColor()) {
+        if (leftIf<=rightIf) {
+            //Log.d("checkprob", "getColorForShape: warning color chosen");
             return warningColor;
 
         }
