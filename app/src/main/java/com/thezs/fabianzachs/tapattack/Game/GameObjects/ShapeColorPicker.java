@@ -43,15 +43,22 @@ public class ShapeColorPicker {
         //float leftIf = randGenerator.nextFloat();
         //double rightIf = getProbabilityOfWarningColor();
         //Log.d("checkprob", "getColorForShape: " + leftIf + "/n" + rightIf);
+        double probabilityOfWarningColor;
 
-
-        double probabilityOfWarningColor = getProbabilityOfWarningColor();
-        //Log.d("probabilityofwarning", "before: " + probabilityOfWarningColor);
-        if (probabilityOfWarningColor >= MAX_PROBABILITY_OF_WARNING_COLOR)
+        if (maxProbabilityReached)
             probabilityOfWarningColor = MAX_PROBABILITY_OF_WARNING_COLOR;
+        else {
+            probabilityOfWarningColor = getProbabilityOfWarningColor();
+            maxProbabilityReached = probabilityOfWarningColor >= MAX_PROBABILITY_OF_WARNING_COLOR;
+        }
+
+        //double probabilityOfWarningColor = getProbabilityOfWarningColor();
+        //Log.d("probabilityofwarning", "before: " + probabilityOfWarningColor);
+        //if (probabilityOfWarningColor >= MAX_PROBABILITY_OF_WARNING_COLOR)
+            //probabilityOfWarningColor = MAX_PROBABILITY_OF_WARNING_COLOR;
+
 
         //Log.d("probabilityofwarning", "getColorForShape: " + probabilityOfWarningColor);
-        // tODO if last getProbabilityofWarningcolor > 1/6 then keep at 1/6 chance
         //Log.d("randomfloat", "getColorForShape: " + randGenerator.nextFloat());
         if (randGenerator.nextFloat() <= probabilityOfWarningColor) {
         //if (leftIf<=rightIf) {
