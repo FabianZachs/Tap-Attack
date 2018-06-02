@@ -26,8 +26,8 @@ public class SharedRect {
     }
 
     public Rect getUnUsedRect() {
-        Log.d("debugrect", "getUnUsedRect: unusedrect:" + unUsedRects.size());
-        Log.d("debugrect", "getUnUsedRect: usedrect:" + usedRects.size());
+        //Log.d("debugrect", "getUnUsedRect: unusedrect:" + unUsedRects.size());
+        //Log.d("debugrect", "getUnUsedRect: usedrect:" + usedRects.size());
         Rect rect = unUsedRects.poll();
         if (rect!=null)
             usedRects.add(rect);
@@ -36,7 +36,7 @@ public class SharedRect {
     }
 
     public void freeRect(Rect rect) {
-        Log.d("paint", "freePaint: rect freed");
+        //Log.d("paint", "freePaint: rect freed");
         unUsedRects.add(rect);
         usedRects.remove(rect);
     }

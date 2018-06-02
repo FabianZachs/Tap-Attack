@@ -99,7 +99,7 @@ public class Star extends ShapeObject {
 
         //ColorFilter filter = new PorterDuffColorFilter(Color.HSVToColor(255,hsv),PorterDuff.Mode.SRC_IN);
         ColorFilter filter = new PorterDuffColorFilter(intColors.get(colorIndex),PorterDuff.Mode.SRC_IN);
-        Log.d("colorindex", "update: colorindex: " + colorIndex);
+        //Log.d("colorindex", "update: colorindex: " + colorIndex);
 
 
 

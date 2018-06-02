@@ -28,7 +28,7 @@ public abstract class SimpleTheme extends ThemeObject {
     }
 
     public Paint getShapePaint(Paint paint, String color) {
-        Log.d("paint", "getShapePaint: " + color);
+        //Log.d("paint", "getShapePaint: " + color);
         ColorFilter filter = new PorterDuffColorFilter(getColorToInt(color), PorterDuff.Mode.SRC_IN);
         paint.setColorFilter(filter);
 

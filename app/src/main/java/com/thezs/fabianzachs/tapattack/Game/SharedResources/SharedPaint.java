@@ -27,8 +27,8 @@ public class SharedPaint {
     }
 
     public Paint getUnUsedPaint() {
-        Log.d("debugpaint", "getUnUsedPaint: unusedpaint:" + unUsedPaints.size());
-        Log.d("debugpaint", "getUnUsedPaint: usedpaint:" + usedPaints.size());
+        //Log.d("debugpaint", "getUnUsedPaint: unusedpaint:" + unUsedPaints.size());
+        //Log.d("debugpaint", "getUnUsedPaint: usedpaint:" + usedPaints.size());
         Paint paint = unUsedPaints.poll();
         if (paint!=null)
             usedPaints.add(paint);
@@ -37,18 +37,18 @@ public class SharedPaint {
     }
 
     public void freePaint(Paint paint) {
-        Log.d("debug4", "freePaint: paint freed");
-        Log.d("seeifweare freeing paint", "freePaint: paint freed" + paint);
+        //Log.d("debug4", "freePaint: paint freed");
+        //Log.d("seeifweare freeing paint", "freePaint: paint freed" + paint);
         paint.setAlpha(255);
-        Log.d("beforefreeint", "getUnUsedPaint: unusedpaint:" + unUsedPaints.size());
-        Log.d("beforefreeint", "getUnUsedPaint: usedpaint:" + usedPaints.size());
+        //Log.d("beforefreeint", "getUnUsedPaint: unusedpaint:" + unUsedPaints.size());
+        //Log.d("beforefreeint", "getUnUsedPaint: usedpaint:" + usedPaints.size());
         boolean work = unUsedPaints.add(paint);
-        Log.d("diditwork", "freePaint: " + work);
+        //Log.d("diditwork", "freePaint: " + work);
         boolean work2 = usedPaints.remove(paint);
-        Log.d("diditwork", "freePaint2: " + work2);
-        Log.d("beforefreeint", "getUnUsedPaint: unusedpaint:after" + unUsedPaints.size());
-        Log.d("beforefreeint", "getUnUsedPaint: usedpaint:after" + usedPaints.size());
-        Log.d("debug4", "freePaint: size" + unUsedPaints.size());
+        //Log.d("diditwork", "freePaint2: " + work2);
+        //Log.d("beforefreeint", "getUnUsedPaint: unusedpaint:after" + unUsedPaints.size());
+        //Log.d("beforefreeint", "getUnUsedPaint: usedpaint:after" + usedPaints.size());
+        //Log.d("debug4", "freePaint: size" + unUsedPaints.size());
     }
 
 }

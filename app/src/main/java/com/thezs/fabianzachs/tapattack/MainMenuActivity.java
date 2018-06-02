@@ -60,7 +60,7 @@ public class MainMenuActivity extends  GeneralParent {
         Constants.SCREEN_WIDTH = screenDimension.x;
         // TODO bug: screen height from dm is incorrect for pixel
         Constants.SCREEN_HEIGHT = screenDimension.y;
-        Log.d("height", "initializeConstants: height: " + Constants.SCREEN_HEIGHT );
+        //Log.d("height", "initializeConstants: height: " + Constants.SCREEN_HEIGHT );
 
         Constants.SHAPE_WIDTH = Constants.SHAPE_HEIGHT = Constants.SCREEN_WIDTH/5 + Constants.SCREEN_WIDTH/25;
 
@@ -79,7 +79,7 @@ public class MainMenuActivity extends  GeneralParent {
         // TODO do rest ...
 
         // top based on where warning color is
-        Log.d("screenwidth", "initializeConstants: width: " + Constants.SCREEN_WIDTH);
+        //Log.d("screenwidth", "initializeConstants: width: " + Constants.SCREEN_WIDTH);
         //Constants.SHAPE_CLICK_AREA = new Rect(Constants.SCREEN_WIDTH/20, 30 + (Constants.SCREEN_HEIGHT/40 +25) + 20 + Constants.SCREEN_WIDTH/15 + 10 + Constants.SHAPE_HEIGHT/2, Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT - 1);
         //Constants.SHAPE_CREATION_AREA = new Rect(Constants.SHAPE_CLICK_AREA.left + Constants.SHAPE_WIDTH/2,Constants.SHAPE_CLICK_AREA.top + Constants.SHAPE_HEIGHT/2,
         //                                        Constants.SHAPE_CLICK_AREA.right - Constants.SHAPE_WIDTH/2, Constants.SHAPE_CLICK_AREA.bottom - Constants.SHAPE_HEIGHT/2);

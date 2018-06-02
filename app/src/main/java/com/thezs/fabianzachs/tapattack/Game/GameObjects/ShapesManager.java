@@ -70,8 +70,8 @@ public class ShapesManager {
     }
 
     public void update() {
-        Log.d("debugpaint", "update: shapes size" + shapes.size());
-        Log.d("debugpaint", "update: grave seize" + graveObjects.size());
+        //Log.d("debugpaint", "update: shapes size" + shapes.size());
+        //Log.d("debugpaint", "update: grave seize" + graveObjects.size());
 
         for (ShapeObject shape : shapes) {
 
@@ -96,10 +96,10 @@ public class ShapesManager {
             }
             // TODO this will end game
             else if (shape.getBitmapHolder().top > Constants.SCREEN_HEIGHT) {
-                Log.d("resource proe", "update: shape left. " + shape.getBitmapHolder().top);
+                //Log.d("resource proe", "update: shape left. " + shape.getBitmapHolder().top);
                 freeResources(shape.getPaintObj(), shape.getBitmapHolder());
                 shapes.remove(shape);
-                Log.d("debugpaint", "resources free");
+                //Log.d("debugpaint", "resources free");
             }
 
             else shape.update();

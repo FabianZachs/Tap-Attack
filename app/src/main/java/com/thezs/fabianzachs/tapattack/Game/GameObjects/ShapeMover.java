@@ -31,7 +31,7 @@ public class ShapeMover {
         startTime = System.currentTimeMillis();
         //float speed = Constants.SCREEN_HEIGHT/5000.0f;
 
-        Log.d("speed", "now speed: " + getSpeed(elapsedTime));
+        //Log.d("speed", "now speed: " + getSpeed(elapsedTime));
         for (ShapeObject shape : shapes) {
             shape.incrementY((float) getSpeed(elapsedTime) * elapsedTime);
 

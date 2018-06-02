@@ -78,7 +78,7 @@ public class ShapeBuilder {
                         paint, bitmapHolder, mediator);
 */
             case "cross":
-                Log.d("crosscolor", "buildShape: color"+color);
+                //Log.d("crosscolor", "buildShape: color"+color);
 
                 return new Cross(100, color, centerLocation,
                         themesManager.getCurrentTheme().getShapeBitmap(shape,color,false),
