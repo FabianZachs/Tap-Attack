@@ -29,6 +29,7 @@ public class Constants {
     public static Map<String, String[]> COLORS; // theme -> [] of colors
     public static String[] NEONCOLORS = {"blue","yellow","red","purple","green"};
     public static String CURRENT_THEME;
+    public static String CURRENT_SHAPE_TYPE;
     public static String CURRENT_BACKGROUND = "backgroundtriangleblue";
 
 

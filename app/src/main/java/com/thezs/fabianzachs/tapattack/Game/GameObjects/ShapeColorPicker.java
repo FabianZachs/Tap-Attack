@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class ShapeColorPicker {
 
-    private int NUMBER_OF_COLORS = 6;
+    private int NUMBER_OF_COLORS = 5;
     private String warningColor;
     //private String[] colors;
     private ArrayList<String> colors;
@@ -46,6 +46,7 @@ public class ShapeColorPicker {
         if (randGenerator.nextFloat() <= getProbabilityOfWarningColor()) {
         //if (leftIf<=rightIf) {
             //Log.d("checkprob", "getColorForShape: warning color chosen");
+            Log.d("returningcolor", "getColorForShape: warning color:");
             return warningColor;
 
         }

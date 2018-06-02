@@ -13,9 +13,9 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 public class SharedPaint {
 
-    private final int MAX_NUMBER_OF_PAINTS = 6; // TODO this is tied to max number of shapes in shapesPopulator
-    private ArrayBlockingQueue<Paint> unUsedPaints;
-    private ArrayList<Paint> usedPaints;
+    private final int MAX_NUMBER_OF_PAINTS = 2; // TODO this is tied to max number of shapes in shapesPopulator
+    /*private*/ public ArrayBlockingQueue<Paint> unUsedPaints;
+    /*private*/ public ArrayList<Paint> usedPaints;
 
     public SharedPaint() {
         unUsedPaints = new ArrayBlockingQueue<Paint>(MAX_NUMBER_OF_PAINTS);
@@ -27,6 +27,8 @@ public class SharedPaint {
     }
 
     public Paint getUnUsedPaint() {
+        Log.d("debugpaint", "getUnUsedPaint: unusedpaint:" + unUsedPaints.size());
+        Log.d("debugpaint", "getUnUsedPaint: usedpaint:" + usedPaints.size());
         Paint paint = unUsedPaints.poll();
         if (paint!=null)
             usedPaints.add(paint);
@@ -35,10 +37,18 @@ public class SharedPaint {
     }
 
     public void freePaint(Paint paint) {
-        Log.d("paint", "freePaint: paint freed");
+        Log.d("debug4", "freePaint: paint freed");
+        Log.d("seeifweare freeing paint", "freePaint: paint freed" + paint);
         paint.setAlpha(255);
-        unUsedPaints.add(paint);
-        usedPaints.remove(paint);
+        Log.d("beforefreeint", "getUnUsedPaint: unusedpaint:" + unUsedPaints.size());
+        Log.d("beforefreeint", "getUnUsedPaint: usedpaint:" + usedPaints.size());
+        boolean work = unUsedPaints.add(paint);
+        Log.d("diditwork", "freePaint: " + work);
+        boolean work2 = usedPaints.remove(paint);
+        Log.d("diditwork", "freePaint2: " + work2);
+        Log.d("beforefreeint", "getUnUsedPaint: unusedpaint:after" + unUsedPaints.size());
+        Log.d("beforefreeint", "getUnUsedPaint: usedpaint:after" + usedPaints.size());
+        Log.d("debug4", "freePaint: size" + unUsedPaints.size());
     }
 
 }

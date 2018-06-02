@@ -37,7 +37,7 @@ public class ShapeBuilder {
         //initializeAnimations();
         themesManager = new ThemesManager();
         //gameTheme = themesManager.buildTheme("vibrant", "curved");
-        themesManager.setCurrentTheme(themesManager.buildTheme("vibrant", "curved"));
+        themesManager.setCurrentTheme(themesManager.buildTheme(Constants.CURRENT_THEME,Constants.CURRENT_SHAPE_TYPE));
     }
 
     public ShapeObject buildShape(String shape, String color, Point centerLocation, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {

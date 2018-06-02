@@ -48,6 +48,7 @@ public class ShapeMover {
         //double denominator = (3000000/((.021*currentGameTime)+300));
         //double denominator = (1000000/((.003*currentGameTime)+300));
         //double denominator = (900000/((.003*currentGameTime)+300)); // good start speed, but steeper slope
+        //double denominator = (990000/((.126*currentGameTime)+300));  // TODO check if good with function for producing warning colors
         double denominator = (900000/((.006*currentGameTime)+300));  // TODO check if good with function for producing warning colors
         return Constants.SCREEN_HEIGHT/ denominator;
     }

@@ -26,6 +26,8 @@ public class SharedRect {
     }
 
     public Rect getUnUsedRect() {
+        Log.d("debugrect", "getUnUsedRect: unusedrect:" + unUsedRects.size());
+        Log.d("debugrect", "getUnUsedRect: usedrect:" + usedRects.size());
         Rect rect = unUsedRects.poll();
         if (rect!=null)
             usedRects.add(rect);

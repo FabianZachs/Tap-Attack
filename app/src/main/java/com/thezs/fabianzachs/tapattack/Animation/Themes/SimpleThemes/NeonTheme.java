@@ -8,7 +8,7 @@ public class NeonTheme extends SimpleTheme {
 
     // TODO we ask for a shape & color and get it --
     // TODO WHEN REUSING PAINT WE NEED TO RESET THE COLORFILTER!!-- or do we since for all shapes we change it again
-    public static Integer[] intColors = {0xff00ffff,0xff00ff00,0xffffff00,0xffff0000,0xffff0000};
+    public static Integer[] intColors = {0xff00ffff,0xff00ff00,0xffffff00,0xffff0000,0xffcc00ff};
     public static String[] strColors = {"blue","green","yellow","red","purple"};
 
 
