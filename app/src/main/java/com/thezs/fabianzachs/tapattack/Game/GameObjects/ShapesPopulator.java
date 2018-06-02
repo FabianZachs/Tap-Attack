@@ -82,27 +82,27 @@ public class ShapesPopulator {
         //return shapes;
 
         //this.shapeColorPicker.getProbabilityOfWarningColor();
-        Log.d("returningcolor", "update: # shapese" + shapes.size());
+        //Log.d("returningcolor", "update: # shapese" + shapes.size());
 
         if (shapes.size() >= 1 && shapes.get(0).getBitmapHolder().top - SHAPE_SPACING < 0)
             return shapes;
 
         Paint paint = sharedPaint.getUnUsedPaint();
-        Log.d("debug3", "update: paint:" + paint);
-        Log.d("debug3", "update: unusedpaintsize:" + sharedPaint.unUsedPaints.size());
+        //Log.d("debug3", "update: paint:" + paint);
+        //Log.d("debug3", "update: unusedpaintsize:" + sharedPaint.unUsedPaints.size());
 
         if (paint == null) {
             //Log.d("resourcesmissing", "update: paint none");
-            Log.d("debug3", "update: paint:null");
+            //Log.d("debug3", "update: paint:null");
             return shapes;
         }
 
         Rect bitmapHolder = sharedRect.getUnUsedRect();
-        Log.d("debug3", "update: rect:" + bitmapHolder);
+        //Log.d("debug3", "update: rect:" + bitmapHolder);
         if (bitmapHolder == null) {
-            Log.d("debug3", "update: rect:null");
+            //Log.d("debug3", "update: rect:null");
             sharedPaint.freePaint(paint);
-            Log.d("resourcesmissing", "update: rect none");
+            //Log.d("resourcesmissing", "update: rect none");
             return shapes;
         }
 
@@ -205,7 +205,7 @@ public class ShapesPopulator {
         return selectedColor;
         */
         String color = shapeColorPicker.getColorForShape();
-        Log.d("returningcolor2", "getColor: " + color);
+        //Log.d("returningcolor2", "getColor: " + color);
         return color;
     }
 
