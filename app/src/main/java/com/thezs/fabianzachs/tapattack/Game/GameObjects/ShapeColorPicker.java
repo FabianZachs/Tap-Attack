@@ -74,13 +74,13 @@ public class ShapeColorPicker {
 
         ArrayList<String> selectableColors = new ArrayList<>(colors);
 
-        Log.d("java.lang.indexoutofbounds", "colors size" + colors.size());
-        Log.d("java.lang.indexoutofbounds", "size: " + selectableColors.size());
+        //Log.d("java.lang.indexoutofbounds", "colors size" + colors.size());
+        //Log.d("java.lang.indexoutofbounds", "size: " + selectableColors.size());
         selectableColors.remove(warningColor);
-        Log.d("java.lang.indexoutofbounds", "size: " + selectableColors.size());
-        Log.d("java.lang.indexoutofbounds", "\n\n");
+        //Log.d("java.lang.indexoutofbounds", "size: " + selectableColors.size());
+        //Log.d("java.lang.indexoutofbounds", "\n\n");
         String colorToReturn =selectableColors.get(randGenerator.nextInt(NUMBER_OF_COLORS-1));
-        Log.d("java.lang.null", "getColorForShape: normal color return: " + colorToReturn );
+        //Log.d("java.lang.null", "getColorForShape: normal color return: " + colorToReturn );
         return colorToReturn;
 
 
