@@ -4,10 +4,12 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
@@ -16,10 +18,12 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdView;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
+import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
 import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
 
 import java.util.ArrayList;
@@ -28,6 +32,7 @@ import java.util.HashMap;
 public class MainMenuActivity extends  GeneralParent {
 
     private ArrayList<MediaPlayer> mediaPlayers; // these players loop -> turn of onStop()
+    private ThemesManager themesManager;
     private SharedPreferences prefs;
     private AdView mAdView;
 
@@ -50,10 +55,21 @@ public class MainMenuActivity extends  GeneralParent {
 
         helper.bannerAdSetup(this, mAdView);
 
+
+
+        // for images in store
+        this.themesManager = new ThemesManager();
+        //gameTheme = themesManager.buildTheme("vibrant", "curved");
+        //themesManager.setCurrentTheme(themesManager.buildTheme(Constants.CURRENT_THEME,Constants.CURRENT_SHAPE_TYPE));
+        themesManager.setCurrentTheme(themesManager.buildTheme(prefs.getString("shapeTheme", "neon"),prefs.getString("shapeType","curved")));
+
+
         //initMusic(R.raw.mainmenu);
     }
 
     private void initializeConstants() {
+
+        Constants.CURRENT_CONTEXT = this;
 
         Point screenDimension = screenResolution();
         // get screen dimensions stored
@@ -269,6 +285,21 @@ public class MainMenuActivity extends  GeneralParent {
 
 
 
+    /*
+    private void okButtonSetup(View alertView, final AlertDialog dialog) {
+
+        TextView okButt = (TextView) alertView.findViewById(R.id.ok_button);
+
+        okButt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //playSound(R.raw.closesettings);
+                dialog.dismiss();
+            }
+        });
+    }*/
+
+
 
     public void storeClick(View view) {
         // TODO intialize to default theme in startup- breaks if user doesnt click store to set theme
@@ -276,7 +307,10 @@ public class MainMenuActivity extends  GeneralParent {
 
         View alertView = getLayoutInflater().inflate(R.layout.store_main_menu, null);
 
-        // todo setup what each button does
+
+
+
+
 
         AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
 
@@ -289,10 +323,23 @@ public class MainMenuActivity extends  GeneralParent {
         dialogFullscreen(dialog);
 
 
+        /// =====================
+        // shape_color_image
+        ImageView shapeColorImg = (ImageView) alertView.findViewById(R.id.shape_color_image);
+        shapeColorImg.setImageBitmap(themesManager.getCurrentTheme().getShapeBitmap("circle", "red", false));
+        // todo make size correct
+        // todo border around image
+
+
+        ////// ================================
+
+
+
+
 
 
         SharedPreferences.Editor prefsEditor = prefs.edit();
-        prefsEditor.putString("theme", "neon");
+        prefsEditor.putString("shapeTheme", "neon");
         prefsEditor.apply();
 
 
@@ -301,7 +348,16 @@ public class MainMenuActivity extends  GeneralParent {
     }
 
 
+    public void openShapeTypeStore(View view) {
+        // todo complete
+        StyleableToast.makeText(this,  "shapetype store click",R.style.successtoast).show();
+    }
 
+    public void openBackgroundStore(View view) {
+        StyleableToast.makeText(this,  "background store click",R.style.successtoast).show();
+    }
 
-
+    public void openShapeColorStore(View view) {
+        StyleableToast.makeText(this,  "shape color store click",R.style.successtoast).show();
+    }
 }
