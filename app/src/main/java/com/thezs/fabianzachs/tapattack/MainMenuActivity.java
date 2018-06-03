@@ -26,6 +26,8 @@ import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
 import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -326,7 +328,17 @@ public class MainMenuActivity extends  GeneralParent {
         /// =====================
         // shape_color_image
         ImageView shapeColorImg = (ImageView) alertView.findViewById(R.id.shape_color_image);
+
+        android.view.ViewGroup.LayoutParams layoutParams = shapeColorImg.getLayoutParams();
+        layoutParams.width = Constants.SCREEN_WIDTH/4;
+        layoutParams.height = Constants.SCREEN_WIDTH/4;
+        shapeColorImg.setLayoutParams(layoutParams);
+
         shapeColorImg.setImageBitmap(themesManager.getCurrentTheme().getShapeBitmap("circle", "red", false));
+
+        TextView setColorTheme = (TextView) alertView.findViewById(R.id.shape_color_set);
+        setColorTheme.setText(prefs.getString("shapeTheme", "neon").toUpperCase());
+
         // todo make size correct
         // todo border around image
 

@@ -23,6 +23,8 @@ public class Cross extends ShapeObject {
         super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder, mediator);
         setLives(1);
         //setProgressBarAddition(-100);
+        // todo set back to gravable?? currently there is an error in grave
+        setGraveAble(false);
 
         setmDetector(new GestureDetectorCompat(Constants.CURRENT_CONTEXT, new MyGestureListener()));
     }

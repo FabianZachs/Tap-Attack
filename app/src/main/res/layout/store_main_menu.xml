@@ -55,6 +55,7 @@ android:background="@drawable/dialog_shape">
 
             android:id="@+id/shape_color_section"
             android:onClick="openShapeColorStore"
+            android:background="@drawable/store_background_outline"
             android:layout_toRightOf="@+id/shape_type_section"
             android:padding="10dp"
             android:layout_width="wrap_content"
@@ -67,13 +68,31 @@ android:background="@drawable/dialog_shape">
                 android:layout_height="wrap_content"
                 android:text="Shape Theme"
                 android:textSize="25sp"/>
-            <ImageView
-                android:id="@+id/shape_color_image"
+
+            <RelativeLayout
                 android:layout_below="@+id/shape_color_text"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/shape_color_image"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <TextView
+                    android:id="@+id/shape_color_set"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/undinaru"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PLACEHOLDER"
+                    android:textSize="18sp"/>
+
+            </RelativeLayout>
         </RelativeLayout>
 
         <!-- background -->
