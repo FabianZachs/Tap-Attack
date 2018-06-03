@@ -18,6 +18,7 @@ android:background="@drawable/dialog_shape">
         android:adjustViewBounds="true"/>
 
     <RelativeLayout
+        android:paddingLeft="10sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="15dp">
@@ -29,6 +30,7 @@ android:background="@drawable/dialog_shape">
             android:id="@+id/shape_type_section"
             android:onClick="openShapeTypeStore"
             android:padding="10dp"
+            android:layout_marginRight="15sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
@@ -70,14 +72,24 @@ android:background="@drawable/dialog_shape">
 
         </RelativeLayout>
 
+        <View
+            android:id="@+id/anchor"
+            android:layout_toRightOf="@+id/shape_type_section"
+            android:layout_width="0sp"
+            android:layout_height="0sp">
+
+        </View>
+
         <!-- shape colors -->
         <!-- text and preview of currently selected -->
+        <!--android:layout_toRightOf="@+id/shape_type_section"-->
         <RelativeLayout
 
             android:id="@+id/shape_color_section"
             android:onClick="openShapeColorStore"
-            android:layout_toRightOf="@+id/shape_type_section"
+            android:layout_toRightOf="@+id/anchor"
             android:padding="10dp"
+            android:layout_marginLeft="15sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
