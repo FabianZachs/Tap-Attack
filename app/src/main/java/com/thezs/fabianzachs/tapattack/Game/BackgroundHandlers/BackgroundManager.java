@@ -1,5 +1,6 @@
 package com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
@@ -31,6 +32,10 @@ public class BackgroundManager {
                 return;
 
         }
+    }
+
+    public Bitmap getBackground() {
+        return gameBackground.getBackground();
     }
 
     public void draw(Canvas canvas) {

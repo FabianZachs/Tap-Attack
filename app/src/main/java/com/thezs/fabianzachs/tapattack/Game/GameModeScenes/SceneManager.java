@@ -55,6 +55,6 @@ public class SceneManager {
 
         Constants.CURRENT_THEME = prefs.getString("shapeTheme", "neon");
         Constants.CURRENT_SHAPE_TYPE = prefs.getString("shapeType", "curved"); // or straight
-        Constants.CURRENT_BACKGROUND = "";
+        Constants.CURRENT_BACKGROUND = prefs.getString("background", "backgroundtriangleblue");
     }
 }

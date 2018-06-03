@@ -21,15 +21,15 @@ public abstract class GameBackground {
     public GameBackground(String bitmapName, int[] UIHolderColors) {
         this.warningColorHolder = new WarningColorHolder();
         //this.progressBarHolder = new ProgressBarHolder();
-        setupBitmap(bitmapName);
+        this.background = getBackgroundBitmap(bitmapName);
         setupHolders(UIHolderColors);
 
     }
 
-    private void setupBitmap(String bitmapName) {
+    public static Bitmap getBackgroundBitmap(String bitmapName) {
         BitmapFactory bf = new BitmapFactory();
         int resID = Constants.CURRENT_CONTEXT.getResources().getIdentifier(bitmapName, "drawable", Constants.CURRENT_CONTEXT.getPackageName());
-        this.background = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), resID);
+        return bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), resID);
     }
 
     public Bitmap getBackground() {

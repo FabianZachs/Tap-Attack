@@ -24,6 +24,8 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdView;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
+import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundManager;
+import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.Backgrounds.GameBackground;
 import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
 
 import org.w3c.dom.Text;
@@ -35,6 +37,7 @@ public class MainMenuActivity extends  GeneralParent {
 
     private ArrayList<MediaPlayer> mediaPlayers; // these players loop -> turn of onStop()
     private ThemesManager themesManager;
+    private BackgroundManager backgroundManager;
     private SharedPreferences prefs;
     private AdView mAdView;
 
@@ -64,6 +67,8 @@ public class MainMenuActivity extends  GeneralParent {
         //gameTheme = themesManager.buildTheme("vibrant", "curved");
         //themesManager.setCurrentTheme(themesManager.buildTheme(Constants.CURRENT_THEME,Constants.CURRENT_SHAPE_TYPE));
         themesManager.setCurrentTheme(themesManager.buildTheme(prefs.getString("shapeTheme", "neon"),prefs.getString("shapeType","curved")));
+
+        //this.backgroundManager = new BackgroundManager(prefs.getString("background","backgroundtriangleblue"));
 
 
         //initMusic(R.raw.mainmenu);
@@ -348,9 +353,6 @@ public class MainMenuActivity extends  GeneralParent {
         // shape_type_image
         ImageView shapeTypeImg = (ImageView) alertView.findViewById(R.id.shape_type_image);
 
-        android.view.ViewGroup.LayoutParams layoutParams2 = shapeColorImg.getLayoutParams();
-        layoutParams.width = Constants.SCREEN_WIDTH/4;
-        layoutParams.height = Constants.SCREEN_WIDTH/4;
         shapeTypeImg.setLayoutParams(layoutParams);
 
         String outlineName = prefs.getString("shapeTpe", "curved") + "outline";
@@ -364,7 +366,10 @@ public class MainMenuActivity extends  GeneralParent {
         // =======================================
 
         // background_image
-
+        ImageView backgroundImg = (ImageView) alertView.findViewById(R.id.background_image);
+        backgroundImg.setLayoutParams(layoutParams);
+        //backgroundImg.setImageBitmap(backgroundManager.getBackground());
+        backgroundImg.setImageBitmap(GameBackground.getBackgroundBitmap(prefs.getString("background","backgroundtriangleblue")));
 
         // =======================================
 
