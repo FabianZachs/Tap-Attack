@@ -40,6 +40,8 @@ public class ShapeColorPicker {
 
     public String getColorForShape() {
 
+        //Log.d("java.lang.null", "\n\n");
+        //Log.d("java.long.null", "WARNINGCOLOR" + warningColor);
         //float leftIf = randGenerator.nextFloat();
         //double rightIf = getProbabilityOfWarningColor();
         //Log.d("checkprob", "getColorForShape: " + leftIf + "/n" + rightIf);
@@ -64,13 +66,22 @@ public class ShapeColorPicker {
         //if (leftIf<=rightIf) {
             //Log.d("checkprob", "getColorForShape: warning color chosen");
             //Log.d("returningcolor", "getColorForShape: warning color:");
+            //Log.d("java.lang.null", "getColorForShape: warningcolor return: " + warningColor);
             return warningColor;
 
         }
 
-        ArrayList<String> selectableColors = colors;
+
+        ArrayList<String> selectableColors = new ArrayList<>(colors);
+
+        Log.d("java.lang.indexoutofbounds", "colors size" + colors.size());
+        Log.d("java.lang.indexoutofbounds", "size: " + selectableColors.size());
         selectableColors.remove(warningColor);
-        return selectableColors.get(randGenerator.nextInt(NUMBER_OF_COLORS-1));
+        Log.d("java.lang.indexoutofbounds", "size: " + selectableColors.size());
+        Log.d("java.lang.indexoutofbounds", "\n\n");
+        String colorToReturn =selectableColors.get(randGenerator.nextInt(NUMBER_OF_COLORS-1));
+        Log.d("java.lang.null", "getColorForShape: normal color return: " + colorToReturn );
+        return colorToReturn;
 
 
 
@@ -82,7 +93,7 @@ public class ShapeColorPicker {
         //Log.d("warningcolorprob", "getProbabilityOfWarningColor: secondsinscestart" + secondsSinceStart);
 
         //Math.log((0.003* secondsSinceStart) +1);
-        double returnthis =Math.log(0.003* secondsSinceStart +1);
+        double returnthis = Math.log(0.003* secondsSinceStart +1);
 
         //Log.d("warningcolorprob", "getProbabilityOfWarningColor: " +returnthis);
         return returnthis;

@@ -270,7 +270,7 @@ public class MainMenuActivity extends  GeneralParent {
     public void storeClick(View view) {
         // TODO intialize to default theme in startup- breaks if user doesnt click store to set theme
         SharedPreferences.Editor prefsEditor = prefs.edit();
-        prefsEditor.putString("theme", "vibrant");
+        prefsEditor.putString("theme", "neon");
         prefsEditor.apply();
 
 

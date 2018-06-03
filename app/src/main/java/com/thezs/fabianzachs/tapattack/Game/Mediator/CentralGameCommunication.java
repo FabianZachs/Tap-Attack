@@ -87,7 +87,9 @@ public class CentralGameCommunication {
         this.shapesManager = shapesManager;
     }
 
-    public void addObject(ShapeColorPicker shapeColorPicker) {this.shapeColorPicker = shapeColorPicker;}
+    public void addObject(ShapeColorPicker shapeColorPicker) {
+        this.shapeColorPicker = shapeColorPicker;
+    }
 
     public void addObject(Score score) {
         this.score = score;
@@ -109,8 +111,10 @@ public class CentralGameCommunication {
         this.warningColor.shake();
     }
 
+    //todo this call breaks things
     public void warningColorChanged(String strColor) {
-        this.shapeColorPicker.setWarningColor(strColor);
+        shapeColorPicker.setWarningColor(strColor);
+        //shapeColorPicker.setWarningColor(warningColor.getCurrentStrColor());
     }
 
 

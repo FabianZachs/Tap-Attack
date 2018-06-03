@@ -205,7 +205,7 @@ public class ShapesPopulator {
         return selectedColor;
         */
         String color = shapeColorPicker.getColorForShape();
-        //Log.d("returningcolor2", "getColor: " + color);
+        //Log.d("java.lang.null", "getColor: in getColor() " + color);
         return color;
     }
 
