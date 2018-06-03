@@ -345,6 +345,32 @@ public class MainMenuActivity extends  GeneralParent {
 
         ////// ================================
 
+        // shape_type_image
+        ImageView shapeTypeImg = (ImageView) alertView.findViewById(R.id.shape_type_image);
+
+        android.view.ViewGroup.LayoutParams layoutParams2 = shapeColorImg.getLayoutParams();
+        layoutParams.width = Constants.SCREEN_WIDTH/4;
+        layoutParams.height = Constants.SCREEN_WIDTH/4;
+        shapeTypeImg.setLayoutParams(layoutParams);
+
+        String outlineName = prefs.getString("shapeTpe", "curved") + "outline";
+        int resID = this.getResources().getIdentifier(outlineName, "drawable", this.getPackageName());
+        shapeTypeImg.setImageResource(resID);
+
+
+        TextView setTypeShape = (TextView) alertView.findViewById(R.id.shape_type_set);
+        setTypeShape.setText(prefs.getString("shapeType", "curved").toUpperCase());
+
+        // =======================================
+
+        // background_image
+
+
+        // =======================================
+
+
+
+
 
 
 
