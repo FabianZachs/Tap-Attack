@@ -229,7 +229,7 @@ public class ShapesPopulator {
     }
 
     public String getDirection() {
-        int i = rand.nextInt(4);
+        int i = rand.nextInt(3);
 
         switch (i) {
             case 0:
@@ -238,8 +238,8 @@ public class ShapesPopulator {
                 return "RIGHT";
             case 2:
                 return "UP";
-            case 3:
-                return "DOWN";
+            //case 3:
+                //return "DOWN";
         }
 
         throw new RuntimeException("getDirection failed");

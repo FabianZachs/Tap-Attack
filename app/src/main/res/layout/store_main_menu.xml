@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:orientation="vertical"
+android:gravity="center"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:background="@drawable/dialog_shape">
+
+    <TextView
+        android:text="STORE"
+        android:textColor="@color/store"
+        android:fontFamily="@font/undinaru"
+        android:textSize="50sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+
+        <!-- shape types -->
+        <!-- text and preview of currently selected -->
+        <RelativeLayout
+
+            android:id="@+id/shape_type_section"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/shape_type_text"
+                android:textStyle="bold"
+                android:fontFamily="@font/undinaru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shape Type"
+                android:textSize="25sp"/>
+            <ImageView
+                android:id="@+id/shape_type_image"
+                android:layout_below="@+id/shape_type_text"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        </RelativeLayout>
+
+        <!-- shape colors -->
+        <!-- text and preview of currently selected -->
+        <RelativeLayout
+
+            android:id="@+id/shape_color_section"
+            android:layout_toRightOf="@+id/shape_type_section"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/shape_color_text"
+                android:textStyle="bold"
+                android:fontFamily="@font/undinaru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shape Color"
+                android:textSize="25sp"/>
+            <ImageView
+                android:id="@+id/shape_color_image"
+                android:layout_below="@+id/shape_color_text"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </RelativeLayout>
+
+        <!-- background -->
+        <!-- text and preview of currently selected -->
+        <RelativeLayout
+
+            android:id="@+id/background_section"
+            android:layout_below="@+id/shape_type_section"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/background_text"
+                android:textStyle="bold"
+                android:fontFamily="@font/undinaru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Background"
+                android:textSize="25sp"/>
+            <ImageView
+                android:id="@+id/background_image"
+                android:layout_below="@+id/background_text"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+    <TextView
+        android:id="@+id/ok_button"
+        android:fontFamily="@font/undinaru"
+        android:text="@string/ok"
+        android:textColor="#000000"
+        android:textSize="40sp"
+        android:soundEffectsEnabled="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

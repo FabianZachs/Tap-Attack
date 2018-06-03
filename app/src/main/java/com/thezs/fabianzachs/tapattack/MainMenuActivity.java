@@ -267,8 +267,30 @@ public class MainMenuActivity extends  GeneralParent {
         this.startActivity(intent);
     }
 
+
+
+
     public void storeClick(View view) {
         // TODO intialize to default theme in startup- breaks if user doesnt click store to set theme
+
+
+        View alertView = getLayoutInflater().inflate(R.layout.store_main_menu, null);
+
+        // todo setup what each button does
+
+        AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
+
+
+        dbuilder.setView(alertView);
+        final AlertDialog dialog = dbuilder.create();
+
+        okButtonSetup(alertView, dialog);
+
+        dialogFullscreen(dialog);
+
+
+
+
         SharedPreferences.Editor prefsEditor = prefs.edit();
         prefsEditor.putString("theme", "neon");
         prefsEditor.apply();
@@ -277,4 +299,9 @@ public class MainMenuActivity extends  GeneralParent {
 
         StyleableToast.makeText(this,  prefs.getString("theme","error-no theme"), R.style.successtoast).show();
     }
+
+
+
+
+
 }
