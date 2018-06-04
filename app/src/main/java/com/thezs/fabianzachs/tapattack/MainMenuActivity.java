@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -18,6 +19,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,6 +34,7 @@ import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -65,10 +68,8 @@ public class MainMenuActivity extends  GeneralParent {
 
 
         // for images in store
-        this.themesManager = new ThemesManager();
         //gameTheme = themesManager.buildTheme("vibrant", "curved");
         //themesManager.setCurrentTheme(themesManager.buildTheme(Constants.CURRENT_THEME,Constants.CURRENT_SHAPE_TYPE));
-        themesManager.setCurrentTheme(themesManager.buildTheme(prefs.getString("shapeTheme", "neon"),prefs.getString("shapeType","curved")));
 
         //this.backgroundManager = new BackgroundManager(prefs.getString("background","backgroundtriangleblue"));
 
@@ -341,7 +342,11 @@ public class MainMenuActivity extends  GeneralParent {
         layoutParams.height = Constants.SCREEN_WIDTH/4;
         shapeColorImg.setLayoutParams(layoutParams);
 
-        shapeColorImg.setImageBitmap(themesManager.getCurrentTheme().getShapeBitmap("circle", "red", false));
+
+
+        Bitmap bm = BitmapFactory.decodeResource(this.getResources(),
+                Constants.SHAPE_THEMES_ID[Arrays.asList(Constants.SHAPE_THEMES).indexOf(prefs.getString("shapeTheme","neon"))]);
+        shapeColorImg.setImageBitmap(bm);
 
         TextView setColorTheme = (TextView) alertView.findViewById(R.id.shape_color_set);
         setColorTheme.setText(prefs.getString("shapeTheme", "neon").toUpperCase());
@@ -436,5 +441,22 @@ public class MainMenuActivity extends  GeneralParent {
         ListView mList = (ListView) alertView.findViewById(R.id.item_list);
         CustomListView customListView = new CustomListView(this, Constants.SHAPE_THEMES, Constants.SHAPE_THEMES_ID);
         mList.setAdapter(customListView);
+
+        mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Log.d("storeclickregisters", "onItemClick: " + position);
+
+                SharedPreferences.Editor prefsEditor = prefs.edit();
+                prefsEditor.putString("shapeTheme", Constants.SHAPE_THEMES[position]);
+                prefsEditor.apply();
+                //Intent intent = new Intent(this, SendMessage.class);
+                //String message = "abc";
+                //intent.putExtra(EXTRA_MESSAGE, message);
+                //startActivity(intent);
+            }
+        });
+
     }
 }
