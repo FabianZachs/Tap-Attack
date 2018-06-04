@@ -19,6 +19,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdView;
@@ -32,6 +33,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MainMenuActivity extends  GeneralParent {
 
@@ -393,7 +395,20 @@ public class MainMenuActivity extends  GeneralParent {
 
     public void openShapeTypeStore(View view) {
         // todo complete
-        StyleableToast.makeText(this,  "shapetype store click",R.style.successtoast).show();
+        View alertView = getLayoutInflater().inflate(R.layout.store_item_list, null);
+        AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
+        dbuilder.setView(alertView);
+        final AlertDialog dialog = dbuilder.create();
+        dialogFullscreen(dialog);
+
+        ListView mList = (ListView) alertView.findViewById(R.id.item_list);
+
+        Integer[] ids = {R.drawable.straightoutline, R.drawable.curvedoutline};
+
+        CustomListView customListView = new CustomListView(this, Constants.SHAPE_TYPES, ids);
+        mList.setAdapter(customListView);
+
+
     }
 
     public void openBackgroundStore(View view) {
