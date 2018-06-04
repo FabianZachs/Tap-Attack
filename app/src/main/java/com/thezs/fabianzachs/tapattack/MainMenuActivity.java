@@ -412,10 +412,29 @@ public class MainMenuActivity extends  GeneralParent {
     }
 
     public void openBackgroundStore(View view) {
-        StyleableToast.makeText(this,  "background store click",R.style.successtoast).show();
+        View alertView = getLayoutInflater().inflate(R.layout.store_item_list, null);
+        AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
+        dbuilder.setView(alertView);
+        final AlertDialog dialog = dbuilder.create();
+        okButtonSetup(alertView, dialog);
+        dialogFullscreen(dialog);
+
+        ListView mList = (ListView) alertView.findViewById(R.id.item_list);
+        CustomListView customListView = new CustomListView(this, Constants.BACKGROUNDS, Constants.BACKGROUNDS_ID);
+        mList.setAdapter(customListView);
     }
 
     public void openShapeColorStore(View view) {
-        StyleableToast.makeText(this,  "shape color store click",R.style.successtoast).show();
+        View alertView = getLayoutInflater().inflate(R.layout.store_item_list, null);
+        AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
+        dbuilder.setView(alertView);
+        final AlertDialog dialog = dbuilder.create();
+        okButtonSetup(alertView, dialog);
+        dialogFullscreen(dialog);
+
+
+        ListView mList = (ListView) alertView.findViewById(R.id.item_list);
+        CustomListView customListView = new CustomListView(this, Constants.SHAPE_THEMES, Constants.SHAPE_THEMES_ID);
+        mList.setAdapter(customListView);
     }
 }

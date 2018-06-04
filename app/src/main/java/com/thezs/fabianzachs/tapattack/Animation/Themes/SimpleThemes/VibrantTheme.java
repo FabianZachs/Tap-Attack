@@ -6,7 +6,8 @@ package com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes;
 
 public class VibrantTheme extends SimpleTheme {
 
-    public static Integer[] intColors = {0xff2D7DD2,0xff44355B,0xffEEB902,0xffF45D01,0xffDB2B39};
+    // orange used to be f47101ff
+    public static Integer[] intColors = {0xff2D7DD2,0xff44355B,0xffEEB902,0xffF47101,0xffDB2B39};
     public static String[] strColors = {"blue","purple","yellow","orange","red"};
 
     public VibrantTheme(String shapeType) {

@@ -25,10 +25,18 @@ public class Constants {
     public static Context CURRENT_CONTEXT;
 
     public static String[] SHAPES = {"circle", "square", "cross", "arrow", "star"};
+
     public static String[] SHAPE_TYPES = {"straight","curved"};
     public static Integer[] SHAPE_TYPES_IDS = {R.drawable.straightoutline, R.drawable.curvedoutline};
+
+
     public static String[] SHAPE_THEMES = {"neon","flat","vibrant"};
-    public static String[] BACKGROUNDS  = {"backgroundtriangleblue"};
+    public static Integer[] SHAPE_THEMES_ID = {R.drawable.neonthemetemplate, R.drawable.flatthemetemplate, R.drawable.vibrantthemetemplate};
+
+
+    //public static String[] BACKGROUNDS  = {"backgroundtriangleblue"};
+    public static String[] BACKGROUNDS  = {"triangle-blue"};
+    public static Integer[] BACKGROUNDS_ID = {R.drawable.backgroundtriangleblue};
 
     public static Map<String, String[]> COLORS; // theme -> [] of colors
     public static String[] NEONCOLORS = {"blue","yellow","red","purple","green"};
