@@ -399,13 +399,13 @@ public class MainMenuActivity extends  GeneralParent {
         AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
         dbuilder.setView(alertView);
         final AlertDialog dialog = dbuilder.create();
+        okButtonSetup(alertView, dialog);
         dialogFullscreen(dialog);
 
         ListView mList = (ListView) alertView.findViewById(R.id.item_list);
 
-        Integer[] ids = {R.drawable.straightoutline, R.drawable.curvedoutline};
 
-        CustomListView customListView = new CustomListView(this, Constants.SHAPE_TYPES, ids);
+        CustomListView customListView = new CustomListView(this, Constants.SHAPE_TYPES, Constants.SHAPE_TYPES_IDS);
         mList.setAdapter(customListView);
 
 

@@ -26,6 +26,7 @@ public class Constants {
 
     public static String[] SHAPES = {"circle", "square", "cross", "arrow", "star"};
     public static String[] SHAPE_TYPES = {"straight","curved"};
+    public static Integer[] SHAPE_TYPES_IDS = {R.drawable.straightoutline, R.drawable.curvedoutline};
     public static String[] SHAPE_THEMES = {"neon","flat","vibrant"};
     public static String[] BACKGROUNDS  = {"backgroundtriangleblue"};
 

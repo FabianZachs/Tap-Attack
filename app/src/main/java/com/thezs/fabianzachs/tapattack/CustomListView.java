@@ -69,14 +69,6 @@ public class CustomListView extends ArrayAdapter<String> {
             layoutParams.height = Constants.SCREEN_WIDTH/6;
             itemImageSection.setLayoutParams(layoutParams);
 
-
-            /*
-            itemImageSection = (ImageView) v.findViewById(R.id.item_image) ;
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(Constants.SCREEN_WIDTH/6,Constants.SCREEN_WIDTH/6);
-            params.gravity = (Gravity.RIGHT| Gravity.CENTER);
-            itemImageSection.setLayoutParams(params);
-            */
-
         }
     }
 }
