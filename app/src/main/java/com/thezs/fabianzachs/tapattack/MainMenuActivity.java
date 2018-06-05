@@ -45,6 +45,7 @@ public class MainMenuActivity extends  GeneralParent {
     private BackgroundManager backgroundManager;
     private SharedPreferences prefs;
     private AdView mAdView;
+    private Store store;
 
 
     @Override
@@ -65,6 +66,7 @@ public class MainMenuActivity extends  GeneralParent {
 
         helper.bannerAdSetup(this, mAdView);
 
+        this.store = new Store(this, prefs);
 
 
         // for images in store
@@ -154,7 +156,7 @@ public class MainMenuActivity extends  GeneralParent {
         dialogFullscreen(dialog);
     }
 
-    private void dialogFullscreen(AlertDialog dialog) {
+    public void dialogFullscreen(AlertDialog dialog) {
 
         // to remove square edges from custom dialog shape
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -295,13 +297,21 @@ public class MainMenuActivity extends  GeneralParent {
 
 
 
+    public void storeSetup() {
+
+        //this.store = new Store(this);
+    }
 
 
 
     public void storeClick(View view) {
         // TODO intialize to default theme in startup- breaks if user doesnt click store to set theme
 
+        store.storeClicked();
 
+        /*
+
+        // todo ne    already done
         View alertView = getLayoutInflater().inflate(R.layout.store_main_menu, null);
 
 
@@ -309,12 +319,14 @@ public class MainMenuActivity extends  GeneralParent {
 
         dbuilder.setView(alertView);
         final AlertDialog dialog = dbuilder.create();
+        //^ todo ne    already done
+        /*
 
         okButtonSetup(alertView, dialog);
 
         dialogFullscreen(dialog);
 
-
+// start jere
         /// =====================
         // shape_color_image
         ImageView shapeColorImg = (ImageView) alertView.findViewById(R.id.shape_color_image);
@@ -327,6 +339,9 @@ public class MainMenuActivity extends  GeneralParent {
         Bitmap bm = BitmapFactory.decodeResource(this.getResources(),
                 Constants.SHAPE_THEMES_ID[Arrays.asList(Constants.SHAPE_THEMES).indexOf(prefs.getString("shapeTheme","neon"))]);
         shapeColorImg.setImageBitmap(bm);
+
+
+
 
         TextView setColorTheme = (TextView) alertView.findViewById(R.id.shape_color_set);
         setColorTheme.setText(prefs.getString("shapeTheme", "neon").toUpperCase());
@@ -364,6 +379,7 @@ public class MainMenuActivity extends  GeneralParent {
 
 
         //StyleableToast.makeText(this,  prefs.getString("theme","error-no theme"), R.style.successtoast).show();
+        */
     }
 
 
