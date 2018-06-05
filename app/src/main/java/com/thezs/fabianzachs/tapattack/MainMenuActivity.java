@@ -295,19 +295,6 @@ public class MainMenuActivity extends  GeneralParent {
 
 
 
-    /*
-    private void okButtonSetup(View alertView, final AlertDialog dialog) {
-
-        TextView okButt = (TextView) alertView.findViewById(R.id.ok_button);
-
-        okButt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //playSound(R.raw.closesettings);
-                dialog.dismiss();
-            }
-        });
-    }*/
 
 
 
@@ -318,12 +305,7 @@ public class MainMenuActivity extends  GeneralParent {
         View alertView = getLayoutInflater().inflate(R.layout.store_main_menu, null);
 
 
-
-
-
-
         AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
-
 
         dbuilder.setView(alertView);
         final AlertDialog dialog = dbuilder.create();
@@ -342,17 +324,12 @@ public class MainMenuActivity extends  GeneralParent {
         layoutParams.height = Constants.SCREEN_WIDTH/4;
         shapeColorImg.setLayoutParams(layoutParams);
 
-
-
         Bitmap bm = BitmapFactory.decodeResource(this.getResources(),
                 Constants.SHAPE_THEMES_ID[Arrays.asList(Constants.SHAPE_THEMES).indexOf(prefs.getString("shapeTheme","neon"))]);
         shapeColorImg.setImageBitmap(bm);
 
         TextView setColorTheme = (TextView) alertView.findViewById(R.id.shape_color_set);
         setColorTheme.setText(prefs.getString("shapeTheme", "neon").toUpperCase());
-
-        // todo make size correct
-        // todo border around image
 
 
         ////// ================================
@@ -379,14 +356,6 @@ public class MainMenuActivity extends  GeneralParent {
         backgroundImg.setImageBitmap(GameBackground.getBackgroundBitmap(prefs.getString("background","backgroundtriangleblue")));
 
         // =======================================
-
-
-
-
-
-
-
-
 
         //SharedPreferences.Editor prefsEditor = prefs.edit();
         //prefsEditor.putString("shapeTheme", "neon");
@@ -416,6 +385,7 @@ public class MainMenuActivity extends  GeneralParent {
 
     }
 
+
     public void openBackgroundStore(View view) {
         View alertView = getLayoutInflater().inflate(R.layout.store_item_list, null);
         AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
@@ -434,7 +404,7 @@ public class MainMenuActivity extends  GeneralParent {
         AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
         dbuilder.setView(alertView);
         final AlertDialog dialog = dbuilder.create();
-        okButtonSetup(alertView, dialog);
+        okButtonLockInSetup(alertView, dialog, view);
         dialogFullscreen(dialog);
 
 
@@ -460,5 +430,35 @@ public class MainMenuActivity extends  GeneralParent {
             }
         });
 
+    }
+    private void okButtonLockInSetup(final View alertView, final AlertDialog dialog, final View viewWithViewToUpdate) {
+
+        TextView okButt = (TextView) alertView.findViewById(R.id.ok_button);
+
+        okButt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //playSound(R.raw.closesettings);
+                updateStoreSelected(viewWithViewToUpdate);
+                dialog.dismiss();
+            }
+        });
+    }
+
+    private void updateStoreSelected(View alertView) {
+        // todo first the colors section
+        ImageView shapeColorImg = (ImageView) alertView.findViewById(R.id.shape_color_image);
+
+        android.view.ViewGroup.LayoutParams layoutParams = shapeColorImg.getLayoutParams();
+        layoutParams.width = Constants.SCREEN_WIDTH/4;
+        layoutParams.height = Constants.SCREEN_WIDTH/4;
+        shapeColorImg.setLayoutParams(layoutParams);
+
+        Bitmap bm = BitmapFactory.decodeResource(this.getResources(),
+                Constants.SHAPE_THEMES_ID[Arrays.asList(Constants.SHAPE_THEMES).indexOf(prefs.getString("shapeTheme","neon"))]);
+        shapeColorImg.setImageBitmap(bm);
+
+        TextView setColorTheme = (TextView) alertView.findViewById(R.id.shape_color_set);
+        setColorTheme.setText(prefs.getString("shapeTheme", "neon").toUpperCase());
     }
 }
