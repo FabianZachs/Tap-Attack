@@ -455,6 +455,7 @@ public class MainMenuActivity extends  GeneralParent {
         }); */
 
     }
+    /*
     private void okButtonLockInSetup(final View alertView, final AlertDialog dialog, final View viewWithViewToUpdate) {
 
         TextView okButt = (TextView) alertView.findViewById(R.id.ok_button);
@@ -467,8 +468,9 @@ public class MainMenuActivity extends  GeneralParent {
                 dialog.dismiss();
             }
         });
-    }
+    }*/
 
+    /*
     private void updateStoreSelected(View alertView) {
         // todo first the colors section
         ImageView shapeColorImg = (ImageView) alertView.findViewById(R.id.shape_color_image);
@@ -484,5 +486,5 @@ public class MainMenuActivity extends  GeneralParent {
 
         TextView setColorTheme = (TextView) alertView.findViewById(R.id.shape_color_set);
         setColorTheme.setText(prefs.getString("shapeTheme", "neon").toUpperCase());
-    }
+    }*/
 }

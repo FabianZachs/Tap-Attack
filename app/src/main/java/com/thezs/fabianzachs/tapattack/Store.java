@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -48,10 +49,14 @@ public class Store {
         standardOkButtonSetup(mainStoreAlertView, mainStoreDialog);
         dialogFullscreen(mainStoreDialog);
 
+        setupImgAndTextOfStoreSectons();
+    }
+
+    private void setupImgAndTextOfStoreSectons() {
+
         setupStoreSectionPreviewImg("color", R.id.shape_color_image);
         setupStoreSectionPreviewImg("type", R.id.shape_type_image);
         setupStoreSectionPreviewImg("background", R.id.background_image);
-
 
         setupStoreSectionText("color", R.id.shape_color_set);
         setupStoreSectionText("type", R.id.shape_type_set);
@@ -85,6 +90,12 @@ public class Store {
         AlertDialog.Builder dbuilder = new AlertDialog.Builder(mainMenuActivity);
         dbuilder.setView(alertView);
         final AlertDialog dialog = dbuilder.create();
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                setupImgAndTextOfStoreSectons();
+            }
+        });
         okButtonLockInSetup(alertView, dialog, mainStoreAlertView);
         dialogFullscreen(dialog);
 
@@ -104,7 +115,7 @@ public class Store {
 
     }
 
-    private void okButtonLockInSetup(final View alertView, final AlertDialog dialog, final View viewWithViewToUpdate) {
+    private void okButtonLockInSetup(/*final String section, final Integer resID,*/ final View alertView, final AlertDialog dialog, final View viewWithViewToUpdate) {
         TextView okButt = (TextView) alertView.findViewById(R.id.ok_button);
 
 
@@ -112,7 +123,7 @@ public class Store {
             @Override
             public void onClick(View view) {
                 //playSound(R.raw.closesettings);
-                //updateStoreSelected(viewWithViewToUpdate);
+                setupImgAndTextOfStoreSectons();
                 dialog.dismiss();
             }
         });
@@ -150,7 +161,7 @@ public class Store {
                 img.setImageBitmap(bm);
                 return;
             case "type":
-                String outlineName = prefs.getString("shapeTpe", "curved") + "outline";
+                String outlineName = prefs.getString("shapeType", "curved") + "outline";
                 int resIDBitmap = mainMenuActivity.getResources().getIdentifier(outlineName, "drawable", mainMenuActivity.getPackageName());
                 img.setImageResource(resIDBitmap);
 
@@ -167,11 +178,6 @@ public class Store {
 
 
     }
-
-
-
-
-
 
 
     private void standardOkButtonSetup(View alertView, final AlertDialog dialog) {
