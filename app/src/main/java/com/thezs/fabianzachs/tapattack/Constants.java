@@ -42,6 +42,7 @@ public class Constants {
     public static String[] NEONCOLORS = {"blue","yellow","red","purple","green"};
     public static String CURRENT_THEME;
     public static String CURRENT_SHAPE_TYPE;
+    // todo check below
     public static String CURRENT_BACKGROUND = "backgroundtriangleblue";
 
 

@@ -9,7 +9,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextClock;
 import android.widget.TextView;
 
@@ -29,14 +31,6 @@ public class Store {
     Activity mainMenuActivity;
     private View mainStoreAlertView;
     final private AlertDialog mainStoreDialog;
-/*
-    public Store(View mainStoreAlertView, android.support.v7.app.AlertDialog mainStoreDialog, Context context) {
-        this.mainStoreAlertView = mainStoreAlertView;
-        this.mainStoreDialog = mainStoreDialog;
-
-        standardOkButtonSetup(this.mainStoreAlertView, this.mainStoreDialog);
-    }
-    */
 
     public Store(Activity mainMenuActivity, SharedPreferences prefs) {
 
@@ -61,8 +55,67 @@ public class Store {
 
         setupStoreSectionText("color", R.id.shape_color_set);
         setupStoreSectionText("type", R.id.shape_type_set);
+    }
+
+    public void openStoreSection(View view, String section) {
+
+        switch (section) {
+            case "color":
+                buildDialog(/*view, R.layout.store_item_list,*/ Constants.SHAPE_THEMES, Constants.SHAPE_THEMES_ID, "shapeTheme");
+                return;
+            case "type":
+                buildDialog(Constants.SHAPE_TYPES, Constants.SHAPE_TYPES_IDS, "shapeType");
+                return;
+            case "background":
+                buildDialog(Constants.BACKGROUNDS, Constants.BACKGROUNDS_ID, "background");
+                return;
+        }
+
+        throw new RuntimeException("UNKNOWN STORE SECTION");
+        // todo item click listened
+    }
+
+    private void setUpList(String[] names, Integer[] IDs) {
+
+    }
+
+    private void buildDialog(/*View view, Integer resID, */final String[] names, Integer[] IDs, final String prefKey) {
+
+        View alertView = mainMenuActivity.getLayoutInflater().inflate(R.layout.store_item_list, null);
+        AlertDialog.Builder dbuilder = new AlertDialog.Builder(mainMenuActivity);
+        dbuilder.setView(alertView);
+        final AlertDialog dialog = dbuilder.create();
+        okButtonLockInSetup(alertView, dialog, mainStoreAlertView);
+        dialogFullscreen(dialog);
+
+        ListView mList = (ListView) alertView.findViewById(R.id.item_list);
+        CustomListView customListView = new CustomListView(mainMenuActivity, names, IDs);
+        mList.setAdapter(customListView);
+        mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                view.setSelected(true);
+
+                SharedPreferences.Editor prefsEditor = prefs.edit();
+                prefsEditor.putString(prefKey, names[position]);
+                prefsEditor.apply();
+            }
+        });
+
+    }
+
+    private void okButtonLockInSetup(final View alertView, final AlertDialog dialog, final View viewWithViewToUpdate) {
+        TextView okButt = (TextView) alertView.findViewById(R.id.ok_button);
 
 
+        okButt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //playSound(R.raw.closesettings);
+                //updateStoreSelected(viewWithViewToUpdate);
+                dialog.dismiss();
+            }
+        });
     }
 
     private void setupStoreSectionText(String section, Integer resID) {
@@ -103,7 +156,11 @@ public class Store {
 
                 return;
             case "background":
-                img.setImageBitmap(GameBackground.getBackgroundBitmap(prefs.getString("background","backgroundtriangleblue")));
+                Bitmap bm2 = BitmapFactory.decodeResource(mainMenuActivity.getResources(),
+                        Constants.BACKGROUNDS_ID[Arrays.asList(Constants.BACKGROUNDS).indexOf(prefs.getString("background","triangle-blue"))]);
+                img.setImageBitmap(bm2);
+                //String str = prefs.getString("background", "bluetriangle");
+                //img.setImageBitmap(GameBackground.getBackgroundBitmap(prefs.getString("background","bluetriangle")));
                 return;
         }
         throw new RuntimeException("UNKNOWN STORE IMAGE TO SETUP");

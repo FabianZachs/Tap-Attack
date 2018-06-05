@@ -385,6 +385,8 @@ public class MainMenuActivity extends  GeneralParent {
 
     public void openShapeTypeStore(View view) {
         // todo complete
+        store.openStoreSection(view, "type");
+        /*
         View alertView = getLayoutInflater().inflate(R.layout.store_item_list, null);
         AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
         dbuilder.setView(alertView);
@@ -397,12 +399,15 @@ public class MainMenuActivity extends  GeneralParent {
 
         CustomListView customListView = new CustomListView(this, Constants.SHAPE_TYPES, Constants.SHAPE_TYPES_IDS);
         mList.setAdapter(customListView);
+        */
 
 
     }
 
 
     public void openBackgroundStore(View view) {
+        store.openStoreSection(view, "background");
+        /*
         View alertView = getLayoutInflater().inflate(R.layout.store_item_list, null);
         AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
         dbuilder.setView(alertView);
@@ -413,9 +418,12 @@ public class MainMenuActivity extends  GeneralParent {
         ListView mList = (ListView) alertView.findViewById(R.id.item_list);
         CustomListView customListView = new CustomListView(this, Constants.BACKGROUNDS, Constants.BACKGROUNDS_ID);
         mList.setAdapter(customListView);
+        */
     }
 
     public void openShapeColorStore(View view) {
+        store.openStoreSection(view, "color");
+        /*
         View alertView = getLayoutInflater().inflate(R.layout.store_item_list, null);
         AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
         dbuilder.setView(alertView);
@@ -424,10 +432,10 @@ public class MainMenuActivity extends  GeneralParent {
         dialogFullscreen(dialog);
 
 
+
         ListView mList = (ListView) alertView.findViewById(R.id.item_list);
         CustomListView customListView = new CustomListView(this, Constants.SHAPE_THEMES, Constants.SHAPE_THEMES_ID);
         mList.setAdapter(customListView);
-
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -444,7 +452,7 @@ public class MainMenuActivity extends  GeneralParent {
                 //intent.putExtra(EXTRA_MESSAGE, message);
                 //startActivity(intent);
             }
-        });
+        }); */
 
     }
     private void okButtonLockInSetup(final View alertView, final AlertDialog dialog, final View viewWithViewToUpdate) {

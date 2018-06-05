@@ -25,7 +25,8 @@ public class BackgroundManager {
     private void setupGameBackground(String backgroundID) {
 
         switch (backgroundID) {
-            case "backgroundtriangleblue":
+            case "triangle-blue":
+            //case "backgroundtriangleblue":
                 gameBackground = new BlueTriangular();
                 return;
             case "OTHER BACKGROUNDS":
