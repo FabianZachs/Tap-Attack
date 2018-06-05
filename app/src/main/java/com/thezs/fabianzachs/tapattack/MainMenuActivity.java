@@ -388,13 +388,13 @@ public class MainMenuActivity extends  GeneralParent {
 
 
 
-        SharedPreferences.Editor prefsEditor = prefs.edit();
-        prefsEditor.putString("shapeTheme", "neon");
-        prefsEditor.apply();
+        //SharedPreferences.Editor prefsEditor = prefs.edit();
+        //prefsEditor.putString("shapeTheme", "neon");
+        //prefsEditor.apply();
 
 
 
-        StyleableToast.makeText(this,  prefs.getString("theme","error-no theme"), R.style.successtoast).show();
+        //StyleableToast.makeText(this,  prefs.getString("theme","error-no theme"), R.style.successtoast).show();
     }
 
 
@@ -446,7 +446,6 @@ public class MainMenuActivity extends  GeneralParent {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Log.d("storeclickregisters", "onItemClick: " + position);
 
                 SharedPreferences.Editor prefsEditor = prefs.edit();
                 prefsEditor.putString("shapeTheme", Constants.SHAPE_THEMES[position]);
