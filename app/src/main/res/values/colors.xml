@@ -7,6 +7,7 @@
     <!-- <color name="settingsbackground">#374a4a</color> -->
     <color name="settingsbackground">#f3f3f3ff</color>
     <color name="soundon">#42b4db</color>
+    <color name="selectedItem">#42b4db</color>
     <color name="soundoff">#d93b3b</color>
     <color name="store">#fefa1b</color>
     <color name="menu">#374a4a</color>

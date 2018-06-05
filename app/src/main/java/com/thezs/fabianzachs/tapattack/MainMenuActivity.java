@@ -447,6 +447,9 @@ public class MainMenuActivity extends  GeneralParent {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
 
+                view.setSelected(true);
+
+
                 SharedPreferences.Editor prefsEditor = prefs.edit();
                 prefsEditor.putString("shapeTheme", Constants.SHAPE_THEMES[position]);
                 prefsEditor.apply();
