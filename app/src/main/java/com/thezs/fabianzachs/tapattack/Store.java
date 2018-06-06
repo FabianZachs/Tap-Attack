@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -53,16 +52,25 @@ public class Store {
 
         this.mainStoreDialog = buildDialog(mainStoreAlertView);
         this.colorSectionDialog = buildDialog(colorSectionAlertView);
-        this.typeSectionDialog = buildDialog(colorSectionAlertView);
+        this.typeSectionDialog = buildDialog(typeSectionAlertView);
         this.backgroundSectionDialog = buildDialog(backgroundSectionAlertView);
 
 
         standardOkButtonSetup(mainStoreAlertView, mainStoreDialog);
         setupImgAndTextOfStoreSectons();
 
+        setupDialogDismissForStoreSection(colorSectionAlertView, colorSectionDialog);
+        setupDialogDismissForStoreSection(typeSectionAlertView, typeSectionDialog);
+        setupDialogDismissForStoreSection(backgroundSectionAlertView, backgroundSectionDialog);
+
         setupStoreSectionList(colorSectionAlertView, colorSectionDialog, Constants.SHAPE_THEMES,
             Constants.SHAPE_THEMES_ID, "shapeTheme");
 
+        setupStoreSectionList(typeSectionAlertView,typeSectionDialog,Constants.SHAPE_TYPES,
+               Constants.SHAPE_TYPES_IDS, "shapeType");
+
+        setupStoreSectionList(backgroundSectionAlertView,backgroundSectionDialog, Constants.BACKGROUNDS,
+                Constants.BACKGROUNDS_ID,"background");
 
 //        this.mainStoreAlertView = mainMenuActivity.getLayoutInflater().inflate(R.layout.store_main_menu, null);
         //AlertDialog.Builder mainStoredbuilder = new AlertDialog.Builder(mainMenuActivity);
@@ -71,15 +79,18 @@ public class Store {
         //this.store = new Store(mainStoreAlertView, mainStoreDialog, this);
     }
 
-    private void setupStoreSectionList(View alertView , AlertDialog dialog, final String[] names, final Integer[] IDs, final String prefKey) {
+    private void setupDialogDismissForStoreSection(View alertView, AlertDialog dialog) {
+
         dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
                 setupImgAndTextOfStoreSectons();
-            } // todo put above into seperate class
+            }
         });
         okButtonLockInSetup(alertView, dialog, mainStoreAlertView);
-        // todo dialogFullscreen(dialog);
+    }
+
+    private void setupStoreSectionList(View alertView , AlertDialog dialog, final String[] names, final Integer[] IDs, final String prefKey) {
 
         ListView mList = (ListView) alertView.findViewById(R.id.item_list);
         CustomListView customListView = new CustomListView(mainMenuActivity, names, IDs);
@@ -161,24 +172,28 @@ public class Store {
 
         switch (section) {
             case "color":
-                long startTime = System.currentTimeMillis();
-                dialogFullscreen(colorSectionDialog);
-                long endTime = System.currentTimeMillis();
+                //long startTime = System.currentTimeMillis();
+                //long endTime = System.currentTimeMillis();
 
-                Log.d("timetakencolor", "openStoreSection: color" + (endTime - startTime));
+                //Log.d("timetakencolor", "openStoreSection: color" + (endTime - startTime));
 
                 //buildDialogOLD(/*view, R.layout.store_item_list,*/ Constants.SHAPE_THEMES, Constants.SHAPE_THEMES_ID, "shapeTheme");
 
+                dialogFullscreen(colorSectionDialog);
                 return;
             case "type":
+                dialogFullscreen(typeSectionDialog);
+                /*
                 long startTime2 = System.currentTimeMillis();
                 buildDialogOLD(Constants.SHAPE_TYPES, Constants.SHAPE_TYPES_IDS, "shapeType");
                 long endTime2 = System.currentTimeMillis();
 
                 Log.d("timetakencolor", "openStoreSection: type" + (endTime2 - startTime2));
+                */
                 return;
             case "background":
-                buildDialogOLD(Constants.BACKGROUNDS, Constants.BACKGROUNDS_ID, "background");
+                //buildDialogOLD(Constants.BACKGROUNDS, Constants.BACKGROUNDS_ID, "background");
+                dialogFullscreen(backgroundSectionDialog);
                 return;
         }
 
