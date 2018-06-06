@@ -30,9 +30,13 @@ public class Store {
 
     private SharedPreferences prefs;
     Activity mainMenuActivity;
+
+
     private View mainStoreAlertView;
     final private AlertDialog mainStoreDialog;
 
+
+    // todo instead of creating dialog on click of store section, create them in start of game
     public Store(Activity mainMenuActivity, SharedPreferences prefs) {
 
         this.prefs = prefs;
