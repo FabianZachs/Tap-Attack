@@ -28,4 +28,6 @@
     <string name="menu"><u>MENU</u></string>
     <string name="store"><u>STORE</u></string>
     <string name="Select">Select</string>
+    <string name="exit">EXIT</string>
+    <string name="resume">RESUME</string>
 </resources>

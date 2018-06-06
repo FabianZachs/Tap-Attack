@@ -20,6 +20,7 @@ public class MainThread extends Thread {
     public static Canvas canvas;
 
     private boolean running;
+    public boolean isPaused;
 
 
     public MainThread(SurfaceHolder surfaceHolder, GamePanel gamePanel) {
@@ -43,6 +44,14 @@ public class MainThread extends Thread {
         long targetTime = 1000/MAX_FPS;
 
         while (running) {
+
+            while (running && isPaused) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+
+                }
+            }
 
             if (Looper.myLooper() == null)
                 Looper.prepare();

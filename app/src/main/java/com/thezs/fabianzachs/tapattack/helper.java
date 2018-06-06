@@ -1,7 +1,11 @@
 package com.thezs.fabianzachs.tapattack;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -37,5 +41,21 @@ public class helper {
         AdView = (AdView) activity.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         AdView.loadAd(adRequest);
+    }
+
+    public static void dialogFullscreen(Activity activity, AlertDialog dialog) {
+
+        // to remove square edges from custom dialog shape
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        //Set the dialog to not focusable (makes navigation ignore us adding the window)
+        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+        dialog.show();
+        //Set the dialog to immersive
+        dialog.getWindow().getDecorView().setSystemUiVisibility(
+                activity.getWindow().getDecorView().getSystemUiVisibility());
+
+        //Clear the not focusable flag from the window
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
     }
 }

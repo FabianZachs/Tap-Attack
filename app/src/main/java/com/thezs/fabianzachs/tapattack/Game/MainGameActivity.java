@@ -1,17 +1,25 @@
 package com.thezs.fabianzachs.tapattack.Game;
 
         import android.app.Activity;
+        import android.app.AlertDialog;
+        import android.graphics.Color;
         import android.graphics.Rect;
+        import android.graphics.drawable.ColorDrawable;
         import android.graphics.drawable.LayerDrawable;
         import android.media.Image;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
         import android.view.Gravity;
         import android.view.View;
+        import android.view.Window;
+        import android.view.WindowManager;
         import android.widget.FrameLayout;
         import android.widget.ImageView;
         import android.widget.LinearLayout;
 
+        import com.google.android.gms.ads.AdRequest;
+        import com.google.android.gms.ads.AdView;
+        import com.google.android.gms.ads.MobileAds;
         import com.thezs.fabianzachs.tapattack.Constants;
         import com.thezs.fabianzachs.tapattack.R;
         import com.thezs.fabianzachs.tapattack.helper;
@@ -21,6 +29,8 @@ package com.thezs.fabianzachs.tapattack.Game;
  */
 
 public class MainGameActivity extends Activity {
+
+    private GamePanel gamePanel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,7 +44,8 @@ public class MainGameActivity extends Activity {
         Constants.GAME_ACTIVITY = this;
 
         LinearLayout viewForGamePanel = (LinearLayout) findViewById(R.id.game_panel_surface);
-        viewForGamePanel.addView(new GamePanel(this));
+        this.gamePanel = new GamePanel(this);
+        viewForGamePanel.addView(this.gamePanel);
 
         // below works for setting entire screen the view
         // setContentView(new GamePanel(this));
@@ -118,10 +129,45 @@ public class MainGameActivity extends Activity {
 
     // TODO make this pause button size relative to screen size
     public void pauseClick(View view) {
-        com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar.running = false;
-        finish();
+        //com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar.running = false;
+        gamePanel.pauseThread();
+
+        // todo expand pause screen
+        //this.getLayoutInflater(R.layout.pause_screen);
+        View alertView = this.getLayoutInflater().inflate(R.layout.pause_screen, null);
+        AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
+        dbuilder.setView(alertView);
+        final AlertDialog dialog = dbuilder.create();
+        dialog.setCancelable(false);
+
+        Window window = dialog.getWindow();
+        if(window != null){
+            window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND); // This flag is required to set otherwise the setDimAmount method will not show any effect
+            window.setDimAmount(1.0f); //0 for no dim to 1 for full dim
+        }
+
+
+
+        helper.dialogFullscreen(this, dialog);
+
+        AdView pauseBannerAd;
+        // todo banner ad
+        bannerAdSetup(alertView);
+        //finish();
     }
 
 
+    public void bannerAdSetup(View alertView) {
+        // ads (below setContentView)
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        AdView adView = (AdView) alertView.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+    }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

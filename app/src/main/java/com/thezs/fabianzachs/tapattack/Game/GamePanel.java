@@ -87,4 +87,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
     }
+
+    public void pauseThread() {
+        thread.isPaused = true;
+    }
 }
