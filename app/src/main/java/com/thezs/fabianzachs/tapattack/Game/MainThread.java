@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.view.SurfaceHolder;
 
 /**
@@ -20,7 +21,7 @@ public class MainThread extends Thread {
     public static Canvas canvas;
 
     private boolean running;
-    public boolean isPaused;
+    public boolean isPaused = false;
 
 
     public MainThread(SurfaceHolder surfaceHolder, GamePanel gamePanel) {
@@ -45,10 +46,13 @@ public class MainThread extends Thread {
 
         while (running) {
 
-            while (running && isPaused) {
+            Log.d("threaddubug", "run: ispaused" + isPaused);
+            while (isPaused) {
                 try {
+                    Log.d("threaddubug", "run: ispaused" + isPaused);
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
+                    Log.d("threaddubug", "run: ispaused" + isPaused);
 
                 }
             }

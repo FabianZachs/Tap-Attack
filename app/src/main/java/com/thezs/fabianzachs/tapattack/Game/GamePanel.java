@@ -89,6 +89,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void pauseThread() {
-        thread.isPaused = true;
+        //thread.isPaused = true;
+    }
+
+    public void unPauseThread() {
+        //thread.isPaused = false;
     }
 }

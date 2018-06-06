@@ -16,6 +16,7 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.widget.FrameLayout;
         import android.widget.ImageView;
         import android.widget.LinearLayout;
+        import android.widget.TextView;
 
         import com.google.android.gms.ads.AdRequest;
         import com.google.android.gms.ads.AdView;
@@ -147,6 +148,7 @@ public class MainGameActivity extends Activity {
         }
 
 
+        standardOkButtonSetup(alertView, dialog);
 
         helper.dialogFullscreen(this, dialog);
 
@@ -169,5 +171,27 @@ public class MainGameActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    public void exitClick(View view) {
+        // todo save current score and streak?? prbly not
+        finish();
+    }
+
+    public void resumeClick(View view) {
+        gamePanel.unPauseThread();
+
+    }
+    private void standardOkButtonSetup(View alertView, final AlertDialog dialog) {
+
+        TextView okButt = (TextView) alertView.findViewById(R.id.resumeButton);
+
+        okButt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //playSound(R.raw.closesettings);
+                dialog.dismiss();
+            }
+        });
     }
 }
