@@ -13,12 +13,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextClock;
 import android.widget.TextView;
-
-import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.Backgrounds.GameBackground;
-
-import org.w3c.dom.Text;
 
 import java.util.Arrays;
 
@@ -35,25 +30,91 @@ public class Store {
     private View mainStoreAlertView;
     final private AlertDialog mainStoreDialog;
 
+    private View colorSectionAlertView;
+    final private AlertDialog colorSectionDialog;
+
+    private View typeSectionAlertView;
+    final private AlertDialog typeSectionDialog;
+
+    private View backgroundSectionAlertView;
+    final private AlertDialog backgroundSectionDialog;
 
     // todo instead of creating dialog on click of store section, create them in start of game
     public Store(Activity mainMenuActivity, SharedPreferences prefs) {
 
         this.prefs = prefs;
         this.mainMenuActivity = mainMenuActivity;
-        this.mainStoreAlertView = mainMenuActivity.getLayoutInflater().inflate(R.layout.store_main_menu, null);
-        AlertDialog.Builder mainStoredbuilder = new AlertDialog.Builder(mainMenuActivity);
-        mainStoredbuilder.setView(mainStoreAlertView);
-        this.mainStoreDialog = mainStoredbuilder.create();
+
+        this.mainStoreAlertView = getAlertView(R.layout.store_main_menu);
+        this.colorSectionAlertView = getAlertView(R.layout.store_item_list);
+        this.typeSectionAlertView = getAlertView(R.layout.store_item_list);
+        this.backgroundSectionAlertView = getAlertView(R.layout.store_item_list);
+
+        this.mainStoreDialog = buildDialog(mainStoreAlertView);
+        this.colorSectionDialog = buildDialog(colorSectionAlertView);
+        this.typeSectionDialog = buildDialog(colorSectionAlertView);
+        this.backgroundSectionDialog = buildDialog(backgroundSectionAlertView);
+
+
+        standardOkButtonSetup(mainStoreAlertView, mainStoreDialog);
+
+
+//        this.mainStoreAlertView = mainMenuActivity.getLayoutInflater().inflate(R.layout.store_main_menu, null);
+        //AlertDialog.Builder mainStoredbuilder = new AlertDialog.Builder(mainMenuActivity);
+        //mainStoredbuilder.setView(mainStoreAlertView);
+      //  this.mainStoreDialog = mainStoredbuilder.create();
         //this.store = new Store(mainStoreAlertView, mainStoreDialog, this);
     }
 
+    private AlertDialog buildDialog(View alertView) {
+        AlertDialog.Builder dbuilder = new AlertDialog.Builder(mainMenuActivity);
+        dbuilder.setView(alertView);
+        return dbuilder.create();
+
+    }
+
+    private View getAlertView(Integer resID) {
+        return mainMenuActivity.getLayoutInflater().inflate(resID, null);
+    }
+
+    /*
+    private void buildDialogOLD(final String[] names, Integer[] IDs, final String prefKey) {
+
+        View alertView = mainMenuActivity.getLayoutInflater().inflate(R.layout.store_item_list, null);
+        AlertDialog.Builder dbuilder = new AlertDialog.Builder(mainMenuActivity);
+        dbuilder.setView(alertView);
+        final AlertDialog dialog = dbuilder.create();
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                setupImgAndTextOfStoreSectons();
+            }
+        });
+        okButtonLockInSetup(alertView, dialog, mainStoreAlertView);
+        dialogFullscreen(dialog);
+
+        ListView mList = (ListView) alertView.findViewById(R.id.item_list);
+        CustomListView customListView = new CustomListView(mainMenuActivity, names, IDs);
+        mList.setAdapter(customListView);
+        mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                view.setSelected(true);
+
+                SharedPreferences.Editor prefsEditor = prefs.edit();
+                prefsEditor.putString(prefKey, names[position]);
+                prefsEditor.apply();
+            }
+        });
+
+    }
+    */
 
     public void storeClicked() {
-        standardOkButtonSetup(mainStoreAlertView, mainStoreDialog);
+        //standardOkButtonSetup(mainStoreAlertView, mainStoreDialog);
         dialogFullscreen(mainStoreDialog);
 
-        setupImgAndTextOfStoreSectons();
+        //setupImgAndTextOfStoreSectons();
     }
 
     private void setupImgAndTextOfStoreSectons() {
@@ -70,13 +131,13 @@ public class Store {
 
         switch (section) {
             case "color":
-                buildDialog(/*view, R.layout.store_item_list,*/ Constants.SHAPE_THEMES, Constants.SHAPE_THEMES_ID, "shapeTheme");
+                buildDialogOLD(/*view, R.layout.store_item_list,*/ Constants.SHAPE_THEMES, Constants.SHAPE_THEMES_ID, "shapeTheme");
                 return;
             case "type":
-                buildDialog(Constants.SHAPE_TYPES, Constants.SHAPE_TYPES_IDS, "shapeType");
+                buildDialogOLD(Constants.SHAPE_TYPES, Constants.SHAPE_TYPES_IDS, "shapeType");
                 return;
             case "background":
-                buildDialog(Constants.BACKGROUNDS, Constants.BACKGROUNDS_ID, "background");
+                buildDialogOLD(Constants.BACKGROUNDS, Constants.BACKGROUNDS_ID, "background");
                 return;
         }
 
@@ -88,7 +149,7 @@ public class Store {
 
     }
 
-    private void buildDialog(/*View view, Integer resID, */final String[] names, Integer[] IDs, final String prefKey) {
+    private void buildDialogOLD(/*View view, Integer resID, */final String[] names, Integer[] IDs, final String prefKey) {
 
         View alertView = mainMenuActivity.getLayoutInflater().inflate(R.layout.store_item_list, null);
         AlertDialog.Builder dbuilder = new AlertDialog.Builder(mainMenuActivity);
