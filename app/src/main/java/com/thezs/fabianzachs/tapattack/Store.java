@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -57,6 +58,10 @@ public class Store {
 
 
         standardOkButtonSetup(mainStoreAlertView, mainStoreDialog);
+        setupImgAndTextOfStoreSectons();
+
+        setupStoreSectionList(colorSectionAlertView, colorSectionDialog, Constants.SHAPE_THEMES,
+            Constants.SHAPE_THEMES_ID, "shapeTheme");
 
 
 //        this.mainStoreAlertView = mainMenuActivity.getLayoutInflater().inflate(R.layout.store_main_menu, null);
@@ -66,17 +71,30 @@ public class Store {
         //this.store = new Store(mainStoreAlertView, mainStoreDialog, this);
     }
 
-    private AlertDialog buildDialog(View alertView) {
-        AlertDialog.Builder dbuilder = new AlertDialog.Builder(mainMenuActivity);
-        dbuilder.setView(alertView);
-        return dbuilder.create();
+    private void setupStoreSectionList(View alertView , AlertDialog dialog, final String[] names, final Integer[] IDs, final String prefKey) {
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                setupImgAndTextOfStoreSectons();
+            } // todo put above into seperate class
+        });
+        okButtonLockInSetup(alertView, dialog, mainStoreAlertView);
+        // todo dialogFullscreen(dialog);
 
+        ListView mList = (ListView) alertView.findViewById(R.id.item_list);
+        CustomListView customListView = new CustomListView(mainMenuActivity, names, IDs);
+        mList.setAdapter(customListView);
+        mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                view.setSelected(true);
+
+                SharedPreferences.Editor prefsEditor = prefs.edit();
+                prefsEditor.putString(prefKey, names[position]);
+                prefsEditor.apply();
+            }
+        });
     }
-
-    private View getAlertView(Integer resID) {
-        return mainMenuActivity.getLayoutInflater().inflate(resID, null);
-    }
-
     /*
     private void buildDialogOLD(final String[] names, Integer[] IDs, final String prefKey) {
 
@@ -110,6 +128,18 @@ public class Store {
     }
     */
 
+    private AlertDialog buildDialog(View alertView) {
+        AlertDialog.Builder dbuilder = new AlertDialog.Builder(mainMenuActivity);
+        dbuilder.setView(alertView);
+        return dbuilder.create();
+
+    }
+
+    private View getAlertView(Integer resID) {
+        return mainMenuActivity.getLayoutInflater().inflate(resID, null);
+    }
+
+
     public void storeClicked() {
         //standardOkButtonSetup(mainStoreAlertView, mainStoreDialog);
         dialogFullscreen(mainStoreDialog);
@@ -131,10 +161,21 @@ public class Store {
 
         switch (section) {
             case "color":
-                buildDialogOLD(/*view, R.layout.store_item_list,*/ Constants.SHAPE_THEMES, Constants.SHAPE_THEMES_ID, "shapeTheme");
+                long startTime = System.currentTimeMillis();
+                dialogFullscreen(colorSectionDialog);
+                long endTime = System.currentTimeMillis();
+
+                Log.d("timetakencolor", "openStoreSection: color" + (endTime - startTime));
+
+                //buildDialogOLD(/*view, R.layout.store_item_list,*/ Constants.SHAPE_THEMES, Constants.SHAPE_THEMES_ID, "shapeTheme");
+
                 return;
             case "type":
+                long startTime2 = System.currentTimeMillis();
                 buildDialogOLD(Constants.SHAPE_TYPES, Constants.SHAPE_TYPES_IDS, "shapeType");
+                long endTime2 = System.currentTimeMillis();
+
+                Log.d("timetakencolor", "openStoreSection: type" + (endTime2 - startTime2));
                 return;
             case "background":
                 buildDialogOLD(Constants.BACKGROUNDS, Constants.BACKGROUNDS_ID, "background");
