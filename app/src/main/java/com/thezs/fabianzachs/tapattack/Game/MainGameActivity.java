@@ -9,6 +9,7 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.media.Image;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
+        import android.util.Log;
         import android.view.Gravity;
         import android.view.View;
         import android.view.Window;
@@ -133,7 +134,6 @@ public class MainGameActivity extends Activity {
         //com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar.running = false;
         gamePanel.pauseThread();
 
-        // todo expand pause screen
         //this.getLayoutInflater(R.layout.pause_screen);
         View alertView = this.getLayoutInflater().inflate(R.layout.pause_screen, null);
         AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
@@ -178,10 +178,15 @@ public class MainGameActivity extends Activity {
         finish();
     }
 
+    /*
     public void resumeClick(View view) {
-        gamePanel.unPauseThread();
+        //gamePanel.unPauseThread();
+        // todo create new thread
+        Log.d("threadingdebug", "startNewThread: called");
+        gamePanel.startNewThread();
 
     }
+    */
     private void standardOkButtonSetup(View alertView, final AlertDialog dialog) {
 
         TextView okButt = (TextView) alertView.findViewById(R.id.resumeButton);
@@ -191,7 +196,12 @@ public class MainGameActivity extends Activity {
             public void onClick(View view) {
                 //playSound(R.raw.closesettings);
                 dialog.dismiss();
+                gamePanel.startNewThread();
             }
         });
+    }
+
+    public void resumeClick(View view) {
+        Log.d("threadingdebug", "startNewThread: called");
     }
 }

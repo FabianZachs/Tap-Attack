@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.Game;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -42,6 +43,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         thread.start();          // method in Thread class
     }
 
+    public void startNewThread() {
+        Log.d("threadingdebug", "startNewThread: called");
+        thread = new MainThread(getHolder(), this);
+
+        thread.setRunning(true);
+        thread.start();
+    }
 
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
@@ -89,10 +97,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void pauseThread() {
-        //thread.isPaused = true;
+        thread.setRunning(false);
     }
 
     public void unPauseThread() {
         //thread.isPaused = false;
     }
+
 }

@@ -46,6 +46,7 @@ public class MainThread extends Thread {
 
         while (running) {
 
+            /*
             Log.d("threaddubug", "run: ispaused" + isPaused);
             while (isPaused) {
                 try {
@@ -55,7 +56,7 @@ public class MainThread extends Thread {
                     Log.d("threaddubug", "run: ispaused" + isPaused);
 
                 }
-            }
+            }*/
 
             if (Looper.myLooper() == null)
                 Looper.prepare();
