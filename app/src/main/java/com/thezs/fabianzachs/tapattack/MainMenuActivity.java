@@ -71,7 +71,7 @@ public class MainMenuActivity extends  GeneralParent {
 
         // for images in store
         //gameTheme = themesManager.buildTheme("vibrant", "curved");
-        //themesManager.setCurrentTheme(themesManager.buildTheme(Constants.CURRENT_THEME,Constants.CURRENT_SHAPE_TYPE));
+        //themesManager.setCurrentGameConstants(themesManager.buildTheme(Constants.CURRENT_THEME,Constants.CURRENT_SHAPE_TYPE));
 
         //this.backgroundManager = new BackgroundManager(prefs.getString("background","backgroundtriangleblue"));
 

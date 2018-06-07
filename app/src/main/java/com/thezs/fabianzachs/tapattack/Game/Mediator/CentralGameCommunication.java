@@ -1,8 +1,10 @@
 package com.thezs.fabianzachs.tapattack.Game.Mediator;
 
+import android.graphics.drawable.shapes.Shape;
 import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapeColorPicker;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapeMover;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
@@ -15,7 +17,10 @@ import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.WarningColor;
 
 public class CentralGameCommunication {
 
+    private long gameStartTime;
+
     private ShapesManager shapesManager; // TODO  do we need this??
+    private ShapeMover shapeMover;
     private Score score;
     private Streak streak;
     //private ProgressBar progressBar;
@@ -26,7 +31,8 @@ public class CentralGameCommunication {
     * recieve messages regarding destruction of shape, incorrect taps of shape, (passing required info)
     *
      */
-    public CentralGameCommunication() {
+    public CentralGameCommunication(long gameStartTime) {
+        this.gameStartTime = gameStartTime;
 
     }
 
@@ -36,6 +42,15 @@ public class CentralGameCommunication {
 
     public String getStrWarningColor() {
         return this.warningColor.getCurrentStrColor();
+    }
+
+    public long getGameStartTime() {
+        return gameStartTime;
+    }
+
+    public void incrementStartTimeBy(long timeAmount) {
+        this.gameStartTime += timeAmount;
+        shapeMover.updateStartTime();
     }
 
 
@@ -105,6 +120,10 @@ public class CentralGameCommunication {
 */
     public void addObject(WarningColor warningColor) {
         this.warningColor = warningColor;
+    }
+
+    public void addObject(ShapeMover shapeMover) {
+        this.shapeMover = shapeMover;
     }
 
     public void warningComponentShake() {

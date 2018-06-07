@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
+import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -16,12 +17,15 @@ public class ShapeMover {
 
     private long startTime;
     private long initTime;
+    private CentralGameCommunication mediator;
     private float RATE_OF_SPEED_INCREASE; // TODO use log(x+1) function
 
-    public ShapeMover() {
+    public ShapeMover(CentralGameCommunication mediator) {
         //Log.d("speed", "previous speed: " + Constants.SCREEN_HEIGHT/5000.0f);
+        this.mediator = mediator;
         this.startTime = System.currentTimeMillis();
         this.initTime = System.currentTimeMillis();
+        // todo universal time
     }
 
     public void updateShapeLocation(Shape shape) {}
@@ -40,8 +44,12 @@ public class ShapeMover {
 
     }
 
+    public void updateStartTime() {
+        this.startTime = System.currentTimeMillis();
+    }
+
     public double getSpeed(int elapsedTime) {
-        long currentGameTime = System.currentTimeMillis() - initTime;
+        long currentGameTime = System.currentTimeMillis() - mediator.getGameStartTime();
         //Log.d("speed", "getSpeed: currenttime" + currentGameTime);
         //double denominator = (10000* (1/(Math.log(50000 * currentGameTime+ 100)))) + 5000;
 

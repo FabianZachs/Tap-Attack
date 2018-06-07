@@ -9,6 +9,7 @@ import android.view.SurfaceView;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameModeScenes.SceneManager;
+import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 
 /**
  * Created by fabianzachs on 07/02/18.
@@ -21,14 +22,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     //private SceneManager manager;
 
-    public GamePanel(Context context) {
+    public GamePanel(Context context, CentralGameCommunication mediator) {
         super(context);
 
         getHolder().addCallback(this);
 
         Constants.CURRENT_CONTEXT = context;
 
-        sceneManager = new SceneManager();
+        sceneManager = new SceneManager(mediator);
 
         setFocusable(true);
     }
@@ -44,7 +45,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void startNewThread() {
-        Log.d("threadingdebug", "startNewThread: called");
         thread = new MainThread(getHolder(), this);
 
         thread.setRunning(true);
@@ -96,7 +96,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         super.onDraw(canvas);
     }
 
-    public void pauseThread() {
+    public void endRunningThread() {
         thread.setRunning(false);
     }
 

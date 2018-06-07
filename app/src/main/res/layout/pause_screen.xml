@@ -30,7 +30,6 @@ android:background="@drawable/dialog_shape">
         android:layout_height="wrap_content">
 
         <TextView
-            android:onClick="resumeClick"
             android:layout_margin="10sp"
             android:id="@+id/resumeButton"
             android:fontFamily="@font/undinaru"

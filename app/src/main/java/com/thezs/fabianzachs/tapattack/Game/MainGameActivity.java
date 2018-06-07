@@ -2,11 +2,7 @@ package com.thezs.fabianzachs.tapattack.Game;
 
         import android.app.Activity;
         import android.app.AlertDialog;
-        import android.graphics.Color;
-        import android.graphics.Rect;
-        import android.graphics.drawable.ColorDrawable;
         import android.graphics.drawable.LayerDrawable;
-        import android.media.Image;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
         import android.util.Log;
@@ -23,6 +19,7 @@ package com.thezs.fabianzachs.tapattack.Game;
         import com.google.android.gms.ads.AdView;
         import com.google.android.gms.ads.MobileAds;
         import com.thezs.fabianzachs.tapattack.Constants;
+        import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
         import com.thezs.fabianzachs.tapattack.R;
         import com.thezs.fabianzachs.tapattack.helper;
 
@@ -33,6 +30,7 @@ package com.thezs.fabianzachs.tapattack.Game;
 public class MainGameActivity extends Activity {
 
     private GamePanel gamePanel;
+    CentralGameCommunication mediator;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +44,10 @@ public class MainGameActivity extends Activity {
         Constants.GAME_ACTIVITY = this;
 
         LinearLayout viewForGamePanel = (LinearLayout) findViewById(R.id.game_panel_surface);
-        this.gamePanel = new GamePanel(this);
+        // todo initimediator here
+        this.mediator = new CentralGameCommunication(System.currentTimeMillis());
+
+        this.gamePanel = new GamePanel(this, mediator);
         viewForGamePanel.addView(this.gamePanel);
 
         // below works for setting entire screen the view
@@ -132,7 +133,8 @@ public class MainGameActivity extends Activity {
     // TODO make this pause button size relative to screen size
     public void pauseClick(View view) {
         //com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar.running = false;
-        gamePanel.pauseThread();
+        long timeOfPauseClick = System.currentTimeMillis();
+        gamePanel.endRunningThread();
 
         //this.getLayoutInflater(R.layout.pause_screen);
         View alertView = this.getLayoutInflater().inflate(R.layout.pause_screen, null);
@@ -148,9 +150,12 @@ public class MainGameActivity extends Activity {
         }
 
 
-        standardOkButtonSetup(alertView, dialog);
+        resumeButtonSetup(alertView, dialog, timeOfPauseClick);
 
         helper.dialogFullscreen(this, dialog);
+
+
+
 
         AdView pauseBannerAd;
         // todo banner ad
@@ -174,7 +179,6 @@ public class MainGameActivity extends Activity {
     }
 
     public void exitClick(View view) {
-        // todo save current score and streak?? prbly not
         finish();
     }
 
@@ -187,7 +191,7 @@ public class MainGameActivity extends Activity {
 
     }
     */
-    private void standardOkButtonSetup(View alertView, final AlertDialog dialog) {
+    private void resumeButtonSetup(View alertView, final AlertDialog dialog, final long timeOfPauseClick) {
 
         TextView okButt = (TextView) alertView.findViewById(R.id.resumeButton);
 
@@ -196,12 +200,16 @@ public class MainGameActivity extends Activity {
             public void onClick(View view) {
                 //playSound(R.raw.closesettings);
                 dialog.dismiss();
-                gamePanel.startNewThread();
+                resumeClick(view, timeOfPauseClick);
             }
         });
     }
 
-    public void resumeClick(View view) {
-        Log.d("threadingdebug", "startNewThread: called");
+    public void resumeClick(View view, long timeOfPauseClick) {
+        //Log.d("threadingdebug3", "startNewThread: called");
+        long timeInPauseScreen = System.currentTimeMillis() - timeOfPauseClick;
+        mediator.incrementStartTimeBy(timeInPauseScreen);
+        //Log.d("timeinpause", "resumeClick: " + timeInPauseScreen);
+        gamePanel.startNewThread();
     }
 }

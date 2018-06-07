@@ -62,6 +62,7 @@ public class ShapesPopulator {
         this.sharedRect = sharedRect;
         this.timeOfLastShapeAddition = 0;
         this.initTime = initTime;
+        // todo universal time
         this.newShapeArea = new Rect(300,300,300,300);
         rand = new Random(); // TODO make attribute?
         this.shapeBuilder = new ShapeBuilder(initTime);

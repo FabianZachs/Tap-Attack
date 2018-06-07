@@ -47,7 +47,8 @@ public class ShapesManager {
         this.sharedRect = new SharedRect();
         this.shapesPopulator = new ShapesPopulator(mediator,initTime,sharedPaint,sharedRect);
         this.graveFactory = new GraveFactory();
-        this.shapeMover = new ShapeMover();
+        this.shapeMover = new ShapeMover(mediator);
+        mediator.addObject(shapeMover);
     }
 
     public void recieveTouch(MotionEvent event) {

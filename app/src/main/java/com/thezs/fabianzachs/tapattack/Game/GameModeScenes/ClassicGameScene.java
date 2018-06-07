@@ -39,10 +39,11 @@ public class ClassicGameScene implements Scene {
     private ShapesManager shapesManager;
 
 
-    public ClassicGameScene() {
+    public ClassicGameScene(CentralGameCommunication mediator) {
         this.initTime = System.currentTimeMillis();
+        // todo universal time
         this.gameOver = false; // TODO or/and on reset?
-        this.mediator = new CentralGameCommunication();
+        this.mediator = mediator;
 
         Constants.NEONCOLORS = RandomizeArray(Constants.NEONCOLORS); // TODO make this responsive to any theme
 

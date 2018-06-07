@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 import com.thezs.fabianzachs.tapattack.Game.Scene;
 
 import java.util.ArrayList;
@@ -22,10 +23,10 @@ public class SceneManager {
     private static Scene CURRENT_SCENE;
 
     // TODO update to take game mode x (ACTIVE_SCENE is specified before)
-    public SceneManager() {
-        setCurrentTheme();
+    public SceneManager(CentralGameCommunication mediator) {
+        setCurrentGameConstants();
         ACTIVE_SCENE = 0;
-        scenes.add(new ClassicGameScene());
+        scenes.add(new ClassicGameScene(mediator));
         CURRENT_SCENE = scenes.get(ACTIVE_SCENE);
     }
 
@@ -50,7 +51,7 @@ public class SceneManager {
         CURRENT_SCENE.setGameOver(true);
     }
 
-    public void setCurrentTheme() {
+    public void setCurrentGameConstants() {
         SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerPrefs", MODE_PRIVATE);
 
         Constants.CURRENT_THEME = prefs.getString("shapeTheme", "neon");
