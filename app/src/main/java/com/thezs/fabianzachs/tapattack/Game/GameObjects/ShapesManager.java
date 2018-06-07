@@ -67,6 +67,7 @@ public class ShapesManager {
             //mediator.changeProgressBarBy(-40);
             mediator.warningComponentShake();
             mediator.resetStreak();
+            mediator.setGameOver(); //todo for setting up gameOver we have that background touch triggers gameover
         }
     }
 

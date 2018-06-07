@@ -46,6 +46,7 @@ public class MainGameActivity extends Activity {
         LinearLayout viewForGamePanel = (LinearLayout) findViewById(R.id.game_panel_surface);
         // todo initimediator here
         this.mediator = new CentralGameCommunication(System.currentTimeMillis());
+        mediator.addObject(this);
 
         this.gamePanel = new GamePanel(this, mediator);
         viewForGamePanel.addView(this.gamePanel);
@@ -129,6 +130,25 @@ public class MainGameActivity extends Activity {
         //Constants.WARNING_COLOR_CLICK_AREA_RIGHT = new Rect(Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH/20,30 + (Constants.SCREEN_HEIGHT/40 +25) + 20 + Constants.SCREEN_WIDTH/15 + 10 + Constants.SHAPE_HEIGHT/2,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         //Constants.SHAPE_CLICK_AREA = new Rect(Constants.SCREEN_WIDTH/20, 30 + (Constants.SCREEN_HEIGHT/40 +25) + 20 + Constants.SCREEN_WIDTH/15 + 10 + Constants.SHAPE_HEIGHT/2, Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT - 1);
     }
+
+    public void showGameOverScreen(int streakToDisplay) {
+        View alertView = this.getLayoutInflater().inflate(R.layout.game_over, null);
+
+        TextView streakText = (TextView) alertView.findViewById(R.id.streak_text);
+        streakText.setText("STREAK: " + streakToDisplay);
+
+        AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
+        dbuilder.setView(alertView);
+        final AlertDialog dialog = dbuilder.create();
+        //dialog.setCancelable(false); // todo add after done testign
+
+        helper.dialogFullscreen(this, dialog);
+
+        AdView pauseBannerAd;
+        // todo banner ad
+        bannerAdSetup(alertView);
+    }
+
 
     // TODO make this pause button size relative to screen size
     public void pauseClick(View view) {

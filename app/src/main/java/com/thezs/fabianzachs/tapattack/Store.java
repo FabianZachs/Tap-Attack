@@ -45,15 +45,15 @@ public class Store {
         this.prefs = prefs;
         this.mainMenuActivity = mainMenuActivity;
 
-        this.mainStoreAlertView = getAlertView(R.layout.store_main_menu);
-        this.colorSectionAlertView = getAlertView(R.layout.store_item_list);
-        this.typeSectionAlertView = getAlertView(R.layout.store_item_list);
-        this.backgroundSectionAlertView = getAlertView(R.layout.store_item_list);
+        this.mainStoreAlertView = helper.getAlertView(mainMenuActivity, R.layout.store_main_menu);
+        this.colorSectionAlertView = helper.getAlertView(mainMenuActivity, R.layout.store_item_list);
+        this.typeSectionAlertView = helper.getAlertView(mainMenuActivity, R.layout.store_item_list);
+        this.backgroundSectionAlertView = helper.getAlertView(mainMenuActivity, R.layout.store_item_list);
 
-        this.mainStoreDialog = buildDialog(mainStoreAlertView);
-        this.colorSectionDialog = buildDialog(colorSectionAlertView);
-        this.typeSectionDialog = buildDialog(typeSectionAlertView);
-        this.backgroundSectionDialog = buildDialog(backgroundSectionAlertView);
+        this.mainStoreDialog = helper.getBuiltDialog(mainMenuActivity, mainStoreAlertView);
+        this.colorSectionDialog = helper.getBuiltDialog(mainMenuActivity, colorSectionAlertView);
+        this.typeSectionDialog = helper.getBuiltDialog(mainMenuActivity, typeSectionAlertView);
+        this.backgroundSectionDialog = helper.getBuiltDialog(mainMenuActivity, backgroundSectionAlertView);
 
 
         standardOkButtonSetup(mainStoreAlertView, mainStoreDialog);
@@ -139,16 +139,18 @@ public class Store {
     }
     */
 
+    /*
     private AlertDialog buildDialog(View alertView) {
         AlertDialog.Builder dbuilder = new AlertDialog.Builder(mainMenuActivity);
         dbuilder.setView(alertView);
         return dbuilder.create();
 
     }
-
+*/
+    /*
     private View getAlertView(Integer resID) {
         return mainMenuActivity.getLayoutInflater().inflate(resID, null);
-    }
+    }*/
 
 
     public void storeClicked() {
@@ -164,8 +166,8 @@ public class Store {
         setupStoreSectionPreviewImg("type", R.id.shape_type_image);
         setupStoreSectionPreviewImg("background", R.id.background_image);
 
-        setupStoreSectionText("color", R.id.shape_color_set);
-        setupStoreSectionText("type", R.id.shape_type_set);
+        setupStoreSectionText("color", R.id.best_streak_text);
+        setupStoreSectionText("type", R.id.best_score_text);
     }
 
     public void openStoreSection(View view, String section) {

@@ -1,15 +1,13 @@
 package com.thezs.fabianzachs.tapattack.Game.Mediator;
 
-import android.graphics.drawable.shapes.Shape;
-import android.util.Log;
-
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapeColorPicker;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapeMover;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
-import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
+import com.thezs.fabianzachs.tapattack.Game.GamePanel;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.WarningColor;
+import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
 
 /**
  * Created by fabianzachs on 08/03/18.
@@ -20,6 +18,8 @@ public class CentralGameCommunication {
     private long gameStartTime;
 
     private ShapesManager shapesManager; // TODO  do we need this??
+    private MainGameActivity mainGameActivity;
+    private GamePanel gamePanel;
     private ShapeMover shapeMover;
     private Score score;
     private Streak streak;
@@ -34,6 +34,12 @@ public class CentralGameCommunication {
     public CentralGameCommunication(long gameStartTime) {
         this.gameStartTime = gameStartTime;
 
+    }
+
+    public void setGameOver() {
+        gamePanel.endRunningThread();
+        mainGameActivity.showGameOverScreen(streak.getCurrentGameHighestStreak());
+        // todo get score and streak into prefs if highscore (do elsewhere, like when we create dialog, so pass in game score and game highest streak acheived)
     }
 
     public Integer getIntWarningColor() {
@@ -124,6 +130,14 @@ public class CentralGameCommunication {
 
     public void addObject(ShapeMover shapeMover) {
         this.shapeMover = shapeMover;
+    }
+
+    public void addObject(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+    }
+
+    public void addObject(MainGameActivity mainGameActivity) {
+        this.mainGameActivity = mainGameActivity;
     }
 
     public void warningComponentShake() {

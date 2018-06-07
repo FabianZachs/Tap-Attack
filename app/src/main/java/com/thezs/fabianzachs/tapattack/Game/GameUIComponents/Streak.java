@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 
 import com.thezs.fabianzachs.tapattack.Constants;
-import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,8 @@ public class Streak {
     private final List<Integer> STREAK_COLORS = new ArrayList<>();
     private final int STREAK_POINTS_PER_COLOR = 5;
 
-    private int streak;
+    private int currentStreak;
+    private int highestCurrentGameStreak;
 
     private int xLocation;
     private int yLocation;
@@ -30,7 +30,8 @@ public class Streak {
     public Streak() {
         //this.shapesManager = shapesManager;
         //this.shapesManager.attachStreakObserver(this);
-        this.streak = 0;
+        this.currentStreak = 0;
+        this.highestCurrentGameStreak = 0;
         setupSTREAK_COLORS();
         // TODO do this relative to screen height and width
         this.xLocation = 40;
@@ -70,24 +71,30 @@ public class Streak {
 
 
     public void draw(Canvas canvas) {
-        int index = streak/STREAK_POINTS_PER_COLOR> STREAK_COLORS.size() - 1 ? STREAK_COLORS.size() - 1 : streak/STREAK_POINTS_PER_COLOR;
+        int index = currentStreak /STREAK_POINTS_PER_COLOR> STREAK_COLORS.size() - 1 ? STREAK_COLORS.size() - 1 : currentStreak /STREAK_POINTS_PER_COLOR;
         streakPaint.setColor(STREAK_COLORS.get(index));
         canvas.drawText(getStringStreak(), xLocation, yLocation, streakPaint);
     }
 
-    public void setStreak(int streak) {
-        this.streak = streak;
+    public void setCurrentStreak(int currentStreak) {
+        this.currentStreak = currentStreak;
     }
 
     public void incStreak(int amount) {
-        this.streak += amount;
+        this.currentStreak += amount;
     }
 
     public void resetStreak() {
-        this.streak = 0;
+        highestCurrentGameStreak = currentStreak > highestCurrentGameStreak ? currentStreak : highestCurrentGameStreak;
+        this.currentStreak = 0;
     }
 
     private String getStringStreak() {
-        return streak == 0 ? "STREAK" : Integer.toString(streak);
+        return currentStreak == 0 ? "STREAK" : Integer.toString(currentStreak);
+    }
+
+    public int getCurrentGameHighestStreak() {
+        return currentStreak > highestCurrentGameStreak ? currentStreak : highestCurrentGameStreak;
+
     }
 }

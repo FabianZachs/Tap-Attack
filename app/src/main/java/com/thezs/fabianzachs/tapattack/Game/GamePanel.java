@@ -24,6 +24,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public GamePanel(Context context, CentralGameCommunication mediator) {
         super(context);
+        mediator.addObject(this);
 
         getHolder().addCallback(this);
 

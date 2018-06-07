@@ -18,6 +18,19 @@ import com.google.android.gms.ads.MobileAds;
 public class helper {
 
 
+    public static View getAlertView(Activity activity, Integer resID) {
+        return activity.getLayoutInflater().inflate(resID, null);
+    }
+
+
+    public static AlertDialog getBuiltDialog(Activity activity, View alertView) {
+        AlertDialog.Builder dbuilder = new AlertDialog.Builder(activity);
+        dbuilder.setView(alertView);
+        return dbuilder.create();
+
+    }
+
+
     public static void makeFullscreen(Activity activity) {
         // task bar
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
