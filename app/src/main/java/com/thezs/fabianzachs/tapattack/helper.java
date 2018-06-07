@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -28,6 +29,20 @@ public class helper {
         dbuilder.setView(alertView);
         return dbuilder.create();
 
+    }
+
+
+    public static void setupStandardDialogDismissButton(Integer resID, View alertView, final AlertDialog dialog) {
+
+        TextView okButt = (TextView) alertView.findViewById(resID);
+
+        okButt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //playSound(R.raw.closesettings);
+                dialog.dismiss();
+            }
+        });
     }
 
 

@@ -56,7 +56,8 @@ public class Store {
         this.backgroundSectionDialog = helper.getBuiltDialog(mainMenuActivity, backgroundSectionAlertView);
 
 
-        standardOkButtonSetup(mainStoreAlertView, mainStoreDialog);
+        //standardOkButtonSetup(mainStoreAlertView, mainStoreDialog);
+        helper.setupStandardDialogDismissButton(R.id.ok_button,mainStoreAlertView, mainStoreDialog);
         setupImgAndTextOfStoreSectons();
 
         setupDialogDismissForStoreSection(colorSectionAlertView, colorSectionDialog);
@@ -155,7 +156,8 @@ public class Store {
 
     public void storeClicked() {
         //standardOkButtonSetup(mainStoreAlertView, mainStoreDialog);
-        dialogFullscreen(mainStoreDialog);
+        //dialogFullscreen(mainStoreDialog);
+        helper.dialogFullscreen(mainMenuActivity, mainStoreDialog);
 
         //setupImgAndTextOfStoreSectons();
     }
@@ -181,10 +183,12 @@ public class Store {
 
                 //buildDialogOLD(/*view, R.layout.store_item_list,*/ Constants.SHAPE_THEMES, Constants.SHAPE_THEMES_ID, "shapeTheme");
 
-                dialogFullscreen(colorSectionDialog);
+                //dialogFullscreen(colorSectionDialog);
+                helper.dialogFullscreen(mainMenuActivity, colorSectionDialog);
                 return;
             case "type":
-                dialogFullscreen(typeSectionDialog);
+                //dialogFullscreen(typeSectionDialog);
+                helper.dialogFullscreen(mainMenuActivity, typeSectionDialog);
                 /*
                 long startTime2 = System.currentTimeMillis();
                 buildDialogOLD(Constants.SHAPE_TYPES, Constants.SHAPE_TYPES_IDS, "shapeType");
@@ -195,7 +199,8 @@ public class Store {
                 return;
             case "background":
                 //buildDialogOLD(Constants.BACKGROUNDS, Constants.BACKGROUNDS_ID, "background");
-                dialogFullscreen(backgroundSectionDialog);
+                helper.dialogFullscreen(mainMenuActivity, backgroundSectionDialog);
+                //dialogFullscreen(backgroundSectionDialog);
                 return;
         }
 
@@ -206,8 +211,8 @@ public class Store {
     private void setUpList(String[] names, Integer[] IDs) {
 
     }
-
-    private void buildDialogOLD(/*View view, Integer resID, */final String[] names, Integer[] IDs, final String prefKey) {
+/*
+    private void buildDialogOLD(final String[] names, Integer[] IDs, final String prefKey) {
 
         View alertView = mainMenuActivity.getLayoutInflater().inflate(R.layout.store_item_list, null);
         AlertDialog.Builder dbuilder = new AlertDialog.Builder(mainMenuActivity);
@@ -220,7 +225,7 @@ public class Store {
             }
         });
         okButtonLockInSetup(alertView, dialog, mainStoreAlertView);
-        dialogFullscreen(dialog);
+        helper.dialogFullscreen(mainMenuActivity, dialog);
 
         ListView mList = (ListView) alertView.findViewById(R.id.item_list);
         CustomListView customListView = new CustomListView(mainMenuActivity, names, IDs);
@@ -236,7 +241,7 @@ public class Store {
             }
         });
 
-    }
+    }*/
 
     private void okButtonLockInSetup(/*final String section, final Integer resID,*/ final View alertView, final AlertDialog dialog, final View viewWithViewToUpdate) {
         TextView okButt = (TextView) alertView.findViewById(R.id.ok_button);
@@ -302,7 +307,7 @@ public class Store {
 
     }
 
-
+/*
     private void standardOkButtonSetup(View alertView, final AlertDialog dialog) {
 
         TextView okButt = (TextView) alertView.findViewById(R.id.ok_button);
@@ -315,7 +320,8 @@ public class Store {
             }
         });
     }
-
+    */
+/*
     private void dialogFullscreen(AlertDialog dialog) {
 
         // to remove square edges from custom dialog shape
@@ -331,4 +337,5 @@ public class Store {
         //Clear the not focusable flag from the window
         dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
     }
+    */
 }
