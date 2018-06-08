@@ -124,6 +124,7 @@ android:background="@drawable/dialog_shape">
 
 <TextView
     android:id="@+id/ok_button"
+    android:onClick="exitClick"
     android:fontFamily="@font/undinaru"
     android:text="@string/ok"
     android:textColor="#000000"

@@ -62,6 +62,9 @@ public class Score {
         this.score += amount;
     }
 
+    public int getScore() {
+        return score;
+    }
 
     private String getStringScore() {
         return score == 0 ? "SCORE" : Integer.toString(score);

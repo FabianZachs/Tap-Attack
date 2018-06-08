@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.Game;
 
         import android.app.Activity;
         import android.app.AlertDialog;
+        import android.content.SharedPreferences;
         import android.graphics.drawable.LayerDrawable;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
@@ -131,16 +132,39 @@ public class MainGameActivity extends Activity {
         //Constants.SHAPE_CLICK_AREA = new Rect(Constants.SCREEN_WIDTH/20, 30 + (Constants.SCREEN_HEIGHT/40 +25) + 20 + Constants.SCREEN_WIDTH/15 + 10 + Constants.SHAPE_HEIGHT/2, Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT - 1);
     }
 
-    public void showGameOverScreen(int streakToDisplay) {
-        View alertView = this.getLayoutInflater().inflate(R.layout.game_over, null);
-
+    public void setupGameOverFields(View alertView, int scoreToDisplay, int streakToDisplay) {
         TextView streakText = (TextView) alertView.findViewById(R.id.streak_text);
         streakText.setText("STREAK: " + streakToDisplay);
 
-        AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
-        dbuilder.setView(alertView);
-        final AlertDialog dialog = dbuilder.create();
+        TextView scoreText = (TextView) alertView.findViewById(R.id.score_text);
+        scoreText.setText("SCORE: " + scoreToDisplay);
+
+        SharedPreferences prefs = getSharedPreferences("playerStats", MODE_PRIVATE);
+        int bestScore = prefs.getInt(/*CONSTANTS.CURRENTGAEMODE + */"bestScore", 0);// todo make work  for different current gamemodes
+        int bestStreak = prefs.getInt(/*CONSTANTS.CURRENTGAEMODE + */"bestStreak", 0);// todo make work  for different current gamemodes
+
+        // todo if new best score make best score a cool animation and set bestScore &/| bestStreak prefs to current gotten ones
+
+
+
+        TextView bestScoreText = (TextView) alertView.findViewById(R.id.best_score_text);
+
+        TextView bestStreakText = (TextView) alertView.findViewById(R.id.best_streak_text);
+    }
+
+    public void showGameOverScreen(int scoreToDisplay, int streakToDisplay) {
+        //View alertView = this.getLayoutInflater().inflate(R.layout.game_over, null);
+        View alertView = helper.getAlertView(this, R.layout.game_over);
+
+        setupGameOverFields(alertView, scoreToDisplay, streakToDisplay);
+
+        final AlertDialog dialog = helper.getBuiltDialog(this, alertView);
+        //AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
+        //dbuilder.setView(alertView);
+        //final AlertDialog dialog = dbuilder.create();
+
         //dialog.setCancelable(false); // todo add after done testign
+
 
         helper.dialogFullscreen(this, dialog);
 
@@ -156,11 +180,8 @@ public class MainGameActivity extends Activity {
         long timeOfPauseClick = System.currentTimeMillis();
         gamePanel.endRunningThread();
 
-        //this.getLayoutInflater(R.layout.pause_screen);
-        View alertView = this.getLayoutInflater().inflate(R.layout.pause_screen, null);
-        AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
-        dbuilder.setView(alertView);
-        final AlertDialog dialog = dbuilder.create();
+        View alertView = helper.getAlertView(this, R.layout.pause_screen);
+        final AlertDialog dialog = helper.getBuiltDialog(this, alertView);
         dialog.setCancelable(false);
 
         Window window = dialog.getWindow();
@@ -173,8 +194,6 @@ public class MainGameActivity extends Activity {
         resumeButtonSetup(alertView, dialog, timeOfPauseClick);
 
         helper.dialogFullscreen(this, dialog);
-
-
 
 
         AdView pauseBannerAd;
@@ -232,4 +251,5 @@ public class MainGameActivity extends Activity {
         //Log.d("timeinpause", "resumeClick: " + timeInPauseScreen);
         gamePanel.startNewThread();
     }
+
 }

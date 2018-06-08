@@ -63,12 +63,12 @@ public class helper {
         decorView.setSystemUiVisibility(uiOptions);
     }
 
-    public static void bannerAdSetup(Activity activity, AdView AdView) {
+    public static void bannerAdSetup(Activity activity, AdView adView) {
         // ads (below setContentView)
         MobileAds.initialize(activity, "ca-app-pub-3940256099942544~3347511713");
-        AdView = (AdView) activity.findViewById(R.id.adView);
+        adView = (AdView) activity.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-        AdView.loadAd(adRequest);
+        adView.loadAd(adRequest);
     }
 
     public static void dialogFullscreen(Activity activity, AlertDialog dialog) {
