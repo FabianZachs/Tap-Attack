@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.app.Activity;
         import android.app.AlertDialog;
         import android.content.SharedPreferences;
+        import android.graphics.Typeface;
         import android.graphics.drawable.LayerDrawable;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
@@ -16,6 +17,8 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.widget.LinearLayout;
         import android.widget.TextView;
 
+        import com.daimajia.androidanimations.library.Techniques;
+        import com.daimajia.androidanimations.library.YoYo;
         import com.google.android.gms.ads.AdRequest;
         import com.google.android.gms.ads.AdView;
         import com.google.android.gms.ads.MobileAds;
@@ -54,6 +57,12 @@ public class MainGameActivity extends Activity {
 
         // below works for setting entire screen the view
         // setContentView(new GamePanel(this));
+
+        // todo just for testing
+        SharedPreferences prefs = getSharedPreferences("playerStats", MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putInt("bestScore", 0);
+        prefsEditor.apply();
 
     }
 
@@ -132,24 +141,53 @@ public class MainGameActivity extends Activity {
         //Constants.SHAPE_CLICK_AREA = new Rect(Constants.SCREEN_WIDTH/20, 30 + (Constants.SCREEN_HEIGHT/40 +25) + 20 + Constants.SCREEN_WIDTH/15 + 10 + Constants.SHAPE_HEIGHT/2, Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT - 1);
     }
 
-    public void setupGameOverFields(View alertView, int scoreToDisplay, int streakToDisplay) {
+    public void setupGameOverFields(View alertView, int currentGameScore, int currentGameStreak) {
         TextView streakText = (TextView) alertView.findViewById(R.id.streak_text);
-        streakText.setText("STREAK: " + streakToDisplay);
+        streakText.setText("STREAK: " + currentGameStreak);
 
         TextView scoreText = (TextView) alertView.findViewById(R.id.score_text);
-        scoreText.setText("SCORE: " + scoreToDisplay);
+        scoreText.setText("SCORE: " + currentGameScore);
 
         SharedPreferences prefs = getSharedPreferences("playerStats", MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
         int bestScore = prefs.getInt(/*CONSTANTS.CURRENTGAEMODE + */"bestScore", 0);// todo make work  for different current gamemodes
         int bestStreak = prefs.getInt(/*CONSTANTS.CURRENTGAEMODE + */"bestStreak", 0);// todo make work  for different current gamemodes
 
-        // todo if new best score make best score a cool animation and set bestScore &/| bestStreak prefs to current gotten ones
-
-
 
         TextView bestScoreText = (TextView) alertView.findViewById(R.id.best_score_text);
-
         TextView bestStreakText = (TextView) alertView.findViewById(R.id.best_streak_text);
+
+        // todo refactorable
+        if (currentGameScore > bestScore) {
+            bestScore = currentGameScore;
+            prefsEditor.putInt(/*CONSTANTS.CURRENTGAEMODE + */"bestScore", currentGameScore);
+            prefsEditor.apply();
+            //YoYo.with(Techniques.Tada).duration(1000).repeat(0).playOn(bestScoreText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+            //YoYo.with(Techniques.Landing).duration(1000).repeat(0).playOn(bestScoreText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+            //YoYo.with(Techniques.Pulse).duration(1000).repeat(0).playOn(bestScoreText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+            YoYo.with(Techniques.BounceIn).duration(1000).repeat(0).playOn(bestScoreText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+            //YoYo.with(Techniques.FadeIn).duration(1000).repeat(0).playOn(bestScoreText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+
+            bestScoreText.setTextColor(getResources().getColor(R.color.soundon));
+            bestScoreText.setTypeface(bestScoreText.getTypeface(),Typeface.BOLD); // todo messes up font
+            //Typeface tf = Typeface.createFromAsset(getAssets(),"res/font/undinaru.ttf");
+            //bestScoreText.setTypeface(tf);
+            //Typeface typeface = getResources().getFont(R.font.undinaru);
+           // bestScoreText.setTypeface(typeface);
+        }
+        if (currentGameStreak > bestStreak) {
+            bestStreak = currentGameStreak;
+            prefsEditor.putInt(/*CONSTANTS.CURRENTGAEMODE + */"bestStreak", currentGameStreak);
+            prefsEditor.apply();
+        }
+
+
+
+        bestScoreText.setText("BEST SCORE: " + bestScore);
+
+        bestStreakText.setText("BEST STREAK: " + bestStreak);
+
+
     }
 
     public void showGameOverScreen(int scoreToDisplay, int streakToDisplay) {
@@ -166,7 +204,13 @@ public class MainGameActivity extends Activity {
         //dialog.setCancelable(false); // todo add after done testign
 
 
+
+
         helper.dialogFullscreen(this, dialog);
+
+        // todo if new best score make best score a cool animation and set bestScore &/| bestStreak prefs to current gotten ones
+        TextView score = (TextView) alertView.findViewById(R.id.score_text);
+        //YoYo.with(Techniques.Bounce).duration(1000).repeat(3).playOn(score); // todo this works for text animation if bestScore/bestStreak >= score do animaton
 
         AdView pauseBannerAd;
         // todo banner ad
