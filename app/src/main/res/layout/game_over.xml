@@ -7,7 +7,7 @@ android:gravity="center"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:background="@drawable/dialog_shape">
-
+<!-- marging bottom - only for vertical linear layout -->
 <TextView
     android:text="GAME OVER"
     android:textColor="@color/soundoff"
@@ -16,8 +16,176 @@ android:background="@drawable/dialog_shape">
     android:textStyle="bold"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="30sp"
     android:adjustViewBounds="true"/>
 
+
+    <!--
+        <RelativeLayout
+
+            android:id="@+id/score_section"
+            android:padding="10dp"
+            android:layout_margin="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/score_text"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:fontFamily="@font/undinaru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SCORE: 0"
+                android:textSize="25sp"/>
+
+            <TextView
+                android:paddingRight="5sp"
+                android:paddingTop="5sp"
+                android:paddingBottom="5sp"
+                android:id="@+id/best_score_text"
+                android:layout_marginTop="5sp"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/undinaru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BEST SCORE: 0"
+                android:layout_below="@id/score_text"
+                android:textSize="25sp"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:id="@+id/streak_section"
+            android:layout_margin="10sp"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/streak_text"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:fontFamily="@font/undinaru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STREAK: 0"
+                android:textSize="25sp"/>
+            <TextView
+                android:paddingRight="5sp"
+                android:paddingTop="5sp"
+                android:paddingBottom="5sp"
+                android:id="@+id/best_streak_text"
+                android:layout_marginTop="5sp"
+                android:layout_below="@+id/streak_text"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/undinaru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BEST STREAK: 0"
+                android:textSize="25sp"/>
+
+        </RelativeLayout>
+
+
+
+    <TextView
+        android:id="@+id/share_text"
+        android:layout_margin="10sp"
+        android:paddingTop="20sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/undinaru"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SHARE"
+        android:textSize="25sp"/>
+        -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+
+            android:id="@+id/score_section"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/score_text"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:fontFamily="@font/undinaru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SCORE: 0"
+                android:textSize="25sp"/>
+
+            <TextView
+                android:paddingRight="5sp"
+                android:paddingTop="5sp"
+                android:paddingBottom="5sp"
+                android:id="@+id/best_score_text"
+                android:layout_marginTop="5sp"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/undinaru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BEST SCORE: 100"
+                android:layout_below="@id/score_text"
+                android:textSize="25sp"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:id="@+id/streak_section"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/streak_text"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"
+                android:fontFamily="@font/undinaru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STREAK: 0"
+                android:textSize="25sp"/>
+            <TextView
+                android:paddingRight="5sp"
+                android:paddingTop="5sp"
+                android:paddingBottom="5sp"
+                android:id="@+id/best_streak_text"
+                android:layout_marginTop="5sp"
+                android:layout_below="@+id/streak_text"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/undinaru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BEST STREAK: 10"
+                android:textSize="25sp"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/share_text"
+        android:layout_marginTop="30sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/undinaru"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SHARE"
+        android:textSize="25sp"/>
+
+
+    <!--
 <RelativeLayout
     android:paddingLeft="10sp"
     android:layout_width="wrap_content"
@@ -66,10 +234,7 @@ android:background="@drawable/dialog_shape">
         android:layout_height="0sp">
 
     </View>
-
-    <!-- shape colors -->
-    <!-- text and preview of currently selected -->
-    <!--android:layout_toRightOf="@+id/shape_type_section"-->
+    
     <RelativeLayout
 
         android:id="@+id/streak_section"
@@ -101,8 +266,6 @@ android:background="@drawable/dialog_shape">
 
     </RelativeLayout>
 
-    <!-- background -->
-    <!-- text and preview of currently selected -->
     <RelativeLayout
 
         android:id="@+id/background_section"
@@ -122,7 +285,7 @@ android:background="@drawable/dialog_shape">
             android:textSize="25sp"/>
     </RelativeLayout>
 </RelativeLayout>
-
+    -->
 
 
 <TextView
@@ -136,6 +299,7 @@ android:background="@drawable/dialog_shape">
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"/>
 
+
     <com.google.android.gms.ads.AdView
         android:layout_gravity="center"
         android:layout_centerHorizontal="true"
@@ -148,5 +312,6 @@ android:background="@drawable/dialog_shape">
         android:layout_below="@id/pauseSelections"
         ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
     </com.google.android.gms.ads.AdView>
+
 
 </LinearLayout>

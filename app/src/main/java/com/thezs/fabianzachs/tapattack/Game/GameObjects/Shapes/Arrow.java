@@ -9,9 +9,12 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
+import com.thezs.fabianzachs.tapattack.R;
 
 /**
  * Created by fabianzachs on 02/03/18.
@@ -31,6 +34,7 @@ public class Arrow extends ShapeObject {
         super(durationAlive, color, centerLocation, shapeImg, shapeImg, paint, bitmapHolder, mediator);
         setLives(1);
         setProgressBarAddition(15);
+        setGraveAble(false); // todo fix grave for arrow
 
         this.originalPoint = centerLocation;
         this.timeOfLastPenalty = 0;
@@ -105,6 +109,7 @@ public class Arrow extends ShapeObject {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+                StyleableToast.makeText(Constants.CURRENT_CONTEXT, "now", R.style.successtoast).show();
             }
             return true;
         }

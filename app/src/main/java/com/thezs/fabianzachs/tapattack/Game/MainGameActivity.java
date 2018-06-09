@@ -59,10 +59,12 @@ public class MainGameActivity extends Activity {
         // setContentView(new GamePanel(this));
 
         // todo just for testing
+        /*
         SharedPreferences prefs = getSharedPreferences("playerStats", MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = prefs.edit();
         prefsEditor.putInt("bestScore", 0);
         prefsEditor.apply();
+        */
 
     }
 
@@ -179,6 +181,9 @@ public class MainGameActivity extends Activity {
             bestStreak = currentGameStreak;
             prefsEditor.putInt(/*CONSTANTS.CURRENTGAEMODE + */"bestStreak", currentGameStreak);
             prefsEditor.apply();
+            YoYo.with(Techniques.BounceIn).duration(1000).repeat(0).playOn(bestScoreText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+            bestStreakText.setTextColor(getResources().getColor(R.color.soundon));
+            bestStreakText.setTypeface(bestScoreText.getTypeface(),Typeface.BOLD); // todo messes up font
         }
 
 
@@ -190,31 +195,39 @@ public class MainGameActivity extends Activity {
 
     }
 
-    public void showGameOverScreen(int scoreToDisplay, int streakToDisplay) {
-        //View alertView = this.getLayoutInflater().inflate(R.layout.game_over, null);
-        View alertView = helper.getAlertView(this, R.layout.game_over);
+    public void showGameOverScreen(final int scoreToDisplay, final int streakToDisplay) {
 
-        setupGameOverFields(alertView, scoreToDisplay, streakToDisplay);
+        final Activity activity = this;
+        this.runOnUiThread(new Runnable() {
+            public void run() {
+                //View alertView = this.getLayoutInflater().inflate(R.layout.game_over, null);
+                View alertView = helper.getAlertView(activity, R.layout.game_over);
 
-        final AlertDialog dialog = helper.getBuiltDialog(this, alertView);
-        //AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
-        //dbuilder.setView(alertView);
-        //final AlertDialog dialog = dbuilder.create();
+                setupGameOverFields(alertView, scoreToDisplay, streakToDisplay);
 
-        //dialog.setCancelable(false); // todo add after done testign
+                final AlertDialog dialog = helper.getBuiltDialog(activity, alertView);
+                //AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
+                //dbuilder.setView(alertView);
+                //final AlertDialog dialog = dbuilder.create();
+
+                //dialog.setCancelable(false); // todo add after done testign
 
 
 
 
-        helper.dialogFullscreen(this, dialog);
+                helper.dialogFullscreen(activity, dialog);
 
-        // todo if new best score make best score a cool animation and set bestScore &/| bestStreak prefs to current gotten ones
-        TextView score = (TextView) alertView.findViewById(R.id.score_text);
-        //YoYo.with(Techniques.Bounce).duration(1000).repeat(3).playOn(score); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+                //TextView score = (TextView) alertView.findViewById(R.id.score_text);
+                //YoYo.with(Techniques.Bounce).duration(1000).repeat(3).playOn(score);
 
-        AdView pauseBannerAd;
-        // todo banner ad
-        bannerAdSetup(alertView);
+                AdView pauseBannerAd;
+                // todo banner ad
+                bannerAdSetup(alertView);
+            }
+        });
+
+
+
     }
 
 
