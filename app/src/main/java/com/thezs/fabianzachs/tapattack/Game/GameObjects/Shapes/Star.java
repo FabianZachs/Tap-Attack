@@ -53,7 +53,7 @@ public class Star extends ShapeObject {
         //setProgressBarAddition(0);
         setGraveAble(false);
         setLives(1);
-        setPoints(30);
+        setPoints(10);
         setGraveAble(false);
         this.intColors = intColors;
         this.strColors = strColors;

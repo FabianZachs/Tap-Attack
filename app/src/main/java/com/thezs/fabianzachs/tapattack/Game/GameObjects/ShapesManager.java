@@ -88,6 +88,9 @@ public class ShapesManager {
                 shapes.remove(shape);
                 mediator.incScore(shape.getPoints(), shape.getColor());
                 mediator.incStreak(1, shape.getColor());
+                // todo optimize:
+                if (mediator.getStrWarningColor().equals(shape.getColor()))
+                    mediator.setGameOver();
                 //mediator.changeProgressBarBy(shape.getProgressBarAddition(), shape.getColor());
             }
 

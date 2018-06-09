@@ -210,7 +210,7 @@ public class MainGameActivity extends Activity {
                 //dbuilder.setView(alertView);
                 //final AlertDialog dialog = dbuilder.create();
 
-                //dialog.setCancelable(false); // todo add after done testign
+                dialog.setCancelable(false); // todo add after done testign
 
 
 

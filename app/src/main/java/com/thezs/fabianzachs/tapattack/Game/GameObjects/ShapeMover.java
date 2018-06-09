@@ -56,14 +56,15 @@ public class ShapeMover {
 
         if (!maxSpeedReached) {
             long currentGameTime = System.currentTimeMillis() - mediator.getGameStartTime();
-            double denominator = (900000/((.006*currentGameTime)+300));  // TODO check if good with function for producing warning colors
+            double denominator = (800000/((.006*currentGameTime)+300));  // TODO check if good with function for producing warning colors
             speed = Constants.SCREEN_HEIGHT/ denominator;
 
             maxSpeedReached = speed >= MAX_SPEED;
+            //return speed;
         } else
             speed = MAX_SPEED;
 
-        //Log.d("maxspeed", "getSpeed: " + speed);
+        Log.d("maxspeed", "getSpeed: " + speed);
         return speed;
 
 
