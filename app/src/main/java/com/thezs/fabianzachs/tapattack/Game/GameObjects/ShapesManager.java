@@ -102,7 +102,7 @@ public class ShapesManager {
                 //Log.d("resource proe", "update: shape left. " + shape.getBitmapHolder().top);
                 freeResources(shape.getPaintObj(), shape.getBitmapHolder());
                 shapes.remove(shape);
-                mediator.setGameOver();
+                //mediator.setGameOver();
                 //Log.d("debugpaint", "resources free");
             }
 

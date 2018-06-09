@@ -15,6 +15,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ShapeMover {
 
+    private float MAX_SPEED = 1.2f;
+    private boolean maxSpeedReached = false;
     private long startTime;
     private long initTime;
     private CentralGameCommunication mediator;
@@ -49,7 +51,24 @@ public class ShapeMover {
     }
 
     public double getSpeed(int elapsedTime) {
-        long currentGameTime = System.currentTimeMillis() - mediator.getGameStartTime();
+
+        double speed;
+
+        if (!maxSpeedReached) {
+            long currentGameTime = System.currentTimeMillis() - mediator.getGameStartTime();
+            double denominator = (900000/((.006*currentGameTime)+300));  // TODO check if good with function for producing warning colors
+            speed = Constants.SCREEN_HEIGHT/ denominator;
+
+            maxSpeedReached = speed >= MAX_SPEED;
+        } else
+            speed = MAX_SPEED;
+
+        //Log.d("maxspeed", "getSpeed: " + speed);
+        return speed;
+
+
+        //long currentGameTime = System.currentTimeMillis() - mediator.getGameStartTime();
+
         //Log.d("speed", "getSpeed: currenttime" + currentGameTime);
         //double denominator = (10000* (1/(Math.log(50000 * currentGameTime+ 100)))) + 5000;
 
@@ -57,7 +76,7 @@ public class ShapeMover {
         //double denominator = (1000000/((.003*currentGameTime)+300));
         //double denominator = (900000/((.003*currentGameTime)+300)); // good start speed, but steeper slope
         //double denominator = (990000/((.126*currentGameTime)+300));  // TODO check if good with function for producing warning colors
-        double denominator = (900000/((.006*currentGameTime)+300));  // TODO check if good with function for producing warning colors
-        return Constants.SCREEN_HEIGHT/ denominator;
+        //double denominator = (900000/((.006*currentGameTime)+300));  // TODO check if good with function for producing warning colors
+        //return Constants.SCREEN_HEIGHT/ denominator;
     }
 }

@@ -116,13 +116,13 @@ public class ShapesPopulator {
 
         // TODO use factory design pattern? so instead of .buildCross, pass "cross" in parameter
         //mShapes.add(shapeBuilder.buildArrow("blue", newShapeLocation));
-        //ShapeObject newShape = shapeBuilder.buildShape("arrow", getColor(), newShapeLocation,paint,bitmapHolder,mediator, getDirection()) ;
+        ShapeObject newShape = shapeBuilder.buildShape("arrow", getColor(), newShapeLocation,paint,bitmapHolder,mediator, getDirection()) ;
         //ShapeObject newShape = shapeBuilder.buildShape("circle", getColor() , newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //ShapeObject newShape = shapeBuilder.buildShape("cross", getColor() , newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //ShapeObject newShape = shapeBuilder.buildShape("square", getColor(), newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //ShapeObject newShape = shapeBuilder.buildShape("star", getColor(), newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //newShape.attachAllObservers(scoreObserver,streakObserver,progressBarObserver);
-        ShapeObject newShape = shapeBuilder.buildShape(getShape(), getColor(), newShapeLocation, paint, bitmapHolder, mediator, getDirection());
+        //ShapeObject newShape = shapeBuilder.buildShape(getShape(), getColor(), newShapeLocation, paint, bitmapHolder, mediator, getDirection());
         shapes.add(0, newShape);
         timeOfLastShapeAddition = System.currentTimeMillis();
 
@@ -230,15 +230,16 @@ public class ShapesPopulator {
     }
 
     public String getDirection() {
-        int i = rand.nextInt(3);
+        int i = rand.nextInt(2);
 
         switch (i) {
             case 0:
                 return "LEFT";
             case 1:
                 return "RIGHT";
-            case 2:
-                return "UP";
+
+            //case 2:
+              //  return "UP";
             //case 3:
                 //return "DOWN";
         }
