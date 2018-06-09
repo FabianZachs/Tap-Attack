@@ -10,6 +10,7 @@ import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Cross;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Star;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
@@ -97,7 +98,7 @@ public class ShapesManager {
                 mediator.resetStreak(); // TODO even for star????
             }
             // TODO this will end game
-            else if (shape.getBitmapHolder().top > Constants.SCREEN_HEIGHT) {
+            else if (shape.getBitmapHolder().top > Constants.SCREEN_HEIGHT && (shape.getClass() != Star.class && shape.getClass() != Cross.class)) {
                 //Log.d("resource proe", "update: shape left. " + shape.getBitmapHolder().top);
                 freeResources(shape.getPaintObj(), shape.getBitmapHolder());
                 shapes.remove(shape);
