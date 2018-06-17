@@ -64,7 +64,7 @@ public class ShapeMover {
         } else
             speed = MAX_SPEED;
 
-        Log.d("maxspeed", "getSpeed: " + speed);
+        //Log.d("maxspeed", "getSpeed: " + speed);
         return speed;
 
 

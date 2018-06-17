@@ -85,8 +85,10 @@ public class ShapesPopulator {
         //this.shapeColorPicker.getProbabilityOfWarningColor();
         //Log.d("returningcolor", "update: # shapese" + shapes.size());
 
-        if (shapes.size() >= 1 && shapes.get(0).getBitmapHolder().top - SHAPE_SPACING < 0)
+        if (shapes.size() >= 1 && shapes.get(0).getBitmapHolder().top - SHAPE_SPACING < 0) {
+            Log.d("shapepopulatorissue", "A");
             return shapes;
+        }
 
         Paint paint = sharedPaint.getUnUsedPaint();
         //Log.d("debug3", "update: paint:" + paint);
@@ -94,6 +96,7 @@ public class ShapesPopulator {
 
         if (paint == null) {
             //Log.d("resourcesmissing", "update: paint none");
+            Log.d("shapepopulatorissue", "B");
             //Log.d("debug3", "update: paint:null");
             return shapes;
         }
@@ -102,6 +105,7 @@ public class ShapesPopulator {
         //Log.d("debug3", "update: rect:" + bitmapHolder);
         if (bitmapHolder == null) {
             //Log.d("debug3", "update: rect:null");
+            Log.d("shapepopulatorissue", "C");
             sharedPaint.freePaint(paint);
             //Log.d("resourcesmissing", "update: rect none");
             return shapes;
@@ -110,8 +114,10 @@ public class ShapesPopulator {
         Point newShapeLocation = getValidNewShapeLocation(shapes);
 
         // no new location findable
-        if (newShapeLocation == null)
+        if (newShapeLocation == null) {
+            Log.d("shapepopulatorissue", "D");
             return shapes;
+        }
 
 
         // TODO use factory design pattern? so instead of .buildCross, pass "cross" in parameter
@@ -126,6 +132,7 @@ public class ShapesPopulator {
         shapes.add(0, newShape);
         timeOfLastShapeAddition = System.currentTimeMillis();
 
+        Log.d("shapepopulatorissue", "E");
         return shapes; // TODO remember we need the whole list of shapes to know what next shapes we should add
     }
 
