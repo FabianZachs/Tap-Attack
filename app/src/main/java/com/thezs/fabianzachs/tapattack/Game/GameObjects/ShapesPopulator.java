@@ -125,10 +125,10 @@ public class ShapesPopulator {
         //ShapeObject newShape = shapeBuilder.buildShape("arrow", getColor(), newShapeLocation,paint,bitmapHolder,mediator, getDirection()) ;
         //ShapeObject newShape = shapeBuilder.buildShape("circle", getColor() , newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //ShapeObject newShape = shapeBuilder.buildShape("cross", getColor() , newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
-        ShapeObject newShape = shapeBuilder.buildShape("square", getColor(), newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
+        //ShapeObject newShape = shapeBuilder.buildShape("square", getColor(), newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //ShapeObject newShape = shapeBuilder.buildShape("star", getColor(), newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //newShape.attachAllObservers(scoreObserver,streakObserver,progressBarObserver);
-        //ShapeObject newShape = shapeBuilder.buildShape(getShape(), getColor(), newShapeLocation, paint, bitmapHolder, mediator, getDirection());
+        ShapeObject newShape = shapeBuilder.buildShape(getShape(), getColor(), newShapeLocation, paint, bitmapHolder, mediator, getDirection());
         shapes.add(0, newShape);
         timeOfLastShapeAddition = System.currentTimeMillis();
 
