@@ -7,6 +7,7 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.graphics.drawable.LayerDrawable;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
+        import android.support.v4.content.ContextCompat;
         import android.util.Log;
         import android.view.Gravity;
         import android.view.View;
@@ -41,8 +42,8 @@ public class MainGameActivity extends Activity {
         super.onCreate(savedInstanceState);
         helper.makeFullscreen(this);
 
-
         setContentView(R.layout.activity_main_game);
+
 
         bootstrapViewSetup();
         Constants.GAME_ACTIVITY = this;
@@ -91,6 +92,7 @@ public class MainGameActivity extends Activity {
         progressBarHolderParameters.topMargin = 30;
         progressBarHolder.setLayoutParams(progressBarHolderParameters);
         */
+
 
 
         ImageView warningComponent = (ImageView) findViewById(R.id.warning_component);

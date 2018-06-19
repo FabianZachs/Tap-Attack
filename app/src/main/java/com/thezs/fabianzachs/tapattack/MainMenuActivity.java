@@ -13,6 +13,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -62,7 +64,13 @@ public class MainMenuActivity extends  GeneralParent {
         prefs = getSharedPreferences("playerPrefs", MODE_PRIVATE);
 
 
+
+
         setContentView(R.layout.activity_main_menu);
+        /* programmatically set background
+        LinearLayout layout = (LinearLayout) findViewById(R.id.parent_layout);
+        layout.setBackground(ContextCompat.getDrawable(this, R.drawable.backgroundtriangleblue));
+        */
 
         helper.bannerAdSetup(this, mAdView);
 

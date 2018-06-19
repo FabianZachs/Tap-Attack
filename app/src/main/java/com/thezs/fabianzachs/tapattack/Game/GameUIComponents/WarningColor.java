@@ -48,6 +48,8 @@ public class WarningColor {
     public static boolean running = true;
 
     private Paint[] warningColorButtonPaints;
+    private ArrayList<Integer> warningColorHistory;
+    private int warningColorHistoryPointer;
 
 
     public WarningColor(CentralGameCommunication mediator, String[] strColors, Integer[] intColors) {
@@ -60,6 +62,8 @@ public class WarningColor {
         setAndRandomizeArrays(strColors,intColors);
         setNextColor();
 
+        this.warningColorHistory = new ArrayList<>();
+        this.warningColorHistoryPointer = 0;
 
 
 
@@ -95,6 +99,11 @@ public class WarningColor {
         timer.start();
 
 
+    }
+
+    public void addToWarningColorHistory(Integer color) {
+        this.warningColorHistory.add(warningColorHistoryPointer, color);
+        warningColorHistoryPointer++;
     }
 
 
