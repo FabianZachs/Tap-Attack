@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.drawable.shapes.Shape;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -38,6 +39,7 @@ public class ShapesManager {
     private SharedPaint sharedPaint;
     private SharedRect sharedRect;
     private ShapeMover shapeMover;
+    private int EXTRA_PIXELS_CLICK_AREA = Constants.SCREEN_HEIGHT/35;
 
 
 
@@ -52,12 +54,28 @@ public class ShapesManager {
         mediator.addObject(shapeMover);
     }
 
+    private Rect shapeClickArea(ShapeObject shape) {
+        Rect shapeClickArea = new Rect(shape.getBitmapHolder());
+        shapeClickArea.left = shapeClickArea.left - EXTRA_PIXELS_CLICK_AREA;
+        shapeClickArea.right = shapeClickArea.right + EXTRA_PIXELS_CLICK_AREA;
+        shapeClickArea.top = shapeClickArea.top - EXTRA_PIXELS_CLICK_AREA;
+        shapeClickArea.bottom = shapeClickArea.bottom + EXTRA_PIXELS_CLICK_AREA;
+        Log.d("clickarea", "shapeClickArea: " + EXTRA_PIXELS_CLICK_AREA);
+
+        return shapeClickArea;
+    }
+
     public void recieveTouch(MotionEvent event) {
 
         boolean shapeInteractment = false;
 
         for (ShapeObject shape : shapes) {
+            /*
             if (shape.getBitmapHolder().contains((int) event.getX(), (int) event.getY())) {
+                shape.recieveTouch(event);
+                shapeInteractment = true;
+            }*/
+            if (shapeClickArea(shape).contains((int) event.getX(), (int) event.getY())) {
                 shape.recieveTouch(event);
                 shapeInteractment = true;
             }
