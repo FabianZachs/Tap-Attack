@@ -83,6 +83,10 @@ public abstract class ShapeObject {
         return (System.currentTimeMillis() - initTime > durationAlive * 1000);
     }
 
+    public boolean leftScreen() {
+        return getBitmapHolder().top > Constants.SCREEN_HEIGHT;
+    }
+
     public void incrementY(float amount) {
         bitmapHolder.top += amount;
         bitmapHolder.bottom += amount;

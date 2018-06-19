@@ -117,14 +117,21 @@ public class ShapesManager {
                 freeResources(shape.getPaintObj(), shape.getBitmapHolder());
                 mediator.resetStreak(); // TODO even for star????
             }
+
+
             // TODO this will end game
-            else if (shape.getBitmapHolder().top > Constants.SCREEN_HEIGHT && (shape.getClass() != Star.class && shape.getClass() != Cross.class)) {
-                //Log.d("resource proe", "update: shape left. " + shape.getBitmapHolder().top);
+            //else if (shape.getBitmapHolder().top > Constants.SCREEN_HEIGHT && (shape.getClass() != Star.class && shape.getClass() != Cross.class)) {
+            else if (shape.leftScreen() && !shapeIsStarOrCross(shape)) {
                 freeResources(shape.getPaintObj(), shape.getBitmapHolder());
                 shapes.remove(shape);
                 //mediator.setGameOver();
-                //Log.d("debugpaint", "resources free");
             }
+
+            else if (shape.leftScreen() && shapeIsStarOrCross(shape)) {
+                freeResources(shape.getPaintObj(), shape.getBitmapHolder());
+                shapes.remove(shape);
+            }
+
 
             else shape.update();
 
@@ -144,6 +151,9 @@ public class ShapesManager {
         shapes = shapesPopulator.update(shapes);
     }
 
+    private boolean shapeIsStarOrCross(ShapeObject shape) {
+        return shape.getClass() == Star.class || shape.getClass() == Cross.class;
+    }
 
     public void draw(Canvas canvas) {
 
