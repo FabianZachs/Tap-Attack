@@ -60,7 +60,6 @@ public class ShapesManager {
         shapeClickArea.right = shapeClickArea.right + EXTRA_PIXELS_CLICK_AREA;
         shapeClickArea.top = shapeClickArea.top - EXTRA_PIXELS_CLICK_AREA;
         shapeClickArea.bottom = shapeClickArea.bottom + EXTRA_PIXELS_CLICK_AREA;
-        Log.d("clickarea", "shapeClickArea: " + EXTRA_PIXELS_CLICK_AREA);
 
         return shapeClickArea;
     }

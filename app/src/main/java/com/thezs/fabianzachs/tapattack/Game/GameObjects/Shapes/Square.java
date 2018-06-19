@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.support.v4.view.GestureDetectorCompat;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
@@ -19,14 +20,15 @@ import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 public class Square extends ShapeObject {
 
     private long timeSetState;
+    private int TIME_FOR_SECOND_CLICK = 500; // used to be 350 for doubletap
 
     public Square(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
         super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder, mediator);
-        setLives(1);
+        setLives(2);
         setProgressBarAddition(15);
         setGraveAble(false);
 
-        timeSetState = 0;
+        //timeSetState = 0;
 
         setmDetector(new GestureDetectorCompat(Constants.CURRENT_CONTEXT, new MyGestureListener()));
 
@@ -41,8 +43,14 @@ public class Square extends ShapeObject {
 
     @Override
     public void update() {
-        if (System.currentTimeMillis() - timeSetState > 350/*ViewConfiguration.getTapTimeout()*/)
+        if (System.currentTimeMillis() - timeSetState > TIME_FOR_SECOND_CLICK/*ViewConfiguration.getTapTimeout()*/ && getState() != 0) {
+            increaseLives();
             setState(0);
+        }
+    }
+
+    private void increaseLives() {
+        setLives(getLives()+1);
     }
 
 
@@ -52,7 +60,8 @@ public class Square extends ShapeObject {
         public boolean onDown(MotionEvent event) {
             setState(1);
             timeSetState = System.currentTimeMillis();
-            setDurationAlive(getDurationAlive() + 0.25f);
+            reduceLives();
+            setDurationAlive(getDurationAlive() + 0.25f); // todo wont matter for waterfall type mode
             return true;
         }
 
@@ -66,7 +75,6 @@ public class Square extends ShapeObject {
 
         @Override
         public boolean onDoubleTap(MotionEvent event) {
-            reduceLives();
             return true;
         }
     }
