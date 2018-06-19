@@ -135,8 +135,8 @@ public class ShapesManager {
 
             else shape.update();
 
-            shapeMover.update(shapes);
         }
+        shapeMover.update(shapes);
 
 
         for (GraveObject graveObject : graveObjects) {
