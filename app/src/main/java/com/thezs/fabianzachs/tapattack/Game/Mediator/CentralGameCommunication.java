@@ -2,6 +2,8 @@ package com.thezs.fabianzachs.tapattack.Game.Mediator;
 
 import android.util.Log;
 
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
+import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapeColorPicker;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapeMover;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
@@ -11,6 +13,7 @@ import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.WarningColor;
 import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
+import com.thezs.fabianzachs.tapattack.R;
 
 /**
  * Created by fabianzachs on 08/03/18.
@@ -154,23 +157,29 @@ public class CentralGameCommunication {
 
     // todo should all this logic be in warningColor class since this logic pertains to it
     public void editWaningColorStreak(ShapeObject shape) {
+        warningColor.findCurrentStreak(shape); // todo maybe return the streak and handle the different rewards??
 
-        warningColor.checkForStreakReset(shape);
+        //warningColor.checkForStreakReset(shape);
 
+        /*
         if (shape.getColorInt().equals(warningColor.getPreviousIntWarningColor())) {
             warningColor.incStreak();
         }
         else{
-            warningColor.resetWarningColorHistoryAndPointer();
+            warningColor.resetColorHistory();
             warningColor.resetWarningStreak();
             //Log.d("warningstreak", "restr" );
         }
-
+*/
         Log.d("warningstreak", "editWaningColorStreak: streak" + warningColor.getStreak());
+        //StyleableToast.makeText(Constants.CURRENT_CONTEXT, warningColor.getStreak() + "", R.style.successtoast).show();
         //Log.d("warningstreak", "editWaningColorStreak: shape" + shape.getColorInt());
         //Log.d("warningstreak", "editWaningColorStreak: oldwarning" + warningColor.getPreviousIntWarningColor());
     }
 
+    public int getWarningColorStreak() {
+        return warningColor.getStreak();
+    }
 
     //public void addObject(ShapeObject shape) {
         // TODO no need to add the shapes as an attribute, nobody tells shapes anything.. we just want to send messages

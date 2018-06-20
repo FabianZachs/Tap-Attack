@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.Game.GameObjects;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.shapes.Shape;
@@ -166,6 +167,14 @@ public class ShapesManager {
 
         for (GraveObject graveObject : graveObjects)
             graveObject.draw(canvas);
+
+        /*
+        // todo testing for warning color streak
+        Paint paint = new Paint();
+        paint.setTextSize(40);
+        paint.setColor(Color.WHITE);
+        canvas.drawText(mediator.getWarningColorStreak() +"" , 200, 200,paint);
+        */
     }
 
     private void freeResources(Paint paintObj, Rect bitmapHolder) {

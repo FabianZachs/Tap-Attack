@@ -71,9 +71,7 @@ public class ShapeColorPicker {
 
         }
 
-        return warningColor; // todo for testing
 
-        /* // todo undo this block comment
         ArrayList<String> selectableColors = new ArrayList<>(colors);
 
         //Log.d("java.lang.indexoutofbounds", "colors size" + colors.size());
@@ -85,7 +83,6 @@ public class ShapeColorPicker {
         //Log.d("java.lang.null", "getColorForShape: normal color return: " + colorToReturn );
         return colorToReturn;
 
-*/
 
     }
 
