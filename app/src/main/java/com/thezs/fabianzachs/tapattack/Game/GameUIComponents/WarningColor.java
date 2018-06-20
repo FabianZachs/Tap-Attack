@@ -50,11 +50,13 @@ public class WarningColor {
     private Paint[] warningColorButtonPaints;
     private ArrayList<Integer> warningColorHistory;
     private int warningColorHistoryPointer;
+    private int warningColorStreak;
 
 
     public WarningColor(CentralGameCommunication mediator, String[] strColors, Integer[] intColors) {
         this.warningColorHistory = new ArrayList<>();
         this.warningColorHistoryPointer = 0;
+        this.warningColorStreak = 0;
         this.colorIndex = 0;
         this.warningDrawable = (GradientDrawable) Constants.warningComponent.getDrawable(1);
         this.mediator = mediator;
@@ -103,14 +105,29 @@ public class WarningColor {
     }
 
     public void addToWarningColorHistory(Integer color) {
+        warningColorHistoryPointer = warningColorHistory.size() == 0 ? 0 : warningColorHistoryPointer++;
         this.warningColorHistory.add(warningColorHistoryPointer, color);
-        warningColorHistoryPointer++;
-        Log.d("warningcolorhist", "addToWarningColorHistory: " + warningColorHistory);
+        Log.d("warningstreak", "addToWarningColorHistory: " + warningColorHistory);
+        Log.d("warningstreak", "pointer: " + warningColorHistoryPointer);
     }
 
     public void resetWarningColorHistoryAndPointer() {
         this.warningColorHistoryPointer = 0;
         this.warningColorHistory.clear();
+        this.warningColorStreak = 0;
+    }
+
+    public Integer getPreviousIntWarningColor() {
+        //Log.d("warningstreak", "pointer called: " + warningColorHistoryPointer);
+        return (warningColorHistoryPointer >= 1 ) ? warningColorHistory.get(warningColorHistoryPointer - 1) : null; // -2 since -1 gets current one since -0 is empty for now
+    }
+
+    public int getStreak() {
+        return this.warningColorStreak;
+    }
+
+    public void incStreak() {
+        warningColorStreak++;
     }
 
 
@@ -211,4 +228,5 @@ public class WarningColor {
         //leftPaint.setShader(new LinearGradient(0,0,0,Constants.WARNING_COLOR_CLICK_AREA_LEFT.bottom,Color.BLACK, Color.WHITE, Shader.TileMode.MIRROR));
         //canvas.drawRect(Constants.WARNING_COLOR_CLICK_AREA_LEFT,leftPaint);
     }
+
 }

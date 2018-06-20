@@ -1,5 +1,7 @@
 package com.thezs.fabianzachs.tapattack.Game.Mediator;
 
+import android.util.Log;
+
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapeColorPicker;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapeMover;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
@@ -151,7 +153,17 @@ public class CentralGameCommunication {
     }
 
     public void editWaningColorStreak(ShapeObject shape) {
-        //if (shape.getColorInt() )
+        if (shape.getColorInt().equals(warningColor.getPreviousIntWarningColor())) {
+            warningColor.incStreak();
+        }
+        else{
+            warningColor.resetWarningColorHistoryAndPointer();
+            //Log.d("warningstreak", "restr" );
+        }
+
+        Log.d("warningstreak", "editWaningColorStreak: strrak" + warningColor.getStreak());
+        //Log.d("warningstreak", "editWaningColorStreak: shape" + shape.getColorInt());
+        //Log.d("warningstreak", "editWaningColorStreak: oldwarning" + warningColor.getPreviousIntWarningColor());
     }
 
 
