@@ -22,6 +22,7 @@ import com.thezs.fabianzachs.tapattack.R;
 public class CentralGameCommunication {
 
     private long gameStartTime;
+    private int WARNINGCOLOR_SHAPE_DESTROY_POINTS = 5; //todo what class should this go into
 
     private ShapesManager shapesManager; // TODO  do we need this??
     private MainGameActivity mainGameActivity;
@@ -160,19 +161,32 @@ public class CentralGameCommunication {
             case 0:
                 return;
             case 1:
-                // todo reward 1
+                rewardOne();
                 return;
             case 2:
-                // todo reward 2
+                rewardTwo();
                 return;
             case 3:
-                // todo reward 1
+                rewardThree();
                 return;
         }
     }
 
+    private void rewardThree() {
+        shapesManager.turnShapesIntoStars();
+    }
+
+    private void rewardTwo() {
+        shapeMover.oppositeDirection();
+        // todo still need to impliment speed decrease
+    }
+
+    private void rewardOne() {
+        score.incScore(WARNINGCOLOR_SHAPE_DESTROY_POINTS);
+    }
+
     public void editWaningColorStreak(ShapeObject shape) {
-        int streak = warningColor.findCurrentStreak(shape); // todo maybe return the streak and handle the different rewards??
+        int streak = warningColor.findCurrentStreak(shape);
         executeReward(streak);
 
 

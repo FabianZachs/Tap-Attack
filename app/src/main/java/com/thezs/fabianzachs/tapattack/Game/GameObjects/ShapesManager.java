@@ -181,4 +181,10 @@ public class ShapesManager {
         sharedPaint.freePaint(paintObj);
         sharedRect.freeRect(bitmapHolder);
     }
+
+    public void turnShapesIntoStars() {
+        for (ShapeObject shape : shapes) {
+            //shapes.get(shapes.indexOf(shape)) = new Star ...
+        }
+    }
 }

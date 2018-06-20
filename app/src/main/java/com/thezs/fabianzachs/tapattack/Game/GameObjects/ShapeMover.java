@@ -9,6 +9,8 @@ import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import javax.xml.datatype.Duration;
+
 /**
  * Created by fabianzachs on 25/05/18.
  */
@@ -21,9 +23,12 @@ public class ShapeMover {
     private long initTime;
     private CentralGameCommunication mediator;
     private float RATE_OF_SPEED_INCREASE; // TODO use log(x+1) function
+    private int DURATION_OF_REVERSE = 800;
+    private int directionVector;
 
     public ShapeMover(CentralGameCommunication mediator) {
         //Log.d("speed", "previous speed: " + Constants.SCREEN_HEIGHT/5000.0f);
+        directionVector = 1;
         this.mediator = mediator;
         this.startTime = System.currentTimeMillis();
         this.initTime = System.currentTimeMillis();
@@ -39,11 +44,39 @@ public class ShapeMover {
 
         //Log.d("speed", "now speed: " + getSpeed(elapsedTime));
         for (ShapeObject shape : shapes) {
-            shape.incrementY((float) getSpeed(elapsedTime) * elapsedTime);
+            shape.incrementY(directionVector * (float) getSpeed(elapsedTime) * elapsedTime);
 
         }
 
 
+    }
+
+    public void oppositeDirection() {
+        this.directionVector = directionVector == 1 ? -1 : 1;
+        final long timeOfReverse = System.currentTimeMillis();
+        final long timeOfEndReverse = timeOfReverse + DURATION_OF_REVERSE;
+
+
+
+        Thread timer = new Thread() {
+            public void run() {
+                boolean running = true;
+                while (running) {
+                    try {
+                        if (timeOfEndReverse < System.currentTimeMillis() ) {
+                            running = false;
+                            directionVector = directionVector == 1 ? -1 : 1;
+                        }
+                        Thread.sleep(100);
+
+                    } catch (InterruptedException e) {
+                        Log.d("running", "run: error");
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        timer.start();
     }
 
     public void updateStartTime() {
