@@ -152,16 +152,21 @@ public class CentralGameCommunication {
         //shapeColorPicker.setWarningColor(warningColor.getCurrentStrColor());
     }
 
+    // todo should all this logic be in warningColor class since this logic pertains to it
     public void editWaningColorStreak(ShapeObject shape) {
+
+        warningColor.checkForStreakReset(shape);
+
         if (shape.getColorInt().equals(warningColor.getPreviousIntWarningColor())) {
             warningColor.incStreak();
         }
         else{
             warningColor.resetWarningColorHistoryAndPointer();
+            warningColor.resetWarningStreak();
             //Log.d("warningstreak", "restr" );
         }
 
-        Log.d("warningstreak", "editWaningColorStreak: strrak" + warningColor.getStreak());
+        Log.d("warningstreak", "editWaningColorStreak: streak" + warningColor.getStreak());
         //Log.d("warningstreak", "editWaningColorStreak: shape" + shape.getColorInt());
         //Log.d("warningstreak", "editWaningColorStreak: oldwarning" + warningColor.getPreviousIntWarningColor());
     }

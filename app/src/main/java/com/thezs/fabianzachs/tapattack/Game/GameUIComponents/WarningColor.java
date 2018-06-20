@@ -16,6 +16,7 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundHandler;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class WarningColor {
         this.warningColorButtonPaints = new Paint[] {leftPaint, rightPaint};
         setAndRandomizeArrays(strColors,intColors);
         setNextColor();
-        resetWarningColorHistoryAndPointer();
+        //resetWarningColorHistoryAndPointer();
 
 
 
@@ -105,25 +106,43 @@ public class WarningColor {
     }
 
     public void addToWarningColorHistory(Integer color) {
-        warningColorHistoryPointer = warningColorHistory.size() == 0 ? 0 : warningColorHistoryPointer++;
-        this.warningColorHistory.add(warningColorHistoryPointer, color);
+        //warningColorHistoryPointer = warningColorHistory.size() == 0 ? 0 : warningColorHistoryPointer++;
+        //this.warningColorHistory.add(warningColorHistoryPointer, color);
+        this.warningColorHistory.add(color);
         Log.d("warningstreak", "addToWarningColorHistory: " + warningColorHistory);
-        Log.d("warningstreak", "pointer: " + warningColorHistoryPointer);
+        //Log.d("warningstreak", "pointer: " + warningColorHistoryPointer);
     }
 
     public void resetWarningColorHistoryAndPointer() {
-        this.warningColorHistoryPointer = 0;
+        //this.warningColorHistoryPointer = 0;
+        Integer lastWarningColor = warningColorHistory.get(warningColorHistory.size() - 1);
         this.warningColorHistory.clear();
-        this.warningColorStreak = 0;
+        warningColorHistory.add(lastWarningColor);
+        //this.warningColorStreak = 0;
     }
 
     public Integer getPreviousIntWarningColor() {
         //Log.d("warningstreak", "pointer called: " + warningColorHistoryPointer);
-        return (warningColorHistoryPointer >= 1 ) ? warningColorHistory.get(warningColorHistoryPointer - 1) : null; // -2 since -1 gets current one since -0 is empty for now
+        //return (warningColorHistoryPointer >= 1 ) ? warningColorHistory.get(warningColorHistoryPointer - 1) : null; // -2 since -1 gets current one since -0 is empty for now
+        //return warningColorHistory.get(warningColorHistory.size() - 2);
+        Integer previousWarningColor = (warningColorHistory.size() >= 2) ? warningColorHistory.get(warningColorHistory.size() - 2) : null;
+        resetWarningColorHistoryAndPointer();
+        return previousWarningColor;
+    }
+
+    public void checkForStreakReset(ShapeObject shape) {
+        if (warningColorHistory.size() != 2) { // == 1 if no warningcolor was tapped since last reset(), >2 if more than once warning color was tapped
+            resetWarningStreak();
+            resetWarningColorHistoryAndPointer();
+        }
     }
 
     public int getStreak() {
         return this.warningColorStreak;
+    }
+
+    public void resetWarningStreak() {
+        this.warningColorStreak = 0;
     }
 
     public void incStreak() {
