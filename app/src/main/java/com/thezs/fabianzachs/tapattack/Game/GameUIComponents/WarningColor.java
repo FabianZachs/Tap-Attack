@@ -53,6 +53,8 @@ public class WarningColor {
 
 
     public WarningColor(CentralGameCommunication mediator, String[] strColors, Integer[] intColors) {
+        this.warningColorHistory = new ArrayList<>();
+        this.warningColorHistoryPointer = 0;
         this.colorIndex = 0;
         this.warningDrawable = (GradientDrawable) Constants.warningComponent.getDrawable(1);
         this.mediator = mediator;
@@ -61,9 +63,8 @@ public class WarningColor {
         this.warningColorButtonPaints = new Paint[] {leftPaint, rightPaint};
         setAndRandomizeArrays(strColors,intColors);
         setNextColor();
+        resetWarningColorHistoryAndPointer();
 
-        this.warningColorHistory = new ArrayList<>();
-        this.warningColorHistoryPointer = 0;
 
 
 
@@ -104,6 +105,12 @@ public class WarningColor {
     public void addToWarningColorHistory(Integer color) {
         this.warningColorHistory.add(warningColorHistoryPointer, color);
         warningColorHistoryPointer++;
+        Log.d("warningcolorhist", "addToWarningColorHistory: " + warningColorHistory);
+    }
+
+    public void resetWarningColorHistoryAndPointer() {
+        this.warningColorHistoryPointer = 0;
+        this.warningColorHistory.clear();
     }
 
 
@@ -121,6 +128,7 @@ public class WarningColor {
         colorIndex = colorIndex >= intColors.length ? 0 : colorIndex;
         warningDrawable.setColor(intColors[colorIndex]);
         updateAllWarningColorObservers(strColors[colorIndex]);
+        addToWarningColorHistory(intColors[colorIndex]);
     }
 
     public void setPreviousColor() {
@@ -128,6 +136,7 @@ public class WarningColor {
         colorIndex = colorIndex < 0 ? intColors.length - 1 : colorIndex;
         warningDrawable.setColor(intColors[colorIndex]);
         updateAllWarningColorObservers(strColors[colorIndex]);
+        addToWarningColorHistory(intColors[colorIndex]);
     }
 
     private void updateAllWarningColorObservers(String strColor) {
