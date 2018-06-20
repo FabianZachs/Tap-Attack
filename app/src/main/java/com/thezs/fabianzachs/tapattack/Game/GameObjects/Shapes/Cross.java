@@ -19,8 +19,8 @@ import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 public class Cross extends ShapeObject {
 
     // TODO make cross flash (like in piano game) when clicked
-    public Cross(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
-        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder, mediator);
+    public Cross(float durationAlive, String color, Integer colorInt, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
+        super(durationAlive, color, colorInt, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder, mediator);
         setLives(1);
         //setProgressBarAddition(-100);
         // todo set back to gravable?? currently there is an error in grave

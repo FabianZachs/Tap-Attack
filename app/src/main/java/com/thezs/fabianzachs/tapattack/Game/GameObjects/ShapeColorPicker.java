@@ -20,7 +20,7 @@ public class ShapeColorPicker {
     private boolean maxProbabilityReached = false;
     private String warningColor;
     //private String[] colors;
-    private ArrayList<String> colors;
+    private ArrayList<String> colors; // todo change to integer colors
     private Random randGenerator;
     private long initTime;
 

@@ -16,6 +16,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
+import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
@@ -44,6 +45,7 @@ public abstract class ShapeObject {
     private Paint alphaPaint;
     private long initTime;
     private String color;
+    private int colorInt;
     private int points;
     private int lives;
 
@@ -53,7 +55,11 @@ public abstract class ShapeObject {
     private GestureDetectorCompat mDetector;
 
 
-    public ShapeObject(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect rect, CentralGameCommunication mediator) {
+    public ShapeObject(float durationAlive, String color, Integer colorInt, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect rect, CentralGameCommunication mediator) {
+
+
+        this.colorInt = colorInt;
+
         this.mediator = mediator;
 
         this.centerLocation = centerLocation;
@@ -78,6 +84,9 @@ public abstract class ShapeObject {
         canvas.drawBitmap(getCurrentShapeImg(), null, getBitmapHolder(),getAlphaPaint());
     }
 
+    public Integer getColorInt() {
+        return this.colorInt;
+    }
 
     public boolean isTimedOut() {
         return (System.currentTimeMillis() - initTime > durationAlive * 1000);

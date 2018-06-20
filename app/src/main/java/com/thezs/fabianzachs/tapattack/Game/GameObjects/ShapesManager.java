@@ -105,6 +105,10 @@ public class ShapesManager {
                 shapes.remove(shape);
                 mediator.incScore(shape.getPoints(), shape.getColor());
                 mediator.incStreak(1, shape.getColor());
+
+                mediator.editWaningColorStreak(shape);
+
+
                 // todo optimize:
                 if (mediator.getStrWarningColor().equals(shape.getColor()))
                     mediator.setGameOver();

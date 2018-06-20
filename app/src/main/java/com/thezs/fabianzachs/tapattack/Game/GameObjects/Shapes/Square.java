@@ -22,8 +22,8 @@ public class Square extends ShapeObject {
     private long timeSetState;
     private int TIME_FOR_SECOND_CLICK = 500; // used to be 350 for doubletap
 
-    public Square(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
-        super(durationAlive, color, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder, mediator);
+    public Square(float durationAlive, String color, Integer colorInt, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
+        super(durationAlive, color, colorInt, centerLocation, shapeImg, shapeClickImg, paint, bitmapHolder, mediator);
         setLives(2);
         setProgressBarAddition(15);
         setGraveAble(false);

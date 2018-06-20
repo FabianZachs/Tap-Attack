@@ -30,8 +30,8 @@ public class Arrow extends ShapeObject {
 
 
 
-    public Arrow(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, String intendendedFlickDirection, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
-        super(durationAlive, color, centerLocation, shapeImg, shapeImg, paint, bitmapHolder, mediator);
+    public Arrow(float durationAlive, String color, Integer colorInt, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, String intendendedFlickDirection, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator) {
+        super(durationAlive, color, colorInt, centerLocation, shapeImg, shapeImg, paint, bitmapHolder, mediator);
         setLives(1);
         setProgressBarAddition(15);
         setGraveAble(false); // todo fix grave for arrow

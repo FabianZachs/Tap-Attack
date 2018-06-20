@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.Game.Mediator;
 
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapeColorPicker;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapeMover;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
 import com.thezs.fabianzachs.tapattack.Game.GamePanel;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
@@ -144,10 +145,13 @@ public class CentralGameCommunication {
         this.warningColor.shake();
     }
 
-    //todo this call breaks things
     public void warningColorChanged(String strColor) {
         shapeColorPicker.setWarningColor(strColor);
         //shapeColorPicker.setWarningColor(warningColor.getCurrentStrColor());
+    }
+
+    public void editWaningColorStreak(ShapeObject shape) {
+        //if (shape.getColorInt() )
     }
 
 

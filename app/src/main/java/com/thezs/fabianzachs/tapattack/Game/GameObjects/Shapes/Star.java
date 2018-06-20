@@ -48,8 +48,8 @@ public class Star extends ShapeObject {
 
     private int colorIndex = 0; // TODO start at random index and if warning colow matches color of star -- reduce progress
 
-    public Star(float durationAlive, String color, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, ArrayList<Integer> intColors, ArrayList<String> strColors,CentralGameCommunication mediator) {
-        super(durationAlive, color, centerLocation, shapeImg, shapeImg, paint, bitmapHolder, mediator);
+    public Star(float durationAlive, String color, Integer colorInt, Point centerLocation, Bitmap shapeImg, Bitmap shapeClickImg, Paint paint, Rect bitmapHolder, ArrayList<Integer> intColors, ArrayList<String> strColors,CentralGameCommunication mediator) {
+        super(durationAlive, color, colorInt, centerLocation, shapeImg, shapeImg, paint, bitmapHolder, mediator);
         //setProgressBarAddition(0);
         setGraveAble(false);
         setLives(1);
