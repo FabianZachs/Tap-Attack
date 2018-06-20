@@ -106,7 +106,7 @@ public class WarningColor {
         //Log.d("warningstreak", "pointer: " + warningColorHistoryPointer);
     }
 
-    public void findCurrentStreak(ShapeObject shape) {
+    public int findCurrentStreak(ShapeObject shape) {
         if ((warningColorHistory.size() != 2) || !shape.getColorInt().equals(getPreviousIntWarningColor())) { // == 1 if no warningcolor was tapped since last reset(), >2 if more than once warning color was tapped
             resetWarningStreak();
             resetColorHistory();
@@ -115,6 +115,7 @@ public class WarningColor {
             resetColorHistory();
             incStreak();
         }
+        return warningColorStreak;
     }
 
     public void resetColorHistory() {

@@ -155,9 +155,28 @@ public class CentralGameCommunication {
         //shapeColorPicker.setWarningColor(warningColor.getCurrentStrColor());
     }
 
-    // todo should all this logic be in warningColor class since this logic pertains to it
+    public void executeReward(int streak) {
+        switch (streak) {
+            case 0:
+                return;
+            case 1:
+                // todo reward 1
+                return;
+            case 2:
+                // todo reward 2
+                return;
+            case 3:
+                // todo reward 1
+                return;
+        }
+    }
+
     public void editWaningColorStreak(ShapeObject shape) {
-        warningColor.findCurrentStreak(shape); // todo maybe return the streak and handle the different rewards??
+        int streak = warningColor.findCurrentStreak(shape); // todo maybe return the streak and handle the different rewards??
+        executeReward(streak);
+
+
+        return;
 
         //warningColor.checkForStreakReset(shape);
 
@@ -171,7 +190,7 @@ public class CentralGameCommunication {
             //Log.d("warningstreak", "restr" );
         }
 */
-        Log.d("warningstreak", "editWaningColorStreak: streak" + warningColor.getStreak());
+        //Log.d("warningstreak", "editWaningColorStreak: streak" + warningColor.getStreak());
         //StyleableToast.makeText(Constants.CURRENT_CONTEXT, warningColor.getStreak() + "", R.style.successtoast).show();
         //Log.d("warningstreak", "editWaningColorStreak: shape" + shape.getColorInt());
         //Log.d("warningstreak", "editWaningColorStreak: oldwarning" + warningColor.getPreviousIntWarningColor());
