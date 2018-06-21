@@ -252,7 +252,10 @@ public class ShapesPopulator {
         }
 
         throw new RuntimeException("getDirection failed");
+    }
 
+    public ShapeObject getShape(String shape, String color, Point centerLocation, Paint paint, Rect bitmapHolder, CentralGameCommunication mediator ,String direction) {
+        return shapeBuilder.buildShape(shape, color, centerLocation, paint, bitmapHolder, mediator, direction);
 
     }
 }

@@ -168,6 +168,7 @@ public class ShapesManager {
         for (GraveObject graveObject : graveObjects)
             graveObject.draw(canvas);
 
+
         /*
         // todo testing for warning color streak
         Paint paint = new Paint();
@@ -175,6 +176,7 @@ public class ShapesManager {
         paint.setColor(Color.WHITE);
         canvas.drawText(mediator.getWarningColorStreak() +"" , 200, 200,paint);
         */
+
     }
 
     private void freeResources(Paint paintObj, Rect bitmapHolder) {
@@ -183,8 +185,9 @@ public class ShapesManager {
     }
 
     public void turnShapesIntoStars() {
-        for (ShapeObject shape : shapes) {
-            //shapes.get(shapes.indexOf(shape)) = new Star ...
+        for (int shapeIndex = 0; shapeIndex < shapes.size(); shapeIndex++) {
+            shapes.set(shapeIndex,shapesPopulator.getShape("star", shapes.get(shapeIndex).getColor(), shapes.get(shapeIndex).getCenterLocation(), shapes.get(shapeIndex).getPaintObj(),
+                    shapes.get(shapeIndex).getBitmapHolder(), mediator, "UP"));
         }
     }
 }
