@@ -84,8 +84,8 @@ public class ShapeMover {
 
     public void decreaseSpeed() {
         //this.numeratorOfDenominator += 300000;
-        this.timeShift += 400000; // 10 seconds back
-        Log.d("timeshift", "decreaseSpeed: " + timeShift);
+        this.timeShift += 15000; // this amount of seconds back in time
+        //Log.d("speeddebug", "decreaseSpeed  efwfgwigwgwrgwgwrgwgwgwgwrg:                               " + timeShift);
     }
 
     public void updateStartTime() {
@@ -98,7 +98,10 @@ public class ShapeMover {
 
         if (!maxSpeedReached) {
             long currentGameTime = System.currentTimeMillis() - mediator.getGameStartTime();
-            double denominator = (800000/((.006*(currentGameTime+timeShift))+300));  // TODO check if good with function for producing warning colors
+            //Log.d("speeddebug", "getSpeed: time " + currentGameTime);
+            double denominator = (800000/((.006*(currentGameTime-timeShift))+300));  // TODO check if good with function for producing warning colors
+            //Log.d("speeddebug", "getSpeed: den " + denominator);
+            //Log.d("speeddebug", "\n");
             speed = Constants.SCREEN_HEIGHT/ denominator;
 
             maxSpeedReached = speed >= MAX_SPEED;
