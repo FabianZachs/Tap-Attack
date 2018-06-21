@@ -71,8 +71,8 @@ public class ShapeColorPicker {
 
         }
 
-        //return warningColor; // for testing
-        ///*
+        return warningColor; // for testing
+        /*
 
         ArrayList<String> selectableColors = new ArrayList<>(colors);
 
@@ -84,7 +84,7 @@ public class ShapeColorPicker {
         String colorToReturn =selectableColors.get(randGenerator.nextInt(NUMBER_OF_COLORS-1));
         //Log.d("java.lang.null", "getColorForShape: normal color return: " + colorToReturn );
         return colorToReturn;
-        //*/
+        */
 
 
     }

@@ -25,6 +25,8 @@ public class ShapeMover {
     private float RATE_OF_SPEED_INCREASE; // TODO use log(x+1) function
     private int DURATION_OF_REVERSE = 800;
     private int directionVector;
+    private int numeratorOfDenominator = 800000;
+    private int timeShift = 0;
 
     public ShapeMover(CentralGameCommunication mediator) {
         //Log.d("speed", "previous speed: " + Constants.SCREEN_HEIGHT/5000.0f);
@@ -66,6 +68,7 @@ public class ShapeMover {
                         if (timeOfEndReverse < System.currentTimeMillis() ) {
                             running = false;
                             directionVector = directionVector == 1 ? -1 : 1;
+                            decreaseSpeed();
                         }
                         Thread.sleep(100);
 
@@ -79,6 +82,12 @@ public class ShapeMover {
         timer.start();
     }
 
+    public void decreaseSpeed() {
+        //this.numeratorOfDenominator += 300000;
+        this.timeShift += 400000; // 10 seconds back
+        Log.d("timeshift", "decreaseSpeed: " + timeShift);
+    }
+
     public void updateStartTime() {
         this.startTime = System.currentTimeMillis();
     }
@@ -89,7 +98,7 @@ public class ShapeMover {
 
         if (!maxSpeedReached) {
             long currentGameTime = System.currentTimeMillis() - mediator.getGameStartTime();
-            double denominator = (800000/((.006*currentGameTime)+300));  // TODO check if good with function for producing warning colors
+            double denominator = (800000/((.006*(currentGameTime+timeShift))+300));  // TODO check if good with function for producing warning colors
             speed = Constants.SCREEN_HEIGHT/ denominator;
 
             maxSpeedReached = speed >= MAX_SPEED;
