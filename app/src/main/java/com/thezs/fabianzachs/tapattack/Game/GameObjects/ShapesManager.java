@@ -184,6 +184,7 @@ public class ShapesManager {
         sharedRect.freeRect(bitmapHolder);
     }
 
+    // todo later check to ensure this removes the old shape (garbage collected) and paint/rect is reused -- but logically should be fine
     public void turnShapesIntoStars() {
         for (int shapeIndex = 0; shapeIndex < shapes.size(); shapeIndex++) {
             shapes.set(shapeIndex,shapesPopulator.getShape("star", shapes.get(shapeIndex).getColor(), shapes.get(shapeIndex).getCenterLocation(), shapes.get(shapeIndex).getPaintObj(),
