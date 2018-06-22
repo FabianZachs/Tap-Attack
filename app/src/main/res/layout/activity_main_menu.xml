@@ -38,6 +38,13 @@
             android:onClick="playButtonClick"
             android:soundEffectsEnabled="false"
             android:src="@drawable/startbluebluered" />
+        <ImageView
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_marginLeft="10sp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/changegamemodebutton"
+            android:layout_toRightOf="@+id/play_button"/>
 
         <TextView
             android:id="@+id/gamemode_title"
@@ -52,6 +59,17 @@
             android:textColor="#b0faff"
             android:textSize="30sp" />
 
+        <!--
+        <ImageView
+            android:layout_width="15sp"
+            android:layout_height="15sp"
+            android:layout_marginLeft="10sp"
+            android:layout_alignBottom="@+id/gamemode_title"
+            android:layout_centerVertical="true"
+            android:layout_below="@id/play_button"
+            android:src="@drawable/changeGameModeButton"
+            android:layout_toRightOf="@+id/gamemode_title"/>
+-->
         <TextView
             android:id="@+id/store_text"
             android:layout_width="wrap_content"
