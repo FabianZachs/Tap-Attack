@@ -43,9 +43,9 @@ public class CentralGameCommunication {
 
     }
 
-    public void setGameOver() {
+    public void setGameOver(String gameOverReason) {
         gamePanel.endRunningThread();
-        mainGameActivity.showGameOverScreen(score.getScore(), streak.getCurrentGameHighestStreak());
+        mainGameActivity.showGameOverScreen(gameOverReason, score.getScore(), streak.getCurrentGameHighestStreak());
         // todo get score and streak into prefs if highscore (do elsewhere, like when we create dialog, so pass in game score and game highest streak acheived)
     }
 

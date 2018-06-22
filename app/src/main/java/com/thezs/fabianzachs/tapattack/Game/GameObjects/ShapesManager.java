@@ -13,6 +13,7 @@ import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Cross;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Star;
+import com.thezs.fabianzachs.tapattack.Game.GameOverReasons;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
@@ -86,7 +87,7 @@ public class ShapesManager {
             //mediator.changeProgressBarBy(-40);
             mediator.warningComponentShake();
             mediator.resetStreak();
-            mediator.setGameOver(); //todo for setting up gameOver we have that background touch triggers gameover
+            mediator.setGameOver(GameOverReasons.backgroundTap()); //todo for setting up gameOver we have that background touch triggers gameover
         }
     }
 
@@ -112,7 +113,7 @@ public class ShapesManager {
 
                 // todo optimize:
                 if (mediator.getStrWarningColor().equals(shape.getColor()))
-                    mediator.setGameOver();
+                    mediator.setGameOver(GameOverReasons.warningColorTap(shape));
                 //mediator.changeProgressBarBy(shape.getProgressBarAddition(), shape.getColor());
             }
 

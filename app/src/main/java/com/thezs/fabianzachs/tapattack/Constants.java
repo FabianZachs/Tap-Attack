@@ -69,4 +69,6 @@ public class Constants {
     public static ImageView warningComponentImg;
     public static Drawable /*LayerDrawable*/ warningComponentButtonRight;
     public static Drawable/*LayerDrawable*/ warningComponentButtonLeft;
+
+
 }

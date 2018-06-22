@@ -145,7 +145,11 @@ public class MainGameActivity extends Activity {
         //Constants.SHAPE_CLICK_AREA = new Rect(Constants.SCREEN_WIDTH/20, 30 + (Constants.SCREEN_HEIGHT/40 +25) + 20 + Constants.SCREEN_WIDTH/15 + 10 + Constants.SHAPE_HEIGHT/2, Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT - 1);
     }
 
-    public void setupGameOverFields(View alertView, int currentGameScore, int currentGameStreak) {
+    public void setupGameOverFields(View alertView, String gameOverReason, int currentGameScore, int currentGameStreak) {
+
+        TextView gameOverText = (TextView) alertView.findViewById(R.id.game_over_text);
+        gameOverText.setText(gameOverReason);
+
         TextView streakText = (TextView) alertView.findViewById(R.id.streak_text);
         streakText.setText("STREAK: " + currentGameStreak);
 
@@ -197,7 +201,7 @@ public class MainGameActivity extends Activity {
 
     }
 
-    public void showGameOverScreen(final int scoreToDisplay, final int streakToDisplay) {
+    public void showGameOverScreen(final String gameOverReason, final int scoreToDisplay, final int streakToDisplay) {
 
         final Activity activity = this;
         this.runOnUiThread(new Runnable() {
@@ -205,7 +209,7 @@ public class MainGameActivity extends Activity {
                 //View alertView = this.getLayoutInflater().inflate(R.layout.game_over, null);
                 View alertView = helper.getAlertView(activity, R.layout.game_over);
 
-                setupGameOverFields(alertView, scoreToDisplay, streakToDisplay);
+                setupGameOverFields(alertView, gameOverReason, scoreToDisplay, streakToDisplay);
 
                 final AlertDialog dialog = helper.getBuiltDialog(activity, alertView);
                 //AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
