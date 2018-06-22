@@ -109,7 +109,7 @@ public class Arrow extends ShapeObject {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                StyleableToast.makeText(Constants.CURRENT_CONTEXT, "now", R.style.successtoast).show();
+                StyleableToast.makeText(Constants.CURRENT_CONTEXT, "flickerror", R.style.successtoast).show();
             }
             return true;
         }

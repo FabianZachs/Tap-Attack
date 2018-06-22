@@ -45,6 +45,7 @@ public class WarningColor {
     private ArrayList<Integer> warningColorHistory;
     private int warningColorHistoryPointer;
     private int warningColorStreak;
+    private Paint textPaint;
 
 
     public WarningColor(CentralGameCommunication mediator, String[] strColors, Integer[] intColors) {
@@ -59,7 +60,12 @@ public class WarningColor {
         this.warningColorButtonPaints = new Paint[] {leftPaint, rightPaint};
         setAndRandomizeArrays(strColors,intColors);
         setNextColor();
-        //resetColorHistory();
+        //resetColorHistory(); // todo do we uncomment this??
+
+
+        this.textPaint = new Paint();
+        textPaint.setTextAlign(Paint.Align.CENTER);
+        textPaint.setTextSize(30);
 
 
 
@@ -238,6 +244,7 @@ public class WarningColor {
     }
 
     public void draw(Canvas canvas) {
+        /*
         //warningColorButtonPaints[0].setColor(getPreviousIntColor());
         //warningColorButtonPaints[1].setColor(getNextIntColor());
         //canvas.drawRect(Constants.WARNING_COLOR_CLICK_AREA_LEFT, warningColorButtonPaints[0]);
@@ -245,6 +252,11 @@ public class WarningColor {
         //Paint leftPaint = new Paint();
         //leftPaint.setShader(new LinearGradient(0,0,0,Constants.WARNING_COLOR_CLICK_AREA_LEFT.bottom,Color.BLACK, Color.WHITE, Shader.TileMode.MIRROR));
         //canvas.drawRect(Constants.WARNING_COLOR_CLICK_AREA_LEFT,leftPaint);
+        */
+
+        // todo now sure if/ how this should be displayed
+        // todo if streak >= 1 then display streak (WARNING COLOR STREAK: 1 +x points) ( : 2 speed reduced) ( : 3 stars)
+        //canvas.drawText("WARNING COLOR STREAK: 1 +x points", 0, 100, textPaint);
     }
 
 }
