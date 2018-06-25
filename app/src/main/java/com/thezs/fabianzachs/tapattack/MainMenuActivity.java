@@ -7,9 +7,16 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.shapes.Shape;
 import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -50,6 +57,42 @@ public class MainMenuActivity extends  GeneralParent {
     private Store store;
 
 
+
+    public void multiShapesMessaroundDELETE() {
+
+        /*
+        ImageView item = (ImageView) findViewById(R.id.play_button);
+        LayerDrawable layers = (LayerDrawable) item.getDrawable();
+        Drawable shape1 = layers.getDrawable(0);
+        Log.d("bounds", "multiShapesMessaroundDELETE: " + shape1.getBounds());
+        shape1.setBounds(0,0,160,5000);
+        Log.d("bounds", "multiShapesMessaroundDELETE: " + shape1.getBounds());
+        ColorFilter filter = new PorterDuffColorFilter(0xff74AC23, PorterDuff.Mode.SRC_IN);
+        shape1.setColorFilter(filter);
+        */
+        ImageView img = (ImageView) findViewById(R.id.play_button);
+        Bitmap myBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.neonthemetemplate);
+        myBitmap= myBitmap.copy(Bitmap.Config.ARGB_8888, true);
+
+        int [] allpixels = new int [ myBitmap.getHeight()*myBitmap.getWidth()];
+
+        myBitmap.getPixels(allpixels, 0, myBitmap.getWidth(), 0, 0,myBitmap.getWidth(),myBitmap.getHeight());
+
+        for(int i =0; i<myBitmap.getHeight()*myBitmap.getWidth();i++){
+
+            if( allpixels[i] == 0xff00ffff/*|| allpixels[i] == Color.BLUE || allpixels[i] == Color.GREEN*/)
+                allpixels[i] = Color.BLACK;
+        }
+
+        myBitmap.setPixels(allpixels, 0, myBitmap.getWidth(), 0, 0, myBitmap.getWidth(), myBitmap.getHeight());
+        img.setImageBitmap(myBitmap);
+
+
+
+
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +110,7 @@ public class MainMenuActivity extends  GeneralParent {
 
 
         setContentView(R.layout.activity_main_menu);
+        multiShapesMessaroundDELETE(); //todo erase
         /* programmatically set background
         LinearLayout layout = (LinearLayout) findViewById(R.id.parent_layout);
         layout.setBackground(ContextCompat.getDrawable(this, R.drawable.backgroundtriangleblue));
