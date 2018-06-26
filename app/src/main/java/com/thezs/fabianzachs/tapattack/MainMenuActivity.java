@@ -58,6 +58,7 @@ public class MainMenuActivity extends  GeneralParent {
 
 
 
+    // todo basic code for altering specific pixels of bitmap
     public void multiShapesMessaroundDELETE() {
 
         /*
@@ -70,6 +71,8 @@ public class MainMenuActivity extends  GeneralParent {
         ColorFilter filter = new PorterDuffColorFilter(0xff74AC23, PorterDuff.Mode.SRC_IN);
         shape1.setColorFilter(filter);
         */
+
+        // EDIT BITMAP
         ImageView img = (ImageView) findViewById(R.id.play_button);
         Bitmap myBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.neonthemetemplate);
         myBitmap= myBitmap.copy(Bitmap.Config.ARGB_8888, true);
@@ -86,6 +89,12 @@ public class MainMenuActivity extends  GeneralParent {
 
         myBitmap.setPixels(allpixels, 0, myBitmap.getWidth(), 0, 0, myBitmap.getWidth(), myBitmap.getHeight());
         img.setImageBitmap(myBitmap);
+
+
+
+        // SAVE IMG TO USER to internal storate -- only app can access this
+        Log.d("filecrap", "multiShapesMessaroundDELETE: " + getFilesDir() );
+
 
 
 
@@ -110,7 +119,7 @@ public class MainMenuActivity extends  GeneralParent {
 
 
         setContentView(R.layout.activity_main_menu);
-        multiShapesMessaroundDELETE(); //todo erase
+        //multiShapesMessaroundDELETE(); //todo erase
         /* programmatically set background
         LinearLayout layout = (LinearLayout) findViewById(R.id.parent_layout);
         layout.setBackground(ContextCompat.getDrawable(this, R.drawable.backgroundtriangleblue));
