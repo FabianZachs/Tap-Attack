@@ -204,7 +204,7 @@ public class MainMenuActivity extends  GeneralParent {
         // inflate the dialog layout
         View alertView = getLayoutInflater().inflate(R.layout.dialog_settings, null);
 
-        soundTogglerSetup(alertView);
+        //soundTogglerSetup(alertView);
 
         // create a builder for the alert
         AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
@@ -248,6 +248,7 @@ public class MainMenuActivity extends  GeneralParent {
     }
 
 
+    /*
     private void soundTogglerSetup(View alertView) {
         // sound toggler view
         final TextView soundText = (TextView) alertView.findViewById(R.id.sound_setting);
@@ -272,6 +273,7 @@ public class MainMenuActivity extends  GeneralParent {
             }
         });
     }
+    */
 
 
     // plays music
