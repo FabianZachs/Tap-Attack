@@ -4,9 +4,13 @@ import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.FlatTheme;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.FourthOfJulyTheme;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.GirlyTheme;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.GoogleTheme;
+import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.MutedTheme;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.NeonTheme;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.OldFashionTheme;
+import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.PrimaryTheme;
+import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.RageTheme;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.RussiaWCTheme;
+import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.SummerTheme;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.SimpleThemes.VibrantTheme;
 
 /**
@@ -48,6 +52,14 @@ public class ThemesManager {
                 return new GoogleTheme(shapeType);
             case "russia wc":
                 return new RussiaWCTheme(shapeType);
+            case "muted":
+                return new MutedTheme(shapeType);
+            case "primary":
+                return new PrimaryTheme(shapeType);
+            case "summer":
+                return new SummerTheme(shapeType);
+            case "rage":
+                return new RageTheme(shapeType);
         }
         return null;
     }
@@ -71,6 +83,14 @@ public class ThemesManager {
                 return GoogleTheme.strColors;
             case "russia wc":
                 return RussiaWCTheme.strColors;
+            case "muted":
+                return MutedTheme.strColors;
+            case "primary":
+                return PrimaryTheme.strColors;
+            case "summer":
+                return SummerTheme.strColors;
+            case "rage":
+                return RageTheme.strColors;
 
         }
         return null;
@@ -95,6 +115,14 @@ public class ThemesManager {
                 return GoogleTheme.intColors;
             case "russia wc":
                 return RussiaWCTheme.intColors;
+            case "muted":
+                return MutedTheme.intColors;
+            case "primary":
+                return PrimaryTheme.intColors;
+            case "summer":
+                return SummerTheme.intColors;
+            case "rage":
+                return RageTheme.intColors;
 
         }
         return null;
