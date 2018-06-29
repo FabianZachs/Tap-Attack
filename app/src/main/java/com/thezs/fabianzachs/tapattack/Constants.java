@@ -17,6 +17,13 @@ import java.util.Map;
  * Created by fabianzachs on 06/02/18.
  */
 
+
+/* CREDITS:
+COOLORS and COLOR-HEX for some amazing color palettes inspirations
+ */
+
+
+
 public class Constants {
     public static int SCREEN_HEIGHT;
     public static int SCREEN_WIDTH;
@@ -26,12 +33,14 @@ public class Constants {
 
     public static String[] SHAPES = {"circle", "square", "cross", "arrow", "star"};
 
-    public static String[] SHAPE_TYPES = {"straight","curved"};
-    public static Integer[] SHAPE_TYPES_IDS = {R.drawable.straightoutline, R.drawable.curvedoutline};
+    public static String[] SHAPE_TYPES = {"straight","curved","paint","bit"};
+    public static Integer[] SHAPE_TYPES_IDS = {R.drawable.straightoutline, R.drawable.curvedoutline, R.drawable.paintoutline, R.drawable.bitoutline};
 
 
-    public static String[] SHAPE_THEMES = {"neon","flat","vibrant"};
-    public static Integer[] SHAPE_THEMES_ID = {R.drawable.neonthemetemplate, R.drawable.flatthemetemplate, R.drawable.vibrantthemetemplate};
+    public static String[] SHAPE_THEMES = {"neon","flat","vibrant","girly","oldfashion","fourthofjuly","google","russia wc"};
+    public static Integer[] SHAPE_THEMES_ID = {R.drawable.neonthemetemplate, R.drawable.flatthemetemplate,
+            R.drawable.vibrantthemetemplate, R.drawable.girlythemetemplate, R.drawable.oldfashionthemetemplate,
+            R.drawable.fourthofjulythemetemplate, R.drawable.googlethemetempalte, R.drawable.russiawcthemetemplate};
 
 
     //public static String[] BACKGROUNDS  = {"backgroundtriangleblue"};
