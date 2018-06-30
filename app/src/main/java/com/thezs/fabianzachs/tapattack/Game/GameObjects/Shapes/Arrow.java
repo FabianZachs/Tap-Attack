@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.GameOverReasons;
 import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 import com.thezs.fabianzachs.tapattack.R;
 
@@ -103,7 +104,8 @@ public class Arrow extends ShapeObject {
                 }
                 else if (System.currentTimeMillis() - timeOfLastPenalty > 1000) {
                     //mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
-                    mediator.resetStreak();
+                    //mediator.resetStreak();
+                    mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this));
                     timeOfLastPenalty = System.currentTimeMillis();
 
                 }
@@ -117,7 +119,8 @@ public class Arrow extends ShapeObject {
         @Override
         public boolean onSingleTapUp(MotionEvent event) {
             //mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
-            mediator.resetStreak();
+            //mediator.resetStreak();
+            mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this));
             return true;
         }
 
@@ -132,6 +135,5 @@ public class Arrow extends ShapeObject {
             return true;
         }
     }
-
 
 }

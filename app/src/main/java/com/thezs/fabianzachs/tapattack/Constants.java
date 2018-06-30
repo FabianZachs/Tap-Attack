@@ -46,8 +46,8 @@ public class Constants {
 
 
     //public static String[] BACKGROUNDS  = {"backgroundtriangleblue"};
-    public static String[] BACKGROUNDS  = {"triangle-blue"};
-    public static Integer[] BACKGROUNDS_ID = {R.drawable.backgroundtriangleblue};
+    public static String[] BACKGROUNDS  = {"triangle-blue", "sky"};
+    public static Integer[] BACKGROUNDS_ID = {R.drawable.backgroundtriangleblue, R.drawable.skybackground};
 
     public static Map<String, String[]> COLORS; // theme -> [] of colors
     public static String[] NEONCOLORS = {"blue","yellow","red","purple","green"};

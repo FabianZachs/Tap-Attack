@@ -11,6 +11,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.GameOverReasons;
 import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 
 /**
@@ -69,7 +70,8 @@ public class Square extends ShapeObject {
         public boolean onFling(MotionEvent event1, MotionEvent event2,
                                float velocityX, float velocityY) {
             //mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
-            mediator.resetStreak();
+            //mediator.resetStreak();
+            mediator.setGameOver(GameOverReasons.wrongShapeAction(Square.this));
             return true;
         }
 

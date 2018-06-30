@@ -147,7 +147,7 @@ public class Star extends ShapeObject {
             setShapeImages(0, Bitmap.createBitmap(getShapeImg(), 0, 0, getShapeImg().getWidth(), getShapeImg().getHeight(), rotationMatrix, true));
             if (mediator.getIntWarningColor().equals(intColors.get(colorIndex))) {
                 reduceLives();
-                mediator.resetStreak();
+                //mediator.resetStreak();
             }
             else {
                 //mediator.incScore(getPoints());

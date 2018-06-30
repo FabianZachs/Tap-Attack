@@ -6,6 +6,7 @@ import android.graphics.Rect;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.Backgrounds.GameBackground;
+import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.Backgrounds.Sky;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.Backgrounds.Triangular.BlueTriangular;
 
 /**
@@ -28,6 +29,9 @@ public class BackgroundManager {
             case "triangle-blue":
             //case "backgroundtriangleblue":
                 gameBackground = new BlueTriangular();
+                return;
+            case "sky":
+                gameBackground = new Sky();
                 return;
             case "OTHER BACKGROUNDS":
                 return;

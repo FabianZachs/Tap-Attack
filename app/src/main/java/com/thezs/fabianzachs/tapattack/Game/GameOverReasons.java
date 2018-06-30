@@ -31,6 +31,7 @@ public class GameOverReasons {
     }
 
     public static String wrongShapeAction(ShapeObject shape) {
-        return "YOU MADE THE WRONG ACTION WITH THE " + shape.getClass().getSimpleName().toUpperCase();
+        //return "YOU MADE THE WRONG ACTION WITH THE " + shape.getClass().getSimpleName().toUpperCase();
+        return "WRONG ACTION FOR THE " + shape.getClass().getSimpleName().toUpperCase();
     }
 }

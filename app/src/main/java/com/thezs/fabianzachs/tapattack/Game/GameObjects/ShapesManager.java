@@ -86,7 +86,7 @@ public class ShapesManager {
         if (!shapeInteractment && event.getAction() == MotionEvent.ACTION_DOWN) {
             //mediator.changeProgressBarBy(-40);
             mediator.warningComponentShake();
-            mediator.resetStreak();
+            //mediator.resetStreak();
             mediator.setGameOver(GameOverReasons.backgroundTap()); //todo for setting up gameOver we have that background touch triggers gameover
         }
     }
@@ -121,7 +121,7 @@ public class ShapesManager {
             else if (shape.isTimedOut()) {
                 shapes.remove(shape);
                 freeResources(shape.getPaintObj(), shape.getBitmapHolder());
-                mediator.resetStreak(); // TODO even for star????
+                //mediator.resetStreak(); // TODO even for star????
             }
 
 
