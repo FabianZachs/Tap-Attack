@@ -71,7 +71,8 @@ public class Square extends ShapeObject {
                                float velocityX, float velocityY) {
             //mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
             //mediator.resetStreak();
-            mediator.setGameOver(GameOverReasons.wrongShapeAction(Square.this));
+            //mediator.setGameOver(GameOverReasons.wrongShapeAction(Square.this));
+            //Log.d("wrong action??", "onFling: ");
             return true;
         }
 
