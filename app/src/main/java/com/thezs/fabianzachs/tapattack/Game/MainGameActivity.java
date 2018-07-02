@@ -26,6 +26,8 @@ package com.thezs.fabianzachs.tapattack.Game;
         import com.thezs.fabianzachs.tapattack.R;
         import com.thezs.fabianzachs.tapattack.helper;
 
+        import org.w3c.dom.Text;
+
 /**
  * Created by fabianzachs on 07/02/18.
  */
@@ -148,8 +150,10 @@ public class MainGameActivity extends Activity {
         TextView gameOverText = (TextView) alertView.findViewById(R.id.game_over_text);
         gameOverText.setText(gameOverReason);
 
+        /*
         TextView streakText = (TextView) alertView.findViewById(R.id.shape_theme_text);
         streakText.setText("STREAK: " + currentGameStreak);
+        */
 
         TextView scoreText = (TextView) alertView.findViewById(R.id.shape_type_text);
         scoreText.setText("SCORE: " + currentGameScore);
@@ -157,11 +161,11 @@ public class MainGameActivity extends Activity {
         SharedPreferences prefs = getSharedPreferences("playerStats", MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = prefs.edit();
         int bestScore = prefs.getInt(/*CONSTANTS.CURRENTGAEMODE + */"bestScore", 0);// todo make work  for different current gamemodes
-        int bestStreak = prefs.getInt(/*CONSTANTS.CURRENTGAEMODE + */"bestStreak", 0);// todo make work  for different current gamemodes
+        //int bestStreak = prefs.getInt(/*CONSTANTS.CURRENTGAEMODE + */"bestStreak", 0);// todo make work  for different current gamemodes
 
 
         TextView bestScoreText = (TextView) alertView.findViewById(R.id.shape_type_image_description);
-        TextView bestStreakText = (TextView) alertView.findViewById(R.id.shape_theme_image_description);
+        //TextView bestStreakText = (TextView) alertView.findViewById(R.id.shape_theme_image_description);
 
         // todo refactorable
         if (currentGameScore > bestScore) {
@@ -181,20 +185,23 @@ public class MainGameActivity extends Activity {
             //Typeface typeface = getResources().getFont(R.font.undinaru);
            // bestScoreText.setTypeface(typeface);
         }
+        /*
         if (currentGameStreak > bestStreak) {
             bestStreak = currentGameStreak;
-            prefsEditor.putInt(/*CONSTANTS.CURRENTGAEMODE + */"bestStreak", currentGameStreak);
+            prefsEditor.putInt("bestStreak", currentGameStreak);
             prefsEditor.apply();
             YoYo.with(Techniques.BounceIn).duration(1000).repeat(0).playOn(bestScoreText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
             bestStreakText.setTextColor(getResources().getColor(R.color.soundon));
             bestStreakText.setTypeface(bestScoreText.getTypeface(),Typeface.BOLD); // todo messes up font
-        }
-
+        }*/
 
 
         bestScoreText.setText("BEST SCORE: " + bestScore);
 
-        bestStreakText.setText("BEST STREAK: " + bestStreak);
+        //bestStreakText.setText("BEST STREAK: " + bestStreak);
+        TextView pointsEquation = (TextView) alertView.findViewById(R.id.points_text);
+        float scoreMultiplier = prefs.getFloat("scoremultiplier", 1);
+        pointsEquation.setText(currentGameScore + " x MULTIPLIER (" + scoreMultiplier + ") = +" + (int) scoreMultiplier * currentGameScore + " POINTS");
 
 
     }
