@@ -7,8 +7,6 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.graphics.drawable.LayerDrawable;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
-        import android.support.v4.content.ContextCompat;
-        import android.util.Log;
         import android.view.Gravity;
         import android.view.View;
         import android.view.Window;
@@ -150,10 +148,10 @@ public class MainGameActivity extends Activity {
         TextView gameOverText = (TextView) alertView.findViewById(R.id.game_over_text);
         gameOverText.setText(gameOverReason);
 
-        TextView streakText = (TextView) alertView.findViewById(R.id.streak_text);
+        TextView streakText = (TextView) alertView.findViewById(R.id.shape_theme_text);
         streakText.setText("STREAK: " + currentGameStreak);
 
-        TextView scoreText = (TextView) alertView.findViewById(R.id.score_text);
+        TextView scoreText = (TextView) alertView.findViewById(R.id.shape_type_text);
         scoreText.setText("SCORE: " + currentGameScore);
 
         SharedPreferences prefs = getSharedPreferences("playerStats", MODE_PRIVATE);
@@ -162,8 +160,8 @@ public class MainGameActivity extends Activity {
         int bestStreak = prefs.getInt(/*CONSTANTS.CURRENTGAEMODE + */"bestStreak", 0);// todo make work  for different current gamemodes
 
 
-        TextView bestScoreText = (TextView) alertView.findViewById(R.id.best_score_text);
-        TextView bestStreakText = (TextView) alertView.findViewById(R.id.best_streak_text);
+        TextView bestScoreText = (TextView) alertView.findViewById(R.id.shape_type_image_description);
+        TextView bestStreakText = (TextView) alertView.findViewById(R.id.shape_theme_image_description);
 
         // todo refactorable
         if (currentGameScore > bestScore) {

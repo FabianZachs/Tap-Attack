@@ -58,14 +58,14 @@ public class Arrow extends ShapeObject {
     private void setIntendedFlickDirectionRadians(String direction) {
 
         switch (direction) {
-            case "UP":
-                intendedFlickDirectionRadians = Math.PI/2;
-                break;
             case "LEFT":
                 intendedFlickDirectionRadians = Math.PI;
                 break;
             case "RIGHT":
                 intendedFlickDirectionRadians = 0;
+                break;
+            case "UP":
+                intendedFlickDirectionRadians = Math.PI/2;
                 break;
             case "DOWN":
                 intendedFlickDirectionRadians = -Math.PI/2;

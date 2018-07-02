@@ -6,10 +6,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -39,6 +36,9 @@ public class Store {
     private View backgroundSectionAlertView;
     final private AlertDialog backgroundSectionDialog;
 
+    private View gamemodeSectionAlertView;
+    final private AlertDialog gamemodeSectionDialog;
+
     // todo instead of creating dialog on click of store section, create them in start of game
     public Store(Activity mainMenuActivity, SharedPreferences prefs) {
 
@@ -49,11 +49,13 @@ public class Store {
         this.colorSectionAlertView = helper.getAlertView(mainMenuActivity, R.layout.store_item_list);
         this.typeSectionAlertView = helper.getAlertView(mainMenuActivity, R.layout.store_item_list);
         this.backgroundSectionAlertView = helper.getAlertView(mainMenuActivity, R.layout.store_item_list);
+        this.gamemodeSectionAlertView = helper.getAlertView(mainMenuActivity, R.layout.store_item_list);
 
         this.mainStoreDialog = helper.getBuiltDialog(mainMenuActivity, mainStoreAlertView);
         this.colorSectionDialog = helper.getBuiltDialog(mainMenuActivity, colorSectionAlertView);
         this.typeSectionDialog = helper.getBuiltDialog(mainMenuActivity, typeSectionAlertView);
         this.backgroundSectionDialog = helper.getBuiltDialog(mainMenuActivity, backgroundSectionAlertView);
+        this.gamemodeSectionDialog = helper.getBuiltDialog(mainMenuActivity, gamemodeSectionAlertView);
 
 
         //standardOkButtonSetup(mainStoreAlertView, mainStoreDialog);
@@ -63,6 +65,7 @@ public class Store {
         setupDialogDismissForStoreSection(colorSectionAlertView, colorSectionDialog);
         setupDialogDismissForStoreSection(typeSectionAlertView, typeSectionDialog);
         setupDialogDismissForStoreSection(backgroundSectionAlertView, backgroundSectionDialog);
+        setupDialogDismissForStoreSection(gamemodeSectionAlertView, gamemodeSectionDialog);
 
         setupStoreSectionList(colorSectionAlertView, colorSectionDialog, Constants.SHAPE_THEMES,
             Constants.SHAPE_THEMES_ID, "shapeTheme");
@@ -72,6 +75,9 @@ public class Store {
 
         setupStoreSectionList(backgroundSectionAlertView,backgroundSectionDialog, Constants.BACKGROUNDS,
                 Constants.BACKGROUNDS_ID,"background");
+
+        setupStoreSectionList(gamemodeSectionAlertView, gamemodeSectionDialog, Constants.GAMEMODES,
+                Constants.GAMEMODES_IDS, "gamemode");
 
 //        this.mainStoreAlertView = mainMenuActivity.getLayoutInflater().inflate(R.layout.store_main_menu, null);
         //AlertDialog.Builder mainStoredbuilder = new AlertDialog.Builder(mainMenuActivity);
@@ -164,12 +170,14 @@ public class Store {
 
     private void setupImgAndTextOfStoreSectons() {
 
-        setupStoreSectionPreviewImg("color", R.id.shape_color_image);
+        setupStoreSectionPreviewImg("color", R.id.shape_theme_image);
         setupStoreSectionPreviewImg("type", R.id.shape_type_image);
         setupStoreSectionPreviewImg("background", R.id.background_image);
+        setupStoreSectionPreviewImg("gamemode", R.id.gamemode_image);
 
-        setupStoreSectionText("color", R.id.best_streak_text);
-        setupStoreSectionText("type", R.id.best_score_text);
+        setupStoreSectionText("color", R.id.shape_theme_image_description);
+        setupStoreSectionText("type", R.id.shape_type_image_description);
+        //setupStoreSectionText("gamemode", R.id.gamemode_image_description);
     }
 
     public void openStoreSection(View view, String section) {
@@ -201,6 +209,9 @@ public class Store {
                 //buildDialogOLD(Constants.BACKGROUNDS, Constants.BACKGROUNDS_ID, "background");
                 helper.dialogFullscreen(mainMenuActivity, backgroundSectionDialog);
                 //dialogFullscreen(backgroundSectionDialog);
+                return;
+            case "gamemode":
+                helper.dialogFullscreen(mainMenuActivity, gamemodeSectionDialog);
                 return;
         }
 
@@ -267,6 +278,9 @@ public class Store {
             case "type":
                 textViewToChange.setText(prefs.getString("shapeType", "curved").toUpperCase());
                 return;
+            case "gamemode":
+                textViewToChange.setText(prefs.getString("gamemode", "intro").toUpperCase());
+                return;
         }
 
         throw new RuntimeException("UNKNOWN STORE TEXT TO SETUP");
@@ -300,6 +314,11 @@ public class Store {
                 img.setImageBitmap(bm2);
                 //String str = prefs.getString("background", "bluetriangle");
                 //img.setImageBitmap(GameBackground.getBackgroundBitmap(prefs.getString("background","bluetriangle")));
+                return;
+            case "gamemode":
+                Bitmap bm3 = BitmapFactory.decodeResource(mainMenuActivity.getResources(),
+                        Constants.GAMEMODES_IDS[Arrays.asList(Constants.GAMEMODES).indexOf(prefs.getString("gamemode","intro"))]);
+                img.setImageBitmap(bm3);
                 return;
         }
         throw new RuntimeException("UNKNOWN STORE IMAGE TO SETUP");

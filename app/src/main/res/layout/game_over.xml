@@ -44,7 +44,7 @@ android:background="@drawable/dialog_shape">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/score_text"
+                android:id="@+id/shape_type_text"
                 android:textStyle="bold"
                 android:fontFamily="@font/undinaru"
                 android:layout_centerHorizontal="true"
@@ -57,13 +57,13 @@ android:background="@drawable/dialog_shape">
                 android:paddingRight="5sp"
                 android:paddingTop="5sp"
                 android:paddingBottom="5sp"
-                android:id="@+id/best_score_text"
+                android:id="@+id/shape_type_image_description"
                 android:layout_marginTop="5sp"
                 android:fontFamily="@font/undinaru"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="BEST SCORE: 100"
-                android:layout_below="@id/score_text"
+                android:layout_below="@id/shape_type_text"
                 android:textSize="25sp"/>
 
 
@@ -71,7 +71,7 @@ android:background="@drawable/dialog_shape">
 
         <RelativeLayout
 
-            android:id="@+id/streak_section"
+            android:id="@+id/shape_theme_section"
             android:layout_weight="1"
             android:paddingRight="10sp"
             android:paddingBottom="10sp"
@@ -79,7 +79,7 @@ android:background="@drawable/dialog_shape">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/streak_text"
+                android:id="@+id/shape_theme_text"
                 android:layout_centerHorizontal="true"
                 android:textStyle="bold"
                 android:fontFamily="@font/undinaru"
@@ -91,9 +91,9 @@ android:background="@drawable/dialog_shape">
                 android:paddingRight="5sp"
                 android:paddingTop="5sp"
                 android:paddingBottom="5sp"
-                android:id="@+id/best_streak_text"
+                android:id="@+id/shape_theme_image_description"
                 android:layout_marginTop="5sp"
-                android:layout_below="@+id/streak_text"
+                android:layout_below="@+id/shape_theme_text"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/undinaru"
                 android:layout_width="wrap_content"
@@ -107,7 +107,7 @@ android:background="@drawable/dialog_shape">
     </LinearLayout>
 
     <TextView
-        android:id="@+id/share_text"
+        android:id="@+id/background_text"
         android:layout_marginTop="30sp"
         android:textStyle="bold"
         android:fontFamily="@font/undinaru"

@@ -34,7 +34,7 @@ android:background="@drawable/dialog_shape">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/score_text"
+                android:id="@+id/shape_type_text"
                 android:textStyle="bold"
                 android:fontFamily="@font/undinaru"
                 android:layout_width="wrap_content"
@@ -46,7 +46,7 @@ android:background="@drawable/dialog_shape">
 
                 android:paddingTop="10sp"
                 android:layout_width="wrap_content"
-                android:layout_below="@+id/score_text"
+                android:layout_below="@+id/shape_type_text"
                 android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content">
 
@@ -57,7 +57,7 @@ android:background="@drawable/dialog_shape">
                     android:layout_height="wrap_content"
                     />
                 <TextView
-                    android:id="@+id/best_score_text"
+                    android:id="@+id/shape_type_image_description"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
                     android:textStyle="bold"
@@ -85,7 +85,7 @@ android:background="@drawable/dialog_shape">
         <!--android:layout_toRightOf="@+id/shape_type_section"-->
         <RelativeLayout
 
-            android:id="@+id/streak_section"
+            android:id="@+id/shape_theme_section"
             android:onClick="openShapeColorStore"
             android:layout_toRightOf="@+id/anchor"
             android:padding="10dp"
@@ -93,7 +93,7 @@ android:background="@drawable/dialog_shape">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/streak_text"
+                android:id="@+id/shape_theme_text"
                 android:textStyle="bold"
                 android:fontFamily="@font/undinaru"
                 android:layout_width="wrap_content"
@@ -102,20 +102,20 @@ android:background="@drawable/dialog_shape">
                 android:textSize="25sp"/>
 
             <RelativeLayout
-                android:layout_below="@+id/streak_text"
+                android:layout_below="@+id/shape_theme_text"
                 android:paddingTop="10sp"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/shape_color_image"
+                    android:id="@+id/shape_theme_image"
                     android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     />
                 <TextView
-                    android:id="@+id/best_streak_text"
+                    android:id="@+id/shape_theme_image_description"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
                     android:textStyle="bold"
@@ -135,20 +135,22 @@ android:background="@drawable/dialog_shape">
             android:id="@+id/background_section"
             android:onClick="openBackgroundStore"
             android:layout_below="@+id/shape_type_section"
+            android:layout_toLeftOf="@id/anchor"
             android:layout_centerHorizontal="true"
             android:padding="10dp"
+            android:layout_marginRight="15sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/share_text"
+                android:id="@+id/background_text"
                 android:textStyle="bold"
                 android:fontFamily="@font/undinaru"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Background"
-                android:textSize="25sp"/>
+                android:textSize="23sp"/>
             <RelativeLayout
-                android:layout_below="@+id/share_text"
+                android:layout_below="@+id/background_text"
                 android:layout_centerHorizontal="true"
                 android:paddingTop="10sp"
                 android:layout_width="wrap_content"
@@ -160,6 +162,42 @@ android:background="@drawable/dialog_shape">
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:id="@+id/gamemode_section"
+            android:onClick="openGameModeStore"
+            android:layout_toRightOf="@+id/anchor"
+            android:padding="10dp"
+            android:layout_marginLeft="15sp"
+            android:layout_below="@+id/shape_theme_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/gamemode_text"
+                android:textStyle="bold"
+                android:fontFamily="@font/undinaru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Game Mode"
+                android:textSize="25sp"/>
+
+            <RelativeLayout
+                android:layout_below="@+id/gamemode_text"
+                android:paddingTop="10sp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/gamemode_image"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
             </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>
