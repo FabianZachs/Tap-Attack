@@ -119,6 +119,7 @@ public class MainMenuActivity extends  GeneralParent {
 
 
         setContentView(R.layout.activity_main_menu);
+        setupPointsDisplay();
         //multiShapesMessaroundDELETE(); //todo erase
         /* programmatically set background
         LinearLayout layout = (LinearLayout) findViewById(R.id.parent_layout);
@@ -138,6 +139,11 @@ public class MainMenuActivity extends  GeneralParent {
 
 
         //initMusic(R.raw.mainmenu);
+    }
+
+    private void setupPointsDisplay() {
+        TextView pointsText = (TextView) findViewById(R.id.points_text);
+        pointsText.setText(Integer.toString(prefs.getInt("points", 0)));
     }
 
     private void initializeConstants() {

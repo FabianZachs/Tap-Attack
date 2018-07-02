@@ -6,6 +6,43 @@
     android:background="@color/blackbackground"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="20sp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/titletext"
+            />
+
+        <ImageView
+            android:id="@+id/points_image"
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:layout_marginTop="20sp"
+            android:layout_toRightOf="@id/title_text"
+            android:src="@drawable/curvedstar"/>
+
+        <TextView
+            android:layout_marginLeft="5sp"
+            android:id="@+id/points_text"
+            android:text="POINTS"
+            android:textColor="@color/store"
+            android:textSize="16sp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:layout_toRightOf="@id/points_image"/>
+    </RelativeLayout>
+
+    <!--
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -16,6 +53,7 @@
         android:src="@drawable/titletext"
 
         />
+        -->
 
     <RelativeLayout
         android:layout_width="match_parent"

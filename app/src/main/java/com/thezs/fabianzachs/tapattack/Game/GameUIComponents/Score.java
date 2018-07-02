@@ -28,8 +28,9 @@ public class Score {
         //this.shapesManager.attachScoreObserver(this);
         this.score = 0;
         // TODO do this relative to screen height and width
-        this.xLocation = 40;
-        this.yLocation = 80;
+        this.xLocation = 60;
+        //this.yLocation = 80;
+        this.yLocation =(Constants.SCREEN_HEIGHT/16 ) ;
         setupPaint();
 
     }
@@ -43,7 +44,7 @@ public class Score {
         scorePaint.setTypeface(bold);
 
 
-        scorePaint.setTextSize(40);
+        scorePaint.setTextSize(70);
         scorePaint.setColor(Color.WHITE);
     }
 

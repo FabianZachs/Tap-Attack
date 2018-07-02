@@ -80,7 +80,7 @@ public class ClassicGameScene implements Scene {
         //backgroundHandler.draw(canvas, "blue");
         backgroundManager.draw(canvas);
         score.draw(canvas);
-        streak.draw(canvas);
+        //streak.draw(canvas);
         shapesManager.draw(canvas);
         warningColor.draw(canvas);
 
