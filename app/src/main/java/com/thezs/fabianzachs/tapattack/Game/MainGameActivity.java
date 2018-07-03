@@ -200,8 +200,9 @@ public class MainGameActivity extends Activity {
 
         //bestStreakText.setText("BEST STREAK: " + bestStreak);
         TextView pointsEquation = (TextView) alertView.findViewById(R.id.points_text);
-        float scoreMultiplier = prefs.getFloat("scoremultiplier", 1);
-        pointsEquation.setText(currentGameScore + " x MULTIPLIER (" + scoreMultiplier + ") = +" + (int) scoreMultiplier * currentGameScore + " POINTS");
+        //float scoreMultiplier = prefs.getFloat("scoremultiplier", 1);
+        float scoreMultiplier = 2.2f;
+        pointsEquation.setText(currentGameScore + " x MULTIPLIER (" + scoreMultiplier + ") = +" + (int) (scoreMultiplier * currentGameScore) + " POINTS");
 
 
     }
@@ -286,7 +287,7 @@ public class MainGameActivity extends Activity {
     }
 
     public void exitClick(View view) {
-        finish();
+        finish(); // todo somehow tell mainmenu activity to do yoyo animation and update new points
     }
 
     /*
