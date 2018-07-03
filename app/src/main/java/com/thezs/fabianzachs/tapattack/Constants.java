@@ -33,8 +33,8 @@ public class Constants {
 
     public static String[] SHAPES = {"circle", "square", "cross", "arrow", "star"};
 
-    public static String[] GAMEMODES = {"intro", "classic", "unknown", "unknown2", "unknown3", "unknown4"};
-    public static Integer[] GAMEMODES_IDS = {R.drawable.instructionsgamemode,R.drawable.startbluebluered, R.drawable.lockeditem, R.drawable.lockeditem2, R.drawable.lockeditem3, R.drawable.lockeditem4};
+    public static String[] GAMEMODES = {"intro", "classic", "unknown", };
+    public static Integer[] GAMEMODES_IDS = {R.drawable.instructionsgamemode,R.drawable.startbluebluered, R.drawable.lockeditem};
 
     public static String[] SHAPE_TYPES = {"straight","curved","paint","bit"};
     public static Integer[] SHAPE_TYPES_IDS = {R.drawable.straightoutline, R.drawable.curvedoutline, R.drawable.paintoutline, R.drawable.bitoutline};
