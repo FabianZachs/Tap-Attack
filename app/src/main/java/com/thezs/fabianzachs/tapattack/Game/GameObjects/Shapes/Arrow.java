@@ -17,6 +17,8 @@ import com.thezs.fabianzachs.tapattack.Game.GameOverReasons;
 import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 import com.thezs.fabianzachs.tapattack.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by fabianzachs on 02/03/18.
  */
@@ -105,13 +107,14 @@ public class Arrow extends ShapeObject {
                 else if (System.currentTimeMillis() - timeOfLastPenalty > 1000) {
                     //mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
                     //mediator.resetStreak();
-                    mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this));
+                    mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this, "fling", "in that direction"));
+                    //mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this));
+                    StyleableToast.makeText(Constants.CURRENT_CONTEXT, "wrong flick direction", R.style.successtoast).show();
                     timeOfLastPenalty = System.currentTimeMillis();
 
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                StyleableToast.makeText(Constants.CURRENT_CONTEXT, "flickerror", R.style.successtoast).show();
             }
             return true;
         }
@@ -120,7 +123,9 @@ public class Arrow extends ShapeObject {
         public boolean onSingleTapUp(MotionEvent event) {
             //mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
             //mediator.resetStreak();
-            mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this));
+            mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this, "tap", ""));
+            //mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this));
+            StyleableToast.makeText(Constants.CURRENT_CONTEXT, "single tap up", R.style.successtoast).show();
             return true;
         }
 

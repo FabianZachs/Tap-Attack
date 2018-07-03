@@ -2,6 +2,8 @@ package com.thezs.fabianzachs.tapattack.Game;
 
 import android.graphics.drawable.shapes.Shape;
 
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Arrow;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 
 /**
@@ -30,8 +32,22 @@ public class GameOverReasons {
         return "DARN! YOU MISSED THE SHAPE";
     }
 
+
+    public static String wrongShapeAction(ShapeObject shape, String shapeAction, String extraDetail) {
+        //return "YOU MADE THE WRONG ACTION WITH THE " + shape.getClass().getSimpleName().toUpperCase();
+        //return "WRONG ACTION FOR THE " + shape.getClass().getSimpleName().toUpperCase();
+
+        if (shape instanceof Arrow && shapeAction.equals("fling")) {
+            return "WRONG FLING DIRECTION FOR THE ARROW";
+        }
+
+        return "DON'T " + shapeAction.toUpperCase() + " THE " + shape.getClass().getSimpleName().toUpperCase();
+    }
+
+    /*
     public static String wrongShapeAction(ShapeObject shape) {
         //return "YOU MADE THE WRONG ACTION WITH THE " + shape.getClass().getSimpleName().toUpperCase();
         return "WRONG ACTION FOR THE " + shape.getClass().getSimpleName().toUpperCase();
     }
+    */
 }

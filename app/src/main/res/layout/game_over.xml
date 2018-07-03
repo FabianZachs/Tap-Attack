@@ -24,6 +24,7 @@ android:background="@drawable/dialog_shape">
         android:textSize="20sp"
         android:layout_marginTop="10sp"
         android:layout_marginBottom="30sp"
+        android:textAlignment="center"
         android:text="REASON FOR LOSS PLACEHOLDER"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -119,6 +120,7 @@ android:background="@drawable/dialog_shape">
         android:fontFamily="@font/undinaru"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textAlignment="center"
         android:text="SCORE x SCORE MULTIPLIER(1) = + POINTS"
         />
 

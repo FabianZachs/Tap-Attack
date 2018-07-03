@@ -72,6 +72,7 @@ public class Square extends ShapeObject {
             //mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
             //mediator.resetStreak();
             //mediator.setGameOver(GameOverReasons.wrongShapeAction(Square.this));
+            mediator.setGameOver(GameOverReasons.wrongShapeAction(Square.this, "fling", ""));
             //Log.d("wrong action??", "onFling: ");
             return true;
         }
