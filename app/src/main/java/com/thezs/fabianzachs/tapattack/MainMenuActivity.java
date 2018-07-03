@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,6 +34,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.ads.AdView;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
@@ -113,7 +116,7 @@ public class MainMenuActivity extends  GeneralParent {
 
         // method instantiation
         //mediaPlayers = new ArrayList<MediaPlayer>();
-        prefs = getSharedPreferences("playerPrefs", MODE_PRIVATE);
+        prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
 
 
 
@@ -346,6 +349,7 @@ public class MainMenuActivity extends  GeneralParent {
     @Override
     protected void onResume() {
         super.onResume();
+        //Log.d("resumecalled", "onResume: RESUME");
         //repeatMpResume();
     }
 
@@ -361,10 +365,21 @@ public class MainMenuActivity extends  GeneralParent {
     public void playButtonClick(View view) {
         Intent intent = new Intent(this, MainGameActivity.class);
         intent.putExtra("gamemode", "classic");
-        this.startActivity(intent);
+        //this.startActivity(intent);
+        this.startActivityForResult(intent, 1);
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1){
+            // todo put into seperate function
+            //Log.d("endintent", Integer.toString(prefs.getInt("points",0)));
+            TextView pointsText = (TextView) findViewById(R.id.points_text);
+            pointsText.setText(Integer.toString(prefs.getInt("points", 0)));
+            YoYo.with(Techniques.BounceIn).duration(2000).repeat(0).playOn(pointsText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+        }
+        //super.onActivityResult(requestCode, resultCode, data);
+    }
 
     public void storeSetup() {
 

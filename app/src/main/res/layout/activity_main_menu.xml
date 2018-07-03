@@ -30,6 +30,20 @@
             android:src="@drawable/curvedstar"/>
 
         <TextView
+            android:layout_marginLeft="7sp"
+
+            android:textStyle="bold"
+            android:id="@+id/points_text"
+            android:text="POINTS"
+            android:textColor="@color/store"
+            android:textSize="22sp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
+            android:layout_toRightOf="@id/points_image"/>
+        <!--
+        <TextView
             android:layout_marginLeft="5sp"
             android:id="@+id/points_text"
             android:text="POINTS"
@@ -40,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
             android:layout_toRightOf="@id/points_image"/>
+            -->
     </RelativeLayout>
 
     <!--

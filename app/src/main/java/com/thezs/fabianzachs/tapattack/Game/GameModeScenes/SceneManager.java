@@ -52,7 +52,7 @@ public class SceneManager {
     }
 
     public void setCurrentGameConstants() {
-        SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerPrefs", MODE_PRIVATE);
+        SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", MODE_PRIVATE);
 
         Constants.CURRENT_THEME = prefs.getString("shapeTheme", "neon");
         Constants.CURRENT_SHAPE_TYPE = prefs.getString("shapeType", "curved"); // or straight

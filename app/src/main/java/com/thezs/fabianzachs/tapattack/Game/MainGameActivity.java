@@ -7,6 +7,7 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.graphics.drawable.LayerDrawable;
         import android.os.Bundle;
         import android.support.annotation.Nullable;
+        import android.util.Log;
         import android.view.Gravity;
         import android.view.View;
         import android.view.Window;
@@ -158,7 +159,7 @@ public class MainGameActivity extends Activity {
         TextView scoreText = (TextView) alertView.findViewById(R.id.shape_type_text);
         scoreText.setText("SCORE: " + currentGameScore);
 
-        SharedPreferences prefs = getSharedPreferences("playerStats", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = prefs.edit();
         int bestScore = prefs.getInt(/*CONSTANTS.CURRENTGAEMODE + */"bestScore", 0);// todo make work  for different current gamemodes
         //int bestStreak = prefs.getInt(/*CONSTANTS.CURRENTGAEMODE + */"bestStreak", 0);// todo make work  for different current gamemodes
@@ -200,10 +201,15 @@ public class MainGameActivity extends Activity {
 
         //bestStreakText.setText("BEST STREAK: " + bestStreak);
         TextView pointsEquation = (TextView) alertView.findViewById(R.id.points_text);
-        //float scoreMultiplier = prefs.getFloat("scoremultiplier", 1);
-        float scoreMultiplier = 2.2f;
-        pointsEquation.setText(currentGameScore + " x MULTIPLIER (" + scoreMultiplier + ") = +" + (int) (scoreMultiplier * currentGameScore) + " POINTS");
+        float scoreMultiplier = prefs.getFloat("scoremultiplier", 1);
+        //float scoreMultiplier = 1000;
+        int pointsearned = (int) (scoreMultiplier * currentGameScore);
+        pointsEquation.setText(currentGameScore + " x MULTIPLIER (" + scoreMultiplier + ") = +" + pointsearned + " POINTS");
 
+        int currentPoints = prefs.getInt("points", 0);
+        prefsEditor.putInt("points", currentPoints + pointsearned);
+        prefsEditor.apply();
+        //Log.d("endintent", "setupGameOverFields: " + prefs.getInt("points", 0));
 
     }
 
@@ -287,7 +293,8 @@ public class MainGameActivity extends Activity {
     }
 
     public void exitClick(View view) {
-        finish(); // todo somehow tell mainmenu activity to do yoyo animation and update new points
+        setResult(1);
+        finish();
     }
 
     /*
