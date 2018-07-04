@@ -43,7 +43,7 @@ public class Constants {
             R.drawable.thirdmultiplier, R.drawable.fourthmultiplier, R.drawable.fifthmultiplier, R.drawable.sixthmultiplier};
 
 
-    public static String[] GAMEMODES = {"intro", "classic", "unknown" };
+    public static String[] GAMEMODES = {"tutorial", "classic", "unknown" };
     public static Integer[] GAMEMODES_IDS = {R.drawable.instructionsgamemode,R.drawable.startbluebluered, R.drawable.lockeditem};
 
     public static String[] SHAPE_TYPES = {"straight","curved","paint","bit"};

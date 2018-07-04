@@ -306,7 +306,7 @@ public class Store {
                 textViewToChange.setText(prefs.getString("shapeType", "curved").toUpperCase());
                 return;
             case "gamemode":
-                textViewToChange.setText(prefs.getString("gamemode", "intro").toUpperCase());
+                textViewToChange.setText(prefs.getString("gamemode", "tutorial").toUpperCase());
                 return;
         }
 
@@ -344,7 +344,7 @@ public class Store {
                 return;
             case "gamemode":
                 Bitmap bm3 = BitmapFactory.decodeResource(mainMenuActivity.getResources(),
-                        Constants.GAMEMODES_IDS[Arrays.asList(Constants.GAMEMODES).indexOf(prefs.getString("gamemode","intro"))]);
+                        Constants.GAMEMODES_IDS[Arrays.asList(Constants.GAMEMODES).indexOf(prefs.getString("gamemode","tutorial"))]);
                 img.setImageBitmap(bm3);
                 return;
             case "multiplier":
