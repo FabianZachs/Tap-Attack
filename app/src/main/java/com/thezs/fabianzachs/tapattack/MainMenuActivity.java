@@ -121,7 +121,8 @@ public class MainMenuActivity extends  GeneralParent {
 
 
 
-        setContentView(R.layout.activity_main_menu);
+        //setContentView(R.layout.activity_main_menu);
+        setContentView(R.layout.activity_main_menu2);
         setupPointsDisplay();
         //multiShapesMessaroundDELETE(); //todo erase
         /* programmatically set background
@@ -129,6 +130,7 @@ public class MainMenuActivity extends  GeneralParent {
         layout.setBackground(ContextCompat.getDrawable(this, R.drawable.backgroundtriangleblue));
         */
 
+        Log.d("adcreation", "onCreate: ad created");
         helper.bannerAdSetup(this, mAdView);
 
         this.store = new Store(this, prefs);
@@ -373,6 +375,7 @@ public class MainMenuActivity extends  GeneralParent {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 1){
             // todo put into seperate function
+            // todo should i reload another banner ad?
             //Log.d("endintent", Integer.toString(prefs.getInt("points",0)));
             TextView pointsText = (TextView) findViewById(R.id.points_text);
             pointsText.setText(Integer.toString(prefs.getInt("points", 0)));

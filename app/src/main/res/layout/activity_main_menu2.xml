@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blackbackground"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/upperSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/title_section"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+
+
+            </RelativeLayout>
+            <ImageView
+                android:id="@+id/title_image1"
+                android:layout_marginLeft="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:adjustViewBounds="true"
+                android:maxHeight="70sp"
+                android:src="@drawable/titleimage1"
+                />
+
+            <ImageView
+                android:id="@+id/title_image2"
+                android:maxHeight="70sp"
+                android:layout_marginLeft="20sp"
+                android:layout_below="@+id/title_image1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+
+                android:src="@drawable/titleimage2"
+                />
+
+
+            <RelativeLayout
+                android:layout_toRightOf="@+id/title_image1"
+                android:layout_marginTop="5sp"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/points_image"
+                    android:layout_width="20sp"
+                    android:layout_height="20sp"
+                    android:layout_marginTop="20sp"
+                    android:layout_toRightOf="@id/title_text"
+                    android:layout_toLeftOf="@+id/points_text"
+                    android:src="@drawable/curvedstar"/>
+
+                <TextView
+                    android:layout_marginLeft="7sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20sp"
+                    android:gravity="right"
+                    android:textStyle="bold"
+                    android:id="@+id/points_text"
+                    android:text="POINTS"
+                    android:textColor="@color/store"
+                    android:textSize="22sp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15sp"
+                    />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+        <!--
+        <TextView
+            android:layout_marginLeft="5sp"
+            android:id="@+id/points_text"
+            android:text="POINTS"
+            android:textColor="@color/store"
+            android:textSize="16sp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:layout_toRightOf="@id/points_image"/>
+            -->
+    </RelativeLayout>
+
+    <!--
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20sp"
+        android:layout_marginTop="20sp"
+        android:layout_weight="2"
+        android:adjustViewBounds="true"
+        android:src="@drawable/titletext"
+
+        />
+        -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <View
+            android:id="@+id/anchor"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_centerInParent="true" />
+
+
+        <!--
+        <ImageView
+            android:id="@+id/play_button"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_alignBottom="@+id/anchor"
+            android:layout_centerHorizontal="true"
+            android:onClick="playButtonClick"
+            android:soundEffectsEnabled="false"
+            android:src="@drawable/neonthemetemplate" />
+            -->
+        <ImageView
+            android:id="@+id/play_button"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_alignBottom="@+id/anchor"
+            android:layout_centerHorizontal="true"
+            android:onClick="playButtonClick"
+            android:soundEffectsEnabled="false"
+            android:src="@drawable/startbluebluered" />
+        <!--
+        <ImageView
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_marginLeft="10sp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/changegamemodebutton"
+            android:layout_toRightOf="@+id/play_button"/>
+            -->
+
+        <TextView
+            android:id="@+id/gamemode_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/play_button"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5sp"
+            android:fontFamily="@font/undinaru"
+            android:soundEffectsEnabled="false"
+            android:text="Classic"
+            android:textColor="#b0faff"
+            android:textSize="30sp" />
+
+        <!--
+        <ImageView
+            android:layout_width="15sp"
+            android:layout_height="15sp"
+            android:layout_marginLeft="10sp"
+            android:layout_alignBottom="@+id/gamemode_title"
+            android:layout_centerVertical="true"
+            android:layout_below="@id/play_button"
+            android:src="@drawable/changeGameModeButton"
+            android:layout_toRightOf="@+id/gamemode_title"/>
+-->
+        <TextView
+            android:id="@+id/store_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gamemode_title"
+            android:layout_marginLeft="20sp"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/undinaru"
+            android:onClick="storeClick"
+            android:text="@string/store"
+            android:textColor="#fefa1b"
+            android:textSize="45sp" />
+
+        <TextView
+            android:id="@+id/menu_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/store_text"
+            android:layout_alignParentRight="true"
+            android:layout_alignRight="@+id/store_text"
+            android:layout_below="@+id/gamemode_title"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/undinaru"
+            android:onClick="menuClick"
+            android:soundEffectsEnabled="false"
+            android:text="@string/menu"
+            android:textColor="#374a4a"
+            android:textSize="45sp" />
+
+    </RelativeLayout>
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
+
+</LinearLayout>
