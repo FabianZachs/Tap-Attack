@@ -39,6 +39,12 @@ public class Store {
     private View gamemodeSectionAlertView;
     final private AlertDialog gamemodeSectionDialog;
 
+    private View multiplierSectionAlertView;
+    final private AlertDialog multiplierSectionDialog;
+
+    private View warningColorStreakSectionAlertView;
+    final private AlertDialog warningColorStreakSectionDialog;
+
     // todo instead of creating dialog on click of store section, create them in start of game
     public Store(Activity mainMenuActivity, SharedPreferences prefs) {
 
@@ -50,12 +56,16 @@ public class Store {
         this.typeSectionAlertView = helper.getAlertView(mainMenuActivity, R.layout.store_item_list);
         this.backgroundSectionAlertView = helper.getAlertView(mainMenuActivity, R.layout.store_item_list);
         this.gamemodeSectionAlertView = helper.getAlertView(mainMenuActivity, R.layout.store_item_list);
+        this.multiplierSectionAlertView = helper.getAlertView(mainMenuActivity, R.layout.store_item_list);
+        this.warningColorStreakSectionAlertView = helper.getAlertView(mainMenuActivity, R.layout.store_item_list);
 
         this.mainStoreDialog = helper.getBuiltDialog(mainMenuActivity, mainStoreAlertView);
         this.colorSectionDialog = helper.getBuiltDialog(mainMenuActivity, colorSectionAlertView);
         this.typeSectionDialog = helper.getBuiltDialog(mainMenuActivity, typeSectionAlertView);
         this.backgroundSectionDialog = helper.getBuiltDialog(mainMenuActivity, backgroundSectionAlertView);
         this.gamemodeSectionDialog = helper.getBuiltDialog(mainMenuActivity, gamemodeSectionAlertView);
+        this.multiplierSectionDialog = helper.getBuiltDialog(mainMenuActivity, multiplierSectionAlertView);
+        this.warningColorStreakSectionDialog = helper.getBuiltDialog(mainMenuActivity, warningColorStreakSectionAlertView);
 
 
         //standardOkButtonSetup(mainStoreAlertView, mainStoreDialog);
@@ -66,6 +76,8 @@ public class Store {
         setupDialogDismissForStoreSection(typeSectionAlertView, typeSectionDialog);
         setupDialogDismissForStoreSection(backgroundSectionAlertView, backgroundSectionDialog);
         setupDialogDismissForStoreSection(gamemodeSectionAlertView, gamemodeSectionDialog);
+        setupDialogDismissForStoreSection(multiplierSectionAlertView, multiplierSectionDialog);
+        setupDialogDismissForStoreSection(warningColorStreakSectionAlertView, warningColorStreakSectionDialog);
 
         setupStoreSectionList(colorSectionAlertView, colorSectionDialog, Constants.SHAPE_THEMES,
             Constants.SHAPE_THEMES_ID, "shapeTheme");
@@ -78,6 +90,12 @@ public class Store {
 
         setupStoreSectionList(gamemodeSectionAlertView, gamemodeSectionDialog, Constants.GAMEMODES,
                 Constants.GAMEMODES_IDS, "gamemode");
+
+        setupStoreSectionList(multiplierSectionAlertView,multiplierSectionDialog,Constants.MULTIPLIERS,
+                Constants.MULTIPLIER_IDS, "multiplier");
+
+        setupStoreSectionList(warningColorStreakSectionAlertView,warningColorStreakSectionDialog, Constants.WARNING_COLOR_STREAK_REWARDS,
+                Constants.WARNING_COLOR_STREAK_REWARDS_IDS, "warningcolorstreakreward");
 
 //        this.mainStoreAlertView = mainMenuActivity.getLayoutInflater().inflate(R.layout.store_main_menu, null);
         //AlertDialog.Builder mainStoredbuilder = new AlertDialog.Builder(mainMenuActivity);
@@ -174,6 +192,8 @@ public class Store {
         setupStoreSectionPreviewImg("type", R.id.shape_type_image);
         setupStoreSectionPreviewImg("background", R.id.background_image);
         setupStoreSectionPreviewImg("gamemode", R.id.gamemode_image);
+        setupStoreSectionPreviewImg("multiplier", R.id.pointmultiplier_image);
+        setupStoreSectionPreviewImg("warningcolorstreakreward", R.id.warning_color_streak_image);
 
         setupStoreSectionText("color", R.id.shape_theme_image_description);
         setupStoreSectionText("type", R.id.shape_type_image_description);
@@ -213,6 +233,13 @@ public class Store {
             case "gamemode":
                 helper.dialogFullscreen(mainMenuActivity, gamemodeSectionDialog);
                 return;
+            case "multiplier":
+                helper.dialogFullscreen(mainMenuActivity, multiplierSectionDialog);
+                return;
+            case "warningcolorstreakreward":
+                helper.dialogFullscreen(mainMenuActivity, warningColorStreakSectionDialog);
+                return;
+
         }
 
         throw new RuntimeException("UNKNOWN STORE SECTION");
@@ -319,6 +346,16 @@ public class Store {
                 Bitmap bm3 = BitmapFactory.decodeResource(mainMenuActivity.getResources(),
                         Constants.GAMEMODES_IDS[Arrays.asList(Constants.GAMEMODES).indexOf(prefs.getString("gamemode","intro"))]);
                 img.setImageBitmap(bm3);
+                return;
+            case "multiplier":
+                Bitmap bm4 = BitmapFactory.decodeResource(mainMenuActivity.getResources(),
+                        Constants.MULTIPLIER_IDS[Arrays.asList(Constants.MULTIPLIERS).indexOf(prefs.getString("multiplier","basic"))]);
+                img.setImageBitmap(bm4);
+                return;
+            case "warningcolorstreakreward":
+                Bitmap bm5 = BitmapFactory.decodeResource(mainMenuActivity.getResources(),
+                        Constants.WARNING_COLOR_STREAK_REWARDS_IDS[Arrays.asList(Constants.WARNING_COLOR_STREAK_REWARDS).indexOf(prefs.getString("warningcolorstreakreward","more points"))]);
+                img.setImageBitmap(bm5);
                 return;
         }
         throw new RuntimeException("UNKNOWN STORE IMAGE TO SETUP");

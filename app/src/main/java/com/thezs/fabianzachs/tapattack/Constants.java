@@ -31,9 +31,19 @@ public class Constants {
     public static int SHAPE_WIDTH;
     public static Context CURRENT_CONTEXT;
 
+
     public static String[] SHAPES = {"circle", "square", "cross", "arrow", "star"};
 
-    public static String[] GAMEMODES = {"intro", "classic", "unknown", };
+    public static final String[] WARNING_COLOR_STREAK_REWARDS = {"shift up", "reduce speed", "stars", "more points"};
+    public static Integer[] WARNING_COLOR_STREAK_REWARDS_IDS = {R.drawable.shiftshapesupicon, R.drawable.reducespeedicon, R.drawable.turnintostarsicon, R.drawable.morepointsicon};
+
+
+    public static String[] MULTIPLIERS = {"basic", "decent", "heating up","burning","fire!","insane!!"};
+    public static Integer[] MULTIPLIER_IDS = {R.drawable.firstmultiplier, R.drawable.secondmultiplier,
+            R.drawable.thirdmultiplier, R.drawable.fourthmultiplier, R.drawable.fifthmultiplier, R.drawable.sixthmultiplier};
+
+
+    public static String[] GAMEMODES = {"intro", "classic", "unknown" };
     public static Integer[] GAMEMODES_IDS = {R.drawable.instructionsgamemode,R.drawable.startbluebluered, R.drawable.lockeditem};
 
     public static String[] SHAPE_TYPES = {"straight","curved","paint","bit"};

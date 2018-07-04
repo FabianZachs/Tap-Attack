@@ -201,8 +201,16 @@ public class MainGameActivity extends Activity {
 
         //bestStreakText.setText("BEST STREAK: " + bestStreak);
         TextView pointsEquation = (TextView) alertView.findViewById(R.id.points_text);
-        float scoreMultiplier = prefs.getFloat("scoremultiplier", 1);
-        //float scoreMultiplier = 1000;
+
+
+        float scoreMultiplier = getScoreMultiplier(prefs.getString("multiplier", "basic"));
+
+
+
+
+
+
+        //float scoreMultiplier = 10000;
         int pointsearned = (int) (scoreMultiplier * currentGameScore);
         pointsEquation.setText(currentGameScore + " x MULTIPLIER (" + scoreMultiplier + ") = +" + pointsearned + " POINTS");
 
@@ -211,6 +219,31 @@ public class MainGameActivity extends Activity {
         prefsEditor.apply();
         //Log.d("endintent", "setupGameOverFields: " + prefs.getInt("points", 0));
 
+    }
+
+    private float getScoreMultiplier(String multiplierText) {
+        float multiplier = 0;
+        switch (multiplierText) {
+            case "basic":
+                multiplier = 1.0f;
+                break;
+            case "decent":
+                multiplier = 1.5f;
+                break;
+            case "heating up":
+                multiplier = 2.0f;
+                break;
+            case "burning":
+                multiplier = 3.0f;
+                break;
+            case "fire!":
+                multiplier = 5.0f;
+                break;
+            case "insane!!":
+                multiplier = 10.0f;
+                break;
+        }
+        return multiplier;
     }
 
     public void showGameOverScreen(final String gameOverReason, final int scoreToDisplay, final int streakToDisplay) {

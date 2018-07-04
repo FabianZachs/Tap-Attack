@@ -77,6 +77,7 @@ public class Arrow extends ShapeObject {
 
     private boolean isCorrectFlick(float x1, float y1, float x2, float y2) {
         Double angle = Math.atan2(y1 - y2, x2 - x1);
+        StyleableToast.makeText(Constants.CURRENT_CONTEXT, angle + "", R.style.successtoast).show();
 
         if (angle < -(Math.PI/2)  - Math.PI/4)
             angle = (2 * Math.PI) + angle;

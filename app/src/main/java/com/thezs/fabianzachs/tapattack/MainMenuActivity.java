@@ -546,6 +546,14 @@ public class MainMenuActivity extends  GeneralParent {
     public void openGameModeStore(View view) {
         store.openStoreSection(view, "gamemode");
     }
+
+    public void openPointmultiplierStore(View view) {
+        store.openStoreSection(view, "multiplier");
+    }
+
+    public void openWarningColorStreakStore(View view) {
+        store.openStoreSection(view, "warningcolorstreakreward");
+    }
     /*
     private void okButtonLockInSetup(final View alertView, final AlertDialog dialog, final View viewWithViewToUpdate) {
 

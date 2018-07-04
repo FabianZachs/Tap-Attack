@@ -200,6 +200,80 @@ android:background="@drawable/dialog_shape">
 
             </RelativeLayout>
         </RelativeLayout>
+
+
+        <RelativeLayout
+
+            android:id="@+id/pointmultiplier_section"
+            android:onClick="openPointmultiplierStore"
+            android:layout_below="@+id/background_section"
+            android:layout_toLeftOf="@id/anchor"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp"
+            android:layout_marginTop="10sp"
+            android:layout_marginRight="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/pointmultiplier_text"
+                android:textStyle="bold"
+                android:fontFamily="@font/undinaru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Multiplier "
+                android:textSize="23sp"/>
+            <RelativeLayout
+                android:layout_below="@+id/pointmultiplier_text"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/pointmultiplier_image"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+
+            android:id="@+id/warning_color_streak_section"
+            android:onClick="openWarningColorStreakStore"
+            android:layout_toRightOf="@+id/anchor"
+            android:padding="10dp"
+            android:layout_marginTop="10sp"
+            android:layout_marginLeft="15sp"
+            android:layout_below="@+id/gamemode_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/warning_color_streak_text"
+                android:textStyle="bold"
+                android:fontFamily="@font/undinaru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Color Streak"
+                android:textSize="25sp"/>
+
+            <RelativeLayout
+                android:layout_below="@+id/warning_color_streak_text"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/warning_color_streak_image"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
     </RelativeLayout>
 
 
