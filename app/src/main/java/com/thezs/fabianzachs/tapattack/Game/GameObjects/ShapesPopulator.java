@@ -55,7 +55,7 @@ public class ShapesPopulator {
 
     private ShapeColorPicker shapeColorPicker;
 
-    public ShapesPopulator(CentralGameCommunication mediator, long initTime, SharedPaint sharedPaint, SharedRect sharedRect) {
+    public ShapesPopulator(CentralGameCommunication mediator, long initTime, SharedPaint sharedPaint, SharedRect sharedRect, CopyOnWriteArrayList<ShapeObject> shapes) {
         this.shapeColors = ThemesManager.getStrColors(Constants.CURRENT_THEME);
         this.mediator = mediator;
         this.sharedPaint = sharedPaint;
@@ -72,7 +72,32 @@ public class ShapesPopulator {
 
         this.shapeColorPicker = new ShapeColorPicker(initTime);
         mediator.addObject(shapeColorPicker);
+
+        // todo start game with screen filled with shapes up to 3/4 of screen height
+        ArrayList<Point> startShapeLocations = getSetOfValidStartShapeLocations();
+
+        for (Point shapeLocation : startShapeLocations) {
+
+            ShapeObject newShape = shapeBuilder.buildShape(getShape(), getColor(), shapeLocation, sharedPaint.getUnUsedPaint(), sharedRect.getUnUsedRect(), mediator, getDirection());
+            shapes.add(0, newShape);
+        }
     }
+
+    private ArrayList<Point> getSetOfValidStartShapeLocations() {
+        int i = 0;
+        int j = 0;
+        ArrayList<Point> shapeLocations = new ArrayList<>();
+
+        while (j < (1 * Constants.SCREEN_HEIGHT)/4) {
+            i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left;
+            shapeLocations.add(new Point(i,j));
+
+            j += SHAPE_SPACING + Constants.SHAPE_HEIGHT;
+        }
+
+        return shapeLocations;
+    }
+
 
     public CopyOnWriteArrayList update(CopyOnWriteArrayList<ShapeObject> shapes) {
 
@@ -258,4 +283,5 @@ public class ShapesPopulator {
         return shapeBuilder.buildShape(shape, color, centerLocation, paint, bitmapHolder, mediator, direction);
 
     }
+
 }

@@ -50,7 +50,7 @@ public class ShapesManager {
         this.mediator = mediator;
         this.sharedPaint = new SharedPaint();
         this.sharedRect = new SharedRect();
-        this.shapesPopulator = new ShapesPopulator(mediator,initTime,sharedPaint,sharedRect);
+        this.shapesPopulator = new ShapesPopulator(mediator,initTime,sharedPaint,sharedRect, shapes);
         this.graveFactory = new GraveFactory();
         this.shapeMover = new ShapeMover(mediator);
         mediator.addObject(shapeMover);
