@@ -34,7 +34,7 @@ public class ShapeBuilder {
     private ThemesManager themesManager; //TODO do we need this as an attribute?
     //private ThemeObject gameTheme;
 
-    public ShapeBuilder(long initTime) {
+    public ShapeBuilder(/*long initTime*/) {
         // decides durationAlive depending on initTime & current time
         //initializeAnimations();
         themesManager = new ThemesManager();

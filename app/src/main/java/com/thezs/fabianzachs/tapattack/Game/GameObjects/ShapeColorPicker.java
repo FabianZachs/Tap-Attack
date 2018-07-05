@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,11 +23,13 @@ public class ShapeColorPicker {
     //private String[] colors;
     private ArrayList<String> colors; // todo change to integer colors
     private Random randGenerator;
-    private long initTime;
+    private CentralGameCommunication mediator;
+    //private long initTime;
 
 
-    public ShapeColorPicker(long initTime) {
-        this.initTime = initTime;
+    public ShapeColorPicker(/*long initTime*/CentralGameCommunication mediator) {
+        //this.initTime = initTime;
+        this.mediator = mediator;
         this.colors = new ArrayList<>(Arrays.asList(ThemesManager.getStrColors(Constants.CURRENT_THEME)));
         this.NUMBER_OF_COLORS = colors.size();
         this.randGenerator = new Random();
@@ -103,7 +106,8 @@ public class ShapeColorPicker {
 
     public long getGameTime() {
         //Log.d("warningcolorprob", "getGameTime: " + (System.currentTimeMillis() - initTime)/1000);
-        return System.currentTimeMillis() - initTime;
+        //return System.currentTimeMillis() - initTime;
+        return System.currentTimeMillis() - mediator.getInitTime();
     }
 
 

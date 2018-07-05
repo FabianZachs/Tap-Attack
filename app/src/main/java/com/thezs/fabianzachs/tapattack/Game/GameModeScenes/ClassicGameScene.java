@@ -32,7 +32,7 @@ public class ClassicGameScene implements Scene {
     private ProgressBar progressBar;
     private Streak streak;
     private Score score;
-    private long initTime;
+    //private long initTime;
 
     //private BackgroundHandler backgroundHandler; // takeout
     private BackgroundManager backgroundManager;
@@ -40,14 +40,15 @@ public class ClassicGameScene implements Scene {
 
 
     public ClassicGameScene(CentralGameCommunication mediator) {
-        this.initTime = System.currentTimeMillis();
+        //this.initTime = System.currentTimeMillis();
         // todo universal time
         this.gameOver = false; // TODO or/and on reset?
         this.mediator = mediator;
+        mediator.resetInitTime();
 
         Constants.NEONCOLORS = RandomizeArray(Constants.NEONCOLORS); // TODO make this responsive to any theme
 
-        this.shapesManager = new ShapesManager(mediator, initTime);
+        this.shapesManager = new ShapesManager(mediator);
         //this.backgroundManager = new BackgroundManager("backgroundtriangleblue");
         this.backgroundManager = new BackgroundManager(Constants.CURRENT_BACKGROUND);
         this.warningColor = new WarningColor(mediator,ThemesManager.getStrColors(Constants.CURRENT_THEME), ThemesManager.getIntColors(Constants.CURRENT_THEME));
@@ -93,7 +94,10 @@ public class ClassicGameScene implements Scene {
 
     @Override
     public void recieveTouch(MotionEvent event) {
-        mediator.startGameMotion();
+        if (!mediator.gameMoving()) {
+            mediator.startGameMotion();
+            mediator.resetInitTime();
+        }
         //if (!gameOver) {
             //shapesManager.recieveTouch(event);
         //}

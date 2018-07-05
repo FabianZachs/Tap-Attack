@@ -44,7 +44,7 @@ public class ShapesPopulator {
 
     private long timeOfLastShapeAddition;
 
-    private long initTime;
+    //private long initTime;
     private Rect newShapeArea; // instead of creating a new rect for every shape we want to create
     private Random rand;
     private ShapeBuilder shapeBuilder;
@@ -55,22 +55,22 @@ public class ShapesPopulator {
 
     private ShapeColorPicker shapeColorPicker;
 
-    public ShapesPopulator(CentralGameCommunication mediator, long initTime, SharedPaint sharedPaint, SharedRect sharedRect, CopyOnWriteArrayList<ShapeObject> shapes) {
+    public ShapesPopulator(CentralGameCommunication mediator, SharedPaint sharedPaint, SharedRect sharedRect, CopyOnWriteArrayList<ShapeObject> shapes) {
         this.shapeColors = ThemesManager.getStrColors(Constants.CURRENT_THEME);
         this.mediator = mediator;
         this.sharedPaint = sharedPaint;
         this.sharedRect = sharedRect;
         this.timeOfLastShapeAddition = 0;
-        this.initTime = initTime;
+        //this.initTime = initTime;
         // todo universal time
         this.newShapeArea = new Rect(300,300,300,300);
         rand = new Random(); // TODO make attribute?
-        this.shapeBuilder = new ShapeBuilder(initTime);
+        this.shapeBuilder = new ShapeBuilder(/*initTime*/);
         this.colorFinder = new Random();
 
 
 
-        this.shapeColorPicker = new ShapeColorPicker(initTime);
+        this.shapeColorPicker = new ShapeColorPicker(mediator);
         mediator.addObject(shapeColorPicker);
 
         // todo start game with screen filled with shapes up to 3/4 of screen height
@@ -88,7 +88,7 @@ public class ShapesPopulator {
         int j = 0;
         ArrayList<Point> shapeLocations = new ArrayList<>();
 
-        while (j < (1 * Constants.SCREEN_HEIGHT)/4) {
+        while (j < (3 * Constants.SCREEN_HEIGHT)/4) {
             i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left;
             shapeLocations.add(new Point(i,j));
 
@@ -221,8 +221,9 @@ public class ShapesPopulator {
     }
 
 
+    // todo is this method in more classes? maybe just put into mediator class
     public long getGameTime() {
-        return System.currentTimeMillis() - initTime;
+        return System.currentTimeMillis() - mediator.getInitTime();
     }
 
 

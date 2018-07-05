@@ -219,6 +219,15 @@ public class CentralGameCommunication {
         this.shapesMoving = true;
     }
 
+    public void resetInitTime() {
+        this.gameStartTime = System.currentTimeMillis();
+        //shapeMover.resetStartTime();
+    }
+
+    public long getInitTime() {
+    return gameStartTime;
+    }
+
     public boolean gameMoving() {
         return shapesMoving;
     }

@@ -20,7 +20,7 @@ public class ShapeMover {
     private float MAX_SPEED = 1.2f;
     private boolean maxSpeedReached = false;
     private long startTime;
-    private long initTime;
+    //private long initTime;
     private CentralGameCommunication mediator;
     private float RATE_OF_SPEED_INCREASE; // TODO use log(x+1) function
     private int DURATION_OF_REVERSE = 800;
@@ -33,13 +33,23 @@ public class ShapeMover {
         directionVector = 1;
         this.mediator = mediator;
         this.startTime = System.currentTimeMillis();
-        this.initTime = System.currentTimeMillis();
+        //this.initTime = System.currentTimeMillis();
+
         // todo universal time
+    }
+
+    public void resetStartTime() {
+        this.startTime = System.currentTimeMillis();
     }
 
     public void updateShapeLocation(Shape shape) {}
 
     public void update(CopyOnWriteArrayList<ShapeObject> shapes) {
+        if (!mediator.gameMoving()) {
+            startTime = System.currentTimeMillis();
+            Log.d("shapemover", "update: not moving");
+        }
+        Log.d("shapemover", "update: moving");
         int elapsedTime = (int) (System.currentTimeMillis() - startTime);
         startTime = System.currentTimeMillis();
         //float speed = Constants.SCREEN_HEIGHT/5000.0f;

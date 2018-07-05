@@ -45,12 +45,12 @@ public class ShapesManager {
 
 
 
-    public ShapesManager(CentralGameCommunication mediator, long initTime) {
+    public ShapesManager(CentralGameCommunication mediator) {
 
         this.mediator = mediator;
         this.sharedPaint = new SharedPaint();
         this.sharedRect = new SharedRect();
-        this.shapesPopulator = new ShapesPopulator(mediator,initTime,sharedPaint,sharedRect, shapes);
+        this.shapesPopulator = new ShapesPopulator(mediator,sharedPaint,sharedRect, shapes);
         this.graveFactory = new GraveFactory();
         this.shapeMover = new ShapeMover(mediator);
         mediator.addObject(shapeMover);
@@ -142,8 +142,7 @@ public class ShapesManager {
             else shape.update();
 
         }
-        if (mediator.gameMoving())
-            shapeMover.update(shapes);
+        shapeMover.update(shapes);
 
 
         for (GraveObject graveObject : graveObjects) {
