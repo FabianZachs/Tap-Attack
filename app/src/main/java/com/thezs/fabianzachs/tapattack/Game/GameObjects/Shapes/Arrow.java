@@ -30,6 +30,7 @@ public class Arrow extends ShapeObject {
     private final Point originalPoint;
     private final int ARROW_TRAVEL_DISTANCE = 30;
     private long timeOfLastPenalty;
+    private double FLICK_DIRECTION_LENIENCY = Math.PI/4;
 
 
 
@@ -77,13 +78,53 @@ public class Arrow extends ShapeObject {
 
     private boolean isCorrectFlick(float x1, float y1, float x2, float y2) {
         Double angle = Math.atan2(y1 - y2, x2 - x1);
-        StyleableToast.makeText(Constants.CURRENT_CONTEXT, angle + "", R.style.successtoast).show();
 
-        if (angle < -(Math.PI/2)  - Math.PI/4)
-            angle = (2 * Math.PI) + angle;
+        switch (intendedFlickDirectionString) {
+            case "RIGHT":
+                return (angle >= intendedFlickDirectionRadians - FLICK_DIRECTION_LENIENCY &&
+                        angle <= intendedFlickDirectionRadians + FLICK_DIRECTION_LENIENCY);
+
+                // todo up and down havent been checked since they wont be in the game likely
+            case "UP":
+                return (angle >= intendedFlickDirectionRadians - FLICK_DIRECTION_LENIENCY &&
+                        angle <= intendedFlickDirectionRadians + FLICK_DIRECTION_LENIENCY);
+            case "DOWN":
+                return (angle >= intendedFlickDirectionRadians - FLICK_DIRECTION_LENIENCY &&
+                        angle <= intendedFlickDirectionRadians + FLICK_DIRECTION_LENIENCY);
+            case "LEFT":
+                angle = getUnitCircleVersion(angle);
+                return (angle >= intendedFlickDirectionRadians - FLICK_DIRECTION_LENIENCY &&
+                        angle <= intendedFlickDirectionRadians + FLICK_DIRECTION_LENIENCY);
+
+
+        }
+        return false;
+
+        /*
+        angle = getUnitCircleVersion(angle);
+
+        StyleableToast.makeText(Constants.CURRENT_CONTEXT, angle + "", R.style.successtoast).show();
+        angle = angle % (2* Math.PI);
 
         return (angle >= intendedFlickDirectionRadians - Math.PI/4 &&
                 angle <= intendedFlickDirectionRadians + Math.PI/4);
+                */
+
+        /*
+        if (angle < -(Math.PI/2)  - Math.PI/4)
+            angle = (2 * Math.PI) + angle;
+        StyleableToast.makeText(Constants.CURRENT_CONTEXT, angle + "", R.style.successtoast).show();
+
+        return (angle >= intendedFlickDirectionRadians - Math.PI/4 &&
+                angle <= intendedFlickDirectionRadians + Math.PI/4);
+        */
+    }
+
+    private Double getUnitCircleVersion(Double angle) {
+        if (angle < 0) {
+            angle = Math.PI + (angle + Math.PI);
+        }
+        return angle;
     }
 
     public String getIntendedFlickDirectionString() {
