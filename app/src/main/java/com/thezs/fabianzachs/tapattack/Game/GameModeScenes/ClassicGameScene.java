@@ -92,19 +92,30 @@ public class ClassicGameScene implements Scene {
 
     }
 
-    @Override
-    public void recieveTouch(MotionEvent event) {
+    private void initializeGameMovement() {
         if (!mediator.gameMoving()) {
             mediator.startGameMotion();
             mediator.resetInitTime();
         }
+    }
+
+    @Override
+    public void recieveTouch(MotionEvent event) {
+        /*
+        if (!mediator.gameMoving()) {
+            mediator.startGameMotion();
+            mediator.resetInitTime();
+        }
+        */
         //if (!gameOver) {
             //shapesManager.recieveTouch(event);
         //}
         // TODO touch can be for warning color if in warning color region
         // TODO if touch in shape creation region
-        if (Constants.SHAPE_CLICK_AREA.contains((int) event.getX(), (int) event.getY()))
+        if (Constants.SHAPE_CLICK_AREA.contains((int) event.getX(), (int) event.getY())) {
+            initializeGameMovement();
             shapesManager.recieveTouch(event);
+        }
         else if (Constants.WARNING_COLOR_CLICK_AREA_LEFT.contains((int) event.getX(), (int) event.getY()))
             //Log.d("warningtoucharea", "recieveTouch: warning");
             warningColor.recieveTouch(event, "left");

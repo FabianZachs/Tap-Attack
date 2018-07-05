@@ -110,7 +110,7 @@ public class Arrow extends ShapeObject {
                     //mediator.resetStreak();
                     mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this, "fling", "in that direction"));
                     //mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this));
-                    StyleableToast.makeText(Constants.CURRENT_CONTEXT, "wrong flick direction", R.style.successtoast).show();
+                    //StyleableToast.makeText(Constants.CURRENT_CONTEXT, "wrong flick direction", R.style.successtoast).show();
                     timeOfLastPenalty = System.currentTimeMillis();
 
                 }
