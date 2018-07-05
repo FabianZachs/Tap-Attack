@@ -217,6 +217,7 @@ public class CentralGameCommunication {
 
     public void startGameMotion() {
         this.shapesMoving = true;
+        this.shapesManager.shapesJustStartedMoving = true;
     }
 
     public void resetInitTime() {

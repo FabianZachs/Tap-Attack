@@ -45,10 +45,11 @@ public class ShapeMover {
     public void updateShapeLocation(Shape shape) {}
 
     public void update(CopyOnWriteArrayList<ShapeObject> shapes) {
+        /*
         if (!mediator.gameMoving()) {
             startTime = System.currentTimeMillis();
             Log.d("shapemover", "update: not moving");
-        }
+        }*/
         Log.d("shapemover", "update: moving");
         int elapsedTime = (int) (System.currentTimeMillis() - startTime);
         startTime = System.currentTimeMillis();

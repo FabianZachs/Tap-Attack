@@ -42,6 +42,7 @@ public class ShapesManager {
     private SharedRect sharedRect;
     private ShapeMover shapeMover;
     private int EXTRA_PIXELS_CLICK_AREA = Constants.SCREEN_HEIGHT/35;
+    public boolean shapesJustStartedMoving = false;
 
 
 
@@ -142,8 +143,17 @@ public class ShapesManager {
             else shape.update();
 
         }
-        shapeMover.update(shapes);
 
+        if (mediator.gameMoving())  {
+            if (shapesJustStartedMoving) {
+                shapeMover.resetStartTime(); // todo somehow know that this is the first tinme called then execute this line
+                shapesJustStartedMoving = false;
+            }
+
+            shapeMover.update(shapes);
+        }
+
+        //shapeMover.update(shapes);
 
         for (GraveObject graveObject : graveObjects) {
             if (graveObject.graveDestroyed()) {
