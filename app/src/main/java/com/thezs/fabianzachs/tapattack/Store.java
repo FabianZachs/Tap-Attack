@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -125,11 +126,16 @@ public class Store {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 view.setSelected(true);
 
+                // todo if its an unlock item click: 1) check if valid number of points 2) get random index of locked item 3) unlock that item 4) remove that index from the locked list 5) remove cost of points from prefs
+
                 SharedPreferences.Editor prefsEditor = prefs.edit();
                 prefsEditor.putString(prefKey, names[position]);
                 prefsEditor.apply();
             }
         });
+
+
+
     }
     /*
     private void buildDialogOLD(final String[] names, Integer[] IDs, final String prefKey) {

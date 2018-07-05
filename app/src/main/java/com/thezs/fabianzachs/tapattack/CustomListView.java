@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
@@ -46,8 +47,9 @@ public class CustomListView extends ArrayAdapter<String> {
         else {
             viewHolder = (ViewHolder) r.getTag();
         }
-        viewHolder.itemImageSection.setImageResource(imgIDs[position]);
         viewHolder.itemNameSection.setText(itemNames[position].toUpperCase());
+        viewHolder.itemImageSection.setImageResource(imgIDs[position]);
+        viewHolder.itemLockedImage.setImageResource(R.drawable.lockeditem); // todo check with prefs if that item is locked/unlocked
         return r;
 
 
@@ -58,6 +60,7 @@ public class CustomListView extends ArrayAdapter<String> {
     class ViewHolder {
         TextView itemNameSection;
         ImageView itemImageSection;
+        ImageView itemLockedImage;
 
         ViewHolder(View v) {
             itemNameSection = (TextView) v.findViewById(R.id.item_name);
@@ -69,6 +72,8 @@ public class CustomListView extends ArrayAdapter<String> {
             layoutParams.height = Constants.SCREEN_WIDTH/6;
             itemImageSection.setLayoutParams(layoutParams);
 
+            itemLockedImage = (ImageView) v.findViewById(R.id.item_locked_image);
+            itemLockedImage.setLayoutParams(layoutParams);
         }
     }
 }

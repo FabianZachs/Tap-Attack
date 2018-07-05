@@ -43,19 +43,20 @@ public class Constants {
             R.drawable.thirdmultiplier, R.drawable.fourthmultiplier, R.drawable.fifthmultiplier, R.drawable.sixthmultiplier};
 
 
-    public static String[] GAMEMODES = {"tutorial", "classic", "unknown" };
+    public static String[] GAMEMODES = {"tutorial", "classic", "unknown"};
     public static Integer[] GAMEMODES_IDS = {R.drawable.instructionsgamemode,R.drawable.startbluebluered, R.drawable.lockeditem};
 
     public static String[] SHAPE_TYPES = {"straight","curved","paint","bit"};
     public static Integer[] SHAPE_TYPES_IDS = {R.drawable.straightoutline, R.drawable.curvedoutline, R.drawable.paintoutline, R.drawable.bitoutline};
 
 
-    public static String[] SHAPE_THEMES = {"neon","flat","vibrant","girly","oldfashion","fourthofjuly","google","russia wc","muted","primary","summer","rage"};
-    public static Integer[] SHAPE_THEMES_ID = {R.drawable.neonthemetemplate, R.drawable.flatthemetemplate,
+    public static String[] SHAPE_THEMES = {"unlock","neon","flat","vibrant","girly","oldfashion","fourthofjuly","google","russia wc","muted","primary","summer","rage"};
+    public static Integer[] SHAPE_THEMES_ID = {R.drawable.unlockitem2, R.drawable.neonthemetemplate, R.drawable.flatthemetemplate,
             R.drawable.vibrantthemetemplate, R.drawable.girlythemetemplate, R.drawable.oldfashionthemetemplate,
             R.drawable.fourthofjulythemetemplate, R.drawable.googlethemetempalte, R.drawable.russiawcthemetemplate,
             R.drawable.mutedthemetemplate, R.drawable.primarythemetemplate,R.drawable.summerthemetemplate,
             R.drawable.ragethemetemplate};
+    public static int SHAPE_THEMES_PRICE = 1000;
 
 
     //public static String[] BACKGROUNDS  = {"backgroundtriangleblue"};

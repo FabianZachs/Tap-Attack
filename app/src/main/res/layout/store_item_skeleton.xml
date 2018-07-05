@@ -26,6 +26,16 @@
             android:layout_marginBottom="15sp"
             android:layout_marginTop="15sp"
             />
+        <ImageView
+            android:id="@+id/item_locked_image"
+            android:layout_marginRight="30sp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15sp"
+            android:layout_marginTop="15sp"
+            />
 
 
 </RelativeLayout>

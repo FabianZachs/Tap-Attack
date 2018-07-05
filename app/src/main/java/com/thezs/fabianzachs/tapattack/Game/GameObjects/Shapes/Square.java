@@ -10,9 +10,11 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameOverReasons;
 import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
+import com.thezs.fabianzachs.tapattack.R;
 
 /**
  * Created by fabianzachs on 24/02/18.
@@ -72,9 +74,18 @@ public class Square extends ShapeObject {
             //mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
             //mediator.resetStreak();
             //mediator.setGameOver(GameOverReasons.wrongShapeAction(Square.this));
-            mediator.setGameOver(GameOverReasons.wrongShapeAction(Square.this, "fling", ""));
+            //mediator.setGameOver(GameOverReasons.wrongShapeAction(Square.this, "fling", ""));
+
+            StyleableToast.makeText(Constants.CURRENT_CONTEXT, "fling game over", R.style.successtoast).show();
             //Log.d("wrong action??", "onFling: ");
             return true;
+        }
+
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            //mediator.setGameOver(GameOverReasons.wrongShapeAction(Square.this, "scroll", ""));
+            StyleableToast.makeText(Constants.CURRENT_CONTEXT, "scroll game over", R.style.successtoast).show();
+            return super.onScroll(e1, e2, distanceX, distanceY);
         }
 
         @Override
