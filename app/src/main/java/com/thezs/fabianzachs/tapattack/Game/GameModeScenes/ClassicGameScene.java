@@ -1,6 +1,9 @@
 package com.thezs.fabianzachs.tapattack.Game.GameModeScenes;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
@@ -84,6 +87,40 @@ public class ClassicGameScene implements Scene {
         //streak.draw(canvas);
         shapesManager.draw(canvas);
         warningColor.draw(canvas);
+
+        // todo draw "TOUCH TO START" text in middle of screen if !mediator.gameMoving()
+        if (!mediator.gameMoving()) {
+            drawStartGameText(canvas);
+        }
+
+    }
+
+    private void drawStartGameText(Canvas canvas) {
+
+
+
+
+
+
+        Paint startGameTextPaint = new Paint();
+
+        Typeface plain = Typeface.createFromAsset(Constants.CURRENT_CONTEXT.getAssets(), "undinaru.ttf");
+        Typeface bold = Typeface.create(plain, Typeface.BOLD);
+        startGameTextPaint.setTypeface(bold);
+
+
+        startGameTextPaint.setColor(Color.WHITE);
+
+
+
+        startGameTextPaint.setTextSize(100);
+        startGameTextPaint.setTextAlign(Paint.Align.CENTER);
+        int xPos = (canvas.getWidth() / 2);
+        //int yPos = (int) ((canvas.getHeight() / 2) - ((startGameTextPaint.descent() + startGameTextPaint.ascent()) / 2)) ; center
+        int yPos = (int) (7*canvas.getHeight()) /8;
+        //((textPaint.descent() + textPaint.ascent()) / 2) is the distance from the baseline to the center.
+
+        canvas.drawText("TOUCH TO START", xPos, yPos, startGameTextPaint);
 
     }
 
