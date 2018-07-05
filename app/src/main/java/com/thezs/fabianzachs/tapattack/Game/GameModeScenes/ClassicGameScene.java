@@ -95,6 +95,7 @@ public class ClassicGameScene implements Scene {
 
     }
 
+    // todo refactor -- repeatedly calling new paint in thread cant be efficient. So do setupStartGameTExtPaint and then else statement above release the paint by setting null maybe??
     private void drawStartGameText(Canvas canvas) {
 
 
