@@ -75,6 +75,7 @@ public class ShapesPopulator {
 
         // todo start game with screen filled with shapes up to 3/4 of screen height
         ArrayList<Point> startShapeLocations = getSetOfValidStartShapeLocations();
+        Log.d("inittesting", "ShapesPopulator: "+startShapeLocations.size());
 
         for (Point shapeLocation : startShapeLocations) {
 
@@ -85,14 +86,14 @@ public class ShapesPopulator {
 
     private ArrayList<Point> getSetOfValidStartShapeLocations() {
         int i = 0;
-        int j = 0;
+        int j = (3 * Constants.SCREEN_HEIGHT)/4;
         ArrayList<Point> shapeLocations = new ArrayList<>();
 
-        while (j < (3 * Constants.SCREEN_HEIGHT)/4) {
+        while (j > 0) {
             i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left;
             shapeLocations.add(new Point(i,j));
 
-            j += SHAPE_SPACING + Constants.SHAPE_HEIGHT;
+            j -= SHAPE_SPACING + Constants.SHAPE_HEIGHT;
         }
 
         return shapeLocations;

@@ -81,18 +81,22 @@ public class Arrow extends ShapeObject {
 
         switch (intendedFlickDirectionString) {
             case "RIGHT":
+                //Log.d("anglefinder", "isCorrectFlick: " + angle + " " + intendedFlickDirectionString);
                 return (angle >= intendedFlickDirectionRadians - FLICK_DIRECTION_LENIENCY &&
                         angle <= intendedFlickDirectionRadians + FLICK_DIRECTION_LENIENCY);
 
                 // todo up and down havent been checked since they wont be in the game likely
             case "UP":
+                //Log.d("anglefinder", "isCorrectFlick: " + angle + " " + intendedFlickDirectionString);
                 return (angle >= intendedFlickDirectionRadians - FLICK_DIRECTION_LENIENCY &&
                         angle <= intendedFlickDirectionRadians + FLICK_DIRECTION_LENIENCY);
             case "DOWN":
+                //Log.d("anglefinder", "isCorrectFlick: " + angle + " " + intendedFlickDirectionString);
                 return (angle >= intendedFlickDirectionRadians - FLICK_DIRECTION_LENIENCY &&
                         angle <= intendedFlickDirectionRadians + FLICK_DIRECTION_LENIENCY);
             case "LEFT":
                 angle = getUnitCircleVersion(angle);
+                //Log.d("anglefinder", "isCorrectFlick: " + angle + " " + intendedFlickDirectionString);
                 return (angle >= intendedFlickDirectionRadians - FLICK_DIRECTION_LENIENCY &&
                         angle <= intendedFlickDirectionRadians + FLICK_DIRECTION_LENIENCY);
 
