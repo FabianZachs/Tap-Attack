@@ -142,7 +142,8 @@ public class ShapesManager {
             else shape.update();
 
         }
-        shapeMover.update(shapes);
+        if (mediator.gameMoving())
+            shapeMover.update(shapes);
 
 
         for (GraveObject graveObject : graveObjects) {

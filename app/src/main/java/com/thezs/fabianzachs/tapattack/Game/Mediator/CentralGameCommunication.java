@@ -33,6 +33,7 @@ public class CentralGameCommunication {
     //private ProgressBar progressBar;
     private WarningColor warningColor;
     private ShapeColorPicker shapeColorPicker;
+    private boolean shapesMoving = false;
 
     /* Tasks:
     * recieve messages regarding destruction of shape, incorrect taps of shape, (passing required info)
@@ -212,6 +213,14 @@ public class CentralGameCommunication {
 
     public int getWarningColorStreak() {
         return warningColor.getStreak();
+    }
+
+    public void startGameMotion() {
+        this.shapesMoving = true;
+    }
+
+    public boolean gameMoving() {
+        return shapesMoving;
     }
 
     //public void addObject(ShapeObject shape) {

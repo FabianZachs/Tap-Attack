@@ -93,6 +93,7 @@ public class ClassicGameScene implements Scene {
 
     @Override
     public void recieveTouch(MotionEvent event) {
+        mediator.startGameMotion();
         //if (!gameOver) {
             //shapesManager.recieveTouch(event);
         //}
