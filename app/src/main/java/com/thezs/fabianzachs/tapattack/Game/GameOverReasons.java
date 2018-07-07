@@ -38,7 +38,7 @@ public class GameOverReasons {
         //return "WRONG ACTION FOR THE " + shape.getClass().getSimpleName().toUpperCase();
 
         if (shape instanceof Arrow && shapeAction.equals("fling")) {
-            return "WRONG FLING DIRECTION FOR THE ARROW";
+            return "WRONG FLING DIRECTION FOR THE ARROW " + extraDetail; // todo maybe include actusl direction to fling in
         }
 
         return "DON'T " + shapeAction.toUpperCase() + " THE " + shape.getClass().getSimpleName().toUpperCase();

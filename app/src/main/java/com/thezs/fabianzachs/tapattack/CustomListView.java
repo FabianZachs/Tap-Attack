@@ -1,16 +1,13 @@
 package com.thezs.fabianzachs.tapattack;
 
 import android.app.Activity;
-import android.content.Context;
-import android.media.Image;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,13 +20,17 @@ public class CustomListView extends ArrayAdapter<String> {
     private String[] itemNames;
     private Integer[] imgIDs;
     private Activity context;
+    private SharedPreferences unlockedPrefs;
 
-    public CustomListView(Activity context, String[] itemNames, Integer[] imgIDs) {
+    public CustomListView(Activity context, SharedPreferences unlockedPrefs, String[] itemNames, Integer[] imgIDs) {
         super(context, R.layout.store_item_skeleton, itemNames);
 
         this.context = context;
         this.itemNames = itemNames;
         this.imgIDs = imgIDs;
+
+        this.unlockedPrefs = unlockedPrefs;
+
 
     }
 
@@ -49,7 +50,22 @@ public class CustomListView extends ArrayAdapter<String> {
         }
         viewHolder.itemNameSection.setText(itemNames[position].toUpperCase());
         viewHolder.itemImageSection.setImageResource(imgIDs[position]);
-        viewHolder.itemLockedImage.setImageResource(R.drawable.lockeditem); // todo check with prefs if that item is locked/unlocked
+
+
+
+
+// to unlock an item:
+        /*
+        SharedPreferences.Editor prefsEditior = unlockedPrefs.edit();
+        prefsEditior.putBoolean("neon", true);
+        prefsEditior.apply();
+        */
+
+        // we only want to display the lock icon if it is locked
+        if (!unlockedPrefs.getBoolean(itemNames[position], false))
+            viewHolder.itemLockedImage.setImageResource(R.drawable.lockeditem); // todo check with prefs if that item is locked/unlocked
+
+
         return r;
 
 

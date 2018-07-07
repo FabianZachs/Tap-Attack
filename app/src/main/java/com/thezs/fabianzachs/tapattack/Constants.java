@@ -34,8 +34,8 @@ public class Constants {
 
     public static String[] SHAPES = {"circle", "square", "cross", "arrow", "star"};
 
-    public static final String[] WARNING_COLOR_STREAK_REWARDS = {"shift up", "reduce speed", "stars", "more points"};
-    public static Integer[] WARNING_COLOR_STREAK_REWARDS_IDS = {R.drawable.shiftshapesupicon, R.drawable.reducespeedicon, R.drawable.turnintostarsicon, R.drawable.morepointsicon};
+    public static final String[] WARNING_COLOR_STREAK_REWARDS = {"unlock item","shift up", "reduce speed", "stars", "more points"};
+    public static Integer[] WARNING_COLOR_STREAK_REWARDS_IDS = {R.drawable.unlockitem2, R.drawable.shiftshapesupicon, R.drawable.reducespeedicon, R.drawable.turnintostarsicon, R.drawable.morepointsicon};
 
 
     public static String[] MULTIPLIERS = {"basic", "decent", "heating up","burning","fire!","insane!!"};
@@ -50,7 +50,7 @@ public class Constants {
     public static Integer[] SHAPE_TYPES_IDS = {R.drawable.straightoutline, R.drawable.curvedoutline, R.drawable.paintoutline, R.drawable.bitoutline};
 
 
-    public static String[] SHAPE_THEMES = {"unlock","neon","flat","vibrant","girly","oldfashion","fourthofjuly","google","russia wc","muted","primary","summer","rage"};
+    public static String[] SHAPE_THEMES = {"unlock item","neon","flat","vibrant","girly","oldfashion","fourthofjuly","google","russia wc","muted","primary","summer","rage"};
     public static Integer[] SHAPE_THEMES_ID = {R.drawable.unlockitem2, R.drawable.neonthemetemplate, R.drawable.flatthemetemplate,
             R.drawable.vibrantthemetemplate, R.drawable.girlythemetemplate, R.drawable.oldfashionthemetemplate,
             R.drawable.fourthofjulythemetemplate, R.drawable.googlethemetempalte, R.drawable.russiawcthemetemplate,

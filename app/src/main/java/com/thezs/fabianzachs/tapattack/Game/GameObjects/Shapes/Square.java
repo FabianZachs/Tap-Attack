@@ -30,6 +30,7 @@ public class Square extends ShapeObject {
         setLives(2);
         setProgressBarAddition(15);
         setGraveAble(false);
+        setPoints(2);
 
         //timeSetState = 0;
 

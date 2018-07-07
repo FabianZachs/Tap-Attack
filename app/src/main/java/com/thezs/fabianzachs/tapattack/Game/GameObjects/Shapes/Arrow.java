@@ -77,7 +77,10 @@ public class Arrow extends ShapeObject {
     }
 
     private boolean isCorrectFlick(float x1, float y1, float x2, float y2) {
-        Double angle = Math.atan2(y1 - y2, x2 - x1);
+        Double angle = Math.atan2(y1 - y2, x2 - x1); // more similar to unit circle
+        //Double angle = Math.atan2(y1-y2,x1-x2);
+
+        Log.d("anglefinder", "isCorrectFlick: " + angle + " " + intendedFlickDirectionString);
 
         switch (intendedFlickDirectionString) {
             case "RIGHT":
@@ -92,11 +95,13 @@ public class Arrow extends ShapeObject {
                         angle <= intendedFlickDirectionRadians + FLICK_DIRECTION_LENIENCY);
             case "DOWN":
                 //Log.d("anglefinder", "isCorrectFlick: " + angle + " " + intendedFlickDirectionString);
+
                 return (angle >= intendedFlickDirectionRadians - FLICK_DIRECTION_LENIENCY &&
                         angle <= intendedFlickDirectionRadians + FLICK_DIRECTION_LENIENCY);
             case "LEFT":
                 angle = getUnitCircleVersion(angle);
                 //Log.d("anglefinder", "isCorrectFlick: " + angle + " " + intendedFlickDirectionString);
+
                 return (angle >= intendedFlickDirectionRadians - FLICK_DIRECTION_LENIENCY &&
                         angle <= intendedFlickDirectionRadians + FLICK_DIRECTION_LENIENCY);
 
@@ -153,7 +158,7 @@ public class Arrow extends ShapeObject {
                 else if (System.currentTimeMillis() - timeOfLastPenalty > 1000) {
                     //mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
                     //mediator.resetStreak();
-                    mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this, "fling", "in that direction"));
+                    mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this, "fling", "in that direction " + intendedFlickDirectionString+" " + Math.atan2(event1.getY() - event2.getY(), event2.getX() - event1.getX())));
                     //mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this));
                     //StyleableToast.makeText(Constants.CURRENT_CONTEXT, "wrong flick direction", R.style.successtoast).show();
                     timeOfLastPenalty = System.currentTimeMillis();

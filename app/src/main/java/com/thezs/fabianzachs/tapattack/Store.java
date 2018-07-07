@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -13,7 +14,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
+
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * Created by fabianzachs on 05/06/18.
@@ -118,8 +122,8 @@ public class Store {
 
     private void setupStoreSectionList(View alertView , AlertDialog dialog, final String[] names, final Integer[] IDs, final String prefKey) {
 
-        ListView mList = (ListView) alertView.findViewById(R.id.item_list);
-        CustomListView customListView = new CustomListView(mainMenuActivity, names, IDs);
+        final ListView mList = (ListView) alertView.findViewById(R.id.item_list);
+        final CustomListView customListView = new CustomListView(mainMenuActivity, mainMenuActivity.getSharedPreferences("unlocks", Context.MODE_PRIVATE),names, IDs);
         mList.setAdapter(customListView);
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -127,10 +131,31 @@ public class Store {
                 view.setSelected(true);
 
                 // todo if its an unlock item click: 1) check if valid number of points 2) get random index of locked item 3) unlock that item 4) remove that index from the locked list 5) remove cost of points from prefs
+                if (position == 0) {
+                    // todo execute random unlock ( make sure enough points)
+                    Random random = new Random();
+                    int positionToUnlock = random.nextInt(names.length - 1) + 1;
+                    //StyleableToast.makeText(Constants.CURRENT_CONTEXT, positionToUnlock+"",R.style.successtoast).show();
 
+
+                    // todo scroll to unlocked item
+                    int h1 = mList.getHeight();
+                    int h2 = mList.getHeight();
+
+                    //mList.smoothScrollToPositionFromTop(position, h1/2 - h2/2, duration);
+                    mList.smoothScrollToPositionFromTop(positionToUnlock, 0, 1000);
+
+                    mList.setSelection(positionToUnlock);
+
+                    // todo maybe make text red if not enough points
+
+                }
+                // todo if position is unlocked item toggle item
                 SharedPreferences.Editor prefsEditor = prefs.edit();
                 prefsEditor.putString(prefKey, names[position]);
                 prefsEditor.apply();
+                // todo if position is locked item launch pay for item dialog REAL MONEY
+
             }
         });
 
