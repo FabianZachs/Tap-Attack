@@ -38,16 +38,16 @@ public class Constants {
     public static Integer[] WARNING_COLOR_STREAK_REWARDS_IDS = {R.drawable.unlockitem2, R.drawable.shiftshapesupicon, R.drawable.reducespeedicon, R.drawable.turnintostarsicon, R.drawable.morepointsicon};
 
 
-    public static String[] MULTIPLIERS = {"basic", "decent", "heating up","burning","fire!","insane!!"};
-    public static Integer[] MULTIPLIER_IDS = {R.drawable.firstmultiplier, R.drawable.secondmultiplier,
+    public static String[] MULTIPLIERS = {"unlock item", "basic", "decent", "heating up","burning","fire!","insane!!"};
+    public static Integer[] MULTIPLIER_IDS = {R.drawable.unlockitem2, R.drawable.firstmultiplier, R.drawable.secondmultiplier,
             R.drawable.thirdmultiplier, R.drawable.fourthmultiplier, R.drawable.fifthmultiplier, R.drawable.sixthmultiplier};
 
 
-    public static String[] GAMEMODES = {"tutorial", "classic", "unknown"};
-    public static Integer[] GAMEMODES_IDS = {R.drawable.instructionsgamemode,R.drawable.startbluebluered, R.drawable.lockeditem};
+    public static String[] GAMEMODES = {"unlock item","tutorial", "classic", "unknown"};
+    public static Integer[] GAMEMODES_IDS = {R.drawable.unlockitem2, R.drawable.instructionsgamemode,R.drawable.startbluebluered, R.drawable.lockeditem};
 
-    public static String[] SHAPE_TYPES = {"straight","curved","paint","bit"};
-    public static Integer[] SHAPE_TYPES_IDS = {R.drawable.straightoutline, R.drawable.curvedoutline, R.drawable.paintoutline, R.drawable.bitoutline};
+    public static String[] SHAPE_TYPES = {"unlock item", "straight","curved","paint","bit"};
+    public static Integer[] SHAPE_TYPES_IDS = {R.drawable.unlockitem2, R.drawable.straightoutline, R.drawable.curvedoutline, R.drawable.paintoutline, R.drawable.bitoutline};
 
 
     public static String[] SHAPE_THEMES = {"unlock item","neon","flat","vibrant","girly","oldfashion","fourthofjuly","google","russia wc","muted","primary","summer","rage"};
@@ -60,8 +60,8 @@ public class Constants {
 
 
     //public static String[] BACKGROUNDS  = {"backgroundtriangleblue"};
-    public static String[] BACKGROUNDS  = {"triangle-blue", "sky"};
-    public static Integer[] BACKGROUNDS_ID = {R.drawable.backgroundtriangleblue, R.drawable.skybackground};
+    public static String[] BACKGROUNDS  = {"unlock item", "triangle-blue", "sky"};
+    public static Integer[] BACKGROUNDS_ID = {R.drawable.unlockitem2, R.drawable.backgroundtriangleblue, R.drawable.skybackground};
 
     public static Map<String, String[]> COLORS; // theme -> [] of colors
     public static String[] NEONCOLORS = {"blue","yellow","red","purple","green"};

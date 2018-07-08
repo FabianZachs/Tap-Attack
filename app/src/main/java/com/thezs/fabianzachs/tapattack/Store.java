@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -121,9 +122,10 @@ public class Store {
     }
 
     private void setupStoreSectionList(View alertView , AlertDialog dialog, final String[] names, final Integer[] IDs, final String prefKey) {
+        final SharedPreferences unlockedPrefs = mainMenuActivity.getSharedPreferences("unlocks", Context.MODE_PRIVATE);
 
         final ListView mList = (ListView) alertView.findViewById(R.id.item_list);
-        final CustomListView customListView = new CustomListView(mainMenuActivity, mainMenuActivity.getSharedPreferences("unlocks", Context.MODE_PRIVATE),names, IDs);
+        final CustomListView customListView = new CustomListView(mainMenuActivity, unlockedPrefs,names, IDs);
         mList.setAdapter(customListView);
 
 
@@ -140,12 +142,14 @@ public class Store {
                     int positionToUnlock = random.nextInt(names.length - 1) + 1;
                     //StyleableToast.makeText(Constants.CURRENT_CONTEXT, positionToUnlock+"",R.style.successtoast).show();
 
+                    SharedPreferences.Editor unlockedEditor = unlockedPrefs.edit();
+                    unlockedEditor.putBoolean(names[positionToUnlock], true);
+                    unlockedEditor.apply();
 
-                    // todo scroll to unlocked item
+
                     int h1 = mList.getHeight();
-                    int h2 = mList.getHeight();
-
-                    //mList.smoothScrollToPositionFromTop(position, h1/2 - h2/2, duration);
+                    int h2 = mList.getWidth();
+                    //mList.smoothScrollToPositionFromTop(position, h1/2 - h2/2, 1000);
                     mList.smoothScrollToPositionFromTop(positionToUnlock, 0, 1000);
 
 

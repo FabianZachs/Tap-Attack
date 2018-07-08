@@ -57,11 +57,13 @@ public class CustomListView extends ArrayAdapter<String> {
 
 // to unlock an item:
 
+
         /*
         SharedPreferences.Editor prefsEditior = unlockedPrefs.edit();
-        prefsEditior.putBoolean("unlock item", true);
+        prefsEditior.putBoolean("neon", true);
         prefsEditior.apply();
-*/
+        */
+
 
         // we only want to display the lock icon if it is locked
         if (!unlockedPrefs.getBoolean( itemNames[position], false) && (position != 0)) {
