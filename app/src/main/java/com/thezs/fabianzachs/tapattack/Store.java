@@ -125,10 +125,13 @@ public class Store {
         final ListView mList = (ListView) alertView.findViewById(R.id.item_list);
         final CustomListView customListView = new CustomListView(mainMenuActivity, mainMenuActivity.getSharedPreferences("unlocks", Context.MODE_PRIVATE),names, IDs);
         mList.setAdapter(customListView);
+
+
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 view.setSelected(true);
+
 
                 // todo if its an unlock item click: 1) check if valid number of points 2) get random index of locked item 3) unlock that item 4) remove that index from the locked list 5) remove cost of points from prefs
                 if (position == 0) {
@@ -145,15 +148,22 @@ public class Store {
                     //mList.smoothScrollToPositionFromTop(position, h1/2 - h2/2, duration);
                     mList.smoothScrollToPositionFromTop(positionToUnlock, 0, 1000);
 
-                    mList.setSelection(positionToUnlock);
+
+                    mList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+                    mList.setItemChecked(positionToUnlock,true);
+                    position = positionToUnlock;
+
 
                     // todo maybe make text red if not enough points
 
                 }
+
                 // todo if position is unlocked item toggle item
                 SharedPreferences.Editor prefsEditor = prefs.edit();
                 prefsEditor.putString(prefKey, names[position]);
                 prefsEditor.apply();
+
                 // todo if position is locked item launch pay for item dialog REAL MONEY
 
             }

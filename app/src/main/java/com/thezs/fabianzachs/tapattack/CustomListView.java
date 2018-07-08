@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,15 +56,21 @@ public class CustomListView extends ArrayAdapter<String> {
 
 
 // to unlock an item:
+
         /*
         SharedPreferences.Editor prefsEditior = unlockedPrefs.edit();
-        prefsEditior.putBoolean("neon", true);
+        prefsEditior.putBoolean("unlock item", true);
         prefsEditior.apply();
-        */
+*/
 
         // we only want to display the lock icon if it is locked
-        if (!unlockedPrefs.getBoolean(itemNames[position], false))
+        if (!unlockedPrefs.getBoolean( itemNames[position], false) && (position != 0)) {
+            Log.d("position", "getView: "+position);
             viewHolder.itemLockedImage.setImageResource(R.drawable.lockeditem); // todo check with prefs if that item is locked/unlocked
+
+        }
+        else
+            viewHolder.itemLockedImage.setImageResource(android.R.color.transparent);
 
 
         return r;
