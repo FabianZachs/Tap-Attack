@@ -36,19 +36,26 @@ public class Constants {
 
     public static final String[] WARNING_COLOR_STREAK_REWARDS = {"unlock item","shift up", "reduce speed", "stars", "more points"};
     public static Integer[] WARNING_COLOR_STREAK_REWARDS_IDS = {R.drawable.unlockitem2, R.drawable.shiftshapesupicon, R.drawable.reducespeedicon, R.drawable.turnintostarsicon, R.drawable.morepointsicon};
+    public static int[] WARNING_COLOR_STREAK_REWARDS_IDS_PRICE_POINTS = {5000, 5000, 5000, 5000, 5000};
+    public static int[] WARNING_COLOR_STREAK_REWARDS_IDS_PRICE_MONEY = {0, 1, 1, 1, 1};
 
 
-    public static String[] MULTIPLIERS = {"unlock item", "basic", "decent", "heating up","burning","fire!","insane!!"};
-    public static Integer[] MULTIPLIER_IDS = {R.drawable.unlockitem2, R.drawable.firstmultiplier, R.drawable.secondmultiplier,
+    public static String[] MULTIPLIERS = {"basic", "decent", "heating up","burning","fire!","insane!!"};
+    public static Integer[] MULTIPLIER_IDS = {R.drawable.firstmultiplier, R.drawable.secondmultiplier,
             R.drawable.thirdmultiplier, R.drawable.fourthmultiplier, R.drawable.fifthmultiplier, R.drawable.sixthmultiplier};
+    public static int[] MULTIPLIERS_PRICE_POINTS = {-1, -1, -1, -1, -1, -1};
+    public static int[] MULTIPLIERS_PRICE_MONEY = {0, 1, 2, 3, 4, 5};
 
 
     public static String[] GAMEMODES = {"unlock item","tutorial", "classic", "unknown"};
     public static Integer[] GAMEMODES_IDS = {R.drawable.unlockitem2, R.drawable.instructionsgamemode,R.drawable.startbluebluered, R.drawable.lockeditem};
+    public static int[] GAMEMODES_PRICE_POINTS = {5000, 0, 0, 1000};
+    public static int[] GAMEMODES_PRICE_MONEY = {0, 0, 0, 1};
 
     public static String[] SHAPE_TYPES = {"unlock item", "straight","curved","paint","bit"};
     public static Integer[] SHAPE_TYPES_IDS = {R.drawable.unlockitem2, R.drawable.straightoutline, R.drawable.curvedoutline, R.drawable.paintoutline, R.drawable.bitoutline};
-
+    public static int[] SHAPE_TYPES_PRICE_POINTS = {10000, 10000, 10000, 10000, 10000};
+    public static int[] SHAPE_TYPES_PRICE_MONEY = {0, 1, 1, 1, 1};
 
     public static String[] SHAPE_THEMES = {"unlock item","neon","flat","vibrant","girly","oldfashion","fourthofjuly","google","russia wc","muted","primary","summer","rage"};
     public static Integer[] SHAPE_THEMES_ID = {R.drawable.unlockitem2, R.drawable.neonthemetemplate, R.drawable.flatthemetemplate,
@@ -56,12 +63,14 @@ public class Constants {
             R.drawable.fourthofjulythemetemplate, R.drawable.googlethemetempalte, R.drawable.russiawcthemetemplate,
             R.drawable.mutedthemetemplate, R.drawable.primarythemetemplate,R.drawable.summerthemetemplate,
             R.drawable.ragethemetemplate};
-    public static int SHAPE_THEMES_PRICE = 1000;
-
+    public static int[] SHAPE_THEMES_PRICE_POINTS = {0, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000};
+    public static int[] SHAPE_THEMES_PRICE_MONEY = {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 
     //public static String[] BACKGROUNDS  = {"backgroundtriangleblue"};
     public static String[] BACKGROUNDS  = {"unlock item", "triangle-blue", "sky"};
     public static Integer[] BACKGROUNDS_ID = {R.drawable.unlockitem2, R.drawable.backgroundtriangleblue, R.drawable.skybackground};
+    public static int[] BACKGROUNDS_PRICE_POINTS = {0, 5000, 5000};
+    public static int[] BACKGROUNDS_PRICE_MONEY = {0, 1, 1};
 
     public static Map<String, String[]> COLORS; // theme -> [] of colors
     public static String[] NEONCOLORS = {"blue","yellow","red","purple","green"};

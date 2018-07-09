@@ -37,7 +37,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 COLUMN_RESOURCEID + " INTEGER, " +
                 COLUMN_PRICEPOINTS+ " INTEGER, " +
                 COLUMN_PRICEMONEY + " INTEGER, " +
-                COLUMN_UNLOCKED + " BOOLEAN " +
+                COLUMN_UNLOCKED + " BIT " +
                 ");";
 
         sqLiteDatabase.execSQL(query);
@@ -79,6 +79,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         while(!pointer.isAfterLast()) {
             if (pointer.getString(pointer.getColumnIndex(COLUMN_NAME)) != null) {
                 dbString += pointer.getString(pointer.getColumnIndex(COLUMN_NAME));
+                dbString += pointer.getString(pointer.getColumnIndex(COLUMN_UNLOCKED));
                 dbString += "\n";
             }
             pointer.moveToNext();
@@ -87,4 +88,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return dbString;
 
     }
+
+    public void removeAllRows() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("delete from "+ TABLE_STOREITEMS);
+    }
+
 }

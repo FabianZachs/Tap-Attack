@@ -148,14 +148,60 @@ public class MainMenuActivity extends  GeneralParent {
         //initMusic(R.raw.mainmenu);
 
         /////////////// DATABASE ////////////////
+
+
+        //if (!prefs.getBoolean("firstTime", false)) {
+        databaseSetup();
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("firstTime", true);
+        editor.apply();
+        //}
+
+
+
+
+        //MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+        //dbHandler.deleteStoreItem("neon");
+        //Log.d("database", "stuff "+dbHandler.databaseToString());
+
+    }
+
+    private void databaseSetup() {
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-        StoreItem storeItem = new StoreItem("theme", "neon", R.drawable.neonthemetemplate,
-                5000, 1, false);
+        dbHandler.removeAllRows();
+        //StoreItem storeItem = new StoreItem("theme", "neon", R.drawable.neonthemetemplate,
+        //        5000, 1, false);
+        //dbHandler.addStoreItem(storeItem);
 
-        dbHandler.addStoreItem(storeItem);
 
-        dbHandler.deleteStoreItem("neon");
-        Log.d("database", "stuff "+dbHandler.databaseToString());
+        storeItemsSetup(dbHandler,"shape theme", Constants.SHAPE_THEMES, Constants.SHAPE_THEMES_ID, Constants.SHAPE_THEMES_PRICE_POINTS, Constants.SHAPE_THEMES_PRICE_MONEY);
+        storeItemsSetup(dbHandler,"shape type", Constants.SHAPE_TYPES, Constants.SHAPE_TYPES_IDS, Constants.SHAPE_TYPES_PRICE_POINTS, Constants.SHAPE_TYPES_PRICE_MONEY);
+        storeItemsSetup(dbHandler,"background", Constants.BACKGROUNDS, Constants.BACKGROUNDS_ID, Constants.BACKGROUNDS_PRICE_POINTS, Constants.BACKGROUNDS_PRICE_MONEY);
+        storeItemsSetup(dbHandler,"game mode", Constants.GAMEMODES, Constants.GAMEMODES_IDS, Constants.GAMEMODES_PRICE_POINTS, Constants.GAMEMODES_PRICE_MONEY);
+        storeItemsSetup(dbHandler,"multiplier", Constants.MULTIPLIERS, Constants.MULTIPLIER_IDS, Constants.MULTIPLIERS_PRICE_POINTS, Constants.MULTIPLIERS_PRICE_MONEY);
+        storeItemsSetup(dbHandler,"color streak", Constants.WARNING_COLOR_STREAK_REWARDS, Constants.WARNING_COLOR_STREAK_REWARDS_IDS, Constants.WARNING_COLOR_STREAK_REWARDS_IDS_PRICE_POINTS, Constants.WARNING_COLOR_STREAK_REWARDS_IDS_PRICE_MONEY);
+
+        unlockBeginningItems(dbHandler);
+        Log.d("database", ""+dbHandler.databaseToString());
+
+    }
+
+    private void unlockBeginningItems(MyDBHandler dbHandler) {
+        dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.SHAPE_THEMES[1] + "';");
+        dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.BACKGROUNDS[1] + "';");
+        dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.SHAPE_TYPES[1] + "';");
+        dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.GAMEMODES[1] + "';");
+        dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.GAMEMODES[2] + "';");
+        dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.GAMEMODES[3] + "';");
+        dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.MULTIPLIERS[0] + "';");
+
+    }
+
+    private void storeItemsSetup(MyDBHandler dbHandler, String category, String names[], Integer ids[], int[] pricePoints, int[] priceMoney) {
+        for (int i = 0;  i < names.length ; i++ ) {
+            dbHandler.addStoreItem(new StoreItem(category,names[i],ids[i], pricePoints[i], priceMoney[i], false));
+        }
 
     }
 
