@@ -138,6 +138,7 @@ public class Store {
                 // todo if its an unlock item click: 1) check if valid number of points 2) get random index of locked item 3) unlock that item 4) remove that index from the locked list 5) remove cost of points from prefs
                 if (position == 0) {
                     // todo execute random unlock ( make sure enough points)
+
                     Random random = new Random();
                     int positionToUnlock = random.nextInt(names.length - 1) + 1;
                     //StyleableToast.makeText(Constants.CURRENT_CONTEXT, positionToUnlock+"",R.style.successtoast).show();
@@ -147,9 +148,6 @@ public class Store {
                     unlockedEditor.apply();
 
 
-                    int h1 = mList.getHeight();
-                    int h2 = mList.getWidth();
-                    //mList.smoothScrollToPositionFromTop(position, h1/2 - h2/2, 1000);
                     mList.smoothScrollToPositionFromTop(positionToUnlock, 0, 1000);
 
 
@@ -162,6 +160,17 @@ public class Store {
                     // todo maybe make text red if not enough points
 
                 }
+
+                else {
+
+                    if (unlockedPrefs.getBoolean(names[position],false)) {
+                        StyleableToast.makeText(mainMenuActivity,  "unlocked", R.style.successtoast).show();
+                    }
+                    else
+                        StyleableToast.makeText(mainMenuActivity,  "locked", R.style.successtoast).show();
+
+
+                    }
 
                 // todo if position is unlocked item toggle item
                 SharedPreferences.Editor prefsEditor = prefs.edit();

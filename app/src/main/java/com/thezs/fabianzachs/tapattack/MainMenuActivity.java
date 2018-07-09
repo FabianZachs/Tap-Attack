@@ -39,6 +39,8 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.ads.AdView;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
+import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
+import com.thezs.fabianzachs.tapattack.Database.StoreItem;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundManager;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.Backgrounds.GameBackground;
 import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
@@ -144,6 +146,17 @@ public class MainMenuActivity extends  GeneralParent {
 
 
         //initMusic(R.raw.mainmenu);
+
+        /////////////// DATABASE ////////////////
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+        StoreItem storeItem = new StoreItem("theme", "neon", R.drawable.neonthemetemplate,
+                5000, 1, false);
+
+        dbHandler.addStoreItem(storeItem);
+
+        dbHandler.deleteStoreItem("neon");
+        Log.d("database", "stuff "+dbHandler.databaseToString());
+
     }
 
     private void setupPointsDisplay() {
