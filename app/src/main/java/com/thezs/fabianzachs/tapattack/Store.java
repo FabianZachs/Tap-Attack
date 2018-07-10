@@ -85,22 +85,22 @@ public class Store {
         setupDialogDismissForStoreSection(multiplierSectionAlertView, multiplierSectionDialog);
         setupDialogDismissForStoreSection(warningColorStreakSectionAlertView, warningColorStreakSectionDialog);
 
-        setupStoreSectionList(colorSectionAlertView, colorSectionDialog, Constants.SHAPE_THEMES,
+        setupStoreSectionList(colorSectionAlertView, colorSectionDialog, "unlockablebypoints", Constants.SHAPE_THEMES,
             Constants.SHAPE_THEMES_ID, "shapeTheme");
 
-        setupStoreSectionList(typeSectionAlertView,typeSectionDialog,Constants.SHAPE_TYPES,
+        setupStoreSectionList(typeSectionAlertView,typeSectionDialog,"unlockablebypoints", Constants.SHAPE_TYPES,
                Constants.SHAPE_TYPES_IDS, "shapeType");
 
-        setupStoreSectionList(backgroundSectionAlertView,backgroundSectionDialog, Constants.BACKGROUNDS,
+        setupStoreSectionList(backgroundSectionAlertView,backgroundSectionDialog, "unlockablebypoints", Constants.BACKGROUNDS,
                 Constants.BACKGROUNDS_ID,"background");
 
-        setupStoreSectionList(gamemodeSectionAlertView, gamemodeSectionDialog, Constants.GAMEMODES,
+        setupStoreSectionList(gamemodeSectionAlertView, gamemodeSectionDialog, "unlockablebypoints", Constants.GAMEMODES,
                 Constants.GAMEMODES_IDS, "gamemode");
 
-        setupStoreSectionList(multiplierSectionAlertView,multiplierSectionDialog,Constants.MULTIPLIERS,
+        setupStoreSectionList(multiplierSectionAlertView,multiplierSectionDialog, "notunlockablebypoints", Constants.MULTIPLIERS,
                 Constants.MULTIPLIER_IDS, "multiplier");
 
-        setupStoreSectionList(warningColorStreakSectionAlertView,warningColorStreakSectionDialog, Constants.WARNING_COLOR_STREAK_REWARDS,
+        setupStoreSectionList(warningColorStreakSectionAlertView,warningColorStreakSectionDialog, "unlockablebypoints", Constants.WARNING_COLOR_STREAK_REWARDS,
                 Constants.WARNING_COLOR_STREAK_REWARDS_IDS, "warningcolorstreakreward");
 
 //        this.mainStoreAlertView = mainMenuActivity.getLayoutInflater().inflate(R.layout.store_main_menu, null);
@@ -121,66 +121,75 @@ public class Store {
         okButtonLockInSetup(alertView, dialog, mainStoreAlertView);
     }
 
-    private void setupStoreSectionList(View alertView , AlertDialog dialog, final String[] names, final Integer[] IDs, final String prefKey) {
+    private void setupStoreSectionList(View alertView , AlertDialog dialog, String storeSection, final String[] names, final Integer[] IDs, final String prefKey) {
         final SharedPreferences unlockedPrefs = mainMenuActivity.getSharedPreferences("unlocks", Context.MODE_PRIVATE);
 
         final ListView mList = (ListView) alertView.findViewById(R.id.item_list);
         final CustomListView customListView = new CustomListView(mainMenuActivity, unlockedPrefs,names, IDs);
         mList.setAdapter(customListView);
 
-
-        mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                view.setSelected(true);
-
-
-                // todo if its an unlock item click: 1) check if valid number of points 2) get random index of locked item 3) unlock that item 4) remove that index from the locked list 5) remove cost of points from prefs
-                if (position == 0) {
-                    // todo execute random unlock ( make sure enough points)
-
-                    Random random = new Random();
-                    int positionToUnlock = random.nextInt(names.length - 1) + 1;
-                    //StyleableToast.makeText(Constants.CURRENT_CONTEXT, positionToUnlock+"",R.style.successtoast).show();
-
-                    SharedPreferences.Editor unlockedEditor = unlockedPrefs.edit();
-                    unlockedEditor.putBoolean(names[positionToUnlock], true);
-                    unlockedEditor.apply();
+        switch (storeSection) {
+            case "unlockablebypoints":
+                mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                        view.setSelected(true);
 
 
-                    mList.smoothScrollToPositionFromTop(positionToUnlock, 0, 1000);
+                        // todo if its an unlock item click: 1) check if valid number of points 2) get random index of locked item 3) unlock that item 4) remove that index from the locked list 5) remove cost of points from prefs
+                        if (position == 0) {
+                            // todo execute random unlock ( make sure enough points)
+
+                            Random random = new Random();
+                            int positionToUnlock = random.nextInt(names.length - 1) + 1;
+                            //StyleableToast.makeText(Constants.CURRENT_CONTEXT, positionToUnlock+"",R.style.successtoast).show();
+
+                            SharedPreferences.Editor unlockedEditor = unlockedPrefs.edit();
+                            unlockedEditor.putBoolean(names[positionToUnlock], true);
+                            unlockedEditor.apply();
 
 
-                    mList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
-                    mList.setItemChecked(positionToUnlock,true);
-                    position = positionToUnlock;
+                            mList.smoothScrollToPositionFromTop(positionToUnlock, 0, 1000);
 
 
-                    // todo maybe make text red if not enough points
+                            mList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
-                }
+                            mList.setItemChecked(positionToUnlock,true);
+                            position = positionToUnlock;
 
-                else {
 
-                    if (unlockedPrefs.getBoolean(names[position],false)) {
-                        StyleableToast.makeText(mainMenuActivity,  "unlocked", R.style.successtoast).show();
+                            // todo maybe make text red if not enough points
+
+                        }
+
+                        else {
+
+                            if (unlockedPrefs.getBoolean(names[position],false)) {
+                                StyleableToast.makeText(mainMenuActivity,  "unlocked", R.style.successtoast).show();
+                            }
+                            else
+                                StyleableToast.makeText(mainMenuActivity,  "locked", R.style.successtoast).show();
+
+
+                        }
+
+                        // todo if position is unlocked item toggle item
+                        SharedPreferences.Editor prefsEditor = prefs.edit();
+                        prefsEditor.putString(prefKey, names[position]);
+                        prefsEditor.apply();
+
+                        // todo if position is locked item launch pay for item dialog REAL MONEY
+
                     }
-                    else
-                        StyleableToast.makeText(mainMenuActivity,  "locked", R.style.successtoast).show();
+                });
 
+                return;
 
-                    }
+            case "notunlockablebypoints":
 
-                // todo if position is unlocked item toggle item
-                SharedPreferences.Editor prefsEditor = prefs.edit();
-                prefsEditor.putString(prefKey, names[position]);
-                prefsEditor.apply();
+                return;
+        }
 
-                // todo if position is locked item launch pay for item dialog REAL MONEY
-
-            }
-        });
 
 
 

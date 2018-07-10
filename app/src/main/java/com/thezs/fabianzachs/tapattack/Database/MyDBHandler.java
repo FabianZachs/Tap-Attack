@@ -7,6 +7,8 @@ import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 /**
  * Created by fabianzachs on 09/07/18.
  */
@@ -86,6 +88,29 @@ public class MyDBHandler extends SQLiteOpenHelper {
         }
         db.close();
         return dbString;
+
+    }
+
+    public String[] getListOfLockedItems(String category) {
+        String query = "SELECT * FROM " + TABLE_STOREITEMS + " WHERE " + COLUMN_UNLOCKED + " = 0 AND " + COLUMN_CATEGORY + " = \'" + category + "\';";
+        ArrayList<String> lockedItems = new ArrayList<>();
+
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor pointer = db.rawQuery(query, null);
+        pointer.moveToFirst();
+
+        while(!pointer.isAfterLast()) {
+            if (pointer.getString(pointer.getColumnIndex(COLUMN_NAME)) != null) {
+                lockedItems.add(pointer.getString(pointer.getColumnIndex(COLUMN_NAME)));
+            }
+            pointer.moveToNext();
+        }
+        db.close();
+
+        String[] lockedArray = new String[ lockedItems.size() ];
+        lockedItems.toArray(lockedArray);
+        return lockedArray;
 
     }
 

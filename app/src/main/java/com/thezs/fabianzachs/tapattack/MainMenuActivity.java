@@ -150,7 +150,7 @@ public class MainMenuActivity extends  GeneralParent {
         /////////////// DATABASE ////////////////
 
 
-        //if (!prefs.getBoolean("firstTime", false)) {
+        //if (!prefs.getBoolean("firstTime", false)) { // todo uncomment when complete
         databaseSetup();
 
         SharedPreferences.Editor editor = prefs.edit();
@@ -183,18 +183,25 @@ public class MainMenuActivity extends  GeneralParent {
         storeItemsSetup(dbHandler,"color streak", Constants.WARNING_COLOR_STREAK_REWARDS, Constants.WARNING_COLOR_STREAK_REWARDS_IDS, Constants.WARNING_COLOR_STREAK_REWARDS_IDS_PRICE_POINTS, Constants.WARNING_COLOR_STREAK_REWARDS_IDS_PRICE_MONEY);
 
         unlockBeginningItems(dbHandler);
-        Log.d("database", ""+dbHandler.databaseToString());
+        Log.d("database", ""+dbHandler.getListOfLockedItems("shape theme").length);
+        //Log.d("database", ""+dbHandler.getListOfLockedItems("color streak").length);
+        //Log.d("database", ""+dbHandler.databaseToString());
 
     }
 
     private void unlockBeginningItems(MyDBHandler dbHandler) {
+        dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.SHAPE_THEMES[0] + "';");
         dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.SHAPE_THEMES[1] + "';");
+        dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.BACKGROUNDS[0] + "';");
         dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.BACKGROUNDS[1] + "';");
+        dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.SHAPE_TYPES[0] + "';");
         dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.SHAPE_TYPES[1] + "';");
+        dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.GAMEMODES[0] + "';");
         dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.GAMEMODES[1] + "';");
         dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.GAMEMODES[2] + "';");
         dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.GAMEMODES[3] + "';");
         dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.MULTIPLIERS[0] + "';");
+        dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.WARNING_COLOR_STREAK_REWARDS[0] + "';");
 
     }
 
