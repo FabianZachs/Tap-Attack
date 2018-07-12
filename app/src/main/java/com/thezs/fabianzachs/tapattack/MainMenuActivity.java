@@ -183,7 +183,11 @@ public class MainMenuActivity extends  GeneralParent {
         storeItemsSetup(dbHandler,"color streak", Constants.WARNING_COLOR_STREAK_REWARDS, Constants.WARNING_COLOR_STREAK_REWARDS_IDS, Constants.WARNING_COLOR_STREAK_REWARDS_IDS_PRICE_POINTS, Constants.WARNING_COLOR_STREAK_REWARDS_IDS_PRICE_MONEY);
 
         unlockBeginningItems(dbHandler);
-        Log.d("database", ""+dbHandler.getListOfLockedItems("shape theme").length);
+        /*
+        for(String name : dbHandler.getListOfLockedItems("shape theme")) {
+            Log.d("database", "" + name);
+        }*/
+        //Log.d("database", ""+dbHandler.getListOfLockedItems("shape theme").length);
         //Log.d("database", ""+dbHandler.getListOfLockedItems("color streak").length);
         //Log.d("database", ""+dbHandler.databaseToString());
 

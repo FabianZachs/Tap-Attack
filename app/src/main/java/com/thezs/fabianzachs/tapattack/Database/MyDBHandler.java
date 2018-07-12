@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by fabianzachs on 09/07/18.
@@ -111,8 +113,29 @@ public class MyDBHandler extends SQLiteOpenHelper {
         String[] lockedArray = new String[ lockedItems.size() ];
         lockedItems.toArray(lockedArray);
         return lockedArray;
+    }
+
+    public HashMap<String, Boolean> getMapOFItemsWithUnlockStatus(String category) {
+        HashMap<String, Boolean> itemsAndUnlockedStatus = new HashMap<>();
+        String query = "SELECT ";
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor pointer = db.rawQuery(query, null);
+        pointer.moveToFirst();
+
+        while(!pointer.isAfterLast()) {
+            if (pointer.getString(pointer.getColumnIndex(COLUMN_NAME)) != null) {
+                //lockedItems.add(pointer.getString(pointer.getColumnIndex(COLUMN_NAME)));
+            }
+            pointer.moveToNext();
+        }
+        db.close();
+
+
+        return itemsAndUnlockedStatus;
 
     }
+
 
     public void removeAllRows() {
         SQLiteDatabase db = getWritableDatabase();

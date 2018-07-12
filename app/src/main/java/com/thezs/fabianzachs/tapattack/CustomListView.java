@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
+
 /**
  * Created by fabianzachs on 04/06/18.
  */
@@ -23,7 +25,11 @@ public class CustomListView extends ArrayAdapter<String> {
     private Activity context;
     private SharedPreferences unlockedPrefs;
 
-    public CustomListView(Activity context, SharedPreferences unlockedPrefs, String[] itemNames, Integer[] imgIDs) {
+    private MyDBHandler dbHandler;
+    private String category;
+
+    // todo needs item name, item drawable id, if locked
+    public CustomListView(Activity context, SharedPreferences unlockedPrefs, String category, String[] itemNames, Integer[] imgIDs) {
         super(context, R.layout.store_item_skeleton, itemNames);
 
         this.context = context;
@@ -31,6 +37,10 @@ public class CustomListView extends ArrayAdapter<String> {
         this.imgIDs = imgIDs;
 
         this.unlockedPrefs = unlockedPrefs;
+
+        // database version:
+        dbHandler = new MyDBHandler(context, null, null, 1);
+        this.category = category;
 
 
     }
@@ -49,8 +59,13 @@ public class CustomListView extends ArrayAdapter<String> {
         else {
             viewHolder = (ViewHolder) r.getTag();
         }
+
         viewHolder.itemNameSection.setText(itemNames[position].toUpperCase());
         viewHolder.itemImageSection.setImageResource(imgIDs[position]);
+
+
+        //dbHandler.getWritableDatabase().execSQL("SELECT ");
+        //viewHolder.itemNameSection.setText();
 
 
 

@@ -19,7 +19,9 @@ import java.util.Map;
 
 
 /* CREDITS:
-COOLORS and COLOR-HEX for some amazing color palettes inspirations
+COOLORS and COLOR-HEX for amazing color palettes inspirations
+LUNAPIC for great background filters
+LOGOS BY NICK on youtube for inkscape tutorials
  */
 
 
@@ -52,13 +54,13 @@ public class Constants {
     public static int[] GAMEMODES_PRICE_POINTS = {5000, 0, 0, 1000};
     public static int[] GAMEMODES_PRICE_MONEY = {0, 0, 0, 1};
 
-    public static String[] SHAPE_TYPES = {"unlock item", "straight","curved","paint","bit"};
-    public static Integer[] SHAPE_TYPES_IDS = {R.drawable.unlockitem2, R.drawable.straightoutline, R.drawable.curvedoutline, R.drawable.paintoutline, R.drawable.bitoutline};
-    public static int[] SHAPE_TYPES_PRICE_POINTS = {10000, 10000, 10000, 10000, 10000};
-    public static int[] SHAPE_TYPES_PRICE_MONEY = {0, 1, 1, 1, 1};
+    public static String[] SHAPE_TYPES = {"unlock item", "straight","curved","paint","bit","drip"};
+    public static Integer[] SHAPE_TYPES_IDS = {R.drawable.unlockitem2, R.drawable.straightoutline, R.drawable.curvedoutline, R.drawable.paintoutline, R.drawable.bitoutline, R.drawable.dripoutline};
+    public static int[] SHAPE_TYPES_PRICE_POINTS = {10000, 10000, 10000, 10000, 10000, 10000};
+    public static int[] SHAPE_TYPES_PRICE_MONEY = {0, 1, 1, 1, 1,1};
 
-    public static String[] SHAPE_THEMES = {"unlock item","neon","flat","vibrant","girly","oldfashion","fourthofjuly","google","russia wc","muted","primary","summer","rage"};
-    public static Integer[] SHAPE_THEMES_ID = {R.drawable.unlockitem2, R.drawable.neonthemetemplate, R.drawable.flatthemetemplate,
+    public static String[] SHAPE_THEMES = {"random unlock for: 2000","neon","flat","vibrant","girly","oldfashion","fourthofjuly","google","russia wc","muted","primary","summer","rage"};
+    public static Integer[] SHAPE_THEMES_ID = {/*R.drawable.unlockitem2,*/R.drawable.transparent, R.drawable.neonthemetemplate, R.drawable.flatthemetemplate,
             R.drawable.vibrantthemetemplate, R.drawable.girlythemetemplate, R.drawable.oldfashionthemetemplate,
             R.drawable.fourthofjulythemetemplate, R.drawable.googlethemetempalte, R.drawable.russiawcthemetemplate,
             R.drawable.mutedthemetemplate, R.drawable.primarythemetemplate,R.drawable.summerthemetemplate,
@@ -67,10 +69,12 @@ public class Constants {
     public static int[] SHAPE_THEMES_PRICE_MONEY = {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 
     //public static String[] BACKGROUNDS  = {"backgroundtriangleblue"};
-    public static String[] BACKGROUNDS  = {"unlock item", "triangle-blue", "sky"};
-    public static Integer[] BACKGROUNDS_ID = {R.drawable.unlockitem2, R.drawable.backgroundtriangleblue, R.drawable.skybackground};
-    public static int[] BACKGROUNDS_PRICE_POINTS = {0, 5000, 5000};
-    public static int[] BACKGROUNDS_PRICE_MONEY = {0, 1, 1};
+    public static String[] BACKGROUNDS  = {"unlock item", "tri-blue", "tri-point", "tri-old", "tri-gold", "tri-edge", "tri-red", "tri-green", "tri-art1", "tri-art2","tri-sky","sky"};
+    public static Integer[] BACKGROUNDS_ID = {R.drawable.unlockitem2, R.drawable.backgroundtriangleblue, R.drawable.backgroundtrianglepointy, R.drawable.backgroundtriangleblackandwhite,
+            R.drawable.backgroundtrianglecaramel, R.drawable.backgroundtriangleedge, R.drawable.backgroundtrianglered, R.drawable.backgroundtrianglegreen, R.drawable.backgroundtriangleart1,
+            R.drawable.backgroundtriangleart2, R.drawable.backgroundtrianglesky, R.drawable.skybackground};
+    public static int[] BACKGROUNDS_PRICE_POINTS = {0, 5000, 5000, 5000, 5000,5000, 5000,5000, 5000,5000, 5000,5000};
+    public static int[] BACKGROUNDS_PRICE_MONEY = {0, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1, 1};
 
     public static Map<String, String[]> COLORS; // theme -> [] of colors
     public static String[] NEONCOLORS = {"blue","yellow","red","purple","green"};
