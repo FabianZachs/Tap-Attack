@@ -12,11 +12,18 @@ import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.UIHolders.WarningCo
  * Created by fabianzachs on 15/03/18.
  */
 
-public abstract class GameBackground {
+public class GameBackground {
 
     private Bitmap background;
     private WarningColorHolder warningColorHolder;
     //private ProgressBarHolder progressBarHolder;
+
+    public GameBackground(Integer bitmapId, int[] warningColorHolderColors) {
+        this.background = BitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), bitmapId);
+        this.warningColorHolder = new WarningColorHolder();
+        warningColorHolder.setColor(warningColorHolderColors);
+
+    }
 
     public GameBackground(String bitmapName, int[] UIHolderColors) {
         this.warningColorHolder = new WarningColorHolder();
