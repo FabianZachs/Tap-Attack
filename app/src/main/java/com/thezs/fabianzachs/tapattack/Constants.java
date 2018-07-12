@@ -75,6 +75,8 @@ public class Constants {
             R.drawable.backgroundtriangleart2, R.drawable.backgroundtrianglesky, R.drawable.skybackground};
     public static int[] BACKGROUNDS_PRICE_POINTS = {0, 5000, 5000, 5000, 5000,5000, 5000,5000, 5000,5000, 5000,5000};
     public static int[] BACKGROUNDS_PRICE_MONEY = {0, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1, 1};
+    public static Integer[] BACKGROUND_WARNINGCOLOR_1 = {null, 0xff0040ff, 0xffffffff, 0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff};
+    public static Integer[] BACKGROUND_WARNINGCOLOR_2 =  {null, 0xff00bcfe, 0xffffffff, 0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff};
 
     public static Map<String, String[]> COLORS; // theme -> [] of colors
     public static String[] NEONCOLORS = {"blue","yellow","red","purple","green"};

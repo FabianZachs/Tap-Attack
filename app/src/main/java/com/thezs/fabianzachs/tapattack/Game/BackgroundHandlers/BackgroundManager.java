@@ -19,6 +19,11 @@ public class BackgroundManager {
     private Rect entireScreenRect;
 
     public BackgroundManager(String backgroundID) {
+        // todo get player sharedprefs for unlocks and find the currently selected background from the database
+        // todo get the drawable resource file from the database
+        // now we have drawable resouirce
+
+
         setupGameBackground(backgroundID);
         this.entireScreenRect = new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
     }

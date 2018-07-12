@@ -177,7 +177,7 @@ public class MainMenuActivity extends  GeneralParent {
 
         storeItemsSetup(dbHandler,"shape theme", Constants.SHAPE_THEMES, Constants.SHAPE_THEMES_ID, Constants.SHAPE_THEMES_PRICE_POINTS, Constants.SHAPE_THEMES_PRICE_MONEY);
         storeItemsSetup(dbHandler,"shape type", Constants.SHAPE_TYPES, Constants.SHAPE_TYPES_IDS, Constants.SHAPE_TYPES_PRICE_POINTS, Constants.SHAPE_TYPES_PRICE_MONEY);
-        storeItemsSetup(dbHandler,"background", Constants.BACKGROUNDS, Constants.BACKGROUNDS_ID, Constants.BACKGROUNDS_PRICE_POINTS, Constants.BACKGROUNDS_PRICE_MONEY);
+        storeItemsSetupBackground(dbHandler,"background", Constants.BACKGROUNDS, Constants.BACKGROUNDS_ID, Constants.BACKGROUND_WARNINGCOLOR_1, Constants.BACKGROUND_WARNINGCOLOR_2, Constants.BACKGROUNDS_PRICE_POINTS, Constants.BACKGROUNDS_PRICE_MONEY);
         storeItemsSetup(dbHandler,"game mode", Constants.GAMEMODES, Constants.GAMEMODES_IDS, Constants.GAMEMODES_PRICE_POINTS, Constants.GAMEMODES_PRICE_MONEY);
         storeItemsSetup(dbHandler,"multiplier", Constants.MULTIPLIERS, Constants.MULTIPLIER_IDS, Constants.MULTIPLIERS_PRICE_POINTS, Constants.MULTIPLIERS_PRICE_MONEY);
         storeItemsSetup(dbHandler,"color streak", Constants.WARNING_COLOR_STREAK_REWARDS, Constants.WARNING_COLOR_STREAK_REWARDS_IDS, Constants.WARNING_COLOR_STREAK_REWARDS_IDS_PRICE_POINTS, Constants.WARNING_COLOR_STREAK_REWARDS_IDS_PRICE_MONEY);
@@ -189,9 +189,10 @@ public class MainMenuActivity extends  GeneralParent {
         }*/
         //Log.d("database", ""+dbHandler.getListOfLockedItems("shape theme").length);
         //Log.d("database", ""+dbHandler.getListOfLockedItems("color streak").length);
-        //Log.d("database", ""+dbHandler.databaseToString());
+        Log.d("database", ""+dbHandler.databaseToString());
 
     }
+
 
     private void unlockBeginningItems(MyDBHandler dbHandler) {
         dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.SHAPE_THEMES[0] + "';");
@@ -211,9 +212,15 @@ public class MainMenuActivity extends  GeneralParent {
 
     private void storeItemsSetup(MyDBHandler dbHandler, String category, String names[], Integer ids[], int[] pricePoints, int[] priceMoney) {
         for (int i = 0;  i < names.length ; i++ ) {
-            dbHandler.addStoreItem(new StoreItem(category,names[i],ids[i], pricePoints[i], priceMoney[i], false));
+            dbHandler.addStoreItem(new StoreItem(category,names[i],ids[i],0, 0, pricePoints[i], priceMoney[i], false));
         }
 
+    }
+
+    private void storeItemsSetupBackground(MyDBHandler dbHandler, String category, String names[], Integer ids[], Integer[] warningColor1, Integer[] warningColor2, int[] pricePoints, int[] priceMoney) {
+        for (int i = 0;  i < names.length ; i++ ) {
+            dbHandler.addStoreItem(new StoreItem(category,names[i],ids[i],warningColor1[i], warningColor2[i], pricePoints[i], priceMoney[i], false));
+        }
     }
 
     private void setupPointsDisplay() {

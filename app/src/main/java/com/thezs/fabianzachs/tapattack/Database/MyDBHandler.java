@@ -24,6 +24,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_CATEGORY = "category";
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_RESOURCEID = "resourceid";
+    public static final String COLUMN_WARNINGCOLOR1 = "warningcolor1";
+    public static final String COLUMN_WARNINGCOLOR2 = "warningcolor2";
     public static final String COLUMN_PRICEPOINTS = "pricepoints";
     public static final String COLUMN_PRICEMONEY = "pricemoney";
     public static final String COLUMN_UNLOCKED = "unlocked";
@@ -39,6 +41,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 COLUMN_CATEGORY + " TEXT, " +
                 COLUMN_NAME + " TEXT, " +
                 COLUMN_RESOURCEID + " INTEGER, " +
+                COLUMN_WARNINGCOLOR1 + " INTEGER, " +
+                COLUMN_WARNINGCOLOR2 + " INTEGER, " +
                 COLUMN_PRICEPOINTS+ " INTEGER, " +
                 COLUMN_PRICEMONEY + " INTEGER, " +
                 COLUMN_UNLOCKED + " BIT " +
@@ -58,6 +62,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_CATEGORY,item.get_category());
         values.put(COLUMN_NAME,item.get_name());
         values.put(COLUMN_RESOURCEID, item.get_drawableId());
+        values.put(COLUMN_WARNINGCOLOR1, item.get_warningColor1());
+        values.put(COLUMN_WARNINGCOLOR2, item.get_warningColor2());
         values.put(COLUMN_PRICEPOINTS, item.get_pricePoints());
         values.put(COLUMN_PRICEMONEY, item.get_priceMoney());
         values.put(COLUMN_UNLOCKED, item.is_unlocked());
@@ -83,7 +89,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
         while(!pointer.isAfterLast()) {
             if (pointer.getString(pointer.getColumnIndex(COLUMN_NAME)) != null) {
                 dbString += pointer.getString(pointer.getColumnIndex(COLUMN_NAME));
-                dbString += pointer.getString(pointer.getColumnIndex(COLUMN_UNLOCKED));
+                dbString += pointer.getString(pointer.getColumnIndex(COLUMN_WARNINGCOLOR1));
+                dbString += pointer.getString(pointer.getColumnIndex(COLUMN_WARNINGCOLOR2));
                 dbString += "\n";
             }
             pointer.moveToNext();

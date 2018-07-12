@@ -10,14 +10,18 @@ public class StoreItem {
     private String _category;
     private String _name;
     private Integer _drawableId;
+    private Integer _warningColor1;
+    private Integer _warningColor2;
     private int _pricePoints;
     private int _priceMoney;
     private boolean _unlocked;
 
-    public StoreItem(String _category, String _name, Integer  _drawableId, int _pricePoints, int _priceMoney, boolean _unlocked) {
+    public StoreItem(String _category, String _name, Integer  _drawableId, Integer _warningColor1, Integer _warningColor2, int _pricePoints, int _priceMoney, boolean _unlocked) {
         this._category = _category;
         this._name = _name;
         this._drawableId = _drawableId;
+        this._warningColor1 = _warningColor1;
+        this._warningColor2 = _warningColor2;
         this._pricePoints = _pricePoints;
         this._priceMoney = _priceMoney;
         this._unlocked = _unlocked;
@@ -53,6 +57,22 @@ public class StoreItem {
 
     public int get_id() {
         return _id;
+    }
+
+    public void set_warningColor1(Integer _warningColor1) {
+        this._warningColor1 = _warningColor1;
+    }
+
+    public void set_warningColor2(Integer _warningColor2) {
+        this._warningColor2 = _warningColor2;
+    }
+
+    public Integer get_warningColor1() {
+        return this._warningColor1;
+    }
+
+    public Integer get_warningColor2() {
+        return this._warningColor2;
     }
 
     public String get_category() {
