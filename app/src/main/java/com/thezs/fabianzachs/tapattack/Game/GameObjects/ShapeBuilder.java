@@ -130,12 +130,14 @@ public class ShapeBuilder {
     private Bitmap translateBitmap(String direction, Bitmap origonalBitmap) {
 
         Matrix rotationMatrix = new Matrix();
+        Log.d("direction", "translateBitmap: "+direction);
 
         switch (direction) {
             case "UP":
                 break;
             case "LEFT":
-                rotationMatrix.postRotate(-90);
+                rotationMatrix.postRotate(90);
+                rotationMatrix.preScale(1.0f,-1.0f);
                 break;
             case "RIGHT":
                 rotationMatrix.postRotate(90);
