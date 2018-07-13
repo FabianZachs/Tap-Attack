@@ -125,6 +125,15 @@ public class MainMenuActivity extends  GeneralParent {
 
         //setContentView(R.layout.activity_main_menu);
         setContentView(R.layout.activity_main_menu2);
+
+        if (!prefs.getBoolean("firstTime", false)) { // todo uncomment when complete
+            Log.d("thisran", "onCreate: ran");
+            databaseSetup();
+
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("firstTime", true);
+            editor.apply();
+        }
         setupPointsDisplay();
         //multiShapesMessaroundDELETE(); //todo erase
         /* programmatically set background
@@ -150,14 +159,6 @@ public class MainMenuActivity extends  GeneralParent {
         /////////////// DATABASE ////////////////
 
 
-        if (!prefs.getBoolean("firstTime", false)) { // todo uncomment when complete
-            Log.d("thisran", "onCreate: ran");
-            databaseSetup();
-
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("firstTime", true);
-            editor.apply();
-        }
 
 
 

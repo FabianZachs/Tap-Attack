@@ -25,7 +25,7 @@ public class BackgroundManager {
         // todo get the drawable resource file from the database
         // now we have drawable resouirce and the 2 warning color holders
         int[] colors = {0xff0040ff,0xff00bcfe};
-        this.gameBackground = new GameBackground(R.drawable.backgroundtrianglepointy, colors);
+        this.gameBackground = new GameBackground(R.drawable.backgroundtrianglecaramel, colors);
         this.entireScreenRect = new Rect(0,0,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 
     }
