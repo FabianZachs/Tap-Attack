@@ -38,6 +38,7 @@ public class Constants {
 
     public static final String[] WARNING_COLOR_STREAK_REWARDS = {"unlock item","shift up", "reduce speed", "stars", "more points"};
     public static Integer[] WARNING_COLOR_STREAK_REWARDS_IDS = {R.drawable.unlockitem2, R.drawable.shiftshapesupicon, R.drawable.reducespeedicon, R.drawable.turnintostarsicon, R.drawable.morepointsicon};
+    public static String[] WARNING_COLOR_STREAK_REWARDS_FILES = {"unlockitem2", "shiftshapesupicon", "reducespeedicon", "turnintostarsicon", "morepointsicon"};
     public static int[] WARNING_COLOR_STREAK_REWARDS_IDS_PRICE_POINTS = {5000, 5000, 5000, 5000, 5000};
     public static int[] WARNING_COLOR_STREAK_REWARDS_IDS_PRICE_MONEY = {0, 1, 1, 1, 1};
 
@@ -45,22 +46,31 @@ public class Constants {
     public static String[] MULTIPLIERS = {"basic", "decent", "heating up","burning","fire!","insane!!"};
     public static Integer[] MULTIPLIER_IDS = {R.drawable.firstmultiplier, R.drawable.secondmultiplier,
             R.drawable.thirdmultiplier, R.drawable.fourthmultiplier, R.drawable.fifthmultiplier, R.drawable.sixthmultiplier};
+    public static String[] MULTIPLIER_FILES = {"firstmultiplier", "secondmultiplier",
+            "thirdmultiplier", "fourthmultiplier", "fifthmultiplier", "sixthmultiplier"};
     public static int[] MULTIPLIERS_PRICE_POINTS = {-1, -1, -1, -1, -1, -1};
     public static int[] MULTIPLIERS_PRICE_MONEY = {0, 1, 2, 3, 4, 5};
 
 
     public static String[] GAMEMODES = {"unlock item","tutorial", "classic", "unknown"};
     public static Integer[] GAMEMODES_IDS = {R.drawable.unlockitem2, R.drawable.instructionsgamemode,R.drawable.startbluebluered, R.drawable.lockeditem};
+    public static String[] GAMEMODES_FILES = {"unlockitem2", "instructionsgamemode", "startbluebluered", "lockeditem"};
     public static int[] GAMEMODES_PRICE_POINTS = {5000, 0, 0, 1000};
     public static int[] GAMEMODES_PRICE_MONEY = {0, 0, 0, 1};
 
     public static String[] SHAPE_TYPES = {"unlock item", "straight","curved","paint","bit","drip"};
     public static Integer[] SHAPE_TYPES_IDS = {R.drawable.unlockitem2, R.drawable.straightoutline, R.drawable.curvedoutline, R.drawable.paintoutline, R.drawable.bitoutline, R.drawable.dripoutline};
+    public static String[] SHAPE_TYPES_FILES = {"unlockitem2", "straightoutline", "curvedoutline", "paintoutline", "bitoutline", "dripoutline"};
     public static int[] SHAPE_TYPES_PRICE_POINTS = {10000, 10000, 10000, 10000, 10000, 10000};
     public static int[] SHAPE_TYPES_PRICE_MONEY = {0, 1, 1, 1, 1,1};
 
     public static String[] SHAPE_THEMES = {"random unlock for: 2000","neon","flat","vibrant","girly","oldfashion","fourthofjuly","google","russia wc","muted","primary","summer","rage"};
-    public static Integer[] SHAPE_THEMES_ID = {/*R.drawable.unlockitem2,*/R.drawable.transparent, R.drawable.neonthemetemplate, R.drawable.flatthemetemplate,
+    public static String[] SHAPE_THEMES_FILES = {"unlockitem2"/*R.drawable.transparent*/, "neonthemetemplate", "flatthemetemplate",
+            "vibrantthemetemplate", "girlythemetemplate", "oldfashionthemetemplate",
+            "fourthofjulythemetemplate", "googlethemetempalte", "russiawcthemetemplate",
+            "mutedthemetemplate", "primarythemetemplate", "summerthemetemplate",
+            "ragethemetemplate"};
+    public static Integer[] SHAPE_THEMES_ID = {R.drawable.unlockitem2/*R.drawable.transparent*/, R.drawable.neonthemetemplate, R.drawable.flatthemetemplate,
             R.drawable.vibrantthemetemplate, R.drawable.girlythemetemplate, R.drawable.oldfashionthemetemplate,
             R.drawable.fourthofjulythemetemplate, R.drawable.googlethemetempalte, R.drawable.russiawcthemetemplate,
             R.drawable.mutedthemetemplate, R.drawable.primarythemetemplate,R.drawable.summerthemetemplate,
@@ -70,6 +80,9 @@ public class Constants {
 
     //public static String[] BACKGROUNDS  = {"backgroundtriangleblue"};
     public static String[] BACKGROUNDS  = {"unlock item", "tri-blue", "tri-point", "tri-old", "tri-gold", "tri-edge", "tri-red", "tri-green", "tri-art1", "tri-art2","tri-sky","sky"};
+    public static String[] BACKGROUNDS_FILES = {"unlockitem2", "backgroundtriangleblue", "backgroundtrianglepointy", "backgroundtriangleblackandwhite",
+            "backgroundtrianglecaramel", "backgroundtriangleedge", "backgroundtrianglered", "backgroundtrianglegreen", "backgroundtriangleart1",
+            "backgroundtriangleart2", "backgroundtrianglesky", "skybackground"};
     public static Integer[] BACKGROUNDS_ID = {R.drawable.unlockitem2, R.drawable.backgroundtriangleblue, R.drawable.backgroundtrianglepointy, R.drawable.backgroundtriangleblackandwhite,
             R.drawable.backgroundtrianglecaramel, R.drawable.backgroundtriangleedge, R.drawable.backgroundtrianglered, R.drawable.backgroundtrianglegreen, R.drawable.backgroundtriangleart1,
             R.drawable.backgroundtriangleart2, R.drawable.backgroundtrianglesky, R.drawable.skybackground};

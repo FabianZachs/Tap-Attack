@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
+import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -124,8 +125,12 @@ public class Store {
     private void setupStoreSectionList(View alertView , AlertDialog dialog, String category, final String[] names, final Integer[] IDs, final String prefKey) {
         final SharedPreferences unlockedPrefs = mainMenuActivity.getSharedPreferences("unlocks", Context.MODE_PRIVATE);
 
+
+        final MyDBHandler dbHandler = new MyDBHandler(mainMenuActivity, null, null, 1);
+
+
         final ListView mList = (ListView) alertView.findViewById(R.id.item_list);
-        final CustomListView customListView = new CustomListView(mainMenuActivity, unlockedPrefs,category, names, IDs);
+        final CustomListView customListView = new CustomListView(mainMenuActivity, dbHandler,/*unlockedPrefs,*/category , dbHandler.getItemNamesFromCategory(category)/*, IDs*/);
         mList.setAdapter(customListView);
 
         if (category.equals("shape theme") || category.equals("shape type") || category.equals("background") || category.equals("gamemode") || category.equals("color streak")) {
@@ -143,11 +148,14 @@ public class Store {
                         Random random = new Random();
                         int positionToUnlock = random.nextInt(names.length - 1) + 1;
                         //StyleableToast.makeText(Constants.CURRENT_CONTEXT, positionToUnlock+"",R.style.successtoast).show();
-
+/*
                         SharedPreferences.Editor unlockedEditor = unlockedPrefs.edit();
                         unlockedEditor.putBoolean(names[positionToUnlock], true);
                         unlockedEditor.apply();
-
+*/
+                        dbHandler.unlockItemViaName(names[positionToUnlock]);
+                        Log.d("database2", "onItemClick: " + dbHandler.databaseToString());
+                        customListView.notifyDataSetChanged();
 
                         mList.smoothScrollToPositionFromTop(positionToUnlock, 0, 1000);
 

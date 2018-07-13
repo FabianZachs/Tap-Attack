@@ -12,7 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.thezs.fabianzachs.tapattack.Database.BasicStoreItem;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
+
+import java.util.ArrayList;
 
 /**
  * Created by fabianzachs on 04/06/18.
@@ -20,27 +23,30 @@ import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 
 public class CustomListView extends ArrayAdapter<String> {
 
-    private String[] itemNames;
-    private Integer[] imgIDs;
+    //private String[] itemNames;
+    //private Integer[] imgIDs;
     private Activity context;
-    private SharedPreferences unlockedPrefs;
+    //private SharedPreferences unlockedPrefs;
 
     private MyDBHandler dbHandler;
-    private String category;
+    //private String category;
+    private ArrayList<BasicStoreItem> itemsToDisplay;
 
     // todo needs item name, item drawable id, if locked
-    public CustomListView(Activity context, SharedPreferences unlockedPrefs, String category, String[] itemNames, Integer[] imgIDs) {
+    public CustomListView(Activity context, MyDBHandler dbHandler,/*SharedPreferences unlockedPrefs,*/ String category, String[] itemNames/*, Integer[] imgIDs*/) {
         super(context, R.layout.store_item_skeleton, itemNames);
 
         this.context = context;
+        /*
         this.itemNames = itemNames;
         this.imgIDs = imgIDs;
-
-        this.unlockedPrefs = unlockedPrefs;
+        */
+        //this.unlockedPrefs = unlockedPrefs;
 
         // database version:
-        dbHandler = new MyDBHandler(context, null, null, 1);
-        this.category = category;
+        this.dbHandler = dbHandler;
+        itemsToDisplay = dbHandler.getBasicStoreItemsFromCategory(category);
+        // todo databse takes category and returns BasicStoreItems[]
 
 
     }
@@ -60,9 +66,16 @@ public class CustomListView extends ArrayAdapter<String> {
             viewHolder = (ViewHolder) r.getTag();
         }
 
-        viewHolder.itemNameSection.setText(itemNames[position].toUpperCase());
-        viewHolder.itemImageSection.setImageResource(imgIDs[position]);
+        //viewHolder.itemNameSection.setText(itemNames[position].toUpperCase());
+        //viewHolder.itemImageSection.setImageResource(imgIDs[position]);
+        viewHolder.itemNameSection.setText(itemsToDisplay.get(position).get_name());
+        viewHolder.itemImageSection.setImageResource(helper.getResourceId(context, itemsToDisplay.get(position).get_file()));
 
+        if (itemsToDisplay.get(position).is_unlocked() != 1)
+            viewHolder.itemLockedImage.setImageResource(helper.getResourceId(context, "lockeditem"));
+
+        else
+            viewHolder.itemLockedImage.setImageResource(android.R.color.transparent);
 
         //dbHandler.getWritableDatabase().execSQL("SELECT ");
         //viewHolder.itemNameSection.setText();
@@ -80,6 +93,8 @@ public class CustomListView extends ArrayAdapter<String> {
         */
 
 
+
+        /*
         // we only want to display the lock icon if it is locked
         if (!unlockedPrefs.getBoolean( itemNames[position], false) && (position != 0)) {
             Log.d("position", "getView: "+position);
@@ -88,6 +103,8 @@ public class CustomListView extends ArrayAdapter<String> {
         }
         else
             viewHolder.itemLockedImage.setImageResource(android.R.color.transparent);
+            */
+
 
 
         return r;

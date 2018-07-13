@@ -3,13 +3,12 @@ package com.thezs.fabianzachs.tapattack.Database;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by fabianzachs on 09/07/18.
@@ -23,7 +22,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_CATEGORY = "category";
     public static final String COLUMN_NAME = "name";
-    public static final String COLUMN_RESOURCEID = "resourceid";
+    public static final String COLUMN_FILE = "file";
     public static final String COLUMN_WARNINGCOLOR1 = "warningcolor1";
     public static final String COLUMN_WARNINGCOLOR2 = "warningcolor2";
     public static final String COLUMN_PRICEPOINTS = "pricepoints";
@@ -40,12 +39,12 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_CATEGORY + " TEXT, " +
                 COLUMN_NAME + " TEXT, " +
-                COLUMN_RESOURCEID + " INTEGER, " +
+                COLUMN_FILE + " TEXT, " +
                 COLUMN_WARNINGCOLOR1 + " INTEGER, " +
                 COLUMN_WARNINGCOLOR2 + " INTEGER, " +
                 COLUMN_PRICEPOINTS+ " INTEGER, " +
                 COLUMN_PRICEMONEY + " INTEGER, " +
-                COLUMN_UNLOCKED + " BIT " +
+                COLUMN_UNLOCKED + " INTEGER " +
                 ");";
 
         sqLiteDatabase.execSQL(query);
@@ -61,7 +60,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_CATEGORY,item.get_category());
         values.put(COLUMN_NAME,item.get_name());
-        values.put(COLUMN_RESOURCEID, item.get_drawableId());
+        values.put(COLUMN_FILE, item.get_file());
         values.put(COLUMN_WARNINGCOLOR1, item.get_warningColor1());
         values.put(COLUMN_WARNINGCOLOR2, item.get_warningColor2());
         values.put(COLUMN_PRICEPOINTS, item.get_pricePoints());
@@ -89,8 +88,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
         while(!pointer.isAfterLast()) {
             if (pointer.getString(pointer.getColumnIndex(COLUMN_NAME)) != null) {
                 dbString += pointer.getString(pointer.getColumnIndex(COLUMN_NAME));
-                dbString += pointer.getString(pointer.getColumnIndex(COLUMN_WARNINGCOLOR1));
-                dbString += pointer.getString(pointer.getColumnIndex(COLUMN_WARNINGCOLOR2));
+                //dbString += pointer.getString(pointer.getColumnIndex(COLUMN_WARNINGCOLOR1));
+                //dbString += pointer.getString(pointer.getColumnIndex(COLUMN_WARNINGCOLOR2));
+                dbString += pointer.getString(pointer.getColumnIndex(COLUMN_UNLOCKED));
                 dbString += "\n";
             }
             pointer.moveToNext();
@@ -143,6 +143,55 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     }
 
+    public void unlockItemViaName(String name) {
+        getWritableDatabase().execSQL("UPDATE " + TABLE_STOREITEMS + " SET " + COLUMN_UNLOCKED + " = 1 WHERE " + COLUMN_NAME + " = '" + name + "';");
+    }
+
+
+    public ArrayList<BasicStoreItem> getBasicStoreItemsFromCategory(String category) {
+        String query = "SELECT * FROM " + TABLE_STOREITEMS + " WHERE " + COLUMN_CATEGORY + " = \'" + category + "\'";
+        ArrayList<BasicStoreItem> basicStoreItems = new ArrayList<>();
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor pointer = db.rawQuery(query, null);
+        pointer.moveToFirst();
+
+        while(!pointer.isAfterLast()) {
+            if (pointer.getString(pointer.getColumnIndex(COLUMN_NAME)) != null) {
+                basicStoreItems.add(new BasicStoreItem(pointer.getString(pointer.getColumnIndex(COLUMN_NAME)), pointer.getString(pointer.getColumnIndex(COLUMN_FILE)),
+                        pointer.getInt(pointer.getColumnIndex(COLUMN_UNLOCKED))));
+                //Log.d("signedstuff", ": " + R.drawable.unlockitem2);
+            }
+            pointer.moveToNext();
+        }
+        db.close();
+
+        return basicStoreItems;
+    }
+
+    public String[] getItemNamesFromCategory(String category) {
+        String query = "SELECT * FROM " + TABLE_STOREITEMS + " WHERE " + COLUMN_CATEGORY + " = \'" + category + "\'";
+        ArrayList<String> names = new ArrayList<>();
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor pointer = db.rawQuery(query, null);
+        pointer.moveToFirst();
+
+        while(!pointer.isAfterLast()) {
+            if (pointer.getString(pointer.getColumnIndex(COLUMN_NAME)) != null) {
+                names.add(pointer.getString(pointer.getColumnIndex(COLUMN_NAME)));
+                //Log.d("signedstuff", ": " + R.drawable.unlockitem2);
+            }
+            pointer.moveToNext();
+        }
+        db.close();
+
+        String[] namesArray = new String[ names.size() ];
+        names.toArray(namesArray);
+
+        return namesArray;
+
+    }
 
     public void removeAllRows() {
         SQLiteDatabase db = getWritableDatabase();

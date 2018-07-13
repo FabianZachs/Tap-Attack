@@ -2,10 +2,12 @@ package com.thezs.fabianzachs.tapattack;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -85,5 +87,9 @@ public class helper {
 
         //Clear the not focusable flag from the window
         dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+    }
+
+    public static int getResourceId(Context context, String mImageName){
+        return  context.getResources().getIdentifier(mImageName , "drawable", context.getPackageName());
     }
 }

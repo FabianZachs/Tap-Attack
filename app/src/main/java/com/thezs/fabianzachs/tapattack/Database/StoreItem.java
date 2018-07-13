@@ -9,17 +9,17 @@ public class StoreItem {
     private int _id;
     private String _category;
     private String _name;
-    private Integer _drawableId;
+    private String _drawableFile;
     private Integer _warningColor1;
     private Integer _warningColor2;
     private int _pricePoints;
     private int _priceMoney;
-    private boolean _unlocked;
+    private int _unlocked;
 
-    public StoreItem(String _category, String _name, Integer  _drawableId, Integer _warningColor1, Integer _warningColor2, int _pricePoints, int _priceMoney, boolean _unlocked) {
+    public StoreItem(String _category, String _name, String _drawableFile, Integer _warningColor1, Integer _warningColor2, int _pricePoints, int _priceMoney, int _unlocked) {
         this._category = _category;
         this._name = _name;
-        this._drawableId = _drawableId;
+        this._drawableFile = _drawableFile;
         this._warningColor1 = _warningColor1;
         this._warningColor2 = _warningColor2;
         this._pricePoints = _pricePoints;
@@ -39,8 +39,8 @@ public class StoreItem {
         this._name = _name;
     }
 
-    public void set_drawableId(Integer _drawableId) {
-        this._drawableId = _drawableId;
+    public void set_file(String _drawableFile) {
+        this._drawableFile = _drawableFile;
     }
 
     public void set_pricePoints(int _pricePoints) {
@@ -51,7 +51,7 @@ public class StoreItem {
         this._priceMoney = _priceMoney;
     }
 
-    public void set_unlocked(boolean _unlocked) {
+    public void set_unlocked(int _unlocked) {
         this._unlocked = _unlocked;
     }
 
@@ -83,8 +83,8 @@ public class StoreItem {
         return _name;
     }
 
-    public Integer get_drawableId() {
-        return _drawableId;
+    public String get_file() {
+        return _drawableFile;
     }
 
     public int get_pricePoints() {
@@ -95,7 +95,7 @@ public class StoreItem {
         return _priceMoney;
     }
 
-    public boolean is_unlocked() {
+    public int is_unlocked() {
         return _unlocked;
     }
 }
