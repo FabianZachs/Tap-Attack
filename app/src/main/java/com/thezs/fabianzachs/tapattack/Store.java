@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +20,7 @@ import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -86,23 +88,23 @@ public class Store {
         setupDialogDismissForStoreSection(multiplierSectionAlertView, multiplierSectionDialog);
         setupDialogDismissForStoreSection(warningColorStreakSectionAlertView, warningColorStreakSectionDialog);
 
-        setupStoreSectionList(colorSectionAlertView, colorSectionDialog, "shape theme", Constants.SHAPE_THEMES,
-            Constants.SHAPE_THEMES_ID, "shapeTheme");
+        setupStoreSectionList(colorSectionAlertView, colorSectionDialog, "shape theme", /*Constants.SHAPE_THEMES,
+            Constants.SHAPE_THEMES_ID,*/ "shapeTheme");
 
-        setupStoreSectionList(typeSectionAlertView,typeSectionDialog,"shape type", Constants.SHAPE_TYPES,
-               Constants.SHAPE_TYPES_IDS, "shapeType");
+        setupStoreSectionList(typeSectionAlertView,typeSectionDialog,"shape type", /*Constants.SHAPE_TYPES,
+               Constants.SHAPE_TYPES_IDS,*/ "shapeType");
 
-        setupStoreSectionList(backgroundSectionAlertView,backgroundSectionDialog, "background", Constants.BACKGROUNDS,
-                Constants.BACKGROUNDS_ID,"background");
+        setupStoreSectionList(backgroundSectionAlertView,backgroundSectionDialog, "background", /*Constants.BACKGROUNDS,
+                Constants.BACKGROUNDS_ID,*/"background");
 
-        setupStoreSectionList(gamemodeSectionAlertView, gamemodeSectionDialog, "game mode", Constants.GAMEMODES,
-                Constants.GAMEMODES_IDS, "gamemode");
+        setupStoreSectionList(gamemodeSectionAlertView, gamemodeSectionDialog, "game mode", /*Constants.GAMEMODES,
+                Constants.GAMEMODES_IDS, */"gamemode");
 
-        setupStoreSectionList(multiplierSectionAlertView,multiplierSectionDialog, "multiplier", Constants.MULTIPLIERS,
-                Constants.MULTIPLIER_IDS, "multiplier");
+        setupStoreSectionList(multiplierSectionAlertView,multiplierSectionDialog, "multiplier", /*Constants.MULTIPLIERS,
+                Constants.MULTIPLIER_IDS, */"multiplier");
 
-        setupStoreSectionList(warningColorStreakSectionAlertView,warningColorStreakSectionDialog, "color streak", Constants.WARNING_COLOR_STREAK_REWARDS,
-                Constants.WARNING_COLOR_STREAK_REWARDS_IDS, "warningcolorstreakreward");
+        setupStoreSectionList(warningColorStreakSectionAlertView,warningColorStreakSectionDialog, "color streak", /*Constants.WARNING_COLOR_STREAK_REWARDS,
+                Constants.WARNING_COLOR_STREAK_REWARDS_IDS, */"warningcolorstreakreward");
 
 //        this.mainStoreAlertView = mainMenuActivity.getLayoutInflater().inflate(R.layout.store_main_menu, null);
         //AlertDialog.Builder mainStoredbuilder = new AlertDialog.Builder(mainMenuActivity);
@@ -122,11 +124,12 @@ public class Store {
         okButtonLockInSetup(alertView, dialog, mainStoreAlertView);
     }
 
-    private void setupStoreSectionList(View alertView , AlertDialog dialog, String category, final String[] names, final Integer[] IDs, final String prefKey) {
+    private void setupStoreSectionList(View alertView , AlertDialog dialog, final String category, /*final String[] namesOld, final Integer[] IDs,*/ final String prefKey) {
         final SharedPreferences unlockedPrefs = mainMenuActivity.getSharedPreferences("unlocks", Context.MODE_PRIVATE);
 
 
         final MyDBHandler dbHandler = new MyDBHandler(mainMenuActivity, null, null, 1);
+        final String[] names = dbHandler.getItemNamesFromCategory(category);
 
 
         final ListView mList = (ListView) alertView.findViewById(R.id.item_list);
@@ -146,24 +149,46 @@ public class Store {
                         // todo execute random unlock ( make sure enough points)
 
                         Random random = new Random();
-                        int positionToUnlock = random.nextInt(names.length - 1) + 1;
+                        String[] lockedItems = dbHandler.getListOfLockedItems(category);
+                        if (lockedItems.length == 0)
+                            StyleableToast.makeText(mainMenuActivity,  "All Items Unlocked", R.style.successtoast).show();
+
+                        else {
+                            String itemNameToUnlock = lockedItems[random.nextInt(lockedItems.length - 1) + 1];
+                            dbHandler.unlockItemViaName(itemNameToUnlock);
+
+                            int positionToUnlock = helper.getIndexOf(names, itemNameToUnlock);
+
+                            mList.smoothScrollToPositionFromTop(positionToUnlock, 0, 1000);
+                            mList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+                            mList.setItemChecked(positionToUnlock,true);
+                        }
+
+
+
+
+
+
+
                         //StyleableToast.makeText(Constants.CURRENT_CONTEXT, positionToUnlock+"",R.style.successtoast).show();
 /*
                         SharedPreferences.Editor unlockedEditor = unlockedPrefs.edit();
                         unlockedEditor.putBoolean(names[positionToUnlock], true);
                         unlockedEditor.apply();
 */
-                        dbHandler.unlockItemViaName(names[positionToUnlock]);
-                        Log.d("database2", "onItemClick: " + dbHandler.databaseToString());
-                        customListView.notifyDataSetChanged();
+                        //dbHandler.unlockItemViaName(names[positionToUnlock]);
+                        //Log.d("database2", "onItemClick: " + dbHandler.databaseToString());
 
-                        mList.smoothScrollToPositionFromTop(positionToUnlock, 0, 1000);
+                        //customListView.notifyDataSetChanged();
+
+                        //mList.smoothScrollToPositionFromTop(positionToUnlock, 0, 1000);
 
 
-                        mList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+                        //mList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
-                        mList.setItemChecked(positionToUnlock,true);
-                        position = positionToUnlock;
+                        //mList.setItemChecked(positionToUnlock,true);
+
+                        //position = positionToUnlock;
 
 
                         // todo maybe make text red if not enough points
@@ -181,10 +206,12 @@ public class Store {
 
                     }
 
+                    /*
                     // todo if position is unlocked item toggle item
                     SharedPreferences.Editor prefsEditor = prefs.edit();
                     prefsEditor.putString(prefKey, names[position]);
                     prefsEditor.apply();
+                    */
 
                     // todo if position is locked item launch pay for item dialog REAL MONEY
 

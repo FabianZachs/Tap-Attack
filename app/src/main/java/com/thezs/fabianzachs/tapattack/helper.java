@@ -92,4 +92,14 @@ public class helper {
     public static int getResourceId(Context context, String mImageName){
         return  context.getResources().getIdentifier(mImageName , "drawable", context.getPackageName());
     }
+
+    public static int getIndexOf(String[] array, String item) {
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].equals(item))
+                return i;
+        }
+
+        return -1;
+    }
 }

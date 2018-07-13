@@ -70,7 +70,7 @@ public class CustomListView extends ArrayAdapter<String> {
 
         //viewHolder.itemNameSection.setText(itemNames[position].toUpperCase());
         //viewHolder.itemImageSection.setImageResource(imgIDs[position]);
-        viewHolder.itemNameSection.setText(itemsToDisplay.get(position).get_name());
+        viewHolder.itemNameSection.setText(itemsToDisplay.get(position).get_name().toUpperCase());
         viewHolder.itemImageSection.setImageResource(helper.getResourceId(context, itemsToDisplay.get(position).get_file()));
 
         if ( dbHandler.isItemUnlocked(itemsToDisplay.get(position).get_name()) != 1)
