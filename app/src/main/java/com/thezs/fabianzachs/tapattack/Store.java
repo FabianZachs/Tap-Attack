@@ -409,6 +409,7 @@ public class Store {
 
                 return;
             case "background":
+                Log.d("problemo", "setupStoreSectionPreviewImg: " + prefs.getString("background" , "tri-blue"));
                 Bitmap bm2 = BitmapFactory.decodeResource(mainMenuActivity.getResources(),
                         Constants.BACKGROUNDS_ID[Arrays.asList(Constants.BACKGROUNDS).indexOf(prefs.getString("background","tri-blue"))]);
                 img.setImageBitmap(bm2);

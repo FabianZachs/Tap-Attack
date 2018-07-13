@@ -2,15 +2,19 @@ package com.thezs.fabianzachs.tapattack.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.thezs.fabianzachs.tapattack.Constants;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import static android.content.ContentValues.TAG;
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by fabianzachs on 09/07/18.
@@ -217,5 +221,28 @@ public class MyDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("delete from "+ TABLE_STOREITEMS);
     }
+
+    public String getCurrentBackgroundFile() {
+        SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", MODE_PRIVATE);
+        String backgroundName = prefs.getString("background", Constants.BACKGROUNDS[1]);
+        String file;
+
+        String query = "SELECT " + COLUMN_FILE + " FROM " + TABLE_STOREITEMS + " WHERE " + COLUMN_NAME + " = '" + backgroundName+ "';";
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor pointer = db.rawQuery(query, null);
+        pointer.moveToFirst();
+
+        if (pointer.getString(pointer.getColumnIndex(COLUMN_FILE)) != null) {
+            file = pointer.getString(pointer.getColumnIndex(COLUMN_FILE));
+        }
+        else
+            file = Constants.BACKGROUNDS[1];
+
+        db.close();
+
+        return file;
+    }
+
 
 }
