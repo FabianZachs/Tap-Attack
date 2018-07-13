@@ -10,6 +10,8 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Created by fabianzachs on 09/07/18.
  */
@@ -145,6 +147,24 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     public void unlockItemViaName(String name) {
         getWritableDatabase().execSQL("UPDATE " + TABLE_STOREITEMS + " SET " + COLUMN_UNLOCKED + " = 1 WHERE " + COLUMN_NAME + " = '" + name + "';");
+    }
+
+    public int isItemUnlocked(String name) {
+        String query = "SELECT " + COLUMN_UNLOCKED + " FROM " + TABLE_STOREITEMS + " WHERE " + COLUMN_NAME + " = '" + name + "';";
+        int unlocked = 0;
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor pointer = db.rawQuery(query, null);
+        pointer.moveToFirst();
+
+        if (pointer.getString(pointer.getColumnIndex(COLUMN_UNLOCKED)) != null) {
+            unlocked = pointer.getInt(pointer.getColumnIndex(COLUMN_UNLOCKED));
+            //Log.d("signedstuff", ": " + R.drawable.unlockitem2);
+        }
+
+        db.close();
+
+        return unlocked;
     }
 
 

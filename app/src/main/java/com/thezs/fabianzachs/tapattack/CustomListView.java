@@ -31,6 +31,7 @@ public class CustomListView extends ArrayAdapter<String> {
     private MyDBHandler dbHandler;
     //private String category;
     private ArrayList<BasicStoreItem> itemsToDisplay;
+    private String category;
 
     // todo needs item name, item drawable id, if locked
     public CustomListView(Activity context, MyDBHandler dbHandler,/*SharedPreferences unlockedPrefs,*/ String category, String[] itemNames/*, Integer[] imgIDs*/) {
@@ -46,6 +47,7 @@ public class CustomListView extends ArrayAdapter<String> {
         // database version:
         this.dbHandler = dbHandler;
         itemsToDisplay = dbHandler.getBasicStoreItemsFromCategory(category);
+        this.category = category;
         // todo databse takes category and returns BasicStoreItems[]
 
 
@@ -71,11 +73,14 @@ public class CustomListView extends ArrayAdapter<String> {
         viewHolder.itemNameSection.setText(itemsToDisplay.get(position).get_name());
         viewHolder.itemImageSection.setImageResource(helper.getResourceId(context, itemsToDisplay.get(position).get_file()));
 
-        if (itemsToDisplay.get(position).is_unlocked() != 1)
+        if ( dbHandler.isItemUnlocked(itemsToDisplay.get(position).get_name()) != 1)
             viewHolder.itemLockedImage.setImageResource(helper.getResourceId(context, "lockeditem"));
+
 
         else
             viewHolder.itemLockedImage.setImageResource(android.R.color.transparent);
+
+
 
         //dbHandler.getWritableDatabase().execSQL("SELECT ");
         //viewHolder.itemNameSection.setText();
