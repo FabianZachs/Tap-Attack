@@ -150,11 +150,15 @@ public class Store {
 
                         Random random = new Random();
                         String[] lockedItems = dbHandler.getListOfLockedItems(category);
-                        if (lockedItems.length == 0)
+                        if (lockedItems.length == 0) {
                             StyleableToast.makeText(mainMenuActivity,  "All Items Unlocked", R.style.successtoast).show();
+                            return;
+                        }
+
 
                         else {
-                            String itemNameToUnlock = lockedItems[random.nextInt(lockedItems.length - 1) + 1];
+                            String itemNameToUnlock = lockedItems.length > 1 ?  lockedItems[random.nextInt(lockedItems.length - 1) + 1] : lockedItems[0];
+                            //String itemNameToUnlock = lockedItems[random.nextInt(lockedItems.length - 1) + 1];
                             dbHandler.unlockItemViaName(itemNameToUnlock);
 
                             int positionToUnlock = helper.getIndexOf(names, itemNameToUnlock);
@@ -162,6 +166,8 @@ public class Store {
                             mList.smoothScrollToPositionFromTop(positionToUnlock, 0, 1000);
                             mList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
                             mList.setItemChecked(positionToUnlock,true);
+
+                            position = positionToUnlock;
                         }
 
 
@@ -197,6 +203,8 @@ public class Store {
 
                     else {
 
+                        // todo database version of below
+
                         if (unlockedPrefs.getBoolean(names[position],false)) {
                             StyleableToast.makeText(mainMenuActivity,  "unlocked", R.style.successtoast).show();
                         }
@@ -206,12 +214,12 @@ public class Store {
 
                     }
 
-                    /*
+
                     // todo if position is unlocked item toggle item
                     SharedPreferences.Editor prefsEditor = prefs.edit();
                     prefsEditor.putString(prefKey, names[position]);
                     prefsEditor.apply();
-                    */
+
 
                     // todo if position is locked item launch pay for item dialog REAL MONEY
 
