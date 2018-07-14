@@ -206,7 +206,6 @@ public class MainMenuActivity extends  GeneralParent {
         dbHandler.unlockItemViaName(Constants.GAMEMODES[0]);
         dbHandler.unlockItemViaName(Constants.GAMEMODES[1]);
         dbHandler.unlockItemViaName(Constants.GAMEMODES[2]);
-        dbHandler.unlockItemViaName(Constants.GAMEMODES[3]);
         dbHandler.unlockItemViaName(Constants.MULTIPLIERS[0]);
         dbHandler.unlockItemViaName(Constants.WARNING_COLOR_STREAK_REWARDS[0]);
         //dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.SHAPE_THEMES[0] + "';");

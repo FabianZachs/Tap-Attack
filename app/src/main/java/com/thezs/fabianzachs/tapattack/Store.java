@@ -136,7 +136,7 @@ public class Store {
         final CustomListView customListView = new CustomListView(mainMenuActivity, dbHandler,/*unlockedPrefs,*/category , dbHandler.getItemNamesFromCategory(category)/*, IDs*/);
         mList.setAdapter(customListView);
 
-        if (category.equals("shape theme") || category.equals("shape type") || category.equals("background") || category.equals("gamemode") || category.equals("color streak")) {
+        if (category.equals("shape theme") || category.equals("shape type") || category.equals("background") || category.equals("color streak")) {
 
             mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -168,60 +168,32 @@ public class Store {
                             mList.setItemChecked(positionToUnlock,true);
 
                             position = positionToUnlock;
+
+                            SharedPreferences.Editor prefsEditor = prefs.edit();
+                            prefsEditor.putString(prefKey, names[position]);
+                            prefsEditor.apply();
                         }
 
-
-
-
-
-
-
-                        //StyleableToast.makeText(Constants.CURRENT_CONTEXT, positionToUnlock+"",R.style.successtoast).show();
-/*
-                        SharedPreferences.Editor unlockedEditor = unlockedPrefs.edit();
-                        unlockedEditor.putBoolean(names[positionToUnlock], true);
-                        unlockedEditor.apply();
-*/
-                        //dbHandler.unlockItemViaName(names[positionToUnlock]);
-                        //Log.d("database2", "onItemClick: " + dbHandler.databaseToString());
-
-                        //customListView.notifyDataSetChanged();
-
-                        //mList.smoothScrollToPositionFromTop(positionToUnlock, 0, 1000);
-
-
-                        //mList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
-                        //mList.setItemChecked(positionToUnlock,true);
-
-                        //position = positionToUnlock;
-
-
-                        // todo maybe make text red if not enough points
 
                     }
 
                     else {
 
                         // todo database version of below
-
-                        if (unlockedPrefs.getBoolean(names[position],false)) {
-                            StyleableToast.makeText(mainMenuActivity,  "unlocked", R.style.successtoast).show();
+                        if (dbHandler.isItemUnlocked(names[position]) == 1) {
+                            //StyleableToast.makeText(mainMenuActivity,  "unlocked", R.style.successtoast).show();
+                            SharedPreferences.Editor prefsEditor = prefs.edit();
+                            prefsEditor.putString(prefKey, names[position]);
+                            prefsEditor.apply();
                         }
-                        else
-                            StyleableToast.makeText(mainMenuActivity,  "locked", R.style.successtoast).show();
+
+                        else {
+                            // todo item is locked and should start in app purchase to unlock
+                        }
 
 
                     }
 
-
-                    // todo if position is unlocked item toggle item
-                    SharedPreferences.Editor prefsEditor = prefs.edit();
-                    prefsEditor.putString(prefKey, names[position]);
-                    prefsEditor.apply();
-
-
-                    // todo if position is locked item launch pay for item dialog REAL MONEY
 
                 }
             });
@@ -229,8 +201,19 @@ public class Store {
 
         }
 
-        else if (category.equals("multiplier")) {
-            return;
+        else if (category.equals("multiplier") || category.equals("game mode")) {
+
+            mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                    mList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+                    mList.setItemChecked(position,true);
+                    SharedPreferences.Editor prefsEditor = prefs.edit();
+                    prefsEditor.putString(prefKey, names[position]);
+                    prefsEditor.apply();
+                    return;
+                }
+            });
 
         }
 
