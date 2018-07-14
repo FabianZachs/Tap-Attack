@@ -644,6 +644,13 @@ public class MainMenuActivity extends  GeneralParent {
     public void openWarningColorStreakStore(View view) {
         store.openStoreSection(view, "warningcolorstreakreward");
     }
+
+    public void showload(View view) {
+        Intent intent = new Intent(this, LoadingActivity.class);
+        intent.putExtra("gamemode", "classic");
+        //this.startActivity(intent);
+        this.startActivityForResult(intent, 1);
+    }
     /*
     private void okButtonLockInSetup(final View alertView, final AlertDialog dialog, final View viewWithViewToUpdate) {
 

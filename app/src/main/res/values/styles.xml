@@ -44,14 +44,19 @@
         <item name="textSize">18sp</item>
         <item name="colorBackground">#a4f442</item>
         <item name="solidBackground">true</item>
-        <item name="strokeWidth">3dp</item>     API 21+
-        <item name="strokeColor">#a4f442</item>    API 21+
+        <item name="strokeWidth">3dp</item>
+        API 21+
+        <item name="strokeColor">#a4f442</item>
+        API 21+
         <item name="iconLeft">@drawable/greencheckmark</item>
-        <item name="length">LONG</item>         ENUM: LONG | SHORT
+        <item name="length">LONG</item>
+        ENUM: LONG | SHORT
         <item name="cornerRadius">5dp</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 </resources>

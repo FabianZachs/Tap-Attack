@@ -30,4 +30,5 @@
     <string name="Select">Select</string>
     <string name="exit">EXIT</string>
     <string name="resume">RESUME</string>
+    <string name="title_activity_loading">LoadingActivity</string>
 </resources>
