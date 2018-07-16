@@ -5,6 +5,7 @@
     android:background="@color/colorPrimaryDark"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     tools:context="com.thezs.fabianzachs.tapattack.LoadingActivity">
 
     <ImageView
@@ -12,7 +13,8 @@
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/loadingscreen7"/>
+        android:layout_margin="25sp"
+        android:src="@drawable/loadingscreen8"/>
 
 
 </LinearLayout>
