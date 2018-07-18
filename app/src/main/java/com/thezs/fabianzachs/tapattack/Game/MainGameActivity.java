@@ -54,6 +54,10 @@ public class MainGameActivity extends Activity {
         this.mediator = new CentralGameCommunication(System.currentTimeMillis());
         mediator.addObject(this);
 
+        // soundeffects
+        this.mediator.addObject(new GameSoundEffects());
+
+
         this.gamePanel = new GamePanel(this, mediator);
         viewForGamePanel.addView(this.gamePanel);
 

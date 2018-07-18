@@ -9,6 +9,7 @@ import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapeMover;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapesManager;
 import com.thezs.fabianzachs.tapattack.Game.GamePanel;
+import com.thezs.fabianzachs.tapattack.Game.GameSoundEffects;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.WarningColor;
@@ -26,6 +27,7 @@ public class CentralGameCommunication {
 
     private ShapesManager shapesManager; // TODO  do we need this??
     private MainGameActivity mainGameActivity;
+    private GameSoundEffects gameSoundEffects;
     private GamePanel gamePanel;
     private ShapeMover shapeMover;
     private Score score;
@@ -146,6 +148,14 @@ public class CentralGameCommunication {
 
     public void addObject(MainGameActivity mainGameActivity) {
         this.mainGameActivity = mainGameActivity;
+    }
+
+    public void addObject(GameSoundEffects gameSoundEffects) {
+        this.gameSoundEffects = gameSoundEffects;
+    }
+
+    public void circleTapSoundEffect() {
+        gameSoundEffects.playCircleTap();
     }
 
     public void warningComponentShake() {

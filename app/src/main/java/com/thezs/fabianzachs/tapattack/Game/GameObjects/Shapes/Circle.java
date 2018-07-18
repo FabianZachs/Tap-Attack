@@ -45,6 +45,7 @@ public class Circle extends ShapeObject {
 
         @Override
         public boolean onDown(MotionEvent event) {
+            mediator.circleTapSoundEffect();
             reduceLives();
             return true;
         }
