@@ -5,7 +5,9 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.content.SharedPreferences;
         import android.graphics.Typeface;
         import android.graphics.drawable.LayerDrawable;
+        import android.media.MediaPlayer;
         import android.os.Bundle;
+        import android.os.Handler;
         import android.support.annotation.Nullable;
         import android.util.Log;
         import android.view.Gravity;
@@ -37,11 +39,14 @@ public class MainGameActivity extends Activity {
 
     private GamePanel gamePanel;
     CentralGameCommunication mediator;
+    MediaPlayer gameOverMusic;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         helper.makeFullscreen(this);
+
+        gameOverMusic = MediaPlayer.create(this, R.raw.gameoverscreen);
 
         setContentView(R.layout.activity_main_game);
 
@@ -252,6 +257,7 @@ public class MainGameActivity extends Activity {
 
     public void showGameOverScreen(final String gameOverReason, final int scoreToDisplay, final int streakToDisplay) {
 
+
         final Activity activity = this;
         this.runOnUiThread(new Runnable() {
             public void run() {
@@ -281,9 +287,25 @@ public class MainGameActivity extends Activity {
             }
         });
 
+        gameOverMusic.setLooping(true);
+
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                gameOverMusic.start();
+            }
+        }, 1000);
+
 
 
     }
+
+
+
+
 
 
     // TODO make this pause button size relative to screen size
@@ -327,6 +349,7 @@ public class MainGameActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        gameOverMusic.stop();
     }
 
     public void exitClick(View view) {

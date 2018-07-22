@@ -67,6 +67,7 @@ public class GameSoundEffects {
         //arrowSwipe = soundPool.load(Constants.CURRENT_CONTEXT, R.raw.swosh43, 1);
         //arrowSwipe = soundPool.load(Constants.CURRENT_CONTEXT, R.raw.arrow1, 1);
         arrowSwipe = soundPool.load(Constants.CURRENT_CONTEXT, R.raw.swosh08, 1);
+        //arrowSwipe = soundPool.load(Constants.CURRENT_CONTEXT, R.raw.swosh25, 1);
         //arrowSwipe = soundPool.load(Constants.CURRENT_CONTEXT, R.raw.swosh01, 1);
 
 
