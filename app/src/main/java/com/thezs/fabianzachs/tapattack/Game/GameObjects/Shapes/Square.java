@@ -62,6 +62,7 @@ public class Square extends ShapeObject {
 
         @Override
         public boolean onDown(MotionEvent event) {
+            mediator.squareTapOneSoundEffect();
             setState(1);
             timeSetState = System.currentTimeMillis();
             reduceLives();

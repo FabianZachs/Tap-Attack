@@ -47,6 +47,7 @@ public class CentralGameCommunication {
     }
 
     public void setGameOver(String gameOverReason) {
+        gameSoundEffects.playGameOver();
         gamePanel.endRunningThread();
         mainGameActivity.showGameOverScreen(gameOverReason, score.getScore(), streak.getCurrentGameHighestStreak());
         // todo get score and streak into prefs if highscore (do elsewhere, like when we create dialog, so pass in game score and game highest streak acheived)
@@ -156,6 +157,26 @@ public class CentralGameCommunication {
 
     public void circleTapSoundEffect() {
         gameSoundEffects.playCircleTap();
+    }
+
+    public void squareTapOneSoundEffect() {
+        gameSoundEffects.playSquareTapOne();
+    }
+
+    public void squareTapTwoSoundEffect() {
+        gameSoundEffects.playSquareTapTwo();
+    }
+
+    public void starSoundEffect() {
+        gameSoundEffects.playStarTap();
+    }
+
+    public void arrowSoundEffect() {
+        gameSoundEffects.playArrowSwipe();
+    }
+
+    public void gameOverSoundEffect() {
+        gameSoundEffects.playGameOver();
     }
 
     public void warningComponentShake() {

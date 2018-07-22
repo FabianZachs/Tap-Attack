@@ -12,6 +12,7 @@ import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Cross;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Star;
 import com.thezs.fabianzachs.tapattack.Game.GameOverReasons;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
@@ -99,6 +100,18 @@ public class ShapesManager {
         for (ShapeObject shape : shapes) {
 
             if (shape.getLives() <= 0) {
+
+
+
+                // todo refactor tmr!
+                // todo play shape death sound (something like shape.playDeathSoundEffect() { mediator....}
+                if (shape instanceof Square) {
+                    mediator.squareTapTwoSoundEffect();
+                }
+
+
+
+
 
                 if (shape.getGravable())
                     graveObjects.add(graveFactory.buildGrave(shape));

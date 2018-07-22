@@ -153,6 +153,8 @@ public class Arrow extends ShapeObject {
                                 float distanceY) {
             try {
                 if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY())) {
+                    if (getLives() > 0)
+                        mediator.arrowSoundEffect();
                     reduceLives();
                 }
                 else if (System.currentTimeMillis() - timeOfLastPenalty > 1000) {
