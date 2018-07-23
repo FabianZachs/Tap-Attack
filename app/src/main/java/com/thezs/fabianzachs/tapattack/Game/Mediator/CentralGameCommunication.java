@@ -49,7 +49,7 @@ public class CentralGameCommunication {
     public void setGameOver(String gameOverReason) {
         gameSoundEffects.playGameOver();
         // todo stop shapemovement, blink furthest down shape wait for x seconds then executye the rest
-        shapeMover.stop();
+        //shapeMover.stop();
         // todo after certain x secs
         gamePanel.endRunningThread();
         mainGameActivity.showGameOverScreen(gameOverReason, score.getScore(), streak.getCurrentGameHighestStreak());
