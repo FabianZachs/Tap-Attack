@@ -348,6 +348,18 @@ public class MainGameActivity extends Activity {
         adView.loadAd(adRequest);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        gameOverMusic.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mediator.isGameOver)
+            gameOverMusic.start();
+    }
 
     @Override
     protected void onDestroy() {
