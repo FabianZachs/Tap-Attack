@@ -121,8 +121,11 @@ public class MainMenuActivity extends  GeneralParent {
         prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
 
 
-
-
+        /*
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString("background", Constants.BACKGROUNDS[1]);
+        prefsEditor.apply();
+*/
         //setContentView(R.layout.activity_main_menu);
         setContentView(R.layout.activity_main_menu2);
 

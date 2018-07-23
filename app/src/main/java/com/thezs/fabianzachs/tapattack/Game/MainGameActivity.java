@@ -257,6 +257,18 @@ public class MainGameActivity extends Activity {
 
     public void showGameOverScreen(final String gameOverReason, final int scoreToDisplay, final int streakToDisplay) {
 
+        gameOverMusic.setLooping(true);
+
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                gameOverMusic.start();
+            }
+        }, 600);
+
 
         final Activity activity = this;
         this.runOnUiThread(new Runnable() {
@@ -287,17 +299,6 @@ public class MainGameActivity extends Activity {
             }
         });
 
-        gameOverMusic.setLooping(true);
-
-
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //Do something after 100ms
-                gameOverMusic.start();
-            }
-        }, 1000);
 
 
 

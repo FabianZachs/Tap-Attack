@@ -48,6 +48,9 @@ public class CentralGameCommunication {
 
     public void setGameOver(String gameOverReason) {
         gameSoundEffects.playGameOver();
+        // todo stop shapemovement, blink furthest down shape wait for x seconds then executye the rest
+        shapeMover.stop();
+        // todo after certain x secs
         gamePanel.endRunningThread();
         mainGameActivity.showGameOverScreen(gameOverReason, score.getScore(), streak.getCurrentGameHighestStreak());
         // todo get score and streak into prefs if highscore (do elsewhere, like when we create dialog, so pass in game score and game highest streak acheived)

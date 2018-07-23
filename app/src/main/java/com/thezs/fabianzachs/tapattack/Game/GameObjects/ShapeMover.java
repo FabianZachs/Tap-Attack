@@ -50,6 +50,7 @@ public class ShapeMover {
             startTime = System.currentTimeMillis();
             Log.d("shapemover", "update: not moving");
         }*/
+
         Log.d("shapemover", "update: moving");
         int elapsedTime = (int) (System.currentTimeMillis() - startTime);
         startTime = System.currentTimeMillis();
