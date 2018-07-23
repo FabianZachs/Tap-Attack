@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Arrow;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Circle;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Cross;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
@@ -101,8 +102,11 @@ public class ShapesManager {
 
             if (shape.getLives() <= 0) {
 
+                // todo first check if tapped furthest down (unless star or cross)
+
                 // todo optimize:
                 if (mediator.getStrWarningColor().equals(shape.getColor())) {
+                    mediator.warningComponentShake();
                     mediator.setGameOver(GameOverReasons.warningColorTap(shape));
                     break;
                 }
@@ -125,7 +129,7 @@ public class ShapesManager {
                 }
                 shapes.remove(shape);
                 mediator.incScore(shape.getPoints(), shape.getColor());
-                mediator.incStreak(1, shape.getColor());
+                //mediator.incStreak(1, shape.getColor());
 
                 mediator.editWaningColorStreak(shape);
 
@@ -161,7 +165,7 @@ public class ShapesManager {
 
         if (mediator.gameMoving())  {
             if (shapesJustStartedMoving) {
-                shapeMover.resetStartTime(); // todo somehow know that this is the first tinme called then execute this line
+                shapeMover.resetStartTime();
                 shapesJustStartedMoving = false;
             }
 
@@ -187,11 +191,29 @@ public class ShapesManager {
     }
 
     public void drawGameOver(Canvas canvas) {
-        blink(canvas, shapes.get(shapes.size()-1));
+        // todo make sure that shape isnt a star or a cross!
+        int indexOfBlinkingShape = 0;
+        for (int i = shapes.size() - 1; i>=0; i--) {
+            if (shapes.get(i) instanceof Circle || shapes.get(i) instanceof Square ||shapes.get(i) instanceof Arrow) {
+                indexOfBlinkingShape = i;
+                blink(canvas, shapes.get(indexOfBlinkingShape));
+                break;
+            }
+        }
+
+        for (ShapeObject shape : shapes) {
+            if (shapes.indexOf(shape) != indexOfBlinkingShape)
+                shape.draw(canvas);
+        }
+
+
+        //blink(canvas, shapes.get(shapes.size()-1));
+        /*
         for (ShapeObject shape : shapes) {
             if (shapes.indexOf(shape) != shapes.size()-1)
                 shape.draw(canvas);
         }
+        */
     }
 
 

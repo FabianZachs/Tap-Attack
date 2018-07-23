@@ -1,6 +1,8 @@
 package com.thezs.fabianzachs.tapattack.Game.Mediator;
 
+import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Constants;
@@ -24,6 +26,7 @@ public class CentralGameCommunication {
 
     private long gameStartTime;
     private int WARNINGCOLOR_SHAPE_DESTROY_POINTS = 5; //todo what class should this go into
+    private int TIME_AFTER_GAME_OVER_UNTIL_GAME_OVER_SCREEN = 2000;
 
     private ShapesManager shapesManager; // TODO  do we need this??
     private MainGameActivity mainGameActivity;
@@ -47,13 +50,50 @@ public class CentralGameCommunication {
 
     }
 
-    public void setGameOver(String gameOverReason) {
+    public void setGameOver(final String gameOverReason) {
         this.isGameOver = true;
         gameSoundEffects.playGameOver();
         // todo stop shapemovement, blink furthest down shape wait for x seconds then executye the rest
         shapeMover.stop();
-        //shapesManager.flashBottomShape();
         // todo after certain x secs
+        //Log.d("gameovercalled", "setGameOver1: ");
+        //gamePanel.endRunningThread();
+        //Log.d("gameovercalled", "setGameOver2: ");
+        //mainGameActivity.showGameOverScreen(gameOverReason, score.getScore(), streak.getCurrentGameHighestStreak());
+/*
+        final Handler handler = new Handler();
+        Log.d("gameovercalled", "setGameOver3: ");
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("gameovercalled", "setGameOver1: ");
+                gamePanel.endRunningThread();
+                Log.d("gameovercalled", "setGameOver2: ");
+                mainGameActivity.showGameOverScreen(gameOverReason, score.getScore(), streak.getCurrentGameHighestStreak());
+            }
+        }, TIME_AFTER_GAME_OVER_UNTIL_GAME_OVER_SCREEN);
+        */
+
+
+
+        mainGameActivity.runOnUiThread(new Runnable() {
+            public void run() {
+
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                }
+                gamePanel.endRunningThread();
+                mainGameActivity.showGameOverScreen(gameOverReason, score.getScore(), streak.getCurrentGameHighestStreak());
+                //View alertView = this.getLayoutInflater().inflate(R.layout.game_over, null);
+            }
+        });
+
+
+
+
+
+
         //gamePanel.endRunningThread();
         //mainGameActivity.showGameOverScreen(gameOverReason, score.getScore(), streak.getCurrentGameHighestStreak());
         // todo get score and streak into prefs if highscore (do elsewhere, like when we create dialog, so pass in game score and game highest streak acheived)

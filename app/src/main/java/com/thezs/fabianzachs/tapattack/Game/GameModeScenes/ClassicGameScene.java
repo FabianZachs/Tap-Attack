@@ -76,7 +76,8 @@ public class ClassicGameScene implements Scene {
 
     @Override
     public void update() {
-        shapesManager.update();
+        if (!mediator.isGameOver)
+            shapesManager.update();
 
     }
 
@@ -139,6 +140,8 @@ public class ClassicGameScene implements Scene {
         //if (!gameOver) {
             //shapesManager.recieveTouch(event);
         //}
+        if (mediator.isGameOver)
+            return;
         // TODO touch can be for warning color if in warning color region
         // TODO if touch in shape creation region
         if (Constants.SHAPE_CLICK_AREA.contains((int) event.getX(), (int) event.getY())) {

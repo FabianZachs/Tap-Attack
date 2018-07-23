@@ -17,6 +17,8 @@ import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static com.google.android.gms.internal.zzahn.runOnUiThread;
+
 /**
  * Created by fabianzachs on 05/03/18.
  */
@@ -232,6 +234,31 @@ public class WarningColor {
                 .repeat(0)
                 .playOn(Constants.warningComponentImg);
         shake = true; */
+/*
+        Constants.CURRENT_CONTEXT.runOnUiThread(new Runnable() {
+            public void run() {
+                Log.d("shakecalled", "shake: called");
+                YoYo.with(Techniques.Shake)
+                        .duration(750)
+                        .repeat(0)
+                        .playOn(warningComponent);
+            }
+        });
+        */
+
+
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("shalking", "run: ");
+                YoYo.with(Techniques.Shake)
+                        .duration(750)
+                        .repeat(0)
+                        .playOn(warningComponent);
+            }
+        });
+
+        /*
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -241,6 +268,7 @@ public class WarningColor {
                         .playOn(warningComponent);
             }
         });
+        */
     }
 
     public void draw(Canvas canvas) {
