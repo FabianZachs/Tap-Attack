@@ -101,6 +101,11 @@ public class ShapesManager {
 
             if (shape.getLives() <= 0) {
 
+                // todo optimize:
+                if (mediator.getStrWarningColor().equals(shape.getColor())) {
+                    mediator.setGameOver(GameOverReasons.warningColorTap(shape));
+                    break;
+                }
 
 
                 // todo refactor tmr!
@@ -125,9 +130,6 @@ public class ShapesManager {
                 mediator.editWaningColorStreak(shape);
 
 
-                // todo optimize:
-                if (mediator.getStrWarningColor().equals(shape.getColor()))
-                    mediator.setGameOver(GameOverReasons.warningColorTap(shape));
                 //mediator.changeProgressBarBy(shape.getProgressBarAddition(), shape.getColor());
             }
 
@@ -184,13 +186,37 @@ public class ShapesManager {
         return shape.getClass() == Star.class || shape.getClass() == Cross.class;
     }
 
+    public void drawGameOver(Canvas canvas) {
+        blink(canvas, shapes.get(shapes.size()-1));
+        for (ShapeObject shape : shapes) {
+            if (shapes.indexOf(shape) != shapes.size()-1)
+                shape.draw(canvas);
+        }
+    }
+
+
+    private final float BLINK_TIME = 0.5f;
+    private long timeOfBlinkSwitch = System.currentTimeMillis();
+    private boolean blinkOn = true;
+
+    private void blink(Canvas canvas, ShapeObject shapeObject) {
+        if (System.currentTimeMillis() - timeOfBlinkSwitch > BLINK_TIME * 1000) {
+            blinkOn = !blinkOn;
+            timeOfBlinkSwitch = System.currentTimeMillis();
+        }
+        if (blinkOn)
+            shapeObject.draw(canvas);
+    }
+
     public void draw(Canvas canvas) {
+
 
         for (ShapeObject shape : shapes)
             shape.draw(canvas);
 
         for (GraveObject graveObject : graveObjects)
             graveObject.draw(canvas);
+
 
 
         /*
@@ -215,4 +241,5 @@ public class ShapesManager {
                     shapes.get(shapeIndex).getBitmapHolder(), mediator, "UP"));
         }
     }
+
 }

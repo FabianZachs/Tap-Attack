@@ -36,6 +36,7 @@ public class CentralGameCommunication {
     private WarningColor warningColor;
     private ShapeColorPicker shapeColorPicker;
     private boolean shapesMoving = false;
+    public boolean isGameOver = false;
 
     /* Tasks:
     * recieve messages regarding destruction of shape, incorrect taps of shape, (passing required info)
@@ -47,12 +48,14 @@ public class CentralGameCommunication {
     }
 
     public void setGameOver(String gameOverReason) {
+        this.isGameOver = true;
         gameSoundEffects.playGameOver();
         // todo stop shapemovement, blink furthest down shape wait for x seconds then executye the rest
-        //shapeMover.stop();
+        shapeMover.stop();
+        //shapesManager.flashBottomShape();
         // todo after certain x secs
-        gamePanel.endRunningThread();
-        mainGameActivity.showGameOverScreen(gameOverReason, score.getScore(), streak.getCurrentGameHighestStreak());
+        //gamePanel.endRunningThread();
+        //mainGameActivity.showGameOverScreen(gameOverReason, score.getScore(), streak.getCurrentGameHighestStreak());
         // todo get score and streak into prefs if highscore (do elsewhere, like when we create dialog, so pass in game score and game highest streak acheived)
     }
 
