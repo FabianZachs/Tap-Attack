@@ -25,7 +25,8 @@ public class GameOverReasons {
     }
 
     public static String wrongShapeTap(ShapeObject shape) {
-        return "THERE WAS A " + shape.getClass().getSimpleName().toUpperCase()  + " BELOW THE ONE YOU TAPPED";
+        //return "THERE WAS A " + shape.getClass().getSimpleName().toUpperCase()  + " BELOW THE ONE YOU TAPPED";
+        return "YOU FORGOT TO TAP THE " + shape.getClass().getSimpleName().toUpperCase() + " FURTHEST DOWN";
     }
 
     public static String backgroundTap() {

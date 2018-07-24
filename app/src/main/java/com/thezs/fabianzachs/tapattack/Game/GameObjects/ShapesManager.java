@@ -94,6 +94,11 @@ public class ShapesManager {
         }
     }
 
+    public boolean isShapeCircleSquareArrow(ShapeObject shapeObject) {
+        return (shapeObject instanceof Circle || shapeObject instanceof Square || shapeObject instanceof Arrow);
+    }
+
+    // todo refactor update into smaller functions with names specifying what each section checks
     public void update() {
         //Log.d("debugpaint", "update: shapes size" + shapes.size());
         //Log.d("debugpaint", "update: grave seize" + graveObjects.size());
@@ -103,6 +108,21 @@ public class ShapesManager {
             if (shape.getLives() <= 0) {
 
                 // todo first check if tapped furthest down (unless star or cross)
+                // if there exists a c,s,a with lives undereath current shape -> game over
+                /*
+                for (int i = shapes.indexOf(shape) + 1; i < shapes.size(); i++) {
+                    if (isShapeCircleSquareArrow(shapes.get(i)) && shapes.get(i).getLives() > 0) {
+                        mediator.setGameOver(GameOverReasons.wrongShapeTap(shape));
+                        return;
+                    }
+                }
+                */
+                for (int i = shapes.size() - 1; i > shapes.indexOf(shape); i--) {
+                    if (isShapeCircleSquareArrow(shapes.get(i)) && shapes.get(i).getLives() > 0) {
+                        mediator.setGameOver(GameOverReasons.wrongShapeTap(shapes.get(i)));
+                        return;
+                    }
+                }
 
                 // todo optimize:
                 if (mediator.getStrWarningColor().equals(shape.getColor())) {
@@ -188,6 +208,10 @@ public class ShapesManager {
 
     private boolean shapeIsStarOrCross(ShapeObject shape) {
         return shape.getClass() == Star.class || shape.getClass() == Cross.class;
+    }
+
+    public void drawGameOverREDO(Canvas canvas) {
+        // todo depending on the type of game over draw draw different gameover event on canvas
     }
 
     public void drawGameOver(Canvas canvas) {
