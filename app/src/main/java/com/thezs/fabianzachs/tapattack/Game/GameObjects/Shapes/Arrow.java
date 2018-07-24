@@ -160,7 +160,8 @@ public class Arrow extends ShapeObject {
                 else if (System.currentTimeMillis() - timeOfLastPenalty > 1000) {
                     //mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
                     //mediator.resetStreak();
-                    mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this, "fling", "in that direction " + intendedFlickDirectionString+" " + Math.atan2(event1.getY() - event2.getY(), event2.getX() - event1.getX())));
+                    setIncorrectTouchAndReason("fling");
+                    //mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this, "fling", "in that direction " + intendedFlickDirectionString+" " + Math.atan2(event1.getY() - event2.getY(), event2.getX() - event1.getX())));
                     //mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this));
                     //StyleableToast.makeText(Constants.CURRENT_CONTEXT, "wrong flick direction", R.style.successtoast).show();
                     timeOfLastPenalty = System.currentTimeMillis();
@@ -176,7 +177,8 @@ public class Arrow extends ShapeObject {
         public boolean onSingleTapUp(MotionEvent event) {
             //mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
             //mediator.resetStreak();
-            mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this, "tap", ""));
+            setIncorrectTouchAndReason("tap");
+            //mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this, "tap", ""));
             //mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this));
             StyleableToast.makeText(Constants.CURRENT_CONTEXT, "single tap up", R.style.successtoast).show();
             return true;

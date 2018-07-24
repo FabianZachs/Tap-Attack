@@ -92,7 +92,7 @@ public abstract class ShapeObject {
         return this.incorrectTouch;
     }
 
-    private String getTypeOfIncorrectTouch() {
+    public String getTypeOfIncorrectTouch() {
         return this.typeOfIncorrectTouch;
     }
 

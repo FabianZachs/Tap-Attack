@@ -116,6 +116,12 @@ public class ShapesManager {
 
         for (ShapeObject shape : shapes) {
 
+            // todo if incorrect touch type
+            if (shape.wasIncorrectTouch()) {
+                shapeToBlink = shape;
+                mediator.setGameOver(GameOverReasons.wrongShapeAction(shape, shape.getTypeOfIncorrectTouch(), ""));
+            }
+
             if (shape.getLives() <= 0) {
 
                 // todo first check if tapped furthest down (unless star or cross)
@@ -135,11 +141,9 @@ public class ShapesManager {
                     break;
                 }
 
-                // todo if incorrect touch
-                //if (shape.incorrectTouch())
 
 
-                // todo refactor tmr!
+                // todo refactor tmr! only play sound if shape is killed successfully, not losing and shape sound
                 // todo play shape death sound (something like shape.playDeathSoundEffect() { mediator....}
                 if (shape instanceof Square) {
                     mediator.squareTapTwoSoundEffect();
