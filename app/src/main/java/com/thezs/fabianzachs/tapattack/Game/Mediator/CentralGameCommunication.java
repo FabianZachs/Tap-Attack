@@ -54,7 +54,7 @@ public class CentralGameCommunication {
         this.isGameOver = true;
         gameSoundEffects.playGameOver();
         // todo stop shapemovement, blink furthest down shape wait for x seconds then executye the rest
-        shapeMover.stop();
+        //shapeMover.stop();
         // todo after certain x secs
         //Log.d("gameovercalled", "setGameOver1: ");
         //gamePanel.endRunningThread();

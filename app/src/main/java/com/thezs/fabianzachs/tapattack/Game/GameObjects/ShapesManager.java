@@ -46,6 +46,7 @@ public class ShapesManager {
     private int EXTRA_PIXELS_CLICK_AREA = Constants.SCREEN_HEIGHT/35;
     public boolean shapesJustStartedMoving = false;
 
+    private ShapeObject shapeToBlink;
 
 
     public ShapesManager(CentralGameCommunication mediator) {
@@ -57,6 +58,10 @@ public class ShapesManager {
         this.graveFactory = new GraveFactory();
         this.shapeMover = new ShapeMover(mediator);
         mediator.addObject(shapeMover);
+    }
+
+    public void setBlinkingShape(ShapeObject shapeToBlink) {
+        this.shapeToBlink = shapeToBlink;
     }
 
     private Rect shapeClickArea(ShapeObject shape) {
@@ -90,12 +95,18 @@ public class ShapesManager {
             //mediator.changeProgressBarBy(-40);
             mediator.warningComponentShake();
             //mediator.resetStreak();
+            shapeToBlink = getFurthestDownNormalShape();
             mediator.setGameOver(GameOverReasons.backgroundTap()); //todo for setting up gameOver we have that background touch triggers gameover
         }
     }
 
-    public boolean isShapeCircleSquareArrow(ShapeObject shapeObject) {
-        return (shapeObject instanceof Circle || shapeObject instanceof Square || shapeObject instanceof Arrow);
+    private ShapeObject getFurthestDownNormalShape() {
+        for (int i = shapes.size() - 1; i >= 0; i--) {
+            if (!shapeIsStarOrCross(shapes.get(i)))
+                return shapes.get(i);
+        }
+        return shapes.get(0);
+
     }
 
     // todo refactor update into smaller functions with names specifying what each section checks
@@ -108,17 +119,9 @@ public class ShapesManager {
             if (shape.getLives() <= 0) {
 
                 // todo first check if tapped furthest down (unless star or cross)
-                // if there exists a c,s,a with lives undereath current shape -> game over
-                /*
-                for (int i = shapes.indexOf(shape) + 1; i < shapes.size(); i++) {
-                    if (isShapeCircleSquareArrow(shapes.get(i)) && shapes.get(i).getLives() > 0) {
-                        mediator.setGameOver(GameOverReasons.wrongShapeTap(shape));
-                        return;
-                    }
-                }
-                */
                 for (int i = shapes.size() - 1; i > shapes.indexOf(shape); i--) {
-                    if (isShapeCircleSquareArrow(shapes.get(i)) && shapes.get(i).getLives() > 0) {
+                    if (!shapeIsStarOrCross(shapes.get(i)) && shapes.get(i).getLives() > 0) {
+                        shapeToBlink = getFurthestDownNormalShape();
                         mediator.setGameOver(GameOverReasons.wrongShapeTap(shapes.get(i)));
                         return;
                     }
@@ -127,9 +130,13 @@ public class ShapesManager {
                 // todo optimize:
                 if (mediator.getStrWarningColor().equals(shape.getColor())) {
                     mediator.warningComponentShake();
+                    shapeToBlink = shape; // since we already checked if its the furthest down -- this works for wrong color stars
                     mediator.setGameOver(GameOverReasons.warningColorTap(shape));
                     break;
                 }
+
+                // todo if incorrect touch
+                //if (shape.incorrectTouch())
 
 
                 // todo refactor tmr!
@@ -212,13 +219,29 @@ public class ShapesManager {
 
     public void drawGameOverREDO(Canvas canvas) {
         // todo depending on the type of game over draw draw different gameover event on canvas
+        /*
+        String reason = " adwad"
+        switch (reason) {
+            case "Not touching correct shape":
+                drawGameOver(canvas);
+                break;
+            case "star warning color":
+
+        }
+        */
+
+        blink(canvas, shapeToBlink);
+        for (ShapeObject shape : shapes) {
+            if (!shape.equals(shapeToBlink))
+                shape.draw(canvas);
+        }
     }
 
     public void drawGameOver(Canvas canvas) {
-        // todo make sure that shape isnt a star or a cross!
+        // todo make sure that shape isnt a star or a cross
         int indexOfBlinkingShape = 0;
         for (int i = shapes.size() - 1; i>=0; i--) {
-            if (shapes.get(i) instanceof Circle || shapes.get(i) instanceof Square ||shapes.get(i) instanceof Arrow) {
+            if (!shapeIsStarOrCross(shapes.get(i))) {
                 indexOfBlinkingShape = i;
                 blink(canvas, shapes.get(indexOfBlinkingShape));
                 break;

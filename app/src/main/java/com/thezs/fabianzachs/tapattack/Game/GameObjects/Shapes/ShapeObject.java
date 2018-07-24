@@ -51,6 +51,9 @@ public abstract class ShapeObject {
 
     private int stateAnimation = 0;
 
+    private boolean incorrectTouch = false;
+    private String typeOfIncorrectTouch = "";
+
 
     private GestureDetectorCompat mDetector;
 
@@ -78,6 +81,19 @@ public abstract class ShapeObject {
                 (centerLocation.y + (Constants.SHAPE_HEIGHT/2)));
 
         setBitmapHolder(rect);
+    }
+
+    protected void setIncorrectTouchAndReason(String reason) {
+        this.incorrectTouch = true;
+        this.typeOfIncorrectTouch = reason;
+    }
+
+    public boolean wasIncorrectTouch() {
+        return this.incorrectTouch;
+    }
+
+    private String getTypeOfIncorrectTouch() {
+        return this.typeOfIncorrectTouch;
     }
 
     public void draw(Canvas canvas) {
@@ -123,9 +139,6 @@ public abstract class ShapeObject {
         return alphaPaint;
     }
 
-    public final void incorrectTouch() {
-
-    }
 
     public Paint getPaintObj() {
         return this.alphaPaint;

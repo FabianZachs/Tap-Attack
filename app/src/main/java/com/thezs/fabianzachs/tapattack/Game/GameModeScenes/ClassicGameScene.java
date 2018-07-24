@@ -90,7 +90,8 @@ public class ClassicGameScene implements Scene {
         if (!mediator.isGameOver)
             shapesManager.draw(canvas);
         else
-            shapesManager.drawGameOver(canvas);
+            shapesManager.drawGameOverREDO(canvas);
+            //shapesManager.drawGameOver(canvas);
         warningColor.draw(canvas);
 
         // todo draw "TOUCH TO START" text in middle of screen if !mediator.gameMoving()

@@ -27,7 +27,6 @@ public class ShapeMover {
     private int directionVector;
     private int numeratorOfDenominator = 800000;
     private int timeShift = 0;
-    private boolean moving = true;
 
     public ShapeMover(CentralGameCommunication mediator) {
         //Log.d("speed", "previous speed: " + Constants.SCREEN_HEIGHT/5000.0f);
@@ -52,25 +51,15 @@ public class ShapeMover {
             Log.d("shapemover", "update: not moving");
         }*/
 
-        if (moving) {
-            Log.d("shapemover", "update: moving");
-            int elapsedTime = (int) (System.currentTimeMillis() - startTime);
-            startTime = System.currentTimeMillis();
-            //float speed = Constants.SCREEN_HEIGHT/5000.0f;
+        //Log.d("shapemover", "update: moving");
+        int elapsedTime = (int) (System.currentTimeMillis() - startTime);
+        startTime = System.currentTimeMillis();
+        //float speed = Constants.SCREEN_HEIGHT/5000.0f;
 
-            //Log.d("speed", "now speed: " + getSpeed(elapsedTime));
-            for (ShapeObject shape : shapes) {
-                shape.incrementY(directionVector * (float) getSpeed(elapsedTime) * elapsedTime);
-
-            }
-
+        //Log.d("speed", "now speed: " + getSpeed(elapsedTime));
+        for (ShapeObject shape : shapes) {
+            shape.incrementY(directionVector * (float) getSpeed(elapsedTime) * elapsedTime);
         }
-
-
-    }
-
-    public void stop() {
-        this.moving = false;
     }
 
     public void oppositeDirection() {
