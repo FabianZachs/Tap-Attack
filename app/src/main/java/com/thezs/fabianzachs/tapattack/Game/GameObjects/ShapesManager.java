@@ -143,15 +143,12 @@ public class ShapesManager {
 
 
 
-                // todo refactor tmr! only play sound if shape is killed successfully, not losing and shape sound
-                // todo play shape death sound (something like shape.playDeathSoundEffect() { mediator....}
+                /*
                 if (shape instanceof Square) {
                     mediator.squareTapTwoSoundEffect();
                 }
-
-
-
-
+                */
+                shape.playDeathSoundEffect();
 
                 if (shape.getGravable())
                     graveObjects.add(graveFactory.buildGrave(shape));

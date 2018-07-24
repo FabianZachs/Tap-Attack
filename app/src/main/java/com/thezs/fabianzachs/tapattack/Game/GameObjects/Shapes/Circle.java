@@ -28,6 +28,11 @@ public class Circle extends ShapeObject {
 
     }
 
+    @Override
+    public void playDeathSoundEffect() {
+        mediator.circleTapSoundEffect();
+    }
+
 
     @Override
     public void draw(Canvas canvas) {
@@ -45,7 +50,6 @@ public class Circle extends ShapeObject {
 
         @Override
         public boolean onDown(MotionEvent event) {
-            mediator.circleTapSoundEffect();
             reduceLives();
             return true;
         }

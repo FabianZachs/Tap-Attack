@@ -83,6 +83,8 @@ public abstract class ShapeObject {
         setBitmapHolder(rect);
     }
 
+    abstract public void playDeathSoundEffect();
+
     protected void setIncorrectTouchAndReason(String reason) {
         this.incorrectTouch = true;
         this.typeOfIncorrectTouch = reason;

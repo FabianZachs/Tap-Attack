@@ -38,6 +38,11 @@ public class Square extends ShapeObject {
 
     }
 
+    @Override
+    public void playDeathSoundEffect() {
+        mediator.squareTapTwoSoundEffect();
+    }
+
 
     @Override
     public void draw(Canvas canvas) {
@@ -62,10 +67,11 @@ public class Square extends ShapeObject {
 
         @Override
         public boolean onDown(MotionEvent event) {
-            mediator.squareTapOneSoundEffect();
+            reduceLives();
+            if (getLives() > 0)
+                mediator.squareTapOneSoundEffect();
             setState(1);
             timeSetState = System.currentTimeMillis();
-            reduceLives();
             setDurationAlive(getDurationAlive() + 0.25f); // todo wont matter for waterfall type mode
             return true;
         }

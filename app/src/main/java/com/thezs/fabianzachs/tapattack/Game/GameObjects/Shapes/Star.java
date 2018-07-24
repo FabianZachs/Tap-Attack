@@ -90,6 +90,11 @@ public class Star extends ShapeObject {
     }
 
     @Override
+    public void playDeathSoundEffect() {
+        mediator.starSoundEffect();
+    }
+
+    @Override
     public void draw(Canvas canvas) {
 
         // tODO fix colors
@@ -144,7 +149,6 @@ public class Star extends ShapeObject {
         @Override
         public boolean onDown(MotionEvent event) {
             clicked = true;
-            mediator.starSoundEffect();
             setShapeImages(0, Bitmap.createBitmap(getShapeImg(), 0, 0, getShapeImg().getWidth(), getShapeImg().getHeight(), rotationMatrix, true));
             if (mediator.getIntWarningColor().equals(intColors.get(colorIndex))) {
                 reduceLives();

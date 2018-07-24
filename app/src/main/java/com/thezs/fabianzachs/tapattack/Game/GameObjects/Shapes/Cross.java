@@ -29,6 +29,10 @@ public class Cross extends ShapeObject {
         setmDetector(new GestureDetectorCompat(Constants.CURRENT_CONTEXT, new MyGestureListener()));
     }
 
+    @Override
+    public void playDeathSoundEffect() {
+    }
+
 
     @Override
     public void draw(Canvas canvas) {
