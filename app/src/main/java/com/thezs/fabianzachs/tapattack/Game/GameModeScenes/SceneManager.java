@@ -27,7 +27,7 @@ public class SceneManager {
         setCurrentGameConstants();
         ACTIVE_SCENE = 0;
         //scenes.add(new ClassicGameScene(mediator));
-        scenes.add(new InstructionsGameScene());
+        scenes.add(new InstructionsGameScene(mediator));
 
         //CURRENT_SCENE = scenes.get(ACTIVE_SCENE);
     }

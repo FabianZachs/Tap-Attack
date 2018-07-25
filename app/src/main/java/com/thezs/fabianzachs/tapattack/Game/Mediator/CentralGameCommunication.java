@@ -230,7 +230,8 @@ public class CentralGameCommunication {
     }
 
     public void warningColorChanged(String strColor) {
-        shapeColorPicker.setWarningColor(strColor);
+        if (shapeColorPicker != null) // todo since we dont need a shapes color picker for instructions
+            shapeColorPicker.setWarningColor(strColor);
         //shapeColorPicker.setWarningColor(warningColor.getCurrentStrColor());
     }
 
