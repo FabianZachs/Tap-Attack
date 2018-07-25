@@ -129,7 +129,7 @@ public class MainMenuActivity extends  GeneralParent {
         //setContentView(R.layout.activity_main_menu);
         setContentView(R.layout.activity_main_menu2);
 
-        if (!prefs.getBoolean("firstTime", false)) { // todo uncomment when complete
+        if (!prefs.getBoolean("firstTime", false)) {
             Log.d("thisran", "onCreate: ran");
             databaseSetup();
 

@@ -20,14 +20,16 @@ public class SceneManager {
 
     private ArrayList<Scene> scenes = new ArrayList<>();
     private static int ACTIVE_SCENE;
-    private static Scene CURRENT_SCENE;
+    //private static Scene CURRENT_SCENE;
 
     // TODO update to take game mode x (ACTIVE_SCENE is specified before)
     public SceneManager(CentralGameCommunication mediator) {
         setCurrentGameConstants();
         ACTIVE_SCENE = 0;
-        scenes.add(new ClassicGameScene(mediator));
-        CURRENT_SCENE = scenes.get(ACTIVE_SCENE);
+        //scenes.add(new ClassicGameScene(mediator));
+        scenes.add(new InstructionsGameScene());
+
+        //CURRENT_SCENE = scenes.get(ACTIVE_SCENE);
     }
 
     public void recieveTouch(MotionEvent event) {
@@ -47,9 +49,11 @@ public class SceneManager {
         ACTIVE_SCENE = sceneNumber;
     }
 
+    /*
     public static void setGameOver(Boolean gameOver) {
         CURRENT_SCENE.setGameOver(true);
     }
+    */
 
     public void setCurrentGameConstants() {
         SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", MODE_PRIVATE);
