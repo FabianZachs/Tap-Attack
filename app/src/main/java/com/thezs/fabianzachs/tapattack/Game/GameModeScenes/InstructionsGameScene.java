@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
@@ -38,7 +37,15 @@ public class InstructionsGameScene implements Scene{
     private ShapeObject shapeToDisplay = null;
     private Point shapeLocation;
     private String textToDisplay = null;
-    private Point textLocation;
+    private Point shapeTextLocation;
+
+    private Paint shapePaint = new Paint();
+    private Point warningColorTextLocation1 = new Point(Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/8);
+    private Point warningColorTextLocation2 = new Point(Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/2);
+    private Point warningColorTextLocation3 = new Point(Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/2 + 50);
+    private Rect shapeRect = new Rect();
+    private Paint textPaint1 = new Paint();
+    private Paint textPaint2 = new Paint();
     // todo make rect and paint for shape global and paint for text description
 
     public InstructionsGameScene(CentralGameCommunication mediator) {
@@ -54,7 +61,9 @@ public class InstructionsGameScene implements Scene{
 
         //this.shapeLocation = new Point(Constants.SCREEN_HEIGHT/3 - Constants.SHAPE_WIDTH/2, Constants.SCREEN_WIDTH/2 );
         this.shapeLocation = new Point(Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/3 );
-        this.textLocation = new Point(Constants.SCREEN_WIDTH/2, (Constants.SCREEN_HEIGHT/3) * 2 );
+        this.shapeTextLocation = new Point(Constants.SCREEN_WIDTH/2, (Constants.SCREEN_HEIGHT/3) * 2 );
+        setupPaint(textPaint1);
+        setupPaint(textPaint2);
 
 
     }
@@ -64,35 +73,35 @@ public class InstructionsGameScene implements Scene{
         switch (instructionIndex) {
             case 0:
                 if (shapeToDisplay == null) {
-                    shapeToDisplay = shapeBuilder.buildShape("circle", shapeColorPicker.getColorForShape(), shapeLocation, new Paint(), new Rect(), mediator, "UP");
+                    shapeToDisplay = shapeBuilder.buildShape("circle", shapeColorPicker.getColorForShape(), shapeLocation, shapePaint, shapeRect, mediator, "UP");
                     textToDisplay = "TAP CIRCLES ONCE";
                 }
                 shapeInstruction(canvas);
                 return;
             case 1:
                 if (shapeToDisplay == null) {
-                    shapeToDisplay = shapeBuilder.buildShape("square", shapeColorPicker.getColorForShape(), shapeLocation, new Paint(), new Rect(), mediator, "UP");
+                    shapeToDisplay = shapeBuilder.buildShape("square", shapeColorPicker.getColorForShape(), shapeLocation, shapePaint, shapeRect, mediator, "UP");
                     textToDisplay = "TAP SQUARES TWICE RELATIVELY QUICKLY";
                 }
                 shapeInstruction(canvas);
                 return;
             case 2:
                 if (shapeToDisplay == null) {
-                    shapeToDisplay = shapeBuilder.buildShape("arrow", shapeColorPicker.getColorForShape(), shapeLocation, new Paint(), new Rect(), mediator, "RIGHT");
+                    shapeToDisplay = shapeBuilder.buildShape("arrow", shapeColorPicker.getColorForShape(), shapeLocation, shapePaint, shapeRect, mediator, "RIGHT");
                     textToDisplay = "FLICK ARROWS IN THE DIRECTION IT POINTS";
                 }
                 shapeInstruction(canvas);
                 return;
             case 3:
                 if (shapeToDisplay == null) {
-                    shapeToDisplay = shapeBuilder.buildShape("arrow", shapeColorPicker.getColorForShape(), shapeLocation, new Paint(), new Rect(), mediator, "LEFT");
+                    shapeToDisplay = shapeBuilder.buildShape("arrow", shapeColorPicker.getColorForShape(), shapeLocation, shapePaint, shapeRect, mediator, "LEFT");
                     textToDisplay = "FLICK ARROWS IN THE DIRECTION IT POINTS";
                 }
                 shapeInstruction(canvas);
                 return;
             case 4:
                 if (shapeToDisplay == null) {
-                    shapeToDisplay = shapeBuilder.buildShape("cross", shapeColorPicker.getColorForShape(), shapeLocation, new Paint(), new Rect(), mediator, "RIGHT");
+                    shapeToDisplay = shapeBuilder.buildShape("cross", shapeColorPicker.getColorForShape(), shapeLocation, shapePaint, shapeRect, mediator, "RIGHT");
                     textToDisplay = "NEVER TAP THE X... TAP IT TO CONTINUE :P";
                 }
                 shapeInstruction(canvas);
@@ -102,7 +111,7 @@ public class InstructionsGameScene implements Scene{
                 return;
             case 6:
                 if (shapeToDisplay == null) {
-                    shapeToDisplay = shapeBuilder.buildShape("star", shapeColorPicker.getColorForShape(), shapeLocation, new Paint(), new Rect(), mediator, "RIGHT");
+                    shapeToDisplay = shapeBuilder.buildShape("star", shapeColorPicker.getColorForShape(), shapeLocation, shapePaint, shapeRect, mediator, "RIGHT");
                     textToDisplay = "TAP STAR ONLY WHEN NOT WARNING COLOR";
                 }
                 shapeInstruction(canvas);
@@ -113,7 +122,18 @@ public class InstructionsGameScene implements Scene{
     }
 
     private void warningColorInstruction(Canvas canvas) {
-        //canvas.drawText("THIS DISPLAY THE COLOR OF SHAPES YOU CANNOT TOUCH", );
+        canvas.drawText("THIS DISPLAYS THE COLOR OF SHAPES YOU CANNOT TOUCH", warningColorTextLocation1.x, warningColorTextLocation1.y, textPaint1);
+        canvas.drawText("TAP EITHER SIDE BAR TO CHANGE WARNING COLOR", warningColorTextLocation2.x, warningColorTextLocation2.y, textPaint1);
+        canvas.drawText("THEN YOU CAN DESTROY THE SHAPE", warningColorTextLocation3.x, warningColorTextLocation3.y, textPaint1);
+    }
+
+    private void setupPaint(Paint paint) {
+        Typeface plain = Typeface.createFromAsset(Constants.CURRENT_CONTEXT.getAssets(), "undinaru.ttf");
+        Typeface bold = Typeface.create(plain, Typeface.BOLD);
+        paint.setTypeface(bold);
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(40);
+        paint.setTextAlign(Paint.Align.CENTER);
     }
 
     private void shapeInstruction(Canvas canvas) {
@@ -123,24 +143,27 @@ public class InstructionsGameScene implements Scene{
         //Log.d("shapetodis", "shapeInstruction: " + shapeToDisplay);
         // todo find x and y for text depending on shape location 2/3 for y
         // todo center for x
-        //canvas.drawText(textToDisplay, textLocation.x, textLocation.y, new Paint());
-        drawDescriptionText(canvas);
+        //canvas.drawText(textToDisplay, shapeTextLocation.x, shapeTextLocation.y, new Paint());
+        //drawDescriptionText(canvas);
+        canvas.drawText(textToDisplay, shapeTextLocation.x, shapeTextLocation.y, textPaint1);
     }
 
+    /*
     private void drawDescriptionText(Canvas canvas) {
-        Paint startGameTextPaint = new Paint();
+        Paint descriptionPaint = new Paint();
         Typeface plain = Typeface.createFromAsset(Constants.CURRENT_CONTEXT.getAssets(), "undinaru.ttf");
         Typeface bold = Typeface.create(plain, Typeface.BOLD);
-        startGameTextPaint.setTypeface(bold);
-        startGameTextPaint.setColor(Color.WHITE);
-        startGameTextPaint.setTextSize(40);
-        startGameTextPaint.setTextAlign(Paint.Align.CENTER);
+        descriptionPaint.setTypeface(bold);
+        descriptionPaint.setColor(Color.WHITE);
+        descriptionPaint.setTextSize(40);
+        descriptionPaint.setTextAlign(Paint.Align.CENTER);
         //int xPos = (canvas.getWidth() / 2);
         //int yPos = (int) ((canvas.getHeight() / 2) - ((startGameTextPaint.descent() + startGameTextPaint.ascent()) / 2)) ; center
         //int yPos = (int) (7*canvas.getHeight()) /8;
         //((textPaint.descent() + textPaint.ascent()) / 2) is the distance from the baseline to the center.
-        canvas.drawText(textToDisplay, textLocation.x, textLocation.y, startGameTextPaint);
+        canvas.drawText(textToDisplay, shapeTextLocation.x, shapeTextLocation.y, descriptionPaint);
     }
+    */
 
 
     private void nextInstruction() {
@@ -166,7 +189,8 @@ public class InstructionsGameScene implements Scene{
         backgroundManager.draw(canvas);
         instructionToDraw(canvas);
 
-        drawContinueText(canvas);
+        if (instructionIndex >= 5)
+            drawContinueText(canvas);
 
 
     }
@@ -196,6 +220,11 @@ public class InstructionsGameScene implements Scene{
     public void recieveTouch(MotionEvent event) {
         if (shapeToDisplay != null && shapeToDisplay.getBitmapHolder().contains((int) event.getX(), (int) event.getY())) {
             shapeToDisplay.recieveTouch(event);
+        }
+
+        if (instructionIndex >= 5 && Constants.SHAPE_CLICK_AREA.contains((int) event.getX(), (int) event.getY()) && event.getAction()== MotionEvent.ACTION_DOWN) {
+            nextInstruction();
+
         }
         /*
         if (Constants.SHAPE_CLICK_AREA.contains((int) event.getX(), (int) event.getY()) && event.getAction()== MotionEvent.ACTION_UP) {
