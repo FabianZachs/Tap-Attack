@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -129,6 +130,8 @@ public class MainMenuActivity extends  GeneralParent {
         //setContentView(R.layout.activity_main_menu);
         setContentView(R.layout.activity_main_menu2);
 
+        setupGameModeImageAndText();
+
         if (!prefs.getBoolean("firstTime", false)) {
             Log.d("thisran", "onCreate: ran");
             databaseSetup();
@@ -148,6 +151,12 @@ public class MainMenuActivity extends  GeneralParent {
         helper.bannerAdSetup(this, mAdView);
 
         this.store = new Store(this, prefs);
+        store.getMainStoreDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                setupGameModeImageAndText();
+            }
+        });
 
 
         // for images in store
@@ -169,6 +178,17 @@ public class MainMenuActivity extends  GeneralParent {
         //MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         //dbHandler.deleteStoreItem("neon");
         //Log.d("database", "stuff "+dbHandler.databaseToString());
+
+    }
+
+    private void setupGameModeImageAndText() {
+        MyDBHandler myDBHandler = new MyDBHandler(Constants.CURRENT_CONTEXT, null, null, 1);
+
+        ImageView gamemodeImg = (ImageView) findViewById(R.id.play_button);
+        gamemodeImg.setImageResource(helper.getResourceId(Constants.CURRENT_CONTEXT, myDBHandler.getCurrentGamemodeFile()));
+
+        TextView gamemodeText = (TextView) findViewById(R.id.gamemode_title);
+        gamemodeText.setText(prefs.getString("gamemode", Constants.GAMEMODES[0]).toUpperCase());
 
     }
 
@@ -488,6 +508,7 @@ public class MainMenuActivity extends  GeneralParent {
         // TODO intialize to default theme in startup- breaks if user doesnt click store to set theme
 
         store.storeClicked();
+
 
         /*
 

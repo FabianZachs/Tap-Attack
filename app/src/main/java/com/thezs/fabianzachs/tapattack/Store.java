@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -111,6 +112,10 @@ public class Store {
         //mainStoredbuilder.setView(mainStoreAlertView);
       //  this.mainStoreDialog = mainStoredbuilder.create();
         //this.store = new Store(mainStoreAlertView, mainStoreDialog, this);
+    }
+
+    public Dialog getMainStoreDialog() {
+        return this.mainStoreDialog;
     }
 
     private void setupDialogDismissForStoreSection(View alertView, AlertDialog dialog) {

@@ -244,5 +244,28 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return file;
     }
 
+    // todo this and top thing are very similar, just different item section so refactor
+    public String getCurrentGamemodeFile() {
+        SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", MODE_PRIVATE);
+        String backgroundName = prefs.getString("gamemode", Constants.GAMEMODES[0]);
+        String file;
+
+        String query = "SELECT " + COLUMN_FILE + " FROM " + TABLE_STOREITEMS + " WHERE " + COLUMN_NAME + " = '" + backgroundName+ "';";
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor pointer = db.rawQuery(query, null);
+        pointer.moveToFirst();
+
+        if (pointer.getString(pointer.getColumnIndex(COLUMN_FILE)) != null) {
+            file = pointer.getString(pointer.getColumnIndex(COLUMN_FILE));
+        }
+        else
+            file = Constants.GAMEMODES[0];
+
+        db.close();
+
+        return file;
+    }
+
 
 }
