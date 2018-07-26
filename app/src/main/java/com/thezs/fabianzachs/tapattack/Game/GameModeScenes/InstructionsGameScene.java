@@ -15,6 +15,7 @@ import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundManager
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapeBuilder;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapeColorPicker;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Star;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.WarningColor;
 import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 import com.thezs.fabianzachs.tapattack.Game.Scene;
@@ -43,6 +44,7 @@ public class InstructionsGameScene implements Scene{
     private Point warningColorTextLocation1 = new Point(Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/8);
     private Point warningColorTextLocation2 = new Point(Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/2);
     private Point warningColorTextLocation3 = new Point(Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/2 + 50);
+    private Point warningColorTextLocation4 = new Point(Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/2 + 100);
     private Rect shapeRect = new Rect();
     private Paint textPaint1 = new Paint();
     private Paint textPaint2 = new Paint();
@@ -62,8 +64,8 @@ public class InstructionsGameScene implements Scene{
         //this.shapeLocation = new Point(Constants.SCREEN_HEIGHT/3 - Constants.SHAPE_WIDTH/2, Constants.SCREEN_WIDTH/2 );
         this.shapeLocation = new Point(Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/3 );
         this.shapeTextLocation = new Point(Constants.SCREEN_WIDTH/2, (Constants.SCREEN_HEIGHT/3) * 2 );
-        setupPaint(textPaint1);
-        setupPaint(textPaint2);
+        setupPaint(textPaint1, 40);
+        setupPaint(textPaint2, 30);
 
 
     }
@@ -116,23 +118,34 @@ public class InstructionsGameScene implements Scene{
                 }
                 shapeInstruction(canvas);
                 return;
+            case 7:
+                finishInstruction(canvas);
+                return;
 
         }
         instructionsDone = true;
     }
 
+    private void finishInstruction(Canvas canvas) {
+        canvas.drawText("INSTRUCTIONS COMPLETE!", warningColorTextLocation2.x, warningColorTextLocation2.y, textPaint1);
+        canvas.drawText("CHANGE GAMEMODE IN STORE", warningColorTextLocation2.x, warningColorTextLocation2.y + 50, textPaint1);
+    }
+
     private void warningColorInstruction(Canvas canvas) {
         canvas.drawText("THIS DISPLAYS THE COLOR OF SHAPES YOU CANNOT TOUCH", warningColorTextLocation1.x, warningColorTextLocation1.y, textPaint1);
         canvas.drawText("TAP EITHER SIDE BAR TO CHANGE WARNING COLOR", warningColorTextLocation2.x, warningColorTextLocation2.y, textPaint1);
-        canvas.drawText("THEN YOU CAN DESTROY THE SHAPE", warningColorTextLocation3.x, warningColorTextLocation3.y, textPaint1);
+        canvas.drawText("THEN YOU CAN DESTROY THE SHAPE", warningColorTextLocation2.x, warningColorTextLocation2.y + 50, textPaint1);
+        canvas.drawText("CHANGING WARNING COLOR TO DESTROY SHAPES GIVES MORE POINTS", warningColorTextLocation2.x, warningColorTextLocation2.y + 200, textPaint2);
+        canvas.drawText("CHANGING 2x IN A ROW GIVES EVEN MORE POINTS", warningColorTextLocation2.x, warningColorTextLocation2.y + 250, textPaint2);
+        canvas.drawText("CHANGING 3x IN A ROW TRIGGERS COLOR STREAK REWARD", warningColorTextLocation2.x, warningColorTextLocation2.y + 300, textPaint2);
     }
 
-    private void setupPaint(Paint paint) {
+    private void setupPaint(Paint paint, int size) {
         Typeface plain = Typeface.createFromAsset(Constants.CURRENT_CONTEXT.getAssets(), "undinaru.ttf");
         Typeface bold = Typeface.create(plain, Typeface.BOLD);
         paint.setTypeface(bold);
         paint.setColor(Color.WHITE);
-        paint.setTextSize(40);
+        paint.setTextSize(size);
         paint.setTextAlign(Paint.Align.CENTER);
     }
 
@@ -189,7 +202,7 @@ public class InstructionsGameScene implements Scene{
         backgroundManager.draw(canvas);
         instructionToDraw(canvas);
 
-        if (instructionIndex >= 5)
+        if ((instructionIndex >= 5 && instructionIndex < 6) || instructionIndex == 7)
             drawContinueText(canvas);
 
 
@@ -219,12 +232,16 @@ public class InstructionsGameScene implements Scene{
     @Override
     public void recieveTouch(MotionEvent event) {
         if (shapeToDisplay != null && shapeToDisplay.getBitmapHolder().contains((int) event.getX(), (int) event.getY())) {
-            shapeToDisplay.recieveTouch(event);
+            if(shapeToDisplay instanceof Star ) {
+                if (!warningColor.getCurrentStrColor().equals(shapeToDisplay.getColor()))
+                    shapeToDisplay.recieveTouch(event);
+            }
+            else
+                shapeToDisplay.recieveTouch(event);
         }
 
-        if (instructionIndex >= 5 && Constants.SHAPE_CLICK_AREA.contains((int) event.getX(), (int) event.getY()) && event.getAction()== MotionEvent.ACTION_DOWN) {
+        if (((instructionIndex >= 5 && instructionIndex < 6) || instructionIndex == 7) && Constants.SHAPE_CLICK_AREA.contains((int) event.getX(), (int) event.getY()) && event.getAction()== MotionEvent.ACTION_DOWN) {
             nextInstruction();
-
         }
         /*
         if (Constants.SHAPE_CLICK_AREA.contains((int) event.getX(), (int) event.getY()) && event.getAction()== MotionEvent.ACTION_UP) {
