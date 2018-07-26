@@ -1,8 +1,10 @@
 package com.thezs.fabianzachs.tapattack.Game.GameModeScenes;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
@@ -27,9 +29,27 @@ public class SceneManager {
         setCurrentGameConstants();
         ACTIVE_SCENE = 0;
         //scenes.add(new ClassicGameScene(mediator));
-        scenes.add(new InstructionsGameScene(mediator));
+        scenes.add(getSelectedGameMode(mediator));
 
         //CURRENT_SCENE = scenes.get(ACTIVE_SCENE);
+    }
+
+    public Scene getSelectedGameMode(CentralGameCommunication mediator) {
+        SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", MODE_PRIVATE);
+        String gamemode = prefs.getString("gamemode", Constants.GAMEMODES[0]);
+
+        switch (gamemode) {
+            case "tutorial":
+                return new InstructionsGameScene(mediator);
+            case "classic":
+                return new ClassicGameScene(mediator);
+
+        }
+
+        Toast toast = Toast.makeText(Constants.CURRENT_CONTEXT, "Unknown Selected Gamemode", Toast.LENGTH_LONG);
+        toast.show();
+        ((Activity) Constants.CURRENT_CONTEXT).finish();
+        return null;
     }
 
     public void recieveTouch(MotionEvent event) {
