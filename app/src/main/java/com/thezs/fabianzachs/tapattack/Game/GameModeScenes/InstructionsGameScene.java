@@ -176,11 +176,12 @@ public class InstructionsGameScene implements Scene{
             shapeToDisplay = null;
             nextInstruction();
         }
+        else if (shapeToDisplay != null)
+            shapeToDisplay.update();
+
         if (instructionsDone)
             ((Activity) Constants.CURRENT_CONTEXT).finish();
 
-        if (shapeToDisplay != null)
-            shapeToDisplay.update();
     }
 
     @Override
@@ -188,49 +189,34 @@ public class InstructionsGameScene implements Scene{
         backgroundManager.draw(canvas);
         instructionToDraw(canvas);
 
-        if ((instructionIndex >= 5 && instructionIndex < 6) || instructionIndex == 8)
+        if (instructionIndex == 5 || instructionIndex == 8)
             drawContinueText(canvas);
 
-
+        if (warningColor.getCurrentStrColor().equals(shapeToDisplay.getColor()) && instructionIndex != 4) {
+            drawChangeWarningColorText(canvas);
+        }
     }
 
-    private void drawContinueText(Canvas canvas) {
-        /*
-        Paint startGameTextPaint = new Paint();
-        Typeface plain = Typeface.createFromAsset(Constants.CURRENT_CONTEXT.getAssets(), "undinaru.ttf");
-        Typeface bold = Typeface.create(plain, Typeface.BOLD);
-        startGameTextPaint.setTypeface(bold);
-        startGameTextPaint.setColor(Color.WHITE);
-        startGameTextPaint.setTextSize(100);
-        startGameTextPaint.setTextAlign(Paint.Align.CENTER);
-        int xPos = (canvas.getWidth() / 2);
-        //int yPos = (int) ((canvas.getHeight() / 2) - ((startGameTextPaint.descent() + startGameTextPaint.ascent()) / 2)) ; center
-        int yPos = (int) (7*canvas.getHeight()) /8;
-        //((textPaint.descent() + textPaint.ascent()) / 2) is the distance from the baseline to the center.
-        canvas.drawText("TOUCH TO CONTINUE", xPos, yPos, startGameTextPaint);
-        */
-        canvas.drawText("TOUCH TO CONTINUE", continueTextLocation.x, continueTextLocation.y, continueTextPaint);
-
-    }
-    // REFACTOR =============================
-
-    @Override
-    public void terminate() {
-
+    private void drawChangeWarningColorText(Canvas canvas) {
+        canvas.drawText("TAP SIDE BAR TO CHANGE WARNING COLOR", shapeTextLocation.x, shapeTextLocation.y + 100, textPaint1);
     }
 
     @Override
     public void recieveTouch(MotionEvent event) {
         if (shapeToDisplay != null && shapeToDisplay.getBitmapHolder().contains((int) event.getX(), (int) event.getY())) {
+            if (!warningColor.getCurrentStrColor().equals(shapeToDisplay.getColor()))
+                shapeToDisplay.recieveTouch(event);
+            /*
             if(shapeToDisplay instanceof Star || instructionIndex == 7) {
                 if (!warningColor.getCurrentStrColor().equals(shapeToDisplay.getColor()))
                     shapeToDisplay.recieveTouch(event);
             }
             else
                 shapeToDisplay.recieveTouch(event);
+                */
         }
 
-        if (((instructionIndex >= 5 && instructionIndex < 6) || instructionIndex == 8) && Constants.SHAPE_CLICK_AREA.contains((int) event.getX(), (int) event.getY()) && event.getAction()== MotionEvent.ACTION_DOWN) {
+        if (((instructionIndex == 5) || instructionIndex == 8) && Constants.SHAPE_CLICK_AREA.contains((int) event.getX(), (int) event.getY()) && event.getAction()== MotionEvent.ACTION_DOWN) {
             nextInstruction();
         }
         /*
@@ -242,6 +228,16 @@ public class InstructionsGameScene implements Scene{
             warningColor.recieveTouch(event, "left");
         else if(Constants.WARNING_COLOR_CLICK_AREA_RIGHT.contains((int) event.getX(), (int) event.getY()))
             warningColor.recieveTouch(event, "right");
+    }
+    // REFACTOR =============================
+
+    private void drawContinueText(Canvas canvas) {
+        canvas.drawText("TOUCH TO CONTINUE", continueTextLocation.x, continueTextLocation.y, continueTextPaint);
+    }
+
+    @Override
+    public void terminate() {
+
     }
 
     @Override
