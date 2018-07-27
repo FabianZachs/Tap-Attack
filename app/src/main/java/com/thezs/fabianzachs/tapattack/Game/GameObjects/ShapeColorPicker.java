@@ -92,6 +92,13 @@ public class ShapeColorPicker {
 
     }
 
+    public String getRandomNonWarningColor() {
+        ArrayList<String> selectableColors = new ArrayList<>(colors);
+        selectableColors.remove(warningColor);
+        return  selectableColors.get(randGenerator.nextInt(NUMBER_OF_COLORS - 1));
+
+    }
+
     // currently 1/6 chance max at 60 seconds in
     public double getProbabilityOfWarningColor() {
         float secondsSinceStart = getGameTime()/1000.0f; // seconds
