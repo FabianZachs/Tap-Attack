@@ -119,6 +119,13 @@ public class InstructionsGameScene implements Scene{
                 shapeInstruction(canvas);
                 return;
             case 7:
+                if (shapeToDisplay == null) {
+                    shapeToDisplay = shapeBuilder.buildShape("circle", warningColor.getCurrentStrColor(), shapeLocation, shapePaint, shapeRect, mediator, "RIGHT");
+                    textToDisplay = "CHANGE WARNING COLOR TO DESTROY CIRCLE";
+                }
+                shapeInstruction(canvas);
+                return;
+            case 8:
                 finishInstruction(canvas);
                 return;
 
@@ -132,7 +139,9 @@ public class InstructionsGameScene implements Scene{
     }
 
     private void warningColorInstruction(Canvas canvas) {
-        canvas.drawText("THIS DISPLAYS THE COLOR OF SHAPES YOU CANNOT TOUCH", warningColorTextLocation1.x, warningColorTextLocation1.y, textPaint1);
+        //canvas.drawText("THIS DISPLAYS THE COLOR OF SHAPES YOU CANNOT TOUCH", warningColorTextLocation1.x, warningColorTextLocation1.y, textPaint1);
+        canvas.drawText("THE COLOR OF SHAPES YOU CANNOT TOUCH", warningColorTextLocation1.x, warningColorTextLocation1.y, textPaint1);
+        canvas.drawText("IS DISPLAYED ABOVE", warningColorTextLocation1.x, warningColorTextLocation1.y + 50, textPaint1);
         canvas.drawText("TAP EITHER SIDE BAR TO CHANGE WARNING COLOR", warningColorTextLocation2.x, warningColorTextLocation2.y, textPaint1);
         canvas.drawText("THEN YOU CAN DESTROY THE SHAPE", warningColorTextLocation2.x, warningColorTextLocation2.y + 50, textPaint1);
         canvas.drawText("CHANGING WARNING COLOR TO DESTROY SHAPES GIVES MORE POINTS", warningColorTextLocation2.x, warningColorTextLocation2.y + 200, textPaint2);
@@ -202,7 +211,7 @@ public class InstructionsGameScene implements Scene{
         backgroundManager.draw(canvas);
         instructionToDraw(canvas);
 
-        if ((instructionIndex >= 5 && instructionIndex < 6) || instructionIndex == 7)
+        if ((instructionIndex >= 5 && instructionIndex < 6) || instructionIndex == 8)
             drawContinueText(canvas);
 
 
@@ -232,7 +241,7 @@ public class InstructionsGameScene implements Scene{
     @Override
     public void recieveTouch(MotionEvent event) {
         if (shapeToDisplay != null && shapeToDisplay.getBitmapHolder().contains((int) event.getX(), (int) event.getY())) {
-            if(shapeToDisplay instanceof Star ) {
+            if(shapeToDisplay instanceof Star || instructionIndex == 7) {
                 if (!warningColor.getCurrentStrColor().equals(shapeToDisplay.getColor()))
                     shapeToDisplay.recieveTouch(event);
             }
@@ -240,7 +249,7 @@ public class InstructionsGameScene implements Scene{
                 shapeToDisplay.recieveTouch(event);
         }
 
-        if (((instructionIndex >= 5 && instructionIndex < 6) || instructionIndex == 7) && Constants.SHAPE_CLICK_AREA.contains((int) event.getX(), (int) event.getY()) && event.getAction()== MotionEvent.ACTION_DOWN) {
+        if (((instructionIndex >= 5 && instructionIndex < 6) || instructionIndex == 8) && Constants.SHAPE_CLICK_AREA.contains((int) event.getX(), (int) event.getY()) && event.getAction()== MotionEvent.ACTION_DOWN) {
             nextInstruction();
         }
         /*
