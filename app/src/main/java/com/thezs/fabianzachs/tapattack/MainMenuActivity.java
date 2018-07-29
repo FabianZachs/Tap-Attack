@@ -117,9 +117,18 @@ public class MainMenuActivity extends  GeneralParent {
         // set up Constants
         initializeConstants();
 
+        prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
+        if (!prefs.getBoolean("firstTime", false)) {
+            Log.d("thisran", "onCreate: ran");
+            databaseSetup();
+
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("firstTime", true);
+            editor.apply();
+        }
+
         // method instantiation
         //mediaPlayers = new ArrayList<MediaPlayer>();
-        prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
 
 
         /*
@@ -132,14 +141,6 @@ public class MainMenuActivity extends  GeneralParent {
 
         setupGameModeImageAndText();
 
-        if (!prefs.getBoolean("firstTime", false)) {
-            Log.d("thisran", "onCreate: ran");
-            databaseSetup();
-
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("firstTime", true);
-            editor.apply();
-        }
         setupPointsDisplay();
         //multiShapesMessaroundDELETE(); //todo erase
         /* programmatically set background

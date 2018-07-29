@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
@@ -17,6 +18,8 @@ import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapeColorPicker;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Star;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.WarningColor;
+import com.thezs.fabianzachs.tapattack.Game.GraveObjects.GraveFactory;
+import com.thezs.fabianzachs.tapattack.Game.GraveObjects.GraveObject;
 import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 import com.thezs.fabianzachs.tapattack.Game.Scene;
 
@@ -36,6 +39,8 @@ public class InstructionsGameScene implements Scene{
     private ShapeBuilder shapeBuilder;
     private ShapeColorPicker shapeColorPicker;
     private ShapeObject shapeToDisplay = null;
+    private GraveObject graveToDisplay = null;
+    private GraveFactory graveFactory = new GraveFactory();
     private Point shapeLocation;
     private String textToDisplay = null;
     private Point shapeTextLocation;
@@ -75,35 +80,35 @@ public class InstructionsGameScene implements Scene{
     private void instructionToDraw(Canvas canvas) {
         switch (instructionIndex) {
             case 0:
-                if (shapeToDisplay == null) {
+                if (shapeToDisplay == null && graveToDisplay == null) {
                     shapeToDisplay = shapeBuilder.buildShape("circle", shapeColorPicker.getRandomNonWarningColor(), shapeLocation, shapePaint, shapeRect, mediator, "UP");
                     textToDisplay = "TAP CIRCLES ONCE";
                 }
                 shapeInstruction(canvas);
                 return;
             case 1:
-                if (shapeToDisplay == null) {
+                if (shapeToDisplay == null && graveToDisplay == null) {
                     shapeToDisplay = shapeBuilder.buildShape("square", shapeColorPicker.getRandomNonWarningColor(), shapeLocation, shapePaint, shapeRect, mediator, "UP");
                     textToDisplay = "TAP SQUARES TWICE RELATIVELY QUICKLY";
                 }
                 shapeInstruction(canvas);
                 return;
             case 2:
-                if (shapeToDisplay == null) {
+                if (shapeToDisplay == null && graveToDisplay == null) {
                     shapeToDisplay = shapeBuilder.buildShape("arrow", shapeColorPicker.getRandomNonWarningColor(), shapeLocation, shapePaint, shapeRect, mediator, "RIGHT");
                     textToDisplay = "FLICK ARROWS IN THE DIRECTION IT POINTS";
                 }
                 shapeInstruction(canvas);
                 return;
             case 3:
-                if (shapeToDisplay == null) {
+                if (shapeToDisplay == null && graveToDisplay == null) {
                     shapeToDisplay = shapeBuilder.buildShape("arrow", shapeColorPicker.getRandomNonWarningColor(), shapeLocation, shapePaint, shapeRect, mediator, "LEFT");
                     textToDisplay = "FLICK ARROWS IN THE DIRECTION IT POINTS";
                 }
                 shapeInstruction(canvas);
                 return;
             case 4:
-                if (shapeToDisplay == null) {
+                if (shapeToDisplay == null && graveToDisplay == null) {
                     shapeToDisplay = shapeBuilder.buildShape("cross", shapeColorPicker.getRandomNonWarningColor(), shapeLocation, shapePaint, shapeRect, mediator, "RIGHT");
                     textToDisplay = "NEVER TAP THE X... TAP IT TO CONTINUE :P";
                 }
@@ -113,14 +118,14 @@ public class InstructionsGameScene implements Scene{
                 warningColorInstruction(canvas);
                 return;
             case 6:
-                if (shapeToDisplay == null) {
+                if (shapeToDisplay == null && graveToDisplay == null) {
                     shapeToDisplay = shapeBuilder.buildShape("star", shapeColorPicker.getColorForShape(), shapeLocation, shapePaint, shapeRect, mediator, "RIGHT");
                     textToDisplay = "TAP STAR ONLY WHEN NOT WARNING COLOR";
                 }
                 shapeInstruction(canvas);
                 return;
             case 7:
-                if (shapeToDisplay == null) {
+                if (shapeToDisplay == null && graveToDisplay == null) {
                     shapeToDisplay = shapeBuilder.buildShape("circle", warningColor.getCurrentStrColor(), shapeLocation, shapePaint, shapeRect, mediator, "RIGHT");
                     textToDisplay = "CHANGE WARNING COLOR TO DESTROY CIRCLE";
                 }
@@ -160,7 +165,12 @@ public class InstructionsGameScene implements Scene{
     }
 
     private void shapeInstruction(Canvas canvas) {
-        shapeToDisplay.draw(canvas);
+        if (shapeToDisplay != null)
+            shapeToDisplay.draw(canvas);
+        if (graveToDisplay != null) {
+            Log.d("instruction", "update: x");
+            graveToDisplay.draw(canvas);
+        }
         canvas.drawText(textToDisplay, shapeTextLocation.x, shapeTextLocation.y, textPaint1);
     }
 
@@ -171,6 +181,7 @@ public class InstructionsGameScene implements Scene{
     // REFACTOR =============================
     @Override
     public void update() {
+        /*
         if (shapeToDisplay != null && shapeToDisplay.getLives() < 1) {
             shapeToDisplay.playDeathSoundEffect();
             shapeToDisplay = null;
@@ -181,6 +192,60 @@ public class InstructionsGameScene implements Scene{
 
         if (instructionsDone)
             ((Activity) Constants.CURRENT_CONTEXT).finish();
+         */
+        // shape killed and then grow grave
+        if (shapeToDisplay != null && shapeToDisplay.getLives() < 1) {
+            Log.d("instruction", "update: a");
+            shapeToDisplay.playDeathSoundEffect();
+            if (shapeToDisplay.getGravable()) {
+                Log.d("instruction", "update: b");
+                graveToDisplay = graveFactory.buildGrave(shapeToDisplay);
+
+            }
+            else {
+                nextInstruction();
+                Log.d("instruction", "update: c");
+            }
+            shapeToDisplay = null;
+        }
+        // shape not yet killed
+        else if (shapeToDisplay != null) {
+            shapeToDisplay.update();
+            Log.d("instruction", "update: d");
+        }
+
+        if (shapeToDisplay == null && graveToDisplay != null && graveToDisplay.graveDestroyed()) {
+            Log.d("instruction", "update: e");
+            graveToDisplay = null;
+            nextInstruction();
+        }
+
+
+        if (instructionsDone)
+            ((Activity) Constants.CURRENT_CONTEXT).finish();
+
+
+
+
+        /*
+
+        if (shapeToDisplay != null && shapeToDisplay.getLives() < 1) {
+            shapeToDisplay.playDeathSoundEffect();
+            if (shapeToDisplay.getGravable())
+                graveToDisplay = graveFactory.buildGrave(shapeToDisplay);
+            shapeToDisplay = null;
+        }
+        else if (graveToDisplay == null && shapeToDisplay == null)
+            nextInstruction();
+        else if (shapeToDisplay != null)
+            shapeToDisplay.update();
+
+        if (instructionsDone)
+            ((Activity) Constants.CURRENT_CONTEXT).finish();
+
+        if (graveToDisplay != null && graveToDisplay.graveDestroyed())
+            graveToDisplay = null;
+            */
 
     }
 

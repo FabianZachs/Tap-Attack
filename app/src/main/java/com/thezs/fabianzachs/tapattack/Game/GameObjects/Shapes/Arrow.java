@@ -38,7 +38,7 @@ public class Arrow extends ShapeObject {
         super(durationAlive, color, colorInt, centerLocation, shapeImg, shapeImg, paint, bitmapHolder, mediator);
         setLives(1);
         setProgressBarAddition(15);
-        setGraveAble(false); // todo fix grave for arrow
+        //setGraveAble(false); // todo fix grave for arrow
 
         this.originalPoint = centerLocation;
         this.timeOfLastPenalty = 0;
