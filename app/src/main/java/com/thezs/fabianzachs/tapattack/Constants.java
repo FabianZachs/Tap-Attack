@@ -52,11 +52,11 @@ public class Constants {
     public static int[] MULTIPLIERS_PRICE_MONEY = {0, 1, 2, 3, 4, 5};
 
 
-    public static String[] GAMEMODES = {"tutorial", "classic", "unknown"};
-    public static Integer[] GAMEMODES_IDS = {R.drawable.instructionsgamemode,R.drawable.startbluebluered, R.drawable.lockeditem};
-    public static String[] GAMEMODES_FILES = {"instructionsgamemode", "startbluebluered", "lockeditem"};
-    public static int[] GAMEMODES_PRICE_POINTS = {0, 0, 1000};
-    public static int[] GAMEMODES_PRICE_MONEY = {0, 0, 1};
+    public static String[] GAMEMODES = {"tutorial", "classic", "circle", "square", "arrow", "discrete"};
+    public static Integer[] GAMEMODES_IDS = {R.drawable.instructionsgamemode,R.drawable.startbluebluered, R.drawable.circlestart, R.drawable.squarestart, R.drawable.arrowstart, R.drawable.discretestart};
+    public static String[] GAMEMODES_FILES = {"instructionsgamemode", "startbluebluered", "circlestart", "squarestart", "arrowstart", "discretestart"};
+    public static int[] GAMEMODES_PRICE_POINTS = {0, 0, 0, 0, 0, 0};
+    public static int[] GAMEMODES_PRICE_MONEY = {0, 0, 0, 0, 0, 0};
 
     public static String[] SHAPE_TYPES = {"unlock item", "straight","curved","paint","bit","drip","tornpaper"};
     public static Integer[] SHAPE_TYPES_IDS = {R.drawable.unlockitem2, R.drawable.straightoutline, R.drawable.curvedoutline, R.drawable.paintoutline, R.drawable.bitoutline, R.drawable.dripoutline, R.drawable.tornpaperoutline};

@@ -43,6 +43,12 @@ public class SceneManager {
                 return new InstructionsGameScene(mediator);
             case "classic":
                 return new ClassicGameScene(mediator);
+            case "circle":
+                return new ClassicGameScene(mediator);
+            case "square":
+                return new ClassicGameScene(mediator);
+            case "arrow":
+                return new ClassicGameScene(mediator);
 
         }
 

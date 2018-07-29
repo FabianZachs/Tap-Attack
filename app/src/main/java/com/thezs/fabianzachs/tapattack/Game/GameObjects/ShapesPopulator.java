@@ -10,6 +10,7 @@ import android.util.Log;
 import com.thezs.fabianzachs.tapattack.Animation.AnimationManager;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapePickers.ShapePicker;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes.Square;
 import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
@@ -47,6 +48,7 @@ public class ShapesPopulator {
     //private long initTime;
     private Rect newShapeArea; // instead of creating a new rect for every shape we want to create
     private Random rand;
+    private ShapePicker shapePicker;
     private ShapeBuilder shapeBuilder;
 
     private String[] shapeColors;
@@ -65,6 +67,7 @@ public class ShapesPopulator {
         // todo universal time
         this.newShapeArea = new Rect(300,300,300,300);
         rand = new Random(); // TODO make attribute?
+        this.shapePicker = ShapePicker.getShapePicker();
         this.shapeBuilder = new ShapeBuilder(/*initTime*/);
         this.colorFinder = new Random();
 
@@ -80,7 +83,7 @@ public class ShapesPopulator {
 
         for (Point shapeLocation : startShapeLocations) {
 
-            ShapeObject newShape = shapeBuilder.buildShape(getShape(), getColor(), shapeLocation, sharedPaint.getUnUsedPaint(), sharedRect.getUnUsedRect(), mediator, getDirection());
+            ShapeObject newShape = shapeBuilder.buildShape(shapePicker.getShape(), getColor(), shapeLocation, sharedPaint.getUnUsedPaint(), sharedRect.getUnUsedRect(), mediator, getDirection());
             shapes.add(0, newShape);
         }
     }
@@ -155,7 +158,7 @@ public class ShapesPopulator {
         //ShapeObject newShape = shapeBuilder.buildShape("square", getColor(), newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //ShapeObject newShape = shapeBuilder.buildShape("star", getColor(), newShapeLocation,paint,bitmapHolder,mediator,"LEFT") ;
         //newShape.attachAllObservers(scoreObserver,streakObserver,progressBarObserver);
-        ShapeObject newShape = shapeBuilder.buildShape(getShape(), getColor(), newShapeLocation, paint, bitmapHolder, mediator, getDirection());
+        ShapeObject newShape = shapeBuilder.buildShape(shapePicker.getShape(), getColor(), newShapeLocation, paint, bitmapHolder, mediator, getDirection());
         shapes.add(0, newShape);
         timeOfLastShapeAddition = System.currentTimeMillis();
 
@@ -245,6 +248,7 @@ public class ShapesPopulator {
         return color;
     }
 
+    /*
     private String getShape() {
         int i = rand.nextInt(850);
         //Log.d("intindex", "getShape: int" + i);
@@ -263,6 +267,7 @@ public class ShapesPopulator {
 
 
     }
+    */
 
     public String getDirection() {
         int i = rand.nextInt(2);
