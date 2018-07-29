@@ -40,7 +40,6 @@ public class InstructionsGameScene implements Scene{
     private ShapeColorPicker shapeColorPicker;
     private ShapeObject shapeToDisplay = null;
     private GraveObject graveToDisplay = null;
-    private boolean readyForNextInstruction = false;
     private GraveFactory graveFactory = new GraveFactory();
     private Point shapeLocation;
     private String textToDisplay = null;
@@ -169,7 +168,6 @@ public class InstructionsGameScene implements Scene{
         if (shapeToDisplay != null)
             shapeToDisplay.draw(canvas);
         if (graveToDisplay != null) {
-            Log.d("instruction", "update: x");
             graveToDisplay.draw(canvas);
         }
         canvas.drawText(textToDisplay, shapeTextLocation.x, shapeTextLocation.y, textPaint1);
@@ -177,24 +175,11 @@ public class InstructionsGameScene implements Scene{
 
     private void nextInstruction() {
         //if (readyForNextInstruction)
-            this.instructionIndex++;
+        this.instructionIndex++;
     }
 
-    // REFACTOR =============================
     @Override
     public void update() {
-        /*
-        if (shapeToDisplay != null && shapeToDisplay.getLives() < 1) {
-            shapeToDisplay.playDeathSoundEffect();
-            shapeToDisplay = null;
-            nextInstruction();
-        }
-        else if (shapeToDisplay != null)
-            shapeToDisplay.update();
-
-        if (instructionsDone)
-            ((Activity) Constants.CURRENT_CONTEXT).finish();
-         */
         // shape killed and then grow grave
         if (shapeToDisplay != null && shapeToDisplay.getLives() < 1) {
             shapeToDisplay.playDeathSoundEffect();
@@ -212,7 +197,7 @@ public class InstructionsGameScene implements Scene{
             shapeToDisplay.update();
         }
 
-        else if (graveToDisplay != null)
+        if (graveToDisplay != null)
             graveToDisplay.update();
 
         if (shapeToDisplay == null && graveToDisplay != null && graveToDisplay.graveDestroyed()) {
@@ -224,28 +209,6 @@ public class InstructionsGameScene implements Scene{
         if (instructionsDone)
             ((Activity) Constants.CURRENT_CONTEXT).finish();
 
-
-
-
-        /*
-
-        if (shapeToDisplay != null && shapeToDisplay.getLives() < 1) {
-            shapeToDisplay.playDeathSoundEffect();
-            if (shapeToDisplay.getGravable())
-                graveToDisplay = graveFactory.buildGrave(shapeToDisplay);
-            shapeToDisplay = null;
-        }
-        else if (graveToDisplay == null && shapeToDisplay == null)
-            nextInstruction();
-        else if (shapeToDisplay != null)
-            shapeToDisplay.update();
-
-        if (instructionsDone)
-            ((Activity) Constants.CURRENT_CONTEXT).finish();
-
-        if (graveToDisplay != null && graveToDisplay.graveDestroyed())
-            graveToDisplay = null;
-            */
 
     }
 
@@ -271,30 +234,16 @@ public class InstructionsGameScene implements Scene{
         if (shapeToDisplay != null && shapeToDisplay.getBitmapHolder().contains((int) event.getX(), (int) event.getY())) {
             if (!warningColor.getCurrentStrColor().equals(shapeToDisplay.getColor()))
                 shapeToDisplay.recieveTouch(event);
-            /*
-            if(shapeToDisplay instanceof Star || instructionIndex == 7) {
-                if (!warningColor.getCurrentStrColor().equals(shapeToDisplay.getColor()))
-                    shapeToDisplay.recieveTouch(event);
-            }
-            else
-                shapeToDisplay.recieveTouch(event);
-                */
         }
 
         if (((instructionIndex == 5) || instructionIndex == 8) && Constants.SHAPE_CLICK_AREA.contains((int) event.getX(), (int) event.getY()) && event.getAction()== MotionEvent.ACTION_DOWN) {
             nextInstruction();
         }
-        /*
-        if (Constants.SHAPE_CLICK_AREA.contains((int) event.getX(), (int) event.getY()) && event.getAction()== MotionEvent.ACTION_UP) {
-            shapeToDisplay = null;
-            nextInstruction();
-        }*/
         else if (Constants.WARNING_COLOR_CLICK_AREA_LEFT.contains((int) event.getX(), (int) event.getY()))
             warningColor.recieveTouch(event, "left");
         else if(Constants.WARNING_COLOR_CLICK_AREA_RIGHT.contains((int) event.getX(), (int) event.getY()))
             warningColor.recieveTouch(event, "right");
     }
-    // REFACTOR =============================
 
     private void drawContinueText(Canvas canvas) {
         canvas.drawText("TOUCH TO CONTINUE", continueTextLocation.x, continueTextLocation.y, continueTextPaint);
