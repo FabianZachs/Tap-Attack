@@ -93,7 +93,7 @@ public class ShapesManager {
          // if user ACTION_DOWNs and not onto a shape
         if (!shapeInteractment && event.getAction() == MotionEvent.ACTION_DOWN) {
             //mediator.changeProgressBarBy(-40);
-            mediator.warningComponentShake();
+            //mediator.warningComponentShake();
             //mediator.resetStreak();
             shapeToBlink = getFurthestDownNormalShape();
             mediator.setGameOver(GameOverReasons.backgroundTap()); //todo for setting up gameOver we have that background touch triggers gameover
@@ -135,7 +135,7 @@ public class ShapesManager {
 
                 // todo optimize:
                 if (mediator.getStrWarningColor().equals(shape.getColor())) {
-                    mediator.warningComponentShake();
+                    //mediator.warningComponentShake();
                     shapeToBlink = shape; // since we already checked if its the furthest down -- this works for wrong color stars
                     mediator.setGameOver(GameOverReasons.warningColorTap(shape));
                     break;
