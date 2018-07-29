@@ -40,6 +40,7 @@ public class InstructionsGameScene implements Scene{
     private ShapeColorPicker shapeColorPicker;
     private ShapeObject shapeToDisplay = null;
     private GraveObject graveToDisplay = null;
+    private boolean readyForNextInstruction = false;
     private GraveFactory graveFactory = new GraveFactory();
     private Point shapeLocation;
     private String textToDisplay = null;
@@ -175,7 +176,8 @@ public class InstructionsGameScene implements Scene{
     }
 
     private void nextInstruction() {
-        this.instructionIndex++;
+        //if (readyForNextInstruction)
+            this.instructionIndex++;
     }
 
     // REFACTOR =============================
@@ -195,27 +197,25 @@ public class InstructionsGameScene implements Scene{
          */
         // shape killed and then grow grave
         if (shapeToDisplay != null && shapeToDisplay.getLives() < 1) {
-            Log.d("instruction", "update: a");
             shapeToDisplay.playDeathSoundEffect();
             if (shapeToDisplay.getGravable()) {
-                Log.d("instruction", "update: b");
                 graveToDisplay = graveFactory.buildGrave(shapeToDisplay);
 
             }
             else {
                 nextInstruction();
-                Log.d("instruction", "update: c");
             }
             shapeToDisplay = null;
         }
         // shape not yet killed
         else if (shapeToDisplay != null) {
             shapeToDisplay.update();
-            Log.d("instruction", "update: d");
         }
 
+        else if (graveToDisplay != null)
+            graveToDisplay.update();
+
         if (shapeToDisplay == null && graveToDisplay != null && graveToDisplay.graveDestroyed()) {
-            Log.d("instruction", "update: e");
             graveToDisplay = null;
             nextInstruction();
         }

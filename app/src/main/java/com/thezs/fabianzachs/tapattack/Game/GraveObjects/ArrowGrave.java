@@ -44,6 +44,7 @@ public class ArrowGrave extends GraveObject {
     @Override
     public void update() {
         this.currentLocation = getCurrentLocation();
+        Log.d("arrowgrave", "update: location: " + currentLocation);
         setBitmapHolderLocation(currentLocation);
         setPaint(setAlphaPaint(getPaint()));
     }
