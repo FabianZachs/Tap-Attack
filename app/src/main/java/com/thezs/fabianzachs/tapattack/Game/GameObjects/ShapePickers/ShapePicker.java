@@ -1,7 +1,6 @@
 package com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapePickers;
 
 import android.content.SharedPreferences;
-import android.graphics.drawable.shapes.Shape;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 
@@ -27,11 +26,11 @@ public abstract class ShapePicker {
             case "classic":
                 return new ClassicShapePicker();
             case "circle":
-                return new SimpleShapePicker("circle");
+                return new SingleShapePicker("circle");
             case "square":
-                return new SimpleShapePicker("square");
+                return new SingleShapePicker("square");
             case "arrow":
-                return new SimpleShapePicker("arrow");
+                return new SingleShapePicker("arrow");
                 /*
             case "discrete":
                 return;

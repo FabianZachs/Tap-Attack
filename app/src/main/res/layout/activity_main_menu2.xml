@@ -172,6 +172,16 @@
             android:textColor="#b0faff"
             android:textSize="30sp" />
 
+        <TextView
+            android:id="@+id/highscore_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gamemode_title"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/undinaru"
+            android:soundEffectsEnabled="false"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
         <!--
         <ImageView
             android:layout_width="15sp"

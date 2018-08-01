@@ -118,14 +118,14 @@ public class MainMenuActivity extends  GeneralParent {
         initializeConstants();
 
         prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
-        if (!prefs.getBoolean("firstTime", false)) {
+        //if (!prefs.getBoolean("firstTime", false)) {
             Log.d("thisran", "onCreate: ran");
             databaseSetup();
 
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean("firstTime", true);
             editor.apply();
-        }
+        //}
 
         // method instantiation
         //mediaPlayers = new ArrayList<MediaPlayer>();
@@ -139,7 +139,7 @@ public class MainMenuActivity extends  GeneralParent {
         //setContentView(R.layout.activity_main_menu);
         setContentView(R.layout.activity_main_menu2);
 
-        setupGameModeImageAndText();
+        setupGameModeImageAndTextAndHighscore();
 
         setupPointsDisplay();
         //multiShapesMessaroundDELETE(); //todo erase
@@ -155,7 +155,7 @@ public class MainMenuActivity extends  GeneralParent {
         store.getMainStoreDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
-                setupGameModeImageAndText();
+                setupGameModeImageAndTextAndHighscore();
             }
         });
 
@@ -182,7 +182,7 @@ public class MainMenuActivity extends  GeneralParent {
 
     }
 
-    private void setupGameModeImageAndText() {
+    private void setupGameModeImageAndTextAndHighscore() {
         MyDBHandler myDBHandler = new MyDBHandler(Constants.CURRENT_CONTEXT, null, null, 1);
 
         ImageView gamemodeImg = (ImageView) findViewById(R.id.play_button);
@@ -190,6 +190,18 @@ public class MainMenuActivity extends  GeneralParent {
 
         TextView gamemodeText = (TextView) findViewById(R.id.gamemode_title);
         gamemodeText.setText(prefs.getString("gamemode", Constants.GAMEMODES[0]).toUpperCase());
+
+
+        String selectedGameMode = prefs.getString("gamemode", Constants.GAMEMODES[0]);
+        if (!selectedGameMode.equals(Constants.GAMEMODES[0])) {
+            TextView highscoreText = (TextView) findViewById(R.id.highscore_text);
+            int highscoreForSelectedGame = prefs.getInt(selectedGameMode+"highscore", 0);
+            //highscoreText.setText(prefs.getInt(selectedGameMode + "highscore"));
+            //highscoreText.setText(prefs.getInt(prefs.getString("gamemode", Constants.GAMEMODES[0]) + "highscore", 0));
+            highscoreText.setText(Integer.toString(highscoreForSelectedGame));
+
+        }
+
 
     }
 
@@ -497,6 +509,7 @@ public class MainMenuActivity extends  GeneralParent {
             TextView pointsText = (TextView) findViewById(R.id.points_text);
             pointsText.setText(Integer.toString(prefs.getInt("points", 0)));
             YoYo.with(Techniques.BounceIn).duration(2000).repeat(0).playOn(pointsText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+            setupGameModeImageAndTextAndHighscore();
         }
         //super.onActivityResult(requestCode, resultCode, data);
     }

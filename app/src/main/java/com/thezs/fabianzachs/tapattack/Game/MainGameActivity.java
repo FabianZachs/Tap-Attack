@@ -170,7 +170,9 @@ public class MainGameActivity extends Activity {
 
         SharedPreferences prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = prefs.edit();
-        int bestScore = prefs.getInt(/*CONSTANTS.CURRENTGAEMODE + */"bestScore", 0);// todo make work  for different current gamemodes
+        //int bestScore = prefs.getInt(/*CONSTANTS.CURRENTGAEMODE + */"bestScore", 0);// todo make work  for different current gamemodes
+        String selectedGameMode = prefs.getString("gamemode", Constants.GAMEMODES[0]);
+        int highscoreForSelectedGame = prefs.getInt(selectedGameMode+"highscore", 0);
         //int bestStreak = prefs.getInt(/*CONSTANTS.CURRENTGAEMODE + */"bestStreak", 0);// todo make work  for different current gamemodes
 
 
@@ -178,9 +180,9 @@ public class MainGameActivity extends Activity {
         //TextView bestStreakText = (TextView) alertView.findViewById(R.id.shape_theme_image_description);
 
         // todo refactorable
-        if (currentGameScore > bestScore) {
-            bestScore = currentGameScore;
-            prefsEditor.putInt(/*CONSTANTS.CURRENTGAEMODE + */"bestScore", currentGameScore);
+        if (currentGameScore > highscoreForSelectedGame) {
+            highscoreForSelectedGame = currentGameScore;
+            prefsEditor.putInt(selectedGameMode+"highscore", currentGameScore);
             prefsEditor.apply();
             //YoYo.with(Techniques.Tada).duration(1000).repeat(0).playOn(bestScoreText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
             //YoYo.with(Techniques.Landing).duration(1000).repeat(0).playOn(bestScoreText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
@@ -206,7 +208,7 @@ public class MainGameActivity extends Activity {
         }*/
 
 
-        bestScoreText.setText("BEST SCORE: " + bestScore);
+        bestScoreText.setText("BEST SCORE: " + highscoreForSelectedGame);
 
         //bestStreakText.setText("BEST STREAK: " + bestStreak);
         TextView pointsEquation = (TextView) alertView.findViewById(R.id.points_text);
