@@ -198,7 +198,7 @@ public class MainMenuActivity extends  GeneralParent {
             int highscoreForSelectedGame = prefs.getInt(selectedGameMode+"highscore", 0);
             //highscoreText.setText(prefs.getInt(selectedGameMode + "highscore"));
             //highscoreText.setText(prefs.getInt(prefs.getString("gamemode", Constants.GAMEMODES[0]) + "highscore", 0));
-            highscoreText.setText(Integer.toString(highscoreForSelectedGame));
+            highscoreText.setText("Highscore: " + Integer.toString(highscoreForSelectedGame));
 
         }
 

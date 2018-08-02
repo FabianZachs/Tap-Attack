@@ -7,9 +7,9 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_weight="2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="2">
 
         <RelativeLayout
             android:id="@+id/upperSection"
@@ -22,66 +22,63 @@
                 android:layout_height="match_parent">
 
 
-
             </RelativeLayout>
+
             <ImageView
-                android:onClick="showload"
                 android:id="@+id/title_image1"
-                android:layout_marginLeft="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
                 android:layout_marginTop="20sp"
                 android:adjustViewBounds="true"
                 android:maxHeight="70sp"
-                android:src="@drawable/titleimage1"
-                />
+                android:onClick="showload"
+                android:src="@drawable/titleimage1" />
 
             <ImageView
                 android:id="@+id/title_image2"
-                android:maxHeight="70sp"
-                android:layout_marginLeft="20sp"
-                android:layout_below="@+id/title_image1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/title_image1"
+                android:layout_marginLeft="20sp"
                 android:layout_marginTop="20sp"
                 android:adjustViewBounds="true"
+                android:maxHeight="70sp"
                 android:scaleType="fitXY"
 
-                android:src="@drawable/titleimage2"
-                />
+                android:src="@drawable/titleimage2" />
 
 
             <RelativeLayout
-                android:layout_toRightOf="@+id/title_image1"
-                android:layout_marginTop="5sp"
-                android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="5sp"
+                android:layout_toRightOf="@+id/title_image1">
 
                 <ImageView
                     android:id="@+id/points_image"
                     android:layout_width="20sp"
                     android:layout_height="20sp"
                     android:layout_marginTop="20sp"
-                    android:layout_toRightOf="@id/title_text"
                     android:layout_toLeftOf="@+id/points_text"
-                    android:src="@drawable/curvedstar"/>
+                    android:layout_toRightOf="@id/title_text"
+                    android:src="@drawable/curvedstar" />
 
                 <TextView
-                    android:layout_marginLeft="7sp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="20sp"
-                    android:gravity="right"
-                    android:textStyle="bold"
                     android:id="@+id/points_text"
-                    android:text="POINTS"
-                    android:textColor="@color/store"
-                    android:textSize="22sp"
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="7sp"
+                    android:layout_marginRight="20sp"
                     android:layout_marginTop="15sp"
-                    />
+                    android:gravity="right"
+                    android:text="POINTS"
+
+                    android:textColor="@color/store"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
@@ -120,12 +117,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1.5">
 
         <View
             android:id="@+id/anchor"
             android:layout_width="0dp"
-            android:layout_height="120dp"
+            android:layout_height="130dp"
             android:layout_centerInParent="true" />
 
 
@@ -192,15 +189,22 @@
             android:layout_below="@id/play_button"
             android:src="@drawable/changeGameModeButton"
             android:layout_toRightOf="@+id/gamemode_title"/>
+
 -->
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15sp">
+
+
         <TextView
             android:id="@+id/store_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/gamemode_title"
             android:layout_marginLeft="20sp"
             android:layout_marginStart="20sp"
-            android:layout_marginTop="15dp"
             android:fontFamily="@font/undinaru"
             android:onClick="storeClick"
             android:text="@string/store"
@@ -214,10 +218,8 @@
             android:layout_alignEnd="@id/store_text"
             android:layout_alignParentRight="true"
             android:layout_alignRight="@+id/store_text"
-            android:layout_below="@+id/gamemode_title"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="15dp"
             android:fontFamily="@font/undinaru"
             android:onClick="menuClick"
             android:soundEffectsEnabled="false"
@@ -227,12 +229,22 @@
 
     </RelativeLayout>
 
-    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView"
+
+    <RelativeLayout
+        android:id="@+id/banner_ad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
+        android:layout_gravity="center">
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
+
+
+    </RelativeLayout>
 
 </LinearLayout>
