@@ -50,6 +50,7 @@
 
 
             <RelativeLayout
+                android:onClick="pointsSectionClick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -71,14 +72,24 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="7sp"
-                    android:layout_marginRight="20sp"
+                    android:layout_marginRight="45sp"
                     android:layout_marginTop="15sp"
                     android:gravity="right"
                     android:text="POINTS"
-
                     android:textColor="@color/store"
                     android:textSize="22sp"
                     android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/more_points_sign"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10sp"
+                    android:layout_width="20sp"
+                    android:layout_height="20sp"
+                    android:src="@drawable/morepointssign"
+                    android:layout_alignRight="@+id/points_text"
+                    android:layout_alignParentRight="true"
+                    />
 
             </RelativeLayout>
 

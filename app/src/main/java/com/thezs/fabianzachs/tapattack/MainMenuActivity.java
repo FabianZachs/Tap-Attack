@@ -692,6 +692,14 @@ public class MainMenuActivity extends  GeneralParent {
         //this.startActivity(intent);
         this.startActivityForResult(intent, 1);
     }
+
+    public void pointsSectionClick(View view) {
+        // todo we want a dialog with the current coins
+        // todo first option is watch a video to gain z more coins
+        // todo offer coin x2 multiplier for $0.99
+        // todo yoyo shake the more coins icon every x seconds??
+        StyleableToast.makeText(Constants.CURRENT_CONTEXT, "COIN DIALOG WOULD LAUNCH", R.style.successtoast).show();
+    }
     /*
     private void okButtonLockInSetup(final View alertView, final AlertDialog dialog, final View viewWithViewToUpdate) {
 
