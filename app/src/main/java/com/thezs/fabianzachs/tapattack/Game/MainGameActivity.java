@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.Game;
 
         import android.app.Activity;
         import android.app.AlertDialog;
+        import android.app.Dialog;
         import android.content.SharedPreferences;
         import android.graphics.Typeface;
         import android.graphics.drawable.LayerDrawable;
@@ -11,7 +12,9 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.support.annotation.Nullable;
         import android.util.Log;
         import android.view.Gravity;
+        import android.view.LayoutInflater;
         import android.view.View;
+        import android.view.ViewGroup;
         import android.view.Window;
         import android.view.WindowManager;
         import android.widget.FrameLayout;
@@ -278,11 +281,12 @@ public class MainGameActivity extends Activity {
         this.runOnUiThread(new Runnable() {
             public void run() {
                 //View alertView = this.getLayoutInflater().inflate(R.layout.game_over, null);
-                View alertView = helper.getAlertView(activity, R.layout.game_over);
+                View alertView = helper.getAlertView(activity, R.layout.game_over2);
 
-                setupGameOverFields(alertView, gameOverReason, scoreToDisplay, streakToDisplay);
+                //setupGameOverFields(alertView, gameOverReason, scoreToDisplay, streakToDisplay);
 
                 final AlertDialog dialog = helper.getBuiltDialog(activity, alertView);
+
                 //AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
                 //dbuilder.setView(alertView);
                 //final AlertDialog dialog = dbuilder.create();
@@ -290,16 +294,64 @@ public class MainGameActivity extends Activity {
                 dialog.setCancelable(false); // todo add after done testign
 
 
+                //WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
+                //lp.dimAmount=0.9f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
 
 
-                helper.dialogFullscreen(activity, dialog);
+                //helper.dialogFullscreen(activity, dialog);
+
+
+
+                Dialog dialog1 = new Dialog(activity,android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+                dialog1.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+                dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog1.setContentView(R.layout.game_over2);
+                Window window = dialog1.getWindow();
+                WindowManager.LayoutParams wlp = window.getAttributes();
+
+                wlp.gravity = Gravity.CENTER;
+                wlp.flags &= ~WindowManager.LayoutParams.FLAG_BLUR_BEHIND;
+                window.setAttributes(wlp);
+                dialog1.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+                dialog1.show();
+
+
+
+
+
+
+
+
+                /*
+                //Dialog dialog1 = new Dialog(activity, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
+                Dialog dialog1 = new Dialog(activity, android.R.style.Theme_DeviceDefault_NoActionBar_TranslucentDecor);
+                dialog1.setContentView(getLayoutInflater().inflate(R.layout.game_over,null));
+                dialog1.show();
+
+
+
+                /*
+
+                Dialog dialog1 =new Dialog(activity,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+                dialog1.setContentView(R.layout.game_over);
+
+                WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
+                lp.dimAmount=0.5f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+                dialog1.getWindow().setAttributes(lp);
+
+
+                dialog1.show();
+                */
+
+
+                //dialog.getWindow().setLayout(Constants.SCREEN_WIDTH, WindowManager.LayoutParams.MATCH_PARENT);
 
                 //TextView score = (TextView) alertView.findViewById(R.id.score_text);
                 //YoYo.with(Techniques.Bounce).duration(1000).repeat(3).playOn(score);
 
                 AdView pauseBannerAd;
                 // todo banner ad
-                bannerAdSetup(alertView);
+                //bannerAdSetup(alertView);
             }
         });
 
@@ -337,18 +389,18 @@ public class MainGameActivity extends Activity {
 
         AdView pauseBannerAd;
         // todo banner ad
-        bannerAdSetup(alertView);
-        //finish();
+        //bannerAdSetup(alertView);
     }
 
 
+    /*
     public void bannerAdSetup(View alertView) {
         // ads (below setContentView)
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
         AdView adView = (AdView) alertView.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
-    }
+    }*/
 
     @Override
     protected void onPause() {

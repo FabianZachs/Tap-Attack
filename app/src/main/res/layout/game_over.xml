@@ -6,9 +6,10 @@ android:orientation="vertical"
 android:gravity="center"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:background="@drawable/dialog_shape">
+android:background="@drawable/transparent">
 <!-- marging bottom - only for vertical linear layout -->
 <TextView
+    android:layout_weight="1"
     android:text="GAME OVER"
     android:textColor="@color/soundoff"
     android:fontFamily="@font/undinaru"
@@ -19,6 +20,7 @@ android:background="@drawable/dialog_shape">
     android:adjustViewBounds="true"/>
 
     <TextView
+        android:layout_weight="1"
         android:id="@+id/game_over_text"
         android:fontFamily="@font/undinaru"
         android:textSize="20sp"
@@ -38,6 +40,7 @@ android:background="@drawable/dialog_shape">
         -->
 
         <RelativeLayout
+            android:layout_weight="1"
 
             android:id="@+id/score_section"
             android:paddingTop="10sp"
@@ -115,6 +118,7 @@ android:background="@drawable/dialog_shape">
     <TextView
         android:id="@+id/points_text"
         android:layout_width="wrap_content"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_marginTop="20sp"
         android:fontFamily="@font/undinaru"
@@ -131,11 +135,13 @@ android:background="@drawable/dialog_shape">
         android:fontFamily="@font/undinaru"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="SHARE"
         android:textSize="25sp"/>
 
 
 <TextView
+    android:layout_weight="1"
     android:id="@+id/ok_button"
     android:onClick="exitClick"
     android:fontFamily="@font/undinaru"
@@ -148,6 +154,7 @@ android:background="@drawable/dialog_shape">
 
 
     <com.google.android.gms.ads.AdView
+        android:layout_weight="1"
         android:layout_gravity="center"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20sp"
