@@ -1,30 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:orientation="vertical"
+android:gravity="center"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#b3000000">
+<!--
+100% — FF
+95% — F2
+90% — E6
+85% — D9
+80% — CC
+75% — BF
+70% — B3
+65% — A6
+60% — 99
+-->
+<!-- marging bottom - only for vertical linear layout -->
+    <RelativeLayout
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginTop="50sp"
+            android:id="@+id/game_over_text"
+            android:text="GAME OVER"
+            android:textColor="@color/soundoff"
+            android:fontFamily="@font/undinaru"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"/>
+
+        <TextView
+            android:id="@+id/game_over_reason"
+            android:layout_below="@id/game_over_text"
+            android:fontFamily="@font/undinaru"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:textSize="20sp"
+            android:text="YOU MISSED THE SHAPE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+
+<!--
+<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    -->
+
+<RelativeLayout
+    android:layout_weight="1"
+
+    android:id="@+id/score_section"
+    android:paddingTop="10sp"
+    android:paddingBottom="10sp"
+    android:paddingLeft="10sp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/shape_type_text"
+        android:textStyle="bold"
+        android:fontFamily="@font/undinaru"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="50sp"/>
 
     <TextView
-        android:layout_weight="1"
-        android:text="GAME OVER"
-        android:textColor="@color/soundoff"
+        android:paddingRight="5sp"
+        android:paddingTop="5sp"
+        android:paddingBottom="5sp"
+        android:id="@+id/shape_type_image_description"
+        android:layout_marginTop="5sp"
         android:fontFamily="@font/undinaru"
-        android:textSize="50sp"
-        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"/>
+        android:text="BEST: 100"
+        android:layout_below="@id/shape_type_text"
+        android:textSize="25sp"/>
+
+
+</RelativeLayout>
+
+<!--
+<RelativeLayout
+
+    android:id="@+id/shape_theme_section"
+    android:layout_weight="1"
+    android:paddingRight="10sp"
+    android:paddingBottom="10sp"
+    android:paddingTop="10sp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
     <TextView
-        android:layout_weight="1"
-        android:text="GAME OVER"
-        android:gravity="bottom"
-        android:textColor="@color/soundoff"
-        android:fontFamily="@font/undinaru"
-        android:textSize="50sp"
+        android:id="@+id/shape_theme_text"
+        android:layout_centerHorizontal="true"
         android:textStyle="bold"
+        android:fontFamily="@font/undinaru"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"/>
+        android:text="STREAK: 0"
+        android:textSize="25sp"/>
+    <TextView
+        android:paddingRight="5sp"
+        android:paddingTop="5sp"
+        android:paddingBottom="5sp"
+        android:id="@+id/shape_theme_image_description"
+        android:layout_marginTop="5sp"
+        android:layout_below="@+id/shape_theme_text"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/undinaru"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BEST STREAK: 10"
+        android:textSize="25sp"/>
+
+</RelativeLayout>
+-->
+
+
+<!--
+</LinearLayout>
+-->
+
+<TextView
+    android:id="@+id/points_text"
+    android:layout_width="wrap_content"
+    android:layout_weight="1"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20sp"
+    android:fontFamily="@font/undinaru"
+    android:textSize="18sp"
+    android:textStyle="bold"
+    android:textAlignment="center"
+    android:text="SCORE x SCORE MULTIPLIER(1) = + POINTS"
+    />
+
+
+<TextView
+    android:layout_weight="1"
+    android:id="@+id/ok_button"
+    android:onClick="exitClick"
+    android:fontFamily="@font/undinaru"
+    android:text="@string/ok"
+    android:textColor="#000000"
+    android:textSize="50sp"
+    android:soundEffectsEnabled="false"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+
+
+<com.google.android.gms.ads.AdView
+    android:layout_weight="1"
+    android:layout_gravity="center"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="20sp"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/adView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    ads:adSize="BANNER"
+    android:layout_below="@id/pauseSelections"
+    ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+</com.google.android.gms.ads.AdView>
+
 
 </LinearLayout>

@@ -3,13 +3,18 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.app.Activity;
         import android.app.AlertDialog;
         import android.app.Dialog;
+        import android.content.Context;
         import android.content.SharedPreferences;
+        import android.graphics.Color;
         import android.graphics.Typeface;
+        import android.graphics.drawable.ColorDrawable;
+        import android.graphics.drawable.Drawable;
         import android.graphics.drawable.LayerDrawable;
         import android.media.MediaPlayer;
         import android.os.Bundle;
         import android.os.Handler;
         import android.support.annotation.Nullable;
+        import android.support.v4.content.ContextCompat;
         import android.util.Log;
         import android.view.Gravity;
         import android.view.LayoutInflater;
@@ -281,7 +286,8 @@ public class MainGameActivity extends Activity {
         this.runOnUiThread(new Runnable() {
             public void run() {
                 //View alertView = this.getLayoutInflater().inflate(R.layout.game_over, null);
-                View alertView = helper.getAlertView(activity, R.layout.game_over2);
+                /*
+                View alertView = helper.getAlertView(activity, R.layout.game_over);
 
                 //setupGameOverFields(alertView, gameOverReason, scoreToDisplay, streakToDisplay);
 
@@ -298,7 +304,8 @@ public class MainGameActivity extends Activity {
                 //lp.dimAmount=0.9f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
 
 
-                //helper.dialogFullscreen(activity, dialog);
+                helper.dialogFullscreen(activity, dialog);
+                */
 
 
 
@@ -306,6 +313,11 @@ public class MainGameActivity extends Activity {
                 dialog1.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
                 dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog1.setContentView(R.layout.game_over2);
+
+                TextView gameOverText = (TextView) dialog1.findViewById(R.id.game_over_reason);
+                gameOverText.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                gameOverText.setText(gameOverReason);
+
                 Window window = dialog1.getWindow();
                 WindowManager.LayoutParams wlp = window.getAttributes();
 
@@ -313,6 +325,26 @@ public class MainGameActivity extends Activity {
                 wlp.flags &= ~WindowManager.LayoutParams.FLAG_BLUR_BEHIND;
                 window.setAttributes(wlp);
                 dialog1.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+
+
+                //WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
+                //lp.dimAmount=0.0f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+                //window.setDimAmount(1f);
+                //dialog1.getWindow().setAttributes(lp);
+
+
+                AdView adView = (AdView) dialog1.findViewById(R.id.adView);
+                MobileAds.initialize(activity, "ca-app-pub-3940256099942544~3347511713");
+                //AdView adView = (AdView) activity.findViewById(R.id.adView);
+                AdRequest adRequest = new AdRequest.Builder().build();
+                adView.loadAd(adRequest);
+
+                //dialog1.getWindow().setBackgroundDrawable(new ColorDrawable("0xffffff"));
+                Drawable background = ContextCompat.getDrawable(activity, R.drawable.game_over_dialog_shape);
+                background.setAlpha(245);
+
+                dialog1.getWindow().setBackgroundDrawable(background);
+
                 dialog1.show();
 
 

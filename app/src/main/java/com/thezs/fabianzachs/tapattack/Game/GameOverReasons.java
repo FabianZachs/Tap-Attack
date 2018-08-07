@@ -14,7 +14,7 @@ public class GameOverReasons {
 
 
     public static String xTap() {
-        return "OH NO! DON'T TAP THE X";
+        return "DON'T TAP THE X";
     }
 
     public static String warningColorTap(ShapeObject shape) {
@@ -31,7 +31,7 @@ public class GameOverReasons {
     }
 
     public static String backgroundTap() {
-        return "DARN! YOU MISSED THE SHAPE";
+        return "YOU MISSED THE SHAPE";
     }
 
 

@@ -6,7 +6,7 @@ android:orientation="vertical"
 android:gravity="center"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:background="@drawable/transparent">
+android:background="@drawable/dialog_shape">
 <!-- marging bottom - only for vertical linear layout -->
 <TextView
     android:layout_weight="1"
