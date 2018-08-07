@@ -83,7 +83,7 @@ public class CentralGameCommunication {
                     Thread.sleep(/*2000*/0);
                 } catch (InterruptedException e) {
                 }
-                gamePanel.endRunningThread();
+                //gamePanel.endRunningThread();
                 mainGameActivity.showGameOverScreen(gameOverReason, score.getScore(), streak.getCurrentGameHighestStreak());
                 //View alertView = this.getLayoutInflater().inflate(R.layout.game_over, null);
             }

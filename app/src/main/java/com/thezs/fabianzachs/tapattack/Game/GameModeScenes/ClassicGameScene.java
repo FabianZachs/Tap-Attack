@@ -3,7 +3,9 @@ package com.thezs.fabianzachs.tapattack.Game.GameModeScenes;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
@@ -89,8 +91,11 @@ public class ClassicGameScene implements Scene {
         //streak.draw(canvas);
         if (!mediator.isGameOver)
             shapesManager.draw(canvas);
-        else
+        else {
             shapesManager.drawGameOverREDO(canvas);
+            //drawGameOverScreenDim(canvas);
+
+        }
             //shapesManager.drawGameOver(canvas);
         warningColor.draw(canvas);
 
@@ -100,6 +105,17 @@ public class ClassicGameScene implements Scene {
         }
 
     }
+
+    /*
+    private void drawGameOverScreenDim(Canvas canvas) {
+        Rect screen = new Rect();
+        screen.set(0,0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+        Paint paint = new Paint();
+        paint.setColor(Color.BLACK);
+        paint.setAlpha(240);
+        canvas.drawRect(screen, paint);
+    }
+    */
 
     // todo refactor -- repeatedly calling new paint in thread cant be efficient. So do setupStartGameTExtPaint and then else statement above release the paint by setting null maybe??
     private void drawStartGameText(Canvas canvas) {

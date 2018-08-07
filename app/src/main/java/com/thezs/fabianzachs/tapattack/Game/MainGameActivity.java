@@ -3,11 +3,8 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.app.Activity;
         import android.app.AlertDialog;
         import android.app.Dialog;
-        import android.content.Context;
         import android.content.SharedPreferences;
-        import android.graphics.Color;
         import android.graphics.Typeface;
-        import android.graphics.drawable.ColorDrawable;
         import android.graphics.drawable.Drawable;
         import android.graphics.drawable.LayerDrawable;
         import android.media.MediaPlayer;
@@ -15,11 +12,8 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.os.Handler;
         import android.support.annotation.Nullable;
         import android.support.v4.content.ContextCompat;
-        import android.util.Log;
         import android.view.Gravity;
-        import android.view.LayoutInflater;
         import android.view.View;
-        import android.view.ViewGroup;
         import android.view.Window;
         import android.view.WindowManager;
         import android.widget.FrameLayout;
@@ -36,8 +30,6 @@ package com.thezs.fabianzachs.tapattack.Game;
         import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
         import com.thezs.fabianzachs.tapattack.R;
         import com.thezs.fabianzachs.tapattack.helper;
-
-        import org.w3c.dom.Text;
 
 /**
  * Created by fabianzachs on 07/02/18.
@@ -173,7 +165,7 @@ public class MainGameActivity extends Activity {
         streakText.setText("STREAK: " + currentGameStreak);
         */
 
-        TextView scoreText = (TextView) alertView.findViewById(R.id.shape_type_text);
+        TextView scoreText = (TextView) alertView.findViewById(R.id.scoreerwr);
         scoreText.setText("SCORE: " + currentGameScore);
 
         SharedPreferences prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
@@ -184,7 +176,7 @@ public class MainGameActivity extends Activity {
         //int bestStreak = prefs.getInt(/*CONSTANTS.CURRENTGAEMODE + */"bestStreak", 0);// todo make work  for different current gamemodes
 
 
-        TextView bestScoreText = (TextView) alertView.findViewById(R.id.shape_type_image_description);
+        TextView bestScoreText = (TextView) alertView.findViewById(R.id.best_score_text);
         //TextView bestStreakText = (TextView) alertView.findViewById(R.id.shape_theme_image_description);
 
         // todo refactorable
@@ -306,18 +298,22 @@ public class MainGameActivity extends Activity {
 
                 helper.dialogFullscreen(activity, dialog);
                 */
+                // todo first we want to load the background with ad
+                // todo then progressively dim screen
+                // todo finally show all info
 
 
 
-                Dialog dialog1 = new Dialog(activity,android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+                final Dialog dialog1 = new Dialog(activity,android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
                 dialog1.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
                 dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog1.setContentView(R.layout.game_over2);
 
+                /*
                 TextView gameOverText = (TextView) dialog1.findViewById(R.id.game_over_reason);
                 gameOverText.setGravity(View.TEXT_ALIGNMENT_CENTER);
                 gameOverText.setText(gameOverReason);
-
+*/
                 Window window = dialog1.getWindow();
                 WindowManager.LayoutParams wlp = window.getAttributes();
 
@@ -339,17 +335,37 @@ public class MainGameActivity extends Activity {
                 AdRequest adRequest = new AdRequest.Builder().build();
                 adView.loadAd(adRequest);
 
-                //dialog1.getWindow().setBackgroundDrawable(new ColorDrawable("0xffffff"));
-                Drawable background = ContextCompat.getDrawable(activity, R.drawable.game_over_dialog_shape);
-                background.setAlpha(245);
-
-                dialog1.getWindow().setBackgroundDrawable(background);
+                final Drawable background = ContextCompat.getDrawable(activity, R.drawable.game_over_dialog_shape);
+                //background.setAlpha(245);
+                //final int[] alphas = {0, 20, 40, 60, 80, 100, 120, 140, 160};
+                //dialog1.getWindow().setBackgroundDrawable(background);
 
                 dialog1.show();
 
 
 
 
+
+                final Handler handler = new Handler();
+                final Runnable runnable = new Runnable() {
+                    int dim = 0;
+                    @Override
+                    public void run() {
+                        background.setAlpha(dim);
+                        dim += 4;
+                        dialog1.getWindow().setBackgroundDrawable(background);
+                        handler.postDelayed(this, 1);
+                        if (dim > 150) {
+                            handler.removeCallbacks(this);
+                            //setupGameOverFields2(dialog1, gameOverReason, scoreToDisplay, streakToDisplay);
+
+                        }
+                    }
+                };
+                handler.postDelayed(runnable, 0);
+
+                // todo show all info after finished the fade
+                setupGameOverFields2(dialog1, gameOverReason, scoreToDisplay, streakToDisplay);
 
 
 
@@ -392,9 +408,83 @@ public class MainGameActivity extends Activity {
 
     }
 
+    private void setupGameOverFields2(Dialog dialog1, String gameOverReason, int currentGameScore, int streakToDisplay) {
+        TextView gameOverText = (TextView)  dialog1.findViewById(R.id.game_over_text);
+        gameOverText.setText("GAME OVER");
+        TextView gameOverReasonText = (TextView) dialog1.findViewById(R.id.game_over_reason);
+        gameOverReasonText.setText(gameOverReason);
+
+        /*
+        TextView streakText = (TextView) alertView.findViewById(R.id.shape_theme_text);
+        streakText.setText("STREAK: " + currentGameStreak);
+        */
+
+        TextView scoreText = (TextView) dialog1.findViewById(R.id.scoreerwr);
+        scoreText.setText(String.valueOf(currentGameScore));
+
+        SharedPreferences prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        //int bestScore = prefs.getInt(/*CONSTANTS.CURRENTGAEMODE + */"bestScore", 0);// todo make work  for different current gamemodes
+        String selectedGameMode = prefs.getString("gamemode", Constants.GAMEMODES[0]);
+        int highscoreForSelectedGame = prefs.getInt(selectedGameMode+"highscore", 0);
+        //int bestStreak = prefs.getInt(/*CONSTANTS.CURRENTGAEMODE + */"bestStreak", 0);// todo make work  for different current gamemodes
+
+
+        TextView bestScoreText = (TextView) dialog1.findViewById(R.id.best_score_text);
+        //TextView bestStreakText = (TextView) alertView.findViewById(R.id.shape_theme_image_description);
+
+        // todo refactorable
+        if (currentGameScore > highscoreForSelectedGame) {
+            highscoreForSelectedGame = currentGameScore;
+            prefsEditor.putInt(selectedGameMode+"highscore", currentGameScore);
+            prefsEditor.apply();
+            //YoYo.with(Techniques.Tada).duration(1000).repeat(0).playOn(bestScoreText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+            //YoYo.with(Techniques.Landing).duration(1000).repeat(0).playOn(bestScoreText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+            //YoYo.with(Techniques.Pulse).duration(1000).repeat(0).playOn(bestScoreText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+            YoYo.with(Techniques.BounceIn).duration(1000).repeat(0).playOn(bestScoreText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+            //YoYo.with(Techniques.FadeIn).duration(1000).repeat(0).playOn(bestScoreText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+
+            bestScoreText.setTextColor(getResources().getColor(R.color.soundon));
+            bestScoreText.setTypeface(bestScoreText.getTypeface(),Typeface.BOLD); // todo messes up font
+            //Typeface tf = Typeface.createFromAsset(getAssets(),"res/font/undinaru.ttf");
+            //bestScoreText.setTypeface(tf);
+            //Typeface typeface = getResources().getFont(R.font.undinaru);
+            // bestScoreText.setTypeface(typeface);
+        }
+        /*
+        if (currentGameStreak > bestStreak) {
+            bestStreak = currentGameStreak;
+            prefsEditor.putInt("bestStreak", currentGameStreak);
+            prefsEditor.apply();
+            YoYo.with(Techniques.BounceIn).duration(1000).repeat(0).playOn(bestScoreText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+            bestStreakText.setTextColor(getResources().getColor(R.color.soundon));
+            bestStreakText.setTypeface(bestScoreText.getTypeface(),Typeface.BOLD); // todo messes up font
+        }*/
+
+
+        bestScoreText.setText("BEST: " + highscoreForSelectedGame);
+
+        //bestStreakText.setText("BEST STREAK: " + bestStreak);
+        TextView pointsEquation = (TextView) dialog1.findViewById(R.id.points_text);
+
+
+        float scoreMultiplier = getScoreMultiplier(prefs.getString("multiplier", "basic"));
 
 
 
+
+
+
+        //float scoreMultiplier = 10000;
+        int pointsearned = (int) (scoreMultiplier * currentGameScore);
+        //pointsEquation.setText(currentGameScore + " x MULTIPLIER (" + scoreMultiplier + ") = +" + pointsearned + " POINTS");
+        pointsEquation.setText("+" + pointsearned + " POINTS");
+
+        int currentPoints = prefs.getInt("points", 0);
+        prefsEditor.putInt("points", currentPoints + pointsearned);
+        prefsEditor.apply();
+        //Log.d("endintent", "setupGameOverFields: " + prefs.getInt("points", 0));
+    }
 
 
     // TODO make this pause button size relative to screen size
@@ -451,6 +541,7 @@ public class MainGameActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         gameOverMusic.stop();
+        gamePanel.endRunningThread();
     }
 
     public void exitClick(View view) {

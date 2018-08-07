@@ -8,11 +8,9 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Paint;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,7 +19,6 @@ import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -292,7 +289,7 @@ public class Store {
         setupStoreSectionPreviewImg("warningcolorstreakreward", R.id.warning_color_streak_image);
 
         setupStoreSectionText("color", R.id.shape_theme_image_description);
-        setupStoreSectionText("type", R.id.shape_type_image_description);
+        setupStoreSectionText("type", R.id.best_score_text);
         //setupStoreSectionText("gamemode", R.id.gamemode_image_description);
     }
 

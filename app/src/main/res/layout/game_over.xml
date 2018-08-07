@@ -49,7 +49,7 @@ android:background="@drawable/dialog_shape">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/shape_type_text"
+                android:id="@+id/scoreerwr"
                 android:textStyle="bold"
                 android:fontFamily="@font/undinaru"
                 android:layout_centerHorizontal="true"
@@ -62,13 +62,13 @@ android:background="@drawable/dialog_shape">
                 android:paddingRight="5sp"
                 android:paddingTop="5sp"
                 android:paddingBottom="5sp"
-                android:id="@+id/shape_type_image_description"
+                android:id="@+id/best_score_text"
                 android:layout_marginTop="5sp"
                 android:fontFamily="@font/undinaru"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="BEST SCORE: 100"
-                android:layout_below="@id/shape_type_text"
+                android:layout_below="@id/scoreerwr"
                 android:textSize="25sp"/>
 
 
