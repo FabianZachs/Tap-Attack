@@ -85,7 +85,7 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
         prefsEditor.apply();
         */
 
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544/5224354917");
+        //MobileAds.initialize(this, "ca-app-pub-3940256099942544/5224354917");
         vidAd = MobileAds.getRewardedVideoAdInstance(this);
         vidAd.setRewardedVideoAdListener(this);
         vidAd.loadAd("ca-app-pub-3940256099942544/5224354917", new AdRequest.Builder().build());
