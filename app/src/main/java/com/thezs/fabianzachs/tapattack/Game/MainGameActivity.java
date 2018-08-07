@@ -48,11 +48,14 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
     CentralGameCommunication mediator;
     MediaPlayer gameOverMusic;
     RewardedVideoAd vidAd;
+    private int pointsEarned = 0;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         helper.makeFullscreen(this);
+        this.prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
 
         gameOverMusic = MediaPlayer.create(this, R.raw.gameoverscreen);
 
@@ -180,7 +183,7 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
         TextView scoreText = (TextView) alertView.findViewById(R.id.score_text);
         scoreText.setText("SCORE: " + currentGameScore);
 
-        SharedPreferences prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
+        //SharedPreferences prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = prefs.edit();
         //int bestScore = prefs.getInt(/*CONSTANTS.CURRENTGAEMODE + */"bestScore", 0);// todo make work  for different current gamemodes
         String selectedGameMode = prefs.getString("gamemode", Constants.GAMEMODES[0]);
@@ -235,6 +238,7 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
 
         //float scoreMultiplier = 10000;
         int pointsearned = (int) (scoreMultiplier * currentGameScore);
+        this.pointsEarned = pointsearned;
         pointsEquation.setText(currentGameScore + " x MULTIPLIER (" + scoreMultiplier + ") = +" + pointsearned + " POINTS");
 
         int currentPoints = prefs.getInt("points", 0);
@@ -434,7 +438,7 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
         TextView scoreText = (TextView) dialog1.findViewById(R.id.score_text);
         scoreText.setText(String.valueOf(currentGameScore));
 
-        SharedPreferences prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
+        //SharedPreferences prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = prefs.edit();
         //int bestScore = prefs.getInt(/*CONSTANTS.CURRENTGAEMODE + */"bestScore", 0);// todo make work  for different current gamemodes
         String selectedGameMode = prefs.getString("gamemode", Constants.GAMEMODES[0]);
@@ -494,6 +498,7 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
 
         //float scoreMultiplier = 10000;
         int pointsearned = (int) (scoreMultiplier * currentGameScore);
+        this.pointsEarned = pointsearned;
         //pointsEquation.setText(currentGameScore + " x MULTIPLIER (" + scoreMultiplier + ") = +" + pointsearned + " POINTS");
         pointsEquation.setText("+" + pointsearned + " POINTS");
 
@@ -615,7 +620,7 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
 
     @Override
     public void onRewardedVideoAdLoaded() {
-        //StyleableToast.makeText(Constants.CURRENT_CONTEXT, "PLAY VIDEO", R.style.successtoast).show();
+        StyleableToast.makeText(Constants.CURRENT_CONTEXT, "PLAY VIDEO", R.style.successtoast).show();
         Log.d("isadload", "onRewardedVideoAdLoaded: load");
 
     }
@@ -638,6 +643,13 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
     @Override
     public void onRewarded(RewardItem rewardItem) {
         // todo add rewardItem.getAmount() to points
+        // todo add the same number as points as before to player
+
+        int currentPoints = prefs.getInt("points", 0);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+
+        prefsEditor.putInt("points", currentPoints + pointsEarned);
+        prefsEditor.apply();
     }
 
     @Override
