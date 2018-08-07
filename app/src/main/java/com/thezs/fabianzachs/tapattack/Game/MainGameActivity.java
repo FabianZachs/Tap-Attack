@@ -12,6 +12,7 @@ package com.thezs.fabianzachs.tapattack.Game;
         import android.os.Handler;
         import android.support.annotation.Nullable;
         import android.support.v4.content.ContextCompat;
+        import android.util.Log;
         import android.view.Gravity;
         import android.view.View;
         import android.view.Window;
@@ -26,6 +27,10 @@ package com.thezs.fabianzachs.tapattack.Game;
         import com.google.android.gms.ads.AdRequest;
         import com.google.android.gms.ads.AdView;
         import com.google.android.gms.ads.MobileAds;
+        import com.google.android.gms.ads.reward.RewardItem;
+        import com.google.android.gms.ads.reward.RewardedVideoAd;
+        import com.google.android.gms.ads.reward.RewardedVideoAdListener;
+        import com.muddzdev.styleabletoastlibrary.StyleableToast;
         import com.thezs.fabianzachs.tapattack.Constants;
         import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
         import com.thezs.fabianzachs.tapattack.R;
@@ -37,11 +42,12 @@ package com.thezs.fabianzachs.tapattack.Game;
  * Created by fabianzachs on 07/02/18.
  */
 
-public class MainGameActivity extends Activity {
+public class MainGameActivity extends Activity implements RewardedVideoAdListener {
 
     private GamePanel gamePanel;
     CentralGameCommunication mediator;
     MediaPlayer gameOverMusic;
+    RewardedVideoAd vidAd;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,6 +85,10 @@ public class MainGameActivity extends Activity {
         prefsEditor.apply();
         */
 
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544/5224354917");
+        vidAd = MobileAds.getRewardedVideoAdInstance(this);
+        vidAd.setRewardedVideoAdListener(this);
+        vidAd.loadAd("ca-app-pub-3940256099942544/5224354917", new AdRequest.Builder().build());
     }
 
 
@@ -590,4 +600,53 @@ public class MainGameActivity extends Activity {
         gamePanel.startNewThread();
     }
 
+    public void playVideo(View view) {
+        // todo reward video and double points
+        //StyleableToast.makeText(Constants.CURRENT_CONTEXT, "PLAY VIDEO", R.style.successtoast).show();
+        // todo in oncreate
+        //MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        //vidAd = MobileAds.getRewardedVideoAdInstance(this);
+        //vidAd.setRewardedVideoAdListener(this);
+        //vidAd.loadAd("ca-app-pub-3940256099942544~3347511713", new AdRequest.Builder().build());
+
+        if (vidAd.isLoaded())
+            vidAd.show();
+    }
+
+    @Override
+    public void onRewardedVideoAdLoaded() {
+        //StyleableToast.makeText(Constants.CURRENT_CONTEXT, "PLAY VIDEO", R.style.successtoast).show();
+        Log.d("isadload", "onRewardedVideoAdLoaded: load");
+
+    }
+
+    @Override
+    public void onRewardedVideoAdOpened() {
+
+    }
+
+    @Override
+    public void onRewardedVideoStarted() {
+
+    }
+
+    @Override
+    public void onRewardedVideoAdClosed() {
+
+    }
+
+    @Override
+    public void onRewarded(RewardItem rewardItem) {
+        // todo add rewardItem.getAmount() to points
+    }
+
+    @Override
+    public void onRewardedVideoAdLeftApplication() {
+
+    }
+
+    @Override
+    public void onRewardedVideoAdFailedToLoad(int i) {
+
+    }
 }
