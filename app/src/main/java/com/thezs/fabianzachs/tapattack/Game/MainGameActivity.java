@@ -31,6 +31,8 @@ package com.thezs.fabianzachs.tapattack.Game;
         import com.thezs.fabianzachs.tapattack.R;
         import com.thezs.fabianzachs.tapattack.helper;
 
+        import org.w3c.dom.Text;
+
 /**
  * Created by fabianzachs on 07/02/18.
  */
@@ -165,7 +167,7 @@ public class MainGameActivity extends Activity {
         streakText.setText("STREAK: " + currentGameStreak);
         */
 
-        TextView scoreText = (TextView) alertView.findViewById(R.id.scoreerwr);
+        TextView scoreText = (TextView) alertView.findViewById(R.id.score_text);
         scoreText.setText("SCORE: " + currentGameScore);
 
         SharedPreferences prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
@@ -307,7 +309,7 @@ public class MainGameActivity extends Activity {
                 final Dialog dialog1 = new Dialog(activity,android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
                 dialog1.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
                 dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog1.setContentView(R.layout.game_over2);
+                dialog1.setContentView(R.layout.game_over3);
 
                 /*
                 TextView gameOverText = (TextView) dialog1.findViewById(R.id.game_over_reason);
@@ -357,7 +359,7 @@ public class MainGameActivity extends Activity {
                         handler.postDelayed(this, 1);
                         if (dim > 150) {
                             handler.removeCallbacks(this);
-                            //setupGameOverFields2(dialog1, gameOverReason, scoreToDisplay, streakToDisplay);
+                            setupGameOverFields2(dialog1, gameOverReason, scoreToDisplay, streakToDisplay);
 
                         }
                     }
@@ -365,7 +367,7 @@ public class MainGameActivity extends Activity {
                 handler.postDelayed(runnable, 0);
 
                 // todo show all info after finished the fade
-                setupGameOverFields2(dialog1, gameOverReason, scoreToDisplay, streakToDisplay);
+                //setupGameOverFields2(dialog1, gameOverReason, scoreToDisplay, streakToDisplay);
 
 
 
@@ -419,7 +421,7 @@ public class MainGameActivity extends Activity {
         streakText.setText("STREAK: " + currentGameStreak);
         */
 
-        TextView scoreText = (TextView) dialog1.findViewById(R.id.scoreerwr);
+        TextView scoreText = (TextView) dialog1.findViewById(R.id.score_text);
         scoreText.setText(String.valueOf(currentGameScore));
 
         SharedPreferences prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
@@ -464,6 +466,11 @@ public class MainGameActivity extends Activity {
 
         bestScoreText.setText("BEST: " + highscoreForSelectedGame);
 
+        ImageView playVidImg = (ImageView) dialog1.findViewById(R.id.double_points_image);
+        playVidImg.setImageResource(R.drawable.playvideobutton);
+        TextView playVidText = (TextView) dialog1.findViewById(R.id.double_points_text);
+        playVidText.setText("DOUBLE POINTS?");
+
         //bestStreakText.setText("BEST STREAK: " + bestStreak);
         TextView pointsEquation = (TextView) dialog1.findViewById(R.id.points_text);
 
@@ -484,6 +491,9 @@ public class MainGameActivity extends Activity {
         prefsEditor.putInt("points", currentPoints + pointsearned);
         prefsEditor.apply();
         //Log.d("endintent", "setupGameOverFields: " + prefs.getInt("points", 0));
+
+        TextView okButtonText = (TextView) dialog1.findViewById(R.id.ok_button);
+        okButtonText.setText("OK");
     }
 
 

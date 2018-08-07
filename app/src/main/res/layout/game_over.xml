@@ -49,7 +49,7 @@ android:background="@drawable/dialog_shape">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/scoreerwr"
+                android:id="@+id/score_text"
                 android:textStyle="bold"
                 android:fontFamily="@font/undinaru"
                 android:layout_centerHorizontal="true"
@@ -68,7 +68,7 @@ android:background="@drawable/dialog_shape">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="BEST SCORE: 100"
-                android:layout_below="@id/scoreerwr"
+                android:layout_below="@id/score_text"
                 android:textSize="25sp"/>
 
 
