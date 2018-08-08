@@ -42,7 +42,7 @@ android:background="@drawable/dialog_shape">
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:onClick="exitClick"
+            android:onClick="pauseExitClick"
             android:padding="5sp"
             android:id="@+id/exit_button"
             android:fontFamily="@font/undinaru"

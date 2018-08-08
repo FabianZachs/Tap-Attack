@@ -474,8 +474,20 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
     // TODO make this pause button size relative to screen size
     public void pauseClick(View view) {
         //com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar.running = false;
-        if (pauseAd.isLoaded())
-            pauseAd.show(); // todo this should be loaded every 3 minutes or so
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (pauseAd.isLoaded()) {
+                    pauseAd.show();
+                }
+            }
+        }, 3000);
+
+
+        //if (pauseAd.isLoaded())
+        //    pauseAd.show(); // todo this should be loaded every 3 minutes or so
 
         long timeOfPauseClick = System.currentTimeMillis();
         gamePanel.endRunningThread();
@@ -531,10 +543,20 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
         gamePanel.endRunningThread();
     }
 
-    public void exitClick(View view) {
+    public void gameOverExitClick(View view) {
         setResult(1);
         finish();
     }
+
+    public void pauseExitClick(View view) {
+        // so user doesnt get aftergame ad right when they had a pause ad
+        //SharedPreferences.Editor prefsEditor = prefs.edit();
+        //prefsEditor.putInt("gamesSinceLastAd", prefs.getInt("gamesSinceLastAd",0) - 1);
+        //prefsEditor.apply();
+        setResult(2);
+        finish();
+    }
+
 
     /*
     public void resumeClick(View view) {
@@ -625,25 +647,25 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
     }
 
     public Dialog getGameOverDialog(Activity activity) {
-        final Dialog dialog = new Dialog(activity,android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
-        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.game_over3);
-        dialog.setCancelable(false);
-        Window window = dialog.getWindow();
+        final Dialog dialog1 = new Dialog(activity,android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+        dialog1.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+        dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog1.setContentView(R.layout.game_over3);
+        dialog1.setCancelable(false);
+        Window window = dialog1.getWindow();
         WindowManager.LayoutParams wlp = window.getAttributes();
 
         wlp.gravity = Gravity.CENTER;
         wlp.flags &= ~WindowManager.LayoutParams.FLAG_BLUR_BEHIND;
         window.setAttributes(wlp);
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        dialog1.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
-        AdView adView = (AdView) dialog.findViewById(R.id.adView);
+        AdView adView = (AdView) dialog1.findViewById(R.id.adView);
         MobileAds.initialize(activity, "ca-app-pub-3940256099942544~3347511713");
         //AdView adView = (AdView) activity.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
-        return dialog;
+        return dialog1;
     }
 
     @Override

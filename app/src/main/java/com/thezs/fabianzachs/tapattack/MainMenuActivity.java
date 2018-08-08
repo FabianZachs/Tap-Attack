@@ -9,17 +9,22 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -99,6 +104,29 @@ public class MainMenuActivity extends  GeneralParent {
     }
 
 
+    public void buttonEffect(/*View button*/){
+        TextView button = (TextView) findViewById(R.id.menu_text);
+
+        button.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        v.getBackground().setColorFilter(0xe0f47521, PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        v.getBackground().clearColorFilter();
+                        v.invalidate();
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +157,8 @@ public class MainMenuActivity extends  GeneralParent {
 */
         //setContentView(R.layout.activity_main_menu);
         setContentView(R.layout.activity_main_menu2);
+
+        //buttonEffect(/*findViewById(R.id.menu_text)*/);
 
         setupGameModeImageAndTextAndHighscore();
 
@@ -432,6 +462,9 @@ public class MainMenuActivity extends  GeneralParent {
     // shows the settings alert dialog
     public void menuClick(View view) {
 
+        //view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_item));
+
+        YoYo.with(Techniques.Pulse).duration(500).repeat(0).playOn(view);
         // play settings click noise
         //playSound(R.raw.opensettings);
 
@@ -590,6 +623,8 @@ public class MainMenuActivity extends  GeneralParent {
 
 
     public void playButtonClick(View view) {
+        //YoYo.with(Techniques.Pulse).duration(500).repeat(0).playOn(view);
+        //view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_item));
         Intent intent = new Intent(this, MainGameActivity.class);
         intent.putExtra("gamemode", "classic");
         //this.startActivity(intent);
@@ -598,33 +633,31 @@ public class MainMenuActivity extends  GeneralParent {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 1){
-            // todo put into seperate function
-            // todo should i reload another banner ad?
+        updatePoints();
+        setupGameModeImageAndTextAndHighscore();
+
+        SharedPreferences.Editor editor = prefs.edit();
+        if(resultCode == 1){
+            Log.d("gamesads", "onActivityResult: game over exit" );
             //Log.d("endintent", Integer.toString(prefs.getInt("points",0)));
             //TextView pointsText = (TextView) findViewById(R.id.points_text);
             //pointsText.setText(Integer.toString(prefs.getInt("points", 0)));
-            //YoYo.with(Techniques.BounceIn).duration(2000).repeat(0).playOn(pointsText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
-            updatePoints();
-            setupGameModeImageAndTextAndHighscore();
-            startIntervalAd();
+            //YoYo.with(Techniques.BounceIn).duration(2000).repeat(0).playOn(pointsText);
+            //updatePoints();
+            //setupGameModeImageAndTextAndHighscore();
+            //startIntervalAd();
+            //int gamesSinceLastAd = prefs.getInt("gamesSinceLastAd",0);
+            //editor.putInt("gamesSinceLastAd", gamesSinceLastAd+1);
+            editor.putInt("gamesSinceLastAd", prefs.getInt("gamesSinceLastAd",0)+1);
+            editor.apply();
         }
 
-
-
-        SharedPreferences.Editor editor = prefs.edit();
-
-        //int gamesSinceLastAd = prefs.getInt("gamesSinceLastAd",0);
-        //editor.putInt("gamesSinceLastAd", gamesSinceLastAd+1);
-        editor.putInt("gamesSinceLastAd", prefs.getInt("gamesSinceLastAd",0)+1);
-        editor.apply();
         Log.d("gamesads", "onActivityResult: " + prefs.getInt("gamesSinceLastAd",0));
         if (prefs.getInt("gamesSinceLastAd",0) > 2 && afterGameAd.isLoaded()) {
             afterGameAd.show();
             editor.putInt("gamesSinceLastAd", 0);
             editor.apply();
             requestNewAfterGameAd();
-
         }
 
         //super.onActivityResult(requestCode, resultCode, data);
@@ -667,8 +700,12 @@ public class MainMenuActivity extends  GeneralParent {
     public void storeClick(View view) {
         // TODO intialize to default theme in startup- breaks if user doesnt click store to set theme
 
+        //view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_item));
         store.storeClicked();
 
+
+
+        //YoYo.with(Techniques.TakingOff).duration(1000).repeat(0).playOn(findViewById(R.id.store_text)); // todo this works for text animation if bestScore/bestStreak >= score do animaton
 
         /*
 
