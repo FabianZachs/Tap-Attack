@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
@@ -188,7 +189,7 @@ public class MainMenuActivity extends  GeneralParent {
     private void startIntervalAd() {
 
         // todo commented out since kind of annoying
-        /*
+/*
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -198,8 +199,9 @@ public class MainMenuActivity extends  GeneralParent {
                     requestNewTimedMenuAd();
                 }
             }
-        }, 20000);
-        */
+        }, 1000);
+
+*/
 
 
 
@@ -573,7 +575,7 @@ public class MainMenuActivity extends  GeneralParent {
     protected void onResume() {
         super.onResume();
         startAnimatingMorePointsImg();
-        requestNewTimedMenuAd();
+        //requestNewTimedMenuAd();
         //Log.d("resumecalled", "onResume: RESUME");
         //repeatMpResume();
     }
@@ -644,6 +646,13 @@ public class MainMenuActivity extends  GeneralParent {
     private void requestNewTimedMenuAd() {
         timedMenuAd = new InterstitialAd(this);
         timedMenuAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        timedMenuAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                timedMenuAd.show();
+            }
+        });
         AdRequest request = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
         timedMenuAd.loadAd(request);
     }

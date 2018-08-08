@@ -37,8 +37,6 @@ package com.thezs.fabianzachs.tapattack.Game;
         import com.thezs.fabianzachs.tapattack.R;
         import com.thezs.fabianzachs.tapattack.helper;
 
-        import org.w3c.dom.Text;
-
 /**
  * Created by fabianzachs on 07/02/18.
  */
@@ -82,7 +80,6 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
         // below works for setting entire screen the view
         // setContentView(new GamePanel(this));
 
-        // todo just for testing
         /*
         SharedPreferences prefs = getSharedPreferences("playerStats", MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = prefs.edit();
@@ -155,29 +152,9 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
 
     }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            this.getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        }
 
-        ImageView warningComponent = (ImageView) findViewById(R.id.warning_component);
-        int[] location = new int[2];
-        warningComponent.getLocationInWindow(location);
-        //Constants.WARNING_COLOR_CLICK_AREA_LEFT = new Rect(location[0] - Constants.SHAPE_WIDTH, 10, location[0] + Constants.SHAPE_WIDTH, Constants.SHAPE_CLICK_AREA.top);
-        //Constants.WARNING_COLOR_CLICK_AREA_LEFT = new Rect(0,30 + (Constants.SCREEN_HEIGHT/40 +25) + 20 + Constants.SCREEN_WIDTH/15 + 10 + Constants.SHAPE_HEIGHT/2,Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT);
-        //Constants.WARNING_COLOR_CLICK_AREA_RIGHT = new Rect(Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH/20,30 + (Constants.SCREEN_HEIGHT/40 +25) + 20 + Constants.SCREEN_WIDTH/15 + 10 + Constants.SHAPE_HEIGHT/2,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-        //Constants.SHAPE_CLICK_AREA = new Rect(Constants.SCREEN_WIDTH/20, 30 + (Constants.SCREEN_HEIGHT/40 +25) + 20 + Constants.SCREEN_WIDTH/15 + 10 + Constants.SHAPE_HEIGHT/2, Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT - 1);
-    }
 
-    public void setupGameOverFields(View alertView, String gameOverReason, int currentGameScore, int currentGameStreak) {
+    public void setupGameOverFieldsOLD(View alertView, String gameOverReason, int currentGameScore, int currentGameStreak) {
 
         TextView gameOverText = (TextView) alertView.findViewById(R.id.game_over_text);
         gameOverText.setText(gameOverReason);
@@ -251,7 +228,7 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
         int currentPoints = prefs.getInt("points", 0);
         prefsEditor.putInt("points", currentPoints + pointsearned);
         prefsEditor.apply();
-        //Log.d("endintent", "setupGameOverFields: " + prefs.getInt("points", 0));
+        //Log.d("endintent", "setupGameOverFieldsOLD: " + prefs.getInt("points", 0));
 
     }
 
@@ -304,7 +281,7 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
                 /*
                 View alertView = helper.getAlertView(activity, R.layout.game_over);
 
-                //setupGameOverFields(alertView, gameOverReason, scoreToDisplay, streakToDisplay);
+                //setupGameOverFieldsOLD(alertView, gameOverReason, scoreToDisplay, streakToDisplay);
 
                 final AlertDialog dialog = helper.getBuiltDialog(activity, alertView);
 
@@ -312,7 +289,6 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
                 //dbuilder.setView(alertView);
                 //final AlertDialog dialog = dbuilder.create();
 
-                dialog.setCancelable(false); // todo add after done testign
 
 
                 //WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
@@ -321,29 +297,15 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
 
                 helper.dialogFullscreen(activity, dialog);
                 */
-                // todo first we want to load the background with ad
-                // todo then progressively dim screen
-                // todo finally show all info
 
 
 
-                final Dialog dialog1 = new Dialog(activity,android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
-                dialog1.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-                dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog1.setContentView(R.layout.game_over3);
 
                 /*
                 TextView gameOverText = (TextView) dialog1.findViewById(R.id.game_over_reason);
                 gameOverText.setGravity(View.TEXT_ALIGNMENT_CENTER);
                 gameOverText.setText(gameOverReason);
 */
-                Window window = dialog1.getWindow();
-                WindowManager.LayoutParams wlp = window.getAttributes();
-
-                wlp.gravity = Gravity.CENTER;
-                wlp.flags &= ~WindowManager.LayoutParams.FLAG_BLUR_BEHIND;
-                window.setAttributes(wlp);
-                dialog1.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
 
                 //WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
@@ -352,23 +314,16 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
                 //dialog1.getWindow().setAttributes(lp);
 
 
-                AdView adView = (AdView) dialog1.findViewById(R.id.adView);
-                MobileAds.initialize(activity, "ca-app-pub-3940256099942544~3347511713");
-                //AdView adView = (AdView) activity.findViewById(R.id.adView);
-                AdRequest adRequest = new AdRequest.Builder().build();
-                adView.loadAd(adRequest);
 
-                final Drawable background = ContextCompat.getDrawable(activity, R.drawable.game_over_dialog_shape);
                 //background.setAlpha(245);
                 //final int[] alphas = {0, 20, 40, 60, 80, 100, 120, 140, 160};
                 //dialog1.getWindow().setBackgroundDrawable(background);
 
-                dialog1.show();
+                final Dialog dialog = getGameOverDialog(activity);
+                dialog.show();
 
 
-
-
-
+                final Drawable background = ContextCompat.getDrawable(activity, R.drawable.game_over_dialog_shape);
                 final Handler handler = new Handler();
                 final Runnable runnable = new Runnable() {
                     int dim = 0;
@@ -376,19 +331,18 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
                     public void run() {
                         background.setAlpha(dim);
                         dim += 4;
-                        dialog1.getWindow().setBackgroundDrawable(background);
+                        dialog.getWindow().setBackgroundDrawable(background);
                         handler.postDelayed(this, 1);
                         if (dim > 100) {
                             handler.removeCallbacks(this);
-                            setupGameOverFields2(dialog1, gameOverReason, scoreToDisplay, streakToDisplay);
+                            setupGameOverFields(dialog, gameOverReason, scoreToDisplay, streakToDisplay);
 
                         }
                     }
                 };
                 handler.postDelayed(runnable, 0);
 
-                // todo show all info after finished the fade
-                //setupGameOverFields2(dialog1, gameOverReason, scoreToDisplay, streakToDisplay);
+                //setupGameOverFields(dialog1, gameOverReason, scoreToDisplay, streakToDisplay);
 
 
 
@@ -420,8 +374,6 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
                 //TextView score = (TextView) alertView.findViewById(R.id.score_text);
                 //YoYo.with(Techniques.Bounce).duration(1000).repeat(3).playOn(score);
 
-                AdView pauseBannerAd;
-                // todo banner ad
                 //bannerAdSetup(alertView);
             }
         });
@@ -431,7 +383,7 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
 
     }
 
-    private void setupGameOverFields2(Dialog dialog1, String gameOverReason, int currentGameScore, int streakToDisplay) {
+    private void setupGameOverFields(Dialog dialog1, String gameOverReason, int currentGameScore, int streakToDisplay) {
         TextView gameOverText = (TextView)  dialog1.findViewById(R.id.game_over_text);
         gameOverText.setText("GAME OVER");
         TextView gameOverReasonText = (TextView) dialog1.findViewById(R.id.game_over_reason);
@@ -512,7 +464,7 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
         int currentPoints = prefs.getInt("points", 0);
         prefsEditor.putInt("points", currentPoints + pointsearned);
         prefsEditor.apply();
-        //Log.d("endintent", "setupGameOverFields: " + prefs.getInt("points", 0));
+        //Log.d("endintent", "setupGameOverFieldsOLD: " + prefs.getInt("points", 0));
 
         TextView okButtonText = (TextView) dialog1.findViewById(R.id.ok_button);
         okButtonText.setText("OK");
@@ -670,5 +622,49 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
     @Override
     public void onRewardedVideoAdFailedToLoad(int i) {
 
+    }
+
+    public Dialog getGameOverDialog(Activity activity) {
+        final Dialog dialog = new Dialog(activity,android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.game_over3);
+        dialog.setCancelable(false);
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+
+        wlp.gravity = Gravity.CENTER;
+        wlp.flags &= ~WindowManager.LayoutParams.FLAG_BLUR_BEHIND;
+        window.setAttributes(wlp);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+
+        AdView adView = (AdView) dialog.findViewById(R.id.adView);
+        MobileAds.initialize(activity, "ca-app-pub-3940256099942544~3347511713");
+        //AdView adView = (AdView) activity.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+        return dialog;
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            this.getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
+
+        ImageView warningComponent = (ImageView) findViewById(R.id.warning_component);
+        int[] location = new int[2];
+        warningComponent.getLocationInWindow(location);
+        //Constants.WARNING_COLOR_CLICK_AREA_LEFT = new Rect(location[0] - Constants.SHAPE_WIDTH, 10, location[0] + Constants.SHAPE_WIDTH, Constants.SHAPE_CLICK_AREA.top);
+        //Constants.WARNING_COLOR_CLICK_AREA_LEFT = new Rect(0,30 + (Constants.SCREEN_HEIGHT/40 +25) + 20 + Constants.SCREEN_WIDTH/15 + 10 + Constants.SHAPE_HEIGHT/2,Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT);
+        //Constants.WARNING_COLOR_CLICK_AREA_RIGHT = new Rect(Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH/20,30 + (Constants.SCREEN_HEIGHT/40 +25) + 20 + Constants.SCREEN_WIDTH/15 + 10 + Constants.SHAPE_HEIGHT/2,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+        //Constants.SHAPE_CLICK_AREA = new Rect(Constants.SCREEN_WIDTH/20, 30 + (Constants.SCREEN_HEIGHT/40 +25) + 20 + Constants.SCREEN_WIDTH/15 + 10 + Constants.SHAPE_HEIGHT/2, Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT - 1);
     }
 }
