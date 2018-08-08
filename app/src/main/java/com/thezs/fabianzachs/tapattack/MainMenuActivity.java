@@ -28,6 +28,8 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
@@ -46,6 +48,7 @@ public class MainMenuActivity extends  GeneralParent {
     private SharedPreferences prefs;
     private AdView mAdView;
     private Store store;
+    private MorePointsMenu morePointsMenu;
     private InterstitialAd afterGameAd;
     private InterstitialAd timedMenuAd;
 
@@ -146,6 +149,7 @@ public class MainMenuActivity extends  GeneralParent {
             }
         });
 
+        this.morePointsMenu = new MorePointsMenu(this, prefs);
 
         // for images in store
         //gameTheme = themesManager.buildTheme("vibrant", "curved");
@@ -182,6 +186,23 @@ public class MainMenuActivity extends  GeneralParent {
     }
 
     private void startIntervalAd() {
+
+        // todo commented out since kind of annoying
+        /*
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (timedMenuAd.isLoaded()) {
+                    timedMenuAd.show();
+                    requestNewTimedMenuAd();
+                }
+            }
+        }, 20000);
+        */
+
+
+
         /*
         Thread timer = new Thread() {
             public void run() {
@@ -228,16 +249,6 @@ public class MainMenuActivity extends  GeneralParent {
             }
         });
 */
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (timedMenuAd.isLoaded()) {
-                    timedMenuAd.show();
-                    requestNewTimedMenuAd();
-                }
-            }
-        }, 10000);
 
         /*
         Runnable runnable = new Runnable() {
@@ -589,9 +600,10 @@ public class MainMenuActivity extends  GeneralParent {
             // todo put into seperate function
             // todo should i reload another banner ad?
             //Log.d("endintent", Integer.toString(prefs.getInt("points",0)));
-            TextView pointsText = (TextView) findViewById(R.id.points_text);
-            pointsText.setText(Integer.toString(prefs.getInt("points", 0)));
-            YoYo.with(Techniques.BounceIn).duration(2000).repeat(0).playOn(pointsText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+            //TextView pointsText = (TextView) findViewById(R.id.points_text);
+            //pointsText.setText(Integer.toString(prefs.getInt("points", 0)));
+            //YoYo.with(Techniques.BounceIn).duration(2000).repeat(0).playOn(pointsText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+            updatePoints();
             setupGameModeImageAndTextAndHighscore();
             startIntervalAd();
         }
@@ -616,12 +628,19 @@ public class MainMenuActivity extends  GeneralParent {
         //super.onActivityResult(requestCode, resultCode, data);
     }
 
+    public void updatePoints() {
+        TextView pointsText = (TextView) findViewById(R.id.points_text);
+        pointsText.setText(Integer.toString(prefs.getInt("points", 0)));
+        YoYo.with(Techniques.BounceIn).duration(2000).repeat(0).playOn(pointsText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+    }
+
     private void requestNewAfterGameAd() {
         afterGameAd = new InterstitialAd(this);
         afterGameAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         AdRequest request = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
         afterGameAd.loadAd(request);
     }
+
     private void requestNewTimedMenuAd() {
         timedMenuAd = new InterstitialAd(this);
         timedMenuAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
@@ -813,7 +832,16 @@ public class MainMenuActivity extends  GeneralParent {
         // todo first option is watch a video to gain z more coins
         // todo offer coin x2 multiplier for $0.99
         // todo yoyo shake the more coins icon every x seconds??
-        StyleableToast.makeText(Constants.CURRENT_CONTEXT, "COIN DIALOG WOULD LAUNCH", R.style.successtoast).show();
+        //StyleableToast.makeText(Constants.CURRENT_CONTEXT, "COIN DIALOG WOULD LAUNCH", R.style.successtoast).show();
+        morePointsMenu.pointsSectionClick();
+    }
+
+    public void extraPointsViaVidClick(View view) {
+        this.morePointsMenu.extraPointsViaVidClick();
+    }
+
+    public void doublePointsPurchaseClick(View view) {
+        this.morePointsMenu.doublePointsPurchaseClick();
     }
     /*
     private void okButtonLockInSetup(final View alertView, final AlertDialog dialog, final View viewWithViewToUpdate) {
