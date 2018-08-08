@@ -186,6 +186,7 @@ public class MainMenuActivity extends  GeneralParent {
     private void startAnimatingMorePointsImg() {
         ImageView morePointsImg = (ImageView) findViewById(R.id.more_points_sign);
         YoYo.with(Techniques.Tada).duration(2000).repeat(100).playOn(morePointsImg); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+        // todo which of Bounce, Swing, Pulse, Flash, Tada
     }
 
     private void setupGameModeImageAndTextAndHighscore() {

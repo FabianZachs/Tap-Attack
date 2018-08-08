@@ -26,6 +26,7 @@ package com.thezs.fabianzachs.tapattack.Game;
         import com.daimajia.androidanimations.library.YoYo;
         import com.google.android.gms.ads.AdRequest;
         import com.google.android.gms.ads.AdView;
+        import com.google.android.gms.ads.InterstitialAd;
         import com.google.android.gms.ads.MobileAds;
         import com.google.android.gms.ads.reward.RewardItem;
         import com.google.android.gms.ads.reward.RewardedVideoAd;
@@ -47,9 +48,10 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
     private GamePanel gamePanel;
     CentralGameCommunication mediator;
     MediaPlayer gameOverMusic;
-    RewardedVideoAd vidAd;
     private int pointsEarned = 0;
     private SharedPreferences prefs;
+    RewardedVideoAd vidAd;
+    InterstitialAd pauseAd;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,6 +94,11 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
         vidAd = MobileAds.getRewardedVideoAdInstance(this);
         vidAd.setRewardedVideoAdListener(this);
         vidAd.loadAd("ca-app-pub-3940256099942544/5224354917", new AdRequest.Builder().build());
+
+        pauseAd = new InterstitialAd(this);
+        pauseAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        AdRequest request = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        pauseAd.loadAd(request);
     }
 
 
@@ -371,7 +378,7 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
                         dim += 4;
                         dialog1.getWindow().setBackgroundDrawable(background);
                         handler.postDelayed(this, 1);
-                        if (dim > 150) {
+                        if (dim > 100) {
                             handler.removeCallbacks(this);
                             setupGameOverFields2(dialog1, gameOverReason, scoreToDisplay, streakToDisplay);
 
@@ -515,6 +522,9 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
     // TODO make this pause button size relative to screen size
     public void pauseClick(View view) {
         //com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar.running = false;
+        if (pauseAd.isLoaded())
+            pauseAd.show();
+
         long timeOfPauseClick = System.currentTimeMillis();
         gamePanel.endRunningThread();
 
