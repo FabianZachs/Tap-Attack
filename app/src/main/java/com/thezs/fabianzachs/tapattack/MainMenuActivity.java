@@ -1,7 +1,6 @@
 package com.thezs.fabianzachs.tapattack;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,30 +8,19 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.Paint;
 import android.graphics.Point;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.shapes.Shape;
-import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Build;
-import android.support.v4.content.ContextCompat;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
@@ -45,15 +33,10 @@ import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.Database.StoreItem;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundManager;
-import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.Backgrounds.GameBackground;
 import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 public class MainMenuActivity extends  GeneralParent {
 
@@ -64,6 +47,7 @@ public class MainMenuActivity extends  GeneralParent {
     private AdView mAdView;
     private Store store;
     private InterstitialAd afterGameAd;
+    private InterstitialAd timedMenuAd;
 
 
 
@@ -193,6 +177,84 @@ public class MainMenuActivity extends  GeneralParent {
         afterGameAd.loadAd(request);
         */
         requestNewAfterGameAd();
+        requestNewTimedMenuAd();
+        startIntervalAd();
+    }
+
+    private void startIntervalAd() {
+        /*
+        Thread timer = new Thread() {
+            public void run() {
+                boolean running = true;
+                while (running) {
+                    try {
+                        // todo show ad, load another ad (image ad not video)
+                        if (timedMenuAd.isLoaded()) {
+                            timedMenuAd.show();
+                            requestNewTimedMenuAd();
+                        }
+
+                        Thread.sleep(8000);
+
+                    } catch (InterruptedException e) {
+                        Log.d("running", "run: error");
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        timer.start();
+        */
+
+
+        /*
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        // todo show ad, load another ad (image ad not video)
+                        if (timedMenuAd.isLoaded()) {
+                            timedMenuAd.show();
+                            requestNewTimedMenuAd();
+                        }
+
+                        Thread.sleep(8000);
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+*/
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (timedMenuAd.isLoaded()) {
+                    timedMenuAd.show();
+                    requestNewTimedMenuAd();
+                }
+            }
+        }, 10000);
+
+        /*
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                // do your stuff - don't create a new runnable here!
+                if (timedMenuAd.isLoaded()) {
+                    timedMenuAd.show();
+                    requestNewTimedMenuAd();
+                }
+                    handler.postDelayed(this, 10000);
+            }
+        };
+        handler.post(runnable);
+        */
+
+
     }
 
     private void startAnimatingMorePointsImg() {
@@ -500,6 +562,7 @@ public class MainMenuActivity extends  GeneralParent {
     protected void onResume() {
         super.onResume();
         startAnimatingMorePointsImg();
+        requestNewTimedMenuAd();
         //Log.d("resumecalled", "onResume: RESUME");
         //repeatMpResume();
     }
@@ -530,6 +593,7 @@ public class MainMenuActivity extends  GeneralParent {
             pointsText.setText(Integer.toString(prefs.getInt("points", 0)));
             YoYo.with(Techniques.BounceIn).duration(2000).repeat(0).playOn(pointsText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
             setupGameModeImageAndTextAndHighscore();
+            startIntervalAd();
         }
 
 
@@ -557,6 +621,12 @@ public class MainMenuActivity extends  GeneralParent {
         afterGameAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         AdRequest request = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
         afterGameAd.loadAd(request);
+    }
+    private void requestNewTimedMenuAd() {
+        timedMenuAd = new InterstitialAd(this);
+        timedMenuAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        AdRequest request = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        timedMenuAd.loadAd(request);
     }
 
     public void storeSetup() {

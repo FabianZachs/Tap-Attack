@@ -523,7 +523,7 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
     public void pauseClick(View view) {
         //com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar.running = false;
         if (pauseAd.isLoaded())
-            pauseAd.show();
+            pauseAd.show(); // todo this should be loaded every 3 minutes or so
 
         long timeOfPauseClick = System.currentTimeMillis();
         gamePanel.endRunningThread();
