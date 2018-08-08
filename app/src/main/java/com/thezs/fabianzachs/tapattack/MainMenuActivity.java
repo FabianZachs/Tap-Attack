@@ -37,7 +37,9 @@ import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
@@ -61,6 +63,7 @@ public class MainMenuActivity extends  GeneralParent {
     private SharedPreferences prefs;
     private AdView mAdView;
     private Store store;
+    private InterstitialAd afterGameAd;
 
 
 
@@ -181,6 +184,15 @@ public class MainMenuActivity extends  GeneralParent {
         //Log.d("database", "stuff "+dbHandler.databaseToString());
 
         startAnimatingMorePointsImg();
+
+
+        /*
+        afterGameAd = new InterstitialAd(this);
+        afterGameAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        AdRequest request = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        afterGameAd.loadAd(request);
+        */
+        requestNewAfterGameAd();
     }
 
     private void startAnimatingMorePointsImg() {
@@ -487,6 +499,7 @@ public class MainMenuActivity extends  GeneralParent {
     @Override
     protected void onResume() {
         super.onResume();
+        startAnimatingMorePointsImg();
         //Log.d("resumecalled", "onResume: RESUME");
         //repeatMpResume();
     }
@@ -518,7 +531,32 @@ public class MainMenuActivity extends  GeneralParent {
             YoYo.with(Techniques.BounceIn).duration(2000).repeat(0).playOn(pointsText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
             setupGameModeImageAndTextAndHighscore();
         }
+
+
+
+        SharedPreferences.Editor editor = prefs.edit();
+
+        //int gamesSinceLastAd = prefs.getInt("gamesSinceLastAd",0);
+        //editor.putInt("gamesSinceLastAd", gamesSinceLastAd+1);
+        editor.putInt("gamesSinceLastAd", prefs.getInt("gamesSinceLastAd",0)+1);
+        editor.apply();
+        Log.d("gamesads", "onActivityResult: " + prefs.getInt("gamesSinceLastAd",0));
+        if (prefs.getInt("gamesSinceLastAd",0) > 2 && afterGameAd.isLoaded()) {
+            afterGameAd.show();
+            editor.putInt("gamesSinceLastAd", 0);
+            editor.apply();
+            requestNewAfterGameAd();
+
+        }
+
         //super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void requestNewAfterGameAd() {
+        afterGameAd = new InterstitialAd(this);
+        afterGameAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        AdRequest request = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        afterGameAd.loadAd(request);
     }
 
     public void storeSetup() {
