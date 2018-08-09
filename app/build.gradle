@@ -16,6 +16,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/storemenu'] } }
 }
 
 dependencies {
@@ -38,6 +39,7 @@ dependencies {
     compile 'com.daimajia.androidanimations:library:2.3@aar'
 
 }
+
 
 
 

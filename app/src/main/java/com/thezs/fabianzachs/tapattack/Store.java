@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -135,6 +136,7 @@ public class Store {
 
 
         final ListView mList = (ListView) alertView.findViewById(R.id.item_list);
+        //final GridView mList = (GridView) alertView.findViewById(R.id.item_grid);
         final CustomListView customListView = new CustomListView(mainMenuActivity, dbHandler,/*unlockedPrefs,*/category , dbHandler.getItemNamesFromCategory(category)/*, IDs*/);
         mList.setAdapter(customListView);
 

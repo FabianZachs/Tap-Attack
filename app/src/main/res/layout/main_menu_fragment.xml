@@ -217,7 +217,6 @@
             android:layout_marginLeft="20sp"
             android:layout_marginStart="20sp"
             android:fontFamily="@font/undinaru"
-            android:onClick="storeClick"
             android:text="@string/store"
             android:textColor="#fefa1b"
             android:textSize="45sp" />
