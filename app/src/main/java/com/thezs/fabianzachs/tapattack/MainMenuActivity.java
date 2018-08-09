@@ -32,7 +32,6 @@ import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.Database.StoreItem;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundManager;
-import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,6 +54,7 @@ public class MainMenuActivity extends  GeneralParent {
 
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
+        adapter.addFragment(new LoadingFragment(), "load");
         adapter.addFragment(new MainMenuFragment(), "mainmenu");
         adapter.addFragment(new StoreFragment(), "store");
         viewPager.setAdapter(adapter);
@@ -863,7 +863,7 @@ public class MainMenuActivity extends  GeneralParent {
     }
 
     public void showload(View view) {
-        Intent intent = new Intent(this, LoadingActivity.class);
+        Intent intent = new Intent(this, LoadingActivityOLD.class);
         intent.putExtra("gamemode", "classic");
         //this.startActivity(intent);
         this.startActivityForResult(intent, 1);

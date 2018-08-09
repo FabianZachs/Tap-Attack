@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 //import android.app.Fragment;
 import android.support.v4.app.Fragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -37,8 +36,6 @@ import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.Database.StoreItem;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundManager;
 import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -185,7 +182,7 @@ public class MainMenuFragment extends Fragment {
         storeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainMenuActivity)getActivity()).setViewPager(1);
+                ((MainMenuActivity)getActivity()).setViewPager(2);
             }
         });
         return view;
@@ -946,7 +943,7 @@ public class MainMenuFragment extends Fragment {
     }
 
     public void showload(View view) {
-        Intent intent = new Intent(getActivity(), LoadingActivity.class);
+        Intent intent = new Intent(getActivity(), LoadingActivityOLD.class);
         intent.putExtra("gamemode", "classic");
         //this.startActivity(intent);
         this.startActivityForResult(intent, 1);

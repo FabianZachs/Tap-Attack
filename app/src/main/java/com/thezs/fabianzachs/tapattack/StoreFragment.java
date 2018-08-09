@@ -24,7 +24,7 @@ public class StoreFragment extends Fragment {
         backView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainMenuActivity)getActivity()).setViewPager(0);
+                ((MainMenuActivity)getActivity()).setViewPager(1);
             }
         });
         return view;
