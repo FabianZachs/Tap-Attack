@@ -618,6 +618,7 @@ public class MainMenuActivity extends  GeneralParent {
         this.startActivityForResult(intent, 1);
     }
 
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         updatePoints();
@@ -649,6 +650,7 @@ public class MainMenuActivity extends  GeneralParent {
 
         //super.onActivityResult(requestCode, resultCode, data);
     }
+    */
 
     public void updatePoints() {
         TextView pointsText = (TextView) findViewById(R.id.points_text);

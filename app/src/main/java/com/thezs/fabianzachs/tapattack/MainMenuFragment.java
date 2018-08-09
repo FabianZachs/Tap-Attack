@@ -61,11 +61,100 @@ public class MainMenuFragment extends Fragment {
     private InterstitialAd timedMenuAd;
 
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        //helper.makeFullscreen(getActivity());
+
+
+        // set up Constants
+        initializeConstants();
+
+        prefs = getActivity().getSharedPreferences("playerInfo", MODE_PRIVATE);
+        //if (!prefs.getBoolean("firstTime", false)) {
+        Log.d("thisran", "onstart: ran");
+        databaseSetup();
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("firstTime", true);
+        editor.apply();
+        //}
+
+        // method instantiation
+        //mediaPlayers = new ArrayList<MediaPlayer>();
+
+        //editor.putString("gamemode","classic");
+
+        /*
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString("background", Constants.BACKGROUNDS[1]);
+        prefsEditor.apply();
+*/
+        //setContentView(R.layout.activity_main_menu);
+        //setContentView(R.layout.main_menu_fragment);
+
+        //buttonEffect(/*findViewById(R.id.menu_text)*/);
+
+        //multiShapesMessaroundDELETE(); //todo erase
+        /* programmatically set background
+        LinearLayout layout = (LinearLayout) findViewById(R.id.parent_layout);
+        layout.setBackground(ContextCompat.getDrawable(this, R.drawable.backgroundtriangleblue));
+        */
+
+
+
+        // for images in store
+        //gameTheme = themesManager.buildTheme("vibrant", "curved");
+        //themesManager.setCurrentGameConstants(themesManager.buildTheme(Constants.CURRENT_THEME,Constants.CURRENT_SHAPE_TYPE));
+
+        //this.backgroundManager = new BackgroundManager(prefs.getString("background","backgroundtriangleblue"));
+
+
+        //initMusic(R.raw.mainmenu);
+
+        /////////////// DATABASE ////////////////
+
+
+
+
+
+
+        //MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+        //dbHandler.deleteStoreItem("neon");
+        //Log.d("database", "stuff "+dbHandler.databaseToString());
+
+
+
+        /*
+        afterGameAd = new InterstitialAd(this);
+        afterGameAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        AdRequest request = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        afterGameAd.loadAd(request);
+        */
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.main_menu_fragment, container, false);
+        final View view = inflater.inflate(R.layout.main_menu_fragment, container, false);
+        setupGameModeImageAndTextAndHighscore(view);
+        setupPointsDisplay(view);
+        //helper.bannerAdSetup(getActivity(), mAdView);
+        this.store = new Store(getActivity(), prefs);
+        store.getMainStoreDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                setupGameModeImageAndTextAndHighscore(view);
+            }
+        });
+
+        this.morePointsMenu = new MorePointsMenu(getActivity(), prefs);
+        startAnimatingMorePointsImg(view);
+        requestNewAfterGameAd();
+        requestNewTimedMenuAd();
+        startIntervalAd();
         TextView storeButton = (TextView) view.findViewById(R.id.store_text);
         storeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,15 +169,16 @@ public class MainMenuFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        helper.makeFullscreen(getActivity());
+        //helper.makeFullscreen(getActivity());
 
 
         // set up Constants
+        /*
         initializeConstants();
 
         prefs = getActivity().getSharedPreferences("playerInfo", MODE_PRIVATE);
         //if (!prefs.getBoolean("firstTime", false)) {
-        Log.d("thisran", "onCreate: ran");
+        Log.d("thisran", "onstart: ran");
         databaseSetup();
 
         SharedPreferences.Editor editor = prefs.edit();
@@ -100,24 +190,19 @@ public class MainMenuFragment extends Fragment {
         //mediaPlayers = new ArrayList<MediaPlayer>();
 
 
-        /*
-        SharedPreferences.Editor prefsEditor = prefs.edit();
-        prefsEditor.putString("background", Constants.BACKGROUNDS[1]);
-        prefsEditor.apply();
-*/
+
+        //SharedPreferences.Editor prefsEditor = prefs.edit();
+        //prefsEditor.putString("background", Constants.BACKGROUNDS[1]);
+        //prefsEditor.apply();
+
         //setContentView(R.layout.activity_main_menu);
         //setContentView(R.layout.main_menu_fragment);
 
-        //buttonEffect(/*findViewById(R.id.menu_text)*/);
 
         setupGameModeImageAndTextAndHighscore();
 
         setupPointsDisplay();
         //multiShapesMessaroundDELETE(); //todo erase
-        /* programmatically set background
-        LinearLayout layout = (LinearLayout) findViewById(R.id.parent_layout);
-        layout.setBackground(ContextCompat.getDrawable(this, R.drawable.backgroundtriangleblue));
-        */
 
         Log.d("adcreation", "onCreate: ad created");
         helper.bannerAdSetup(getActivity(), mAdView);
@@ -155,15 +240,15 @@ public class MainMenuFragment extends Fragment {
         startAnimatingMorePointsImg();
 
 
-        /*
-        afterGameAd = new InterstitialAd(this);
-        afterGameAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-        AdRequest request = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        afterGameAd.loadAd(request);
-        */
+        //afterGameAd = new InterstitialAd(this);
+        //afterGameAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        //AdRequest request = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        //afterGameAd.loadAd(request);
+
         requestNewAfterGameAd();
         requestNewTimedMenuAd();
         startIntervalAd();
+        */
     }
 
     private void startIntervalAd() {
@@ -250,25 +335,25 @@ public class MainMenuFragment extends Fragment {
 
     }
 
-    private void startAnimatingMorePointsImg() {
-        ImageView morePointsImg = (ImageView) getView().findViewById(R.id.more_points_sign);
+    private void startAnimatingMorePointsImg(View view) {
+        ImageView morePointsImg = (ImageView) view.findViewById(R.id.more_points_sign);
         YoYo.with(Techniques.Tada).duration(2000).repeat(100).playOn(morePointsImg); // todo this works for text animation if bestScore/bestStreak >= score do animaton
         // todo which of Bounce, Swing, Pulse, Flash, Tada
     }
 
-    private void setupGameModeImageAndTextAndHighscore() {
+    private void setupGameModeImageAndTextAndHighscore(View view) {
         MyDBHandler myDBHandler = new MyDBHandler(Constants.CURRENT_CONTEXT, null, null, 1);
 
-        ImageView gamemodeImg = (ImageView) getView().findViewById(R.id.play_button);
+        ImageView gamemodeImg = (ImageView) view.findViewById(R.id.play_button);
         gamemodeImg.setImageResource(helper.getResourceId(Constants.CURRENT_CONTEXT, myDBHandler.getCurrentGamemodeFile()));
 
-        TextView gamemodeText = (TextView) getView().findViewById(R.id.gamemode_title);
+        TextView gamemodeText = (TextView) view.findViewById(R.id.gamemode_title);
         gamemodeText.setText(prefs.getString("gamemode", Constants.GAMEMODES[0]).toUpperCase());
 
 
         String selectedGameMode = prefs.getString("gamemode", Constants.GAMEMODES[0]);
         if (!selectedGameMode.equals(Constants.GAMEMODES[0])) {
-            TextView highscoreText = (TextView) getView().findViewById(R.id.highscore_text);
+            TextView highscoreText = (TextView) view.findViewById(R.id.highscore_text);
             int highscoreForSelectedGame = prefs.getInt(selectedGameMode+"highscore", 0);
             //highscoreText.setText(prefs.getInt(selectedGameMode + "highscore"));
             //highscoreText.setText(prefs.getInt(prefs.getString("gamemode", Constants.GAMEMODES[0]) + "highscore", 0));
@@ -349,8 +434,8 @@ public class MainMenuFragment extends Fragment {
         }
     }
 
-    private void setupPointsDisplay() {
-        TextView pointsText = (TextView) getView().findViewById(R.id.points_text);
+    private void setupPointsDisplay(View view) {
+        TextView pointsText = (TextView) view.findViewById(R.id.points_text);
         pointsText.setText(Integer.toString(prefs.getInt("points", 0)));
     }
 
@@ -557,7 +642,7 @@ public class MainMenuFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        startAnimatingMorePointsImg();
+        //startAnimatingMorePointsImg();
         //requestNewTimedMenuAd();
         //Log.d("resumecalled", "onResume: RESUME");
         //repeatMpResume();
@@ -568,6 +653,7 @@ public class MainMenuFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+        //requestNewTimedMenuAd();
         //repeatMpStop();
     }
 
@@ -584,7 +670,7 @@ public class MainMenuFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         updatePoints();
-        setupGameModeImageAndTextAndHighscore();
+        setupGameModeImageAndTextAndHighscore(getView());
 
         SharedPreferences.Editor editor = prefs.edit();
         if(resultCode == 1){
