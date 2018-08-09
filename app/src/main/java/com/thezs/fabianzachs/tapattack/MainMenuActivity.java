@@ -447,6 +447,7 @@ public class MainMenuActivity extends  GeneralParent {
 
 
     // shows the settings alert dialog
+    /*
     public void menuClick(View view) {
 
         //view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_item));
@@ -470,6 +471,7 @@ public class MainMenuActivity extends  GeneralParent {
 
         dialogFullscreen(dialog);
     }
+    */
 
     public void dialogFullscreen(AlertDialog dialog) {
 

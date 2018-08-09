@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
@@ -81,6 +82,8 @@ public class MainMenuFragment extends Fragment {
         editor.apply();
         //}
 
+        this.store = new Store(getActivity(), prefs);
+        this.morePointsMenu = new MorePointsMenu(getActivity(), prefs);
         // method instantiation
         //mediaPlayers = new ArrayList<MediaPlayer>();
 
@@ -142,15 +145,30 @@ public class MainMenuFragment extends Fragment {
         setupGameModeImageAndTextAndHighscore(view);
         setupPointsDisplay(view);
         //helper.bannerAdSetup(getActivity(), mAdView);
-        this.store = new Store(getActivity(), prefs);
+        /*
         store.getMainStoreDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
                 setupGameModeImageAndTextAndHighscore(view);
             }
         });
+        */
+        TextView menuButton = (TextView) view.findViewById(R.id.menu_text);
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menuClick(view);
+            }
+        });
 
-        this.morePointsMenu = new MorePointsMenu(getActivity(), prefs);
+        RelativeLayout morePointsButton = (RelativeLayout) view.findViewById(R.id.more_points_section);
+        morePointsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pointsSectionClick(view);
+            }
+        });
+
         startAnimatingMorePointsImg(view);
         requestNewAfterGameAd();
         requestNewTimedMenuAd();

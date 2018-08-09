@@ -50,7 +50,7 @@
 
 
             <RelativeLayout
-                android:onClick="pointsSectionClick"
+                android:id="@+id/more_points_section"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -231,7 +231,6 @@
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:fontFamily="@font/undinaru"
-            android:onClick="menuClick"
             android:soundEffectsEnabled="false"
             android:text="@string/menu"
             android:textColor="#374a4a"

@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.ImageView;
@@ -46,6 +47,10 @@ public class MorePointsMenu implements RewardedVideoAdListener {
             ImageView lock = (ImageView) morePointsSectionAlertView.findViewById(R.id.locked_image);
             lock.setImageResource(android.R.color.transparent);
         }
+    }
+
+    public Dialog getMainMorePointsDialog() {
+        return morePointsSectionDialog;
     }
 
     public void pointsSectionClick() {
