@@ -169,6 +169,14 @@ public class MainMenuFragment extends Fragment {
             }
         });
 
+        ImageView playButton = (ImageView) view.findViewById(R.id.play_button);
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playButtonClick(view);
+            }
+        });
+
         startAnimatingMorePointsImg(view);
         requestNewAfterGameAd();
         requestNewTimedMenuAd();
@@ -689,6 +697,7 @@ public class MainMenuFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         updatePoints();
         setupGameModeImageAndTextAndHighscore(getView());
+        Log.d("gamesads", "onActivityResult: game over exit" );
 
         SharedPreferences.Editor editor = prefs.edit();
         if(resultCode == 1){

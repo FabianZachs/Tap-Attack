@@ -611,6 +611,7 @@ public class MainMenuActivity extends  GeneralParent {
     }
 
 
+    /*
     public void playButtonClick(View view) {
         //YoYo.with(Techniques.Pulse).duration(500).repeat(0).playOn(view);
         //view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_item));
@@ -619,6 +620,7 @@ public class MainMenuActivity extends  GeneralParent {
         //this.startActivity(intent);
         this.startActivityForResult(intent, 1);
     }
+    */
 
     /*
     @Override

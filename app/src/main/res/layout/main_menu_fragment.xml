@@ -154,7 +154,6 @@
             android:layout_height="125dp"
             android:layout_alignBottom="@+id/anchor"
             android:layout_centerHorizontal="true"
-            android:onClick="playButtonClick"
             android:soundEffectsEnabled="false"
             android:src="@drawable/startbluebluered" />
         <!--
