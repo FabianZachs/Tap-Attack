@@ -6,10 +6,15 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.android.gms.ads.AdView;
@@ -41,6 +46,39 @@ public class StoreFragment extends Fragment {
         });
 
         setupItemsSection(view);
+
+
+        final Button randomUnlock = (Button) view.findViewById(R.id.random_unlock_text);
+        randomUnlock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_down);
+                //randomUnlock.startAnimation(myAnim);
+            }
+        });
+
+        randomUnlock.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Log.d("motionaction", "onTouch: "+motionEvent.toString());
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN ) {
+                    final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_down);
+                    randomUnlock.startAnimation(myAnim);
+                    myAnim.setFillAfter(true);
+
+                    return true;
+                }
+                else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up);
+                    randomUnlock.startAnimation(myAnim);
+                    myAnim.setFillAfter(true);
+                }
+                return false;
+            }
+        });
+
+
+
         return view;
     }
 
@@ -66,7 +104,6 @@ public class StoreFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        helper.bannerAdSetup(getActivity(), mAdView);
 
 
     }

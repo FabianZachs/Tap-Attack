@@ -43,13 +43,8 @@ public class GamemodeSectionFragment extends Fragment {
 
     public void setupItemGrid(View view) {
         GridView grid = (GridView) view.findViewById(R.id.gridview);
-        CustomAdapter myAdapter = new CustomAdapter( getActivity().getApplicationContext(), dbHandler, testLabels);
+        CustomAdapter myAdapter = new CustomAdapter( getActivity().getApplicationContext(), dbHandler, "game mode");
         grid.setAdapter(myAdapter);
-
-
-
-
     }
 
-    private String[] testLabels = {"A","B","C","D"};
 }
