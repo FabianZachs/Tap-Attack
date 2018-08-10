@@ -48,6 +48,58 @@ public class StoreFragment extends Fragment {
 
         final ImageView backView = (ImageView) view.findViewById(R.id.store_back_image);
 
+
+        backView.setOnTouchListener(new View.OnTouchListener() {
+            boolean lostFocus = false;
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_down);
+                    backView.startAnimation(myAnim);
+                    myAnim.setFillAfter(true);
+                    return true;
+                }
+
+                else if (touchAwayFromView(motionEvent, backView) && !lostFocus) {
+                    Log.d("GESTURES", "onTouch: off view");
+                    final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up);
+                    backView.startAnimation(myAnim);
+                    myAnim.setFillAfter(true);
+                    lostFocus = true;
+                    return true;
+
+                }
+                else if (!touchAwayFromView(motionEvent, backView) && lostFocus) {
+                    final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_down);
+                    backView.startAnimation(myAnim);
+                    myAnim.setFillAfter(true);
+                    lostFocus = false;
+                    return true;
+
+                }
+                else if (motionEvent.getAction() == MotionEvent.ACTION_UP && !lostFocus) {
+                    final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up);
+                    backView.startAnimation(myAnim);
+                    myAnim.setFillAfter(true);
+                    ((MainMenuActivity)getActivity()).setViewPager(1);
+                    return true;
+
+                }
+                else if (motionEvent.getAction() == MotionEvent.ACTION_UP && lostFocus) {
+                    lostFocus = false;
+                    return true;
+                }
+
+
+
+                return false;
+            }
+        });
+
+
+
+        /*
         backView.setOnTouchListener(new View.OnTouchListener() {
             boolean lostFocus = false;
             @Override
@@ -60,7 +112,7 @@ public class StoreFragment extends Fragment {
                         final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up);
                         backView.startAnimation(myAnim);
                         myAnim.setFillAfter(true);
-                        ((MainMenuActivity)getActivity()).setViewPager(1);
+                        //((MainMenuActivity)getActivity()).setViewPager(1);
                     }
                     lostFocus = false;
                     return true;
@@ -98,9 +150,10 @@ public class StoreFragment extends Fragment {
                 return false;
             }
         });
+        */
 
-
-        /*backView.setOnClickListener(new View.OnClickListener() {
+        /*
+        backView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((MainMenuActivity)getActivity()).setViewPager(1);
@@ -152,6 +205,13 @@ public class StoreFragment extends Fragment {
 
 
         return view;
+    }
+
+    private boolean touchAwayFromView(MotionEvent motionEvent, ImageView backView) {
+        Log.d("GESTURES", "touchAwayFromView: " + (motionEvent.getX() < backView.getLeft() || backView.getRight() <motionEvent.getX()
+                || motionEvent.getY() < backView.getTop() || backView.getBottom() < motionEvent.getY()));
+        return (motionEvent.getX() < backView.getLeft() || backView.getRight() <motionEvent.getX()
+                || motionEvent.getY() < backView.getTop() || backView.getBottom() < motionEvent.getY());
     }
 
     public void setViewPager(int fragmentNumber) {
