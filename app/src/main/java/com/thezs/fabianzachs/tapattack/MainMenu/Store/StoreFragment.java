@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.android.gms.ads.AdView;
+import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
 import com.thezs.fabianzachs.tapattack.MainMenu.CustomViewPager;
 import com.thezs.fabianzachs.tapattack.MainMenu.MainMenuActivity;
 import com.thezs.fabianzachs.tapattack.MainMenu.SectionsPageAdapter;
@@ -47,138 +48,14 @@ public class StoreFragment extends Fragment {
 
 
         final ImageView backView = (ImageView) view.findViewById(R.id.store_back_image);
-
-
-        backView.setOnTouchListener(new View.OnTouchListener() {
-            boolean lostFocus = false;
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_down);
-                    backView.startAnimation(myAnim);
-                    myAnim.setFillAfter(true);
-                    return true;
-                }
-
-                else if (touchAwayFromView(motionEvent, backView) && !lostFocus) {
-                    Log.d("GESTURES", "onTouch: off view");
-                    final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up);
-                    backView.startAnimation(myAnim);
-                    myAnim.setFillAfter(true);
-                    lostFocus = true;
-                    return true;
-
-                }
-                else if (!touchAwayFromView(motionEvent, backView) && lostFocus) {
-                    final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_down);
-                    backView.startAnimation(myAnim);
-                    myAnim.setFillAfter(true);
-                    lostFocus = false;
-                    return true;
-
-                }
-                else if (motionEvent.getAction() == MotionEvent.ACTION_UP && !lostFocus) {
-                    final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up);
-                    backView.startAnimation(myAnim);
-                    myAnim.setFillAfter(true);
-                    ((MainMenuActivity)getActivity()).setViewPager(1);
-                    return true;
-
-                }
-                else if (motionEvent.getAction() == MotionEvent.ACTION_UP && lostFocus) {
-                    lostFocus = false;
-                    return true;
-                }
-
-
-
-                return false;
-            }
-        });
-
-
-
-        /*
-        backView.setOnTouchListener(new View.OnTouchListener() {
-            boolean lostFocus = false;
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                Log.d("eventdebug", "onTouch: " + motionEvent.toString());
-                Log.d("eventdebug3", "onTouch: " + lostFocus);
-                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    Log.d("eventdebug3", "onTouch: C");
-                    if (!lostFocus) {
-                        final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up);
-                        backView.startAnimation(myAnim);
-                        myAnim.setFillAfter(true);
-                        //((MainMenuActivity)getActivity()).setViewPager(1);
-                    }
-                    lostFocus = false;
-                    return true;
-                }
-                if (lostFocus && (motionEvent.getX() > backView.getLeft() || backView.getRight() > motionEvent.getX() || motionEvent.getY() > backView.getTop() || backView.getBottom() > motionEvent.getY())) {
-                    lostFocus = false;
-                    final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_down);
-                    backView.startAnimation(myAnim);
-                    myAnim.setFillAfter(true);
-                    return true;
-                }
-                if (lostFocus) {
-                    Log.d("eventdebug1", "onTouch: D");
-                    return true;
-                }
-
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN ) {
-                    final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_down);
-                    backView.startAnimation(myAnim);
-                    myAnim.setFillAfter(true);
-                    Log.d("eventdebug3", "onTouch: A");
-
-                    return true;
-                }
-                if (motionEvent.getX() < backView.getLeft() || backView.getRight() <motionEvent.getX() || motionEvent.getY() < backView.getTop() || backView.getBottom() < motionEvent.getY()) {
-                    lostFocus = true;
-                    final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up);
-                    backView.startAnimation(myAnim);
-                    myAnim.setFillAfter(true);
-                    Log.d("eventdebug3", "onTouch: B");
-                    Log.d("eventdebug3", "onTouch: B : " +motionEvent.getX());
-                    return true;
-                }
-
-                return false;
-            }
-        });
-        */
-
-        /*
-        backView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((MainMenuActivity)getActivity()).setViewPager(1);
-            }
-        });
-        */
-        //helper.setupButtonAnimation(getActivity(), view, backView);
-
-
-
-
+        backView.setOnTouchListener(new ButtonOnTouchListener(getActivity(),backView, "storeToMenu"));
 
 
         setupItemsSection(view);
 
 
         final Button randomUnlock = (Button) view.findViewById(R.id.random_unlock_text);
-        randomUnlock.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_down);
-                //randomUnlock.startAnimation(myAnim);
-            }
-        });
-        helper.setupButtonAnimation(getActivity(), view, randomUnlock);
+        randomUnlock.setOnTouchListener(new ButtonOnTouchListener(getActivity(), randomUnlock, "randomUnlock"));
 
         /*
         randomUnlock.setOnTouchListener(new View.OnTouchListener() {
