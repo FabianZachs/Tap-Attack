@@ -109,7 +109,7 @@ public class helper {
     }
 
     // https://stackoverflow.com/questions/47107105/android-button-has-setontouchlistener-called-on-it-but-does-not-override-perform
-    public static void setupButtonAnimation(final Activity activity, final View view, final Button button) {
+    public static void setupButtonAnimation(final Activity activity, final View view, final View button) {
 
         button.setOnTouchListener(new View.OnTouchListener() {
             @Override

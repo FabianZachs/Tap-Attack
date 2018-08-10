@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.view.ViewPager
+    <com.thezs.fabianzachs.tapattack.CustomViewPager
         android:layout_weight="1"
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="0sp">
 
-    </android.support.v4.view.ViewPager>
+    </com.thezs.fabianzachs.tapattack.CustomViewPager>
     <!--
     <fragment
         android:name="com.thezs.fabianzachs.tapattack.MainMenuFragment"

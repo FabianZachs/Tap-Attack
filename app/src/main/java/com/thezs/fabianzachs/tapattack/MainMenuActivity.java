@@ -50,7 +50,7 @@ public class MainMenuActivity extends  GeneralParent {
 
     private static final String TAG = "MainActivity";
     private SectionsPageAdapter sectionsPageAdapter;
-    private ViewPager viewPager;
+    private CustomViewPager viewPager;
 
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
@@ -72,7 +72,7 @@ public class MainMenuActivity extends  GeneralParent {
         setContentView(R.layout.main_menu4);
 
         sectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
-        viewPager = (ViewPager) findViewById(R.id.container);
+        viewPager = (CustomViewPager) findViewById(R.id.container);
         setupViewPager(viewPager);
         /*
         helper.makeFullscreen(this);

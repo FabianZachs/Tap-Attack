@@ -27,7 +27,7 @@ public class StoreFragment extends Fragment {
 
     private AdView mAdView;
     private SectionsPageAdapter sectionsPageAdapter;
-    private ViewPager viewPager;
+    private CustomViewPager viewPager;
 
 
 
@@ -44,6 +44,7 @@ public class StoreFragment extends Fragment {
                 ((MainMenuActivity)getActivity()).setViewPager(1);
             }
         });
+        //helper.setupButtonAnimation(getActivity(), view, backView);
 
         setupItemsSection(view);
 
@@ -91,7 +92,7 @@ public class StoreFragment extends Fragment {
 
     private void setupItemsSection(View view) {
         sectionsPageAdapter = new SectionsPageAdapter(getActivity().getSupportFragmentManager());
-        viewPager = (ViewPager) view.findViewById(R.id.store_container);
+        viewPager = (CustomViewPager) view.findViewById(R.id.store_container);
         setupViewPager(viewPager);
     }
 
