@@ -56,7 +56,9 @@ public class StoreFragment extends Fragment {
                 //randomUnlock.startAnimation(myAnim);
             }
         });
+        helper.setupButtonAnimation(getActivity(), view, randomUnlock);
 
+        /*
         randomUnlock.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -76,6 +78,7 @@ public class StoreFragment extends Fragment {
                 return false;
             }
         });
+        */
 
 
 

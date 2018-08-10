@@ -5,8 +5,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -101,5 +106,29 @@ public class helper {
         }
 
         return -1;
+    }
+
+    // https://stackoverflow.com/questions/47107105/android-button-has-setontouchlistener-called-on-it-but-does-not-override-perform
+    public static void setupButtonAnimation(final Activity activity, final View view, final Button button) {
+
+        button.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN ) {
+                    final Animation myAnim = AnimationUtils.loadAnimation(activity, R.anim.scale_down);
+                    button.startAnimation(myAnim);
+                    myAnim.setFillAfter(true);
+
+                    return true;
+                }
+                else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    final Animation myAnim = AnimationUtils.loadAnimation(activity, R.anim.scale_up);
+                    button.startAnimation(myAnim);
+                    myAnim.setFillAfter(true);
+                }
+                return false;
+            }
+        });
+
     }
 }
