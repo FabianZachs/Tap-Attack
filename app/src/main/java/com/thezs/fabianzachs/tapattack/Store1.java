@@ -26,7 +26,7 @@ import java.util.Random;
  * Created by fabianzachs on 05/06/18.
  */
 
-public class Store {
+public class Store1 {
 
     private SharedPreferences prefs;
     Activity mainMenuActivity;
@@ -54,7 +54,7 @@ public class Store {
     final private AlertDialog warningColorStreakSectionDialog;
 
     // todo instead of creating dialog on click of store section, create them in start of game
-    public Store(Activity mainMenuActivity, SharedPreferences prefs) {
+    public Store1(Activity mainMenuActivity, SharedPreferences prefs) {
 
         this.prefs = prefs;
         this.mainMenuActivity = mainMenuActivity;
@@ -109,7 +109,7 @@ public class Store {
         //AlertDialog.Builder mainStoredbuilder = new AlertDialog.Builder(mainMenuActivity);
         //mainStoredbuilder.setView(mainStoreAlertView);
       //  this.mainStoreDialog = mainStoredbuilder.create();
-        //this.store = new Store(mainStoreAlertView, mainStoreDialog, this);
+        //this.store = new Store1(mainStoreAlertView, mainStoreDialog, this);
     }
 
     public Dialog getMainStoreDialog() {

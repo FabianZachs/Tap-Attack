@@ -53,7 +53,7 @@ public class MainMenuFragment extends Fragment {
     private BackgroundManager backgroundManager;
     private SharedPreferences prefs;
     private AdView mAdView;
-    private Store store;
+    private Store1 store;
     private MorePointsMenu morePointsMenu;
     private InterstitialAd afterGameAd;
     private InterstitialAd timedMenuAd;
@@ -79,7 +79,7 @@ public class MainMenuFragment extends Fragment {
         editor.apply();
         //}
 
-        this.store = new Store(getActivity(), prefs);
+        //this.store = new Store1(getActivity(), prefs);
         this.morePointsMenu = new MorePointsMenu(getActivity(), prefs);
         // method instantiation
         //mediaPlayers = new ArrayList<MediaPlayer>();
@@ -176,7 +176,7 @@ public class MainMenuFragment extends Fragment {
 
         startAnimatingMorePointsImg(view);
         requestNewAfterGameAd();
-        requestNewTimedMenuAd();
+        //requestNewTimedMenuAd();
         startIntervalAd();
         TextView storeButton = (TextView) view.findViewById(R.id.store_text);
         storeButton.setOnClickListener(new View.OnClickListener() {
@@ -230,7 +230,7 @@ public class MainMenuFragment extends Fragment {
         Log.d("adcreation", "onCreate: ad created");
         helper.bannerAdSetup(getActivity(), mAdView);
 
-        this.store = new Store(getActivity(), prefs);
+        this.store = new Store1(getActivity(), prefs);
         store.getMainStoreDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
@@ -752,7 +752,7 @@ public class MainMenuFragment extends Fragment {
 
     public void storeSetup() {
 
-        //this.store = new Store(this);
+        //this.store = new Store1(this);
     }
 
 

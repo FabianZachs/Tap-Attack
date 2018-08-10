@@ -9,10 +9,31 @@
     android:layout_height="match_parent"
     tools:context="com.thezs.fabianzachs.tapattack.StoreFragment">
 
-    <View
-        android:id="@+id/go_back"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="400sp"/>
+        android:layout_height="0sp"
+        android:layout_weight="2">
+
+        <ImageView
+            android:id="@+id/store_back_image"
+            android:layout_margin="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX=".5"
+            android:scaleY=".5"
+            android:src="@drawable/storebackbutton"/>
+
+
+
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:layout_weight="3"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:id="@+id/store_container">
+
+    </android.support.v4.view.ViewPager>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,7 +46,9 @@
             android:layout_height="50sp"
             app:itemIconTint="#ffffff"
             app:itemTextColor="#ffffff"
-            app:menu="@menu/bottom_navigation_menu"></android.support.design.widget.BottomNavigationView>
+            app:menu="@menu/bottom_navigation_menu">
+
+        </android.support.design.widget.BottomNavigationView>
 
 
     </RelativeLayout>
@@ -36,6 +59,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"></com.google.android.gms.ads.AdView>
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+
+    </com.google.android.gms.ads.AdView>
 
 </LinearLayout>

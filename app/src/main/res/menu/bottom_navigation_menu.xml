@@ -2,19 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/gamemode"
+        android:id="@+id/ic_gamemode"
         android:icon="@drawable/gamemodeicon"
         android:title="Gamemode"/>
     <item
-        android:id="@+id/shape_type"
+        android:id="@+id/ic_shape_type"
         android:icon="@drawable/shapetypeicon"
         android:title="Type"/>
     <item
-        android:id="@+id/theme"
+        android:id="@+id/ic_theme"
         android:icon="@drawable/shapethemeicon"
         android:title="Theme"/>
     <item
-        android:id="@+id/background"
+        android:id="@+id/ic_background"
         android:icon="@drawable/backgroundicon"
         android:title="Background"/>
 

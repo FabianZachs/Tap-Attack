@@ -43,7 +43,7 @@ public class MainMenuActivity extends  GeneralParent {
     private BackgroundManager backgroundManager;
     private SharedPreferences prefs;
     private AdView mAdView;
-    private Store store;
+    private Store1 store;
     private MorePointsMenu morePointsMenu;
     private InterstitialAd afterGameAd;
     private InterstitialAd timedMenuAd;
@@ -113,7 +113,7 @@ public class MainMenuActivity extends  GeneralParent {
         Log.d("adcreation", "onCreate: ad created");
         helper.bannerAdSetup(this, mAdView);
 
-        this.store = new Store(this, prefs);
+        this.store = new Store1(this, prefs);
         store.getMainStoreDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
@@ -685,7 +685,7 @@ public class MainMenuActivity extends  GeneralParent {
 
     public void storeSetup() {
 
-        //this.store = new Store(this);
+        //this.store = new Store1(this);
     }
 
 
