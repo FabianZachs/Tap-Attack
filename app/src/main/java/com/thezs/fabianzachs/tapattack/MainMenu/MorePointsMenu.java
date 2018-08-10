@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack;
+package com.thezs.fabianzachs.tapattack.MainMenu;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -8,12 +8,15 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
+import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.MainMenu.MainMenuActivity;
+import com.thezs.fabianzachs.tapattack.R;
+import com.thezs.fabianzachs.tapattack.helper;
 
 /**
  * Created by fabianzachs on 08/08/18.

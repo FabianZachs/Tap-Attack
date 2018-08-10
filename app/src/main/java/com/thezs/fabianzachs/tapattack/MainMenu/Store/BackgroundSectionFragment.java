@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack.Store;
+package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,9 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.TextView;
 
-import com.thezs.fabianzachs.tapattack.CustomAdapter;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.R;
 
@@ -17,9 +15,10 @@ import com.thezs.fabianzachs.tapattack.R;
  * Created by fabianzachs on 10/08/18.
  */
 
-public class ShapeThemeSectionFragment extends Fragment {
+public class BackgroundSectionFragment extends Fragment {
 
     private MyDBHandler dbHandler; // todo maybe instantiate once and pass to all store item fragments
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class ShapeThemeSectionFragment extends Fragment {
 
     public void setupItemGrid(View view) {
         GridView grid = (GridView) view.findViewById(R.id.gridview);
-        CustomAdapter myAdapter = new CustomAdapter( getActivity().getApplicationContext(), dbHandler, "shape theme");
+        CustomAdapter myAdapter = new CustomAdapter( getActivity().getApplicationContext(), dbHandler, "background");
         grid.setAdapter(myAdapter);
     }
 }

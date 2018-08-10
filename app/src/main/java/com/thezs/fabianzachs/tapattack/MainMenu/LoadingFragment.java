@@ -1,13 +1,14 @@
-package com.thezs.fabianzachs.tapattack;
+package com.thezs.fabianzachs.tapattack.MainMenu;
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.thezs.fabianzachs.tapattack.R;
 
 /**
  * Created by fabianzachs on 09/08/18.

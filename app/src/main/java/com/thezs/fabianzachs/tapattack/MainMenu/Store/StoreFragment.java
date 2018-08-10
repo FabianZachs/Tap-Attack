@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack;
+package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -18,10 +18,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.android.gms.ads.AdView;
-import com.thezs.fabianzachs.tapattack.Store.BackgroundSectionFragment;
-import com.thezs.fabianzachs.tapattack.Store.GamemodeSectionFragment;
-import com.thezs.fabianzachs.tapattack.Store.ShapeThemeSectionFragment;
-import com.thezs.fabianzachs.tapattack.Store.ShapeTypeSectionFragment;
+import com.thezs.fabianzachs.tapattack.MainMenu.CustomViewPager;
+import com.thezs.fabianzachs.tapattack.MainMenu.MainMenuActivity;
+import com.thezs.fabianzachs.tapattack.MainMenu.SectionsPageAdapter;
+import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomNavigationViewHelper;
+import com.thezs.fabianzachs.tapattack.R;
+import com.thezs.fabianzachs.tapattack.MainMenu.Store.BackgroundSectionFragment;
+import com.thezs.fabianzachs.tapattack.MainMenu.Store.GamemodeSectionFragment;
+import com.thezs.fabianzachs.tapattack.MainMenu.Store.ShapeThemeSectionFragment;
+import com.thezs.fabianzachs.tapattack.MainMenu.Store.ShapeTypeSectionFragment;
+import com.thezs.fabianzachs.tapattack.helper;
 
 public class StoreFragment extends Fragment {
 
@@ -37,14 +43,76 @@ public class StoreFragment extends Fragment {
         //return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.store_fragment, container, false);
         setupBottomNavigation(view);
-        ImageView backView = (ImageView) view.findViewById(R.id.store_back_image);
-        backView.setOnClickListener(new View.OnClickListener() {
+
+
+
+        final ImageView backView = (ImageView) view.findViewById(R.id.store_back_image);
+
+        backView.setOnTouchListener(new View.OnTouchListener() {
+            boolean lostFocus = false;
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Log.d("eventdebug", "onTouch: " + motionEvent.toString());
+                Log.d("eventdebug3", "onTouch: " + lostFocus);
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    Log.d("eventdebug3", "onTouch: C");
+                    if (!lostFocus) {
+                        final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up);
+                        backView.startAnimation(myAnim);
+                        myAnim.setFillAfter(true);
+                        ((MainMenuActivity)getActivity()).setViewPager(1);
+                    }
+                    lostFocus = false;
+                    return true;
+                }
+                if (lostFocus && (motionEvent.getX() > backView.getLeft() || backView.getRight() > motionEvent.getX() || motionEvent.getY() > backView.getTop() || backView.getBottom() > motionEvent.getY())) {
+                    lostFocus = false;
+                    final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_down);
+                    backView.startAnimation(myAnim);
+                    myAnim.setFillAfter(true);
+                    return true;
+                }
+                if (lostFocus) {
+                    Log.d("eventdebug1", "onTouch: D");
+                    return true;
+                }
+
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN ) {
+                    final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_down);
+                    backView.startAnimation(myAnim);
+                    myAnim.setFillAfter(true);
+                    Log.d("eventdebug3", "onTouch: A");
+
+                    return true;
+                }
+                if (motionEvent.getX() < backView.getLeft() || backView.getRight() <motionEvent.getX() || motionEvent.getY() < backView.getTop() || backView.getBottom() < motionEvent.getY()) {
+                    lostFocus = true;
+                    final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up);
+                    backView.startAnimation(myAnim);
+                    myAnim.setFillAfter(true);
+                    Log.d("eventdebug3", "onTouch: B");
+                    Log.d("eventdebug3", "onTouch: B : " +motionEvent.getX());
+                    return true;
+                }
+
+                return false;
+            }
+        });
+
+
+        /*backView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((MainMenuActivity)getActivity()).setViewPager(1);
             }
         });
+        */
         //helper.setupButtonAnimation(getActivity(), view, backView);
+
+
+
+
+
 
         setupItemsSection(view);
 

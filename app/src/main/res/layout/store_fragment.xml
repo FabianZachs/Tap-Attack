@@ -7,7 +7,7 @@
     android:gravity="bottom"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.thezs.fabianzachs.tapattack.StoreFragment">
+    tools:context="com.thezs.fabianzachs.tapattack.MainMenu.Store.StoreFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -100,13 +100,13 @@
 
 
 
-    <com.thezs.fabianzachs.tapattack.CustomViewPager
+    <com.thezs.fabianzachs.tapattack.MainMenu.CustomViewPager
         android:layout_weight="3"
         android:layout_width="match_parent"
         android:layout_height="0sp"
         android:id="@+id/store_container">
 
-    </com.thezs.fabianzachs.tapattack.CustomViewPager>
+    </com.thezs.fabianzachs.tapattack.MainMenu.CustomViewPager>
 
     <RelativeLayout
         android:layout_width="match_parent"

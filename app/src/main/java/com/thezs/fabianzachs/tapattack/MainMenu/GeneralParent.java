@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack;
+package com.thezs.fabianzachs.tapattack.MainMenu;
 
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;

@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack;
+package com.thezs.fabianzachs.tapattack.MainMenu;
 
 /**
  * Created by fabianzachs on 10/08/18.

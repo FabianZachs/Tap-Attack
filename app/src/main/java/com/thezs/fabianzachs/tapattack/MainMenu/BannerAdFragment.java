@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack;
+package com.thezs.fabianzachs.tapattack.MainMenu;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.thezs.fabianzachs.tapattack.R;
 
 /**
  * Created by fabianzachs on 10/08/18.

@@ -1,28 +1,25 @@
-package com.thezs.fabianzachs.tapattack;
+package com.thezs.fabianzachs.tapattack.MainMenu;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
-//import android.app.Fragment;
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Build;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.Display;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
@@ -32,21 +29,20 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
+import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.Database.StoreItem;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundManager;
-import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
+import com.thezs.fabianzachs.tapattack.LoadingActivityOLD;
+import com.thezs.fabianzachs.tapattack.MainMenu.Store.StoreFragment;
+import com.thezs.fabianzachs.tapattack.R;
+import com.thezs.fabianzachs.tapattack.Store1;
+import com.thezs.fabianzachs.tapattack.helper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static android.content.Context.MODE_PRIVATE;
-
-/**
- * Created by fabianzachs on 09/08/18.
- */
-
-public class MainMenuFragment extends Fragment {
+public class MainMenuActivity extends GeneralParent {
 
     private ArrayList<MediaPlayer> mediaPlayers; // these players loop -> turn of onStop()
     private ThemesManager themesManager;
@@ -58,179 +54,72 @@ public class MainMenuFragment extends Fragment {
     private InterstitialAd afterGameAd;
     private InterstitialAd timedMenuAd;
 
+    private static final String TAG = "MainActivity";
+    private SectionsPageAdapter sectionsPageAdapter;
+    private CustomViewPager viewPager;
+
+    private void setupViewPager(ViewPager viewPager) {
+        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
+        adapter.addFragment(new LoadingFragment(), "load");
+        adapter.addFragment(new MainMenuFragment(), "mainmenu");
+        adapter.addFragment(new StoreFragment(), "store");
+        viewPager.setAdapter(adapter);
+    }
+
+    public void setViewPager(int fragmentNumber) {
+        viewPager.setCurrentItem(fragmentNumber);
+
+    }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //helper.makeFullscreen(getActivity());
+        setContentView(R.layout.main_menu4);
+
+        sectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
+        viewPager = (CustomViewPager) findViewById(R.id.container);
+        setupViewPager(viewPager);
+        /*
+        helper.makeFullscreen(this);
 
 
         // set up Constants
         initializeConstants();
 
-        prefs = getActivity().getSharedPreferences("playerInfo", MODE_PRIVATE);
+        prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
         //if (!prefs.getBoolean("firstTime", false)) {
-        Log.d("thisran", "onstart: ran");
-        databaseSetup();
+            Log.d("thisran", "onCreate: ran");
+            databaseSetup();
 
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean("firstTime", true);
-        editor.apply();
-        //}
-
-        //this.store = new Store1(getActivity(), prefs);
-        this.morePointsMenu = new MorePointsMenu(getActivity(), prefs);
-        // method instantiation
-        //mediaPlayers = new ArrayList<MediaPlayer>();
-
-        //editor.putString("gamemode","classic");
-
-        /*
-        SharedPreferences.Editor prefsEditor = prefs.edit();
-        prefsEditor.putString("background", Constants.BACKGROUNDS[1]);
-        prefsEditor.apply();
-*/
-        //setContentView(R.layout.activity_main_menu);
-        //setContentView(R.layout.main_menu_fragment);
-
-        //buttonEffect(/*findViewById(R.id.menu_text)*/);
-
-        //multiShapesMessaroundDELETE(); //todo erase
-        /* programmatically set background
-        LinearLayout layout = (LinearLayout) findViewById(R.id.parent_layout);
-        layout.setBackground(ContextCompat.getDrawable(this, R.drawable.backgroundtriangleblue));
-        */
-
-
-
-        // for images in store
-        //gameTheme = themesManager.buildTheme("vibrant", "curved");
-        //themesManager.setCurrentGameConstants(themesManager.buildTheme(Constants.CURRENT_THEME,Constants.CURRENT_SHAPE_TYPE));
-
-        //this.backgroundManager = new BackgroundManager(prefs.getString("background","backgroundtriangleblue"));
-
-
-        //initMusic(R.raw.mainmenu);
-
-        /////////////// DATABASE ////////////////
-
-
-
-
-
-
-        //MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-        //dbHandler.deleteStoreItem("neon");
-        //Log.d("database", "stuff "+dbHandler.databaseToString());
-
-
-
-        /*
-        afterGameAd = new InterstitialAd(this);
-        afterGameAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-        AdRequest request = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        afterGameAd.loadAd(request);
-        */
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
-        final View view = inflater.inflate(R.layout.main_menu_fragment, container, false);
-        setupGameModeImageAndTextAndHighscore(view);
-        setupPointsDisplay(view);
-        //helper.bannerAdSetup(getActivity(), mAdView);
-        /*
-        store.getMainStoreDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                setupGameModeImageAndTextAndHighscore(view);
-            }
-        });
-        */
-        TextView menuButton = (TextView) view.findViewById(R.id.menu_text);
-        menuButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                menuClick(view);
-            }
-        });
-
-        RelativeLayout morePointsButton = (RelativeLayout) view.findViewById(R.id.more_points_section);
-        morePointsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pointsSectionClick(view);
-            }
-        });
-
-        ImageView playButton = (ImageView) view.findViewById(R.id.play_button);
-        playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                playButtonClick(view);
-            }
-        });
-
-        startAnimatingMorePointsImg(view);
-        requestNewAfterGameAd();
-        //requestNewTimedMenuAd();
-        startIntervalAd();
-        TextView storeButton = (TextView) view.findViewById(R.id.store_text);
-        storeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((MainMenuActivity)getActivity()).setViewPager(2);
-            }
-        });
-        return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        //helper.makeFullscreen(getActivity());
-
-
-        // set up Constants
-        /*
-        initializeConstants();
-
-        prefs = getActivity().getSharedPreferences("playerInfo", MODE_PRIVATE);
-        //if (!prefs.getBoolean("firstTime", false)) {
-        Log.d("thisran", "onstart: ran");
-        databaseSetup();
-
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean("firstTime", true);
-        editor.apply();
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("firstTime", true);
+            editor.apply();
         //}
 
         // method instantiation
         //mediaPlayers = new ArrayList<MediaPlayer>();
-
 
 
         //SharedPreferences.Editor prefsEditor = prefs.edit();
         //prefsEditor.putString("background", Constants.BACKGROUNDS[1]);
         //prefsEditor.apply();
-
         //setContentView(R.layout.activity_main_menu);
-        //setContentView(R.layout.main_menu_fragment);
+        setContentView(R.layout.main_menu_fragment);
 
 
         setupGameModeImageAndTextAndHighscore();
 
         setupPointsDisplay();
         //multiShapesMessaroundDELETE(); //todo erase
+        // programmatically set background
+        //LinearLayout layout = (LinearLayout) findViewById(R.id.parent_layout);
+        //layout.setBackground(ContextCompat.getDrawable(this, R.drawable.backgroundtriangleblue));
 
         Log.d("adcreation", "onCreate: ad created");
-        helper.bannerAdSetup(getActivity(), mAdView);
+        helper.bannerAdSetup(this, mAdView);
 
-        this.store = new Store1(getActivity(), prefs);
+        this.store = new Store1(this, prefs);
         store.getMainStoreDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
@@ -238,7 +127,7 @@ public class MainMenuFragment extends Fragment {
             }
         });
 
-        this.morePointsMenu = new MorePointsMenu(getActivity(), prefs);
+        this.morePointsMenu = new MorePointsMenu(this, prefs);
 
         // for images in store
         //gameTheme = themesManager.buildTheme("vibrant", "curved");
@@ -273,6 +162,52 @@ public class MainMenuFragment extends Fragment {
         startIntervalAd();
         */
     }
+
+
+    // todo basic code for altering specific pixels of bitmap
+    public void multiShapesMessaroundDELETE() {
+
+        /*
+        ImageView item = (ImageView) findViewById(R.id.play_button);
+        LayerDrawable layers = (LayerDrawable) item.getDrawable();
+        Drawable shape1 = layers.getDrawable(0);
+        Log.d("bounds", "multiShapesMessaroundDELETE: " + shape1.getBounds());
+        shape1.setBounds(0,0,160,5000);
+        Log.d("bounds", "multiShapesMessaroundDELETE: " + shape1.getBounds());
+        ColorFilter filter = new PorterDuffColorFilter(0xff74AC23, PorterDuff.Mode.SRC_IN);
+        shape1.setColorFilter(filter);
+        */
+
+        // EDIT BITMAP
+        ImageView img = (ImageView) findViewById(R.id.play_button);
+        Bitmap myBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.neonthemetemplate);
+        myBitmap= myBitmap.copy(Bitmap.Config.ARGB_8888, true);
+
+        int [] allpixels = new int [ myBitmap.getHeight()*myBitmap.getWidth()];
+
+        myBitmap.getPixels(allpixels, 0, myBitmap.getWidth(), 0, 0,myBitmap.getWidth(),myBitmap.getHeight());
+
+        for(int i =0; i<myBitmap.getHeight()*myBitmap.getWidth();i++){
+
+            if( allpixels[i] == 0xff00ffff/*|| allpixels[i] == Color.BLUE || allpixels[i] == Color.GREEN*/)
+                allpixels[i] = Color.BLACK;
+        }
+
+        myBitmap.setPixels(allpixels, 0, myBitmap.getWidth(), 0, 0, myBitmap.getWidth(), myBitmap.getHeight());
+        img.setImageBitmap(myBitmap);
+
+
+
+        // SAVE IMG TO USER to internal storate -- only app can access this
+        Log.d("filecrap", "multiShapesMessaroundDELETE: " + getFilesDir() );
+
+
+
+
+
+    }
+
+
 
     private void startIntervalAd() {
 
@@ -358,25 +293,25 @@ public class MainMenuFragment extends Fragment {
 
     }
 
-    private void startAnimatingMorePointsImg(View view) {
-        ImageView morePointsImg = (ImageView) view.findViewById(R.id.more_points_sign);
+    private void startAnimatingMorePointsImg() {
+        ImageView morePointsImg = (ImageView) findViewById(R.id.more_points_sign);
         YoYo.with(Techniques.Tada).duration(2000).repeat(100).playOn(morePointsImg); // todo this works for text animation if bestScore/bestStreak >= score do animaton
         // todo which of Bounce, Swing, Pulse, Flash, Tada
     }
 
-    private void setupGameModeImageAndTextAndHighscore(View view) {
+    private void setupGameModeImageAndTextAndHighscore() {
         MyDBHandler myDBHandler = new MyDBHandler(Constants.CURRENT_CONTEXT, null, null, 1);
 
-        ImageView gamemodeImg = (ImageView) view.findViewById(R.id.play_button);
+        ImageView gamemodeImg = (ImageView) findViewById(R.id.play_button);
         gamemodeImg.setImageResource(helper.getResourceId(Constants.CURRENT_CONTEXT, myDBHandler.getCurrentGamemodeFile()));
 
-        TextView gamemodeText = (TextView) view.findViewById(R.id.gamemode_title);
+        TextView gamemodeText = (TextView) findViewById(R.id.gamemode_title);
         gamemodeText.setText(prefs.getString("gamemode", Constants.GAMEMODES[0]).toUpperCase());
 
 
         String selectedGameMode = prefs.getString("gamemode", Constants.GAMEMODES[0]);
         if (!selectedGameMode.equals(Constants.GAMEMODES[0])) {
-            TextView highscoreText = (TextView) view.findViewById(R.id.highscore_text);
+            TextView highscoreText = (TextView) findViewById(R.id.highscore_text);
             int highscoreForSelectedGame = prefs.getInt(selectedGameMode+"highscore", 0);
             //highscoreText.setText(prefs.getInt(selectedGameMode + "highscore"));
             //highscoreText.setText(prefs.getInt(prefs.getString("gamemode", Constants.GAMEMODES[0]) + "highscore", 0));
@@ -388,7 +323,7 @@ public class MainMenuFragment extends Fragment {
     }
 
     private void databaseSetup() {
-        MyDBHandler dbHandler = new MyDBHandler(getActivity(), null, null, 1);
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         dbHandler.removeAllRows();
         //StoreItem storeItem = new StoreItem("theme", "neon", R.drawable.neonthemetemplate,
         //        5000, 1, false);
@@ -457,14 +392,14 @@ public class MainMenuFragment extends Fragment {
         }
     }
 
-    private void setupPointsDisplay(View view) {
-        TextView pointsText = (TextView) view.findViewById(R.id.points_text);
+    private void setupPointsDisplay() {
+        TextView pointsText = (TextView) findViewById(R.id.points_text);
         pointsText.setText(Integer.toString(prefs.getInt("points", 0)));
     }
 
     private void initializeConstants() {
 
-        Constants.CURRENT_CONTEXT = getActivity();
+        Constants.CURRENT_CONTEXT = this;
 
         Point screenDimension = screenResolution();
         // get screen dimensions stored
@@ -505,7 +440,7 @@ public class MainMenuFragment extends Fragment {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private Point screenResolution() {
         WindowManager windowManager =
-                (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+                (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
         Display display = windowManager.getDefaultDisplay();
         Point screenResolution = new Point();
 
@@ -518,6 +453,7 @@ public class MainMenuFragment extends Fragment {
 
 
     // shows the settings alert dialog
+    /*
     public void menuClick(View view) {
 
         //view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_item));
@@ -527,12 +463,12 @@ public class MainMenuFragment extends Fragment {
         //playSound(R.raw.opensettings);
 
         // inflate the dialog layout
-        View alertView = getActivity().getLayoutInflater().inflate(R.layout.dialog_settings, null);
+        View alertView = getLayoutInflater().inflate(R.layout.dialog_settings, null);
 
         //soundTogglerSetup(alertView);
 
         // create a builder for the alert
-        AlertDialog.Builder dbuilder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
 
         dbuilder.setView(alertView);
         final AlertDialog dialog = dbuilder.create();
@@ -541,6 +477,7 @@ public class MainMenuFragment extends Fragment {
 
         dialogFullscreen(dialog);
     }
+    */
 
     public void dialogFullscreen(AlertDialog dialog) {
 
@@ -552,7 +489,7 @@ public class MainMenuFragment extends Fragment {
         dialog.show();
         //Set the dialog to immersive
         dialog.getWindow().getDecorView().setSystemUiVisibility(
-                getActivity().getWindow().getDecorView().getSystemUiVisibility());
+                this.getWindow().getDecorView().getSystemUiVisibility());
 
         //Clear the not focusable flag from the window
         dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
@@ -603,7 +540,7 @@ public class MainMenuFragment extends Fragment {
 
     // plays music
     private void initMusic(int sound) {
-        MediaPlayer mp = MediaPlayer.create(getActivity(), sound);
+        MediaPlayer mp = MediaPlayer.create(this, sound);
         mp.setLooping(true);
         mediaPlayers.add(mp);
         if (soundOn()) mp.start();
@@ -614,7 +551,7 @@ public class MainMenuFragment extends Fragment {
     private void playSound(int sound) {
 
         if (soundOn()) {
-            MediaPlayer mp = MediaPlayer.create(getActivity(), sound);
+            MediaPlayer mp = MediaPlayer.create(this, sound);
             mp.start();
         }
     }
@@ -663,7 +600,7 @@ public class MainMenuFragment extends Fragment {
 
     // when app opens up again
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
         //startAnimatingMorePointsImg();
         //requestNewTimedMenuAd();
@@ -674,27 +611,28 @@ public class MainMenuFragment extends Fragment {
 
     // when app is closed
     @Override
-    public void onStop() {
+    protected void onStop() {
         super.onStop();
-        //requestNewTimedMenuAd();
         //repeatMpStop();
     }
 
 
+    /*
     public void playButtonClick(View view) {
         //YoYo.with(Techniques.Pulse).duration(500).repeat(0).playOn(view);
         //view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_item));
-        Intent intent = new Intent(getActivity(), MainGameActivity.class);
+        Intent intent = new Intent(this, MainGameActivity.class);
         intent.putExtra("gamemode", "classic");
         //this.startActivity(intent);
         this.startActivityForResult(intent, 1);
     }
+    */
 
+    /*
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         updatePoints();
-        setupGameModeImageAndTextAndHighscore(getView());
-        Log.d("gamesads", "onActivityResult: game over exit" );
+        setupGameModeImageAndTextAndHighscore();
 
         SharedPreferences.Editor editor = prefs.edit();
         if(resultCode == 1){
@@ -722,22 +660,23 @@ public class MainMenuFragment extends Fragment {
 
         //super.onActivityResult(requestCode, resultCode, data);
     }
+    */
 
     public void updatePoints() {
-        TextView pointsText = (TextView) getView().findViewById(R.id.points_text);
+        TextView pointsText = (TextView) findViewById(R.id.points_text);
         pointsText.setText(Integer.toString(prefs.getInt("points", 0)));
         YoYo.with(Techniques.BounceIn).duration(2000).repeat(0).playOn(pointsText); // todo this works for text animation if bestScore/bestStreak >= score do animaton
     }
 
     private void requestNewAfterGameAd() {
-        afterGameAd = new InterstitialAd(getActivity());
+        afterGameAd = new InterstitialAd(this);
         afterGameAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         AdRequest request = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
         afterGameAd.loadAd(request);
     }
 
     private void requestNewTimedMenuAd() {
-        timedMenuAd = new InterstitialAd(getActivity());
+        timedMenuAd = new InterstitialAd(this);
         timedMenuAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         timedMenuAd.setAdListener(new AdListener() {
             @Override
@@ -758,26 +697,13 @@ public class MainMenuFragment extends Fragment {
 
 
     public void storeClick(View view) {
-        //((MainMenuActivity)getActivity()).setViewPager(1);
+        // TODO intialize to default theme in startup- breaks if user doesnt click store to set theme
 
         //view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_item));
 
-        //Intent intent = new Intent(getActivity(), StoreFragment.class);
-        //this.startActivity(intent);
+        Intent intent = new Intent(this, StoreFragment.class);
+        this.startActivity(intent);
         //store.storeClicked();
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -943,7 +869,7 @@ public class MainMenuFragment extends Fragment {
     }
 
     public void showload(View view) {
-        Intent intent = new Intent(getActivity(), LoadingActivityOLD.class);
+        Intent intent = new Intent(this, LoadingActivityOLD.class);
         intent.putExtra("gamemode", "classic");
         //this.startActivity(intent);
         this.startActivityForResult(intent, 1);
@@ -965,4 +891,36 @@ public class MainMenuFragment extends Fragment {
     public void doublePointsPurchaseClick(View view) {
         this.morePointsMenu.doublePointsPurchaseClick();
     }
+    /*
+    private void okButtonLockInSetup(final View alertView, final AlertDialog dialog, final View viewWithViewToUpdate) {
+
+        TextView okButt = (TextView) alertView.findViewById(R.id.ok_button);
+
+        okButt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //playSound(R.raw.closesettings);
+                updateStoreSelected(viewWithViewToUpdate);
+                dialog.dismiss();
+            }
+        });
+    }*/
+
+    /*
+    private void updateStoreSelected(View alertView) {
+        // todo first the colors section
+        ImageView shapeColorImg = (ImageView) alertView.findViewById(R.id.shape_color_image);
+
+        android.view.ViewGroup.LayoutParams layoutParams = shapeColorImg.getLayoutParams();
+        layoutParams.width = Constants.SCREEN_WIDTH/4;
+        layoutParams.height = Constants.SCREEN_WIDTH/4;
+        shapeColorImg.setLayoutParams(layoutParams);
+
+        Bitmap bm = BitmapFactory.decodeResource(this.getResources(),
+                Constants.SHAPE_THEMES_ID[Arrays.asList(Constants.SHAPE_THEMES).indexOf(prefs.getString("shapeTheme","neon"))]);
+        shapeColorImg.setImageBitmap(bm);
+
+        TextView setColorTheme = (TextView) alertView.findViewById(R.id.shape_color_set);
+        setColorTheme.setText(prefs.getString("shapeTheme", "neon").toUpperCase());
+    }*/
 }

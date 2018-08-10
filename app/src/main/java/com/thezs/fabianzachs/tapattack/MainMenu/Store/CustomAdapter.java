@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack;
+package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,9 +7,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Database.BasicStoreItem;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.Database.StoreItem;
+import com.thezs.fabianzachs.tapattack.R;
+import com.thezs.fabianzachs.tapattack.helper;
 
 import java.util.ArrayList;
 
