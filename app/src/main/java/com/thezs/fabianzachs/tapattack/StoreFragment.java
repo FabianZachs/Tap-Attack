@@ -25,6 +25,7 @@ public class StoreFragment extends Fragment {
     private ViewPager viewPager;
 
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {

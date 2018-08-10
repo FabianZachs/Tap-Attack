@@ -22,8 +22,6 @@ public class ShapeTypeSectionFragment extends Fragment {
         //return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.store_item_grid, container, false);
 
-        TextView txt = (TextView) view.findViewById(R.id.test_text);
-        txt.setText("U");
 
         return view;
     }
