@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
-<!-- Colored rectangle-->
+<!-- Colotheme_item_holderngle-->
 <item>
     <shape android:shape="rectangle">
         <padding android:top="35dp"/>
@@ -21,7 +21,7 @@
 </item>
 
 
-<!-- This rectangle for the right side -->
+<!-- Ttheme_item_holderngle for the right side -->
 <!-- Their color should be the same as layout's background -->
 <item
     android:right="-200dp"
@@ -36,7 +36,7 @@
         </shape>
     </rotate>
 </item>
-<!-- This rectangle for the left side -->
+<!-- Ttheme_item_holderngle for the left side -->
 <item
     android:right="200dp"
     android:left="-200dp"

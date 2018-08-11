@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
 import com.thezs.fabianzachs.tapattack.MainMenu.MainMenuActivity;
 
 /**
@@ -99,10 +101,18 @@ public class ButtonOnTouchListener implements View.OnTouchListener {
             case "fragmentToMenu":
                 ((MainMenuActivity)activity).setViewPager(1);
                 break;
+            case "fragmentToStore":
+                ((MainMenuActivity)activity).setViewPager(2);
+                break;
             case "fragmentToSettings":
                 ((MainMenuActivity)activity).setViewPager(3);
+                break;
             case "randomUnlock":
                 break;
+            case "play":
+                Intent intent = new Intent(activity, MainGameActivity.class);
+                intent.putExtra("gamemode", "classic");
+                activity.startActivityForResult(intent, 1);
         }
 
     }

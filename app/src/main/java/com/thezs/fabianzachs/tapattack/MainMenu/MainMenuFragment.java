@@ -169,25 +169,31 @@ public class MainMenuFragment extends Fragment {
             }
         });
 
-        ImageView playButton = (ImageView) view.findViewById(R.id.play_button);
+        RelativeLayout playButton = (RelativeLayout) view.findViewById(R.id.play_section);
+        playButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), playButton, "play"));
+        /*
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 playButtonClick(view);
             }
         });
+        */
 
         startAnimatingMorePointsImg(view);
         requestNewAfterGameAd();
         //requestNewTimedMenuAd();
         startIntervalAd();
         TextView storeButton = (TextView) view.findViewById(R.id.store_text);
+        storeButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), storeButton, "fragmentToStore"));
+        /*
         storeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((MainMenuActivity)getActivity()).setViewPager(2);
             }
         });
+        */
         return view;
     }
 
@@ -945,12 +951,6 @@ public class MainMenuFragment extends Fragment {
         store.openStoreSection(view, "warningcolorstreakreward");
     }
 
-    public void showload(View view) {
-        Intent intent = new Intent(getActivity(), LoadingActivityOLD.class);
-        intent.putExtra("gamemode", "classic");
-        //this.startActivity(intent);
-        this.startActivityForResult(intent, 1);
-    }
 
     public void pointsSectionClick(View view) {
         // todo we want a dialog with the current coins

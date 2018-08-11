@@ -32,7 +32,6 @@
                 android:layout_marginTop="20sp"
                 android:adjustViewBounds="true"
                 android:maxHeight="70sp"
-                android:onClick="showload"
                 android:src="@drawable/titleimage1" />
 
             <ImageView
@@ -125,6 +124,7 @@
         />
         -->
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -135,7 +135,6 @@
             android:layout_width="0dp"
             android:layout_height="130dp"
             android:layout_centerInParent="true" />
-
 
         <!--
         <ImageView
@@ -148,47 +147,54 @@
             android:soundEffectsEnabled="false"
             android:src="@drawable/neonthemetemplate" />
             -->
-        <ImageView
-            android:id="@+id/play_button"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:layout_alignBottom="@+id/anchor"
+        <RelativeLayout
+            android:id="@+id/play_section"
             android:layout_centerHorizontal="true"
-            android:soundEffectsEnabled="false"
-            android:src="@drawable/startbluebluered" />
-        <!--
-        <ImageView
-            android:layout_width="30sp"
-            android:layout_height="30sp"
-            android:layout_marginLeft="10sp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/changegamemodebutton"
-            android:layout_toRightOf="@+id/play_button"/>
-            -->
-
-        <TextView
-            android:id="@+id/gamemode_title"
+            android:layout_alignTop="@+id/anchor"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/play_button"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="5sp"
-            android:fontFamily="@font/undinaru"
-            android:soundEffectsEnabled="false"
-            android:text="Classic"
-            android:textColor="#b0faff"
-            android:textSize="30sp" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/highscore_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/gamemode_title"
-            android:layout_centerInParent="true"
-            android:fontFamily="@font/undinaru"
-            android:soundEffectsEnabled="false"
-            android:textColor="#ffffff"
-            android:textSize="15sp" />
+            <ImageView
+                android:id="@+id/play_button"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:soundEffectsEnabled="false"
+                android:src="@drawable/startbluebluered" />
+            <!--
+            <ImageView
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_marginLeft="10sp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/changegamemodebutton"
+                android:layout_toRightOf="@+id/play_button"/>
+                -->
+
+            <TextView
+                android:id="@+id/gamemode_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/play_button"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="5sp"
+                android:fontFamily="@font/undinaru"
+                android:soundEffectsEnabled="false"
+                android:text="Classic"
+                android:textColor="#b0faff"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/highscore_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/gamemode_title"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/undinaru"
+                android:soundEffectsEnabled="false"
+                android:textColor="#ffffff"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
         <!--
         <ImageView
             android:layout_width="15sp"

@@ -26,10 +26,12 @@ public class CustomAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
     private MyDBHandler dbHandler;
+    private String category;
 
     public CustomAdapter(Context context, MyDBHandler dbHandler, String category) {
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
+        this.category = category;
 
 
         this.dbHandler = dbHandler;
@@ -64,6 +66,8 @@ public class CustomAdapter extends BaseAdapter {
             itemImage.setLayoutParams(layoutParams);
             itemImage.setImageResource(helper.getResourceId(context, storeItemsToDisplay.get(position).get_file()));
 
+
+            // todo use category to find the right holder shape
             ImageView itemImageHolder = (ImageView) view.findViewById(R.id.item_image_holder);
             android.view.ViewGroup.LayoutParams layoutParams2 = itemImageHolder.getLayoutParams();
             layoutParams2.width = layoutParams.width + 20;

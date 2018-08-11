@@ -8,7 +8,7 @@
     <!-- todo maybe add a drawable container for the image-->
     <ImageView
         android:id="@+id/item_image_holder"
-        android:src="@drawable/rectangle"
+        android:src="@drawable/holder_theme_item"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_width="match_parent"

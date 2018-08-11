@@ -12,6 +12,7 @@
     <color name="store">#fefa1b</color>
     <color name="menu">#374a4a</color>
     <color name="unlock">#FFD700</color>
+    <color name="item_holder">#464646</color>
 
     <color name="black_overlay">#66000000</color>
     <!-- <color name="settingsbackground">#2c2c2c</color> -->

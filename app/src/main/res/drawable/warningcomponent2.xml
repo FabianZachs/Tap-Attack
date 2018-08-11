@@ -23,7 +23,7 @@
         </shape>
     </item>
     <item>
-        <shape android:shape="rectangle">
+        <shape android:shatheme_item_holderngle">
             <corners
                 android:radius="50dp" />
             <solid android:color="#a2a221"></solid>

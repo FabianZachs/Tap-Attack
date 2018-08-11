@@ -45,7 +45,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:left="0dp" android:right="30dp">
-        <shape android:shape="rectangle">
+        <shape android:shatheme_item_holderngle">
             <gradient
                 android:startColor="#FFFFFFFF"
                 android:endColor="#FF000000"
@@ -58,7 +58,7 @@
     </item>
 
     <item android:left="30dp" android:right="30dp" >
-        <shape android:shape="rectangle">
+        <shape android:shatheme_item_holderngle">
             <solid android:color="#FF000333" />
             <size
                 android:width="60dp"
@@ -67,7 +67,7 @@
     </item>
 
     <item android:left="90dp" android:right="0dp">
-        <shape android:shape="rectangle">
+        <shape android:shatheme_item_holderngle">
             <gradient
                 android:startColor="#FF000000"
                 android:endColor="#FFFFFFFF"

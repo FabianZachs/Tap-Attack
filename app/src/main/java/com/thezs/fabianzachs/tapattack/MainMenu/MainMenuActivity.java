@@ -870,12 +870,6 @@ public class MainMenuActivity extends GeneralParent {
         store.openStoreSection(view, "warningcolorstreakreward");
     }
 
-    public void showload(View view) {
-        Intent intent = new Intent(this, LoadingActivityOLD.class);
-        intent.putExtra("gamemode", "classic");
-        //this.startActivity(intent);
-        this.startActivityForResult(intent, 1);
-    }
 
     public void pointsSectionClick(View view) {
         // todo we want a dialog with the current coins
