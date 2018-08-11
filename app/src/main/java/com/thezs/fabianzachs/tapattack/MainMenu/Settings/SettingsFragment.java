@@ -45,16 +45,51 @@ public class SettingsFragment extends Fragment {
                 settingsListener.settingsFragmentToMenuFragment();
             }
         }));
-        //backButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(),backButton, "fragmentToMenu"));
 
-        ImageView musicButton = (ImageView) view.findViewById(R.id.music_button);
+        final ImageView musicButton = (ImageView) view.findViewById(R.id.music_button);
         if (prefs.getInt("music", 1) == 1)
             musicButton.setImageResource(R.drawable.onbutton);
         else
             musicButton.setImageResource(R.drawable.offbutton);
 
-        //musicButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), musicButton, "musicButton"));
+        musicButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), musicButton, new ButtonOnTouchListener.ButtonExecuteListener() {
+            @Override
+            public void buttonAction() {
+                if (prefs.getInt("music", 1) == 1) {
+                    musicButton.setImageResource(R.drawable.offbutton);
+                    prefsEditor.putInt("music", 0);
+                    prefsEditor.apply();
+                }
+                else {
+                    musicButton.setImageResource(R.drawable.onbutton);
+                    prefsEditor.putInt("music", 1);
+                    prefsEditor.apply();
+                }
+            }
+        }));
 
+
+        final ImageView fxButton = (ImageView) view.findViewById(R.id.soundeffects_button);
+        if (prefs.getInt("fx", 1) == 1)
+            fxButton.setImageResource(R.drawable.onbutton);
+        else
+            fxButton.setImageResource(R.drawable.offbutton);
+
+        fxButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), fxButton, new ButtonOnTouchListener.ButtonExecuteListener() {
+            @Override
+            public void buttonAction() {
+                if (prefs.getInt("fx", 1) == 1) {
+                    fxButton.setImageResource(R.drawable.offbutton);
+                    prefsEditor.putInt("fx", 0);
+                    prefsEditor.apply();
+                }
+                else {
+                    fxButton.setImageResource(R.drawable.onbutton);
+                    prefsEditor.putInt("fx", 1);
+                    prefsEditor.apply();
+                }
+            }
+        }));
         return view;
     }
 
