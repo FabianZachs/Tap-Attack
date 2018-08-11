@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +34,7 @@ public class StoreFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.store_fragment, container, false);
+        Log.d("storecycle", "onCreateView: ");
         setupBottomNavigation(view);
         setupItemsSection(view);
 
@@ -52,10 +54,22 @@ public class StoreFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d("storecycle", "onCreate: ");
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.d("storecycle", "onActivitycreated: ");
+    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        Log.d("storecycle", "onAttach: ");
         if (context instanceof StoreListener) {
             storeListener = (StoreListener) context;
         } else {

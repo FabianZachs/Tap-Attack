@@ -94,6 +94,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         if (mainMenuFragment.isAdded()) {
             ft.show(mainMenuFragment);
         } else {
+            Log.d("isadded", "displayMainMenuFragment: menu");
             ft.add(R.id.main_fragment, mainMenuFragment, "mainmenu");
         }
         if (storeFragment.isAdded()) { ft.hide(storeFragment); }
@@ -107,6 +108,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         if (storeFragment.isAdded()) {
             ft.show(storeFragment);
         } else {
+            Log.d("isadded", "displayMainMenuFragment: store");
             ft.add(R.id.main_fragment, storeFragment, "store");
         }
         if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
@@ -120,6 +122,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         if (settingsFragment.isAdded()) {
             ft.show(settingsFragment);
         } else {
+            Log.d("isadded", "displayMainMenuFragment: settings");
             ft.add(R.id.main_fragment, settingsFragment, "settings");
         }
         if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
@@ -129,6 +132,17 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
 
 
 
+    private void addAllFragments() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        this.mainMenuFragment = new MainMenuFragment();
+        this.storeFragment = new StoreFragment();
+        this.settingsFragment = new SettingsFragment();
+        // todo check if these fragments have already been added like above methods
+        ft.add(R.id.main_fragment, mainMenuFragment, "mainmenu");
+        ft.add(R.id.main_fragment, storeFragment, "store");
+        ft.add(R.id.main_fragment, settingsFragment, "settings");
+        ft.commit();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,12 +150,13 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
 
         setContentView(R.layout.main_menu4);
 
-
         this.mainMenuFragment = new MainMenuFragment();
         this.storeFragment = new StoreFragment();
         this.settingsFragment = new SettingsFragment();
 
+
         if (findViewById(R.id.main_fragment) != null) {
+            //addAllFragments(); //todo fix this so fragment layout loads before mainmenu opens
 
             if (savedInstanceState != null) {
                 return;
