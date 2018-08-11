@@ -12,6 +12,8 @@ import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Build;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
@@ -43,7 +45,7 @@ import com.thezs.fabianzachs.tapattack.helper;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainMenuActivity extends GeneralParent {
+public class MainMenuActivity extends GeneralParent implements StoreFragment.StoreListener {
 
     private ArrayList<MediaPlayer> mediaPlayers; // these players loop -> turn of onStop()
     private ThemesManager themesManager;
@@ -59,12 +61,17 @@ public class MainMenuActivity extends GeneralParent {
     private SectionsPageAdapter sectionsPageAdapter;
     private CustomViewPager viewPager;
 
+    private MainMenuFragment mainMenuFragment;
+    private StoreFragment storeFragment;
+    private SettingsFragment settingsFragment;
+
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
+
         adapter.addFragment(new LoadingFragment(), "load");
         adapter.addFragment(new MainMenuFragment(), "mainmenu");
-        adapter.addFragment(new StoreFragment(), "store");
         adapter.addFragment(new SettingsFragment(), "settings");
+        adapter.addFragment(new StoreFragment(), "store");
         viewPager.setAdapter(adapter);
     }
 
@@ -74,14 +81,133 @@ public class MainMenuActivity extends GeneralParent {
     }
 
     @Override
+    public void changeToMenuFragment() {
+        /*
+        MainMenuFragment menuFragment = (MainMenuFragment) getSupportFragmentManager().findFragmentByTag("menu");
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.main_fragment, menuFragment);
+        transaction.addToBackStack(null);
+
+        transaction.commit();
+        */
+        displayMainMenuFragment();
+
+    }
+
+
+    public void displayStoreFragment() {
+        //StoreFragment storeFragment = (StoreFragment) getSupportFragmentManager().findFragmentByTag("store");
+        /*
+        Fragment storeFragment = (Fragment) getSupportFragmentManager().findFragmentByTag("store");
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.main_fragment, storeFragment, "store");
+        //transaction.addToBackStack(null);
+
+        transaction.commit();
+        */
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (storeFragment.isAdded()) {
+            Log.d("addingfrags", "displayStoreFragment: already added");
+            ft.show(storeFragment);
+        } else {
+            Log.d("addingfrags", "displayStoreFragment: now added");
+            ft.add(R.id.main_fragment, storeFragment, "store");
+        }
+        if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
+        if (settingsFragment.isAdded()) { ft.hide(settingsFragment); }
+        ft.commit();
+
+        /*
+        getSupportFragmentManager().beginTransaction().
+                replace(R.id.main_fragment, new StoreFragment(), "store").
+                commit();
+*/
+    }
+
+    public void displayMainMenuFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (mainMenuFragment.isAdded()) {
+            //Log.d("addingfrags", "displayStoreFragment: already added");
+            ft.show(mainMenuFragment);
+        } else {
+            //Log.d("addingfrags", "displayStoreFragment: now added");
+            ft.add(R.id.main_fragment, mainMenuFragment, "mainmenu");
+        }
+        if (storeFragment.isAdded()) { ft.hide(storeFragment); }
+        if (settingsFragment.isAdded()) { ft.hide(settingsFragment); }
+        ft.commit();
+    }
+
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main_menu4);
 
+        /*
         sectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
         viewPager = (CustomViewPager) findViewById(R.id.container);
         setupViewPager(viewPager);
+        */
+
+
+        if (findViewById(R.id.main_fragment) != null) {
+
+            // However, if we're being restored from a previous state,
+            // then we don't need to do anything and should return or else
+            // we could end up with overlapping fragments.
+            if (savedInstanceState != null) {
+                return;
+            }
+
+            //getSupportFragmentManager().beginTransaction().add(R.id.main_fragment, new StoreFragment(), "store").commit();
+
+
+
+            //FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            //ft.add(new StoreFragment(), "store").commit();
+            this.mainMenuFragment = new MainMenuFragment();
+            this.storeFragment = new StoreFragment();
+            this.settingsFragment = new SettingsFragment();
+
+/*
+            getSupportFragmentManager().beginTransaction().
+                    add(R.id.main_fragment, new MainMenuFragment(), "menu").
+                    commit();
+            */
+            displayMainMenuFragment();
+
+
+            /*
+            MainMenuFragment mainMenuFragment = new MainMenuFragment();
+
+            mainMenuFragment.setArguments(getIntent().getExtras());
+
+            // Add the fragment to the 'fragment_container' FrameLayout
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.main_fragment, mainMenuFragment).commit();
+            */
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
         /*
         helper.makeFullscreen(this);
 
@@ -887,6 +1013,7 @@ public class MainMenuActivity extends GeneralParent {
     public void doublePointsPurchaseClick(View view) {
         this.morePointsMenu.doublePointsPurchaseClick();
     }
+
     /*
     private void okButtonLockInSetup(final View alertView, final AlertDialog dialog, final View viewWithViewToUpdate) {
 

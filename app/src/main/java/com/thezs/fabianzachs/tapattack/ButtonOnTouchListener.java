@@ -1,10 +1,10 @@
 package com.thezs.fabianzachs.tapattack;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
 import com.thezs.fabianzachs.tapattack.MainMenu.MainMenuActivity;
+import com.thezs.fabianzachs.tapattack.MainMenu.Store.StoreFragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -31,10 +32,11 @@ public class ButtonOnTouchListener implements View.OnTouchListener {
     private SharedPreferences prefs;
     private SharedPreferences.Editor prefsEditor;
 
-    public ButtonOnTouchListener(Activity activity, View button, String buttonIdentifier) {
+    public ButtonOnTouchListener(Activity activity, View button, String buttonIdentifier, ButtonExecuteListener buttonOnTouchListener) {
         this.activity = activity;
         this.button = button;
         this.buttonIdentifier = buttonIdentifier;
+        this.buttonExecuteListener = buttonOnTouchListener;
         //Log.d("buttonarea", "ButtonOnTouchListener: " + button.getLeft() + " " + button.getRight() );
         //Log.d("buttonarea", "ButtonOnTouchListener: " + button.getY() + " " + button.getBottom() );
         //Log.d("buttonarea", "ButtonOnTouchListener: " + location[0]);
@@ -79,7 +81,9 @@ public class ButtonOnTouchListener implements View.OnTouchListener {
             final Animation myAnim = AnimationUtils.loadAnimation(activity, R.anim.scale_up);
             button.startAnimation(myAnim);
             myAnim.setFillAfter(true);
-            buttonAction();
+            //buttonAction();
+            buttonExecuteListener.buttonAction1();
+            // todo maybe: activity.getFragment(fragmentID).buttonAction(actionID)
             return true;
 
         }
@@ -91,6 +95,14 @@ public class ButtonOnTouchListener implements View.OnTouchListener {
 
         return false;
     }
+
+
+    ButtonExecuteListener buttonExecuteListener;
+
+    public interface ButtonExecuteListener {
+        void buttonAction1();
+    }
+
 
 
     Rect outRect = new Rect();
@@ -105,15 +117,36 @@ public class ButtonOnTouchListener implements View.OnTouchListener {
 
 
     private void buttonAction() {
+        FragmentTransaction transaction;
         switch (buttonIdentifier) {
             case "fragmentToMenu":
-                ((MainMenuActivity)activity).setViewPager(1);
-                break;
-            case "fragmentToStore":
-                ((MainMenuActivity)activity).setViewPager(2);
+                //((MainMenuActivity)activity).setViewPager(1);
+
+                // todo "store" should be a variable passed in before to know which activity is asking ButtonTouchListener
+                android.support.v4.app.Fragment fragment =((MainMenuActivity)activity).getSupportFragmentManager().findFragmentByTag("store");
+                if (fragment instanceof StoreFragment) {
+                    Log.d("backbuttonclick", "buttonAction: ");
+                    ((StoreFragment) fragment).backButtonClick();
+                    Log.d("backbuttonclick", "buttonAction: ");
+                }
                 break;
             case "fragmentToSettings":
-                ((MainMenuActivity)activity).setViewPager(3);
+                ((MainMenuActivity)activity).setViewPager(2);
+                break;
+            case "fragmentToStore":
+                //((MainMenuActivity)activity).setViewPager(3);
+                // Create fragment and give it an argument specifying the article it should show
+                StoreFragment storeFragment = new StoreFragment();
+
+                transaction = ((MainMenuActivity)activity).getSupportFragmentManager().beginTransaction();
+
+                // Replace whatever is in the fragment_container view with this fragment,
+                // and add the transaction to the back stack so the user can navigate back
+                transaction.replace(R.id.main_fragment, storeFragment);
+                transaction.addToBackStack(null);
+
+                // Commit the transaction
+                transaction.commit();
                 break;
             case "randomUnlock":
                 break;

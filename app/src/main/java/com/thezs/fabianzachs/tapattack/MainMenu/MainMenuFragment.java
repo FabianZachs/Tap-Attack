@@ -20,7 +20,6 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -39,7 +38,6 @@ import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.Database.StoreItem;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundManager;
 import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
-import com.thezs.fabianzachs.tapattack.LoadingActivityOLD;
 import com.thezs.fabianzachs.tapattack.R;
 import com.thezs.fabianzachs.tapattack.Store1;
 import com.thezs.fabianzachs.tapattack.helper;
@@ -64,11 +62,15 @@ public class MainMenuFragment extends Fragment {
     private MorePointsMenu morePointsMenu;
     private InterstitialAd afterGameAd;
     private InterstitialAd timedMenuAd;
+    private View upProgressTextView;
+
+    private View fragmentView;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("activitycycle", "onCreate: ");
 
         //helper.makeFullscreen(getActivity());
 
@@ -145,9 +147,10 @@ public class MainMenuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
-        final View view = inflater.inflate(R.layout.main_menu_fragment, container, false);
-        setupGameModeImageAndTextAndHighscore(view);
-        setupPointsDisplay(view);
+        fragmentView = inflater.inflate(R.layout.main_menu_fragment, container, false);
+        setupGameModeImageAndTextAndHighscore(fragmentView);
+        setupPointsDisplay(fragmentView);
+        Log.d("activitycycle", "onCreateView: ");
         //helper.bannerAdSetup(getActivity(), mAdView);
         /*
         store.getMainStoreDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -157,11 +160,11 @@ public class MainMenuFragment extends Fragment {
             }
         });
         */
-        final TextView menuButton = (TextView) view.findViewById(R.id.menu_text);
-        menuButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), menuButton, "fragmentToSettings"));
+        final TextView menuButton = (TextView) fragmentView.findViewById(R.id.menu_text);
+        //menuButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), menuButton, "fragmentToSettings"));
 
 
-        RelativeLayout morePointsButton = (RelativeLayout) view.findViewById(R.id.more_points_section);
+        RelativeLayout morePointsButton = (RelativeLayout) fragmentView.findViewById(R.id.more_points_section);
         morePointsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,8 +172,8 @@ public class MainMenuFragment extends Fragment {
             }
         });
 
-        RelativeLayout playButton = (RelativeLayout) view.findViewById(R.id.play_section);
-        playButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), playButton, "play"));
+        RelativeLayout playButton = (RelativeLayout) fragmentView.findViewById(R.id.play_section);
+        //playButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), playButton, "play"));
         /*
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,12 +183,17 @@ public class MainMenuFragment extends Fragment {
         });
         */
 
-        startAnimatingMorePointsImg(view);
+        startAnimatingMorePointsImg(fragmentView);
         requestNewAfterGameAd();
         //requestNewTimedMenuAd();
         startIntervalAd();
-        TextView storeButton = (TextView) view.findViewById(R.id.store_text);
-        storeButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), storeButton, "fragmentToStore"));
+        TextView storeButton = (TextView) fragmentView.findViewById(R.id.store_text);
+        storeButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), storeButton, "fragmentToStore", new ButtonOnTouchListener.ButtonExecuteListener() {
+            @Override
+            public void buttonAction1() {
+                ((MainMenuActivity)getActivity()).displayStoreFragment();
+            }
+        }));
         /*
         storeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,12 +202,21 @@ public class MainMenuFragment extends Fragment {
             }
         });
         */
-        return view;
+
+        setupProgressTextView((TextView) fragmentView.findViewById(R.id.unlock_progress_text));
+
+        return fragmentView;
+    }
+
+
+
+    public void setupProgressTextView(TextView upProgressTextView) {
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        Log.d("activitycycle", "onStart: ");
 
         //helper.makeFullscreen(getActivity());
 
@@ -281,6 +298,12 @@ public class MainMenuFragment extends Fragment {
         requestNewTimedMenuAd();
         startIntervalAd();
         */
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("storedestroyed", "onDestroy: ");
     }
 
     private void startIntervalAd() {
@@ -968,4 +991,5 @@ public class MainMenuFragment extends Fragment {
     public void doublePointsPurchaseClick(View view) {
         this.morePointsMenu.doublePointsPurchaseClick();
     }
+
 }

@@ -35,7 +35,7 @@ public class SettingsFragment extends Fragment {
 
 
         final ImageView backButton= (ImageView) view.findViewById(R.id.back_image);
-        backButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(),backButton, "fragmentToMenu"));
+        //backButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(),backButton, "fragmentToMenu"));
 
         ImageView musicButton = (ImageView) view.findViewById(R.id.music_button);
         if (prefs.getInt("music", 1) == 1)
@@ -43,7 +43,7 @@ public class SettingsFragment extends Fragment {
         else
             musicButton.setImageResource(R.drawable.offbutton);
 
-        musicButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), musicButton, "musicButton"));
+        //musicButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), musicButton, "musicButton"));
 
         return view;
     }

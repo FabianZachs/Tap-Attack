@@ -1,40 +1,32 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.android.gms.ads.AdView;
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
 import com.thezs.fabianzachs.tapattack.MainMenu.CustomViewPager;
-import com.thezs.fabianzachs.tapattack.MainMenu.MainMenuActivity;
 import com.thezs.fabianzachs.tapattack.MainMenu.SectionsPageAdapter;
-import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomNavigationViewHelper;
 import com.thezs.fabianzachs.tapattack.R;
-import com.thezs.fabianzachs.tapattack.MainMenu.Store.BackgroundSectionFragment;
-import com.thezs.fabianzachs.tapattack.MainMenu.Store.GamemodeSectionFragment;
-import com.thezs.fabianzachs.tapattack.MainMenu.Store.ShapeThemeSectionFragment;
-import com.thezs.fabianzachs.tapattack.MainMenu.Store.ShapeTypeSectionFragment;
-import com.thezs.fabianzachs.tapattack.helper;
 
 public class StoreFragment extends Fragment {
 
     private AdView mAdView;
     private SectionsPageAdapter sectionsPageAdapter;
     private CustomViewPager viewPager;
+
+    private StoreListener storeListener;
 
 
 
@@ -48,14 +40,18 @@ public class StoreFragment extends Fragment {
 
 
         final ImageView backButton= (ImageView) view.findViewById(R.id.store_back_image);
-        backButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(),backButton, "fragmentToMenu"));
+        backButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), backButton, "fragmentToMenu", new ButtonOnTouchListener.ButtonExecuteListener() {
+            @Override
+            public void buttonAction1() {
+               storeListener.changeToMenuFragment();
+            }
+        }));
 
 
         setupItemsSection(view);
 
-
         final Button randomUnlock = (Button) view.findViewById(R.id.random_unlock_text);
-        randomUnlock.setOnTouchListener(new ButtonOnTouchListener(getActivity(), randomUnlock, "randomUnlock"));
+        //randomUnlock.setOnTouchListener(new ButtonOnTouchListener(getActivity(), randomUnlock, "randomUnlock"));
 
 
 
@@ -63,6 +59,26 @@ public class StoreFragment extends Fragment {
         return view;
     }
 
+
+    public interface StoreListener {
+        void changeToMenuFragment();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof StoreListener) {
+            storeListener = (StoreListener) context;
+        } else {
+            throw new ClassCastException(context.toString()
+                    + " must implement MyListFragment.OnItemSelectedListener");
+        }
+
+    }
+
+    public void backButtonClick() {
+        storeListener.changeToMenuFragment();
+    }
 
     public void setViewPager(int fragmentNumber) {
         viewPager.setCurrentItem(fragmentNumber);

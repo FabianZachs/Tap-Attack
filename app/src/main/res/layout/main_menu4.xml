@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--
     <com.thezs.fabianzachs.tapattack.MainMenu.CustomViewPager
         android:layout_weight="1"
         android:id="@+id/container"
@@ -12,6 +13,14 @@
         android:layout_height="0sp">
 
     </com.thezs.fabianzachs.tapattack.MainMenu.CustomViewPager>
+    -->
+    <FrameLayout
+        android:id="@+id/main_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="1">
+
+    </FrameLayout>
     <!--
     <fragment
         android:nacom.thezs.fabianzachs.tapattack.MainMenu.MainMenuFragmentment"
@@ -26,7 +35,6 @@
         android:id="@+id/menu_banner_ad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
     </fragment>
 
 </LinearLayout>
