@@ -34,6 +34,7 @@ import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.Database.StoreItem;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundManager;
 import com.thezs.fabianzachs.tapattack.LoadingActivityOLD;
+import com.thezs.fabianzachs.tapattack.MainMenu.Settings.SettingsFragment;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.StoreFragment;
 import com.thezs.fabianzachs.tapattack.R;
 import com.thezs.fabianzachs.tapattack.Store1;
@@ -63,6 +64,7 @@ public class MainMenuActivity extends GeneralParent {
         adapter.addFragment(new LoadingFragment(), "load");
         adapter.addFragment(new MainMenuFragment(), "mainmenu");
         adapter.addFragment(new StoreFragment(), "store");
+        adapter.addFragment(new SettingsFragment(), "settings");
         viewPager.setAdapter(adapter);
     }
 

@@ -47,8 +47,8 @@ public class StoreFragment extends Fragment {
 
 
 
-        final ImageView backView = (ImageView) view.findViewById(R.id.store_back_image);
-        backView.setOnTouchListener(new ButtonOnTouchListener(getActivity(),backView, "storeToMenu"));
+        final ImageView backButton= (ImageView) view.findViewById(R.id.store_back_image);
+        backButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(),backButton, "fragmentToMenu"));
 
 
         setupItemsSection(view);
@@ -57,39 +57,12 @@ public class StoreFragment extends Fragment {
         final Button randomUnlock = (Button) view.findViewById(R.id.random_unlock_text);
         randomUnlock.setOnTouchListener(new ButtonOnTouchListener(getActivity(), randomUnlock, "randomUnlock"));
 
-        /*
-        randomUnlock.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                Log.d("motionaction", "onTouch: "+motionEvent.toString());
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN ) {
-                    final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_down);
-                    randomUnlock.startAnimation(myAnim);
-                    myAnim.setFillAfter(true);
-
-                    return true;
-                }
-                else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up);
-                    randomUnlock.startAnimation(myAnim);
-                    myAnim.setFillAfter(true);
-                }
-                return false;
-            }
-        });
-        */
 
 
 
         return view;
     }
 
-    private boolean touchAwayFromView(MotionEvent motionEvent, ImageView backView) {
-        Log.d("GESTURES", "touchAwayFromView: " + (motionEvent.getX() < backView.getLeft() || backView.getRight() <motionEvent.getX()
-                || motionEvent.getY() < backView.getTop() || backView.getBottom() < motionEvent.getY()));
-        return (motionEvent.getX() < backView.getLeft() || backView.getRight() <motionEvent.getX()
-                || motionEvent.getY() < backView.getTop() || backView.getBottom() < motionEvent.getY());
-    }
 
     public void setViewPager(int fragmentNumber) {
         viewPager.setCurrentItem(fragmentNumber);
@@ -129,23 +102,15 @@ public class StoreFragment extends Fragment {
                         switch (item.getItemId()) {
                             case R.id.ic_gamemode:
                                 setViewPager(0);
-                                //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                //fragmentTransaction.replace(R.id.flContainer, fragment1).commit();
                                 return true;
                             case R.id.ic_shape_type:
                                 setViewPager(1);
-                                //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                //fragmentTransaction.replace(R.id.flContainer, fragment2).commit();
                                 return true;
                             case R.id.ic_theme:
                                 setViewPager(2);
-                                //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                //fragmentTransaction.replace(R.id.flContainer, fragment3).commit();
                                 return true;
                             case R.id.ic_background:
                                 setViewPager(3);
-                                //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                //fragmentTransaction.replace(R.id.flContainer, fragment3).commit();
                                 return true;
                         }
                         return false;
