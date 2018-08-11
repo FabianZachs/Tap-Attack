@@ -66,6 +66,12 @@ public class MainMenuFragment extends Fragment {
 
     private View fragmentView;
 
+    private MainMenuListener mainMenuListener;
+
+    public interface MainMenuListener{
+        void mainMenuFragmentToSettingsFragment();
+        void mainMenuFragmentToStoreFragment();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -150,18 +156,19 @@ public class MainMenuFragment extends Fragment {
         fragmentView = inflater.inflate(R.layout.main_menu_fragment, container, false);
         setupGameModeImageAndTextAndHighscore(fragmentView);
         setupPointsDisplay(fragmentView);
-        Log.d("activitycycle", "onCreateView: ");
-        //helper.bannerAdSetup(getActivity(), mAdView);
-        /*
-        store.getMainStoreDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
+        setupProgressTextView((TextView) fragmentView.findViewById(R.id.unlock_progress_text));
+        startAnimatingMorePointsImg(fragmentView);
+        requestNewAfterGameAd();
+        //requestNewTimedMenuAd();
+        startIntervalAd();
+
+        final TextView settingsButton = (TextView) fragmentView.findViewById(R.id.settings_text);
+        settingsButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), settingsButton, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                setupGameModeImageAndTextAndHighscore(view);
+            public void buttonAction() {
+                mainMenuListener.mainMenuFragmentToSettingsFragment();
             }
-        });
-        */
-        final TextView menuButton = (TextView) fragmentView.findViewById(R.id.menu_text);
-        //menuButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), menuButton, "fragmentToSettings"));
+        }));
 
 
         RelativeLayout morePointsButton = (RelativeLayout) fragmentView.findViewById(R.id.more_points_section);
@@ -183,32 +190,28 @@ public class MainMenuFragment extends Fragment {
         });
         */
 
-        startAnimatingMorePointsImg(fragmentView);
-        requestNewAfterGameAd();
-        //requestNewTimedMenuAd();
-        startIntervalAd();
         TextView storeButton = (TextView) fragmentView.findViewById(R.id.store_text);
-        storeButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), storeButton, "fragmentToStore", new ButtonOnTouchListener.ButtonExecuteListener() {
+        storeButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), storeButton, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
-            public void buttonAction1() {
-                ((MainMenuActivity)getActivity()).displayStoreFragment();
+            public void buttonAction() {
+                mainMenuListener.mainMenuFragmentToStoreFragment();
             }
         }));
-        /*
-        storeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((MainMenuActivity)getActivity()).setViewPager(2);
-            }
-        });
-        */
 
-        setupProgressTextView((TextView) fragmentView.findViewById(R.id.unlock_progress_text));
 
         return fragmentView;
     }
 
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof MainMenuListener) {
+            mainMenuListener = (MainMenuListener) context;
+        } else {
+            throw new ClassCastException(context.toString()
+                    + " must implement MyListFragment.OnItemSelectedListener");
+        }
+    }
 
     public void setupProgressTextView(TextView upProgressTextView) {
     }

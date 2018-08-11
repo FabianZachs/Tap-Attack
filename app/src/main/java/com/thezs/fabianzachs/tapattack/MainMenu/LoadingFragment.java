@@ -23,12 +23,6 @@ public class LoadingFragment extends Fragment {
         View view = inflater.inflate(R.layout.loading_fragment, container, false);
 
         ImageView logo = (ImageView) view.findViewById(R.id.logo);
-        logo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((MainMenuActivity)getActivity()).setViewPager(1);
-            }
-        });
 
         return view;
     }

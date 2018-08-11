@@ -233,7 +233,7 @@
             android:textSize="45sp" />
 
         <TextView
-            android:id="@+id/menu_text"
+            android:id="@+id/settings_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@id/store_text"

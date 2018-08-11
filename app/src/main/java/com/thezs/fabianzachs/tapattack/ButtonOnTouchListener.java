@@ -1,20 +1,13 @@
 package com.thezs.fabianzachs.tapattack;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-
-import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
-import com.thezs.fabianzachs.tapattack.MainMenu.MainMenuActivity;
-import com.thezs.fabianzachs.tapattack.MainMenu.Store.StoreFragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -24,26 +17,16 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class ButtonOnTouchListener implements View.OnTouchListener {
 
-    private String buttonIdentifier;
     private View button;
     private Activity activity;
+    ButtonExecuteListener buttonExecuteListener;
 
     private boolean lostFocus = false;
-    private SharedPreferences prefs;
-    private SharedPreferences.Editor prefsEditor;
 
-    public ButtonOnTouchListener(Activity activity, View button, String buttonIdentifier, ButtonExecuteListener buttonOnTouchListener) {
+    public ButtonOnTouchListener(Activity activity, View button, ButtonExecuteListener buttonOnTouchListener) {
         this.activity = activity;
         this.button = button;
-        this.buttonIdentifier = buttonIdentifier;
         this.buttonExecuteListener = buttonOnTouchListener;
-        //Log.d("buttonarea", "ButtonOnTouchListener: " + button.getLeft() + " " + button.getRight() );
-        //Log.d("buttonarea", "ButtonOnTouchListener: " + button.getY() + " " + button.getBottom() );
-        //Log.d("buttonarea", "ButtonOnTouchListener: " + location[0]);
-        //Log.d("buttonarea", "ButtonOnTouchListener: " + x + ", " + (x+button.getWidth()) + "  " + y + ", " + (y+button.getHeight()));
-        //Log.d("screenwidth", "ButtonOnTouchListener: " + Constants.SCREEN_WIDTH);
-        prefs = activity.getSharedPreferences("playerInfo", MODE_PRIVATE);
-        prefsEditor = prefs.edit();
     }
 
 
@@ -82,8 +65,7 @@ public class ButtonOnTouchListener implements View.OnTouchListener {
             button.startAnimation(myAnim);
             myAnim.setFillAfter(true);
             //buttonAction();
-            buttonExecuteListener.buttonAction1();
-            // todo maybe: activity.getFragment(fragmentID).buttonAction(actionID)
+            buttonExecuteListener.buttonAction();
             return true;
 
         }
@@ -97,10 +79,9 @@ public class ButtonOnTouchListener implements View.OnTouchListener {
     }
 
 
-    ButtonExecuteListener buttonExecuteListener;
 
     public interface ButtonExecuteListener {
-        void buttonAction1();
+        void buttonAction();
     }
 
 
@@ -116,13 +97,13 @@ public class ButtonOnTouchListener implements View.OnTouchListener {
     }
 
 
+    /*
     private void buttonAction() {
         FragmentTransaction transaction;
         switch (buttonIdentifier) {
             case "fragmentToMenu":
                 //((MainMenuActivity)activity).setViewPager(1);
 
-                // todo "store" should be a variable passed in before to know which activity is asking ButtonTouchListener
                 android.support.v4.app.Fragment fragment =((MainMenuActivity)activity).getSupportFragmentManager().findFragmentByTag("store");
                 if (fragment instanceof StoreFragment) {
                     Log.d("backbuttonclick", "buttonAction: ");
@@ -171,6 +152,8 @@ public class ButtonOnTouchListener implements View.OnTouchListener {
         }
 
     }
+    */
+
     /*
     private boolean touchAwayFromView(MotionEvent motionEvent, View backView) {
         Log.d("touchaway", "touchAwayFromView: " + motionEvent.getRawX() + " " + motionEvent.getRawY());

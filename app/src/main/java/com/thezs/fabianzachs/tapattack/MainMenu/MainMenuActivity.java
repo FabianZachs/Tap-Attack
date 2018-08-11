@@ -45,7 +45,7 @@ import com.thezs.fabianzachs.tapattack.helper;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainMenuActivity extends GeneralParent implements StoreFragment.StoreListener {
+public class MainMenuActivity extends GeneralParent implements StoreFragment.StoreListener, SettingsFragment.SettingsListener, MainMenuFragment.MainMenuListener {
 
     private ArrayList<MediaPlayer> mediaPlayers; // these players loop -> turn of onStop()
     private ThemesManager themesManager;
@@ -57,91 +57,76 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     private InterstitialAd afterGameAd;
     private InterstitialAd timedMenuAd;
 
+    /*
     private static final String TAG = "MainActivity";
     private SectionsPageAdapter sectionsPageAdapter;
     private CustomViewPager viewPager;
+    */
 
     private MainMenuFragment mainMenuFragment;
     private StoreFragment storeFragment;
     private SettingsFragment settingsFragment;
 
-    private void setupViewPager(ViewPager viewPager) {
-        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(new LoadingFragment(), "load");
-        adapter.addFragment(new MainMenuFragment(), "mainmenu");
-        adapter.addFragment(new SettingsFragment(), "settings");
-        adapter.addFragment(new StoreFragment(), "store");
-        viewPager.setAdapter(adapter);
-    }
-
-    public void setViewPager(int fragmentNumber) {
-        viewPager.setCurrentItem(fragmentNumber);
-
+    @Override
+    public void mainMenuFragmentToSettingsFragment() {
+        displaySettingsFragment();
     }
 
     @Override
-    public void changeToMenuFragment() {
-        /*
-        MainMenuFragment menuFragment = (MainMenuFragment) getSupportFragmentManager().findFragmentByTag("menu");
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        transaction.replace(R.id.main_fragment, menuFragment);
-        transaction.addToBackStack(null);
-
-        transaction.commit();
-        */
-        displayMainMenuFragment();
-
+    public void mainMenuFragmentToStoreFragment() {
+        displayStoreFragment();
     }
 
+    @Override
+    public void storeFragmentToMenuFragment() {
+        displayMainMenuFragment();
+    }
 
-    public void displayStoreFragment() {
-        //StoreFragment storeFragment = (StoreFragment) getSupportFragmentManager().findFragmentByTag("store");
-        /*
-        Fragment storeFragment = (Fragment) getSupportFragmentManager().findFragmentByTag("store");
+    @Override
+    public void settingsFragmentToMenuFragment() {
+        displayMainMenuFragment();
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        transaction.replace(R.id.main_fragment, storeFragment, "store");
-        //transaction.addToBackStack(null);
-
-        transaction.commit();
-        */
-
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        if (storeFragment.isAdded()) {
-            Log.d("addingfrags", "displayStoreFragment: already added");
-            ft.show(storeFragment);
-        } else {
-            Log.d("addingfrags", "displayStoreFragment: now added");
-            ft.add(R.id.main_fragment, storeFragment, "store");
-        }
-        if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
-        if (settingsFragment.isAdded()) { ft.hide(settingsFragment); }
-        ft.commit();
-
-        /*
-        getSupportFragmentManager().beginTransaction().
-                replace(R.id.main_fragment, new StoreFragment(), "store").
-                commit();
-*/
     }
 
     public void displayMainMenuFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (mainMenuFragment.isAdded()) {
-            //Log.d("addingfrags", "displayStoreFragment: already added");
             ft.show(mainMenuFragment);
         } else {
-            //Log.d("addingfrags", "displayStoreFragment: now added");
             ft.add(R.id.main_fragment, mainMenuFragment, "mainmenu");
         }
         if (storeFragment.isAdded()) { ft.hide(storeFragment); }
         if (settingsFragment.isAdded()) { ft.hide(settingsFragment); }
         ft.commit();
     }
+
+    public void displayStoreFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        if (storeFragment.isAdded()) {
+            ft.show(storeFragment);
+        } else {
+            ft.add(R.id.main_fragment, storeFragment, "store");
+        }
+        if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
+        if (settingsFragment.isAdded()) { ft.hide(settingsFragment); }
+        ft.commit();
+    }
+
+    public void displaySettingsFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        if (settingsFragment.isAdded()) {
+            ft.show(settingsFragment);
+        } else {
+            ft.add(R.id.main_fragment, settingsFragment, "settings");
+        }
+        if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
+        if (storeFragment.isAdded()) { ft.hide(storeFragment); }
+        ft.commit();
+    }
+
 
 
 
@@ -151,55 +136,22 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
 
         setContentView(R.layout.main_menu4);
 
-        /*
-        sectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
-        viewPager = (CustomViewPager) findViewById(R.id.container);
-        setupViewPager(viewPager);
-        */
 
+        this.mainMenuFragment = new MainMenuFragment();
+        this.storeFragment = new StoreFragment();
+        this.settingsFragment = new SettingsFragment();
 
         if (findViewById(R.id.main_fragment) != null) {
 
-            // However, if we're being restored from a previous state,
-            // then we don't need to do anything and should return or else
-            // we could end up with overlapping fragments.
             if (savedInstanceState != null) {
                 return;
             }
 
-            //getSupportFragmentManager().beginTransaction().add(R.id.main_fragment, new StoreFragment(), "store").commit();
-
-
-
-            //FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            //ft.add(new StoreFragment(), "store").commit();
-            this.mainMenuFragment = new MainMenuFragment();
-            this.storeFragment = new StoreFragment();
-            this.settingsFragment = new SettingsFragment();
-
-/*
-            getSupportFragmentManager().beginTransaction().
-                    add(R.id.main_fragment, new MainMenuFragment(), "menu").
-                    commit();
-            */
             displayMainMenuFragment();
-
-
-            /*
-            MainMenuFragment mainMenuFragment = new MainMenuFragment();
-
-            mainMenuFragment.setArguments(getIntent().getExtras());
-
-            // Add the fragment to the 'fragment_container' FrameLayout
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.main_fragment, mainMenuFragment).commit();
-            */
-
-
-
-
-
         }
+
+        // todo data base should be initiated here
+        // todo music should be initiated here
 
 
 
@@ -353,71 +305,6 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         }, 1000);
 
 */
-
-
-
-        /*
-        Thread timer = new Thread() {
-            public void run() {
-                boolean running = true;
-                while (running) {
-                    try {
-                        // todo show ad, load another ad (image ad not video)
-                        if (timedMenuAd.isLoaded()) {
-                            timedMenuAd.show();
-                            requestNewTimedMenuAd();
-                        }
-
-                        Thread.sleep(8000);
-
-                    } catch (InterruptedException e) {
-                        Log.d("running", "run: error");
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-        timer.start();
-        */
-
-
-        /*
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                        // todo show ad, load another ad (image ad not video)
-                        if (timedMenuAd.isLoaded()) {
-                            timedMenuAd.show();
-                            requestNewTimedMenuAd();
-                        }
-
-                        Thread.sleep(8000);
-
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-*/
-
-        /*
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                // do your stuff - don't create a new runnable here!
-                if (timedMenuAd.isLoaded()) {
-                    timedMenuAd.show();
-                    requestNewTimedMenuAd();
-                }
-                    handler.postDelayed(this, 10000);
-            }
-        };
-        handler.post(runnable);
-        */
-
 
     }
 
@@ -824,187 +711,8 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
 
 
 
-    public void storeClick(View view) {
-        // TODO intialize to default theme in startup- breaks if user doesnt click store to set theme
-
-        //view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_item));
-
-        Intent intent = new Intent(this, StoreFragment.class);
-        this.startActivity(intent);
-        //store.storeClicked();
 
 
-
-        //YoYo.with(Techniques.TakingOff).duration(1000).repeat(0).playOn(findViewById(R.id.store_text)); // todo this works for text animation if bestScore/bestStreak >= score do animaton
-
-        /*
-
-        // todo ne    already done
-        View alertView = getLayoutInflater().inflate(R.layout.store_main_menu, null);
-
-
-        AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
-
-        dbuilder.setView(alertView);
-        final AlertDialog dialog = dbuilder.create();
-        //^ todo ne    already done
-        /*
-
-        okButtonSetup(alertView, dialog);
-
-        dialogFullscreen(dialog);
-
-// start jere
-        /// =====================
-        // shape_color_image
-        ImageView shapeColorImg = (ImageView) alertView.findViewById(R.id.shape_color_image);
-
-        android.view.ViewGroup.LayoutParams layoutParams = shapeColorImg.getLayoutParams();
-        layoutParams.width = Constants.SCREEN_WIDTH/4;
-        layoutParams.height = Constants.SCREEN_WIDTH/4;
-        shapeColorImg.setLayoutParams(layoutParams);
-
-        Bitmap bm = BitmapFactory.decodeResource(this.getResources(),
-                Constants.SHAPE_THEMES_ID[Arrays.asList(Constants.SHAPE_THEMES).indexOf(prefs.getString("shapeTheme","neon"))]);
-        shapeColorImg.setImageBitmap(bm);
-
-
-
-
-        TextView setColorTheme = (TextView) alertView.findViewById(R.id.shape_color_set);
-        setColorTheme.setText(prefs.getString("shapeTheme", "neon").toUpperCase());
-
-
-        ////// ================================
-
-        // shape_type_image
-        ImageView shapeTypeImg = (ImageView) alertView.findViewById(R.id.shape_type_image);
-
-        shapeTypeImg.setLayoutParams(layoutParams);
-
-        String outlineName = prefs.getString("shapeTpe", "curved") + "outline";
-        int resID = this.getResources().getIdentifier(outlineName, "drawable", this.getPackageName());
-        shapeTypeImg.setImageResource(resID);
-
-
-        TextView setTypeShape = (TextView) alertView.findViewById(R.id.shape_type_set);
-        setTypeShape.setText(prefs.getString("shapeType", "curved").toUpperCase());
-
-        // =======================================
-
-        // background_image
-        ImageView backgroundImg = (ImageView) alertView.findViewById(R.id.background_image);
-        backgroundImg.setLayoutParams(layoutParams);
-        //backgroundImg.setImageBitmap(backgroundManager.getBackground());
-        backgroundImg.setImageBitmap(GameBackground.getBackgroundBitmap(prefs.getString("background","backgroundtriangleblue")));
-
-        // =======================================
-
-        //SharedPreferences.Editor prefsEditor = prefs.edit();
-        //prefsEditor.putString("shapeTheme", "neon");
-        //prefsEditor.apply();
-
-
-
-        //StyleableToast.makeText(this,  prefs.getString("theme","error-no theme"), R.style.successtoast).show();
-        */
-    }
-
-
-    public void openShapeTypeStore(View view) {
-        // todo complete
-        store.openStoreSection(view, "type");
-        /*
-        View alertView = getLayoutInflater().inflate(R.layout.store_item_list, null);
-        AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
-        dbuilder.setView(alertView);
-        final AlertDialog dialog = dbuilder.create();
-        okButtonSetup(alertView, dialog);
-        dialogFullscreen(dialog);
-
-        ListView mList = (ListView) alertView.findViewById(R.id.item_list);
-
-
-        CustomListView customListView = new CustomListView(this, Constants.SHAPE_TYPES, Constants.SHAPE_TYPES_IDS);
-        mList.setAdapter(customListView);
-        */
-
-
-    }
-
-
-    public void openBackgroundStore(View view) {
-        store.openStoreSection(view, "background");
-        /*
-        View alertView = getLayoutInflater().inflate(R.layout.store_item_list, null);
-        AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
-        dbuilder.setView(alertView);
-        final AlertDialog dialog = dbuilder.create();
-        okButtonSetup(alertView, dialog);
-        dialogFullscreen(dialog);
-
-        ListView mList = (ListView) alertView.findViewById(R.id.item_list);
-        CustomListView customListView = new CustomListView(this, Constants.BACKGROUNDS, Constants.BACKGROUNDS_ID);
-        mList.setAdapter(customListView);
-        */
-    }
-
-    public void openShapeColorStore(View view) {
-        store.openStoreSection(view, "color");
-        /*
-        View alertView = getLayoutInflater().inflate(R.layout.store_item_list, null);
-        AlertDialog.Builder dbuilder = new AlertDialog.Builder(this);
-        dbuilder.setView(alertView);
-        final AlertDialog dialog = dbuilder.create();
-        okButtonLockInSetup(alertView, dialog, view);
-        dialogFullscreen(dialog);
-
-
-
-        ListView mList = (ListView) alertView.findViewById(R.id.item_list);
-        CustomListView customListView = new CustomListView(this, Constants.SHAPE_THEMES, Constants.SHAPE_THEMES_ID);
-        mList.setAdapter(customListView);
-        mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-
-                view.setSelected(true);
-
-
-                SharedPreferences.Editor prefsEditor = prefs.edit();
-                prefsEditor.putString("shapeTheme", Constants.SHAPE_THEMES[position]);
-                prefsEditor.apply();
-                //Intent intent = new Intent(this, SendMessage.class);
-                //String message = "abc";
-                //intent.putExtra(EXTRA_MESSAGE, message);
-                //startActivity(intent);
-            }
-        }); */
-
-    }
-
-    public void openGameModeStore(View view) {
-        store.openStoreSection(view, "gamemode");
-    }
-
-    public void openPointmultiplierStore(View view) {
-        store.openStoreSection(view, "multiplier");
-    }
-
-    public void openWarningColorStreakStore(View view) {
-        store.openStoreSection(view, "warningcolorstreakreward");
-    }
-
-
-    public void pointsSectionClick(View view) {
-        // todo we want a dialog with the current coins
-        // todo first option is watch a video to gain z more coins
-        // todo offer coin x2 multiplier for $0.99
-        // todo yoyo shake the more coins icon every x seconds??
-        //StyleableToast.makeText(Constants.CURRENT_CONTEXT, "COIN DIALOG WOULD LAUNCH", R.style.successtoast).show();
-        morePointsMenu.pointsSectionClick();
-    }
 
     public void extraPointsViaVidClick(View view) {
         this.morePointsMenu.extraPointsViaVidClick();
@@ -1013,6 +721,8 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     public void doublePointsPurchaseClick(View view) {
         this.morePointsMenu.doublePointsPurchaseClick();
     }
+
+
 
     /*
     private void okButtonLockInSetup(final View alertView, final AlertDialog dialog, final View viewWithViewToUpdate) {
@@ -1046,4 +756,21 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         TextView setColorTheme = (TextView) alertView.findViewById(R.id.shape_color_set);
         setColorTheme.setText(prefs.getString("shapeTheme", "neon").toUpperCase());
     }*/
+
+    /*
+    private void setupViewPager(ViewPager viewPager) {
+        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
+
+        adapter.addFragment(new LoadingFragment(), "load");
+        adapter.addFragment(new MainMenuFragment(), "mainmenu");
+        adapter.addFragment(new SettingsFragment(), "settings");
+        adapter.addFragment(new StoreFragment(), "store");
+        viewPager.setAdapter(adapter);
+    }
+
+    public void setViewPager(int fragmentNumber) {
+        viewPager.setCurrentItem(fragmentNumber);
+
+    }
+    */
 }

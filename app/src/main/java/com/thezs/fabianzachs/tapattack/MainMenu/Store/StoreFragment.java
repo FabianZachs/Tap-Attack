@@ -1,5 +1,6 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -22,47 +23,35 @@ import com.thezs.fabianzachs.tapattack.R;
 
 public class StoreFragment extends Fragment {
 
-    private AdView mAdView;
-    private SectionsPageAdapter sectionsPageAdapter;
     private CustomViewPager viewPager;
-
     private StoreListener storeListener;
 
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.store_fragment, container, false);
         setupBottomNavigation(view);
-
+        setupItemsSection(view);
 
 
         final ImageView backButton= (ImageView) view.findViewById(R.id.store_back_image);
-        backButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), backButton, "fragmentToMenu", new ButtonOnTouchListener.ButtonExecuteListener() {
+        backButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), backButton, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
-            public void buttonAction1() {
-               storeListener.changeToMenuFragment();
+            public void buttonAction() {
+               storeListener.storeFragmentToMenuFragment();
             }
         }));
 
 
-        setupItemsSection(view);
-
         final Button randomUnlock = (Button) view.findViewById(R.id.random_unlock_text);
         //randomUnlock.setOnTouchListener(new ButtonOnTouchListener(getActivity(), randomUnlock, "randomUnlock"));
-
-
-
 
         return view;
     }
 
-
-    public interface StoreListener {
-        void changeToMenuFragment();
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -73,19 +62,19 @@ public class StoreFragment extends Fragment {
             throw new ClassCastException(context.toString()
                     + " must implement MyListFragment.OnItemSelectedListener");
         }
-
     }
 
-    public void backButtonClick() {
-        storeListener.changeToMenuFragment();
+    public interface StoreListener {
+        void storeFragmentToMenuFragment();
     }
+
 
     public void setViewPager(int fragmentNumber) {
         viewPager.setCurrentItem(fragmentNumber);
     }
 
+
     private void setupItemsSection(View view) {
-        sectionsPageAdapter = new SectionsPageAdapter(getActivity().getSupportFragmentManager());
         viewPager = (CustomViewPager) view.findViewById(R.id.store_container);
         setupViewPager(viewPager);
     }
@@ -98,14 +87,6 @@ public class StoreFragment extends Fragment {
         adapter.addFragment(new BackgroundSectionFragment(), "gamemode");
         viewPager.setAdapter(adapter);
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-
-    }
-
 
     private void setupBottomNavigation(View view) {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) view.findViewById(R.id.bottom_nav_bar);

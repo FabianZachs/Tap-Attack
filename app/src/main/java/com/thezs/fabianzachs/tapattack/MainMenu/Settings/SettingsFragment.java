@@ -1,5 +1,7 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Settings;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,7 +24,10 @@ public class SettingsFragment extends Fragment {
 
     private SharedPreferences prefs;
     private SharedPreferences.Editor prefsEditor;
+    private SettingsListener settingsListener;
 
+
+    @SuppressLint({"CommitPrefEdits", "ClickableViewAccessibility"})
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,8 +38,13 @@ public class SettingsFragment extends Fragment {
         prefsEditor = prefs.edit();
 
 
-
         final ImageView backButton= (ImageView) view.findViewById(R.id.back_image);
+        backButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), backButton, new ButtonOnTouchListener.ButtonExecuteListener() {
+            @Override
+            public void buttonAction() {
+                settingsListener.settingsFragmentToMenuFragment();
+            }
+        }));
         //backButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(),backButton, "fragmentToMenu"));
 
         ImageView musicButton = (ImageView) view.findViewById(R.id.music_button);
@@ -46,5 +56,20 @@ public class SettingsFragment extends Fragment {
         //musicButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), musicButton, "musicButton"));
 
         return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof SettingsListener) {
+            settingsListener = (SettingsListener) context;
+        } else {
+            throw new ClassCastException(context.toString()
+                    + " must implement MyListFragment.OnItemSelectedListener");
+        }
+    }
+
+    public interface SettingsListener {
+        void settingsFragmentToMenuFragment();
     }
 }
