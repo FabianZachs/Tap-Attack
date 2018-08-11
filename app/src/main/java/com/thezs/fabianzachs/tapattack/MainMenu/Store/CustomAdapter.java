@@ -67,11 +67,21 @@ public class CustomAdapter extends BaseAdapter {
             itemImage.setImageResource(helper.getResourceId(context, storeItemsToDisplay.get(position).get_file()));
 
 
-            // todo use category to find the right holder shape
+
             ImageView itemImageHolder = (ImageView) view.findViewById(R.id.item_image_holder);
             android.view.ViewGroup.LayoutParams layoutParams2 = itemImageHolder.getLayoutParams();
             layoutParams2.width = layoutParams.width + 20;
             layoutParams2.height = layoutParams.height + 20;
+
+            switch (category) {
+                case "game mode":
+                    itemImageHolder.setImageResource(R.drawable.holder_gamemode);
+                    break;
+                case "background":
+                    itemImageHolder.setImageResource(R.drawable.holder_background);
+                    break;
+            }
+
             itemImageHolder.setLayoutParams(layoutParams2);
 
         }

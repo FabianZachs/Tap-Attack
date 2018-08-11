@@ -24,6 +24,27 @@
             android:src="@drawable/storebackbutton"/>
 
         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
+                android:src="@drawable/itemhighlight"/>
+
+            <ImageView
+                android:id="@+id/selected_item"
+                android:src="@drawable/startbluebluered"
+                android:layout_width="80sp"
+                android:layout_height="80sp"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
             android:id="@+id/more_points_section"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -101,7 +122,7 @@
 
 
     <com.thezs.fabianzachs.tapattack.MainMenu.CustomViewPager
-        android:layout_weight="3"
+        android:layout_weight="2"
         android:layout_width="match_parent"
         android:layout_height="0sp"
         android:id="@+id/store_container">
