@@ -23,4 +23,11 @@
         android:fontFamily="@font/undinaru"
         android:text="SETTINGS"/>
 
+    <ImageView
+        android:id="@+id/music_button"
+        android:layout_gravity="center"
+        android:layout_width="75sp"
+        android:layout_height="75sp"
+        android:src="@drawable/onbutton"/>
+
 </LinearLayout>

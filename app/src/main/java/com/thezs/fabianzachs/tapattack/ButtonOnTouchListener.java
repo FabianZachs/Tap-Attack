@@ -3,15 +3,19 @@ package com.thezs.fabianzachs.tapattack;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
 import com.thezs.fabianzachs.tapattack.MainMenu.MainMenuActivity;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by fabianzachs on 11/08/18.
@@ -24,6 +28,8 @@ public class ButtonOnTouchListener implements View.OnTouchListener {
     private Activity activity;
 
     private boolean lostFocus = false;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor prefsEditor;
 
     public ButtonOnTouchListener(Activity activity, View button, String buttonIdentifier) {
         this.activity = activity;
@@ -34,6 +40,8 @@ public class ButtonOnTouchListener implements View.OnTouchListener {
         //Log.d("buttonarea", "ButtonOnTouchListener: " + location[0]);
         //Log.d("buttonarea", "ButtonOnTouchListener: " + x + ", " + (x+button.getWidth()) + "  " + y + ", " + (y+button.getHeight()));
         //Log.d("screenwidth", "ButtonOnTouchListener: " + Constants.SCREEN_WIDTH);
+        prefs = activity.getSharedPreferences("playerInfo", MODE_PRIVATE);
+        prefsEditor = prefs.edit();
     }
 
 
@@ -113,6 +121,20 @@ public class ButtonOnTouchListener implements View.OnTouchListener {
                 Intent intent = new Intent(activity, MainGameActivity.class);
                 intent.putExtra("gamemode", "classic");
                 activity.startActivityForResult(intent, 1);
+                break;
+            case "musicButton":
+                ImageView buttonImg = (ImageView) button;
+                if (prefs.getInt("music", 1) == 1) {
+                    buttonImg.setImageResource(R.drawable.offbutton);
+                    prefsEditor.putInt("music", 0);
+                    prefsEditor.apply();
+                }
+                else {
+                    buttonImg.setImageResource(R.drawable.onbutton);
+                    prefsEditor.putInt("music", 1);
+                    prefsEditor.apply();
+                }
+                break;
         }
 
     }
