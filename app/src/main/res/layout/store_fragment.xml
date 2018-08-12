@@ -130,6 +130,36 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="8sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_width="150sp"
+                android:src="@drawable/titleholder"
+                android:scaleX="1.5"
+
+                android:layout_height="20sp" />
+
+            <ImageView
+                android:id="@+id/seperator"
+                android:layout_width="match_parent"
+                android:layout_height="3sp"
+                android:background="#ffffff"
+                android:layout_marginLeft="25sp"
+                android:layout_marginRight="25sp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5sp"
+
+                />
+
+        </RelativeLayout>
+
 
     </RelativeLayout>
 
@@ -138,6 +168,8 @@
 
 
     <com.thezs.fabianzachs.tapattack.MainMenu.Store.CustomViewPager
+        android:layout_marginLeft="25sp"
+        android:layout_marginRight="25sp"
         android:layout_weight="2"
         android:layout_width="match_parent"
         android:layout_height="0sp"
