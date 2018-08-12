@@ -6,8 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.thezs.fabianzachs.tapattack.CustomListView;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.R;
 
@@ -37,8 +39,18 @@ public class ShapeThemeSectionFragment extends Fragment {
     }
 
     public void setupItemGrid(View view) {
-        GridView grid = (GridView) view.findViewById(R.id.gridview);
-        CustomAdapter myAdapter = new CustomAdapter( getActivity().getApplicationContext(), dbHandler, "shape theme");
-        grid.setAdapter(myAdapter);
+        final GridView grid = (GridView) view.findViewById(R.id.gridview);
+        grid.setAdapter(new CustomAdapter( getActivity().getApplicationContext(), dbHandler, "shape theme"));
+
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
+                CustomAdapter myAdapter = (CustomAdapter) parent.getAdapter();
+
+
+                myAdapter.setSelectedItemPosition(position);
+                myAdapter.notifyDataSetChanged();
+            }
+        });
     }
 }

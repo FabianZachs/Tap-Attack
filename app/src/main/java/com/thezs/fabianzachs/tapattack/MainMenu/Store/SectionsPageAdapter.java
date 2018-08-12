@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack.MainMenu;
+package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

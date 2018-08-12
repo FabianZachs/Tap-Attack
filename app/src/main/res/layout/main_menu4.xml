@@ -6,13 +6,13 @@
     android:layout_height="match_parent">
 
     <!--
-    <com.thezs.fabianzachs.tapattack.MainMenu.CustomViewPager
+ com.thezs.fabianzachs.tapattack.MainMenu.Store.CustomViewPagerager
         android:layout_weight="1"
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="0sp">
 
-    </com.thezs.fabianzachs.tapattack.MainMenu.CustomViewPager>
+  com.thezs.fabianzachs.tapattack.MainMenu.Store.CustomViewPagerager>
     -->
     <FrameLayout
         android:id="@+id/main_fragment"

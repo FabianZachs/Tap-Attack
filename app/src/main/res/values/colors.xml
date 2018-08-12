@@ -15,5 +15,6 @@
     <color name="item_holder">#464646</color>
 
     <color name="black_overlay">#66000000</color>
+    <color name="selected_item_holder">#ffde00</color>
     <!-- <color name="settingsbackground">#2c2c2c</color> -->
 </resources>

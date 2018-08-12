@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
@@ -38,7 +39,17 @@ public class ShapeTypeSectionFragment extends Fragment {
 
     public void setupItemGrid(View view) {
         GridView grid = (GridView) view.findViewById(R.id.gridview);
-        CustomAdapter myAdapter = new CustomAdapter( getActivity().getApplicationContext(), dbHandler, "shape type");
-        grid.setAdapter(myAdapter);
+        grid.setAdapter(new CustomAdapter( getActivity().getApplicationContext(), dbHandler, "shape type"));
+
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
+                CustomAdapter myAdapter = (CustomAdapter) parent.getAdapter();
+
+
+                myAdapter.setSelectedItemPosition(position);
+                myAdapter.notifyDataSetChanged();
+            }
+        });
     }
 }

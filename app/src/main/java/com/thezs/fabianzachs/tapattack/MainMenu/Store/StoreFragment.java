@@ -16,10 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.google.android.gms.ads.AdView;
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
-import com.thezs.fabianzachs.tapattack.MainMenu.CustomViewPager;
-import com.thezs.fabianzachs.tapattack.MainMenu.SectionsPageAdapter;
 import com.thezs.fabianzachs.tapattack.R;
 
 public class StoreFragment extends Fragment {

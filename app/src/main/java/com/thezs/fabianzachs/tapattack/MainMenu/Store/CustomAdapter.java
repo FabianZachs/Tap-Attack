@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 
 public class CustomAdapter extends BaseAdapter {
 
+    private int selectedItemPosition; // todo this should be passed in as an argument in constructor to have currently used item selected
     private ArrayList<BasicStoreItem> storeItemsToDisplay;
     private Context context;
     private LayoutInflater layoutInflater;
@@ -38,6 +40,11 @@ public class CustomAdapter extends BaseAdapter {
         storeItemsToDisplay = dbHandler.getBasicStoreItemsFromCategory(category);
 
     }
+
+    public void setSelectedItemPosition(int position) {
+        selectedItemPosition = position;
+    }
+
 
     @Override
     public int getCount() {
@@ -58,33 +65,56 @@ public class CustomAdapter extends BaseAdapter {
     public View getView(int position, View view, ViewGroup viewGroup) {
         if (view== null) {
             view = layoutInflater.inflate(R.layout.grid_item, viewGroup, false );
-
             ImageView itemImage = (ImageView) view.findViewById(R.id.item_image);
-            android.view.ViewGroup.LayoutParams layoutParams = itemImage.getLayoutParams();
+            ViewGroup.LayoutParams layoutParams = itemImage.getLayoutParams();
             layoutParams.width = Constants.SCREEN_WIDTH/6;
             layoutParams.height = Constants.SCREEN_WIDTH/6;
             itemImage.setLayoutParams(layoutParams);
             itemImage.setImageResource(helper.getResourceId(context, storeItemsToDisplay.get(position).get_file()));
 
-
-
             ImageView itemImageHolder = (ImageView) view.findViewById(R.id.item_image_holder);
-            android.view.ViewGroup.LayoutParams layoutParams2 = itemImageHolder.getLayoutParams();
+            ViewGroup.LayoutParams layoutParams2 = itemImageHolder.getLayoutParams();
             layoutParams2.width = layoutParams.width + 20;
             layoutParams2.height = layoutParams.height + 20;
+            itemImageHolder.setLayoutParams(layoutParams2);
+        }
+
+
+
+
+
+        // todo maybe refactor to only have one holder per item section and just change drawable color of that holder
+        ImageView itemImageHolder = (ImageView) view.findViewById(R.id.item_image_holder);
 
             switch (category) {
                 case "game mode":
-                    itemImageHolder.setImageResource(R.drawable.holder_gamemode);
+                    if (position == selectedItemPosition)
+                        itemImageHolder.setImageResource(R.drawable.holder_gamemode_selected);
+                    else
+                        itemImageHolder.setImageResource(R.drawable.holder_gamemode);
+                    break;
+                case "shape theme":
+                    if (position == selectedItemPosition)
+                        itemImageHolder.setImageResource(R.drawable.holder_theme_item_selected);
+                    else
+                        itemImageHolder.setImageResource(R.drawable.holder_theme_item);
+                    break;
+                case "shape type":
+                    if (position == selectedItemPosition)
+                        itemImageHolder.setImageResource(R.drawable.holder_theme_item_selected);
+                    else
+                        itemImageHolder.setImageResource(R.drawable.holder_theme_item);
                     break;
                 case "background":
-                    itemImageHolder.setImageResource(R.drawable.holder_background);
+                    if (position == selectedItemPosition)
+                        itemImageHolder.setImageResource(R.drawable.holder_background_selected);
+                    else
+                        itemImageHolder.setImageResource(R.drawable.holder_background);
                     break;
+
             }
 
-            itemImageHolder.setLayoutParams(layoutParams2);
 
-        }
 
         return view;
     }

@@ -16,7 +16,6 @@ import java.net.URI;
 
 public class MusicPlayer implements MediaPlayer.OnErrorListener {
 
-    // todo needs to the songs
     private MediaPlayer musicPlayer;
     private Activity activity;
 
