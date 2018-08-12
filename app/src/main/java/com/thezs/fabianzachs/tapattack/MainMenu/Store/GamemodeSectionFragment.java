@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.R;
+import com.thezs.fabianzachs.tapattack.helper;
 
 /**
  * Created by fabianzachs on 10/08/18.
@@ -24,11 +26,15 @@ public class GamemodeSectionFragment extends Fragment {
 
     private MyDBHandler dbHandler; // todo maybe instantiate once and pass to all store item fragments
     private GameModeSectionFragmentListener listener;
+    private SharedPreferences prefs;
+    private GridView gridView;
+    private CustomAdapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.dbHandler = new MyDBHandler(getActivity(), null, null, 1);
+        prefs = getActivity().getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
     }
 
     @Nullable
@@ -40,6 +46,11 @@ public class GamemodeSectionFragment extends Fragment {
         setupItemGrid(view);
 
 
+        // to find initially selected item
+        final String[] names = dbHandler.getItemNamesFromCategory("game mode");
+        int itemIndex = helper.getIndexOf(names, prefs.getString("gamemode", "tutorial"));
+        int resourceID = helper.getResourceId(getContext(), adapter.getItem(itemIndex).get_file());
+        listener.selectedItemChanged(getResources().getDrawable(resourceID));
         return view;
     }
 
@@ -55,10 +66,11 @@ public class GamemodeSectionFragment extends Fragment {
     }
 
     public void setupItemGrid(View view) {
-        GridView grid = (GridView) view.findViewById(R.id.gridview);
-        grid.setAdapter(new CustomAdapter( getActivity().getApplicationContext(), dbHandler, "game mode"));
+        gridView = (GridView) view.findViewById(R.id.gridview);
+        adapter = new CustomAdapter( getActivity().getApplicationContext(), dbHandler, "game mode");
+        gridView.setAdapter(adapter);
 
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
                 CustomAdapter myAdapter = (CustomAdapter) parent.getAdapter();
@@ -67,6 +79,13 @@ public class GamemodeSectionFragment extends Fragment {
                 myAdapter.setSelectedItemPosition(position);
                 myAdapter.notifyDataSetChanged();
                 listener.selectedItemChanged(((ImageView) (view.findViewById(R.id.item_image))).getDrawable());
+
+                //if (dbHandler.isItemUnlocked(names[position]) == 1) {
+                    //StyleableToast.makeText(mainMenuActivity,  "unlocked", R.style.successtoast).show();
+                    SharedPreferences.Editor prefsEditor = prefs.edit();
+                    prefsEditor.putString("gamemode", myAdapter.getItem(position).get_name());
+                    prefsEditor.apply();
+                //}
             }
         });
     }
