@@ -1,5 +1,7 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -14,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -52,6 +56,44 @@ public class StoreFragment extends Fragment implements GamemodeSectionFragment.G
 
         final Button randomUnlock = (Button) view.findViewById(R.id.random_unlock_text);
         //randomUnlock.setOnTouchListener(new ButtonOnTouchListener(getActivity(), randomUnlock, "randomUnlock"));
+
+        /*
+        ImageView highlight = (ImageView) view.findViewById(R.id.item_highlight);
+        Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.pulse);
+        highlight.startAnimation(myAnim);
+        */
+        ImageView iv = (ImageView) view.findViewById(R.id.item_highlight);
+
+        ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(
+                iv,
+                PropertyValuesHolder.ofFloat("scaleX", 1.2f),
+                PropertyValuesHolder.ofFloat("scaleY", 1.2f));
+        scaleDown.setDuration(510);
+        //scaleDown.setInterpolator(new FastOutSlowInInterpolator());
+
+        scaleDown.setRepeatCount(ObjectAnimator.INFINITE);
+        scaleDown.setRepeatMode(ObjectAnimator.REVERSE);
+        scaleDown.start();
+
+        ImageView star1 = (ImageView) view.findViewById(R.id.item_highlight1);
+        Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_clockwise);
+        star1.startAnimation(myAnim);
+
+        ImageView star2 = (ImageView) view.findViewById(R.id.item_highlight2);
+        Animation myAnim2 = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_anticlockwise);
+        star2.startAnimation(myAnim2);
+
+        ImageView selectedItem = (ImageView) view.findViewById(R.id.selected_item);
+        ObjectAnimator scaleDownItem = ObjectAnimator.ofPropertyValuesHolder(
+                selectedItem,
+                PropertyValuesHolder.ofFloat("scaleX", .9f),
+                PropertyValuesHolder.ofFloat("scaleY", .9f));
+        scaleDownItem.setDuration(410);
+        //scaleDown.setInterpolator(new FastOutSlowInInterpolator());
+
+        scaleDownItem.setRepeatCount(ObjectAnimator.INFINITE);
+        scaleDownItem.setRepeatMode(ObjectAnimator.REVERSE);
+        scaleDownItem.start();
 
         setupTopUI(0);
         return view;

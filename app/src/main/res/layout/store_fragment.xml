@@ -28,11 +28,26 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/item_highlight"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_centerInParent="true"
-                android:src="@drawable/squareitemhighlight"/>
+                android:src="@drawable/circleitemhighlight"/>
+            <ImageView
+                android:id="@+id/item_highlight1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
+                android:src="@drawable/highlightstar1"/>
+            <ImageView
+                android:id="@+id/item_highlight2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
+                android:src="@drawable/highlightstar3"/>
 
             <ImageView
                 android:id="@+id/selected_item"
