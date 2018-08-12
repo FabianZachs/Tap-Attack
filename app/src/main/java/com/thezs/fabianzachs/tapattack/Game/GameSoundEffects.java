@@ -17,7 +17,6 @@ import com.thezs.fabianzachs.tapattack.R;
 
 public class GameSoundEffects {
 
-    // todo should have a reference to all sound effects to play
 
     private int MAX_STREAMS = 4;
 
@@ -31,10 +30,6 @@ public class GameSoundEffects {
     private static int warningColorTap;
     private static int starTap;
     private static int gameOver;
-
-
-    // todo do rest
-
 
 
     public GameSoundEffects() {
@@ -90,7 +85,6 @@ public class GameSoundEffects {
         //squareTapOne = soundPool.load(Constants.CURRENT_CONTEXT, R.raw.bookplace1, 1);
         //squareTapTwo = soundPool.load(Constants.CURRENT_CONTEXT, R.raw.bookclose, 1);
 
-        // todo do rest
 
     }
 
@@ -118,5 +112,4 @@ public class GameSoundEffects {
     public void playGameOver() {
         soundPool.play(gameOver, 1.0f, 1.0f, 1, 0, 1.0f);
     }
-    // todo do rest
 }

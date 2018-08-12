@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
 import com.thezs.fabianzachs.tapattack.R;
@@ -43,6 +44,9 @@ public class SettingsFragment extends Fragment {
             @Override
             public void buttonAction() {
                 settingsListener.settingsFragmentToMenuFragment();
+
+                if (prefs.getInt("music", 1) == 0)
+                    settingsListener.removeMusicPlayer();
             }
         }));
 
@@ -59,11 +63,13 @@ public class SettingsFragment extends Fragment {
                     musicButton.setImageResource(R.drawable.offbutton);
                     prefsEditor.putInt("music", 0);
                     prefsEditor.apply();
+                    settingsListener.musicOff();
                 }
                 else {
                     musicButton.setImageResource(R.drawable.onbutton);
                     prefsEditor.putInt("music", 1);
                     prefsEditor.apply();
+                    settingsListener.musicOn();
                 }
             }
         }));
@@ -90,6 +96,8 @@ public class SettingsFragment extends Fragment {
                 }
             }
         }));
+
+
         return view;
     }
 
@@ -106,5 +114,10 @@ public class SettingsFragment extends Fragment {
 
     public interface SettingsListener {
         void settingsFragmentToMenuFragment();
+        void musicOff();
+        void musicOn();
+        void fxOff();
+        void fxOn();
+        void removeMusicPlayer();
     }
 }

@@ -67,6 +67,8 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     private StoreFragment storeFragment;
     private SettingsFragment settingsFragment;
 
+    private MusicPlayer musicPlayer;
+
 
     @Override
     public void mainMenuFragmentToSettingsFragment() {
@@ -87,6 +89,37 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     public void settingsFragmentToMenuFragment() {
         displayMainMenuFragment();
 
+    }
+
+    @Override
+    public void musicOff() {
+        musicPlayer.pausePlaying();
+    }
+
+    @Override
+    public void musicOn() {
+        musicPlayer.play();
+    }
+
+    @Override
+    public void removeMusicPlayer() {
+        musicPlayer.musicPlayerNotNeeded();
+    }
+
+    @Override
+    public void fxOff() {
+
+    }
+
+    @Override
+    public void fxOn() {
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        musicPlayer.pausePlaying();
     }
 
     public void displayMainMenuFragment() {
@@ -144,15 +177,25 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         ft.commit();
     }
 
+    private void musicSetup() {
+        this.musicPlayer = new MusicPlayer(this);
+        if (prefs.getInt("music", 1) == 1)
+            musicPlayer.play();
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
 
         setContentView(R.layout.main_menu4);
 
         this.mainMenuFragment = new MainMenuFragment();
         this.storeFragment = new StoreFragment();
         this.settingsFragment = new SettingsFragment();
+
+        musicSetup();
 
 
         if (findViewById(R.id.main_fragment) != null) {
@@ -182,7 +225,6 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         // set up Constants
         initializeConstants();
 
-        prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
         //if (!prefs.getBoolean("firstTime", false)) {
             Log.d("thisran", "onCreate: ran");
             databaseSetup();
@@ -257,6 +299,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         startIntervalAd();
         */
     }
+
 
 
     // todo basic code for altering specific pixels of bitmap
@@ -632,6 +675,8 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     @Override
     protected void onResume() {
         super.onResume();
+        if (prefs.getInt("music", 1) == 1)
+            musicPlayer.play();
         //startAnimatingMorePointsImg();
         //requestNewTimedMenuAd();
         //Log.d("resumecalled", "onResume: RESUME");
@@ -643,6 +688,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     @Override
     protected void onStop() {
         super.onStop();
+        musicPlayer.pausePlaying();
         //repeatMpStop();
     }
 
