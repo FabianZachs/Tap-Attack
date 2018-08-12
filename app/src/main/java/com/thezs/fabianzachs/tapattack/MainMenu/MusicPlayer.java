@@ -51,7 +51,9 @@ public class MusicPlayer implements MediaPlayer.OnErrorListener {
 
     public void musicPlayerNotNeeded() {
         Log.d("musicplayer", "MusicPlayer: E");
-        musicPlayer.release();
-        musicPlayer = null;
+        if (musicPlayer != null) {
+            musicPlayer.release();
+            musicPlayer = null;
+        }
     }
 }

@@ -26,6 +26,10 @@ public class SectionsPageAdapter extends FragmentPagerAdapter {
         fragmentTitles.add(title);
     }
 
+    public String titleOfFragment(Fragment fragment) {
+        return fragmentTitles.get(fragments.indexOf(fragment));
+    }
+
     @Override
     public CharSequence getPageTitle(int position) {
         return fragmentTitles.get(position);

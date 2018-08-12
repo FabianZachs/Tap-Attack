@@ -1,13 +1,17 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.R;
@@ -19,6 +23,7 @@ import com.thezs.fabianzachs.tapattack.R;
 public class GamemodeSectionFragment extends Fragment {
 
     private MyDBHandler dbHandler; // todo maybe instantiate once and pass to all store item fragments
+    private GameModeSectionFragmentListener listener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,6 +43,17 @@ public class GamemodeSectionFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (getParentFragment() instanceof GameModeSectionFragmentListener) {
+            listener = (GameModeSectionFragmentListener) getParentFragment();
+        } else {
+            throw new ClassCastException(context.toString()
+                    + " must implement GamemodeSectionFragment.GameModeSectionFragmentListener");
+        }
+    }
+
     public void setupItemGrid(View view) {
         GridView grid = (GridView) view.findViewById(R.id.gridview);
         grid.setAdapter(new CustomAdapter( getActivity().getApplicationContext(), dbHandler, "game mode"));
@@ -50,8 +66,13 @@ public class GamemodeSectionFragment extends Fragment {
 
                 myAdapter.setSelectedItemPosition(position);
                 myAdapter.notifyDataSetChanged();
+                listener.selectedItemChanged(((ImageView) (view.findViewById(R.id.item_image))).getDrawable());
             }
         });
+    }
+
+    public interface GameModeSectionFragmentListener {
+        void selectedItemChanged(Drawable itemImage);
     }
 
 }
