@@ -38,7 +38,7 @@ public class GamemodeSectionFragment extends ItemSectionFragment {
         Log.d("onviewcreateitem", "onCreateView: " + SECTION);
 
         super.setupItemGrid(view, SECTION, DEFAULT_SECTION_VALUE);
-        super.setInitialDisplayedItemFromThisSection();
+        super.setDisplayedItemFromThisSection();
 
         return view;
     }

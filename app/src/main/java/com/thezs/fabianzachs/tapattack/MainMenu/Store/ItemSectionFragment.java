@@ -45,7 +45,7 @@ public abstract class ItemSectionFragment extends Fragment {
 
 
 
-    protected void setInitialDisplayedItemFromThisSection(/*String section, String defaultValue*/) {
+    protected void setDisplayedItemFromThisSection(/*String section, String defaultValue*/) {
         /*
         String[] names = dbHandler.getItemNamesFromCategory(section);
         int initiallySelectedPosition = helper.getIndexOf(names, prefs.getString(section, defaultValue));

@@ -39,7 +39,7 @@ public class ShapeThemeSectionFragment extends ItemSectionFragment {
         //return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.store_item_grid, container, false);
         super.setupItemGrid(view, SECTION, DEFAULT_SECTION_VALUE); //todo does gridview know which item to highlight first
-        //super.setInitialDisplayedItemFromThisSection(SECTION, DEFAULT_SECTION_VALUE);
+        //super.setDisplayedItemFromThisSection(SECTION, DEFAULT_SECTION_VALUE);
         Log.d("onviewcreateitem", "onCreateView: " + SECTION);
 
         return view;

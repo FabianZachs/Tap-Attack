@@ -44,7 +44,7 @@ public class BackgroundSectionFragment extends ItemSectionFragment {
         Log.d("onviewcreateitem", "onCreateView: " + SECTION);
 
         super.setupItemGrid(view, SECTION, DEFAULT_SECTION_VALUE); //todo does gridview know which item to highlight first && gridview seleced item resets whenever we return to it
-        //super.setInitialDisplayedItemFromThisSection(SECTION,DEFAULT_SECTION_VALUE);
+        //super.setDisplayedItemFromThisSection(SECTION,DEFAULT_SECTION_VALUE);
 
         return view;
     }

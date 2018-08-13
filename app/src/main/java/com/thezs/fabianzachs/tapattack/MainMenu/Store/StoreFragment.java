@@ -1,9 +1,6 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.annotation.SuppressLint;
-import android.content.ClipData;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
@@ -17,9 +14,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
@@ -190,8 +184,8 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
                 // todo setupUI elements according to which fragment
                 Log.d("debugtime", "onPageSelected: page: " + viewPager.getCurrentItem());
                 ItemSectionFragment currentlyDisplayedFragment = (ItemSectionFragment)  adapter.getItem(position);
-                currentlyDisplayedFragment.setInitialDisplayedItemFromThisSection();
-                //((ItemSectionFragment)adapter.getItem(position)).setInitialDisplayedItemFromThisSection(adapter.getPageTitle(position), adapter.getItem(position));
+                currentlyDisplayedFragment.setDisplayedItemFromThisSection();
+                //((ItemSectionFragment)adapter.getItem(position)).setDisplayedItemFromThisSection(adapter.getPageTitle(position), adapter.getItem(position));
                 //Log.d("debugtime", "onPageSelected: page: " + position);
                 //adapter.getRegeisteredFragment
                 //setupTopUI(position);
@@ -213,7 +207,7 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
         adapter.addFragment(new ShapeThemeSectionFragment(), "shapetheme");
         adapter.addFragment(new BackgroundSectionFragment(), "background");
         // to set the initially shown item connected to the first one shown in the viewpager (index 0 shown first)
-        //((ItemSectionFragment)adapter.getItem(0)).setInitialDisplayedItemFromThisSection(adapter.getPageTitle(0), ((ItemSectionFragment) adapter.getItem(0)).getDEFAULT_SECTION_VALUE());
+        //((ItemSectionFragment)adapter.getItem(0)).setDisplayedItemFromThisSection(adapter.getPageTitle(0), ((ItemSectionFragment) adapter.getItem(0)).getDEFAULT_SECTION_VALUE());
         viewPager.setAdapter(adapter);
     }
 
