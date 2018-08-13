@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class GamemodeSectionFragment extends ItemSectionFragment {
         //return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.store_item_grid, container, false);
 
+        Log.d("onviewcreateitem", "onCreateView: " + SECTION);
         super.setupItemGrid(view, SECTION);
         super.setInitialSelectedItem(SECTION, Constants.GAMEMODES[0]);
 
@@ -48,5 +50,6 @@ public class GamemodeSectionFragment extends ItemSectionFragment {
         super.onAttach(context);
         super.setListener(context);
     }
+
 
 }

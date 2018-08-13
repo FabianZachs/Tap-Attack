@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,11 +36,14 @@ public abstract class ItemSectionFragment extends Fragment {
         prefs = getActivity().getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
     }
 
+
     protected void setInitialSelectedItem(String section, String defaultValue) {
         String[] names = dbHandler.getItemNamesFromCategory(section);
-        int itemIndex = helper.getIndexOf(names, prefs.getString(section, defaultValue));
-        int resourceID = helper.getResourceId(getContext(), adapter.getItem(itemIndex).get_file());
-        listener.selectedItemChanged(getResources().getDrawable(resourceID), adapter.getItem(itemIndex).get_unlocked());
+        int initiallySelectedPosition = helper.getIndexOf(names, prefs.getString(section, defaultValue));
+        int resourceID = helper.getResourceId(getContext(), adapter.getItem(initiallySelectedPosition).get_file());
+        listener.selectedItemChanged(getResources().getDrawable(resourceID), adapter.getItem(initiallySelectedPosition).get_unlocked());
+        //adapter.setSelectedItemPosition(initiallySelectedPosition);
+        //adapter.notifyDataSetChanged();
     }
 
     protected void setListener(Context context) {

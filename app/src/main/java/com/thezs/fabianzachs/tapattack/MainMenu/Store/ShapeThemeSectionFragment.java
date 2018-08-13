@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class ShapeThemeSectionFragment extends ItemSectionFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.store_item_grid, container, false);
+        Log.d("onviewcreateitem", "onCreateView: " + SECTION);
         super.setupItemGrid(view, SECTION); //todo does gridview know which item to highlight first
         super.setInitialSelectedItem(SECTION, Constants.SHAPE_THEMES[0]);
 
