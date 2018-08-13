@@ -24,11 +24,6 @@ import com.thezs.fabianzachs.tapattack.helper;
 
 public class BackgroundSectionFragment extends ItemSectionFragment {
 
-    //private MyDBHandler dbHandler;
-    //private SharedPreferences prefs;
-    //private BackgroundSectionFragmentListener listener;
-    //private GridView gridView;
-    //private CustomAdapter adapter;
     private String SECTION = "background";
 
 
@@ -55,52 +50,4 @@ public class BackgroundSectionFragment extends ItemSectionFragment {
         super.setListener(context);
     }
 
-    /*
-    public void setupItemGrid(View view) {
-        GridView grid = (GridView) view.findViewById(R.id.gridview);
-        grid.setAdapter(new CustomAdapter( getActivity().getApplicationContext(), dbHandler, "background"));
-
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View view, int position, long id) {
-                CustomAdapter myAdapter = (CustomAdapter) parent.getAdapter();
-
-
-                myAdapter.setSelectedItemPosition(position);
-                myAdapter.notifyDataSetChanged();
-            }
-        });
-    }*/
-
-    /*
-    public void setupItemGrid(View view) {
-        gridView = (GridView) view.findViewById(R.id.gridview);
-        adapter = new CustomAdapter( getActivity().getApplicationContext(), dbHandler, "background");
-        gridView.setAdapter(adapter);
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View view, int position, long id) {
-                CustomAdapter myAdapter = (CustomAdapter) parent.getAdapter();
-
-
-                myAdapter.setSelectedItemPosition(position);
-                myAdapter.notifyDataSetChanged();
-                listener.selectedItemChanged(((ImageView) (view.findViewById(R.id.item_image))).getDrawable(), adapter.getItem(position).get_unlocked());
-
-                //if (dbHandler.isItemUnlocked(names[position]) == 1) {
-                //StyleableToast.makeText(mainMenuActivity,  "unlocked", R.style.successtoast).show();
-                SharedPreferences.Editor prefsEditor = prefs.edit();
-                prefsEditor.putString("background", myAdapter.getItem(position).get_name());
-                prefsEditor.apply();
-                //}
-            }
-        });
-    }*/
-
-    /*
-    public interface BackgroundSectionFragmentListener {
-        void selectedItemChanged(Drawable itemImage);
-    }
-    */
 }

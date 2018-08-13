@@ -22,11 +22,6 @@ import com.thezs.fabianzachs.tapattack.helper;
 
 public class GamemodeSectionFragment extends ItemSectionFragment {
 
-    //private MyDBHandler dbHandler;
-    //private GameModeSectionFragmentListener listener;
-    //private SharedPreferences prefs;
-    //private GridView gridView;
-    //private CustomAdapter adapter;
     private String SECTION = "game mode";
 
 
@@ -52,44 +47,6 @@ public class GamemodeSectionFragment extends ItemSectionFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         super.setListener(context);
-        /*
-        if (getParentFragment() instanceof GameModeSectionFragmentListener) {
-            listener = (GameModeSectionFragmentListener) getParentFragment();
-        } else {
-            throw new ClassCastException(context.toString()
-                    + " must implement GamemodeSectionFragment.GameModeSectionFragmentListener");
-        }*/
     }
-
-    /*
-    public void setupItemGrid(View view) {
-        gridView = (GridView) view.findViewById(R.id.gridview);
-        adapter = new CustomAdapter( getActivity().getApplicationContext(), dbHandler, "game mode");
-        gridView.setAdapter(adapter);
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View view, int position, long id) {
-                CustomAdapter myAdapter = (CustomAdapter) parent.getAdapter();
-
-
-                myAdapter.setSelectedItemPosition(position);
-                myAdapter.notifyDataSetChanged();
-                listener.selectedItemChanged(((ImageView) (view.findViewById(R.id.item_image))).getDrawable(), adapter.getItem(position).get_unlocked());
-
-                //if (dbHandler.isItemUnlocked(names[position]) == 1) {
-                    //StyleableToast.makeText(mainMenuActivity,  "unlocked", R.style.successtoast).show();
-                    SharedPreferences.Editor prefsEditor = prefs.edit();
-                    prefsEditor.putString("gamemode", myAdapter.getItem(position).get_name());
-                    prefsEditor.apply();
-                //}
-            }
-        });
-    }*/
-
-    /*
-    public interface GameModeSectionFragmentListener extends ItemSectionListener {
-        void selectedItemChanged(Drawable itemImage);
-    }*/
 
 }
