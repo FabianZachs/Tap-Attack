@@ -7,5 +7,5 @@ import android.graphics.drawable.Drawable;
  */
 
 interface ItemSectionListener {
-    void selectedItemChanged(Drawable itemImage, int unlocked);
+    void selectedItemChanged(Drawable itemImage, String itemTitle ,int unlocked);
 }

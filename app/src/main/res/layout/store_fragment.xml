@@ -14,14 +14,36 @@
         android:layout_height="0sp"
         android:layout_weight="2">
 
-        <ImageView
-            android:id="@+id/store_back_image"
-            android:layout_margin="10sp"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleX=".6"
-            android:scaleY=".6"
-            android:src="@drawable/storebackbutton"/>
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3sp"
+                android:background="#ffffff"
+                android:layout_marginLeft="25sp"
+                android:layout_marginRight="25sp"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="5sp"/>
+
+            <TextView
+                android:id="@+id/section_title_text"
+                android:layout_width="150sp"
+                android:gravity="center"
+                android:text="SECTION NAME"
+                android:fontFamily="@font/undinaru"
+                android:textStyle="bold"
+                android:layout_height="30sp"
+                android:textAlignment="center"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/titleholderupsidedown"
+                />
+
+        </RelativeLayout>
+
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -64,16 +86,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="5sp"
-            android:layout_toRightOf="@+id/title_image1">
+            >
 
             <ImageView
                 android:id="@+id/points_image"
                 android:layout_width="20sp"
                 android:layout_height="20sp"
-                android:layout_marginTop="20sp"
+                android:layout_marginTop="10sp"
                 android:layout_toLeftOf="@+id/points_text"
-                android:layout_toRightOf="@id/title_text"
                 android:src="@drawable/curvedstar" />
 
             <TextView
@@ -82,53 +102,217 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="7sp"
-                android:layout_marginRight="45sp"
-                android:layout_marginTop="15sp"
+                android:layout_marginRight="8sp"
+                android:layout_marginTop="5sp"
                 android:gravity="right"
                 android:text="POINTS"
                 android:textColor="@color/store"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_marginBottom="20sp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_width="120sp"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/random_unlock_section"
+                android:layout_marginLeft="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/random_unlock_text"
+                    android:fontFamily="@font/undinaru"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:text="RANDOM UNLOCK\n 500"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/button3"
+                    android:layout_width="80sp"
+                    android:layout_height="50sp" />
+
+                <ImageView
+                    android:layout_width="10sp"
+                    android:layout_alignBottom="@+id/random_unlock_text"
+                    android:layout_alignRight="@+id/random_unlock_text"
+                    android:layout_marginBottom="7sp"
+                    android:layout_marginRight="15sp"
+
+                    android:layout_height="10sp"
+                    android:src="@drawable/curvedstar" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="18sp"
+            android:gravity="right"
+            >
+
             <ImageView
-                android:id="@+id/more_points_sign"
-                android:layout_marginTop="20sp"
-                android:layout_marginRight="10sp"
+                android:id="@+id/video_image"
                 android:layout_width="20sp"
                 android:layout_height="20sp"
-                android:src="@drawable/morepointssign"
-                android:layout_alignRight="@+id/points_text"
+                android:layout_marginTop="20sp"
+                android:layout_toLeftOf="@+id/additional_points_text"
+                android:src="@drawable/playvideobutton" />
+
+            <TextView
+                android:id="@+id/additional_points_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="5sp"
+                android:layout_marginRight="34sp"
+                android:layout_marginTop="15sp"
+                android:text="+200"
+                android:textColor="@color/store"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/star"
+                android:layout_marginTop="21sp"
+                android:layout_marginRight="13sp"
+                android:layout_width="15sp"
+                android:layout_height="15sp"
+                android:src="@drawable/curvedstar"
                 android:layout_alignParentRight="true"
                 />
 
         </RelativeLayout>
 
+        <!--
         <RelativeLayout
-            android:layout_marginBottom="10sp"
+            android:layout_marginBottom="5sp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_width="120sp"
             android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/random_unlock_text"
-                android:layout_marginLeft="20sp"
-                android:layout_width="100sp"
-                android:layout_height="70sp"
+
+            <TextView
+                android:id="@+id/additional_points_text"
+                android:layout_width="50sp"
+                android:layout_marginRight="25sp"
+                android:layout_height="50sp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
                 android:fontFamily="@font/undinaru"
-                android:textStyle="bold"
-                android:text="RANDOM UNLOCK\n 500"
+                android:gravity="center"
+                android:text="+200"
                 android:textAlignment="center"
                 android:textColor="#ffffff"
-                android:background="@drawable/button3"
-                />
+                android:textSize="20sp"
+                android:textStyle="bold" />
+            <ImageView
+                android:layout_toLeftOf="@+id/additional_points_text"
+                android:layout_width="30sp"
+                android:layout_centerVertical="true"
+                android:layout_height="30sp"
+                android:src="@drawable/playvideobutton"/>
 
             <ImageView
-                android:layout_width="15sp"
-                android:layout_height="15sp"
-                android:src="@drawable/curvedstar" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/star"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/additional_points_text"/>
 
         </RelativeLayout>
+        -->
+
+        <!--
+            <RelativeLayout
+                android:layout_marginBottom="20sp"
+                android:layout_width="100sp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/video_for_points_section"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="25sp">
+
+
+                    <TextView
+                        android:id="@+id/video_for_points_text"
+                        android:layout_alignParentBottom="true"
+                        android:fontFamily="@font/undinaru"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:text="+500"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50sp" />
+
+                    <ImageView
+                        android:id="@+id/video_image"
+                        android:layout_width="100sp"
+                        android:layout_height="30sp"
+                        android:layout_alignParentBottom="true"
+                        android:src="@drawable/playvideobutton" />
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+            -->
+        <!--
+        <RelativeLayout
+            android:id="@+id/more_points_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            >
+
+            <ImageView
+                android:id="@+id/points_image"
+                android:layout_width="20sp"
+                android:layout_height="20sp"
+                android:layout_marginTop="10sp"
+                android:layout_toLeftOf="@+id/points_text"
+                android:src="@drawable/curvedstar" />
+
+            <TextView
+                android:id="@+id/points_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="7sp"
+                android:layout_marginRight="8sp"
+                android:layout_marginTop="5sp"
+                android:gravity="right"
+                android:text="POINTS"
+                android:textColor="@color/store"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+        -->
+
+
 
         <RelativeLayout
             android:layout_alignParentBottom="true"
@@ -136,15 +320,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
-            <ImageView
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
+            <TextView
+                android:id="@+id/item_title_text"
                 android:layout_width="150sp"
-                android:src="@drawable/titleholder"
-                android:scaleX="1.5"
+                android:gravity="center"
+                android:text="ITEM NAME"
+                android:fontFamily="@font/undinaru"
+                android:textStyle="bold"
+                android:layout_height="30sp"
+                android:layout_alignParentBottom="true"
+                android:textAlignment="center"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/titleholder"
+                />
 
-                android:layout_height="20sp" />
 
             <ImageView
                 android:id="@+id/seperator"

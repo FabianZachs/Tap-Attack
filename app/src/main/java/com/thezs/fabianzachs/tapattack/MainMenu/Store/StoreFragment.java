@@ -1,6 +1,5 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
@@ -15,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
 import com.thezs.fabianzachs.tapattack.R;
@@ -25,6 +26,8 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
     private SectionsPageAdapter  adapter;
     private StoreListener storeListener;
     private ImageView displayedItemImage;
+    private TextView displayedItemTitle;
+    private TextView displayedSectionTitle;
 
 
     @Override
@@ -51,9 +54,13 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.store_fragment, container, false);
+        View view = inflater.inflate(R.layout.store_fragment2, container, false);
         setupBottomNavigation(view);
         setupItemsSection(view);
+        setupRandomUnlockSection(view);
+
+        displayedItemTitle = (TextView) view.findViewById(R.id.item_title_text);
+        displayedSectionTitle = (TextView) view.findViewById(R.id.section_title_text);
         displayedItemImage = (ImageView) view.findViewById(R.id.selected_item);
 
         Log.d("currentitem", "onNavigationItemSelected:create " +viewPager.getCurrentItem());
@@ -115,9 +122,12 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
     }
 
     @Override
-    public void selectedItemChanged(Drawable itemImage, int unlocked) {
+    public void selectedItemChanged(Drawable itemImage, String itemTitle, int unlocked) {
         displayedItemImage.setImageDrawable(itemImage);
+        displayedItemTitle.setText(itemTitle.toUpperCase());
+        // todo show lock if locked
     }
+
 
     public interface StoreListener {
         void storeFragmentToMenuFragment();
@@ -139,20 +149,36 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
             case 1:
                 if (adapter.getPageTitle(fragmentPagePosition) != "shapetype")
                     throw new IllegalArgumentException("Fragment title not matching current fragment");
+                setTopShapethemeUI();
                 break;
             case 2:
                 if (adapter.getPageTitle(fragmentPagePosition) != "shapetheme")
                     throw new IllegalArgumentException("Fragment title not matching current fragment");
+                setTopShapetypeUI();
                 break;
             case 3:
                 if (adapter.getPageTitle(fragmentPagePosition) != "background")
                     throw new IllegalArgumentException("Fragment title not matching current fragment");
+                setTopBackgroundUI();
                 break;
         }
 
     }
 
+    private void setTopBackgroundUI() {
+        displayedSectionTitle.setText("BACKGROUNDS");
+    }
+
+    private void setTopShapetypeUI() {
+        displayedSectionTitle.setText("SHAPE TYPES");
+    }
+
+    private void setTopShapethemeUI() {
+        displayedSectionTitle.setText("SHAPE THEME");
+    }
+
     private void setTopGamemodeUI() {
+        displayedSectionTitle.setText("GAME MODE");
         // todo buy button text
         // todo itemhighlight
         // todo selected item
@@ -161,6 +187,16 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
     }
 
 
+
+    private void setupRandomUnlockSection(View view) {
+        RelativeLayout unlockSction = (RelativeLayout) view.findViewById(R.id.random_unlock_section);
+        unlockSction.setOnTouchListener(new ButtonOnTouchListener(getActivity(), unlockSction, new ButtonOnTouchListener.ButtonExecuteListener() {
+            @Override
+            public void buttonAction() {
+                //randomUnlockClick();
+            }
+        }));
+    }
 
 
     private void setupItemsSection(View view) {
@@ -176,8 +212,8 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
             public void onPageSelected(int position) {
                 // todo setupUI elements according to which fragment
                 ItemSectionFragment currentlyDisplayedFragment = (ItemSectionFragment)  adapter.getItem(position);
-                currentlyDisplayedFragment.setDisplayedItemFromThisSection();
-                //((ItemSectionFragment)adapter.getItem(position)).setDisplayedItemFromThisSection(adapter.getPageTitle(position), adapter.getItem(position));
+                currentlyDisplayedFragment.notifyNewItemToDisplayFromThisSection();
+                //((ItemSectionFragment)adapter.getItem(position)).notifyNewItemToDisplayFromThisSection(adapter.getPageTitle(position), adapter.getItem(position));
                 //Log.d("debugtime", "onPageSelected: page: " + position);
                 //adapter.getRegeisteredFragment
                 setupTopUI(position);
@@ -199,7 +235,7 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
         adapter.addFragment(new ShapeThemeSectionFragment(), "shapetheme");
         adapter.addFragment(new BackgroundSectionFragment(), "background");
         // to set the initially shown item connected to the first one shown in the viewpager (index 0 shown first)
-        //((ItemSectionFragment)adapter.getItem(0)).setDisplayedItemFromThisSection(adapter.getPageTitle(0), ((ItemSectionFragment) adapter.getItem(0)).getDEFAULT_SECTION_VALUE());
+        //((ItemSectionFragment)adapter.getItem(0)).notifyNewItemToDisplayFromThisSection(adapter.getPageTitle(0), ((ItemSectionFragment) adapter.getItem(0)).getDEFAULT_SECTION_VALUE());
         viewPager.setAdapter(adapter);
     }
 

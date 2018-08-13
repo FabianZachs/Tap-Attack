@@ -42,9 +42,9 @@ public abstract class ItemSectionFragment extends Fragment {
 
 
 
-    protected void setDisplayedItemFromThisSection(/*String section, String defaultValue*/) {
+    protected void notifyNewItemToDisplayFromThisSection(/*String section, String defaultValue*/) {
         int resourceIDOfItemImage = helper.getResourceId(getContext(), adapter.getItem(getCurrentSelectedItemPosition()).get_file());
-        listener.selectedItemChanged(getResources().getDrawable(resourceIDOfItemImage), adapter.getItem(getCurrentSelectedItemPosition()).get_unlocked());
+        listener.selectedItemChanged(getResources().getDrawable(resourceIDOfItemImage), adapter.getItem(getCurrentSelectedItemPosition()).get_name(), adapter.getItem(getCurrentSelectedItemPosition()).get_unlocked());
     }
 
     protected void setListener(Context context) {
@@ -69,7 +69,7 @@ public abstract class ItemSectionFragment extends Fragment {
 
                 myAdapter.setSelectedItemPosition(position);
                 myAdapter.notifyDataSetChanged();
-                listener.selectedItemChanged(((ImageView) (view.findViewById(R.id.item_image))).getDrawable(), adapter.getItem(position).get_unlocked());
+                listener.selectedItemChanged(((ImageView) (view.findViewById(R.id.item_image))).getDrawable(), adapter.getItem(position).get_name(), adapter.getItem(position).get_unlocked());
 
                 //if (dbHandler.isItemUnlocked(names[position]) == 1) {
                 //StyleableToast.makeText(mainMenuActivity,  "unlocked", R.style.successtoast).show();

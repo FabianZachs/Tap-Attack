@@ -3,7 +3,6 @@ package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,7 @@ public class GamemodeSectionFragment extends ItemSectionFragment {
         View view = inflater.inflate(R.layout.store_item_grid, container, false);
 
         super.setupItemGrid(view);
-        super.setDisplayedItemFromThisSection();
+        super.notifyNewItemToDisplayFromThisSection();
 
         return view;
     }
