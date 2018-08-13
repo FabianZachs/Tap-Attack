@@ -24,6 +24,7 @@ import com.thezs.fabianzachs.tapattack.helper;
 public class GamemodeSectionFragment extends ItemSectionFragment {
 
     private String SECTION = "game mode";
+    private String DEFAULT_SECTION_VALUE = Constants.GAMEMODES[0];
 
 
 
@@ -37,10 +38,10 @@ public class GamemodeSectionFragment extends ItemSectionFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.store_item_grid, container, false);
-
         Log.d("onviewcreateitem", "onCreateView: " + SECTION);
-        super.setupItemGrid(view, SECTION);
-        super.setInitialSelectedItem(SECTION, Constants.GAMEMODES[0]);
+
+        super.setupItemGrid(view, SECTION, DEFAULT_SECTION_VALUE);
+        //super.setInitialSelectedItem(SECTION, DEFAULT_SECTION_VALUE);
 
         return view;
     }

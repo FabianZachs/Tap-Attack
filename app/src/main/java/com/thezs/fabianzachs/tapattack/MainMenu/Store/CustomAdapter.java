@@ -30,10 +30,11 @@ public class CustomAdapter extends BaseAdapter {
     private MyDBHandler dbHandler;
     private String category;
 
-    public CustomAdapter(Context context, MyDBHandler dbHandler, String category) {
+    public CustomAdapter(Context context, MyDBHandler dbHandler, String category, int initiallySelectedItem) {
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         this.category = category;
+        this.selectedItemPosition = initiallySelectedItem;
 
 
         this.dbHandler = dbHandler;

@@ -26,6 +26,7 @@ import com.thezs.fabianzachs.tapattack.helper;
 public class BackgroundSectionFragment extends ItemSectionFragment {
 
     private String SECTION = "background";
+    private String DEFAULT_SECTION_VALUE = Constants.BACKGROUNDS[0];
 
 
     @Override
@@ -40,8 +41,8 @@ public class BackgroundSectionFragment extends ItemSectionFragment {
         View view = inflater.inflate(R.layout.store_item_grid, container, false);
         Log.d("onviewcreateitem", "onCreateView: " + SECTION);
 
-        super.setupItemGrid(view, SECTION); //todo does gridview know which item to highlight first && gridview seleced item resets whenever we return to it
-        super.setInitialSelectedItem(SECTION, Constants.BACKGROUNDS[0]);
+        super.setupItemGrid(view, SECTION, DEFAULT_SECTION_VALUE); //todo does gridview know which item to highlight first && gridview seleced item resets whenever we return to it
+        //super.setInitialSelectedItem(SECTION,DEFAULT_SECTION_VALUE);
 
         return view;
     }

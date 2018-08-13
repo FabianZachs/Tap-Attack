@@ -36,6 +36,11 @@ public abstract class ItemSectionFragment extends Fragment {
         prefs = getActivity().getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
     }
 
+    protected int getCurrentSelectedItem(String section, String defaultValue) {
+        String[] names = dbHandler.getItemNamesFromCategory(section);
+        return helper.getIndexOf(names, prefs.getString(section, defaultValue));
+    }
+
 
     protected void setInitialSelectedItem(String section, String defaultValue) {
         String[] names = dbHandler.getItemNamesFromCategory(section);
@@ -55,9 +60,9 @@ public abstract class ItemSectionFragment extends Fragment {
         }
     }
 
-    public void setupItemGrid(View view, final String section) {
+    public void setupItemGrid(View view, final String section, String defaultValue) {
         gridView = (GridView) view.findViewById(R.id.gridview);
-        adapter = new CustomAdapter(getActivity().getApplicationContext(), dbHandler, section);
+        adapter = new CustomAdapter(getActivity().getApplicationContext(), dbHandler, section, getCurrentSelectedItem(section, defaultValue));
         gridView.setAdapter(adapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

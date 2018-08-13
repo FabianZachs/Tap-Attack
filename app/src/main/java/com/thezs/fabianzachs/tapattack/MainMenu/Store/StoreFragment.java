@@ -38,7 +38,6 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.store_fragment, container, false);
-        Log.d("storecycle", "onCreateView: ");
         setupBottomNavigation(view);
         setupItemsSection(view);
         displayedItemImage = (ImageView) view.findViewById(R.id.selected_item);
@@ -54,7 +53,7 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
         }));
 
 
-        final Button randomUnlock = (Button) view.findViewById(R.id.random_unlock_text);
+        //final Button randomUnlock = (Button) view.findViewById(R.id.random_unlock_text);
         //randomUnlock.setOnTouchListener(new ButtonOnTouchListener(getActivity(), randomUnlock, "randomUnlock"));
 
         /* todo animations
@@ -178,6 +177,7 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
 
     private void setupItemsSection(View view) {
         viewPager = (CustomViewPager) view.findViewById(R.id.store_container);
+        viewPager.setOffscreenPageLimit(3);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
