@@ -23,12 +23,14 @@ import com.thezs.fabianzachs.tapattack.R;
 
 public class ShapeThemeSectionFragment extends ItemSectionFragment {
 
-    private String SECTION = "shape theme";
-    private String DEFAULT_SECTION_VALUE = Constants.SHAPE_THEMES[0];
+    //private String SECTION = "shape theme";
+    //private String DEFAULT_SECTION_VALUE = Constants.SHAPE_THEMES[0];
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setDEFAULT_SECTION_VALUE(Constants.SHAPE_THEMES[0]);
+        setSECTION("shape theme");
     }
 
     @Nullable
@@ -37,7 +39,7 @@ public class ShapeThemeSectionFragment extends ItemSectionFragment {
         //return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.store_item_grid, container, false);
         super.setupItemGrid(view, SECTION, DEFAULT_SECTION_VALUE); //todo does gridview know which item to highlight first
-        //super.setInitialSelectedItem(SECTION, DEFAULT_SECTION_VALUE);
+        //super.setInitialDisplayedItemFromThisSection(SECTION, DEFAULT_SECTION_VALUE);
         Log.d("onviewcreateitem", "onCreateView: " + SECTION);
 
         return view;

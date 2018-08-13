@@ -1,21 +1,15 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.ImageView;
 
 import com.thezs.fabianzachs.tapattack.Constants;
-import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.R;
-import com.thezs.fabianzachs.tapattack.helper;
 
 /**
  * Created by fabianzachs on 10/08/18.
@@ -23,14 +17,17 @@ import com.thezs.fabianzachs.tapattack.helper;
 
 public class GamemodeSectionFragment extends ItemSectionFragment {
 
-    private String SECTION = "game mode";
-    private String DEFAULT_SECTION_VALUE = Constants.GAMEMODES[0];
+    //private String SECTION = "game mode";
+    //public String DEFAULT_SECTION_VALUE = Constants.GAMEMODES[0];
+
 
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setDEFAULT_SECTION_VALUE(Constants.GAMEMODES[0]);
+        setSECTION("game mode");
     }
 
     @Nullable
@@ -41,7 +38,7 @@ public class GamemodeSectionFragment extends ItemSectionFragment {
         Log.d("onviewcreateitem", "onCreateView: " + SECTION);
 
         super.setupItemGrid(view, SECTION, DEFAULT_SECTION_VALUE);
-        //super.setInitialSelectedItem(SECTION, DEFAULT_SECTION_VALUE);
+        super.setInitialDisplayedItemFromThisSection();
 
         return view;
     }

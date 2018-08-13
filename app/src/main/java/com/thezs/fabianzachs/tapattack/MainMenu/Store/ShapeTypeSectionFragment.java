@@ -22,13 +22,15 @@ import com.thezs.fabianzachs.tapattack.R;
 
 public class ShapeTypeSectionFragment extends ItemSectionFragment {
 
-    private String SECTION = "shape type";
-    private String DEFAULT_SECTION_VALUE = Constants.SHAPE_TYPES[0];
+    //private String SECTION = "shape type";
+    //private String DEFAULT_SECTION_VALUE = Constants.SHAPE_TYPES[0];
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setDEFAULT_SECTION_VALUE(Constants.SHAPE_TYPES[0]);
+        setSECTION("shape type");
     }
 
     @Nullable
@@ -39,7 +41,7 @@ public class ShapeTypeSectionFragment extends ItemSectionFragment {
         Log.d("onviewcreateitem", "onCreateView: " + SECTION);
 
         super.setupItemGrid(view, SECTION, DEFAULT_SECTION_VALUE); //todo does gridview know which item to highlight first
-        //super.setInitialSelectedItem(SECTION, DEFAULT_SECTION_VALUE);
+        //super.setInitialDisplayedItemFromThisSection(SECTION, DEFAULT_SECTION_VALUE);
 
         return view;
     }

@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
@@ -187,7 +188,14 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
             @Override
             public void onPageSelected(int position) {
                 // todo setupUI elements according to which fragment
-                setupTopUI(position);
+                Log.d("debugtime", "onPageSelected: page: " + viewPager.getCurrentItem());
+                ItemSectionFragment currentlyDisplayedFragment = (ItemSectionFragment)  adapter.getItem(position);
+                currentlyDisplayedFragment.setInitialDisplayedItemFromThisSection();
+                //((ItemSectionFragment)adapter.getItem(position)).setInitialDisplayedItemFromThisSection(adapter.getPageTitle(position), adapter.getItem(position));
+                //Log.d("debugtime", "onPageSelected: page: " + position);
+                //adapter.getRegeisteredFragment
+                //setupTopUI(position);
+
             }
 
             @Override
@@ -204,6 +212,8 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
         adapter.addFragment(new ShapeTypeSectionFragment(), "shapetype");
         adapter.addFragment(new ShapeThemeSectionFragment(), "shapetheme");
         adapter.addFragment(new BackgroundSectionFragment(), "background");
+        // to set the initially shown item connected to the first one shown in the viewpager (index 0 shown first)
+        //((ItemSectionFragment)adapter.getItem(0)).setInitialDisplayedItemFromThisSection(adapter.getPageTitle(0), ((ItemSectionFragment) adapter.getItem(0)).getDEFAULT_SECTION_VALUE());
         viewPager.setAdapter(adapter);
     }
 

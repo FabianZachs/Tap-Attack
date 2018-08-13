@@ -29,22 +29,31 @@ public abstract class ItemSectionFragment extends Fragment {
     private GridView gridView;
     private CustomAdapter adapter;
 
+    protected String DEFAULT_SECTION_VALUE;
+    protected String SECTION;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setUpPrefsAndDatabase();
+    }
+
+    public void setUpPrefsAndDatabase() {
         dbHandler = new MyDBHandler(getActivity(), null, null, 1);
         prefs = getActivity().getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
     }
 
-    protected int getCurrentSelectedItem(String section, String defaultValue) {
-        String[] names = dbHandler.getItemNamesFromCategory(section);
-        return helper.getIndexOf(names, prefs.getString(section, defaultValue));
-    }
 
 
-    protected void setInitialSelectedItem(String section, String defaultValue) {
+    protected void setInitialDisplayedItemFromThisSection(/*String section, String defaultValue*/) {
+        /*
         String[] names = dbHandler.getItemNamesFromCategory(section);
         int initiallySelectedPosition = helper.getIndexOf(names, prefs.getString(section, defaultValue));
+        int resourceID = helper.getResourceId(getContext(), adapter.getItem(initiallySelectedPosition).get_file());
+        listener.selectedItemChanged(getResources().getDrawable(resourceID), adapter.getItem(initiallySelectedPosition).get_unlocked());
+        */
+        String[] names = dbHandler.getItemNamesFromCategory(SECTION);
+        int initiallySelectedPosition = helper.getIndexOf(names, prefs.getString(SECTION, DEFAULT_SECTION_VALUE));
         int resourceID = helper.getResourceId(getContext(), adapter.getItem(initiallySelectedPosition).get_file());
         listener.selectedItemChanged(getResources().getDrawable(resourceID), adapter.getItem(initiallySelectedPosition).get_unlocked());
         //adapter.setSelectedItemPosition(initiallySelectedPosition);
@@ -83,5 +92,27 @@ public abstract class ItemSectionFragment extends Fragment {
                 //}
             }
         });
+    }
+
+    protected int getCurrentSelectedItem(String section, String defaultValue) {
+        String[] names = dbHandler.getItemNamesFromCategory(section);
+        return helper.getIndexOf(names, prefs.getString(section, defaultValue));
+    }
+
+
+    protected void setDEFAULT_SECTION_VALUE(String DEFAULT_SECTION_VALUE) {
+        this.DEFAULT_SECTION_VALUE = DEFAULT_SECTION_VALUE;
+    }
+
+    public String getDEFAULT_SECTION_VALUE() {
+        return DEFAULT_SECTION_VALUE;
+    }
+
+    protected void setSECTION(String SECTION) {
+        this.SECTION = SECTION;
+    }
+
+    public String getSECTION() {
+        return SECTION;
     }
 }
