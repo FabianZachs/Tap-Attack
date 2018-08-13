@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.R;
 import com.thezs.fabianzachs.tapattack.helper;
@@ -21,17 +22,18 @@ import com.thezs.fabianzachs.tapattack.helper;
 
 public class GamemodeSectionFragment extends ItemSectionFragment {
 
-    private MyDBHandler dbHandler; // todo maybe instantiate once and pass to all store item fragments
+    //private MyDBHandler dbHandler;
     //private GameModeSectionFragmentListener listener;
-    private SharedPreferences prefs;
-    private GridView gridView;
-    private CustomAdapter adapter;
+    //private SharedPreferences prefs;
+    //private GridView gridView;
+    //private CustomAdapter adapter;
+    private String SECTION = "game mode";
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.dbHandler = new MyDBHandler(getActivity(), null, null, 1);
-        prefs = getActivity().getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
     }
 
     @Nullable
@@ -40,14 +42,9 @@ public class GamemodeSectionFragment extends ItemSectionFragment {
         //return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.store_item_grid, container, false);
 
-        setupItemGrid(view);
+        super.setupItemGrid(view, SECTION);
+        super.setInitialSelectedItem(SECTION, Constants.GAMEMODES[0]);
 
-
-        // to find initially selected item
-        final String[] names = dbHandler.getItemNamesFromCategory("game mode");
-        int itemIndex = helper.getIndexOf(names, prefs.getString("gamemode", "tutorial"));
-        int resourceID = helper.getResourceId(getContext(), adapter.getItem(itemIndex).get_file());
-        listener.selectedItemChanged(getResources().getDrawable(resourceID), adapter.getItem(itemIndex).get_unlocked());
         return view;
     }
 
@@ -64,6 +61,7 @@ public class GamemodeSectionFragment extends ItemSectionFragment {
         }*/
     }
 
+    /*
     public void setupItemGrid(View view) {
         gridView = (GridView) view.findViewById(R.id.gridview);
         adapter = new CustomAdapter( getActivity().getApplicationContext(), dbHandler, "game mode");
@@ -87,7 +85,7 @@ public class GamemodeSectionFragment extends ItemSectionFragment {
                 //}
             }
         });
-    }
+    }*/
 
     /*
     public interface GameModeSectionFragmentListener extends ItemSectionListener {

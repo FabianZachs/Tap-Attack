@@ -24,18 +24,17 @@ import com.thezs.fabianzachs.tapattack.helper;
 
 public class BackgroundSectionFragment extends ItemSectionFragment {
 
-    private MyDBHandler dbHandler; // todo maybe instantiate once and pass to all store item fragments
-    private SharedPreferences prefs;
+    //private MyDBHandler dbHandler;
+    //private SharedPreferences prefs;
     //private BackgroundSectionFragmentListener listener;
-    private GridView gridView;
-    private CustomAdapter adapter;
+    //private GridView gridView;
+    //private CustomAdapter adapter;
+    private String SECTION = "background";
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.dbHandler = new MyDBHandler(getActivity(), null, null, 1);
-        prefs = getActivity().getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
     }
 
     @Nullable
@@ -44,11 +43,8 @@ public class BackgroundSectionFragment extends ItemSectionFragment {
         //return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.store_item_grid, container, false);
 
-        setupItemGrid(view);
-        final String[] names = dbHandler.getItemNamesFromCategory("background");
-        int itemIndex = helper.getIndexOf(names, prefs.getString("background", Constants.BACKGROUNDS[0]));
-        int resourceID = helper.getResourceId(getContext(), adapter.getItem(itemIndex).get_file());
-        listener.selectedItemChanged(getResources().getDrawable(resourceID), adapter.getItem(itemIndex).get_unlocked());
+        super.setupItemGrid(view, SECTION); //todo does gridview know which item to highlight first
+        super.setInitialSelectedItem(SECTION, Constants.BACKGROUNDS[0]);
 
         return view;
     }
@@ -76,6 +72,7 @@ public class BackgroundSectionFragment extends ItemSectionFragment {
         });
     }*/
 
+    /*
     public void setupItemGrid(View view) {
         gridView = (GridView) view.findViewById(R.id.gridview);
         adapter = new CustomAdapter( getActivity().getApplicationContext(), dbHandler, "background");
@@ -99,7 +96,7 @@ public class BackgroundSectionFragment extends ItemSectionFragment {
                 //}
             }
         });
-    }
+    }*/
 
     /*
     public interface BackgroundSectionFragmentListener {
