@@ -24,7 +24,7 @@ import android.widget.ImageView;
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
 import com.thezs.fabianzachs.tapattack.R;
 
-public class StoreFragment extends Fragment implements GamemodeSectionFragment.GameModeSectionFragmentListener {
+public class StoreFragment extends Fragment implements /*GamemodeSectionFragment.GameModeSectionFragmentListener*/ItemSectionListener {
 
     private CustomViewPager viewPager;
     private SectionsPageAdapter  adapter;
@@ -57,11 +57,12 @@ public class StoreFragment extends Fragment implements GamemodeSectionFragment.G
         final Button randomUnlock = (Button) view.findViewById(R.id.random_unlock_text);
         //randomUnlock.setOnTouchListener(new ButtonOnTouchListener(getActivity(), randomUnlock, "randomUnlock"));
 
-        /*
+        /* todo animations
         ImageView highlight = (ImageView) view.findViewById(R.id.item_highlight);
         Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.pulse);
         highlight.startAnimation(myAnim);
         */
+        /*
         ImageView iv = (ImageView) view.findViewById(R.id.item_highlight);
 
         ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(
@@ -94,6 +95,7 @@ public class StoreFragment extends Fragment implements GamemodeSectionFragment.G
         scaleDownItem.setRepeatCount(ObjectAnimator.INFINITE);
         scaleDownItem.setRepeatMode(ObjectAnimator.REVERSE);
         scaleDownItem.start();
+        */
 
         setupTopUI(0);
         return view;
@@ -154,9 +156,12 @@ public class StoreFragment extends Fragment implements GamemodeSectionFragment.G
         // todo item name title
     }
 
+
     @Override
-    public void selectedItemChanged(Drawable itemImage) {
+    public void selectedItemChanged(Drawable itemImage, int unlocked) {
         displayedItemImage.setImageDrawable(itemImage);
+        // todo doesnt need to setup top ui since we are in the same store section (otherwise other code will be called)
+        // todo and so only the item needs to change
 
     }
 

@@ -2,11 +2,8 @@ package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +19,10 @@ import com.thezs.fabianzachs.tapattack.helper;
  * Created by fabianzachs on 10/08/18.
  */
 
-public class GamemodeSectionFragment extends Fragment {
+public class GamemodeSectionFragment extends ItemSectionFragment {
 
     private MyDBHandler dbHandler; // todo maybe instantiate once and pass to all store item fragments
-    private GameModeSectionFragmentListener listener;
+    //private GameModeSectionFragmentListener listener;
     private SharedPreferences prefs;
     private GridView gridView;
     private CustomAdapter adapter;
@@ -50,19 +47,21 @@ public class GamemodeSectionFragment extends Fragment {
         final String[] names = dbHandler.getItemNamesFromCategory("game mode");
         int itemIndex = helper.getIndexOf(names, prefs.getString("gamemode", "tutorial"));
         int resourceID = helper.getResourceId(getContext(), adapter.getItem(itemIndex).get_file());
-        listener.selectedItemChanged(getResources().getDrawable(resourceID));
+        listener.selectedItemChanged(getResources().getDrawable(resourceID), adapter.getItem(itemIndex).get_unlocked());
         return view;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        super.setListener(context);
+        /*
         if (getParentFragment() instanceof GameModeSectionFragmentListener) {
             listener = (GameModeSectionFragmentListener) getParentFragment();
         } else {
             throw new ClassCastException(context.toString()
                     + " must implement GamemodeSectionFragment.GameModeSectionFragmentListener");
-        }
+        }*/
     }
 
     public void setupItemGrid(View view) {
@@ -78,7 +77,7 @@ public class GamemodeSectionFragment extends Fragment {
 
                 myAdapter.setSelectedItemPosition(position);
                 myAdapter.notifyDataSetChanged();
-                listener.selectedItemChanged(((ImageView) (view.findViewById(R.id.item_image))).getDrawable());
+                listener.selectedItemChanged(((ImageView) (view.findViewById(R.id.item_image))).getDrawable(), adapter.getItem(position).get_unlocked());
 
                 //if (dbHandler.isItemUnlocked(names[position]) == 1) {
                     //StyleableToast.makeText(mainMenuActivity,  "unlocked", R.style.successtoast).show();
@@ -90,8 +89,9 @@ public class GamemodeSectionFragment extends Fragment {
         });
     }
 
-    public interface GameModeSectionFragmentListener {
+    /*
+    public interface GameModeSectionFragmentListener extends ItemSectionListener {
         void selectedItemChanged(Drawable itemImage);
-    }
+    }*/
 
 }

@@ -19,21 +19,14 @@ import com.thezs.fabianzachs.tapattack.R;
 public abstract class ItemSectionFragment extends Fragment {
     protected SharedPreferences prefs;
     protected MyDBHandler dbHandler;
+    public ItemSectionListener listener;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        this.dbHandler = new MyDBHandler(getActivity(), null, null, 1);
-        prefs = getActivity().getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.store_item_grid, container, false);
-        ///setupItemGrid(view);
-        return view;
-
+    protected void setListener(Context context) {
+        if (getParentFragment() instanceof ItemSectionListener) {
+            listener = (ItemSectionListener) getParentFragment();
+        } else {
+            throw new ClassCastException(context.toString()
+                    + " must implement GamemodeSectionFragment.GameModeSectionFragmentListener");
+        }
     }
 }

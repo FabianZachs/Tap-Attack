@@ -1,5 +1,6 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import com.thezs.fabianzachs.tapattack.R;
 public class ShapeTypeSectionFragment extends Fragment {
 
     private MyDBHandler dbHandler; // todo maybe instantiate once and pass to all store item fragments
+    private ShapeTypeSectionFragmentListener listener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,5 +53,9 @@ public class ShapeTypeSectionFragment extends Fragment {
                 myAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    public interface ShapeTypeSectionFragmentListener {
+        void selectedItemChanged(Drawable itemImage);
     }
 }

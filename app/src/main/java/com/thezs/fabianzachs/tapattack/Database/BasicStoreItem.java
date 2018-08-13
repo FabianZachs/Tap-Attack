@@ -24,6 +24,10 @@ public class BasicStoreItem {
         return _drawableFile;
     }
 
+    public int get_unlocked() {
+        return _unlocked;
+    }
+
     public int is_unlocked() {
         return _unlocked;
     }
