@@ -17,11 +17,6 @@ import com.thezs.fabianzachs.tapattack.R;
 
 public class GamemodeSectionFragment extends ItemSectionFragment {
 
-    //private String SECTION = "game mode";
-    //public String DEFAULT_SECTION_VALUE = Constants.GAMEMODES[0];
-
-
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,11 +28,9 @@ public class GamemodeSectionFragment extends ItemSectionFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.store_item_grid, container, false);
-        Log.d("onviewcreateitem", "onCreateView: " + SECTION);
 
-        super.setupItemGrid(view, SECTION, DEFAULT_SECTION_VALUE);
+        super.setupItemGrid(view);
         super.setDisplayedItemFromThisSection();
 
         return view;

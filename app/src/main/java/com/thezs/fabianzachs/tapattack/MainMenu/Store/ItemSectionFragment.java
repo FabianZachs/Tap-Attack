@@ -5,10 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -38,7 +35,7 @@ public abstract class ItemSectionFragment extends Fragment {
         setUpPrefsAndDatabase();
     }
 
-    public void setUpPrefsAndDatabase() {
+    protected void setUpPrefsAndDatabase() {
         dbHandler = new MyDBHandler(getActivity(), null, null, 1);
         prefs = getActivity().getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
     }
@@ -46,18 +43,8 @@ public abstract class ItemSectionFragment extends Fragment {
 
 
     protected void setDisplayedItemFromThisSection(/*String section, String defaultValue*/) {
-        /*
-        String[] names = dbHandler.getItemNamesFromCategory(section);
-        int initiallySelectedPosition = helper.getIndexOf(names, prefs.getString(section, defaultValue));
-        int resourceID = helper.getResourceId(getContext(), adapter.getItem(initiallySelectedPosition).get_file());
-        listener.selectedItemChanged(getResources().getDrawable(resourceID), adapter.getItem(initiallySelectedPosition).get_unlocked());
-        */
-        String[] names = dbHandler.getItemNamesFromCategory(SECTION);
-        int initiallySelectedPosition = helper.getIndexOf(names, prefs.getString(SECTION, DEFAULT_SECTION_VALUE));
-        int resourceID = helper.getResourceId(getContext(), adapter.getItem(initiallySelectedPosition).get_file());
-        listener.selectedItemChanged(getResources().getDrawable(resourceID), adapter.getItem(initiallySelectedPosition).get_unlocked());
-        //adapter.setSelectedItemPosition(initiallySelectedPosition);
-        //adapter.notifyDataSetChanged();
+        int resourceIDOfItemImage = helper.getResourceId(getContext(), adapter.getItem(getCurrentSelectedItemPosition()).get_file());
+        listener.selectedItemChanged(getResources().getDrawable(resourceIDOfItemImage), adapter.getItem(getCurrentSelectedItemPosition()).get_unlocked());
     }
 
     protected void setListener(Context context) {
@@ -69,9 +56,9 @@ public abstract class ItemSectionFragment extends Fragment {
         }
     }
 
-    public void setupItemGrid(View view, final String section, String defaultValue) {
+    public void setupItemGrid(View view/*, final String section, String defaultValue*/) {
         gridView = (GridView) view.findViewById(R.id.gridview);
-        adapter = new CustomAdapter(getActivity().getApplicationContext(), dbHandler, section, getCurrentSelectedItem(section, defaultValue));
+        adapter = new CustomAdapter(getActivity().getApplicationContext(), dbHandler, SECTION, getCurrentSelectedItemPosition());
         gridView.setAdapter(adapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -87,16 +74,16 @@ public abstract class ItemSectionFragment extends Fragment {
                 //if (dbHandler.isItemUnlocked(names[position]) == 1) {
                 //StyleableToast.makeText(mainMenuActivity,  "unlocked", R.style.successtoast).show();
                 SharedPreferences.Editor prefsEditor = prefs.edit();
-                prefsEditor.putString(section, myAdapter.getItem(position).get_name());
+                prefsEditor.putString(SECTION, myAdapter.getItem(position).get_name());
                 prefsEditor.apply();
                 //}
             }
         });
     }
 
-    protected int getCurrentSelectedItem(String section, String defaultValue) {
-        String[] names = dbHandler.getItemNamesFromCategory(section);
-        return helper.getIndexOf(names, prefs.getString(section, defaultValue));
+    protected int getCurrentSelectedItemPosition() {
+        String[] names = dbHandler.getItemNamesFromCategory(SECTION);
+        return helper.getIndexOf(names, prefs.getString(SECTION, DEFAULT_SECTION_VALUE));
     }
 
 

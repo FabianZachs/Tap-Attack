@@ -24,11 +24,30 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
     private CustomViewPager viewPager;
     private SectionsPageAdapter  adapter;
     private StoreListener storeListener;
-    private int currentItemFragmentIndex = 0;
     private ImageView displayedItemImage;
 
 
-    @SuppressLint("ClickableViewAccessibility")
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof StoreListener) {
+            storeListener = (StoreListener) context;
+        } else {
+            throw new ClassCastException(context.toString()
+                    + " must implement MyListFragment.OnItemSelectedListener");
+        }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -96,46 +115,37 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d("storecycle", "onCreate: ");
+    public void selectedItemChanged(Drawable itemImage, int unlocked) {
+        displayedItemImage.setImageDrawable(itemImage);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.d("storecycle", "onActivitycreated: ");
+    public interface StoreListener {
+        void storeFragmentToMenuFragment();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Log.d("storecycle", "onAttach: ");
-        if (context instanceof StoreListener) {
-            storeListener = (StoreListener) context;
-        } else {
-            throw new ClassCastException(context.toString()
-                    + " must implement MyListFragment.OnItemSelectedListener");
-        }
+    public void setViewPager(int fragmentNumber) {
+        viewPager.setCurrentItem(fragmentNumber);
     }
 
-    public void setupTopUI(int position) {
-        switch (position)  {
+
+
+    private void setupTopUI(int fragmentPagePosition) {
+        switch (fragmentPagePosition)  {
             case 0:
-                if (adapter.getPageTitle(position) != "gamemode")
+                if (adapter.getPageTitle(fragmentPagePosition) != "gamemode")
                     throw new IllegalArgumentException("Fragment title not matching current fragment");
                 setTopGamemodeUI();
                 break;
             case 1:
-                if (adapter.getPageTitle(position) != "shapetype")
+                if (adapter.getPageTitle(fragmentPagePosition) != "shapetype")
                     throw new IllegalArgumentException("Fragment title not matching current fragment");
                 break;
             case 2:
-                if (adapter.getPageTitle(position) != "shapetheme")
+                if (adapter.getPageTitle(fragmentPagePosition) != "shapetheme")
                     throw new IllegalArgumentException("Fragment title not matching current fragment");
                 break;
             case 3:
-                if (adapter.getPageTitle(position) != "background")
+                if (adapter.getPageTitle(fragmentPagePosition) != "background")
                     throw new IllegalArgumentException("Fragment title not matching current fragment");
                 break;
         }
@@ -151,23 +161,6 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
     }
 
 
-    @Override
-    public void selectedItemChanged(Drawable itemImage, int unlocked) {
-        displayedItemImage.setImageDrawable(itemImage);
-        // todo doesnt need to setup top ui since we are in the same store section (otherwise other code will be called)
-        // todo and so only the item needs to change
-
-    }
-
-
-    public interface StoreListener {
-        void storeFragmentToMenuFragment();
-    }
-
-
-    public void setViewPager(int fragmentNumber) {
-        viewPager.setCurrentItem(fragmentNumber);
-    }
 
 
     private void setupItemsSection(View view) {
@@ -182,13 +175,12 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
             @Override
             public void onPageSelected(int position) {
                 // todo setupUI elements according to which fragment
-                Log.d("debugtime", "onPageSelected: page: " + viewPager.getCurrentItem());
                 ItemSectionFragment currentlyDisplayedFragment = (ItemSectionFragment)  adapter.getItem(position);
                 currentlyDisplayedFragment.setDisplayedItemFromThisSection();
                 //((ItemSectionFragment)adapter.getItem(position)).setDisplayedItemFromThisSection(adapter.getPageTitle(position), adapter.getItem(position));
                 //Log.d("debugtime", "onPageSelected: page: " + position);
                 //adapter.getRegeisteredFragment
-                //setupTopUI(position);
+                setupTopUI(position);
 
             }
 
