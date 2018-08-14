@@ -29,8 +29,11 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
+import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.MyRewardVideoAd;
 import com.thezs.fabianzachs.tapattack.R;
+
+import org.w3c.dom.Text;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -45,6 +48,8 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
     private TextView displayedSectionTitle;
     private TextView currentPointsText;
     public SharedPreferences prefs;
+    private MyDBHandler dbHandler;
+    private View view; // todo refactor to use the global variable since its better than needing to keep all above references
 
 
     @Override
@@ -62,6 +67,7 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prefs = getActivity().getSharedPreferences("playerInfo", MODE_PRIVATE);
+        dbHandler = new MyDBHandler(getActivity(), null, null, 1);
     }
 
     @Override
@@ -73,13 +79,12 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.store_fragment2, container, false);
+        this.view = inflater.inflate(R.layout.store_fragment2, container, false);
         displayedItemTitle = (TextView) view.findViewById(R.id.item_title_text);
         displayedSectionTitle = (TextView) view.findViewById(R.id.section_title_text);
         displayedItemImage = (ImageView) view.findViewById(R.id.selected_item);
         lockImage = (ImageView) view.findViewById(R.id.lock);
         currentPointsText = (TextView) view.findViewById(R.id.current_points_text);
-        //setupVideoAd();
         setupVideoAdClick(view, prefs);
         setupBottomNavigation(view);
         setupItemsSection(view);
@@ -176,6 +181,11 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
         currentPointsText.setText(Integer.toString(prefs.getInt("points", 0)));
     }
 
+    public void setupLockedFraction(View view, String category) {
+        TextView fraction = (TextView) view.findViewById(R.id.unlocked_fraction);
+        int numberUnlocked = dbHandler.getNumberOfItemsFromCategory(category) - dbHandler.getNumberOfLockedItems(category);
+        fraction.setText( numberUnlocked + "/" + dbHandler.getNumberOfItemsFromCategory(category));
+    }
 
 
     public interface StoreListener {
@@ -200,12 +210,12 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
             case 1:
                 if (!adapter.getPageTitle(fragmentPagePosition).equals("shapetype"))
                     throw new IllegalArgumentException("Fragment title not matching current fragment");
-                setTopShapethemeUI();
+                setTopShapetypeUI();
                 break;
             case 2:
                 if (!adapter.getPageTitle(fragmentPagePosition).equals("shapetheme"))
                     throw new IllegalArgumentException("Fragment title not matching current fragment");
-                setTopShapetypeUI();
+                setTopShapethemeUI();
                 break;
             case 3:
                 if (!adapter.getPageTitle(fragmentPagePosition).equals("background"))
@@ -218,18 +228,22 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
 
     private void setTopBackgroundUI() {
         displayedSectionTitle.setText("BACKGROUNDS");
+        setupLockedFraction(view, "background");
     }
 
     private void setTopShapetypeUI() {
         displayedSectionTitle.setText("SHAPE TYPES");
+        setupLockedFraction(view, "shape type");
     }
 
     private void setTopShapethemeUI() {
         displayedSectionTitle.setText("SHAPE THEME");
+        setupLockedFraction(view, "shape theme");
     }
 
     private void setTopGamemodeUI() {
         displayedSectionTitle.setText("GAME MODE");
+        setupLockedFraction(view, "game mode");
         // todo buy button text
         // todo itemhighlight
         // todo selected item

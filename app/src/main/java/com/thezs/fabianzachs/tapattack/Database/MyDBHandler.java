@@ -128,6 +128,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return lockedArray;
     }
 
+    public int getNumberOfLockedItems(String category) {
+        return getListOfLockedItems(category).length;
+    }
+
     public HashMap<String, Boolean> getMapOFItemsWithUnlockStatus(String category) {
         HashMap<String, Boolean> itemsAndUnlockedStatus = new HashMap<>();
         String query = "SELECT ";
@@ -215,6 +219,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         return namesArray;
 
+    }
+
+    public int getNumberOfItemsFromCategory(String category) {
+        return getItemNamesFromCategory(category).length;
     }
 
     public void removeAllRows() {
