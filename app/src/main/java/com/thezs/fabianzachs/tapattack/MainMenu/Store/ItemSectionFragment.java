@@ -2,17 +2,23 @@ package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
+import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.R;
 import com.thezs.fabianzachs.tapattack.helper;
+
+import java.util.Random;
 
 /**
  * Created by fabianzachs on 12/08/18.
@@ -22,6 +28,7 @@ public abstract class ItemSectionFragment extends Fragment {
 
     protected SharedPreferences prefs;
     protected MyDBHandler dbHandler;
+
     public ItemSectionListener listener;
     private GridView gridView;
     private CustomAdapter adapter;
@@ -35,6 +42,35 @@ public abstract class ItemSectionFragment extends Fragment {
         setUpPrefsAndDatabase();
     }
 
+    public void randomUnlock() {
+        Log.d("randomunlock", "randomUnlock: ");
+        if (SECTION.equals("game mode"))
+            return;
+            //StyleableToast.makeText(Constants.CURRENT_CONTEXT, "goooood", R.style.successtoast).show();
+        String[] lockedItems = dbHandler.getListOfLockedItems(SECTION);
+        if (lockedItems.length == 0) {
+            // todo handle if all items are unlocked
+            StyleableToast.makeText(Constants.CURRENT_CONTEXT, "All Items Unlocked", R.style.successtoast).show();
+            return;
+        }
+
+        Random random = new Random();
+        String itemNameToUnlock = lockedItems.length > 1 ?  lockedItems[random.nextInt(lockedItems.length - 1) + 1] : lockedItems[0];
+        dbHandler.unlockItemViaName(itemNameToUnlock);
+
+        int positionToUnlock = adapter.getIndexOfItemWithName(itemNameToUnlock);
+
+        gridView.smoothScrollToPosition(positionToUnlock);
+        // todo have it tick select each item to the positionToUnlock
+        adapter.setSelectedItemPosition(positionToUnlock);
+        adapter.notifyDataSetChanged();
+
+        // todo tell parent framgnet new item shown
+
+        Drawable image = getContext().getResources().getDrawable(helper.getResourceId(getContext(), adapter.getItem(positionToUnlock).get_file()));
+        listener.selectedItemChanged(image, adapter.getItem(positionToUnlock).get_name(), 1);
+    }
+
     protected void setUpPrefsAndDatabase() {
         dbHandler = new MyDBHandler(getActivity(), null, null, 1);
         prefs = getActivity().getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
@@ -42,9 +78,10 @@ public abstract class ItemSectionFragment extends Fragment {
 
 
 
-    protected void notifyNewItemToDisplayFromThisSection(/*String section, String defaultValue*/) {
-        int resourceIDOfItemImage = helper.getResourceId(getContext(), adapter.getItem(getCurrentSelectedItemPosition()).get_file());
-        listener.selectedItemChanged(getResources().getDrawable(resourceIDOfItemImage), adapter.getItem(getCurrentSelectedItemPosition()).get_name(), adapter.getItem(getCurrentSelectedItemPosition()).get_unlocked());
+    protected void notifyNewItemToDisplayFromThisSectionBecauseSectionChange(/*String section, String defaultValue*/) {
+        Log.d("itemunlocked", "notifyNewItemToDisplayFromThisSectionBecauseSectionChange: " + adapter.getItem(getCurrentEquipedItemPosition()).get_name());
+        int resourceIDOfItemImage = helper.getResourceId(getContext(), adapter.getItem(getCurrentEquipedItemPosition()).get_file());
+        listener.selectedItemChanged(getResources().getDrawable(resourceIDOfItemImage), adapter.getItem(getCurrentEquipedItemPosition()).get_name(), adapter.getItem(getCurrentEquipedItemPosition()).get_unlocked());
     }
 
     protected void setListener(Context context) {
@@ -58,7 +95,7 @@ public abstract class ItemSectionFragment extends Fragment {
 
     public void setupItemGrid(View view/*, final String section, String defaultValue*/) {
         gridView = (GridView) view.findViewById(R.id.gridview);
-        adapter = new CustomAdapter(getActivity().getApplicationContext(), dbHandler, SECTION, getCurrentSelectedItemPosition());
+        adapter = new CustomAdapter(getActivity().getApplicationContext(), dbHandler, SECTION, getCurrentEquipedItemPosition());
         gridView.setAdapter(adapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -81,7 +118,7 @@ public abstract class ItemSectionFragment extends Fragment {
         });
     }
 
-    protected int getCurrentSelectedItemPosition() {
+    protected int getCurrentEquipedItemPosition() {
         String[] names = dbHandler.getItemNamesFromCategory(SECTION);
         return helper.getIndexOf(names, prefs.getString(SECTION, DEFAULT_SECTION_VALUE));
     }

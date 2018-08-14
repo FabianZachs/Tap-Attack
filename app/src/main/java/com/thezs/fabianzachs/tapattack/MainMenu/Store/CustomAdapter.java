@@ -42,6 +42,14 @@ public class CustomAdapter extends BaseAdapter {
 
     }
 
+    public int getIndexOfItemWithName(String name) {
+        for (int i = 0; i < storeItemsToDisplay.size(); i++) {
+            if (storeItemsToDisplay.get(i).get_name().equals(name))
+                return i;
+        }
+        throw new IllegalArgumentException("index not found of item");
+    }
+
     public void setSelectedItemPosition(int position) {
         selectedItemPosition = position;
     }
@@ -64,6 +72,7 @@ public class CustomAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
+        storeItemsToDisplay = dbHandler.getBasicStoreItemsFromCategory(category);
         if (view== null) {
             view = layoutInflater.inflate(R.layout.grid_item, viewGroup, false );
             ImageView itemImage = (ImageView) view.findViewById(R.id.item_image);
@@ -79,12 +88,25 @@ public class CustomAdapter extends BaseAdapter {
             layoutParams2.height = layoutParams.height + 20;
             itemImageHolder.setLayoutParams(layoutParams2);
 
-            // todo might need to be out of this if statement since it gets updated!!
-            if (storeItemsToDisplay.get(position).get_unlocked() != 1) {
-                ImageView lockImage = (ImageView) view.findViewById(R.id.locked_image);
-                lockImage.setLayoutParams(layoutParams);
-                lockImage.setImageResource(R.drawable.lockeditem);
-            }
+
+        }
+
+        // todo might need to be out of this if statement since it gets updated!!
+        if (storeItemsToDisplay.get(position).get_unlocked() != 1) {
+            ImageView lockImage = (ImageView) view.findViewById(R.id.locked_image);
+            ViewGroup.LayoutParams layoutParams = lockImage.getLayoutParams();
+            layoutParams.width = Constants.SCREEN_WIDTH/6;
+            layoutParams.height = Constants.SCREEN_WIDTH/6;
+            lockImage.setLayoutParams(layoutParams);
+            lockImage.setImageResource(R.drawable.lockeditem);
+        }
+        else {
+            ImageView lockImage = (ImageView) view.findViewById(R.id.locked_image);
+            ViewGroup.LayoutParams layoutParams = lockImage.getLayoutParams();
+            layoutParams.width = Constants.SCREEN_WIDTH/6;
+            layoutParams.height = Constants.SCREEN_WIDTH/6;
+            lockImage.setLayoutParams(layoutParams);
+            lockImage.setImageResource(android.R.color.transparent);
         }
 
 

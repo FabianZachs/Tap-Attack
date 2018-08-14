@@ -218,22 +218,21 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
 
 
 
-        /*
         helper.makeFullscreen(this);
 
 
         // set up Constants
         initializeConstants();
 
-        //if (!prefs.getBoolean("firstTime", false)) {
-            Log.d("thisran", "onCreate: ran");
+        if (!prefs.getBoolean("firstTime", false)) {
             databaseSetup();
 
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean("firstTime", true);
             editor.apply();
-        //}
+        }
 
+        /*
         // method instantiation
         //mediaPlayers = new ArrayList<MediaPlayer>();
 

@@ -85,6 +85,7 @@ public class MainMenuFragment extends Fragment {
         initializeConstants();
 
         prefs = getActivity().getSharedPreferences("playerInfo", MODE_PRIVATE);
+        /*
         //if (!prefs.getBoolean("firstTime", false)) {
         Log.d("thisran", "onstart: ran");
         databaseSetup();
@@ -92,10 +93,10 @@ public class MainMenuFragment extends Fragment {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("firstTime", true);
         editor.apply();
-        //}
+        //}*/
 
         //this.store = new Store1(getActivity(), prefs);
-        this.morePointsMenu = new MorePointsMenu(getActivity(), prefs);
+        // todo need this ?? this.morePointsMenu = new MorePointsMenu(getActivity(), prefs);
         // method instantiation
         //mediaPlayers = new ArrayList<MediaPlayer>();
 

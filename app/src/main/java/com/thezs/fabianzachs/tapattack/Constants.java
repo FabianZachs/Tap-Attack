@@ -34,6 +34,7 @@ public class Constants {
     public static Context CURRENT_CONTEXT;
 
     public static int videoAdReward = 200;
+    public static int[] PRICE_BY_SECTION = {0,2000,1000,2000};
 
     public static String[] SHAPES = {"circle", "square", "cross", "arrow", "star"};
 

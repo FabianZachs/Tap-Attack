@@ -30,7 +30,7 @@ public class GamemodeSectionFragment extends ItemSectionFragment {
         View view = inflater.inflate(R.layout.store_item_grid, container, false);
 
         super.setupItemGrid(view);
-        super.notifyNewItemToDisplayFromThisSection();
+        super.notifyNewItemToDisplayFromThisSectionBecauseSectionChange();
 
         return view;
     }
