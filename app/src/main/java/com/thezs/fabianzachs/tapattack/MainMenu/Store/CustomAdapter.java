@@ -78,6 +78,13 @@ public class CustomAdapter extends BaseAdapter {
             layoutParams2.width = layoutParams.width + 20;
             layoutParams2.height = layoutParams.height + 20;
             itemImageHolder.setLayoutParams(layoutParams2);
+
+            // todo might need to be out of this if statement since it gets updated!!
+            if (storeItemsToDisplay.get(position).get_unlocked() != 1) {
+                ImageView lockImage = (ImageView) view.findViewById(R.id.locked_image);
+                lockImage.setLayoutParams(layoutParams);
+                lockImage.setImageResource(R.drawable.lockeditem);
+            }
         }
 
 
@@ -89,29 +96,51 @@ public class CustomAdapter extends BaseAdapter {
 
             switch (category) {
                 case "game mode":
+                    if (position != selectedItemPosition)
+                        itemImageHolder.setImageResource(R.drawable.holder_gamemode);
+                    else if (storeItemsToDisplay.get(position).get_unlocked() == 1)
+                        itemImageHolder.setImageResource(R.drawable.holder_gamemode_selected);
+                    else
+                        itemImageHolder.setImageResource(R.drawable.holder_gamemode_selected_locked);
+
+                    /*
                     if (position == selectedItemPosition)
                         itemImageHolder.setImageResource(R.drawable.holder_gamemode_selected);
                     else
                         itemImageHolder.setImageResource(R.drawable.holder_gamemode);
+                        */
                     break;
+                case "background":
+                    if (position != selectedItemPosition)
+                        itemImageHolder.setImageResource(R.drawable.holder_background);
+                    else if (storeItemsToDisplay.get(position).get_unlocked() == 1)
+                        itemImageHolder.setImageResource(R.drawable.holder_background_selected);
+                    else
+                        itemImageHolder.setImageResource(R.drawable.holder_background_selected_locked);
+                    break;
+                case "shape type":
                 case "shape theme":
+                    if (position != selectedItemPosition)
+                        itemImageHolder.setImageResource(R.drawable.holder_theme_item);
+                    else if (storeItemsToDisplay.get(position).get_unlocked() == 1)
+                        itemImageHolder.setImageResource(R.drawable.holder_theme_item_selected);
+                    else
+                        itemImageHolder.setImageResource(R.drawable.holder_theme_item_selected_locked);
+                    /*
                     if (position == selectedItemPosition)
                         itemImageHolder.setImageResource(R.drawable.holder_theme_item_selected);
                     else
                         itemImageHolder.setImageResource(R.drawable.holder_theme_item);
+                        */
                     break;
+                    /*
                 case "shape type":
                     if (position == selectedItemPosition)
                         itemImageHolder.setImageResource(R.drawable.holder_theme_item_selected);
                     else
                         itemImageHolder.setImageResource(R.drawable.holder_theme_item);
                     break;
-                case "background":
-                    if (position == selectedItemPosition)
-                        itemImageHolder.setImageResource(R.drawable.holder_background_selected);
-                    else
-                        itemImageHolder.setImageResource(R.drawable.holder_background);
-                    break;
+                    */
 
             }
 

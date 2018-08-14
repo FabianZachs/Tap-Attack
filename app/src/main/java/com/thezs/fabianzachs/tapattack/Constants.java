@@ -33,6 +33,7 @@ public class Constants {
     public static int SHAPE_WIDTH;
     public static Context CURRENT_CONTEXT;
 
+    public static int videoAdReward = 200;
 
     public static String[] SHAPES = {"circle", "square", "cross", "arrow", "star"};
 
