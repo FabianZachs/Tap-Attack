@@ -64,6 +64,7 @@ public class Constants {
     public static String[] SHAPE_TYPES_FILES = {"unlockitem2", "straightoutline", "curvedoutline", "paintoutline", "bitoutline", "dripoutline", "tornpaperoutline"};
     public static int[] SHAPE_TYPES_PRICE_POINTS = {10000, 10000, 10000, 10000, 10000, 10000, 10000};
     public static int[] SHAPE_TYPES_PRICE_MONEY = {0, 1, 1, 1, 1,1, 1};
+    public static int SHAPE_TYPES_POINTS_COST = 2000;
 
     public static String[] SHAPE_THEMES = {"random unlock for: 2000","neon","flat","vibrant","girly","oldfashion","fourthofjuly","google","russia wc","muted","primary","summer","rage"};
     public static String[] SHAPE_THEMES_FILES = {"unlockitem2"/*R.drawable.transparent*/, "neonthemetemplate", "flatthemetemplate",
@@ -78,6 +79,7 @@ public class Constants {
             R.drawable.ragethemetemplate};
     public static int[] SHAPE_THEMES_PRICE_POINTS = {0, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000};
     public static int[] SHAPE_THEMES_PRICE_MONEY = {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    public static int SHAPE_THEME_POINTS_COST = 1000;
 
     //public static String[] BACKGROUNDS  = {"backgroundtriangleblue"};
     public static String[] BACKGROUNDS  = {"unlock item", "tri-blue", "tri-point", "tri-old", "tri-gold", "tri-edge", "tri-red", "tri-green", "tri-art1", "tri-art2","tri-sky","sky"};
@@ -91,6 +93,7 @@ public class Constants {
     public static int[] BACKGROUNDS_PRICE_MONEY = {0, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1, 1};
     public static Integer[] BACKGROUND_WARNINGCOLOR_1 = {null, 0xff0040ff, 0xffffffff, 0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff};
     public static Integer[] BACKGROUND_WARNINGCOLOR_2 =  {null, 0xff00bcfe, 0xffffffff, 0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff};
+    public static int BACKGROUND_POINTS_COST = 2000;
 
     public static Map<String, String[]> COLORS; // theme -> [] of colors
     public static String[] NEONCOLORS = {"blue","yellow","red","purple","green"};

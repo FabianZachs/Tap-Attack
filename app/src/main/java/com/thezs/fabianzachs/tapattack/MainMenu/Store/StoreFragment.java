@@ -5,6 +5,7 @@ import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.annotation.Nullable;
@@ -29,6 +30,7 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
+import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.MyRewardVideoAd;
 import com.thezs.fabianzachs.tapattack.R;
@@ -88,7 +90,7 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
         setupVideoAdClick(view, prefs);
         setupBottomNavigation(view);
         setupItemsSection(view);
-        setupRandomUnlockSection(view);
+        setupRandomUnlockSection();
         updateCurrentPointsText(); // todo add this to listener when item is unlocked and will this update after a game going back into store... listener to when store is shown
 
         // todo video for points section click
@@ -181,7 +183,7 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
         currentPointsText.setText(Integer.toString(prefs.getInt("points", 0)));
     }
 
-    public void setupLockedFraction(View view, String category) {
+    public void setupLockedFraction(String category) {
         TextView fraction = (TextView) view.findViewById(R.id.unlocked_fraction);
         int numberUnlocked = dbHandler.getNumberOfItemsFromCategory(category) - dbHandler.getNumberOfLockedItems(category);
         fraction.setText( numberUnlocked + "/" + dbHandler.getNumberOfItemsFromCategory(category));
@@ -228,22 +230,27 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
 
     private void setTopBackgroundUI() {
         displayedSectionTitle.setText("BACKGROUNDS");
-        setupLockedFraction(view, "background");
+        setupLockedFraction("background");
+        updateUnlockSectionText(Constants.BACKGROUND_POINTS_COST);
     }
+
 
     private void setTopShapetypeUI() {
         displayedSectionTitle.setText("SHAPE TYPES");
-        setupLockedFraction(view, "shape type");
+        setupLockedFraction("shape type");
+        updateUnlockSectionText(Constants.SHAPE_TYPES_POINTS_COST);
     }
 
     private void setTopShapethemeUI() {
         displayedSectionTitle.setText("SHAPE THEME");
-        setupLockedFraction(view, "shape theme");
+        setupLockedFraction("shape theme");
+        updateUnlockSectionText(Constants.SHAPE_THEME_POINTS_COST);
     }
 
     private void setTopGamemodeUI() {
         displayedSectionTitle.setText("GAME MODE");
-        setupLockedFraction(view, "game mode");
+        setupLockedFraction("game mode");
+        updateUnlockSectionText(0);
         // todo buy button text
         // todo itemhighlight
         // todo selected item
@@ -251,16 +258,35 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
         // todo item name title
     }
 
+    private void updateUnlockSectionText(int price) {
+        TextView randomUnlockText = (TextView) view.findViewById(R.id.random_unlock_text);
+        ImageView randomUnlockStar = (ImageView) view.findViewById(R.id.random_unlock_star);
+        if (price == 0) {
+            randomUnlockText.setVisibility(View.INVISIBLE);
+            randomUnlockStar.setVisibility(View.INVISIBLE);
+
+        }
+        else {
+            randomUnlockText.setVisibility(View.VISIBLE);
+            randomUnlockStar.setVisibility(View.VISIBLE);
+        }
+        randomUnlockText.setText("RANDOM UNLOCK\n " + price);
+    }
 
 
-    private void setupRandomUnlockSection(View view) {
+
+    private void setupRandomUnlockSection() {
         RelativeLayout unlockSction = (RelativeLayout) view.findViewById(R.id.random_unlock_section);
         unlockSction.setOnTouchListener(new ButtonOnTouchListener(getActivity(), unlockSction, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
             public void buttonAction() {
-                //randomUnlockClick();
+                randomUnlockClick();
             }
         }));
+    }
+
+    private void randomUnlockClick() {
+        // todo logic to unlock something depending on currentsection
     }
 
 
@@ -278,6 +304,7 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
                 // todo setupUI elements according to which fragment
                 ItemSectionFragment currentlyDisplayedFragment = (ItemSectionFragment)  adapter.getItem(position);
                 currentlyDisplayedFragment.notifyNewItemToDisplayFromThisSection();
+                // todo setCurrentlyDisplayedFragment
                 //((ItemSectionFragment)adapter.getItem(position)).notifyNewItemToDisplayFromThisSection(adapter.getPageTitle(position), adapter.getItem(position));
                 //Log.d("debugtime", "onPageSelected: page: " + position);
                 //adapter.getRegeisteredFragment
