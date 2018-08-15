@@ -49,6 +49,7 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
 
     @Override
     public void onAttach(Context context) {
+        Log.d("lifecycle", "onAttach: ");
         super.onAttach(context);
         if (context instanceof StoreListener) {
             storeListener = (StoreListener) context;
@@ -60,6 +61,7 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.d("lifecycle", "onCreate: ");
         super.onCreate(savedInstanceState);
         prefs = getActivity().getSharedPreferences("playerInfo", MODE_PRIVATE);
         dbHandler = new MyDBHandler(getActivity(), null, null, 1);
@@ -67,6 +69,7 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        Log.d("lifecycle", "onActivityCreated: ");
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -74,6 +77,7 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        Log.d("lifecycle", "onCreateView: ");
         this.view = inflater.inflate(R.layout.store_fragment2, container, false);
         displayedItemTitle = (TextView) view.findViewById(R.id.item_title_text);
         displayedSectionTitle = (TextView) view.findViewById(R.id.section_title_text);
@@ -188,6 +192,16 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
         TextView fraction = (TextView) view.findViewById(R.id.unlocked_fraction);
         int numberUnlocked = dbHandler.getNumberOfItemsFromCategory(category) - dbHandler.getNumberOfLockedItems(category);
         fraction.setText( numberUnlocked + "/" + dbHandler.getNumberOfItemsFromCategory(category));
+    }
+
+    public void onShow() {
+        Log.d("lifecycle", "onShow: ");
+        ItemSectionFragment currentlyDisplayedFragment = (ItemSectionFragment)  fragmentAdapter.getItem(currentlyDisplayedFragmentIndex);
+
+        currentlyDisplayedFragment.setSelectionToEquiped();
+        currentlyDisplayedFragment.updateGridView();
+        currentlyDisplayedFragment.notifyNewItemToDisplayFromThisSectionBecauseSectionChange();
+
     }
 
 

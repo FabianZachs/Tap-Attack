@@ -2,7 +2,6 @@ package com.thezs.fabianzachs.tapattack.MainMenu;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,9 +11,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Build;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,7 +32,6 @@ import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.Database.StoreItem;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundManager;
-import com.thezs.fabianzachs.tapattack.LoadingActivityOLD;
 import com.thezs.fabianzachs.tapattack.MainMenu.Settings.SettingsFragment;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.StoreFragment;
 import com.thezs.fabianzachs.tapattack.R;
@@ -139,6 +135,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         if (storeFragment.isAdded()) {
+            storeFragment.onShow(); // todo maybe a listener which updates all store sections
             ft.show(storeFragment);
         } else {
             Log.d("isadded", "displayMainMenuFragment: store");
