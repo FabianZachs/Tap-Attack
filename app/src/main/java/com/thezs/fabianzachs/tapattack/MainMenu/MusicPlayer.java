@@ -36,7 +36,8 @@ public class MusicPlayer implements MediaPlayer.OnErrorListener {
     public void play() {
         Log.d("musicplayer", "MusicPlayer: C.2");
         if (musicPlayer == null) {
-            musicPlayer = MediaPlayer.create(activity, R.raw.mysong2);
+            //musicPlayer = MediaPlayer.create(activity, R.raw.mysong2);
+            musicPlayer = MediaPlayer.create(activity, R.raw.enchantedtiki86);
             musicPlayer.setLooping(true);
             Log.d("musicplayer", "MusicPlayer: C");
         }

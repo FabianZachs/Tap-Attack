@@ -33,7 +33,7 @@ public class Constants {
     public static int SHAPE_WIDTH;
     public static Context CURRENT_CONTEXT;
 
-    public final static int videoAdReward = 200;
+    public final static int VIDEO_AD_REWARD = 200;
     public final static int[] PRICE_BY_SECTION = {0,2000,1000,2000};
     public final static String GAME_MODE_TAG = "game mode";
     public final static String SHAPE_TYPE_TAG = "shape type";

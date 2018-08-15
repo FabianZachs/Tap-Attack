@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -24,6 +23,7 @@ public class MyRewardVideoAd implements RewardedVideoAdListener {
     RewardedVideoAd videoAd;
     Context context;
     SharedPreferences prefs;
+    // TODO THIS IS OBSOLETE -- NEVER VERSION STOREREWARDVIDEOAD
 
     public MyRewardVideoAd(Context context, SharedPreferences prefs, ImageView videoImage) {
         this.context = context;
@@ -80,7 +80,7 @@ public class MyRewardVideoAd implements RewardedVideoAdListener {
         int currentPoints = prefs.getInt("points", 0);
         SharedPreferences.Editor prefsEditor = prefs.edit();
 
-        prefsEditor.putInt("points", currentPoints + Constants.videoAdReward);
+        prefsEditor.putInt("points", currentPoints + Constants.VIDEO_AD_REWARD);
         prefsEditor.apply();
 
     }

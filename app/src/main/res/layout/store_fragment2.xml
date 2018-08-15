@@ -234,6 +234,7 @@
                 android:layout_height="30sp"
                 android:src="@drawable/playvideobutton"/>
             <TextView
+                android:id="@+id/reward_text"
                 android:layout_marginEnd="2sp"
                 android:layout_marginRight="2sp"
                 android:layout_width="wrap_content"
