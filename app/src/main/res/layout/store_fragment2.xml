@@ -82,6 +82,42 @@
 
 
         <RelativeLayout
+            android:id="@+id/purchase_unlock_section"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="25sp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/unlock_text"
+                android:fontFamily="@font/undinaru"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:text="UNLOCK\n 500"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:background="@drawable/button3"
+                android:layout_width="70sp"
+                android:layout_height="45sp" />
+            <ImageView
+                android:id="@+id/unlock_star"
+                android:layout_width="12sp"
+                android:layout_height="12sp"
+                android:src="@drawable/curvedstar"
+                android:layout_alignRight="@+id/unlock_text"
+                android:layout_alignEnd="@+id/unlock_text"
+                android:layout_alignBottom="@+id/unlock_text"
+                android:layout_marginBottom="10sp"
+                android:layout_marginRight="10sp"
+                android:layout_marginEnd="10sp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

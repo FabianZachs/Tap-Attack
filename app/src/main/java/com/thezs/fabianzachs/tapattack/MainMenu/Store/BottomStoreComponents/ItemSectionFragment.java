@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack.MainMenu.Store;
+package com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -74,7 +74,7 @@ public abstract class ItemSectionFragment extends Fragment {
 
 
 
-    protected void notifyNewItemToDisplayFromThisSectionBecauseSectionChange(/*String section, String defaultValue*/) {
+    public void notifyNewItemToDisplayFromThisSectionBecauseSectionChange(/*String section, String defaultValue*/) {
         Log.d("buggy", "notifyNewItemToDisplayFromThisSectionBecauseSectionChange: " + getCurrentEquipedItemPosition());
         Log.d("buggy", "section: " + SECTION);
         Log.d("buggy", "item: " + prefs.getString(SECTION, DEFAULT_SECTION_VALUE));

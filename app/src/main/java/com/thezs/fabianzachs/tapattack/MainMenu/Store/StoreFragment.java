@@ -26,6 +26,14 @@ import android.widget.TextView;
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
+import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.BackgroundSectionFragment;
+import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.BottomNavigationViewHelper;
+import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.GamemodeSectionFragment;
+import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.ItemSectionFragment;
+import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.ItemSectionListener;
+import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.MyBottomNavigation;
+import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.ShapeThemeSectionFragment;
+import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.ShapeTypeSectionFragment;
 import com.thezs.fabianzachs.tapattack.MyRewardVideoAd;
 import com.thezs.fabianzachs.tapattack.R;
 
@@ -85,7 +93,8 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
         lockImage = (ImageView) view.findViewById(R.id.lock);
         currentPointsText = (TextView) view.findViewById(R.id.current_points_text);
         setupVideoAdClick(view);
-        setupBottomNavigation(view);
+        setupBottomNavigation();
+
         setupItemsSection(view);
         setupRandomUnlockSection();
         updateCurrentPointsText(); // todo add this to listener when item is unlocked and will this update after a game going back into store... listener to when store is shown
@@ -205,15 +214,18 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
     }
 
 
+
     public interface StoreListener {
         void storeFragmentToMenuFragment();
         //void setupStoreVideoRewardAd();
         //void videoAdRequested();
     }
 
+    /*
     public void setViewPager(int fragmentNumber) {
         viewPager.setCurrentItem(fragmentNumber);
     }
+    */
 
 
 
@@ -354,41 +366,22 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
     }
 
 
-    private void setupBottomNavigation(View view) {
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) view.findViewById(R.id.bottom_nav_bar);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+    private void updatePointsRelatedViews() {
+        updateCurrentPointsText();
+        // todo turn random unlock button text soundoff red if not enough points
+        //((ItemSectionFragment) fragmentAdapter.getItem(currentlyDisplayedFragmentIndex)).getRandomPrice();
+        //Constants.PRICE_BY_SECTION[currentlyDisplayedFragmentIndex];
+    }
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.ic_gamemode:
-                                setViewPager(0);
-                                //setCurrentItemFragmentIndex(0);
-                                //viewPager.getCurrentItem();
-                                //Log.d("currentitem", "onNavigationItemSelected: " +viewPager.getCurrentItem());
-                                return true;
-                            case R.id.ic_shape_type:
-                                setViewPager(1);
-                                //setCurrentItemFragmentIndex(1);
-                                //Log.d("currentitem", "onNavigationItemSelected: " +viewPager.getCurrentItem());
-                                return true;
-                            case R.id.ic_theme:
-                                setViewPager(2);
-                                //setCurrentItemFragmentIndex(2);
-                                //Log.d("currentitem", "onNavigationItemSelected: " +viewPager.getCurrentItem());
-                                return true;
-                            case R.id.ic_background:
-                                setViewPager(3);
-                                //setCurrentItemFragmentIndex(3);
-                                //Log.d("currentitem", "onNavigationItemSelected: " +viewPager.getCurrentItem());
-                                return true;
-                        }
-                        return false;
-                    }
-                }
-        );
+
+
+    private void setupBottomNavigation() {
+        new MyBottomNavigation(getContext(), view, new MyBottomNavigation.BottomNavigationListener() {
+            @Override
+            public void setViewPage(int fragmentIndex) {
+                viewPager.setCurrentItem(fragmentIndex);
+            }
+        });
     }
 
 }

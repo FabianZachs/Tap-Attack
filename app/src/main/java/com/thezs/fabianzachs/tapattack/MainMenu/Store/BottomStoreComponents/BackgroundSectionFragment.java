@@ -1,33 +1,27 @@
-package com.thezs.fabianzachs.tapattack.MainMenu.Store;
+package com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
 
 import com.thezs.fabianzachs.tapattack.Constants;
-import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.R;
 
 /**
  * Created by fabianzachs on 10/08/18.
  */
 
-public class ShapeTypeSectionFragment extends ItemSectionFragment {
+public class BackgroundSectionFragment extends ItemSectionFragment {
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setDEFAULT_SECTION_VALUE(Constants.SHAPE_TYPES[0]);
-        setSECTION(Constants.SHAPE_TYPE_TAG);
+        setDEFAULT_SECTION_VALUE(Constants.BACKGROUNDS[0]);
+        setSECTION(Constants.BACKGROUND_TAG);
     }
 
     @Nullable
@@ -45,4 +39,5 @@ public class ShapeTypeSectionFragment extends ItemSectionFragment {
         super.onAttach(context);
         super.setListener(context);
     }
+
 }

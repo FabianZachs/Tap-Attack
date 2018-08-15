@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack.MainMenu.Store;
+package com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents;
 
 /**
  * Created by fabianzachs on 09/08/18.

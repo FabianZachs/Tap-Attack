@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack.MainMenu.Store;
+package com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents;
 
 import android.content.Context;
 import android.os.Bundle;
