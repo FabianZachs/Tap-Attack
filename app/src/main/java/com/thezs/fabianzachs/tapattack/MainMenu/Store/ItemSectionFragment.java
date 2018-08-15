@@ -30,8 +30,8 @@ public abstract class ItemSectionFragment extends Fragment {
     protected MyDBHandler dbHandler;
 
     public ItemSectionListener listener;
-    private GridView gridView;
-    private CustomAdapter adapter;
+    protected GridView gridView;
+    private CustomGridAdapter adapter;
 
     protected String DEFAULT_SECTION_VALUE;
     protected String SECTION;
@@ -43,13 +43,10 @@ public abstract class ItemSectionFragment extends Fragment {
     }
 
     public void randomUnlock() {
-        Log.d("randomunlock", "randomUnlock: ");
-        if (SECTION.equals("game mode"))
+        if (SECTION.equals(Constants.GAME_MODE_TAG))
             return;
-            //StyleableToast.makeText(Constants.CURRENT_CONTEXT, "goooood", R.style.successtoast).show();
         String[] lockedItems = dbHandler.getListOfLockedItems(SECTION);
         if (lockedItems.length == 0) {
-            // todo handle if all items are unlocked
             StyleableToast.makeText(Constants.CURRENT_CONTEXT, "All Items Unlocked", R.style.successtoast).show();
             return;
         }
@@ -65,10 +62,9 @@ public abstract class ItemSectionFragment extends Fragment {
         adapter.setSelectedItemPosition(positionToUnlock);
         adapter.notifyDataSetChanged();
 
-        // todo tell parent framgnet new item shown
-
         Drawable image = getContext().getResources().getDrawable(helper.getResourceId(getContext(), adapter.getItem(positionToUnlock).get_file()));
-        listener.selectedItemChanged(image, adapter.getItem(positionToUnlock).get_name(), 1);
+        listener.selectedItemChanged(SECTION, image, adapter.getItem(positionToUnlock).get_name(), 1);
+        // todo set this item as the equiped one -- but do it in storefragment ?? or is
     }
 
     protected void setUpPrefsAndDatabase() {
@@ -79,9 +75,11 @@ public abstract class ItemSectionFragment extends Fragment {
 
 
     protected void notifyNewItemToDisplayFromThisSectionBecauseSectionChange(/*String section, String defaultValue*/) {
-        Log.d("itemunlocked", "notifyNewItemToDisplayFromThisSectionBecauseSectionChange: " + adapter.getItem(getCurrentEquipedItemPosition()).get_name());
+        Log.d("buggy", "notifyNewItemToDisplayFromThisSectionBecauseSectionChange: " + getCurrentEquipedItemPosition());
+        Log.d("buggy", "section: " + SECTION);
+        Log.d("buggy", "item: " + prefs.getString(SECTION, DEFAULT_SECTION_VALUE));
         int resourceIDOfItemImage = helper.getResourceId(getContext(), adapter.getItem(getCurrentEquipedItemPosition()).get_file());
-        listener.selectedItemChanged(getResources().getDrawable(resourceIDOfItemImage), adapter.getItem(getCurrentEquipedItemPosition()).get_name(), adapter.getItem(getCurrentEquipedItemPosition()).get_unlocked());
+        listener.selectedItemChanged(SECTION, getResources().getDrawable(resourceIDOfItemImage), adapter.getItem(getCurrentEquipedItemPosition()).get_name(), adapter.getItem(getCurrentEquipedItemPosition()).get_unlocked());
     }
 
     protected void setListener(Context context) {
@@ -95,27 +93,28 @@ public abstract class ItemSectionFragment extends Fragment {
 
     public void setupItemGrid(View view/*, final String section, String defaultValue*/) {
         gridView = (GridView) view.findViewById(R.id.gridview);
-        adapter = new CustomAdapter(getActivity().getApplicationContext(), dbHandler, SECTION, getCurrentEquipedItemPosition());
+        adapter = new CustomGridAdapter(getActivity().getApplicationContext(), dbHandler, SECTION, getCurrentEquipedItemPosition());
         gridView.setAdapter(adapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
-                CustomAdapter myAdapter = (CustomAdapter) parent.getAdapter();
+                CustomGridAdapter myAdapter = (CustomGridAdapter) parent.getAdapter();
 
 
                 myAdapter.setSelectedItemPosition(position);
                 myAdapter.notifyDataSetChanged();
-                listener.selectedItemChanged(((ImageView) (view.findViewById(R.id.item_image))).getDrawable(), adapter.getItem(position).get_name(), adapter.getItem(position).get_unlocked());
+                listener.selectedItemChanged(SECTION,((ImageView) (view.findViewById(R.id.item_image))).getDrawable(), adapter.getItem(position).get_name(), adapter.getItem(position).get_unlocked());
 
                 //if (dbHandler.isItemUnlocked(names[position]) == 1) {
                 //StyleableToast.makeText(mainMenuActivity,  "unlocked", R.style.successtoast).show();
-                SharedPreferences.Editor prefsEditor = prefs.edit();
-                prefsEditor.putString(SECTION, myAdapter.getItem(position).get_name());
-                prefsEditor.apply();
                 //}
             }
         });
+    }
+
+    public void updateGridView() {
+        adapter.notifyDataSetChanged();
     }
 
     protected int getCurrentEquipedItemPosition() {
@@ -138,5 +137,9 @@ public abstract class ItemSectionFragment extends Fragment {
 
     public String getSECTION() {
         return SECTION;
+    }
+
+    public void setSelectionToEquiped() {
+        adapter.setSelectedItemPosition(getCurrentEquipedItemPosition());
     }
 }

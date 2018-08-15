@@ -30,7 +30,7 @@ public class BackgroundSectionFragment extends ItemSectionFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setDEFAULT_SECTION_VALUE(Constants.BACKGROUNDS[0]);
-        setSECTION("background");
+        setSECTION(Constants.BACKGROUND_TAG);
     }
 
     @Nullable

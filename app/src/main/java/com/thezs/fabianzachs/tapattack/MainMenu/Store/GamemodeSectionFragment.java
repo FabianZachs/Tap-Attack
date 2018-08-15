@@ -21,7 +21,7 @@ public class GamemodeSectionFragment extends ItemSectionFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setDEFAULT_SECTION_VALUE(Constants.GAMEMODES[0]);
-        setSECTION("game mode");
+        setSECTION(Constants.GAME_MODE_TAG);
     }
 
     @Nullable

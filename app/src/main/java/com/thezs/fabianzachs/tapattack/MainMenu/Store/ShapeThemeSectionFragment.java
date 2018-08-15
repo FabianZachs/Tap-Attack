@@ -28,7 +28,7 @@ public class ShapeThemeSectionFragment extends ItemSectionFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setDEFAULT_SECTION_VALUE(Constants.SHAPE_THEMES[0]);
-        setSECTION("shape theme");
+        setSECTION(Constants.SHAPE_THEME_TAG);
     }
 
     @Nullable

@@ -33,8 +33,12 @@ public class Constants {
     public static int SHAPE_WIDTH;
     public static Context CURRENT_CONTEXT;
 
-    public static int videoAdReward = 200;
-    public static int[] PRICE_BY_SECTION = {0,2000,1000,2000};
+    public final static int videoAdReward = 200;
+    public final static int[] PRICE_BY_SECTION = {0,2000,1000,2000};
+    public final static String GAME_MODE_TAG = "game mode";
+    public final static String SHAPE_TYPE_TAG = "shape type";
+    public final static String SHAPE_THEME_TAG = "shape theme";
+    public final static String BACKGROUND_TAG = "background";
 
     public static String[] SHAPES = {"circle", "square", "cross", "arrow", "star"};
 
@@ -60,40 +64,40 @@ public class Constants {
     public static int[] GAMEMODES_PRICE_POINTS = {0, 0, 0, 0, 0, 0};
     public static int[] GAMEMODES_PRICE_MONEY = {0, 0, 0, 0, 0, 0};
 
-    public static String[] SHAPE_TYPES = {"unlock item", "straight","curved","paint","bit","drip","tornpaper"};
-    public static Integer[] SHAPE_TYPES_IDS = {R.drawable.unlockitem2, R.drawable.straightoutline, R.drawable.curvedoutline, R.drawable.paintoutline, R.drawable.bitoutline, R.drawable.dripoutline, R.drawable.tornpaperoutline};
-    public static String[] SHAPE_TYPES_FILES = {"unlockitem2", "straightoutline", "curvedoutline", "paintoutline", "bitoutline", "dripoutline", "tornpaperoutline"};
-    public static int[] SHAPE_TYPES_PRICE_POINTS = {10000, 10000, 10000, 10000, 10000, 10000, 10000};
-    public static int[] SHAPE_TYPES_PRICE_MONEY = {0, 1, 1, 1, 1,1, 1};
+    public static String[] SHAPE_TYPES = {"straight","curved","paint","bit","drip","tornpaper"};
+    public static Integer[] SHAPE_TYPES_IDS = {R.drawable.straightoutline, R.drawable.curvedoutline, R.drawable.paintoutline, R.drawable.bitoutline, R.drawable.dripoutline, R.drawable.tornpaperoutline};
+    public static String[] SHAPE_TYPES_FILES = {"straightoutline", "curvedoutline", "paintoutline", "bitoutline", "dripoutline", "tornpaperoutline"};
+    public static int[] SHAPE_TYPES_PRICE_POINTS = {10000, 10000, 10000, 10000, 10000, 10000};
+    public static int[] SHAPE_TYPES_PRICE_MONEY = {1, 1, 1, 1,1, 1};
     public static int SHAPE_TYPES_POINTS_COST = 2000;
 
-    public static String[] SHAPE_THEMES = {"random unlock for: 2000","neon","flat","vibrant","girly","oldfashion","fourthofjuly","google","russia wc","muted","primary","summer","rage"};
-    public static String[] SHAPE_THEMES_FILES = {"unlockitem2"/*R.drawable.transparent*/, "neonthemetemplate", "flatthemetemplate",
+    public static String[] SHAPE_THEMES = {"neon","flat","vibrant","girly","oldfashion","fourthofjuly","google","russia wc","muted","primary","summer","rage"};
+    public static String[] SHAPE_THEMES_FILES = {"neonthemetemplate", "flatthemetemplate",
             "vibrantthemetemplate", "girlythemetemplate", "oldfashionthemetemplate",
             "fourthofjulythemetemplate", "googlethemetempalte", "russiawcthemetemplate",
             "mutedthemetemplate", "primarythemetemplate", "summerthemetemplate",
             "ragethemetemplate"};
-    public static Integer[] SHAPE_THEMES_ID = {R.drawable.unlockitem2/*R.drawable.transparent*/, R.drawable.neonthemetemplate, R.drawable.flatthemetemplate,
+    public static Integer[] SHAPE_THEMES_ID = {R.drawable.neonthemetemplate, R.drawable.flatthemetemplate,
             R.drawable.vibrantthemetemplate, R.drawable.girlythemetemplate, R.drawable.oldfashionthemetemplate,
             R.drawable.fourthofjulythemetemplate, R.drawable.googlethemetempalte, R.drawable.russiawcthemetemplate,
             R.drawable.mutedthemetemplate, R.drawable.primarythemetemplate,R.drawable.summerthemetemplate,
             R.drawable.ragethemetemplate};
-    public static int[] SHAPE_THEMES_PRICE_POINTS = {0, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000};
-    public static int[] SHAPE_THEMES_PRICE_MONEY = {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    public static int[] SHAPE_THEMES_PRICE_POINTS = {2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000};
+    public static int[] SHAPE_THEMES_PRICE_MONEY = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
     public static int SHAPE_THEME_POINTS_COST = 1000;
 
     //public static String[] BACKGROUNDS  = {"backgroundtriangleblue"};
-    public static String[] BACKGROUNDS  = {"unlock item", "tri-blue", "tri-point", "tri-old", "tri-gold", "tri-edge", "tri-red", "tri-green", "tri-art1", "tri-art2","tri-sky","sky"};
-    public static String[] BACKGROUNDS_FILES = {"unlockitem2", "backgroundtriangleblue", "backgroundtrianglepointy", "backgroundtriangleblackandwhite",
+    public static String[] BACKGROUNDS  = {"tri-blue", "tri-point", "tri-old", "tri-gold", "tri-edge", "tri-red", "tri-green", "tri-art1", "tri-art2","tri-sky","sky"};
+    public static String[] BACKGROUNDS_FILES = {"backgroundtriangleblue", "backgroundtrianglepointy", "backgroundtriangleblackandwhite",
             "backgroundtrianglecaramel", "backgroundtriangleedge", "backgroundtrianglered", "backgroundtrianglegreen", "backgroundtriangleart1",
             "backgroundtriangleart2", "backgroundtrianglesky", "skybackground"};
-    public static Integer[] BACKGROUNDS_ID = {R.drawable.unlockitem2, R.drawable.backgroundtriangleblue, R.drawable.backgroundtrianglepointy, R.drawable.backgroundtriangleblackandwhite,
+    public static Integer[] BACKGROUNDS_ID = {R.drawable.backgroundtriangleblue, R.drawable.backgroundtrianglepointy, R.drawable.backgroundtriangleblackandwhite,
             R.drawable.backgroundtrianglecaramel, R.drawable.backgroundtriangleedge, R.drawable.backgroundtrianglered, R.drawable.backgroundtrianglegreen, R.drawable.backgroundtriangleart1,
             R.drawable.backgroundtriangleart2, R.drawable.backgroundtrianglesky, R.drawable.skybackground};
-    public static int[] BACKGROUNDS_PRICE_POINTS = {0, 5000, 5000, 5000, 5000,5000, 5000,5000, 5000,5000, 5000,5000};
-    public static int[] BACKGROUNDS_PRICE_MONEY = {0, 1, 1,  1, 1, 1, 1, 1, 1, 1, 1, 1};
-    public static Integer[] BACKGROUND_WARNINGCOLOR_1 = {null, 0xff0040ff, 0xffffffff, 0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff};
-    public static Integer[] BACKGROUND_WARNINGCOLOR_2 =  {null, 0xff00bcfe, 0xffffffff, 0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff};
+    public static int[] BACKGROUNDS_PRICE_POINTS = {5000, 5000, 5000, 5000,5000, 5000,5000, 5000,5000, 5000,5000};
+    public static int[] BACKGROUNDS_PRICE_MONEY = {1, 1,  1, 1, 1, 1, 1, 1, 1, 1, 1};
+    public static Integer[] BACKGROUND_WARNINGCOLOR_1 = {0xff0040ff, 0xffffffff, 0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff};
+    public static Integer[] BACKGROUND_WARNINGCOLOR_2 =  {0xff00bcfe, 0xffffffff, 0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff};
     public static int BACKGROUND_POINTS_COST = 2000;
 
     public static Map<String, String[]> COLORS; // theme -> [] of colors

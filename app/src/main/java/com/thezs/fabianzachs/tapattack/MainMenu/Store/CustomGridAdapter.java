@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * Created by fabianzachs on 10/08/18.
  */
 
-public class CustomAdapter extends BaseAdapter {
+public class CustomGridAdapter extends BaseAdapter {
 
     private int selectedItemPosition; // todo this should be passed in as an argument in constructor to have currently used item selected
     private ArrayList<BasicStoreItem> storeItemsToDisplay;
@@ -30,7 +30,7 @@ public class CustomAdapter extends BaseAdapter {
     private MyDBHandler dbHandler;
     private String category;
 
-    public CustomAdapter(Context context, MyDBHandler dbHandler, String category, int initiallySelectedItem) {
+    public CustomGridAdapter(Context context, MyDBHandler dbHandler, String category, int initiallySelectedItem) {
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
         this.category = category;
@@ -117,7 +117,7 @@ public class CustomAdapter extends BaseAdapter {
         ImageView itemImageHolder = (ImageView) view.findViewById(R.id.item_image_holder);
 
             switch (category) {
-                case "game mode":
+                case Constants.GAME_MODE_TAG:
                     if (position != selectedItemPosition)
                         itemImageHolder.setImageResource(R.drawable.holder_gamemode);
                     else if (storeItemsToDisplay.get(position).get_unlocked() == 1)
@@ -125,14 +125,8 @@ public class CustomAdapter extends BaseAdapter {
                     else
                         itemImageHolder.setImageResource(R.drawable.holder_gamemode_selected_locked);
 
-                    /*
-                    if (position == selectedItemPosition)
-                        itemImageHolder.setImageResource(R.drawable.holder_gamemode_selected);
-                    else
-                        itemImageHolder.setImageResource(R.drawable.holder_gamemode);
-                        */
                     break;
-                case "background":
+                case Constants.BACKGROUND_TAG:
                     if (position != selectedItemPosition)
                         itemImageHolder.setImageResource(R.drawable.holder_background);
                     else if (storeItemsToDisplay.get(position).get_unlocked() == 1)
@@ -140,29 +134,15 @@ public class CustomAdapter extends BaseAdapter {
                     else
                         itemImageHolder.setImageResource(R.drawable.holder_background_selected_locked);
                     break;
-                case "shape type":
-                case "shape theme":
+                case Constants.SHAPE_TYPE_TAG:
+                case Constants.SHAPE_THEME_TAG:
                     if (position != selectedItemPosition)
                         itemImageHolder.setImageResource(R.drawable.holder_theme_item);
                     else if (storeItemsToDisplay.get(position).get_unlocked() == 1)
                         itemImageHolder.setImageResource(R.drawable.holder_theme_item_selected);
                     else
                         itemImageHolder.setImageResource(R.drawable.holder_theme_item_selected_locked);
-                    /*
-                    if (position == selectedItemPosition)
-                        itemImageHolder.setImageResource(R.drawable.holder_theme_item_selected);
-                    else
-                        itemImageHolder.setImageResource(R.drawable.holder_theme_item);
-                        */
                     break;
-                    /*
-                case "shape type":
-                    if (position == selectedItemPosition)
-                        itemImageHolder.setImageResource(R.drawable.holder_theme_item_selected);
-                    else
-                        itemImageHolder.setImageResource(R.drawable.holder_theme_item);
-                    break;
-                    */
 
             }
 

@@ -27,7 +27,7 @@ public class ShapeTypeSectionFragment extends ItemSectionFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setDEFAULT_SECTION_VALUE(Constants.SHAPE_TYPES[0]);
-        setSECTION("shape type");
+        setSECTION(Constants.SHAPE_TYPE_TAG);
     }
 
     @Nullable

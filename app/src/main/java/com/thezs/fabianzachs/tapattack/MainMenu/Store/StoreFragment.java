@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +34,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class StoreFragment extends Fragment implements /*GamemodeSectionFragment.GameModeSectionFragmentListener*/ItemSectionListener {
 
     private CustomViewPager viewPager;
-    private SectionsPageAdapter  adapter;
+    private SectionsPageAdapter fragmentAdapter;
     private StoreListener storeListener;
     private ImageView displayedItemImage;
     private ImageView lockImage;
@@ -79,7 +80,7 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
         displayedItemImage = (ImageView) view.findViewById(R.id.selected_item);
         lockImage = (ImageView) view.findViewById(R.id.lock);
         currentPointsText = (TextView) view.findViewById(R.id.current_points_text);
-        setupVideoAdClick(view, prefs);
+        setupVideoAdClick(view);
         setupBottomNavigation(view);
         setupItemsSection(view);
         setupRandomUnlockSection();
@@ -147,7 +148,7 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
         return view;
     }
 
-    private void setupVideoAdClick(View view, SharedPreferences prefs) {
+    private void setupVideoAdClick(View view) {
         final MyRewardVideoAd rewardVideoAd = new MyRewardVideoAd(getContext(), prefs, (ImageView) view.findViewById(R.id.reward_video_image));
         LinearLayout rewardVideoAdSection = (LinearLayout) view.findViewById(R.id.reward_video_ad_section);
         rewardVideoAdSection.setOnTouchListener(new ButtonOnTouchListener(getActivity(), rewardVideoAdSection, new ButtonOnTouchListener.ButtonExecuteListener() {
@@ -162,11 +163,18 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
 
 
     @Override
-    public void selectedItemChanged(Drawable itemImage, String itemTitle, int unlocked) {
+    public void selectedItemChanged(String section, Drawable itemImage, String itemTitle, int unlocked) {
         displayedItemImage.setImageDrawable(itemImage);
         displayedItemTitle.setText(itemTitle.toUpperCase());
-        if (unlocked == 1)
+        if (unlocked == 1) {
+            SharedPreferences.Editor prefsEditor = prefs.edit();
+            prefsEditor.putString(section, itemTitle);
+            //Log.d("isthisright", "selectedItemChanged: " + fragmentAdapter.getPageTitle(currentlyDisplayedFragmentIndex));
+            prefsEditor.apply();
+            Log.d("isthisright", "selectedItemChanged: " +section);
             lockImage.setImageResource(android.R.color.transparent);
+        }
+            // todo then make it the equiped
         else
             lockImage.setImageResource(R.drawable.lockeditem);
 
@@ -198,22 +206,22 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
     private void setupTopUI(int fragmentPagePosition) {
         switch (fragmentPagePosition)  {
             case 0:
-                if (!adapter.getPageTitle(fragmentPagePosition).equals("gamemode"))
+                if (!fragmentAdapter.getPageTitle(fragmentPagePosition).equals(Constants.GAME_MODE_TAG))
                     throw new IllegalArgumentException("Fragment title not matching current fragment");
                 setTopGamemodeUI();
                 break;
             case 1:
-                if (!adapter.getPageTitle(fragmentPagePosition).equals("shapetype"))
+                if (!fragmentAdapter.getPageTitle(fragmentPagePosition).equals(Constants.SHAPE_TYPE_TAG))
                     throw new IllegalArgumentException("Fragment title not matching current fragment");
                 setTopShapetypeUI();
                 break;
             case 2:
-                if (!adapter.getPageTitle(fragmentPagePosition).equals("shapetheme"))
+                if (!fragmentAdapter.getPageTitle(fragmentPagePosition).equals(Constants.SHAPE_THEME_TAG))
                     throw new IllegalArgumentException("Fragment title not matching current fragment");
                 setTopShapethemeUI();
                 break;
             case 3:
-                if (!adapter.getPageTitle(fragmentPagePosition).equals("background"))
+                if (!fragmentAdapter.getPageTitle(fragmentPagePosition).equals(Constants.BACKGROUND_TAG))
                     throw new IllegalArgumentException("Fragment title not matching current fragment");
                 setTopBackgroundUI();
                 break;
@@ -223,28 +231,28 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
 
     private void setTopBackgroundUI() {
         displayedSectionTitle.setText("BACKGROUNDS");
-        setupLockedFraction("background");
+        setupLockedFraction(Constants.BACKGROUND_TAG);
         updateUnlockSectionText(Constants.PRICE_BY_SECTION[3]);
     }
 
 
     private void setTopShapetypeUI() {
         displayedSectionTitle.setText("SHAPE TYPES");
-        setupLockedFraction("shape type");
+        setupLockedFraction(Constants.SHAPE_TYPE_TAG);
         updateUnlockSectionText(Constants.SHAPE_TYPES_POINTS_COST);
         updateUnlockSectionText(Constants.PRICE_BY_SECTION[1]);
     }
 
     private void setTopShapethemeUI() {
         displayedSectionTitle.setText("SHAPE THEME");
-        setupLockedFraction("shape theme");
+        setupLockedFraction(Constants.SHAPE_THEME_TAG);
         updateUnlockSectionText(Constants.SHAPE_THEME_POINTS_COST);
         updateUnlockSectionText(Constants.PRICE_BY_SECTION[2]);
     }
 
     private void setTopGamemodeUI() {
         displayedSectionTitle.setText("GAME MODE");
-        setupLockedFraction("game mode");
+        setupLockedFraction(Constants.GAME_MODE_TAG);
         updateUnlockSectionText(Constants.PRICE_BY_SECTION[0]);
         // todo buy button text
         // todo itemhighlight
@@ -277,7 +285,7 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
             public void buttonAction() {
                 //randomUnlockClick();
                 //viewPager.getCurrentItem().;
-                ItemSectionFragment currentFragment = (ItemSectionFragment) adapter.getItem(currentlyDisplayedFragmentIndex);
+                ItemSectionFragment currentFragment = (ItemSectionFragment) fragmentAdapter.getItem(currentlyDisplayedFragmentIndex);
                 currentFragment.randomUnlock();
             }
         }));
@@ -295,13 +303,19 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
 
             @Override
             public void onPageSelected(int position) {
-                // todo setupUI elements according to which fragment
-                ItemSectionFragment currentlyDisplayedFragment = (ItemSectionFragment)  adapter.getItem(position);
+                ItemSectionFragment currentlyDisplayedFragment = (ItemSectionFragment)  fragmentAdapter.getItem(position);
+
+                currentlyDisplayedFragment.setSelectionToEquiped();
+                currentlyDisplayedFragment.updateGridView();
+
+
+                // todo reset grid to select currently equiped item
                 currentlyDisplayedFragment.notifyNewItemToDisplayFromThisSectionBecauseSectionChange();
                 currentlyDisplayedFragmentIndex = position;
-                //((ItemSectionFragment)adapter.getItem(position)).notifyNewItemToDisplayFromThisSectionBecauseSectionChange(adapter.getPageTitle(position), adapter.getItem(position));
+                Log.d("isthisright", "onPageSelected: " + currentlyDisplayedFragment);
+                //((ItemSectionFragment)fragmentAdapter.getItem(position)).notifyNewItemToDisplayFromThisSectionBecauseSectionChange(fragmentAdapter.getPageTitle(position), fragmentAdapter.getItem(position));
                 //Log.d("debugtime", "onPageSelected: page: " + position);
-                //adapter.getRegeisteredFragment
+                //fragmentAdapter.getRegeisteredFragment
                 setupTopUI(position);
 
             }
@@ -315,14 +329,14 @@ public class StoreFragment extends Fragment implements /*GamemodeSectionFragment
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        adapter = new SectionsPageAdapter(getChildFragmentManager());
-        adapter.addFragment(new GamemodeSectionFragment(), "gamemode");
-        adapter.addFragment(new ShapeTypeSectionFragment(), "shapetype");
-        adapter.addFragment(new ShapeThemeSectionFragment(), "shapetheme");
-        adapter.addFragment(new BackgroundSectionFragment(), "background");
+        fragmentAdapter = new SectionsPageAdapter(getChildFragmentManager());
+        fragmentAdapter.addFragment(new GamemodeSectionFragment(), Constants.GAME_MODE_TAG);
+        fragmentAdapter.addFragment(new ShapeTypeSectionFragment(), Constants.SHAPE_TYPE_TAG);
+        fragmentAdapter.addFragment(new ShapeThemeSectionFragment(), Constants.SHAPE_THEME_TAG);
+        fragmentAdapter.addFragment(new BackgroundSectionFragment(), Constants.BACKGROUND_TAG);
         // to set the initially shown item connected to the first one shown in the viewpager (index 0 shown first)
-        //((ItemSectionFragment)adapter.getItem(0)).notifyNewItemToDisplayFromThisSectionBecauseSectionChange(adapter.getPageTitle(0), ((ItemSectionFragment) adapter.getItem(0)).getDEFAULT_SECTION_VALUE());
-        viewPager.setAdapter(adapter);
+        //((ItemSectionFragment)fragmentAdapter.getItem(0)).notifyNewItemToDisplayFromThisSectionBecauseSectionChange(fragmentAdapter.getPageTitle(0), ((ItemSectionFragment) fragmentAdapter.getItem(0)).getDEFAULT_SECTION_VALUE());
+        viewPager.setAdapter(fragmentAdapter);
     }
 
 
