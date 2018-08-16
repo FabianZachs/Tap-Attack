@@ -36,10 +36,20 @@ public abstract class ItemSectionFragment extends Fragment {
     protected String DEFAULT_SECTION_VALUE;
     protected String SECTION;
 
+
+    public interface ItemSectionListener {
+        void selectedItemChanged(String section, Drawable itemImage, String itemTitle ,int unlocked);
+        void itemUnlockComplete();
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setUpPrefsAndDatabase();
+    }
+
+    public void purchaseUnlock() {
+        // todo complete
     }
 
     public void randomUnlock() {
@@ -65,6 +75,7 @@ public abstract class ItemSectionFragment extends Fragment {
         Drawable image = getContext().getResources().getDrawable(helper.getResourceId(getContext(), adapter.getItem(positionToUnlock).get_file()));
         listener.selectedItemChanged(SECTION, image, adapter.getItem(positionToUnlock).get_name(), 1);
         // todo set this item as the equiped one -- but do it in storefragment ?? or is
+        listener.itemUnlockComplete();
     }
 
     protected void setUpPrefsAndDatabase() {
@@ -87,7 +98,7 @@ public abstract class ItemSectionFragment extends Fragment {
             listener = (ItemSectionListener) getParentFragment();
         } else {
             throw new ClassCastException(context.toString()
-                    + " must implement GamemodeSectionFragment.GameModeSectionFragmentListener");
+                    + " must implement ItemSectionFragment.");
         }
     }
 
@@ -139,7 +150,7 @@ public abstract class ItemSectionFragment extends Fragment {
         return SECTION;
     }
 
-    public void setSelectionToEquiped() {
+    public void setEqiupedItemToSelectedItem() {
         adapter.setSelectedItemPosition(getCurrentEquipedItemPosition());
     }
 }

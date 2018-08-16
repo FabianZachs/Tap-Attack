@@ -18,11 +18,13 @@ public class MyBottomNavigation extends BottomNavigationView {
 
     private BottomNavigationListener listener;
 
-    public MyBottomNavigation(Context context, View view, BottomNavigationListener listener) {
+    public MyBottomNavigation(Context context, View view) {
         super(context);
-        this.listener = listener;
         setupBottomNavigation(view);
+    }
 
+    public void setBottomNavigationListener(BottomNavigationListener listener) {
+        this.listener = listener;
     }
 
     public interface BottomNavigationListener {

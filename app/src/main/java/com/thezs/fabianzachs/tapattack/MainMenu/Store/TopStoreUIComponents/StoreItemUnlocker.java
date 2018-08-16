@@ -1,17 +1,20 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.StoreFragment;
+import com.thezs.fabianzachs.tapattack.MainMenu.Store.StoreFragmentOLD;
 import com.thezs.fabianzachs.tapattack.R;
 
 /**
@@ -29,12 +32,22 @@ public class StoreItemUnlocker {
     private StoreFragment storeFragment;
     // todo needs to handle purchase unlock button (^)
     // todo needs listener that store will implement to update points, gridview (for lockimage and selected), displayed item
-    public StoreItemUnlocker(final StoreFragment storeFragment, final Activity activity, View view, final UnlockListener listener, MyDBHandler myDBHandler) {
 
+    public interface UnlockListener {
+        void randomUnlockClick();
+        void purchaseUnlockClick();
+    }
+
+    public void setUnlockListener(UnlockListener listener) {
+        this.listener = listener;
+    }
+
+    public StoreItemUnlocker(final StoreFragment storeFragment, final Activity activity, View view, MyDBHandler myDBHandler) {
+
+        this.activity = activity;
         this.fraction = (TextView) view.findViewById(R.id.unlocked_fraction);
         this.randomUnlockText = view.findViewById(R.id.random_unlock_text);
         this.randomUnlockSection = view.findViewById(R.id.random_unlock_section);
-        this.listener = listener;
         this.myDBHandler = myDBHandler;
         this.storeFragment = storeFragment;
         updateUnlockedFraction();
@@ -50,6 +63,9 @@ public class StoreItemUnlocker {
                     StyleableToast.makeText(activity,  "UNLOCKING...", R.style.successtoast).show();
                     listener.randomUnlockClick();
                 }
+                else if (!enoughPointsForRandomUnlock() && randomUnlockTextVisible()) {
+                    YoYo.with(Techniques.Shake).duration(800).repeat(0).playOn(randomUnlockSection); // todo this works for text animation if bestScore/bestStreak >= score do animaton
+                }
             }
         }));
 
@@ -64,6 +80,7 @@ public class StoreItemUnlocker {
             }
         }));
     }
+
 
     public void updateUnlockedFraction() {
         String section = storeFragment.getCurrentlyDisplayedItemFragmentTAG();
@@ -87,6 +104,7 @@ public class StoreItemUnlocker {
 
     private boolean purchaseUnlockActive() {
         // todo similar to above
+        return true;
     }
 
 
@@ -95,11 +113,16 @@ public class StoreItemUnlocker {
 
         if (!enoughPointsForRandomUnlock())
             randomUnlockText.setTextColor(ContextCompat.getColor(activity, R.color.soundoff));
+        else randomUnlockText.setTextColor(0xffffffff);
 
         if (randomUnlockTextVisible())
             randomUnlockSection.setVisibility(View.VISIBLE);
         else
             randomUnlockSection.setVisibility(View.INVISIBLE);
+    }
+
+    public void updatePurchaseUnlockView() {
+        // todo
     }
 
     private boolean enoughPointsForRandomUnlock() {
@@ -108,14 +131,10 @@ public class StoreItemUnlocker {
 
     private boolean randomUnlockTextVisible() {
 
-        return !storeFragment.getCurrentlyDisplayedItemFragmentTAG.equals(Constants.GAME_MODE_TAG)
-                &&  myDBHandler.getListOfLockedItems(storeFragment.getCurrentlyDisplayedItemFragmentTAG) != 0;
+        return !storeFragment.getCurrentlyDisplayedItemFragmentTAG().equals(Constants.GAME_MODE_TAG)
+                &&  myDBHandler.getListOfLockedItems(storeFragment.getCurrentlyDisplayedItemFragmentTAG()).length != 0;
 
     }
 
-    public interface UnlockListener {
-        void randomUnlockClick();
-        void purchaseUnlockClick();
-    }
 
 }

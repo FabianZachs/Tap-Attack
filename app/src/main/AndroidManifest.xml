@@ -29,7 +29,7 @@
             android:name=".Game.MainGameActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".LoadingActivityOLD" />
-        <activity android:name=".MainMenu.Store.StoreFragment"></activity>
+        <activity android:name=".MainMenu.Store.StoreFragmentOLD"></activity>
     </application>
 
 </manifest>

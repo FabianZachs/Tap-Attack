@@ -40,7 +40,7 @@
     
     <!-- 1) MainActivityFragment -->
     
-    <!-- 2) StoreFragment -->
+    <!--StoreFragmentOLDment -->
     <string name="itemsUnlockedFraction">%1$d/%2$d</string>
     <string name="randomUnlockText">RANDOM UNLOCK\n %1$d</string>
     

@@ -7,7 +7,7 @@
     android:gravity="bottom"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.thezs.fabianzachs.tapattack.MainMenu.Store.StoreFragment">
+    tools:context="com.thezs.fabianzachs.tapattack.MainMenu.Store.StoreFragmentOLD">
 
     <RelativeLayout
         android:layout_width="match_parent"

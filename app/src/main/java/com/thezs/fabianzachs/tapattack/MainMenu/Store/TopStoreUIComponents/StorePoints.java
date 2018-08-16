@@ -14,6 +14,15 @@ public class StorePoints {
 
     private TextView pointsText;
     private SharedPreferences prefs;
+    private StorePointsListener listener;
+
+    public interface StorePointsListener{
+        void pointsUpdated();
+    }
+
+    public void setStorePointsListener(StorePointsListener listener) {
+        this.listener = listener;
+    }
 
     public StorePoints(View view, SharedPreferences prefs) {
         this.prefs = prefs;
@@ -21,8 +30,14 @@ public class StorePoints {
         updateCurrentPoints();
     }
 
+    public int getCurrentPoints() {
+        return prefs.getInt("points", 0);
+    }
+
     public void updateCurrentPoints() {
         pointsText.setText(Integer.toString(prefs.getInt("points", 0)));
+        if (listener != null)
+            listener.pointsUpdated();
     }
 
     public void addToPointsAndUpdateView(int addPoints) {

@@ -135,7 +135,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         if (storeFragment.isAdded()) {
-            storeFragment.onShow(); // todo maybe a listener which updates all store sections
+            //storeFragment.onShow(); // todo maybe a listener which updates all store sections
             ft.show(storeFragment);
         } else {
             Log.d("isadded", "displayMainMenuFragment: store");
@@ -185,6 +185,9 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
+
+        // FOR TESTING STORE:
+        prefs.edit().putInt("points", 1000).apply();
 
         setContentView(R.layout.main_menu4);
 
@@ -821,7 +824,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         adapter.addFragment(new LoadingFragment(), "load");
         adapter.addFragment(new MainMenuFragment(), "mainmenu");
         adapter.addFragment(new SettingsFragment(), "settings");
-        adapter.addFragment(new StoreFragment(), "store");
+        adapter.addFragment(new StoreFragmentOLD(), "store");
         viewPager.setAdapter(adapter);
     }
 

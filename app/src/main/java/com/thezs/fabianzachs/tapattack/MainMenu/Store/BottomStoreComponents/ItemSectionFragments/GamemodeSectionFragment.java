@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents;
+package com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.ItemSectionFragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.ItemSectionFragment;
 import com.thezs.fabianzachs.tapattack.R;
 
 /**

@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -31,9 +32,8 @@ public class StoreRewardVideoAd implements RewardedVideoAdListener {
     private RewardedVideoAd videoAd;
     private Activity activity;
 
-    public StoreRewardVideoAd(Activity activity, View view, RewardAdListener listener) {
+    public StoreRewardVideoAd(Activity activity, View view) {
         this.activity = activity;
-        this.listener = listener;
         this.videoImage = view.findViewById(R.id.reward_video_image);
         setupRewardText(view);
         videoImage.setImageResource(R.drawable.playvideobutton);
@@ -55,8 +55,13 @@ public class StoreRewardVideoAd implements RewardedVideoAdListener {
         rewardText.setText("+"+Constants.VIDEO_AD_REWARD);
     }
 
+
     public interface RewardAdListener {
         void videoAdCompleted(int earnedPoints);
+    }
+
+    public void setRewardAdListener(RewardAdListener listener) {
+        this.listener = listener;
     }
 
 

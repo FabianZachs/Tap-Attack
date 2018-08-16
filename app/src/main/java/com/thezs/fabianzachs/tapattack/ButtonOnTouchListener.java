@@ -105,9 +105,9 @@ public class ButtonOnTouchListener implements View.OnTouchListener {
                 //((MainMenuActivity)activity).setViewPager(1);
 
                 android.support.v4.app.Fragment fragment =((MainMenuActivity)activity).getSupportFragmentManager().findFragmentByTag("store");
-                if (fragment instanceof StoreFragment) {
+                if (fragment instanceof StoreFragmentOLD) {
                     Log.d("backbuttonclick", "buttonAction: ");
-                    ((StoreFragment) fragment).backButtonClick();
+                    ((StoreFragmentOLD) fragment).backButtonClick();
                     Log.d("backbuttonclick", "buttonAction: ");
                 }
                 break;
@@ -117,7 +117,7 @@ public class ButtonOnTouchListener implements View.OnTouchListener {
             case "fragmentToStore":
                 //((MainMenuActivity)activity).setViewPager(3);
                 // Create fragment and give it an argument specifying the article it should show
-                StoreFragment storeFragment = new StoreFragment();
+                StoreFragmentOLD storeFragment = new StoreFragmentOLD();
 
                 transaction = ((MainMenuActivity)activity).getSupportFragmentManager().beginTransaction();
 

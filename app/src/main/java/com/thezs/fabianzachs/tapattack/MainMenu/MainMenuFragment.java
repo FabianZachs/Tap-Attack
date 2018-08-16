@@ -798,7 +798,7 @@ public class MainMenuFragment extends Fragment {
 
         //view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_item));
 
-        //Intent intent = new Intent(getActivity(), StoreFragment.class);
+        //Intent intent = new Intent(getActivity(), StoreFragmentOLD.class);
         //this.startActivity(intent);
         //store.storeClicked();
 
