@@ -39,7 +39,7 @@ import com.thezs.fabianzachs.tapattack.R;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class StoreFragment extends Fragment implements /*GamemodeSectionFragment.GameModeSectionFragmentListener*/ItemSectionListener {
+final public class StoreFragment extends Fragment implements /*GamemodeSectionFragment.GameModeSectionFragmentListener*/ItemSectionListener {
 
     private CustomViewPager viewPager;
     private SectionsPageAdapter fragmentAdapter;

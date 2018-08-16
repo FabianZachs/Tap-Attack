@@ -34,4 +34,16 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    
+    
+    <!-- My Resource Strings -->
+    
+    <!-- 1) MainActivityFragment -->
+    
+    <!-- 2) StoreFragment -->
+    <string name="itemsUnlockedFraction">%1$d/%2$d</string>
+    <string name="randomUnlockText">RANDOM UNLOCK\n %1$d</string>
+    
+    
+    
 </resources>
