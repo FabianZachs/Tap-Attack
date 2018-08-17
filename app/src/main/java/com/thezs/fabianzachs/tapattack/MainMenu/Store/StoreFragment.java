@@ -56,12 +56,12 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.store_fragment2, container, false);
-        this.storePoints = new StorePoints(view, prefs);
+        this.storePoints = new StorePoints(getActivity(), view, prefs);
         this.storeItemSectionviewPager = new MyStoreItemSectionViewPager(getContext(),this,view);
         this.storeItemUnlocker = new StoreItemUnlocker(this, getActivity(), view, myDBHandler);
         this.customVideoAd = new StoreRewardVideoAd(getActivity(), view);
         this.displayedItem = new DisplayedItem(view, prefs, prefs.edit());
-        this.sectionTitle = new SectionTitle(view);
+        this.sectionTitle = new SectionTitle(view, this);
         this.myBottomNavigation = new MyBottomNavigation(getContext(), view);
 
         setListeners();
@@ -106,7 +106,8 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
 
             @Override
             public void purchaseUnlockClick() {
-                storeItemSectionviewPager.purchaseUnlockForCurrentItemSection();
+                //storeItemSectionviewPager.purchaseUnlockForCurrentItemSection();
+                storePoints.addToPointsAndUpdateView(500);
 
             }
         });
@@ -139,7 +140,7 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
                 storeItemUnlocker.updateRandomUnlockView();
                 storeItemUnlocker.updatePurchaseUnlockView();
                 storeItemUnlocker.updateUnlockedFraction();
-                sectionTitle.setSectionText(getCurrentlyDisplayedItemFragmentTAG());
+                sectionTitle.setSectionText();
             }
         });
 

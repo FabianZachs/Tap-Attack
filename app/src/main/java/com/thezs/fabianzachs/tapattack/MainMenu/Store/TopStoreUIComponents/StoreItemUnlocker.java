@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -76,6 +77,7 @@ public class StoreItemUnlocker {
                 if (true/*handle for if purcase unlock should be run(maybe not enough points)*/) {
                     //listener.purchaseUnlockClick();
                     StyleableToast.makeText(activity,  "UNLOCKING PURCHASE...", R.style.successtoast).show();
+                    listener.purchaseUnlockClick();
                 }
             }
         }));
@@ -99,6 +101,7 @@ public class StoreItemUnlocker {
         */
 
 
+        //return (randomUnlockSection.getVisibility()==View.VISIBLE && enoughPointsForRandomUnlock());
         return (randomUnlockSection.getVisibility()==View.VISIBLE && enoughPointsForRandomUnlock());
     }
 
@@ -115,10 +118,16 @@ public class StoreItemUnlocker {
             randomUnlockText.setTextColor(ContextCompat.getColor(activity, R.color.soundoff));
         else randomUnlockText.setTextColor(0xffffffff);
 
-        if (randomUnlockTextVisible())
+        if (randomUnlockTextVisible()) {
+            Log.d("shouldbegone", "visible");
             randomUnlockSection.setVisibility(View.VISIBLE);
-        else
+
+        }
+        else {
+
+            Log.d("shouldbegone", "invisible");
             randomUnlockSection.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void updatePurchaseUnlockView() {
@@ -130,6 +139,7 @@ public class StoreItemUnlocker {
     }
 
     private boolean randomUnlockTextVisible() {
+        Log.d("shouldbegone", "randomUnlockTextVisible: " +myDBHandler.getListOfLockedItems(storeFragment.getCurrentlyDisplayedItemFragmentTAG()).length);
 
         return !storeFragment.getCurrentlyDisplayedItemFragmentTAG().equals(Constants.GAME_MODE_TAG)
                 &&  myDBHandler.getListOfLockedItems(storeFragment.getCurrentlyDisplayedItemFragmentTAG()).length != 0;

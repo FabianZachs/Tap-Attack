@@ -224,13 +224,13 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         // set up Constants
         initializeConstants();
 
-        if (!prefs.getBoolean("firstTime", false)) {
+        //if (!prefs.getBoolean("firstTime", false)) {
             databaseSetup();
 
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean("firstTime", true);
             editor.apply();
-        }
+        //}
 
         /*
         // method instantiation

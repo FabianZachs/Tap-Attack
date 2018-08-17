@@ -1,7 +1,10 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.thezs.fabianzachs.tapattack.R;
@@ -12,6 +15,7 @@ import com.thezs.fabianzachs.tapattack.R;
 
 public class StorePoints {
 
+    private Activity activity;
     private TextView pointsText;
     private SharedPreferences prefs;
     private StorePointsListener listener;
@@ -22,9 +26,11 @@ public class StorePoints {
 
     public void setStorePointsListener(StorePointsListener listener) {
         this.listener = listener;
+
     }
 
-    public StorePoints(View view, SharedPreferences prefs) {
+    public StorePoints(Activity activity, View view, SharedPreferences prefs) {
+        this.activity = activity;
         this.prefs = prefs;
         this.pointsText = view.findViewById(R.id.current_points_text);
         updateCurrentPoints();
@@ -35,7 +41,11 @@ public class StorePoints {
     }
 
     public void updateCurrentPoints() {
-        pointsText.setText(Integer.toString(prefs.getInt("points", 0)));
+
+        Animation updatePointsText = AnimationUtils.loadAnimation(activity, R.anim.slow_scale_up);
+        pointsText.startAnimation(updatePointsText);
+
+        pointsText.setText(activity.getResources().getString(R.string.currentPoints, prefs.getInt("points", 0)));
         if (listener != null)
             listener.pointsUpdated();
     }
