@@ -135,7 +135,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         if (storeFragment.isAdded()) {
-            //storeFragment.onShow(); // todo maybe a listener which updates all store sections
+            storeFragment.onShow();
             ft.show(storeFragment);
         } else {
             Log.d("isadded", "displayMainMenuFragment: store");
@@ -187,7 +187,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
 
         // FOR TESTING STORE:
-        prefs.edit().putInt("points", 1000).apply();
+        prefs.edit().putInt("points", 8000).apply();
 
         setContentView(R.layout.main_menu4);
 
@@ -224,13 +224,13 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         // set up Constants
         initializeConstants();
 
-        //if (!prefs.getBoolean("firstTime", false)) {
+        if (!prefs.getBoolean("firstTime", false)) {
             databaseSetup();
 
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean("firstTime", true);
             editor.apply();
-        //}
+        }
 
         /*
         // method instantiation

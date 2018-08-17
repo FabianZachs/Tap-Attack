@@ -39,7 +39,11 @@ public class MyStoreItemSectionViewPager {
     }
 
     public int getCurrentRandomUnlockPrice() {
-        return Constants.PRICE_BY_SECTION[currentlyDisplayedFragmentIndex];
+        return Constants.RANDOM_PRICE_BY_SECTION[currentlyDisplayedFragmentIndex];
+    }
+
+    public int getCurrentPurchaseUnlockPrice() {
+        return Constants.PURCHASE_PRICE_BY_SECTION[currentlyDisplayedFragmentIndex];
     }
 
     public void setCurrentlyDisplayedFragment(int index) {
@@ -54,6 +58,10 @@ public class MyStoreItemSectionViewPager {
     public void purchaseUnlockForCurrentItemSection() {
         ItemSectionFragment currentFragment = (ItemSectionFragment) fragmentAdapter.getItem(currentlyDisplayedFragmentIndex);
         currentFragment.purchaseUnlock();
+    }
+
+    public ItemSectionFragment getCurrentlyDisplayedFragment() {
+        return (ItemSectionFragment) fragmentAdapter.getItem(currentlyDisplayedFragmentIndex);
     }
 
 
@@ -110,6 +118,7 @@ public class MyStoreItemSectionViewPager {
         viewPager.setAdapter(fragmentAdapter);
 
     }
+
 
     /*
     public void setItemSectionListeners(ItemSectionFragment.ItemSectionListener listener) {

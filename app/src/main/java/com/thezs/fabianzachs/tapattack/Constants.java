@@ -34,7 +34,8 @@ public class Constants {
     public static Context CURRENT_CONTEXT;
 
     public final static int VIDEO_AD_REWARD = 200;
-    public final static int[] PRICE_BY_SECTION = {0,2000,1000,2000};
+    public final static int[] RANDOM_PRICE_BY_SECTION = {0,2000,1000,2000};
+    public final static int[] PURCHASE_PRICE_BY_SECTION = {0,4000,2000,4000};
     public final static String GAME_MODE_TAG = "game mode";
     public final static String SHAPE_TYPE_TAG = "shape type";
     public final static String SHAPE_THEME_TAG = "shape theme";

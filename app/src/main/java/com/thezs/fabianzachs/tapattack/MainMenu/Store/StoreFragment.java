@@ -1,5 +1,7 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -9,6 +11,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
@@ -66,6 +70,29 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
 
         setListeners();
 
+        // todo animations
+
+        ImageView iv = (ImageView) view.findViewById(R.id.item_highlight);
+
+
+        ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(
+                iv,
+                PropertyValuesHolder.ofFloat("scaleX", 1.1f),
+                PropertyValuesHolder.ofFloat("scaleY", 1.1f));
+        scaleDown.setDuration(510);
+        //scaleDown.setInterpolator(new FastOutSlowInInterpolator());
+
+        scaleDown.setRepeatCount(ObjectAnimator.INFINITE);
+        scaleDown.setRepeatMode(ObjectAnimator.REVERSE);
+        scaleDown.start();
+
+        ImageView star1 = (ImageView) view.findViewById(R.id.item_highlight1);
+        Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_clockwise);
+        star1.startAnimation(myAnim);
+
+        ImageView star2 = (ImageView) view.findViewById(R.id.item_highlight2);
+        Animation myAnim2 = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_anticlockwise);
+        star2.startAnimation(myAnim2);
 
         final ImageView backButton= view.findViewById(R.id.store_back_image);
         backButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), backButton, new ButtonOnTouchListener.ButtonExecuteListener() {
@@ -107,7 +134,7 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
             @Override
             public void purchaseUnlockClick() {
                 //storeItemSectionviewPager.purchaseUnlockForCurrentItemSection();
-                storePoints.addToPointsAndUpdateView(500);
+                storeItemSectionviewPager.purchaseUnlockForCurrentItemSection();
 
             }
         });
@@ -153,6 +180,14 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
         });
     }
 
+    public void onShow() {
+        ItemSectionFragment currentlyDisplayedFragment = storeItemSectionviewPager.getCurrentlyDisplayedFragment();
+        currentlyDisplayedFragment.setEqiupedItemToSelectedItem();
+        currentlyDisplayedFragment.updateGridView();
+        currentlyDisplayedFragment.notifyNewItemToDisplayFromThisSectionBecauseSectionChange();
+
+    }
+
     @Override
     public void selectedItemChanged(String section, Drawable itemImage, String itemTitle, int unlocked) {
         displayedItem.updateDisplayedItem(section, itemImage, itemTitle, unlocked);
@@ -178,6 +213,10 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
 
     public int getCurrentRandomUnlockPrice() {
         return storeItemSectionviewPager.getCurrentRandomUnlockPrice();
+    }
+
+    public int getCurrentPurchaseUnlockPrice() {
+        return storeItemSectionviewPager.getCurrentPurchaseUnlockPrice();
     }
 
     public int getCurrentPoints() {

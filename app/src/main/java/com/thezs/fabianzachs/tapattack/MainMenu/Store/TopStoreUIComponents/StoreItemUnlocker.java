@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +31,8 @@ public class StoreItemUnlocker {
     private TextView fraction;
     private TextView randomUnlockText;
     private RelativeLayout randomUnlockSection;
+    private RelativeLayout purchaseUnlockSection;
+    private TextView purchaseUnlockText;
     private StoreFragment storeFragment;
     // todo needs to handle purchase unlock button (^)
     // todo needs listener that store will implement to update points, gridview (for lockimage and selected), displayed item
@@ -49,36 +52,38 @@ public class StoreItemUnlocker {
         this.fraction = (TextView) view.findViewById(R.id.unlocked_fraction);
         this.randomUnlockText = view.findViewById(R.id.random_unlock_text);
         this.randomUnlockSection = view.findViewById(R.id.random_unlock_section);
+        this.purchaseUnlockSection = view.findViewById(R.id.purchase_unlock_section);
+        this.purchaseUnlockText = view.findViewById(R.id.purchase_unlock_text);
         this.myDBHandler = myDBHandler;
         this.storeFragment = storeFragment;
         updateUnlockedFraction();
         updateRandomUnlockView();
+        updatePurchaseUnlockView();
 
-        final RelativeLayout randomUnlockSection = view.findViewById(R.id.random_unlock_section);
-                randomUnlockSection.setOnTouchListener(new ButtonOnTouchListener(activity, randomUnlockSection, new ButtonOnTouchListener.ButtonExecuteListener() {
+        randomUnlockSection.setOnTouchListener(new ButtonOnTouchListener(activity, randomUnlockSection, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
             public void buttonAction() {
 
-                if (randomUnlockActive()) {
 
-                    StyleableToast.makeText(activity,  "UNLOCKING...", R.style.successtoast).show();
+
+                if (randomUnlockActive()) {
                     listener.randomUnlockClick();
                 }
-                else if (!enoughPointsForRandomUnlock() && randomUnlockTextVisible()) {
-                    YoYo.with(Techniques.Shake).duration(800).repeat(0).playOn(randomUnlockSection); // todo this works for text animation if bestScore/bestStreak >= score do animaton
-                }
+                else //if (!enoughPointsForRandomUnlock() || allUnlocked()) {
+                    YoYo.with(Techniques.Shake).duration(800).repeat(0).playOn(randomUnlockSection);
+                //}
             }
         }));
 
-        RelativeLayout purchaseSection = view.findViewById(R.id.purchase_unlock_section);
-        purchaseSection.setOnTouchListener(new ButtonOnTouchListener(activity, purchaseSection, new ButtonOnTouchListener.ButtonExecuteListener() {
+        purchaseUnlockSection.setOnTouchListener(new ButtonOnTouchListener(activity, purchaseUnlockSection, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
             public void buttonAction() {
-                if (true/*handle for if purcase unlock should be run(maybe not enough points)*/) {
-                    //listener.purchaseUnlockClick();
-                    StyleableToast.makeText(activity,  "UNLOCKING PURCHASE...", R.style.successtoast).show();
+                if (purchaseUnlockActive()) {
                     listener.purchaseUnlockClick();
                 }
+                else
+                    YoYo.with(Techniques.Shake).duration(800).repeat(0).playOn(purchaseUnlockSection);
+
             }
         }));
     }
@@ -92,22 +97,11 @@ public class StoreItemUnlocker {
     }
 
     private boolean randomUnlockActive() {
-        /*
-        if (randomUnlockSection.getVisibility()==View.VISIBLE)
-            return true;
-        if (enoughPointsForRandomUnlock())
-            return true;
-        return false;
-        */
-
-
-        //return (randomUnlockSection.getVisibility()==View.VISIBLE && enoughPointsForRandomUnlock());
         return (randomUnlockSection.getVisibility()==View.VISIBLE && enoughPointsForRandomUnlock());
     }
 
     private boolean purchaseUnlockActive() {
-        // todo similar to above
-        return true;
+        return (purchaseUnlockSection.getVisibility()==View.VISIBLE && enoughPointsForPurchaseUnlock());
     }
 
 
@@ -131,18 +125,43 @@ public class StoreItemUnlocker {
     }
 
     public void updatePurchaseUnlockView() {
-        // todo
+        purchaseUnlockText.setText(activity.getResources().getString(R.string.purchaseUnlockText, storeFragment.getCurrentPurchaseUnlockPrice()));
+
+        if (!enoughPointsForPurchaseUnlock())
+            purchaseUnlockText.setTextColor(ContextCompat.getColor(activity, R.color.soundoff));
+        else purchaseUnlockText.setTextColor(0xffffffff);
+
+        if (purchaseUnlockTextVisible()) {
+            purchaseUnlockSection.setVisibility(View.VISIBLE);
+
+        }
+        else {
+
+            Log.d("shouldbegone", "invisible");
+            purchaseUnlockSection.setVisibility(View.INVISIBLE);
+        }
     }
 
     private boolean enoughPointsForRandomUnlock() {
         return storeFragment.getCurrentRandomUnlockPrice() <= storeFragment.getCurrentPoints();
     }
 
-    private boolean randomUnlockTextVisible() {
-        Log.d("shouldbegone", "randomUnlockTextVisible: " +myDBHandler.getListOfLockedItems(storeFragment.getCurrentlyDisplayedItemFragmentTAG()).length);
+    private boolean enoughPointsForPurchaseUnlock() {
+        return storeFragment.getCurrentPurchaseUnlockPrice() <= storeFragment.getCurrentPoints();
+    }
 
+    private boolean randomUnlockTextVisible() {
         return !storeFragment.getCurrentlyDisplayedItemFragmentTAG().equals(Constants.GAME_MODE_TAG)
-                &&  myDBHandler.getListOfLockedItems(storeFragment.getCurrentlyDisplayedItemFragmentTAG()).length != 0;
+                &&  !allUnlocked();
+    }
+
+    private boolean purchaseUnlockTextVisible() {
+        return !storeFragment.getCurrentlyDisplayedItemFragmentTAG().equals(Constants.GAME_MODE_TAG)
+                &&  !allUnlocked();
+    }
+
+    private boolean allUnlocked() {
+        return myDBHandler.getListOfLockedItems(storeFragment.getCurrentlyDisplayedItemFragmentTAG()).length == 0;
 
     }
 

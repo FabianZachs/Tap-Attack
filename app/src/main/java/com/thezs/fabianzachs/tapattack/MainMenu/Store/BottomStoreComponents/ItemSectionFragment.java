@@ -49,20 +49,22 @@ public abstract class ItemSectionFragment extends Fragment {
     }
 
     public void purchaseUnlock() {
-        // todo complete
+        String[] lockedItems = dbHandler.getListOfLockedItems(SECTION);
+        Log.d("purchaseunlock", "purchaseUnlock: " + lockedItems[adapter.getSelectedItemPosition()]);
+        unlockViaItemName(lockedItems[adapter.getSelectedItemPosition()]);
     }
 
-    public void randomUnlock() {
+    private void unlockViaItemName(String itemNameToUnlock) {
+        /*
         if (SECTION.equals(Constants.GAME_MODE_TAG))
             return;
-        String[] lockedItems = dbHandler.getListOfLockedItems(SECTION);
+            */
+        /*
         if (lockedItems.length == 0) {
             StyleableToast.makeText(Constants.CURRENT_CONTEXT, "All Items Unlocked", R.style.successtoast).show();
             return;
-        }
+        }*/
 
-        Random random = new Random();
-        String itemNameToUnlock = lockedItems.length > 1 ?  lockedItems[random.nextInt(lockedItems.length - 1) + 1] : lockedItems[0];
         dbHandler.unlockItemViaName(itemNameToUnlock);
 
         int positionToUnlock = adapter.getIndexOfItemWithName(itemNameToUnlock);
@@ -74,8 +76,17 @@ public abstract class ItemSectionFragment extends Fragment {
 
         Drawable image = getContext().getResources().getDrawable(helper.getResourceId(getContext(), adapter.getItem(positionToUnlock).get_file()));
         listener.selectedItemChanged(SECTION, image, adapter.getItem(positionToUnlock).get_name(), 1);
-        // todo set this item as the equiped one -- but do it in storefragment ?? or is
         listener.itemUnlockComplete();
+
+    }
+
+
+
+    public void randomUnlock() {
+        String[] lockedItems = dbHandler.getListOfLockedItems(SECTION);
+        Random random = new Random();
+        String itemNameToUnlock = lockedItems.length > 1 ?  lockedItems[random.nextInt(lockedItems.length - 1) + 1] : lockedItems[0];
+        unlockViaItemName(itemNameToUnlock);
     }
 
     protected void setUpPrefsAndDatabase() {

@@ -20,6 +20,7 @@ public class StorePoints {
     private SharedPreferences prefs;
     private StorePointsListener listener;
 
+
     public interface StorePointsListener{
         void pointsUpdated();
     }

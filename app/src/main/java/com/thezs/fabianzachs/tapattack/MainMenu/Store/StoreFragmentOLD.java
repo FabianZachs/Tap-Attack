@@ -28,7 +28,6 @@ import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.Item
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.ItemSectionFragment;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.ItemSectionFragments.ShapeThemeSectionFragment;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.ItemSectionFragments.ShapeTypeSectionFragment;
-import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.MyBottomNavigation;
 import com.thezs.fabianzachs.tapattack.MyRewardVideoAd;
 import com.thezs.fabianzachs.tapattack.R;
 
@@ -253,7 +252,7 @@ final public class StoreFragmentOLD extends Fragment /*implements GamemodeSectio
     private void setTopBackgroundUI() {
         displayedSectionTitle.setText("BACKGROUNDS");
         setupLockedFraction(Constants.BACKGROUND_TAG);
-        updateUnlockSectionText(Constants.PRICE_BY_SECTION[3]);
+        updateUnlockSectionText(Constants.RANDOM_PRICE_BY_SECTION[3]);
     }
 
 
@@ -261,20 +260,20 @@ final public class StoreFragmentOLD extends Fragment /*implements GamemodeSectio
         displayedSectionTitle.setText("SHAPE TYPES");
         setupLockedFraction(Constants.SHAPE_TYPE_TAG);
         updateUnlockSectionText(Constants.SHAPE_TYPES_POINTS_COST);
-        updateUnlockSectionText(Constants.PRICE_BY_SECTION[1]);
+        updateUnlockSectionText(Constants.RANDOM_PRICE_BY_SECTION[1]);
     }
 
     private void setTopShapethemeUI() {
         displayedSectionTitle.setText("SHAPE THEME");
         setupLockedFraction(Constants.SHAPE_THEME_TAG);
         updateUnlockSectionText(Constants.SHAPE_THEME_POINTS_COST);
-        updateUnlockSectionText(Constants.PRICE_BY_SECTION[2]);
+        updateUnlockSectionText(Constants.RANDOM_PRICE_BY_SECTION[2]);
     }
 
     private void setTopGamemodeUI() {
         displayedSectionTitle.setText("GAME MODE");
         setupLockedFraction(Constants.GAME_MODE_TAG);
-        updateUnlockSectionText(Constants.PRICE_BY_SECTION[0]);
+        updateUnlockSectionText(Constants.RANDOM_PRICE_BY_SECTION[0]);
         // todo buy button text
         // todo itemhighlight
         // todo selected item
@@ -365,7 +364,7 @@ final public class StoreFragmentOLD extends Fragment /*implements GamemodeSectio
         updateCurrentPointsText();
         // todo turn random unlock button text soundoff red if not enough points
         //((ItemSectionFragment) fragmentAdapter.getItem(currentlyDisplayedFragmentIndex)).getRandomPrice();
-        //Constants.PRICE_BY_SECTION[currentlyDisplayedFragmentIndex];
+        //Constants.RANDOM_PRICE_BY_SECTION[currentlyDisplayedFragmentIndex];
     }
 
 

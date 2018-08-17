@@ -34,7 +34,6 @@ public class CustomGridAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private MyDBHandler dbHandler;
     private String category;
-    private ObjectAnimator selectedItemAnimation;
 
     public CustomGridAdapter(Context context, MyDBHandler dbHandler, String category, int initiallySelectedItem) {
         this.context = context;
@@ -57,7 +56,12 @@ public class CustomGridAdapter extends BaseAdapter {
     }
 
     public void setSelectedItemPosition(int position) {
+        Log.d("purchaseunlock", "setSelectedItemPosition: " + position);
         selectedItemPosition = position;
+    }
+
+    public int getSelectedItemPosition() {
+        return selectedItemPosition;
     }
 
 
