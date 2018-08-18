@@ -83,6 +83,34 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM " + TABLE_STOREITEMS + " WHERE " + COLUMN_NAME + "=\"" + name + "\";");
     }
 
+    public int getNumberOfItems() {
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_STOREITEMS;
+        Cursor pointer = db.rawQuery(query, null);
+        pointer.moveToFirst();
+
+        int count = 0;
+
+        while(pointer.moveToNext()) {
+            count++;
+        }
+        return count;
+    }
+
+    public int getNumberOfUnlockedItems() {
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_STOREITEMS + " WHERE " + COLUMN_UNLOCKED + "=\"" + 1 + "\";";
+        Cursor pointer = db.rawQuery(query, null);
+        pointer.moveToFirst();
+
+        int count = 0;
+
+        while(pointer.moveToNext()) {
+            count++;
+        }
+        return count;
+    }
+
     public String databaseToString() {
         String dbString = "";
         SQLiteDatabase db = getWritableDatabase();

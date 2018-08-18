@@ -8,62 +8,58 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.drawable.ColorDrawable;
-import android.media.MediaPlayer;
 import android.os.Build;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
-import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
 import com.thezs.fabianzachs.tapattack.Constants;
-import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
-import com.thezs.fabianzachs.tapattack.Database.StoreItem;
-import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundManager;
+import com.thezs.fabianzachs.tapattack.MainMenu.Menu.MainMenuFragment;
+import com.thezs.fabianzachs.tapattack.MainMenu.Menu.MainMenuFragment2;
 import com.thezs.fabianzachs.tapattack.MainMenu.Settings.SettingsFragment;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.StoreFragment;
 import com.thezs.fabianzachs.tapattack.R;
-import com.thezs.fabianzachs.tapattack.Store1;
-import com.thezs.fabianzachs.tapattack.helper;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainMenuActivity extends GeneralParent implements StoreFragment.StoreListener, SettingsFragment.SettingsListener, MainMenuFragment.MainMenuListener {
 
-    private ArrayList<MediaPlayer> mediaPlayers; // these players loop -> turn of onStop()
-    private ThemesManager themesManager;
-    private BackgroundManager backgroundManager;
     private SharedPreferences prefs;
-    private AdView mAdView;
-    private Store1 store;
-    private MorePointsMenu morePointsMenu;
-    private InterstitialAd afterGameAd;
-    private InterstitialAd timedMenuAd;
+    //private AdView mAdView;
+    //private InterstitialAd afterGameAd;
+    //private InterstitialAd timedMenuAd;
 
-    /*
-    private static final String TAG = "MainActivity";
-    private SectionsPageAdapter sectionsPageAdapter;
-    private CustomViewPager viewPager;
-    */
 
-    private MainMenuFragment mainMenuFragment;
+    private MainMenuFragment2 mainMenuFragment;
     private StoreFragment storeFragment;
     private SettingsFragment settingsFragment;
-
     private MusicPlayer musicPlayer;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
+
+        setContentView(R.layout.main_menu4);
+
+        if (findViewById(R.id.main_fragment) != null) {
+
+            if (savedInstanceState != null) {
+                return;
+            }
+
+            addAllFragments();
+            displayMainMenuFragment();
+        }
+
+
+        new MyItemDatabase(this, prefs);
+        musicSetup();
+        initializeConstants();
+    }
 
 
     @Override
@@ -164,7 +160,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
 
     private void addAllFragments() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        this.mainMenuFragment = new MainMenuFragment();
+        this.mainMenuFragment = new MainMenuFragment2();
         this.storeFragment = new StoreFragment();
         this.settingsFragment = new SettingsFragment();
         //ft.add(R.id.main_fragment, mainMenuFragment, "mainmenu");
@@ -178,32 +174,6 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         if (prefs.getInt("music", 1) == 1)
             musicPlayer.play();
     }
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
-
-        setContentView(R.layout.main_menu4);
-
-        if (findViewById(R.id.main_fragment) != null) {
-
-            if (savedInstanceState != null) {
-                return;
-            }
-
-            addAllFragments();
-            displayMainMenuFragment();
-        }
-
-
-        new MyItemDatabase(this, prefs);
-        musicSetup();
-        initializeConstants();
-    }
-
-
 
     // todo basic code for altering specific pixels of bitmap
     public void multiShapesMessaroundDELETE() {
@@ -331,7 +301,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         musicPlayer.pausePlaying();
     }
 
-
+/*
     private void requestNewAfterGameAd() {
         afterGameAd = new InterstitialAd(this);
         afterGameAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
@@ -352,4 +322,6 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         AdRequest request = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
         timedMenuAd.loadAd(request);
     }
+    */
 }
+

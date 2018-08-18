@@ -41,7 +41,7 @@
                 android:src="@drawable/titleimage2" />
 
             <TextView
-                android:id="@+id/unlock_progress_text"
+                android:id="@+id/percent_unlocked_text"
                 android:layout_marginTop="10sp"
                 android:text="50%"
                 android:textColor="@android:color/white"

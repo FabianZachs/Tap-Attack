@@ -43,6 +43,7 @@ public class Constants {
 
     public static String[] SHAPES = {"circle", "square", "cross", "arrow", "star"};
 
+    /*
     public static final String[] WARNING_COLOR_STREAK_REWARDS = {"unlock item","shift up", "reduce speed", "stars", "more points"};
     public static Integer[] WARNING_COLOR_STREAK_REWARDS_IDS = {R.drawable.unlockitem2, R.drawable.shiftshapesupicon, R.drawable.reducespeedicon, R.drawable.turnintostarsicon, R.drawable.morepointsicon};
     public static String[] WARNING_COLOR_STREAK_REWARDS_FILES = {"unlockitem2", "shiftshapesupicon", "reducespeedicon", "turnintostarsicon", "morepointsicon"};
@@ -57,7 +58,7 @@ public class Constants {
             "thirdmultiplier", "fourthmultiplier", "fifthmultiplier", "sixthmultiplier"};
     public static int[] MULTIPLIERS_PRICE_POINTS = {-1, -1, -1, -1, -1, -1};
     public static int[] MULTIPLIERS_PRICE_MONEY = {0, 1, 2, 3, 4, 5};
-
+*/
 
     public static String[] GAMEMODES = {"tutorial", "classic", "circle", "square", "arrow", "discrete"};
     public static Integer[] GAMEMODES_IDS = {R.drawable.instructionsgamemode,R.drawable.startbluebluered, R.drawable.circlestart, R.drawable.squarestart, R.drawable.arrowstart, R.drawable.discretestart};

@@ -443,6 +443,7 @@ public class Store1 {
                         Constants.GAMEMODES_IDS[Arrays.asList(Constants.GAMEMODES).indexOf(prefs.getString("gamemode","tutorial"))]);
                 img.setImageBitmap(bm3);
                 return;
+                /*
             case "multiplier":
                 Bitmap bm4 = BitmapFactory.decodeResource(mainMenuActivity.getResources(),
                         Constants.MULTIPLIER_IDS[Arrays.asList(Constants.MULTIPLIERS).indexOf(prefs.getString("multiplier","basic"))]);
@@ -453,6 +454,7 @@ public class Store1 {
                         Constants.WARNING_COLOR_STREAK_REWARDS_IDS[Arrays.asList(Constants.WARNING_COLOR_STREAK_REWARDS).indexOf(prefs.getString("warningcolorstreakreward","more points"))]);
                 img.setImageBitmap(bm5);
                 return;
+                */
         }
         throw new RuntimeException("UNKNOWN STORE IMAGE TO SETUP");
 

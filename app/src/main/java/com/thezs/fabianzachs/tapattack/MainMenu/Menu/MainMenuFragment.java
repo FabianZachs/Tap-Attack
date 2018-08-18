@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack.MainMenu;
+package com.thezs.fabianzachs.tapattack.MainMenu.Menu;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
@@ -31,18 +31,17 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.Database.StoreItem;
 import com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers.BackgroundManager;
 import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
+import com.thezs.fabianzachs.tapattack.MainMenu.MorePointsMenu;
 import com.thezs.fabianzachs.tapattack.R;
 import com.thezs.fabianzachs.tapattack.Store1;
 import com.thezs.fabianzachs.tapattack.helper;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -53,8 +52,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class MainMenuFragment extends Fragment {
 
-    private ArrayList<MediaPlayer> mediaPlayers; // these players loop -> turn of onStop()
-    private ThemesManager themesManager;
     private BackgroundManager backgroundManager;
     private SharedPreferences prefs;
     private AdView mAdView;
@@ -76,13 +73,13 @@ public class MainMenuFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("activitycycle", "onCreate: ");
+        //Log.d("activitycycle", "onCreate: ");
 
         //helper.makeFullscreen(getActivity());
 
 
         // set up Constants
-        initializeConstants();
+        //initializeConstants();
 
         prefs = getActivity().getSharedPreferences("playerInfo", MODE_PRIVATE);
         /*
@@ -157,7 +154,7 @@ public class MainMenuFragment extends Fragment {
         fragmentView = inflater.inflate(R.layout.main_menu_fragment, container, false);
         setupGameModeImageAndTextAndHighscore(fragmentView);
         setupPointsDisplay(fragmentView);
-        setupProgressTextView((TextView) fragmentView.findViewById(R.id.unlock_progress_text));
+        setupProgressTextView((TextView) fragmentView.findViewById(R.id.percent_unlocked_text));
         startAnimatingMorePointsImg(fragmentView);
         requestNewAfterGameAd();
         //requestNewTimedMenuAd();
@@ -423,6 +420,7 @@ public class MainMenuFragment extends Fragment {
 
     }
 
+    /*
     private void databaseSetup() {
         MyDBHandler dbHandler = new MyDBHandler(getActivity(), null, null, 1);
         dbHandler.removeAllRows();
@@ -439,17 +437,14 @@ public class MainMenuFragment extends Fragment {
         storeItemsSetup(dbHandler,"color streak", Constants.WARNING_COLOR_STREAK_REWARDS, Constants.WARNING_COLOR_STREAK_REWARDS_FILES, Constants.WARNING_COLOR_STREAK_REWARDS_IDS_PRICE_POINTS, Constants.WARNING_COLOR_STREAK_REWARDS_IDS_PRICE_MONEY);
 
         unlockBeginningItems(dbHandler);
-        /*
-        for(String name : dbHandler.getListOfLockedItems("shape theme")) {
-            Log.d("database", "" + name);
-        }*/
         //Log.d("database", ""+dbHandler.getListOfLockedItems("shape theme").length);
         //Log.d("database", ""+dbHandler.getListOfLockedItems("color streak").length);
         Log.d("database", ""+dbHandler.databaseToString());
 
-    }
+    }*/
 
 
+    /*
     private void unlockBeginningItems(MyDBHandler dbHandler) {
         dbHandler.unlockItemViaName(Constants.SHAPE_THEMES[0]);
         dbHandler.unlockItemViaName(Constants.SHAPE_THEMES[1]);
@@ -479,6 +474,7 @@ public class MainMenuFragment extends Fragment {
         //////////dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.WARNING_COLOR_STREAK_REWARDS[0] + "';");
 
     }
+    */
 
     private void storeItemsSetup(MyDBHandler dbHandler, String category, String names[], String files[], int[] pricePoints, int[] priceMoney) {
         for (int i = 0;  i < names.length ; i++ ) {
@@ -641,7 +637,7 @@ public class MainMenuFragment extends Fragment {
     private void initMusic(int sound) {
         MediaPlayer mp = MediaPlayer.create(getActivity(), sound);
         mp.setLooping(true);
-        mediaPlayers.add(mp);
+        //mediaPlayers.add(mp);
         if (soundOn()) mp.start();
     }
 

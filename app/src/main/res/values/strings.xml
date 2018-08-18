@@ -39,6 +39,8 @@
     <!-- My Resource Strings -->
     
     <!-- 1) MainActivityFragment -->
+    <string name="percentUnlockedText">%1$d%%</string>
+
     
     <!--StoreFragmentOLDment -->
     <string name="itemsUnlockedFraction">%1$d/%2$d</string>
