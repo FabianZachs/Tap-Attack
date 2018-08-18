@@ -23,6 +23,7 @@ import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.MySt
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents.DisplayedItem;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents.SectionTitle;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents.StoreItemUnlocker;
+import com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents.StoreItemUnlocker2;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents.StorePoints;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents.StoreRewardVideoAd;
 import com.thezs.fabianzachs.tapattack.R;
@@ -41,7 +42,8 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
     private MyDBHandler myDBHandler;
 
     private StorePoints storePoints;
-    private StoreItemUnlocker storeItemUnlocker;
+    //private StoreItemUnlocker storeItemUnlocker;
+    private StoreItemUnlocker2 storeItemUnlocker;
     private StoreRewardVideoAd customVideoAd;
     private DisplayedItem displayedItem;
     private SectionTitle sectionTitle;
@@ -62,7 +64,8 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
         View view = inflater.inflate(R.layout.store_fragment2, container, false);
         this.storePoints = new StorePoints(getActivity(), view, prefs);
         this.storeItemSectionviewPager = new MyStoreItemSectionViewPager(getContext(),this,view);
-        this.storeItemUnlocker = new StoreItemUnlocker(this, getActivity(), view, myDBHandler);
+        //this.storeItemUnlocker = new StoreItemUnlocker(this, getActivity(), view, myDBHandler);
+        this.storeItemUnlocker = new StoreItemUnlocker2(getActivity(), myDBHandler, this, view);
         this.customVideoAd = new StoreRewardVideoAd(getActivity(), view);
         this.displayedItem = new DisplayedItem(view, prefs, prefs.edit());
         this.sectionTitle = new SectionTitle(view, this);
@@ -70,8 +73,16 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
 
         setListeners();
 
+        final ImageView backButton= (ImageView) view.findViewById(R.id.store_back_image);
+        backButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), backButton, new ButtonOnTouchListener.ButtonExecuteListener() {
+            @Override
+            public void buttonAction() {
+                storeListener.storeFragmentToMenuFragment();
+            }
+        }));
         // todo animations
 
+        /*
         ImageView iv = (ImageView) view.findViewById(R.id.item_highlight);
 
 
@@ -101,7 +112,10 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
                 storeListener.storeFragmentToMenuFragment();
             }
         }));
+        */
 
+        //storeItemUnlocker.updatePurchaseUnlockView();
+        storeItemUnlocker.updateRandomUnlockView();
         return view;
     }
 
@@ -125,7 +139,7 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
             }
         });
 
-        storeItemUnlocker.setUnlockListener(new StoreItemUnlocker.UnlockListener() {
+        storeItemUnlocker.setUnlockListener(new StoreItemUnlocker2.UnlockListener() {
             @Override
             public void randomUnlockClick() {
                 storeItemSectionviewPager.randomUnlockForCurrentItemSection();
@@ -176,6 +190,7 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
             public void pointsUpdated() {
                 storeItemUnlocker.updateUnlockedFraction();
                 storeItemUnlocker.updateRandomUnlockView();
+                storeItemUnlocker.updatePurchaseUnlockView();
             }
         });
     }
@@ -191,6 +206,7 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
     @Override
     public void selectedItemChanged(String section, Drawable itemImage, String itemTitle, int unlocked) {
         displayedItem.updateDisplayedItem(section, itemImage, itemTitle, unlocked);
+        storeItemUnlocker.updatePurchaseUnlockView();
 
     }
 
@@ -199,15 +215,17 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
         switch (typeOfUnlock) {
             case "random":
                storePoints.addToPointsAndUpdateView(-getCurrentRandomUnlockPrice());
+               storeItemUnlocker.updatePurchaseUnlockView();
                break;
             case "purchase":
                 storePoints.addToPointsAndUpdateView(-getCurrentPurchaseUnlockPrice());
+                storeItemUnlocker.updatePurchaseUnlockView();
                 break;
             default: throw new RuntimeException("type of unlock not found");
         }
     }
 
-    public int currentSelectedItemUnlocked() {
+    public int isCurrentSelectedItemUnlocked() {
         return storeItemSectionviewPager.isCurrentlySelectedItem().get_unlocked();
     }
 

@@ -1,8 +1,6 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents;
 
 import android.app.Activity;
-import android.content.Context;
-import android.media.MediaPlayer;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
@@ -11,12 +9,10 @@ import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.StoreFragment;
-import com.thezs.fabianzachs.tapattack.MainMenu.Store.StoreFragmentOLD;
 import com.thezs.fabianzachs.tapattack.R;
 
 /**
@@ -103,8 +99,8 @@ public class StoreItemUnlocker {
 
     private boolean purchaseUnlockActive() {
         //return (purchaseUnlockSection.getVisibility()==View.VISIBLE && enoughPointsForPurchaseUnlock());
-        Log.d("unlockeditem", "purchaseUnlockActive: "+storeFragment.currentSelectedItemUnlocked());
-        return (purchaseUnlockTextVisible() && enoughPointsForPurchaseUnlock() && storeFragment.currentSelectedItemUnlocked()!=1);
+        Log.d("unlockeditem", "purchaseUnlockActive: "+storeFragment.isCurrentSelectedItemUnlocked());
+        return (purchaseUnlockTextVisible() && enoughPointsForPurchaseUnlock() && storeFragment.isCurrentSelectedItemUnlocked()!=1);
     }
 
 

@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,10 +23,15 @@ public class StoreItemUnlocker2 {
         void purchaseUnlockClick();
     }
 
+    public void setUnlockListener(UnlockListener listener) {
+        this.listener = listener;
+    }
+
     private int WHITE = 0xffffffff;
     private int RED = 0xd93b3bff;
 
     private Activity activity;
+    private UnlockListener listener;
     private StoreFragment storeFragment;
     private MyDBHandler myDBHandler;
     private RelativeLayout randomUnlockSection;
@@ -42,8 +48,8 @@ public class StoreItemUnlocker2 {
         this.unlockFraction =  view.findViewById(R.id.unlocked_fraction);
 
         updateUnlockedFraction();
-        updateRandomUnlockView();
-        updatePurchaseUnlockView();
+        //updateRandomUnlockView();
+        //updatePurchaseUnlockView();
 
         setupUnlockButtonClicks();
 
@@ -61,6 +67,7 @@ public class StoreItemUnlocker2 {
 
 
     public void updateRandomUnlockView() {
+        Log.d("randomunlockupdate", "updateRandomUnlockView: updated");
         TextView randomUnlockText = randomUnlockSection.findViewById(R.id.random_unlock_text);
 
         randomUnlockText.setText(activity.getResources()
@@ -68,10 +75,13 @@ public class StoreItemUnlocker2 {
         randomUnlockText.setTextColor(getRandomUnlockTextColor());
 
         if (isRandomUnlockVisible()) {
+            Log.d("randomunlockupdate", "updateRandomUnlockView: visible");
             randomUnlockSection.setVisibility(View.VISIBLE);
         }
-        else
+        else {
+            Log.d("randomunlockupdate", "updateRandomUnlockView: invisible " + randomUnlockSection.getVisibility());
             randomUnlockSection.setVisibility(View.INVISIBLE);
+        }
     }
 
 
@@ -93,7 +103,8 @@ public class StoreItemUnlocker2 {
         randomUnlockSection.setOnTouchListener(new ButtonOnTouchListener(activity, randomUnlockSection, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
             public void buttonAction() {
-
+                if (isRandomUnlockVisible() && enoughPointsForRandomUnlock())
+                    listener.randomUnlockClick();
             }
         }));
     }
@@ -124,7 +135,7 @@ public class StoreItemUnlocker2 {
     }
 
     private boolean isPurchaseUnlockVisible() {
-        return (storeFragment.currentSelectedItemUnlocked() != 1)
+        return (storeFragment.isCurrentSelectedItemUnlocked() != 1)
                 && !storeFragment.getCurrentlyDisplayedItemFragmentTAG().equals(Constants.GAME_MODE_TAG);
     }
 
