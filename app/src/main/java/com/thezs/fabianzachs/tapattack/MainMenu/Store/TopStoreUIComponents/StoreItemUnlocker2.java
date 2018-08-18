@@ -79,7 +79,7 @@ public class StoreItemUnlocker2 {
             randomUnlockSection.setVisibility(View.VISIBLE);
         }
         else {
-            Log.d("randomunlockupdate", "updateRandomUnlockView: invisible " + randomUnlockSection.getVisibility());
+            //Log.d("randomunlockupdate", "updateRandomUnlockView: invisible " + randomUnlockSection.getVisibility());
             randomUnlockSection.setVisibility(View.INVISIBLE);
         }
     }

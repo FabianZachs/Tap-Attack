@@ -120,7 +120,7 @@ public class MorePointsMenu implements RewardedVideoAdListener {
         prefsEditor.putInt("points", 500 + prefs.getInt("points",0));
         prefsEditor.apply();
 
-        ((MainMenuActivity) mainMenuActivity).updatePoints();
+        //((MainMenuActivity) mainMenuActivity).updatePoints();
     }
 
     @Override
