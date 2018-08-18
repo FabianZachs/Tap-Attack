@@ -195,10 +195,22 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
     }
 
     @Override
-    public void itemUnlockComplete() {
-        storePoints.addToPointsAndUpdateView(-getCurrentRandomUnlockPrice());
-
+    public void itemUnlockComplete(final String typeOfUnlock) {
+        switch (typeOfUnlock) {
+            case "random":
+               storePoints.addToPointsAndUpdateView(-getCurrentRandomUnlockPrice());
+               break;
+            case "purchase":
+                storePoints.addToPointsAndUpdateView(-getCurrentPurchaseUnlockPrice());
+                break;
+            default: throw new RuntimeException("type of unlock not found");
+        }
     }
+
+    public int currentSelectedItemUnlocked() {
+        return storeItemSectionviewPager.isCurrentlySelectedItem().get_unlocked();
+    }
+
 
 
     public interface StoreListener {

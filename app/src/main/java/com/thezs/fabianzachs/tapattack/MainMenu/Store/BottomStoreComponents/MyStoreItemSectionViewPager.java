@@ -5,6 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Database.BasicStoreItem;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.ItemSectionFragments.BackgroundSectionFragment;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.ItemSectionFragments.GamemodeSectionFragment;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.ItemSectionFragments.ShapeThemeSectionFragment;
@@ -117,6 +118,11 @@ public class MyStoreItemSectionViewPager {
         //((ItemSectionFragment)fragmentAdapter.getItem(0)).notifyNewItemToDisplayFromThisSectionBecauseSectionChange(fragmentAdapter.getPageTitle(0), ((ItemSectionFragment) fragmentAdapter.getItem(0)).getDEFAULT_SECTION_VALUE());
         viewPager.setAdapter(fragmentAdapter);
 
+    }
+
+    public BasicStoreItem isCurrentlySelectedItem() {
+        ItemSectionFragment currentFragment = (ItemSectionFragment) fragmentAdapter.getItem(currentlyDisplayedFragmentIndex);
+        return currentFragment.getCurrentlySelectedItem();
     }
 
 

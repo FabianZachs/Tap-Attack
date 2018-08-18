@@ -97,11 +97,14 @@ public class StoreItemUnlocker {
     }
 
     private boolean randomUnlockActive() {
-        return (randomUnlockSection.getVisibility()==View.VISIBLE && enoughPointsForRandomUnlock());
+        //return (randomUnlockSection.getVisibility()==View.VISIBLE && enoughPointsForRandomUnlock());
+        return (randomUnlockTextVisible() && enoughPointsForRandomUnlock());
     }
 
     private boolean purchaseUnlockActive() {
-        return (purchaseUnlockSection.getVisibility()==View.VISIBLE && enoughPointsForPurchaseUnlock());
+        //return (purchaseUnlockSection.getVisibility()==View.VISIBLE && enoughPointsForPurchaseUnlock());
+        Log.d("unlockeditem", "purchaseUnlockActive: "+storeFragment.currentSelectedItemUnlocked());
+        return (purchaseUnlockTextVisible() && enoughPointsForPurchaseUnlock() && storeFragment.currentSelectedItemUnlocked()!=1);
     }
 
 
@@ -162,7 +165,6 @@ public class StoreItemUnlocker {
 
     private boolean allUnlocked() {
         return myDBHandler.getListOfLockedItems(storeFragment.getCurrentlyDisplayedItemFragmentTAG()).length == 0;
-
     }
 
 

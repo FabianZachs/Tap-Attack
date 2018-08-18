@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Database.BasicStoreItem;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.R;
 import com.thezs.fabianzachs.tapattack.helper;
@@ -36,10 +37,14 @@ public abstract class ItemSectionFragment extends Fragment {
     protected String DEFAULT_SECTION_VALUE;
     protected String SECTION;
 
+    public BasicStoreItem getCurrentlySelectedItem() {
+        return adapter.getItem(adapter.getSelectedItemPosition());
+    }
+
 
     public interface ItemSectionListener {
         void selectedItemChanged(String section, Drawable itemImage, String itemTitle ,int unlocked);
-        void itemUnlockComplete();
+        void itemUnlockComplete(String typeOfUnlock);
     }
 
     @Override
@@ -49,12 +54,19 @@ public abstract class ItemSectionFragment extends Fragment {
     }
 
     public void purchaseUnlock() {
-        String[] lockedItems = dbHandler.getListOfLockedItems(SECTION);
+        String[] lockedItems = dbHandler.getItemNamesFromCategory(SECTION);
         Log.d("purchaseunlock", "purchaseUnlock: " + lockedItems[adapter.getSelectedItemPosition()]);
-        unlockViaItemName(lockedItems[adapter.getSelectedItemPosition()]);
+        unlockViaItemName(lockedItems[adapter.getSelectedItemPosition()], "purchase");
     }
 
-    private void unlockViaItemName(String itemNameToUnlock) {
+    public void randomUnlock() {
+        String[] lockedItems = dbHandler.getListOfLockedItems(SECTION);
+        Random random = new Random();
+        String itemNameToUnlock = lockedItems.length > 1 ?  lockedItems[random.nextInt(lockedItems.length - 1) + 1] : lockedItems[0];
+        unlockViaItemName(itemNameToUnlock, "random");
+    }
+
+    private void unlockViaItemName(String itemNameToUnlock, String typeOfUnlock) {
         /*
         if (SECTION.equals(Constants.GAME_MODE_TAG))
             return;
@@ -76,18 +88,12 @@ public abstract class ItemSectionFragment extends Fragment {
 
         Drawable image = getContext().getResources().getDrawable(helper.getResourceId(getContext(), adapter.getItem(positionToUnlock).get_file()));
         listener.selectedItemChanged(SECTION, image, adapter.getItem(positionToUnlock).get_name(), 1);
-        listener.itemUnlockComplete();
+        listener.itemUnlockComplete(typeOfUnlock);
 
     }
 
 
 
-    public void randomUnlock() {
-        String[] lockedItems = dbHandler.getListOfLockedItems(SECTION);
-        Random random = new Random();
-        String itemNameToUnlock = lockedItems.length > 1 ?  lockedItems[random.nextInt(lockedItems.length - 1) + 1] : lockedItems[0];
-        unlockViaItemName(itemNameToUnlock);
-    }
 
     protected void setUpPrefsAndDatabase() {
         dbHandler = new MyDBHandler(getActivity(), null, null, 1);
