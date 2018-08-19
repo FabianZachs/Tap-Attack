@@ -1,9 +1,13 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Menu;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
+import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
+import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.R;
 
@@ -17,15 +21,22 @@ public class PercentUnlockedSection {
     private TextView percentUnlockedText;
     private MyDBHandler myDBHandler;
 
-    public PercentUnlockedSection(Activity activity, View view) {
+    public PercentUnlockedSection(final Activity activity, MyDBHandler myDBHandler, View view) {
         this.activity = activity;
-        this.myDBHandler = new MyDBHandler(activity, null, null, 1);
+        this.myDBHandler = myDBHandler;
         this.percentUnlockedText = view.findViewById(R.id.percent_unlocked_text);
         updatePercentUnlockedText();
+        percentUnlockedText.setOnTouchListener(new ButtonOnTouchListener(activity, percentUnlockedText, new ButtonOnTouchListener.ButtonExecuteListener() {
+            @Override
+            public void buttonAction() {
+                StyleableToast.makeText(activity, "LAUNCHES UNLOCKABLE POWER UPS", R.style.successtoast).show();
+            }
+        }));
     }
 
     public void updatePercentUnlockedText() {
-        int numberOfUnlocked = myDBHandler.getNumberOfUnlockedItems();
+        int numberOfUnlocked = myDBHandler.getNumberOfUnlockedItems() - Constants.NUMBER_OF_INITIALY_UNLOCKED_ITEMS;
+        Log.d("%unlocked", "updatePercentUnlockedText: " + myDBHandler.databaseToString());
         int numberOfItems = myDBHandler.getNumberOfItems();
         int percent =(int) (((float) numberOfUnlocked / numberOfItems) * 100);
         percentUnlockedText.setText(activity.getResources().getString(R.string.percentUnlockedText, percent));

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
+import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.R;
 
 /**
@@ -21,14 +22,17 @@ public class MainMenuFragment2 extends Fragment {
 
     private View view;
     private SharedPreferences prefs;
+    private MyDBHandler myDBHandler;
     private PointsSection pointsSection;
     private PercentUnlockedSection percentUnlockedSection;
+    private PlayGameSection playGameSection;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.prefs = getActivity().getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
+        this.myDBHandler = new MyDBHandler(getActivity(), null, null, 1);
     }
 
     @Nullable
@@ -37,7 +41,8 @@ public class MainMenuFragment2 extends Fragment {
         this.view = inflater.inflate(R.layout.main_menu_fragment, container, false);
         this.pointsSection = new PointsSection(getActivity(),view, prefs);
         setupMorePointsSection();
-        this.percentUnlockedSection = new PercentUnlockedSection(getActivity(), view);
+        this.percentUnlockedSection = new PercentUnlockedSection(getActivity(), myDBHandler, view);
+        this.playGameSection = new PlayGameSection(getActivity(),view, prefs, myDBHandler);
 
         return view;
     }

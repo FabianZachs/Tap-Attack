@@ -162,6 +162,7 @@
 
             <ImageView
                 android:id="@+id/play_button"
+                android:layout_margin="10sp"
                 android:layout_width="125dp"
                 android:layout_height="125dp"
                 android:soundEffectsEnabled="false"

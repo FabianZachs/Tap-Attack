@@ -89,7 +89,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         Cursor pointer = db.rawQuery(query, null);
         pointer.moveToFirst();
 
-        int count = 0;
+        int count = 1;
 
         while(pointer.moveToNext()) {
             count++;
@@ -103,7 +103,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         Cursor pointer = db.rawQuery(query, null);
         pointer.moveToFirst();
 
-        int count = 0;
+        int count = 1;
 
         while(pointer.moveToNext()) {
             count++;
@@ -260,7 +260,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     public String getCurrentBackgroundFile() {
         SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", MODE_PRIVATE);
-        String backgroundName = prefs.getString("background", Constants.BACKGROUNDS[1]);
+        String backgroundName = prefs.getString(Constants.BACKGROUND_TAG, Constants.BACKGROUNDS[1]);
         String file;
 
         String query = "SELECT " + COLUMN_FILE + " FROM " + TABLE_STOREITEMS + " WHERE " + COLUMN_NAME + " = '" + backgroundName+ "';";
@@ -283,7 +283,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     // todo this and top thing are very similar, just different item section so refactor
     public String getCurrentGamemodeFile() {
         SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", MODE_PRIVATE);
-        String backgroundName = prefs.getString("gamemode", Constants.GAMEMODES[0]);
+        String backgroundName = prefs.getString(Constants.GAME_MODE_TAG, Constants.GAMEMODES[0]);
         Log.d("background", "getCurrentGamemodeFile: "+backgroundName);
         Log.d("backgroundstuff", "getCurrentGamemodeFile: " + databaseToString());
         String file;

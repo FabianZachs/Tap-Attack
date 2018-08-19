@@ -18,7 +18,7 @@ public class MyItemDatabase {
     public MyItemDatabase(Activity activity, SharedPreferences prefs) {
 
         if (!prefs.getBoolean("firstTime", false)) {
-            myDBHandler = new MyDBHandler(activity, null, null, 1);
+            myDBHandler = new MyDBHandler(activity, null, null, 2);
             databaseSetup();
 
             SharedPreferences.Editor editor = prefs.edit();
