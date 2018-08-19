@@ -2,13 +2,21 @@ package com.thezs.fabianzachs.tapattack.MainMenu.Menu;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
@@ -20,12 +28,24 @@ import com.thezs.fabianzachs.tapattack.R;
 
 public class MainMenuFragment2 extends Fragment {
 
+    private MainMenuListener mainMenuListener;
+
+
+    public interface MainMenuListener{
+        void mainMenuFragmentToSettingsFragment();
+        void mainMenuFragmentToStoreFragment();
+        void playGameClick();
+    }
+
     private View view;
     private SharedPreferences prefs;
     private MyDBHandler myDBHandler;
     private PointsSection pointsSection;
     private PercentUnlockedSection percentUnlockedSection;
     private PlayGameSection playGameSection;
+    private TimedPresent timedPresent;
+    private TextView storeText;
+    private TextView settingsText;
 
 
     @Override
@@ -33,6 +53,7 @@ public class MainMenuFragment2 extends Fragment {
         super.onCreate(savedInstanceState);
         this.prefs = getActivity().getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
         this.myDBHandler = new MyDBHandler(getActivity(), null, null, 1);
+
     }
 
     @Nullable
@@ -40,21 +61,59 @@ public class MainMenuFragment2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.main_menu_fragment, container, false);
         this.pointsSection = new PointsSection(getActivity(),view, prefs);
-        setupMorePointsSection();
         this.percentUnlockedSection = new PercentUnlockedSection(getActivity(), myDBHandler, view);
         this.playGameSection = new PlayGameSection(getActivity(),view, prefs, myDBHandler);
+        this.timedPresent = new TimedPresent();
 
+        setupFragmentChangingButtons();
+
+        setListeners();
         return view;
     }
 
-    private void setupMorePointsSection() {
-        RelativeLayout pointsSection = view.findViewById(R.id.more_points_section);
-        pointsSection.setOnTouchListener(new ButtonOnTouchListener(getActivity(), pointsSection, new ButtonOnTouchListener.ButtonExecuteListener() {
+    public void onShow() {
+        pointsSection.updateDisplayedPoints();
+        playGameSection.updatePlayGameSection();
+        percentUnlockedSection.updatePercentUnlockedText();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof MainMenuListener) {
+            mainMenuListener = (MainMenuListener) context;
+        } else {
+            throw new ClassCastException(context.toString()
+                    + " must implement MyListFragment.OnItemSelectedListener");
+        }
+    }
+
+    private void setListeners() {
+        playGameSection.setListener(new PlayGameSection.PlayGameListener() {
+            @Override
+            public void playButtonPress() {
+                mainMenuListener.playGameClick();
+            }
+        });
+    }
+
+    private void setupFragmentChangingButtons() {
+        TextView storeText = view.findViewById(R.id.store_text);
+        storeText.setOnTouchListener(new ButtonOnTouchListener(getActivity(), storeText, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
             public void buttonAction() {
-                // todo launch morepoints fragment
+                mainMenuListener.mainMenuFragmentToStoreFragment();
             }
         }));
+
+        TextView settingsText = view.findViewById(R.id.settings_text);
+        settingsText.setOnTouchListener(new ButtonOnTouchListener(getActivity(), settingsText, new ButtonOnTouchListener.ButtonExecuteListener() {
+            @Override
+            public void buttonAction() {
+                mainMenuListener.mainMenuFragmentToSettingsFragment();
+            }
+        }));
+
     }
 
 

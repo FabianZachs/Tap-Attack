@@ -8,6 +8,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.R;
@@ -21,7 +22,16 @@ import org.w3c.dom.Text;
 
 public class PlayGameSection {
 
+    public interface PlayGameListener {
+        void playButtonPress();
+    }
+
+    public void setListener(PlayGameListener listener) {
+        this.listener = listener;
+    }
+
     private Activity activity;
+    private PlayGameListener listener;
     private SharedPreferences prefs;
     private MyDBHandler myDBHandler;
     private ImageView playButton;
@@ -39,6 +49,7 @@ public class PlayGameSection {
 
         updatePlayGameSection();
         startAnimation();
+        setOnTouch();
 
     }
 
@@ -63,5 +74,14 @@ public class PlayGameSection {
 
     public void stopAnimation() {
         playButton.clearAnimation();
+    }
+
+    private void setOnTouch() {
+        playButton.setOnTouchListener(new ButtonOnTouchListener(activity, playButton, new ButtonOnTouchListener.ButtonExecuteListener() {
+            @Override
+            public void buttonAction() {
+                listener.playButtonPress();
+            }
+        }));
     }
 }

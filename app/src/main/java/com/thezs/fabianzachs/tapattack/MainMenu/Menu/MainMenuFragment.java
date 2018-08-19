@@ -713,14 +713,6 @@ public class MainMenuFragment extends Fragment {
     }
 
 
-    public void playButtonClick(View view) {
-        //YoYo.with(Techniques.Pulse).duration(500).repeat(0).playOn(view);
-        //view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_item));
-        Intent intent = new Intent(getActivity(), MainGameActivity.class);
-        intent.putExtra("gamemode", "classic");
-        //this.startActivity(intent);
-        this.startActivityForResult(intent, 1);
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

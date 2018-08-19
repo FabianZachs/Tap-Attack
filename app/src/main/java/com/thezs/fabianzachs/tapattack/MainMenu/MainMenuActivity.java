@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.MainMenu;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
 import com.thezs.fabianzachs.tapattack.MainMenu.Menu.MainMenuFragment;
 import com.thezs.fabianzachs.tapattack.MainMenu.Menu.MainMenuFragment2;
 import com.thezs.fabianzachs.tapattack.MainMenu.Settings.SettingsFragment;
@@ -25,7 +27,7 @@ import com.thezs.fabianzachs.tapattack.R;
 
 import java.util.HashMap;
 
-public class MainMenuActivity extends GeneralParent implements StoreFragment.StoreListener, SettingsFragment.SettingsListener, MainMenuFragment.MainMenuListener {
+public class MainMenuActivity extends GeneralParent implements StoreFragment.StoreListener, SettingsFragment.SettingsListener, MainMenuFragment2.MainMenuListener {
 
     private SharedPreferences prefs;
     //private AdView mAdView;
@@ -78,6 +80,11 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     }
 
     @Override
+    public void playGameClick() {
+        playButtonClick();
+    }
+
+    @Override
     public void settingsFragmentToMenuFragment() {
         displayMainMenuFragment();
 
@@ -114,9 +121,19 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         musicPlayer.pausePlaying();
     }
 
+    private void playButtonClick() {
+        //YoYo.with(Techniques.Pulse).duration(500).repeat(0).playOn(view);
+        //view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_item));
+        Intent intent = new Intent(this, MainGameActivity.class);
+        intent.putExtra("gamemode", "classic");
+        //this.startActivity(intent);
+        this.startActivityForResult(intent, 1);
+    }
+
     public void displayMainMenuFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (mainMenuFragment.isAdded()) {
+            mainMenuFragment.onShow();
             ft.show(mainMenuFragment);
         } else {
             Log.d("isadded", "displayMainMenuFragment: menu");
