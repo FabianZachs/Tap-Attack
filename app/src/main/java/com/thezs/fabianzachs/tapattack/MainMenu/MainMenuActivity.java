@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Build;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,6 +45,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prefs = getSharedPreferences("playerInfo", MODE_PRIVATE);
+        musicSetup();
 
         setContentView(R.layout.main_menu4);
 
@@ -59,7 +61,6 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
 
 
         new MyItemDatabase(this, prefs);
-        musicSetup();
         initializeConstants();
     }
 
@@ -90,6 +91,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
 
     }
 
+
     @Override
     public void musicOff() {
         musicPlayer.pausePlaying();
@@ -106,22 +108,13 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     }
 
     @Override
-    public void fxOff() {
-
-    }
-
-    @Override
-    public void fxOn() {
-
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
         musicPlayer.pausePlaying();
     }
 
     private void playButtonClick() {
+        removeStoreFragment();
         //YoYo.with(Techniques.Pulse).duration(500).repeat(0).playOn(view);
         //view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_item));
         Intent intent = new Intent(this, MainGameActivity.class);
@@ -129,6 +122,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         //this.startActivity(intent);
         this.startActivityForResult(intent, 1);
     }
+
 
     public void displayMainMenuFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -173,6 +167,13 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         ft.commit();
     }
 
+    private void removeStoreFragment() {
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag("store");
+        if(fragment != null) {
+            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+        }
+    }
+
 
 
     private void addAllFragments() {
@@ -192,44 +193,6 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
             musicPlayer.play();
     }
 
-    // todo basic code for altering specific pixels of bitmap
-    public void multiShapesMessaroundDELETE() {
-
-        /*
-        ImageView item = (ImageView) findViewById(R.id.play_button);
-        LayerDrawable layers = (LayerDrawable) item.getDrawable();
-        Drawable shape1 = layers.getDrawable(0);
-        Log.d("bounds", "multiShapesMessaroundDELETE: " + shape1.getBounds());
-        shape1.setBounds(0,0,160,5000);
-        Log.d("bounds", "multiShapesMessaroundDELETE: " + shape1.getBounds());
-        ColorFilter filter = new PorterDuffColorFilter(0xff74AC23, PorterDuff.Mode.SRC_IN);
-        shape1.setColorFilter(filter);
-        */
-
-        // EDIT BITMAP
-        ImageView img = (ImageView) findViewById(R.id.play_button);
-        Bitmap myBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.neonthemetemplate);
-        myBitmap= myBitmap.copy(Bitmap.Config.ARGB_8888, true);
-
-        int [] allpixels = new int [ myBitmap.getHeight()*myBitmap.getWidth()];
-
-        myBitmap.getPixels(allpixels, 0, myBitmap.getWidth(), 0, 0,myBitmap.getWidth(),myBitmap.getHeight());
-
-        for(int i =0; i<myBitmap.getHeight()*myBitmap.getWidth();i++){
-
-            if( allpixels[i] == 0xff00ffff/*|| allpixels[i] == Color.BLUE || allpixels[i] == Color.GREEN*/)
-                allpixels[i] = Color.BLACK;
-        }
-
-        myBitmap.setPixels(allpixels, 0, myBitmap.getWidth(), 0, 0, myBitmap.getWidth(), myBitmap.getHeight());
-        img.setImageBitmap(myBitmap);
-
-
-
-        // SAVE IMG TO USER to internal storate -- only app can access this
-        Log.d("filecrap", "multiShapesMessaroundDELETE: " + getFilesDir() );
-
-    }
 
     private void startIntervalAd() {
 

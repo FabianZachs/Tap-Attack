@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
 import com.thezs.fabianzachs.tapattack.R;
@@ -39,7 +38,7 @@ public class SettingsFragment extends Fragment {
         prefsEditor = prefs.edit();
 
 
-        final ImageView backButton= (ImageView) view.findViewById(R.id.back_image);
+        final ImageView backButton= view.findViewById(R.id.back_image);
         backButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), backButton, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
             public void buttonAction() {
@@ -50,55 +49,40 @@ public class SettingsFragment extends Fragment {
             }
         }));
 
-        final ImageView musicButton = (ImageView) view.findViewById(R.id.music_button);
-        if (prefs.getInt("music", 1) == 1)
-            musicButton.setImageResource(R.drawable.onbutton);
-        else
-            musicButton.setImageResource(R.drawable.offbutton);
-
-        musicButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), musicButton, new ButtonOnTouchListener.ButtonExecuteListener() {
-            @Override
-            public void buttonAction() {
-                if (prefs.getInt("music", 1) == 1) {
-                    musicButton.setImageResource(R.drawable.offbutton);
-                    prefsEditor.putInt("music", 0);
-                    prefsEditor.apply();
-                    settingsListener.musicOff();
-                }
-                else {
-                    musicButton.setImageResource(R.drawable.onbutton);
-                    prefsEditor.putInt("music", 1);
-                    prefsEditor.apply();
-                    settingsListener.musicOn();
-                }
-            }
-        }));
-
-
-        final ImageView fxButton = (ImageView) view.findViewById(R.id.soundeffects_button);
-        if (prefs.getInt("fx", 1) == 1)
-            fxButton.setImageResource(R.drawable.onbutton);
-        else
-            fxButton.setImageResource(R.drawable.offbutton);
-
-        fxButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), fxButton, new ButtonOnTouchListener.ButtonExecuteListener() {
-            @Override
-            public void buttonAction() {
-                if (prefs.getInt("fx", 1) == 1) {
-                    fxButton.setImageResource(R.drawable.offbutton);
-                    prefsEditor.putInt("fx", 0);
-                    prefsEditor.apply();
-                }
-                else {
-                    fxButton.setImageResource(R.drawable.onbutton);
-                    prefsEditor.putInt("fx", 1);
-                    prefsEditor.apply();
-                }
-            }
-        }));
+        setupSoundSetting((ImageView) view.findViewById(R.id.music_button), "music");
+        setupSoundSetting((ImageView) view.findViewById(R.id.soundeffects_button), "fx");
 
 
         return view;
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void setupSoundSetting(final ImageView button, final String soundType) {
+        if (prefs.getInt(soundType, 1) == 1)
+            button.setImageResource(R.drawable.onbutton);
+        else
+            button.setImageResource(R.drawable.offbutton);
+
+        button.setOnTouchListener(new ButtonOnTouchListener(getActivity(), button, new ButtonOnTouchListener.ButtonExecuteListener() {
+            @Override
+            public void buttonAction() {
+                if (prefs.getInt(soundType, 1) == 1) {
+                    button.setImageResource(R.drawable.offbutton);
+                    prefsEditor.putInt(soundType, 0);
+                    prefsEditor.apply();
+                    if (soundType.equals("music"))
+                        settingsListener.musicOff();
+                }
+                else {
+                    button.setImageResource(R.drawable.onbutton);
+                    prefsEditor.putInt(soundType, 1);
+                    prefsEditor.apply();
+                    if (soundType.equals("music"))
+                        settingsListener.musicOn();
+                }
+            }
+        }));
+
     }
 
     @Override
@@ -116,8 +100,6 @@ public class SettingsFragment extends Fragment {
         void settingsFragmentToMenuFragment();
         void musicOff();
         void musicOn();
-        void fxOff();
-        void fxOn();
         void removeMusicPlayer();
     }
 }
