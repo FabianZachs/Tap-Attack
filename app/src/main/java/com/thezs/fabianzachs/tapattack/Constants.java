@@ -41,6 +41,9 @@ public class Constants {
     public final static String SHAPE_TYPE_TAG = "shape type";
     public final static String SHAPE_THEME_TAG = "shape theme";
     public final static String BACKGROUND_TAG = "background";
+    public final static String SETTINGS_TAG = "settings";
+    public final static String MAIN_TAG = "main";
+    public final static String STORE_TAG = "store";
 
     public static String[] SHAPES = {"circle", "square", "cross", "arrowup", "arrowleft", "arrowright", "star"};
 

@@ -32,8 +32,6 @@ public class PointsSection {
         this.pointsImage = view.findViewById(R.id.more_points_sign);
 
         setupMorePointsSection();
-        updateDisplayedPoints();
-        startAnimatingMorePointsImg();
 
     }
 
@@ -41,7 +39,7 @@ public class PointsSection {
         pointsText.setText(activity.getResources().getString(R.string.currentPoints, prefs.getInt("points", 0)));
     }
 
-    private void startAnimatingMorePointsImg() {
+    public void startAnimatingMorePointsImg() {
         YoYo.with(Techniques.Tada).duration(2000).repeat(100).playOn(pointsImage);
         // todo which of Bounce, Swing, Pulse, Flash, Tada
     }

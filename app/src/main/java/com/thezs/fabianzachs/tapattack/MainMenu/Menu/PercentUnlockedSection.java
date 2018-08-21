@@ -25,7 +25,6 @@ public class PercentUnlockedSection {
         this.activity = activity;
         this.myDBHandler = myDBHandler;
         this.percentUnlockedText = view.findViewById(R.id.percent_unlocked_text);
-        updatePercentUnlockedText();
         percentUnlockedText.setOnTouchListener(new ButtonOnTouchListener(activity, percentUnlockedText, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
             public void buttonAction() {
@@ -36,7 +35,6 @@ public class PercentUnlockedSection {
 
     public void updatePercentUnlockedText() {
         int numberOfUnlocked = myDBHandler.getNumberOfUnlockedItems() - Constants.NUMBER_OF_INITIALY_UNLOCKED_ITEMS;
-        Log.d("%unlocked", "updatePercentUnlockedText: " + myDBHandler.databaseToString());
         int numberOfItems = myDBHandler.getNumberOfItems();
         int percent =(int) (((float) numberOfUnlocked / numberOfItems) * 100);
         percentUnlockedText.setText(activity.getResources().getString(R.string.percentUnlockedText, percent));

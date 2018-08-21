@@ -11,6 +11,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Build;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
@@ -115,11 +116,8 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
 
     private void playButtonClick() {
         removeStoreFragment();
-        //YoYo.with(Techniques.Pulse).duration(500).repeat(0).playOn(view);
-        //view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.anim_item));
         Intent intent = new Intent(this, MainGameActivity.class);
-        intent.putExtra("gamemode", "classic");
-        //this.startActivity(intent);
+        intent.putExtra(Constants.GAME_MODE_TAG, "classic");
         this.startActivityForResult(intent, 1);
     }
 
@@ -130,8 +128,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
             mainMenuFragment.onShow();
             ft.show(mainMenuFragment);
         } else {
-            Log.d("isadded", "displayMainMenuFragment: menu");
-            ft.add(R.id.main_fragment, mainMenuFragment, "mainmenu");
+            ft.add(R.id.main_fragment, mainMenuFragment, Constants.MAIN_TAG);
         }
         if (storeFragment.isAdded()) { ft.hide(storeFragment); }
         if (settingsFragment.isAdded()) { ft.hide(settingsFragment); }
@@ -145,8 +142,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
             storeFragment.onShow();
             ft.show(storeFragment);
         } else {
-            Log.d("isadded", "displayMainMenuFragment: store");
-            ft.add(R.id.main_fragment, storeFragment, "store");
+            ft.add(R.id.main_fragment, storeFragment, Constants.STORE_TAG);
         }
         if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
         if (settingsFragment.isAdded()) { ft.hide(settingsFragment); }
@@ -159,8 +155,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         if (settingsFragment.isAdded()) {
             ft.show(settingsFragment);
         } else {
-            Log.d("isadded", "displayMainMenuFragment: settings");
-            ft.add(R.id.main_fragment, settingsFragment, "settings");
+            ft.add(R.id.main_fragment, settingsFragment, Constants.SETTINGS_TAG);
         }
         if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
         if (storeFragment.isAdded()) { ft.hide(storeFragment); }
@@ -168,7 +163,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     }
 
     private void removeStoreFragment() {
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag("store");
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(Constants.STORE_TAG);
         if(fragment != null) {
             getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         }
@@ -182,8 +177,8 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         this.storeFragment = new StoreFragment();
         this.settingsFragment = new SettingsFragment();
         //ft.add(R.id.main_fragment, mainMenuFragment, "mainmenu");
-        ft.add(R.id.main_fragment, storeFragment, "store");
-        ft.add(R.id.main_fragment, settingsFragment, "settings");
+        ft.add(R.id.main_fragment, storeFragment,Constants.STORE_TAG);
+        ft.add(R.id.main_fragment, settingsFragment, Constants.SETTINGS_TAG);
         ft.commit();
     }
 
@@ -303,5 +298,25 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         timedMenuAd.loadAd(request);
     }
     */
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        ((MainMenuFragment2) getSupportFragmentManager().findFragmentByTag(Constants.MAIN_TAG)).onShow();
+
+        SharedPreferences.Editor editor = prefs.edit();
+        if(resultCode == 1){
+            editor.putInt("gamesSinceLastAd", prefs.getInt("gamesSinceLastAd",0)+1);
+            editor.apply();
+        }
+
+        if (prefs.getInt("gamesSinceLastAd",0) > 2 /*&& afterGameAd.isLoaded()*/) {
+            //afterGameAd.show();
+            editor.putInt("gamesSinceLastAd", 0);
+            editor.apply();
+            //requestNewAfterGameAd();
+        }
+
+        //super.onActivityResult(requestCode, resultCode, data);
+    }
 }
 

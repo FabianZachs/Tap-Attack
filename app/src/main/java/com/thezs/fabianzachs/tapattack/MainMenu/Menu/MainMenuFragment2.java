@@ -1,5 +1,6 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Menu;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
@@ -44,8 +45,6 @@ public class MainMenuFragment2 extends Fragment {
     private PercentUnlockedSection percentUnlockedSection;
     private PlayGameSection playGameSection;
     private TimedPresent timedPresent;
-    private TextView storeText;
-    private TextView settingsText;
 
 
     @Override
@@ -71,10 +70,18 @@ public class MainMenuFragment2 extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        onShow();
+    }
+
     public void onShow() {
         pointsSection.updateDisplayedPoints();
-        playGameSection.updatePlayGameSection();
+        pointsSection.startAnimatingMorePointsImg();
         percentUnlockedSection.updatePercentUnlockedText();
+        playGameSection.updatePlayGameSection();
+        playGameSection.startAnimation();
     }
 
     @Override
@@ -97,6 +104,7 @@ public class MainMenuFragment2 extends Fragment {
         });
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setupFragmentChangingButtons() {
         TextView storeText = view.findViewById(R.id.store_text);
         storeText.setOnTouchListener(new ButtonOnTouchListener(getActivity(), storeText, new ButtonOnTouchListener.ButtonExecuteListener() {

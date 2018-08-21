@@ -47,8 +47,6 @@ public class PlayGameSection {
         this.gamemodeText = view.findViewById(R.id.gamemode_title);
         this.gamemodeHighscore = view.findViewById(R.id.highscore_text);
 
-        updatePlayGameSection();
-        startAnimation();
         setOnTouch();
 
     }

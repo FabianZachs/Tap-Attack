@@ -714,38 +714,6 @@ public class MainMenuFragment extends Fragment {
 
 
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        updatePoints();
-        setupGameModeImageAndTextAndHighscore(getView());
-        Log.d("gamesads", "onActivityResult: game over exit" );
-
-        SharedPreferences.Editor editor = prefs.edit();
-        if(resultCode == 1){
-            Log.d("gamesads", "onActivityResult: game over exit" );
-            //Log.d("endintent", Integer.toString(prefs.getInt("points",0)));
-            //TextView pointsText = (TextView) findViewById(R.id.points_text);
-            //pointsText.setText(Integer.toString(prefs.getInt("points", 0)));
-            //YoYo.with(Techniques.BounceIn).duration(2000).repeat(0).playOn(pointsText);
-            //updatePoints();
-            //setupGameModeImageAndTextAndHighscore();
-            //startIntervalAd();
-            //int gamesSinceLastAd = prefs.getInt("gamesSinceLastAd",0);
-            //editor.putInt("gamesSinceLastAd", gamesSinceLastAd+1);
-            editor.putInt("gamesSinceLastAd", prefs.getInt("gamesSinceLastAd",0)+1);
-            editor.apply();
-        }
-
-        Log.d("gamesads", "onActivityResult: " + prefs.getInt("gamesSinceLastAd",0));
-        if (prefs.getInt("gamesSinceLastAd",0) > 2 && afterGameAd.isLoaded()) {
-            afterGameAd.show();
-            editor.putInt("gamesSinceLastAd", 0);
-            editor.apply();
-            requestNewAfterGameAd();
-        }
-
-        //super.onActivityResult(requestCode, resultCode, data);
-    }
 
     public void updatePoints() {
         TextView pointsText = (TextView) getView().findViewById(R.id.points_text);
