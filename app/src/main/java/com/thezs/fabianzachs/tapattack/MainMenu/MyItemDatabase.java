@@ -16,13 +16,14 @@ public class MyItemDatabase {
     private MyDBHandler myDBHandler;
 
     public MyItemDatabase(Activity activity, SharedPreferences prefs) {
+        //prefs.edit().putBoolean("firstTime", true).apply(); // for testing
 
-        if (!prefs.getBoolean("firstTime", false)) {
+        if (prefs.getBoolean("firstTime", true)) {
             myDBHandler = new MyDBHandler(activity, null, null, 2);
             databaseSetup();
 
             SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("firstTime", true);
+            editor.putBoolean("firstTime", false);
             editor.apply();
         }
 

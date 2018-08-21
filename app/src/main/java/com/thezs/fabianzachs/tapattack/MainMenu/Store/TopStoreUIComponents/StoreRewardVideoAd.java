@@ -1,5 +1,6 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.ColorFilter;
@@ -32,6 +33,7 @@ public class StoreRewardVideoAd implements RewardedVideoAdListener {
     private RewardedVideoAd videoAd;
     private Activity activity;
 
+    @SuppressLint("ClickableViewAccessibility")
     public StoreRewardVideoAd(Activity activity, View view) {
         this.activity = activity;
         this.videoImage = view.findViewById(R.id.reward_video_image);
@@ -48,6 +50,7 @@ public class StoreRewardVideoAd implements RewardedVideoAdListener {
                 playVideoAd();
             }
         }));
+
     }
 
     private void setupRewardText(View view) {

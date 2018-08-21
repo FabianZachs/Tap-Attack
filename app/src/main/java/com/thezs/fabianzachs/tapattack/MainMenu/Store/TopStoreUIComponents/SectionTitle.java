@@ -6,8 +6,6 @@ import android.widget.TextView;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.StoreFragment;
 import com.thezs.fabianzachs.tapattack.R;
 
-import org.w3c.dom.Text;
-
 /**
  * Created by fabianzachs on 15/08/18.
  */
@@ -20,10 +18,9 @@ public class SectionTitle {
     public SectionTitle(View view, StoreFragment storeFragment) {
         this.sectionText = view.findViewById(R.id.section_title_text);
         this.storeFragment =storeFragment;
-        setSectionText();
     }
 
-    public void setSectionText() {
+    public void updateSectionText() {
         sectionText.setText(storeFragment.getCurrentlyDisplayedItemFragmentTAG().toUpperCase());
     }
 }

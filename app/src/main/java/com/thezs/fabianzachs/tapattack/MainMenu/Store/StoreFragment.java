@@ -1,7 +1,5 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,8 +10,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
@@ -23,7 +19,6 @@ import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.MyBo
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents.MyStoreItemSectionViewPager;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents.DisplayedItem;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents.SectionTitle;
-import com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents.StoreItemUnlocker;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents.StoreItemUnlocker2;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents.StorePoints;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents.StoreRewardVideoAd;
@@ -43,7 +38,6 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
     private MyDBHandler myDBHandler;
 
     private StorePoints storePoints;
-    //private StoreItemUnlocker storeItemUnlocker;
     private StoreItemUnlocker2 storeItemUnlocker;
     private StoreRewardVideoAd customVideoAd;
     private DisplayedItem displayedItem;
@@ -55,17 +49,17 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         prefs = getActivity().getSharedPreferences("playerInfo", MODE_PRIVATE);
+        prefs.edit().putInt("points", 17000).apply();
         myDBHandler = new MyDBHandler(getActivity(), null, null, 1);
     }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
+
         View view = inflater.inflate(R.layout.store_fragment2, container, false);
-        this.storePoints = new StorePoints(getActivity(), view, prefs);
         this.storeItemSectionviewPager = new MyStoreItemSectionViewPager(getContext(),this,view);
-        //this.storeItemUnlocker = new StoreItemUnlocker(this, getActivity(), view, myDBHandler);
+        this.storePoints = new StorePoints(getActivity(), view, prefs);
         this.storeItemUnlocker = new StoreItemUnlocker2(getActivity(), myDBHandler, this, view);
         this.customVideoAd = new StoreRewardVideoAd(getActivity(), view);
         this.displayedItem = new DisplayedItem(view, prefs.edit());
@@ -82,16 +76,27 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
             }
         }));
 
-        //storeItemUnlocker.updatePurchaseUnlockView();
-        storeItemUnlocker.updateRandomUnlockView();
         return view;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        onShow();
+
+    public void onShow() {
+        storePoints.updateCurrentPoints();
+        storeItemUnlocker.updateUnlockedFraction();
+        storeItemUnlocker.updateRandomUnlockView();
+        storeItemUnlocker.updatePurchaseUnlockView();
+        displayedItem.startAnimation(getActivity());
+        sectionTitle.updateSectionText();
+
+
+
+        ItemSectionFragment currentlyDisplayedFragment = storeItemSectionviewPager.getCurrentlyDisplayedFragment();
+        currentlyDisplayedFragment.setEqiupedItemToSelectedItem();
+        currentlyDisplayedFragment.updateGridView();
+        currentlyDisplayedFragment.notifyNewItemToDisplayFromThisSectionBecauseSectionChange();
+
     }
+
 
 
     @Override
@@ -121,29 +126,11 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
 
             @Override
             public void purchaseUnlockClick() {
-                //storeItemSectionviewPager.purchaseUnlockForCurrentItemSection();
                 storeItemSectionviewPager.purchaseUnlockForCurrentItemSection();
 
             }
         });
 
-        /*
-        storeItemSectionviewPager.setItemSectionListeners(new ItemSectionFragment.ItemSectionListener() {
-            @Override
-            public void selectedItemChanged(String section, Drawable itemImage, String itemTitle, int unlocked) {
-                displayedItem.updateDisplayedItem(section, itemImage, itemTitle, unlocked);
-
-            }
-
-            @Override
-            public void itemUnlockComplete() {
-                storePoints.updateCurrentPoints();
-                storeItemUnlocker.updateUnlockedFraction();
-                storeItemUnlocker.updateRandomUnlockView();
-
-            }
-        });
-        */
 
         myBottomNavigation.setBottomNavigationListener(new MyBottomNavigation.BottomNavigationListener() {
             @Override
@@ -151,11 +138,10 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
                 // handles displayed item inside
                 storeItemSectionviewPager.setCurrentlyDisplayedFragment(fragmentIndex);
 
-                // todo update top UI to currently selected itemSection
                 storeItemUnlocker.updateRandomUnlockView();
                 storeItemUnlocker.updatePurchaseUnlockView();
                 storeItemUnlocker.updateUnlockedFraction();
-                sectionTitle.setSectionText();
+                sectionTitle.updateSectionText();
             }
         });
 
@@ -169,19 +155,10 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
         });
     }
 
-    public void onShow() {
-        ItemSectionFragment currentlyDisplayedFragment = storeItemSectionviewPager.getCurrentlyDisplayedFragment();
-        currentlyDisplayedFragment.setEqiupedItemToSelectedItem();
-        currentlyDisplayedFragment.updateGridView();
-        currentlyDisplayedFragment.notifyNewItemToDisplayFromThisSectionBecauseSectionChange();
-
-        displayedItem.startAnimation(getActivity());
-        // todo start all animations and update views
-    }
-
     @Override
     public void selectedItemChanged(String section, Drawable itemImage, String itemTitle, int unlocked) {
         displayedItem.updateDisplayedItem(section, itemImage, itemTitle, unlocked);
+        //storeItemUnlocker.updateRandomUnlockView();
         storeItemUnlocker.updatePurchaseUnlockView();
 
     }
@@ -191,7 +168,7 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
         switch (typeOfUnlock) {
             case "random":
                storePoints.addToPointsAndUpdateView(-getCurrentRandomUnlockPrice());
-               storeItemUnlocker.updatePurchaseUnlockView();
+               storeItemUnlocker.updateRandomUnlockView();
                break;
             case "purchase":
                 storePoints.addToPointsAndUpdateView(-getCurrentPurchaseUnlockPrice());
@@ -229,56 +206,4 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
         return storePoints.getCurrentPoints();
     }
 
-
-
-    /*
-    @Override
-    public void setViewPage(int fragmentIndex) {
-        // handles displayed item inside
-        storeItemSectionviewPager.setCurrentlyDisplayedFragment(fragmentIndex);
-
-        // todo update top UI to currently selected itemSection
-        storeItemUnlocker.updateRandomUnlockView();
-        storeItemUnlocker.updatePurchaseUnlockView();
-        storeItemUnlocker.updateUnlockedFraction();
-        sectionTitle.setSectionText(getCurrentlyDisplayedItemFragmentTAG());
-    }
-    */
-
-    /*
-    @Override
-    public void selectedItemChanged(String section, Drawable itemImage, String itemTitle, int unlocked) {
-        displayedItem.updateDisplayedItem(section, itemImage, itemTitle, unlocked);
-    }
-
-    @Override
-    public void itemUnlockComplete() {
-        storePoints.updateCurrentPoints();
-        storeItemUnlocker.updateUnlockedFraction();
-        storeItemUnlocker.updateRandomUnlockView();
-    }
-    */
-
-    /*
-    @Override
-    public void randomUnlockClick() {
-        // tell itemsectionfrag
-        storeItemSectionviewPager.randomUnlockForCurrentItemSection();
-
-    }
-
-    @Override
-    public void purchaseUnlockClick() {
-        storeItemSectionviewPager.purchaseUnlockForCurrentItemSection();
-
-    }
-    */
-
-    /*
-    @Override
-    public void videoAdCompleted(int earnedPoints) {
-        storePoints.addToPointsAndUpdateView(earnedPoints);
-
-    }
-    */
 }

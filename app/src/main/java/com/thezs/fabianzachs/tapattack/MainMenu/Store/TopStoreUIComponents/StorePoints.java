@@ -34,7 +34,6 @@ public class StorePoints {
         this.activity = activity;
         this.prefs = prefs;
         this.pointsText = view.findViewById(R.id.current_points_text);
-        updateCurrentPoints();
     }
 
     public int getCurrentPoints() {

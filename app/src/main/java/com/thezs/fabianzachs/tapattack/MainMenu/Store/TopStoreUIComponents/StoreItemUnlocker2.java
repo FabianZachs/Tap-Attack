@@ -1,5 +1,6 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Store.TopStoreUIComponents;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +29,7 @@ public class StoreItemUnlocker2 {
     }
 
     private int WHITE = 0xffffffff;
-    private int RED = 0xd93b3bff;
+    private int RED = 0xffd93b3b;
 
     private Activity activity;
     private UnlockListener listener;
@@ -47,9 +48,6 @@ public class StoreItemUnlocker2 {
         this.purchaseUnlockSection = view.findViewById(R.id.purchase_unlock_section);
         this.unlockFraction =  view.findViewById(R.id.unlocked_fraction);
 
-        updateUnlockedFraction();
-        //updateRandomUnlockView();
-        //updatePurchaseUnlockView();
 
         setupUnlockButtonClicks();
 
@@ -67,7 +65,6 @@ public class StoreItemUnlocker2 {
 
 
     public void updateRandomUnlockView() {
-        Log.d("randomunlockupdate", "updateRandomUnlockView: updated");
         TextView randomUnlockText = randomUnlockSection.findViewById(R.id.random_unlock_text);
 
         randomUnlockText.setText(activity.getResources()
@@ -75,11 +72,11 @@ public class StoreItemUnlocker2 {
         randomUnlockText.setTextColor(getRandomUnlockTextColor());
 
         if (isRandomUnlockVisible()) {
-            Log.d("randomunlockupdate", "updateRandomUnlockView: visible");
+            Log.d("visibility", "updateRandomUnlockView: visubke");
             randomUnlockSection.setVisibility(View.VISIBLE);
         }
         else {
-            //Log.d("randomunlockupdate", "updateRandomUnlockView: invisible " + randomUnlockSection.getVisibility());
+            Log.d("visibility", "updateRandomUnlockView: invisible");
             randomUnlockSection.setVisibility(View.INVISIBLE);
         }
     }
@@ -98,6 +95,7 @@ public class StoreItemUnlocker2 {
             purchaseUnlockSection.setVisibility(View.INVISIBLE);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setupUnlockButtonClicks() {
 
         randomUnlockSection.setOnTouchListener(new ButtonOnTouchListener(activity, randomUnlockSection, new ButtonOnTouchListener.ButtonExecuteListener() {
