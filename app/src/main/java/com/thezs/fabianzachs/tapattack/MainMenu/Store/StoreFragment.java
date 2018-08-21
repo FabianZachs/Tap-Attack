@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.MainMenu.Store;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -57,7 +58,7 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
         myDBHandler = new MyDBHandler(getActivity(), null, null, 1);
     }
 
-    @Nullable
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
@@ -67,7 +68,7 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
         //this.storeItemUnlocker = new StoreItemUnlocker(this, getActivity(), view, myDBHandler);
         this.storeItemUnlocker = new StoreItemUnlocker2(getActivity(), myDBHandler, this, view);
         this.customVideoAd = new StoreRewardVideoAd(getActivity(), view);
-        this.displayedItem = new DisplayedItem(view, prefs, prefs.edit());
+        this.displayedItem = new DisplayedItem(view, prefs.edit());
         this.sectionTitle = new SectionTitle(view, this);
         this.myBottomNavigation = new MyBottomNavigation(getContext(), view);
 
@@ -80,43 +81,16 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
                 storeListener.storeFragmentToMenuFragment();
             }
         }));
-        // todo animations
-
-        /*
-        ImageView iv = (ImageView) view.findViewById(R.id.item_highlight);
-
-
-        ObjectAnimator scaleDown = ObjectAnimator.ofPropertyValuesHolder(
-                iv,
-                PropertyValuesHolder.ofFloat("scaleX", 1.1f),
-                PropertyValuesHolder.ofFloat("scaleY", 1.1f));
-        scaleDown.setDuration(510);
-        //scaleDown.setInterpolator(new FastOutSlowInInterpolator());
-
-        scaleDown.setRepeatCount(ObjectAnimator.INFINITE);
-        scaleDown.setRepeatMode(ObjectAnimator.REVERSE);
-        scaleDown.start();
-
-        ImageView star1 = (ImageView) view.findViewById(R.id.item_highlight1);
-        Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_clockwise);
-        star1.startAnimation(myAnim);
-
-        ImageView star2 = (ImageView) view.findViewById(R.id.item_highlight2);
-        Animation myAnim2 = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_anticlockwise);
-        star2.startAnimation(myAnim2);
-
-        final ImageView backButton= view.findViewById(R.id.store_back_image);
-        backButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), backButton, new ButtonOnTouchListener.ButtonExecuteListener() {
-            @Override
-            public void buttonAction() {
-                storeListener.storeFragmentToMenuFragment();
-            }
-        }));
-        */
 
         //storeItemUnlocker.updatePurchaseUnlockView();
         storeItemUnlocker.updateRandomUnlockView();
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        onShow();
     }
 
 
@@ -201,6 +175,8 @@ final public class StoreFragment extends Fragment implements ItemSectionFragment
         currentlyDisplayedFragment.updateGridView();
         currentlyDisplayedFragment.notifyNewItemToDisplayFromThisSectionBecauseSectionChange();
 
+        displayedItem.startAnimation(getActivity());
+        // todo start all animations and update views
     }
 
     @Override
