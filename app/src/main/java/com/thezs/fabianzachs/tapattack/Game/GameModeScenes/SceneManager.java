@@ -36,7 +36,7 @@ public class SceneManager {
 
     public Scene getSelectedGameMode(CentralGameCommunication mediator) {
         SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", MODE_PRIVATE);
-        String gamemode = prefs.getString("gamemode", Constants.GAMEMODES[0]);
+        String gamemode = prefs.getString(Constants.GAME_MODE_TAG, Constants.GAMEMODES[0]);
 
         switch (gamemode) {
             case "tutorial":
@@ -84,9 +84,9 @@ public class SceneManager {
     public void setCurrentGameConstants() {
         SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", MODE_PRIVATE);
 
-        Constants.CURRENT_THEME = prefs.getString("shapeTheme", Constants.SHAPE_THEMES[1]);
-        Constants.CURRENT_SHAPE_TYPE = prefs.getString("shapeType", Constants.SHAPE_TYPES[1]); // or straight
-        Constants.CURRENT_BACKGROUND = prefs.getString("background", Constants.BACKGROUNDS[1]);
+        Constants.CURRENT_THEME = prefs.getString(Constants.SHAPE_THEME_TAG, Constants.SHAPE_THEMES[1]);
+        Constants.CURRENT_SHAPE_TYPE = prefs.getString(Constants.SHAPE_TYPE_TAG, Constants.SHAPE_TYPES[1]); // or straight
+        Constants.CURRENT_BACKGROUND = prefs.getString(Constants.BACKGROUND_TAG, Constants.BACKGROUNDS[1]);
         //Constants.CURRENT_BACKGROUND = prefs.getString("background", "triangle-blue");
     }
 }

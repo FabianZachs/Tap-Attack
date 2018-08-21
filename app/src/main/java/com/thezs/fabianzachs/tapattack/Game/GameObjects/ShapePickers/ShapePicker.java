@@ -20,7 +20,7 @@ public abstract class ShapePicker {
     public static ShapePicker getShapePicker() {
 
         SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", MODE_PRIVATE);
-        String gamemode = prefs.getString("gamemode", Constants.GAMEMODES[1]);
+        String gamemode = prefs.getString(Constants.GAME_MODE_TAG, Constants.GAMEMODES[1]);
 
         switch (gamemode) {
             case "classic":

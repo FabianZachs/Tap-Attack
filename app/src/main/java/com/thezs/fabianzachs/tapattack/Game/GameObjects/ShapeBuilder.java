@@ -98,7 +98,7 @@ public class ShapeBuilder {
 */
             case "arrow":
                 return new Arrow(100, color, colorInt, centerLocation,
-                        translateBitmap(direction, themesManager.getCurrentTheme().getShapeBitmap(shape,color,false)),
+                        themesManager.getCurrentTheme().getArrowShapeBitmap(direction),
                         null,
                         direction, themesManager.getCurrentTheme().getShapePaint(paint,color), bitmapHolder, mediator);
                 /*
@@ -128,7 +128,10 @@ public class ShapeBuilder {
     }
 
     private Bitmap translateBitmap(String direction, Bitmap origonalBitmap) {
+        return origonalBitmap;
 
+
+        /*
         Matrix rotationMatrix = new Matrix();
         Log.d("direction", "translateBitmap: "+direction);
 
@@ -148,6 +151,7 @@ public class ShapeBuilder {
 
         }
         return Bitmap.createBitmap(origonalBitmap, 0, 0, origonalBitmap.getWidth(), origonalBitmap.getHeight(), rotationMatrix, true);
+*/
     }
     /*
     private Bitmap translateBitmap(String direction, String color, boolean click) {

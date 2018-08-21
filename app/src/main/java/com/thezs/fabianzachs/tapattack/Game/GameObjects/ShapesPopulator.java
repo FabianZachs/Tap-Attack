@@ -38,7 +38,7 @@ public class ShapesPopulator {
     // settings
     private final int UNIT_TIME_PER_SHAPE_ADDITION = 1; // every x seconds one more max shape
     private final int MAX_NUMBER_LOOPS = 5;
-    private final int SHAPE_SPACING = Constants.SCREEN_HEIGHT/15; // space between shapes
+    private final int SHAPE_SPACING = Constants.SHAPE_HEIGHT/4;
     //private final int SHAPE_SPACING = 4 * Constants.SCREEN_HEIGHT; // space between shapes
     private final int MAX_SHAPES = 5;
 
@@ -107,8 +107,6 @@ public class ShapesPopulator {
     public CopyOnWriteArrayList update(CopyOnWriteArrayList<ShapeObject> shapes) {
 
 
-        // TODO integrate the lastTimeShapeAdded with the progress bar to make sure ppl are able to get enough points
-        // TODO possibly reduce time between added shapes when progress bar gets lower and lower. ex. if <10% have no timeout for adding shapes
         //if (maxNumberOfShapes() == shapes.size() || (lastTimeShapeAdded() < 100 && shapes.size() != 0))
         //return shapes;
 
@@ -171,8 +169,10 @@ public class ShapesPopulator {
     }
 
 
-    // TODO find the right bounds for location for shape
     private Point getValidNewShapeLocation(CopyOnWriteArrayList shapes) {
+
+        //return new Point(300,0);
+
 
         //int i = rand.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_WIDTH/2 - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left + Constants.SHAPE_WIDTH/2;
         int j = rand.nextInt(Constants.SHAPE_CREATION_AREA.bottom - Constants.SHAPE_CREATION_AREA.top) + Constants.SHAPE_CREATION_AREA.top;
@@ -202,6 +202,7 @@ public class ShapesPopulator {
         }
 
         return new Point(i,j);
+
 
     }
 
@@ -274,9 +275,9 @@ public class ShapesPopulator {
 
         switch (i) {
             case 0:
-                return "LEFT";
+                return "left";
             case 1:
-                return "RIGHT";
+                return "right";
 
             //case 2:
               //  return "UP";

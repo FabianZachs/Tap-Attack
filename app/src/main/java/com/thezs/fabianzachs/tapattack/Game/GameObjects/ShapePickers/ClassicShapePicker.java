@@ -20,8 +20,11 @@ public class ClassicShapePicker extends ShapePicker {
             return "star";
         else if (i<200)
             return "square";
+
+
         else if (i<500)
             return "arrow";
+
         else
             return "circle";
     }

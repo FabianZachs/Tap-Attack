@@ -1,5 +1,7 @@
 package com.thezs.fabianzachs.tapattack.Game;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -31,8 +33,16 @@ public class GameSoundEffects {
     private static int starTap;
     private static int gameOver;
 
+    private boolean soundfx = true;
+
 
     public GameSoundEffects() {
+        SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
+        if (prefs.getInt("fx", 1) == 0) {
+            soundfx = false;
+            return;
+        }
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
@@ -90,26 +100,38 @@ public class GameSoundEffects {
 
 
     public void playCircleTap() {
+        if (!soundfx)
+            return;
         soundPool.play(circleTap, 1.0f, 1.0f, 1, 0, 1.0f);
     }
 
     public void playSquareTapOne() {
+        if (!soundfx)
+            return;
         soundPool.play(squareTapOne, 1.0f, 1.0f, 1, 0, 1.0f);
     }
 
     public void playSquareTapTwo() {
+        if (!soundfx)
+            return;
         soundPool.play(squareTapTwo, 1.0f, 1.0f, 1, 0, 1.0f);
     }
 
     public void playStarTap() {
+        if (!soundfx)
+            return;
         soundPool.play(starTap, 1.0f, 1.0f, 1, 0, 1.0f);
     }
 
     public void playArrowSwipe() {
+        if (!soundfx)
+            return;
         soundPool.play(arrowSwipe, 1.0f, 1.0f, 1, 0, 1.0f);
     }
 
     public void playGameOver() {
+        if (!soundfx)
+            return;
         soundPool.play(gameOver, 1.0f, 1.0f, 1, 0, 1.0f);
     }
 }

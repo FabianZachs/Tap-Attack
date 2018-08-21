@@ -30,7 +30,7 @@ public class Arrow extends ShapeObject {
     private final Point originalPoint;
     private final int ARROW_TRAVEL_DISTANCE = 30;
     private long timeOfLastPenalty;
-    private double FLICK_DIRECTION_LENIENCY = Math.PI/4;
+    private double FLICK_DIRECTION_LENIENCY = Math.PI/2;
 
 
 
@@ -67,16 +67,16 @@ public class Arrow extends ShapeObject {
     private void setIntendedFlickDirectionRadians(String direction) {
 
         switch (direction) {
-            case "LEFT":
+            case "left":
                 intendedFlickDirectionRadians = Math.PI;
                 break;
-            case "RIGHT":
+            case "right":
                 intendedFlickDirectionRadians = 0;
                 break;
-            case "UP":
+            case "up":
                 intendedFlickDirectionRadians = Math.PI/2;
                 break;
-            case "DOWN":
+            case "down":
                 intendedFlickDirectionRadians = -Math.PI/2;
                 break;
         }
@@ -89,22 +89,22 @@ public class Arrow extends ShapeObject {
         Log.d("anglefinder", "isCorrectFlick: " + angle + " " + intendedFlickDirectionString);
 
         switch (intendedFlickDirectionString) {
-            case "RIGHT":
+            case "right":
                 //Log.d("anglefinder", "isCorrectFlick: " + angle + " " + intendedFlickDirectionString);
                 return (angle >= intendedFlickDirectionRadians - FLICK_DIRECTION_LENIENCY &&
                         angle <= intendedFlickDirectionRadians + FLICK_DIRECTION_LENIENCY);
 
                 // todo up and down havent been checked since they wont be in the game likely
-            case "UP":
+            case "up":
                 //Log.d("anglefinder", "isCorrectFlick: " + angle + " " + intendedFlickDirectionString);
                 return (angle >= intendedFlickDirectionRadians - FLICK_DIRECTION_LENIENCY &&
                         angle <= intendedFlickDirectionRadians + FLICK_DIRECTION_LENIENCY);
-            case "DOWN":
+            case "down":
                 //Log.d("anglefinder", "isCorrectFlick: " + angle + " " + intendedFlickDirectionString);
 
                 return (angle >= intendedFlickDirectionRadians - FLICK_DIRECTION_LENIENCY &&
                         angle <= intendedFlickDirectionRadians + FLICK_DIRECTION_LENIENCY);
-            case "LEFT":
+            case "left":
                 angle = getUnitCircleVersion(angle);
                 //Log.d("anglefinder", "isCorrectFlick: " + angle + " " + intendedFlickDirectionString);
 
@@ -164,7 +164,8 @@ public class Arrow extends ShapeObject {
                 else if (System.currentTimeMillis() - timeOfLastPenalty > 1000) {
                     //mediator.changeProgressBarBy(PROGRESSBAR_REDUCTION_WITH_INCORRECT_TOUCH);
                     //mediator.resetStreak();
-                    setIncorrectTouchAndReason("fling");
+                    //setIncorrectTouchAndReason("fling");
+                    setIncorrectTouchAndReason("fling" + Math.atan2(event1.getY()-event2.getY(),event2.getX()-event1.getX()) );
                     //mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this, "fling", "in that direction " + intendedFlickDirectionString+" " + Math.atan2(event1.getY() - event2.getY(), event2.getX() - event1.getX())));
                     //mediator.setGameOver(GameOverReasons.wrongShapeAction(Arrow.this));
                     //StyleableToast.makeText(Constants.CURRENT_CONTEXT, "wrong flick direction", R.style.successtoast).show();

@@ -42,7 +42,7 @@ public class Constants {
     public final static String SHAPE_THEME_TAG = "shape theme";
     public final static String BACKGROUND_TAG = "background";
 
-    public static String[] SHAPES = {"circle", "square", "cross", "arrow", "star"};
+    public static String[] SHAPES = {"circle", "square", "cross", "arrowup", "arrowleft", "arrowright", "star"};
 
     /*
     public static final String[] WARNING_COLOR_STREAK_REWARDS = {"unlock item","shift up", "reduce speed", "stars", "more points"};

@@ -58,8 +58,13 @@ public class ShapeMover {
 
         //Log.d("speed", "now speed: " + getSpeed(elapsedTime));
         for (ShapeObject shape : shapes) {
-            shape.incrementY(directionVector * (float) getSpeed(elapsedTime) * elapsedTime);
+            //shape.incrementY(directionVector * (float) getSpeed(elapsedTime) * elapsedTime);
+            shape.incrementY(directionVector * (float) getSpeed2() * elapsedTime);
         }
+    }
+
+    private double getSpeed2() {
+        return Constants.SCREEN_HEIGHT/970;
     }
 
     public void oppositeDirection() {

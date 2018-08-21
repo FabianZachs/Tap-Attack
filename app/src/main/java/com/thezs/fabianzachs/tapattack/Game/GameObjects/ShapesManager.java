@@ -26,6 +26,7 @@ import com.thezs.fabianzachs.tapattack.Game.SharedResources.SharedPaint;
 import com.thezs.fabianzachs.tapattack.Game.SharedResources.SharedRect;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -150,11 +151,16 @@ public class ShapesManager {
                 */
                 shape.playDeathSoundEffect();
 
+
                 if (shape.getGravable())
                     graveObjects.add(graveFactory.buildGrave(shape));
                 else {
                     freeResources(shape.getPaintObj(), shape.getBitmapHolder());
                 }
+
+
+
+
                 shapes.remove(shape);
                 mediator.incScore(shape.getPoints(), shape.getColor());
                 //mediator.incStreak(1, shape.getColor());
@@ -165,12 +171,6 @@ public class ShapesManager {
                 //mediator.changeProgressBarBy(shape.getProgressBarAddition(), shape.getColor());
             }
 
-            // TODO wont happen anymore
-            else if (shape.isTimedOut()) {
-                shapes.remove(shape);
-                freeResources(shape.getPaintObj(), shape.getBitmapHolder());
-                //mediator.resetStreak(); // TODO even for star????
-            }
 
 
             // TODO this will end game
@@ -202,14 +202,17 @@ public class ShapesManager {
 
         //shapeMover.update(shapes);
 
+        List gravesToRemove = new ArrayList();
         for (GraveObject graveObject : graveObjects) {
             if (graveObject.graveDestroyed()) {
-                graveObjects.remove(graveObject);
+                //graveObjects.remove(graveObject);
+                gravesToRemove.add(graveObject);
                 freeResources(graveObject.getPaint(), graveObject.getBitmapHolder());
             }
             else
                 graveObject.update();
         }
+        graveObjects.removeAll(gravesToRemove);
 
         shapes = shapesPopulator.update(shapes);
     }

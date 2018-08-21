@@ -27,6 +27,10 @@ public abstract class SimpleTheme extends ThemeObject {
         return getBitmapFromMap(getThemeTitle() + shape);
     }
 
+    public Bitmap getArrowShapeBitmap(String direction) {
+        return getBitmapFromMap(getThemeTitle()+"arrow"+direction);
+    }
+
     public Paint getShapePaint(Paint paint, String color) {
         //Log.d("java.lang.NullPointerException", "getShapePaint: " + color);
         ColorFilter filter = new PorterDuffColorFilter(getColorToInt(color), PorterDuff.Mode.SRC_IN);
@@ -45,7 +49,7 @@ public abstract class SimpleTheme extends ThemeObject {
             Bitmap img = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), resID);
             addToBitmapsMap(mDrawableName,img);
 
-            if (shape.equals("circle") || shape.equals("square") || shape.equals("arrow")) {
+            if (shape.equals("circle") || shape.equals("square")) { // todo maybe add star click
                 mDrawableName =getThemeTitle() + shape + "click";
                 resID = Constants.CURRENT_CONTEXT.getResources().getIdentifier(mDrawableName,"drawable", Constants.CURRENT_CONTEXT.getPackageName());
                 img = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), resID);

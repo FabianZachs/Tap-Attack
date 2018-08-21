@@ -70,6 +70,7 @@ public abstract class ThemeObject {
     }
 
     public abstract Bitmap getShapeBitmap(String shape, String color, boolean click);
+    public abstract Bitmap getArrowShapeBitmap(String direction);
     public abstract Paint getShapePaint(Paint paint, String color);
 
     // BITMAPS
