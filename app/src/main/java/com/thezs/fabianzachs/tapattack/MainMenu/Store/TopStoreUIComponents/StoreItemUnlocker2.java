@@ -72,11 +72,11 @@ public class StoreItemUnlocker2 {
         randomUnlockText.setTextColor(getRandomUnlockTextColor());
 
         if (isRandomUnlockVisible()) {
-            Log.d("visibility", "updateRandomUnlockView: visubke");
+            //Log.d("visibility", "updateRandomUnlockView: visubke");
             randomUnlockSection.setVisibility(View.VISIBLE);
         }
         else {
-            Log.d("visibility", "updateRandomUnlockView: invisible");
+            //Log.d("visibility", "updateRandomUnlockView: invisible");
             randomUnlockSection.setVisibility(View.INVISIBLE);
         }
     }
@@ -103,6 +103,14 @@ public class StoreItemUnlocker2 {
             public void buttonAction() {
                 if (isRandomUnlockVisible() && enoughPointsForRandomUnlock())
                     listener.randomUnlockClick();
+            }
+        }));
+
+        purchaseUnlockSection.setOnTouchListener(new ButtonOnTouchListener(activity, purchaseUnlockSection, new ButtonOnTouchListener.ButtonExecuteListener() {
+            @Override
+            public void buttonAction() {
+                if (isPurchaseUnlockVisible() && enoughPointsForPurchaseUnlock())
+                    listener.purchaseUnlockClick();
             }
         }));
     }
