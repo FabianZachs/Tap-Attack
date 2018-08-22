@@ -3,6 +3,9 @@ package com.thezs.fabianzachs.tapattack.MainMenu.Store.BottomStoreComponents;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -107,7 +110,6 @@ public class CustomGridAdapter extends BaseAdapter {
 
         }
 
-        // todo might need to be out of this if statement since it gets updated!!
         if (storeItemsToDisplay.get(position).get_unlocked() != 1) {
             ImageView lockImage = (ImageView) view.findViewById(R.id.locked_image);
             ViewGroup.LayoutParams layoutParams = lockImage.getLayoutParams();
@@ -134,50 +136,41 @@ public class CustomGridAdapter extends BaseAdapter {
 
         switch (category) {
             case Constants.GAME_MODE_TAG:
-                if (position != selectedItemPosition)
-                    itemImageHolder.setImageResource(R.drawable.holder_gamemode);
-                else if (storeItemsToDisplay.get(position).get_unlocked() == 1)
-                    itemImageHolder.setImageResource(R.drawable.holder_gamemode_selected);
-                else
-                    itemImageHolder.setImageResource(R.drawable.holder_gamemode_selected_locked);
-
+                itemImageHolder.setImageDrawable(getItemHolder(context.getResources().getDrawable(R.drawable.holder_gamemode), position));
                 break;
             case Constants.BACKGROUND_TAG:
-                if (position != selectedItemPosition)
-                    itemImageHolder.setImageResource(R.drawable.holder_background);
-                else if (storeItemsToDisplay.get(position).get_unlocked() == 1)
-                    itemImageHolder.setImageResource(R.drawable.holder_background_selected);
-                else
-                    itemImageHolder.setImageResource(R.drawable.holder_background_selected_locked);
+                itemImageHolder.setImageDrawable(getItemHolder(context.getResources().getDrawable(R.drawable.holder_background), position));
                 break;
+
             case Constants.SHAPE_TYPE_TAG:
             case Constants.SHAPE_THEME_TAG:
-                if (position != selectedItemPosition)
-                    itemImageHolder.setImageResource(R.drawable.holder_theme_item);
-                else if (storeItemsToDisplay.get(position).get_unlocked() == 1)
-                    itemImageHolder.setImageResource(R.drawable.holder_theme_item_selected);
-                else
-                    itemImageHolder.setImageResource(R.drawable.holder_theme_item_selected_locked);
+                itemImageHolder.setImageDrawable(getItemHolder(context.getResources().getDrawable(R.drawable.holder_theme_item), position));
                 break;
-
         }
-
-
 
         if (position == selectedItemPosition)
             startAnimationAtSelectedPosition((RelativeLayout) view.findViewById(R.id.grid_item_section));
-        else // stop animation
+        else
             stopAnimation((RelativeLayout) view.findViewById(R.id.grid_item_section));
 
         return view;
+    }
+
+    private Drawable getItemHolder(Drawable holderDrawable, int position) {
+        if (position != selectedItemPosition)
+            holderDrawable.setColorFilter(context.getResources().getColor(R.color.item_holder), PorterDuff.Mode.SRC);
+        else if (storeItemsToDisplay.get(position).get_unlocked() == 1)
+            holderDrawable.setColorFilter(context.getResources().getColor(R.color.selected_item_holder), PorterDuff.Mode.SRC);
+        else
+            holderDrawable.setColorFilter(context.getResources().getColor(R.color.selected_locked_item_holder), PorterDuff.Mode.SRC);
+
+        return holderDrawable;
     }
 
     private void startAnimationAtSelectedPosition(RelativeLayout itemSection) {
 
         Animation selectedItemAnimation = AnimationUtils.loadAnimation(context, R.anim.selected_item);
         itemSection.startAnimation(selectedItemAnimation);
-
-
     }
 
     private void stopAnimation(RelativeLayout itemSection) {

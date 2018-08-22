@@ -48,32 +48,14 @@ public class MyItemDatabase {
 
     private void unlockBeginningItems() {
         myDBHandler.unlockItemViaName(Constants.SHAPE_THEMES[0]);
-        //dbHandler.unlockItemViaName(Constants.SHAPE_THEMES[1]);
         myDBHandler.unlockItemViaName(Constants.BACKGROUNDS[0]);
-        //dbHandler.unlockItemViaName(Constants.BACKGROUNDS[1]);
         myDBHandler.unlockItemViaName(Constants.SHAPE_TYPES[0]);
-        //dbHandler.unlockItemViaName(Constants.SHAPE_TYPES[1]);
         myDBHandler.unlockItemViaName(Constants.GAMEMODES[0]);
         myDBHandler.unlockItemViaName(Constants.GAMEMODES[1]);
         myDBHandler.unlockItemViaName(Constants.GAMEMODES[2]);
         myDBHandler.unlockItemViaName(Constants.GAMEMODES[3]);
         myDBHandler.unlockItemViaName(Constants.GAMEMODES[4]);
         myDBHandler.unlockItemViaName(Constants.GAMEMODES[5]);
-        //dbHandler.unlockItemViaName(Constants.MULTIPLIERS[0]);
-        //dbHandler.unlockItemViaName(Constants.WARNING_COLOR_STREAK_REWARDS[0]);
-        //dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.SHAPE_THEMES[0] + "';");
-        //dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.SHAPE_THEMES[1] + "';");
-        //dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.BACKGROUNDS[0] + "';");
-        //////////dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.BACKGROUNDS[1] + "';");
-        //////////dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.SHAPE_TYPES[0] + "';");
-        //////////dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.SHAPE_TYPES[1] + "';");
-        //////////dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.GAMEMODES[0] + "';");
-        //////////dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.GAMEMODES[1] + "';");
-        //////////dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.GAMEMODES[2] + "';");
-        //////////dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.GAMEMODES[3] + "';");
-        //////////dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.MULTIPLIERS[0] + "';");
-        //////////dbHandler.getWritableDatabase().execSQL("UPDATE " + dbHandler.TABLE_STOREITEMS + " SET " + dbHandler.COLUMN_UNLOCKED + " = 1 WHERE " + dbHandler.COLUMN_NAME + " = '" + Constants.WARNING_COLOR_STREAK_REWARDS[0] + "';");
-
     }
 
     private void storeItemsSetup(String category, String names[], String files[], int[] pricePoints, int[] priceMoney) {
