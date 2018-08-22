@@ -43,28 +43,15 @@ public class MyBottomNavigation extends BottomNavigationView {
                         switch (item.getItemId()) {
                             case R.id.ic_gamemode:
                                 listener.setViewPage(0);
-                                //setViewPager(0);
-                                //setCurrentItemFragmentIndex(0);
-                                //viewPager.getCurrentItem();
-                                //Log.d("currentitem", "onNavigationItemSelected: " +viewPager.getCurrentItem());
                                 return true;
                             case R.id.ic_shape_type:
                                 listener.setViewPage(1);
-                                //setViewPager(1);
-                                //setCurrentItemFragmentIndex(1);
-                                //Log.d("currentitem", "onNavigationItemSelected: " +viewPager.getCurrentItem());
                                 return true;
                             case R.id.ic_theme:
                                 listener.setViewPage(2);
-                                //setViewPager(2);
-                                //setCurrentItemFragmentIndex(2);
-                                //Log.d("currentitem", "onNavigationItemSelected: " +viewPager.getCurrentItem());
                                 return true;
                             case R.id.ic_background:
                                 listener.setViewPage(3);
-                                //setViewPager(3);
-                                //setCurrentItemFragmentIndex(3);
-                                //Log.d("currentitem", "onNavigationItemSelected: " +viewPager.getCurrentItem());
                                 return true;
                         }
                         return false;

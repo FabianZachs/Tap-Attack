@@ -55,7 +55,6 @@ public abstract class ItemSectionFragment extends Fragment {
 
     public void purchaseUnlock() {
         String[] lockedItems = dbHandler.getItemNamesFromCategory(SECTION);
-        Log.d("purchaseunlock", "purchaseUnlock: " + lockedItems[adapter.getSelectedItemPosition()]);
         unlockViaItemName(lockedItems[adapter.getSelectedItemPosition()], "purchase");
     }
 
@@ -67,16 +66,6 @@ public abstract class ItemSectionFragment extends Fragment {
     }
 
     private void unlockViaItemName(String itemNameToUnlock, String typeOfUnlock) {
-        /*
-        if (SECTION.equals(Constants.GAME_MODE_TAG))
-            return;
-            */
-        /*
-        if (lockedItems.length == 0) {
-            StyleableToast.makeText(Constants.CURRENT_CONTEXT, "All Items Unlocked", R.style.successtoast).show();
-            return;
-        }*/
-
         dbHandler.unlockItemViaName(itemNameToUnlock);
 
         int positionToUnlock = adapter.getIndexOfItemWithName(itemNameToUnlock);
@@ -103,9 +92,6 @@ public abstract class ItemSectionFragment extends Fragment {
 
 
     public void notifyNewItemToDisplayFromThisSectionBecauseSectionChange(/*String section, String defaultValue*/) {
-        Log.d("buggy", "notifyNewItemToDisplayFromThisSectionBecauseSectionChange: " + getCurrentEquipedItemPosition());
-        Log.d("buggy", "section: " + SECTION);
-        Log.d("buggy", "item: " + prefs.getString(SECTION, DEFAULT_SECTION_VALUE));
         int resourceIDOfItemImage = helper.getResourceId(getContext(), adapter.getItem(getCurrentEquipedItemPosition()).get_file());
         listener.selectedItemChanged(SECTION, getResources().getDrawable(resourceIDOfItemImage), adapter.getItem(getCurrentEquipedItemPosition()).get_name(), adapter.getItem(getCurrentEquipedItemPosition()).get_unlocked());
     }
@@ -134,9 +120,6 @@ public abstract class ItemSectionFragment extends Fragment {
                 myAdapter.notifyDataSetChanged();
                 listener.selectedItemChanged(SECTION,((ImageView) (view.findViewById(R.id.item_image))).getDrawable(), adapter.getItem(position).get_name(), adapter.getItem(position).get_unlocked());
 
-                //if (dbHandler.isItemUnlocked(names[position]) == 1) {
-                //StyleableToast.makeText(mainMenuActivity,  "unlocked", R.style.successtoast).show();
-                //}
             }
         });
     }

@@ -25,7 +25,6 @@ public class MyStoreItemSectionViewPager {
     private StoreFragment storeFragment;
     private CustomViewPager viewPager;
     private SectionsPageAdapter fragmentAdapter;
-    //private ViewPagerListener listener;
     private int currentlyDisplayedFragmentIndex;
 
     public MyStoreItemSectionViewPager(Context context, StoreFragment storeFragment, View view) {
@@ -64,19 +63,6 @@ public class MyStoreItemSectionViewPager {
     public ItemSectionFragment getCurrentlyDisplayedFragment() {
         return (ItemSectionFragment) fragmentAdapter.getItem(currentlyDisplayedFragmentIndex);
     }
-
-
-    /*
-    public interface ViewPagerListener {
-        void newItemSectionPageSelected(int fragmentIndex);
-    }
-
-    public void setViewPagerListener(ViewPagerListener listener) {
-        this.listener = listener;
-    }
-    */
-
-
 
 
     private void setupItemsSection(View view) {
@@ -125,12 +111,4 @@ public class MyStoreItemSectionViewPager {
         return currentFragment.getCurrentlySelectedItem();
     }
 
-
-    /*
-    public void setItemSectionListeners(ItemSectionFragment.ItemSectionListener listener) {
-        for (int i = 0; i<fragmentAdapter.getCount();i++) {
-            ((ItemSectionFragment)fragmentAdapter.getItem(i)).setItemSectionListener(listener);
-        }
-    }
-    */
 }
