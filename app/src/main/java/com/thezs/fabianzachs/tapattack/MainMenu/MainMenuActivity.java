@@ -4,32 +4,26 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Build;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
-import android.widget.ImageView;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
-import com.thezs.fabianzachs.tapattack.MainMenu.Menu.MainMenuFragment;
 import com.thezs.fabianzachs.tapattack.MainMenu.Menu.MainMenuFragment2;
+import com.thezs.fabianzachs.tapattack.MainMenu.Menu.MorePointsFragment;
 import com.thezs.fabianzachs.tapattack.MainMenu.Settings.SettingsFragment;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.StoreFragment;
 import com.thezs.fabianzachs.tapattack.R;
 
 import java.util.HashMap;
 
-public class MainMenuActivity extends GeneralParent implements StoreFragment.StoreListener, SettingsFragment.SettingsListener, MainMenuFragment2.MainMenuListener {
+public class MainMenuActivity extends GeneralParent implements StoreFragment.StoreListener, SettingsFragment.SettingsListener, MainMenuFragment2.MainMenuListener, MorePointsFragment.morePointsListener {
 
     private SharedPreferences prefs;
     //private AdView mAdView;
@@ -40,6 +34,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     private MainMenuFragment2 mainMenuFragment;
     private StoreFragment storeFragment;
     private SettingsFragment settingsFragment;
+    private MorePointsFragment morePointsFragment;
     private MusicPlayer musicPlayer;
 
     @Override
@@ -56,7 +51,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
                 return;
             }
 
-            addAllFragments();
+            createAndAddFragments();
             displayMainMenuFragment();
         }
 
@@ -77,6 +72,11 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     }
 
     @Override
+    public void mainMenuFragmentToMorePointsFragment() {
+        displayMorePointsFragment();
+    }
+
+    @Override
     public void storeFragmentToMenuFragment() {
         displayMainMenuFragment();
     }
@@ -90,6 +90,11 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     public void settingsFragmentToMenuFragment() {
         displayMainMenuFragment();
 
+    }
+
+    @Override
+    public void morePointsFragmentToMainMenuFragment() {
+        displayMainMenuFragment();
     }
 
 
@@ -122,6 +127,18 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     }
 
 
+    public void displayMorePointsFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (morePointsFragment.isAdded()) {
+            ft.show(morePointsFragment);
+        } else {
+            ft.add(R.id.main_fragment, morePointsFragment, Constants.MORE_POINTS_TAG);
+        }
+        if (storeFragment.isAdded()) { ft.hide(storeFragment); }
+        if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
+        if (settingsFragment.isAdded()) { ft.hide(settingsFragment); }
+        ft.commit();
+    }
     public void displayMainMenuFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if (mainMenuFragment.isAdded()) {
@@ -131,6 +148,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
             ft.add(R.id.main_fragment, mainMenuFragment, Constants.MAIN_TAG);
         }
         if (storeFragment.isAdded()) { ft.hide(storeFragment); }
+        if (morePointsFragment.isAdded()) { ft.hide(morePointsFragment); }
         if (settingsFragment.isAdded()) { ft.hide(settingsFragment); }
         ft.commit();
     }
@@ -145,6 +163,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
             ft.add(R.id.main_fragment, storeFragment, Constants.STORE_TAG);
         }
         if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
+        if (morePointsFragment.isAdded()) { ft.hide(morePointsFragment); }
         if (settingsFragment.isAdded()) { ft.hide(settingsFragment); }
         ft.commit();
     }
@@ -158,6 +177,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
             ft.add(R.id.main_fragment, settingsFragment, Constants.SETTINGS_TAG);
         }
         if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
+        if (morePointsFragment.isAdded()) { ft.hide(morePointsFragment); }
         if (storeFragment.isAdded()) { ft.hide(storeFragment); }
         ft.commit();
     }
@@ -171,14 +191,15 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
 
 
 
-    private void addAllFragments() {
+    private void createAndAddFragments() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         this.mainMenuFragment = new MainMenuFragment2();
         this.storeFragment = new StoreFragment();
         this.settingsFragment = new SettingsFragment();
+        this.morePointsFragment = new MorePointsFragment();
         //ft.add(R.id.main_fragment, mainMenuFragment, "mainmenu");
-        ft.add(R.id.main_fragment, storeFragment,Constants.STORE_TAG);
-        ft.add(R.id.main_fragment, settingsFragment, Constants.SETTINGS_TAG);
+        //ft.add(R.id.main_fragment, storeFragment,Constants.STORE_TAG);
+        //ft.add(R.id.main_fragment, settingsFragment, Constants.SETTINGS_TAG);
         ft.commit();
     }
 
@@ -318,5 +339,6 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
 
         //super.onActivityResult(requestCode, resultCode, data);
     }
+
 }
 

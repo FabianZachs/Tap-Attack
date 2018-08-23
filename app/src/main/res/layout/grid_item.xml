@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- todo maybe add a drawable container for the image-->
     <ImageView
         android:id="@+id/item_image_holder"
         android:src="@drawable/holder_theme_item"

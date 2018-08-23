@@ -1,5 +1,6 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Menu;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.view.View;
@@ -23,9 +24,11 @@ public class PointsSection {
     private RelativeLayout pointsSection;
     private TextView pointsText;
     private ImageView pointsImage;
+    private MainMenuFragment2.MainMenuListener mainMenuListener;
 
-    public PointsSection(Activity activity, View view, SharedPreferences prefs) {
+    public PointsSection(Activity activity, MainMenuFragment2.MainMenuListener mainMenuListener, View view, SharedPreferences prefs) {
         this.activity = activity;
+        this.mainMenuListener = mainMenuListener;
         this.prefs = prefs;
         this.pointsSection = view.findViewById(R.id.more_points_section);
         this.pointsText = view.findViewById(R.id.points_text);
@@ -44,11 +47,12 @@ public class PointsSection {
         // todo which of Bounce, Swing, Pulse, Flash, Tada
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setupMorePointsSection() {
         pointsSection.setOnTouchListener(new ButtonOnTouchListener(activity, pointsSection, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
             public void buttonAction() {
-                // todo launch morepoints fragment
+                mainMenuListener.mainMenuFragmentToMorePointsFragment();
             }
         }));
     }

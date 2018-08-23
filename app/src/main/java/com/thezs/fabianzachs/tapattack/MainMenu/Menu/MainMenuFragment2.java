@@ -35,6 +35,7 @@ public class MainMenuFragment2 extends Fragment {
     public interface MainMenuListener{
         void mainMenuFragmentToSettingsFragment();
         void mainMenuFragmentToStoreFragment();
+        void mainMenuFragmentToMorePointsFragment();
         void playGameClick();
     }
 
@@ -59,7 +60,7 @@ public class MainMenuFragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.main_menu_fragment, container, false);
-        this.pointsSection = new PointsSection(getActivity(),view, prefs);
+        this.pointsSection = new PointsSection(getActivity(), mainMenuListener, view, prefs);
         this.percentUnlockedSection = new PercentUnlockedSection(getActivity(), myDBHandler, view);
         this.playGameSection = new PlayGameSection(getActivity(),view, prefs, myDBHandler);
         this.timedPresent = new TimedPresent();
@@ -121,7 +122,6 @@ public class MainMenuFragment2 extends Fragment {
                 mainMenuListener.mainMenuFragmentToSettingsFragment();
             }
         }));
-
     }
 
 

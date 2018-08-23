@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="#ff000000"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MorePointsFragment">
+
+    <TextView
+        android:id="@+id/more_points_title"
+        android:text="@string/morePointsTitle"
+        android:textColor="@color/store"
+        android:fontFamily="@font/undinaru"
+        android:textStyle="bold"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:textSize="35sp"
+        android:layout_height="0sp" />
+
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0sp">
+        <TextView
+            android:id="@+id/double_points_text"
+            android:layout_centerHorizontal="true"
+            android:text="@string/doublePoints"
+            android:textColor="#333333"
+            android:fontFamily="@font/undinaru"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            />
+        <TextView
+            android:id="@+id/double_points_image"
+            android:text="x2"
+            android:fontFamily="@font/undinaru"
+            android:textStyle="bold"
+            android:textColor="#fffc721f"
+            android:textSize="40sp"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/double_points_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0sp">
+        <TextView
+            android:id="@+id/more_points_text"
+            android:layout_centerHorizontal="true"
+            android:text="@string/morePoints"
+            android:textColor="#333333"
+            android:fontFamily="@font/undinaru"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            />
+
+        <LinearLayout
+            android:layout_below="@id/more_points_text"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="+5,000"
+                android:fontFamily="@font/undinaru"
+                android:textStyle="bold"
+                android:textColor="@color/store"
+                android:textSize="30sp"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/more_points_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="+10,000"
+                android:fontFamily="@font/undinaru"
+                android:textStyle="bold"
+                android:textColor="@color/store"
+                android:textSize="30sp"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/more_points_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="+20,000"
+                android:fontFamily="@font/undinaru"
+                android:textStyle="bold"
+                android:textColor="@color/store"
+                android:textSize="30sp"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/more_points_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0sp">
+        <TextView
+            android:id="@+id/power_ups_text"
+            android:layout_centerHorizontal="true"
+            android:text="@string/powerups"
+            android:textColor="#333333"
+            android:fontFamily="@font/undinaru"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            />
+
+        <LinearLayout
+            android:layout_below="@id/power_ups_text"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:textColor="@color/soundon"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/undinaru"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:text="@string/shield"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="x3"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/undinaru"
+                        android:textSize="15sp"
+                        android:textColor="@color/soundon"/>
+                    <TextView
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="x6"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/undinaru"
+                        android:textSize="15sp"
+                        android:textColor="@color/soundon"/>
+                    <TextView
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="x10"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/undinaru"
+                        android:textSize="15sp"
+                        android:textColor="@color/soundon"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:textColor="@color/soundon"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/undinaru"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:text="@string/starConverter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="x3"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/undinaru"
+                        android:textSize="15sp"
+                        android:textColor="@color/soundon"/>
+                    <TextView
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="x6"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/undinaru"
+                        android:textSize="15sp"
+                        android:textColor="@color/soundon"/>
+                    <TextView
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="x10"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/undinaru"
+                        android:textSize="15sp"
+                        android:textColor="@color/soundon"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

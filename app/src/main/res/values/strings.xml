@@ -34,21 +34,30 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    
-    
+
+
     <!-- My Resource Strings -->
-    
+
     <!-- 1) MainActivityFragment -->
     <string name="percentUnlockedText">%1$d%%</string>
     <string name="highscoreText">Highscore: %1$d</string>
 
-    
+    <!-- MorePointsFragment -->
+    <string name="morePointsTitle">POINTS &amp; POWERUPS!</string>
+    <string name="doublePoints">DOUBLE POINTS</string>
+    <string name="morePoints">MORE POINTS</string>
+    <string name="powerups">POWER-UPS</string>
+    <string name="shield">SHIELDS</string>
+    <string name="starConverter">STAR CONVERTER</string>
+    <string name="quantity">%%%1$d</string>
+
+
+
     <!--StoreFragmentOLDment -->
     <string name="itemsUnlockedFraction">%1$d/%2$d</string>
     <string name="randomUnlockText">RANDOM UNLOCK\n %1$d</string>
     <string name="purchaseUnlockText">UNLOCK\n %1$d</string>
     <string name="currentPoints">%1$d</string>
 
-    
-    
+
 </resources>
