@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_layout"
     android:orientation="horizontal"
-    android:background="@drawable/powerupsicon2"
+    android:background="@drawable/pointsitemholder"
     android:gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="70sp">
+    android:layout_height="60sp">
 
     <TextView
         android:id="@+id/item_quantity"
         android:gravity="center"
-        android:textStyle="bold"
         android:fontFamily="@font/undinaru"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:textColor="@color/menu"
         android:text="x100"
         android:layout_weight="1"
@@ -23,13 +23,13 @@
         android:id="@+id/item_image"
         android:layout_width="40sp"
         android:layout_height="40sp"
-        android:src="@drawable/shiftshapesupicon"
+        android:src="@drawable/shield1"
         />
 
     <TextView
         android:id="@+id/item_price"
         android:text="PRICE"
-        android:textSize="40sp"
+        android:textSize="25sp"
         android:textColor="@color/menu"
         android:gravity="end"
         android:paddingRight="10sp"

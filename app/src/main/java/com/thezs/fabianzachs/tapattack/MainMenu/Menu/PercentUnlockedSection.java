@@ -25,12 +25,6 @@ public class PercentUnlockedSection {
         this.activity = activity;
         this.myDBHandler = myDBHandler;
         this.percentUnlockedText = view.findViewById(R.id.percent_unlocked_text);
-        percentUnlockedText.setOnTouchListener(new ButtonOnTouchListener(activity, percentUnlockedText, new ButtonOnTouchListener.ButtonExecuteListener() {
-            @Override
-            public void buttonAction() {
-                StyleableToast.makeText(activity, "LAUNCHES UNLOCKABLE POWER UPS", R.style.successtoast).show();
-            }
-        }));
     }
 
     public void updatePercentUnlockedText() {

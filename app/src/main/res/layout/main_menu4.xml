@@ -2,19 +2,10 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@drawable/background_test5"
+    android:background="@drawable/background_test"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--
- com.thezs.fabianzachs.tapattack.MainMenu.Store.CustomViewPagerager
-        android:layout_weight="1"
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="0sp">
-
-  com.thezs.fabianzachs.tapattack.MainMenu.Store.CustomViewPagerager>
-    -->
     <FrameLayout
         android:id="@+id/main_fragment"
         android:layout_width="match_parent"
@@ -22,15 +13,6 @@
         android:layout_weight="1">
 
     </FrameLayout>
-    <!--
-    <fragment
-        android:nacom.thezs.fabianzachs.tapattack.MainMenu.MainMenuFragmentment"
-        android:id="@+id/fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </fragment>
-        -->
     <fragment
         android:name="com.thezs.fabianzachs.tapattack.MainMenu.BannerAdFragment"
         android:id="@+id/menu_banner_ad"

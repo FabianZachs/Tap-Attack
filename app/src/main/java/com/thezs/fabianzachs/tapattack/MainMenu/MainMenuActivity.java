@@ -16,14 +16,16 @@ import android.view.WindowManager;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
 import com.thezs.fabianzachs.tapattack.MainMenu.Menu.MainMenuFragment2;
-import com.thezs.fabianzachs.tapattack.MainMenu.Menu.MorePointsFragment;
+import com.thezs.fabianzachs.tapattack.MainMenu.Menu.PaidUnlockSection.PaidPointsFragment;
+import com.thezs.fabianzachs.tapattack.MainMenu.Menu.PaidUnlockSection.PaidUnlocksFragment;
 import com.thezs.fabianzachs.tapattack.MainMenu.Settings.SettingsFragment;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.StoreFragment;
 import com.thezs.fabianzachs.tapattack.R;
 
 import java.util.HashMap;
 
-public class MainMenuActivity extends GeneralParent implements StoreFragment.StoreListener, SettingsFragment.SettingsListener, MainMenuFragment2.MainMenuListener, MorePointsFragment.morePointsListener {
+public class MainMenuActivity extends GeneralParent implements StoreFragment.StoreListener,
+        SettingsFragment.SettingsListener, MainMenuFragment2.MainMenuListener, PaidUnlocksFragment.morePointsListener, PaidPointsFragment.PaidPointsFragmentListener {
 
     private SharedPreferences prefs;
     //private AdView mAdView;
@@ -34,7 +36,8 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     private MainMenuFragment2 mainMenuFragment;
     private StoreFragment storeFragment;
     private SettingsFragment settingsFragment;
-    private MorePointsFragment morePointsFragment;
+    private PaidUnlocksFragment paidUnlocksFragment;
+    private PaidPointsFragment paidPointsFragment;
     private MusicPlayer musicPlayer;
 
     @Override
@@ -73,7 +76,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
 
     @Override
     public void mainMenuFragmentToMorePointsFragment() {
-        displayMorePointsFragment();
+        displayPaidItemsFragment();
     }
 
     @Override
@@ -93,9 +96,21 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     }
 
     @Override
-    public void morePointsFragmentToMainMenuFragment() {
+    public void paidUnlocksFragmentToMainMenuFragment() {
         displayMainMenuFragment();
     }
+
+    @Override
+    public void paidUnlocksFragmentToPaidPointsFragment() {
+        displayPaidPointsFragment();
+
+    }
+
+    /*
+    @Override
+    public void paidItemsFragmentToPaidPointsFragment() {
+        displayPaidPointsFragment();
+    }*/
 
 
     @Override
@@ -126,16 +141,29 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         this.startActivityForResult(intent, 1);
     }
 
-
-    public void displayMorePointsFragment() {
+    public void displayPaidPointsFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        if (morePointsFragment.isAdded()) {
-            ft.show(morePointsFragment);
+        if (paidPointsFragment.isAdded()) {
+            ft.show(paidPointsFragment);
         } else {
-            ft.add(R.id.main_fragment, morePointsFragment, Constants.MORE_POINTS_TAG);
+            ft.add(R.id.main_fragment, paidPointsFragment, Constants.PAID_POINTS_TAG);
         }
         if (storeFragment.isAdded()) { ft.hide(storeFragment); }
-        if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
+        //if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
+        if (settingsFragment.isAdded()) { ft.hide(settingsFragment); }
+        ft.commit();
+    }
+
+
+    public void displayPaidItemsFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (paidUnlocksFragment.isAdded()) {
+            ft.show(paidUnlocksFragment);
+        } else {
+            ft.add(R.id.main_fragment, paidUnlocksFragment, Constants.PAID_UNLOCKS_TAG);
+        }
+        if (storeFragment.isAdded()) { ft.hide(storeFragment); }
+        //if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
         if (settingsFragment.isAdded()) { ft.hide(settingsFragment); }
         ft.commit();
     }
@@ -148,7 +176,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
             ft.add(R.id.main_fragment, mainMenuFragment, Constants.MAIN_TAG);
         }
         if (storeFragment.isAdded()) { ft.hide(storeFragment); }
-        if (morePointsFragment.isAdded()) { ft.hide(morePointsFragment); }
+        if (paidUnlocksFragment.isAdded()) { ft.hide(paidUnlocksFragment); }
         if (settingsFragment.isAdded()) { ft.hide(settingsFragment); }
         ft.commit();
     }
@@ -163,7 +191,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
             ft.add(R.id.main_fragment, storeFragment, Constants.STORE_TAG);
         }
         if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
-        if (morePointsFragment.isAdded()) { ft.hide(morePointsFragment); }
+        if (paidUnlocksFragment.isAdded()) { ft.hide(paidUnlocksFragment); }
         if (settingsFragment.isAdded()) { ft.hide(settingsFragment); }
         ft.commit();
     }
@@ -177,7 +205,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
             ft.add(R.id.main_fragment, settingsFragment, Constants.SETTINGS_TAG);
         }
         if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
-        if (morePointsFragment.isAdded()) { ft.hide(morePointsFragment); }
+        if (paidUnlocksFragment.isAdded()) { ft.hide(paidUnlocksFragment); }
         if (storeFragment.isAdded()) { ft.hide(storeFragment); }
         ft.commit();
     }
@@ -196,7 +224,8 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         this.mainMenuFragment = new MainMenuFragment2();
         this.storeFragment = new StoreFragment();
         this.settingsFragment = new SettingsFragment();
-        this.morePointsFragment = new MorePointsFragment();
+        this.paidUnlocksFragment = new PaidUnlocksFragment();
+        this.paidPointsFragment = new PaidPointsFragment();
         //ft.add(R.id.main_fragment, mainMenuFragment, "mainmenu");
         //ft.add(R.id.main_fragment, storeFragment,Constants.STORE_TAG);
         //ft.add(R.id.main_fragment, settingsFragment, Constants.SETTINGS_TAG);

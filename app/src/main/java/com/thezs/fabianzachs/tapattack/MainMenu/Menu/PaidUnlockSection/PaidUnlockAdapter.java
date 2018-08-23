@@ -3,59 +3,87 @@ package com.thezs.fabianzachs.tapattack.MainMenu.Menu.PaidUnlockSection;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.thezs.fabianzachs.tapattack.R;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.List;
 
-public class PaidUnlockAdapter extends ArrayAdapter<PaidUnlock> {
+public class PaidUnlockAdapter extends ArrayAdapter<PaidUnlockItem> {
 
 
     private Context context;
     private int resource;
+    private String type;
 
-    public PaidUnlockAdapter(@NonNull Context context, int resource, ArrayList<PaidUnlock> objects) {
+    public PaidUnlockAdapter(String type, @NonNull Context context, int resource, ArrayList<PaidUnlockItem> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
+        this.type = type;
     }
+
+
+
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
         int price = getItem(position).getPrice();
         int quantity = getItem(position).getQuantity();
         int drawableId = getItem(position).getDrawableId();
 
+        View r = convertView;
+        ViewHolder viewHolder = null;
+        if (r == null) {
+            LayoutInflater inflater = LayoutInflater.from(context);
+            r= inflater.inflate(resource,parent,false);
+            viewHolder = new ViewHolder(r);
+            r.setTag(viewHolder);
+        }
+        else {
+            viewHolder = (ViewHolder) r.getTag();
+        }
 
-        LayoutInflater inflater = LayoutInflater.from(context);
-        convertView = inflater.inflate(resource, parent, false);
+        switch (type) {
+            case "powerups":
+                viewHolder.priceText.setText(context.getString(R.string.price,price));
+                viewHolder.itemImage.setImageResource(drawableId);
+                viewHolder.quantityText.setText(context.getString(R.string.powerupsQuantity,quantity));
+                viewHolder.itemHolder.setBackgroundResource(R.drawable.powerupitemholder);
+                break;
+            case "points":
+                viewHolder.priceText.setText(context.getString(R.string.price,price));
+                viewHolder.itemImage.setImageResource(drawableId);
+                viewHolder.quantityText.setText(context.getString(R.string.pointsQuantity,quantity));
+                viewHolder.itemHolder.setBackgroundResource(R.drawable.pointsitemholder);
+                break;
+            default: throw new IllegalArgumentException("unknown paid unlock section" + type);
+        }
 
-        ImageView itemImage = convertView.findViewById(R.id.item_image);
-        TextView quantityText = convertView.findViewById(R.id.item_quantity);
-        TextView itemPrice = convertView.findViewById(R.id.item_price);
 
-        itemImage.setImageResource(drawableId);
-        quantityText.setText(quantity+"");
-        itemPrice.setText(price+"");
+        return r;
 
 
+    }
 
+    private class ViewHolder {
+        TextView quantityText;
+        ImageView itemImage;
+        TextView priceText;
+        LinearLayout itemHolder;
 
-        return convertView;
-
-        // todo do background depending on type
-
+        ViewHolder(View view) {
+            quantityText = view.findViewById(R.id.item_quantity);
+            itemImage = view.findViewById(R.id.item_image);
+            priceText = view.findViewById(R.id.item_price);
+            itemHolder = view.findViewById(R.id.main_layout);
+        }
     }
 }

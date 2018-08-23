@@ -42,7 +42,7 @@
     <string name="percentUnlockedText">%1$d%%</string>
     <string name="highscoreText">Highscore: %1$d</string>
 
-    <!-- MorePointsFragment -->
+    <!-- PaidUnlocksFragment -->
     <string name="morePointsTitle">POINTS &amp; POWERUPS!</string>
     <string name="doublePoints">DOUBLE POINTS</string>
     <string name="morePoints">MORE POINTS</string>
@@ -50,6 +50,9 @@
     <string name="shield">SHIELDS</string>
     <string name="starConverter">STAR CONVERTER</string>
     <string name="quantity">%%%1$d</string>
+    <string name="powerupsQuantity">x%1$d</string>
+    <string name="price">$%1$d</string>
+    <string name="pointsQuantity">+%1$dk</string>
 
 
 

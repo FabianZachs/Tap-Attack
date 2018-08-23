@@ -1,13 +1,13 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Menu.PaidUnlockSection;
 
-public class PaidUnlock {
+public class PaidUnlockItem {
 
     private int price;
     private int quantity;
     private int drawableId;
 
 
-    public PaidUnlock(int price, int quantity, int drawableId) {
+    public PaidUnlockItem(int price, int quantity, int drawableId) {
         this.price = price;
         this.quantity = quantity;
         this.drawableId = drawableId;
