@@ -25,11 +25,11 @@ public class PaidPointsFragment extends PaidItemType {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.items.add(new PaidUnlockItem(1,5, R.drawable.star1));
-        this.items.add(new PaidUnlockItem(2,10, R.drawable.star2));
-        this.items.add(new PaidUnlockItem(3,20, R.drawable.star3));
-        this.items.add(new PaidUnlockItem(4,40, R.drawable.star4));
-        this.items.add(new PaidUnlockItem(5,80, R.drawable.star5));
+        this.items.add(new PaidUnlockItem(1,5000, R.drawable.star1));
+        this.items.add(new PaidUnlockItem(2,10000, R.drawable.star2));
+        this.items.add(new PaidUnlockItem(3,20000, R.drawable.star3));
+        this.items.add(new PaidUnlockItem(4,40000, R.drawable.star4));
+        this.items.add(new PaidUnlockItem(5,80000, R.drawable.star5));
         adapter = new PaidUnlockAdapter("points", getActivity(), R.layout.list_purchase_skeleton, items);
     }
 
@@ -41,14 +41,6 @@ public class PaidPointsFragment extends PaidItemType {
 
         ((TextView) view.findViewById(R.id.title_text)).setText(getActivity().getResources().getString(R.string.morePoints));
 
-        ListView listView = view.findViewById(R.id.list_view);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-        });
 
         return view;
 

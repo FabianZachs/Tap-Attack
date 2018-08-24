@@ -110,6 +110,11 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     }
 
     @Override
+    public void paidTypeFragmentToMainMenuFragment() {
+        displayMainMenuFragment();
+    }
+
+    @Override
     public void paidUnlocksFragmentToPaidPointsFragment() {
         displayPaidPointsFragment();
 
@@ -206,6 +211,8 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         }
         if (storeFragment.isAdded()) { ft.hide(storeFragment); }
         if (paidUnlocksFragment.isAdded()) { ft.hide(paidUnlocksFragment); }
+        if (paidPowerupsFragment.isAdded()) { ft.hide(paidPowerupsFragment); }
+        if (paidPointsFragment.isAdded()) { ft.hide(paidPointsFragment); }
         if (settingsFragment.isAdded()) { ft.hide(settingsFragment); }
         ft.commit();
     }

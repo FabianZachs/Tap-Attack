@@ -34,6 +34,12 @@ public abstract class PaidItemType extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_more_points2, container, false);
+        adapter.setListener(new PaidUnlockAdapter.PaidUnlockAdapterListener() {
+            @Override
+            public void purchaseComplete() {
+                listener.paidTypeFragmentToMainMenuFragment();
+            }
+        });
 
         ((ListView) view.findViewById(R.id.list_view)).setAdapter(adapter);
 
@@ -63,5 +69,6 @@ public abstract class PaidItemType extends Fragment {
 
     public interface PaidItemTypeListener {
         void paidTypeFragmentToPaidUnlocksFragment();
+        void paidTypeFragmentToMainMenuFragment();
     }
 }

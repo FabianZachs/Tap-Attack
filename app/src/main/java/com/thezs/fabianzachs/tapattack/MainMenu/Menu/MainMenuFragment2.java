@@ -3,20 +3,12 @@ package com.thezs.fabianzachs.tapattack.MainMenu.Menu;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
@@ -42,7 +34,7 @@ public class MainMenuFragment2 extends Fragment {
     private View view;
     private SharedPreferences prefs;
     private MyDBHandler myDBHandler;
-    private PointsSection pointsSection;
+    private PointsAndShieldSection pointsSection;
     private PercentUnlockedSection percentUnlockedSection;
     private PlayGameSection playGameSection;
     private TimedPresent timedPresent;
@@ -60,7 +52,7 @@ public class MainMenuFragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.main_menu_fragment, container, false);
-        this.pointsSection = new PointsSection(getActivity(), mainMenuListener, view, prefs);
+        this.pointsSection = new PointsAndShieldSection(getActivity(), mainMenuListener, view, prefs);
         this.percentUnlockedSection = new PercentUnlockedSection(getActivity(), myDBHandler, view);
         this.playGameSection = new PlayGameSection(getActivity(),view, prefs, myDBHandler);
         this.timedPresent = new TimedPresent();
@@ -78,7 +70,7 @@ public class MainMenuFragment2 extends Fragment {
     }
 
     public void onShow() {
-        pointsSection.updateDisplayedPoints();
+        pointsSection.updateDisplayedPointsAndShields();
         pointsSection.startAnimatingMorePointsImg();
         percentUnlockedSection.updatePercentUnlockedText();
         playGameSection.updatePlayGameSection();

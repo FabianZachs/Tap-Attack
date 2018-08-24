@@ -32,15 +32,6 @@ public class PaidPowerupsFragment extends PaidItemType {
 
         ((TextView) view.findViewById(R.id.title_text)).setText(getActivity().getResources().getString(R.string.powerups));
 
-        ListView listView = view.findViewById(R.id.list_view);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-        });
-
         return view;
 
     }
