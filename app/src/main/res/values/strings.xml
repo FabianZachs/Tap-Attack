@@ -42,6 +42,7 @@
     <string name="percentUnlockedText">%1$d%%</string>
     <string name="highscoreText">Highscore: %1$d</string>
     <string name="currentShields">x%1$d</string>
+    <string name="gamemodeTitle">%1$s</string>
 
     <!-- PaidUnlocksFragment -->
     <string name="morePointsTitle">POINTS &amp; POWERUPS!</string>

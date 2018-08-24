@@ -216,16 +216,24 @@
             android:id="@+id/play_section"
             android:layout_centerHorizontal="true"
             android:layout_alignTop="@+id/anchor"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
+                android:layout_centerHorizontal="true"
                 android:id="@+id/play_button"
                 android:layout_margin="10sp"
                 android:layout_width="125dp"
                 android:layout_height="125dp"
                 android:soundEffectsEnabled="false"
                 android:src="@drawable/startbluebluered" />
+
+            <ImageView
+                android:id="@+id/equiped_shield"
+                android:layout_above="@+id/play_button"
+                android:layout_centerHorizontal="true"
+                android:layout_width="25sp"
+                android:layout_height="25sp" />
             <!--
             <ImageView
                 android:layout_width="30sp"

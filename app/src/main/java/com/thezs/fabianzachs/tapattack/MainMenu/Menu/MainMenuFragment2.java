@@ -37,6 +37,7 @@ public class MainMenuFragment2 extends Fragment {
     private PointsAndShieldSection pointsSection;
     private PercentUnlockedSection percentUnlockedSection;
     private PlayGameSection playGameSection;
+    private EquipedShieldSection equipedShieldSection;
     private TimedPresent timedPresent;
 
 
@@ -51,10 +52,11 @@ public class MainMenuFragment2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        this.view = inflater.inflate(R.layout.main_menu_fragment, container, false);
+        this.view = inflater.inflate(R.layout.main_menu_fragment2, container, false);
         this.pointsSection = new PointsAndShieldSection(getActivity(), mainMenuListener, view, prefs);
         this.percentUnlockedSection = new PercentUnlockedSection(getActivity(), myDBHandler, view);
         this.playGameSection = new PlayGameSection(getActivity(),view, prefs, myDBHandler);
+        this.equipedShieldSection = new EquipedShieldSection(getActivity(), view, prefs);
         this.timedPresent = new TimedPresent();
 
         setupFragmentChangingButtons();
