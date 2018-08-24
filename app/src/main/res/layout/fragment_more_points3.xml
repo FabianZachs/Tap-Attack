@@ -54,8 +54,8 @@
 
             <ImageView
                 android:layout_weight="1"
-                android:id="@+id/powerups_icon"
-                android:src="@drawable/powerupsicon"
+                android:id="@+id/shields_icon"
+                android:src="@drawable/shieldsicon"
                 android:layout_width="150sp"
                 android:layout_height="150sp" />
 

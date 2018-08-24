@@ -62,11 +62,11 @@ public class PaidUnlockAdapter extends ArrayAdapter<PaidUnlockItem> {
         }
 
         switch (type) {
-            case "powerups":
+            case "shields":
                 viewHolder.priceText.setText(activity.getString(R.string.price,price));
                 viewHolder.itemImage.setImageResource(drawableId);
-                viewHolder.quantityText.setText(activity.getString(R.string.powerupsQuantity,quantity));
-                viewHolder.itemHolder.setBackgroundResource(R.drawable.powerupitemholder);
+                viewHolder.quantityText.setText(activity.getString(R.string.shieldsQuantity,quantity));
+                viewHolder.itemHolder.setBackgroundResource(R.drawable.shieldsitemholder);
                 break;
             case "points":
                 viewHolder.priceText.setText(activity.getString(R.string.price,price));

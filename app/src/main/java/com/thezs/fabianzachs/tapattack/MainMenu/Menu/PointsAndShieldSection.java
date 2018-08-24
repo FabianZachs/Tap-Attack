@@ -29,7 +29,7 @@ public class PointsAndShieldSection {
         this.activity = activity;
         this.mainMenuListener = mainMenuListener;
         this.prefs = prefs;
-        this.pointsAndShieldSection = view.findViewById(R.id.powerups_and_points_section);
+        this.pointsAndShieldSection = view.findViewById(R.id.shields_and_points_section);
         this.pointsText = view.findViewById(R.id.points_text);
         //this.pointsImage = view.findViewById(R.id.more_points_sign);
         this.shieldsText = view.findViewById(R.id.shields_text);
@@ -40,7 +40,7 @@ public class PointsAndShieldSection {
 
     public void updateDisplayedPointsAndShields() {
         pointsText.setText(activity.getResources().getString(R.string.currentPoints, prefs.getInt("points", 0)));
-        shieldsText.setText(activity.getResources().getString(R.string.currentShields, prefs.getInt("powerups", 0)));
+        shieldsText.setText(activity.getResources().getString(R.string.currentShields, prefs.getInt("shields", 0)));
 
     }
 

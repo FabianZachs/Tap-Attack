@@ -5,24 +5,23 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
 import com.thezs.fabianzachs.tapattack.R;
 
-public class EquipedShieldSection {
+class EquipedShieldSection {
 
     private SharedPreferences prefs;
     private ImageView equipedShieldImage;
 
     @SuppressLint("ClickableViewAccessibility")
-    public EquipedShieldSection(Activity activity, View view, final SharedPreferences prefs) {
+    EquipedShieldSection(Activity activity, View view, final SharedPreferences prefs) {
         this.prefs = prefs;
         this.equipedShieldImage = view.findViewById(R.id.equiped_shield);
 
-        if (prefs.getInt("powerups", 0) < 1) {
+        if (prefs.getInt("shields", 0) < 1) {
             disableShields();
         }
 
@@ -31,7 +30,7 @@ public class EquipedShieldSection {
         equipedShieldImage.setOnTouchListener(new ButtonOnTouchListener(activity, equipedShieldImage, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
             public void buttonAction() {
-                if (prefs.getInt("powerups", 0) < 1)
+                if (prefs.getInt("shields", 0) < 1)
                     disableShields();
                 else if (prefs.getBoolean("shieldEnabled", true))
                     disableShields();
@@ -41,7 +40,7 @@ public class EquipedShieldSection {
     }
 
     private void updateShieldImage() {
-        if (prefs.getInt("powerups", 0) < 1) {
+        if (prefs.getInt("shields", 0) < 1) {
             disableShields();
         }
         else if (prefs.getBoolean("shieldEnabled", true))

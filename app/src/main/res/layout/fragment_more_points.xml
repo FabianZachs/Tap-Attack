@@ -120,9 +120,9 @@
         android:layout_width="match_parent"
         android:layout_height="0sp">
         <TextView
-            android:id="@+id/power_ups_text"
+            android:id="@+id/shields_text"
             android:layout_centerHorizontal="true"
-            android:text="@string/powerups"
+            android:text="@string/shields"
             android:textColor="#333333"
             android:fontFamily="@font/undinaru"
             android:textStyle="bold"
@@ -132,7 +132,7 @@
             />
 
         <LinearLayout
-            android:layout_below="@id/power_ups_text"
+            android:layout_below="@id/shields_text"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

@@ -45,14 +45,14 @@
     <string name="gamemodeTitle">%1$s</string>
 
     <!-- PaidUnlocksFragment -->
-    <string name="morePointsTitle">POINTS &amp; POWERUPS!</string>
+    <string name="morePointsTitle">POINTS &amp; SHIELDS!</string>
     <string name="doublePoints">DOUBLE POINTS</string>
     <string name="morePoints">MORE POINTS</string>
-    <string name="powerups">POWER-UPS</string>
+    <string name="shields">SHIELDS</string>
     <string name="shield">SHIELDS</string>
     <string name="starConverter">STAR CONVERTER</string>
     <string name="quantity">%%%1$d</string>
-    <string name="powerupsQuantity">x%1$d</string>
+    <string name="shieldsQuantity">x%1$d</string>
     <string name="price">$%1$d</string>
     <string name="pointsQuantity">+%1$dk</string>
 

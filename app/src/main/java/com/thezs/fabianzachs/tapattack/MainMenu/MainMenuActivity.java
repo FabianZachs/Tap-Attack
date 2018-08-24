@@ -18,7 +18,7 @@ import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
 import com.thezs.fabianzachs.tapattack.MainMenu.Menu.MainMenuFragment2;
 import com.thezs.fabianzachs.tapattack.MainMenu.Menu.PaidUnlockSection.PaidItemType;
 import com.thezs.fabianzachs.tapattack.MainMenu.Menu.PaidUnlockSection.PaidPointsFragment;
-import com.thezs.fabianzachs.tapattack.MainMenu.Menu.PaidUnlockSection.PaidPowerupsFragment;
+import com.thezs.fabianzachs.tapattack.MainMenu.Menu.PaidUnlockSection.PaidShieldsFragment;
 import com.thezs.fabianzachs.tapattack.MainMenu.Menu.PaidUnlockSection.PaidUnlocksFragment;
 import com.thezs.fabianzachs.tapattack.MainMenu.Settings.SettingsFragment;
 import com.thezs.fabianzachs.tapattack.MainMenu.Store.StoreFragment;
@@ -41,7 +41,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     private SettingsFragment settingsFragment;
     private PaidUnlocksFragment paidUnlocksFragment;
     private PaidPointsFragment paidPointsFragment;
-    private PaidPowerupsFragment paidPowerupsFragment;
+    private PaidShieldsFragment paidShieldsFragment;
     private MusicPlayer musicPlayer;
 
     @Override
@@ -121,8 +121,8 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     }
 
     @Override
-    public void paidUnlocksFragmentToPaidPowerupsFragment() {
-        displayPaidPowerupsFragment();
+    public void paidUnlocksFragmentToPaidShieldsFragment() {
+        displayPaidShieldsFragment();
     }
 
     /*
@@ -160,12 +160,12 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         this.startActivityForResult(intent, 1);
     }
 
-    public void displayPaidPowerupsFragment() {
+    public void displayPaidShieldsFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        if (paidPowerupsFragment.isAdded()) {
-            ft.show(paidPowerupsFragment);
+        if (paidShieldsFragment.isAdded()) {
+            ft.show(paidShieldsFragment);
         } else {
-            ft.add(R.id.main_fragment, paidPowerupsFragment, Constants.PAID_POWERUPS_TAG);
+            ft.add(R.id.main_fragment, paidShieldsFragment, Constants.PAID_SHIELDS_TAG);
         }
         if (storeFragment.isAdded()) { ft.hide(storeFragment); }
         //if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
@@ -195,7 +195,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
             ft.add(R.id.main_fragment, paidUnlocksFragment, Constants.PAID_UNLOCKS_TAG);
         }
         if (paidPointsFragment.isAdded()) { ft.hide(paidPointsFragment); }
-        if (paidPowerupsFragment.isAdded()) { ft.hide(paidPowerupsFragment); }
+        if (paidShieldsFragment.isAdded()) { ft.hide(paidShieldsFragment); }
         if (storeFragment.isAdded()) { ft.hide(storeFragment); }
         //if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
         if (settingsFragment.isAdded()) { ft.hide(settingsFragment); }
@@ -211,7 +211,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         }
         if (storeFragment.isAdded()) { ft.hide(storeFragment); }
         if (paidUnlocksFragment.isAdded()) { ft.hide(paidUnlocksFragment); }
-        if (paidPowerupsFragment.isAdded()) { ft.hide(paidPowerupsFragment); }
+        if (paidShieldsFragment.isAdded()) { ft.hide(paidShieldsFragment); }
         if (paidPointsFragment.isAdded()) { ft.hide(paidPointsFragment); }
         if (settingsFragment.isAdded()) { ft.hide(settingsFragment); }
         ft.commit();
@@ -262,7 +262,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         this.settingsFragment = new SettingsFragment();
         this.paidUnlocksFragment = new PaidUnlocksFragment();
         this.paidPointsFragment = new PaidPointsFragment();
-        this.paidPowerupsFragment = new PaidPowerupsFragment();
+        this.paidShieldsFragment = new PaidShieldsFragment();
         //ft.add(R.id.main_fragment, mainMenuFragment, "mainmenu");
         //ft.add(R.id.main_fragment, storeFragment,Constants.STORE_TAG);
         //ft.add(R.id.main_fragment, settingsFragment, Constants.SETTINGS_TAG);
