@@ -19,11 +19,12 @@ import com.thezs.fabianzachs.tapattack.R;
 
 public class PaidUnlocksFragment extends Fragment {
 
-    private morePointsListener listener;
+    private PaidUnlocksListener listener;
 
-    public interface morePointsListener {
+    public interface PaidUnlocksListener {
         void paidUnlocksFragmentToMainMenuFragment();
         void paidUnlocksFragmentToPaidPointsFragment();
+        void paidUnlocksFragmentToPaidPowerupsFragment();
     }
 
     @Override
@@ -100,7 +101,7 @@ public class PaidUnlocksFragment extends Fragment {
         powerupsImage.setOnTouchListener(new ButtonOnTouchListener(getActivity(), powerupsImage, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
             public void buttonAction() {
-                // todo listener to poweryps fragment section
+                listener.paidUnlocksFragmentToPaidPowerupsFragment();
             }
         }));
 
@@ -110,8 +111,8 @@ public class PaidUnlocksFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof morePointsListener) {
-            listener = (morePointsListener) context;
+        if (context instanceof PaidUnlocksListener) {
+            listener = (PaidUnlocksListener) context;
         } else {
             throw new ClassCastException(context.toString()
                     + " must implement PaidUnlocksFragment.paidUnlocksFragmentToMainMenuFragment");

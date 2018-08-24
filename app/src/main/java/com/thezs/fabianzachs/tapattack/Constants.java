@@ -46,6 +46,7 @@ public class Constants {
     public final static String STORE_TAG = "store";
     public final static String PAID_UNLOCKS_TAG = "paid unlock";
     public final static String PAID_POINTS_TAG = "paid points";
+    public final static String PAID_POWERUPS_TAG = "paid powerups";
 
     public static String[] SHAPES = {"circle", "square", "cross", "arrowup", "arrowleft", "arrowright", "star"};
 
