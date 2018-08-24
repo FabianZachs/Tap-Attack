@@ -55,6 +55,7 @@
     <string name="shieldsQuantity">x%1$d</string>
     <string name="price">$%1$d</string>
     <string name="pointsQuantity">+%1$dk</string>
+    <string name="doublePointsDescription">Earn 2x points per game</string>
 
 
 
