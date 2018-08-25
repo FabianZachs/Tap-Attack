@@ -52,7 +52,7 @@
                 android:layout_below="@+id/title_image2"
                 />
             <LinearLayout
-                android:id="@+id/shields_and_points_section"
+                android:id="@+id/points_and_shields_section"
                 android:orientation="vertical"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"

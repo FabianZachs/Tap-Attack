@@ -660,7 +660,7 @@ public class MainGameActivity extends Activity implements RewardedVideoAdListene
         window.setAttributes(wlp);
         dialog1.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
-        AdView adView = (AdView) dialog1.findViewById(R.id.adView);
+        AdView adView = (AdView) dialog1.findViewById(R.id.adViewBottom);
         MobileAds.initialize(activity, "ca-app-pub-3940256099942544~3347511713");
         //AdView adView = (AdView) activity.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();

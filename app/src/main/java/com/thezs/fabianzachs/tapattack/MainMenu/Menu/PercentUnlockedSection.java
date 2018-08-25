@@ -21,10 +21,17 @@ public class PercentUnlockedSection {
     private TextView percentUnlockedText;
     private MyDBHandler myDBHandler;
 
-    public PercentUnlockedSection(final Activity activity, MyDBHandler myDBHandler, View view) {
+    public PercentUnlockedSection(final Activity activity, MyDBHandler myDBHandler, final View view) {
         this.activity = activity;
         this.myDBHandler = myDBHandler;
         this.percentUnlockedText = view.findViewById(R.id.percent_unlocked_text);
+
+        percentUnlockedText.setOnTouchListener(new ButtonOnTouchListener(activity, percentUnlockedText, new ButtonOnTouchListener.ButtonExecuteListener() {
+            @Override
+            public void buttonAction() {
+                new StartMenuAnimation(view);
+            }
+        }));
     }
 
     public void updatePercentUnlockedText() {

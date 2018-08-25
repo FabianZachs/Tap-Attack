@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/parent_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -8,17 +9,43 @@
 
     <RelativeLayout
         android:layout_weight="3.5"
-        android:layout_margin="15sp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        
+
+        <TextView
+            android:id="@+id/title_text1"
+
+            android:layout_marginLeft="10sp"
+            android:layout_marginStart="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="100sp"
+            android:gravity="top"
+            android:textSize="80sp"
+            android:textColor="@color/soundon"
+            android:text="TAP "
+            android:fontFamily="@font/undinaru"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/title_text2"
+            android:layout_marginLeft="10sp"
+            android:layout_marginStart="10sp"
+            android:layout_below="@id/title_text1"
+            android:layout_width="wrap_content"
+            android:layout_height="100sp"
+            android:gravity="top"
+            android:textSize="80sp"
+            android:textColor="@color/soundoff"
+            android:text="ATTACK "
+            android:fontFamily="@font/undinaru"
+            android:textStyle="bold"
+            />
         <ImageView
             android:id="@+id/title_image1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:maxHeight="70sp"
-            android:src="@drawable/titleimage1"
             tools:ignore="ContentDescription" />
 
         <ImageView
@@ -29,13 +56,14 @@
             android:layout_marginTop="20sp"
             android:adjustViewBounds="true"
             android:layout_below="@id/title_image1"
-            android:src="@drawable/titleimage2"
             tools:ignore="ContentDescription" />
         <TextView
             android:id="@+id/percent_unlocked_text"
+            android:layout_marginLeft="10sp"
+            android:layout_marginStart="10sp"
             android:text="@string/percentUnlockedText"
             android:layout_marginTop="10sp"
-            android:layout_below="@+id/title_image2"
+            android:layout_below="@+id/title_text2"
             android:textColor="@android:color/white"
             android:fontFamily="@font/undinaru"
             android:textStyle="bold"
@@ -45,7 +73,7 @@
 
 
         <LinearLayout
-            android:id="@+id/shields_and_points_section"
+            android:id="@+id/points_and_shields_section"
             android:orientation="vertical"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -113,6 +141,7 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/main_play_game_section"
         android:layout_weight="3.5"
         android:gravity="center"
         android:orientation="vertical"
@@ -163,16 +192,17 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_weight="5.5"
+        android:id="@+id/bottom_fragment_changers"
+        android:layout_weight="5.7"
         android:orientation="horizontal"
-        android:layout_marginLeft="10sp"
-        android:layout_marginRight="10sp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
         <TextView
             android:id="@+id/store_text"
+            android:layout_marginLeft="10sp"
+            android:layout_marginStart="10sp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_width="wrap_content"
@@ -194,6 +224,8 @@
 
         <TextView
             android:id="@+id/settings_text"
+            android:layout_marginRight="10sp"
+            android:layout_marginEnd="10sp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"

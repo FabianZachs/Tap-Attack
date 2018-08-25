@@ -10,14 +10,27 @@
         android:id="@+id/main_fragment"
         android:layout_width="match_parent"
         android:layout_height="0sp"
-        android:layout_weight="1">
+        android:layout_weight="5">
 
     </FrameLayout>
+    <!--
     <fragment
         android:name="com.thezs.fabianzachs.tapattack.MainMenu.BannerAdFragment"
         android:id="@+id/menu_banner_ad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </fragment>
+    -->
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adViewBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+
+    </com.google.android.gms.ads.AdView>
 
 </LinearLayout>

@@ -29,7 +29,7 @@ public class PointsAndShieldSection {
         this.activity = activity;
         this.mainMenuListener = mainMenuListener;
         this.prefs = prefs;
-        this.pointsAndShieldSection = view.findViewById(R.id.shields_and_points_section);
+        this.pointsAndShieldSection = view.findViewById(R.id.points_and_shields_section);
         this.pointsText = view.findViewById(R.id.points_text);
         //this.pointsImage = view.findViewById(R.id.more_points_sign);
         this.shieldsText = view.findViewById(R.id.shields_text);

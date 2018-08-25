@@ -131,7 +131,6 @@ public class CustomGridAdapter extends BaseAdapter {
 
 
 
-        // todo maybe refactor to only have one holder per item section and just change drawable color of that holder
         ImageView itemImageHolder = (ImageView) view.findViewById(R.id.item_image_holder);
 
         switch (category) {

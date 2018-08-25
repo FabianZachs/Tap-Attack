@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/warning_component"
+        android:layout_marginTop="15sp"
+        android:layout_width="200dp"
+        android:layout_height="25dp"
+        android:layout_centerHorizontal="true"
+        android:minWidth="500dp"
+        android:src="@drawable/warningcomponent2"
+        />
+
+    <ImageView
+        android:id="@+id/warning_color_change_button_left"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/warningcolorchangebuttonleft"/>
+    <ImageView
+        android:id="@+id/warning_color_change_button_right"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/warningcolorchangebuttonright"/>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="8sp"
+        android:onClick="pauseClick"
+        android:soundEffectsEnabled="false"
+        android:src="@drawable/pausebutton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+
+        />
+
+
+</RelativeLayout>

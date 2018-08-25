@@ -1,19 +1,25 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Menu;
 
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.R;
+
+import java.awt.font.TextAttribute;
 
 /**
  * Created by fabianzachs on 18/08/18.
@@ -62,6 +68,9 @@ public class MainMenuFragment2 extends Fragment {
         setupFragmentChangingButtons();
 
         setListeners();
+
+
+
         return view;
     }
 

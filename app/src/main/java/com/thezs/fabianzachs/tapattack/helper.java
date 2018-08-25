@@ -6,13 +6,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -74,7 +71,7 @@ public class helper {
     public static void bannerAdSetup(Activity activity, AdView adView) {
         // ads (below setContentView)
         MobileAds.initialize(activity, "ca-app-pub-3940256099942544~3347511713");
-        adView = (AdView) activity.findViewById(R.id.adView);
+        adView = (AdView) activity.findViewById(R.id.adViewBottom);
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
     }

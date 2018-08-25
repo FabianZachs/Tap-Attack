@@ -11,10 +11,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.thezs.fabianzachs.tapattack.Constants;
-import com.thezs.fabianzachs.tapattack.Game.MainGameActivity;
+import com.thezs.fabianzachs.tapattack.GameFragment.MainGameFragment;
 import com.thezs.fabianzachs.tapattack.MainMenu.Menu.MainMenuFragment2;
 import com.thezs.fabianzachs.tapattack.MainMenu.Menu.PaidUnlockSection.PaidItemType;
 import com.thezs.fabianzachs.tapattack.MainMenu.Menu.PaidUnlockSection.PaidPointsFragment;
@@ -42,7 +45,11 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     private PaidUnlocksFragment paidUnlocksFragment;
     private PaidPointsFragment paidPointsFragment;
     private PaidShieldsFragment paidShieldsFragment;
+    private MainGameFragment mainGameFragment;
     private MusicPlayer musicPlayer;
+
+    private AdView bannerAdBottom;
+    private AdRequest adRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +72,19 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
 
         new MyItemDatabase(this, prefs);
         initializeConstants();
+
+
+        setupBannerAd();
+
     }
 
+    private void setupBannerAd() {
+        bannerAdBottom = findViewById(R.id.adViewBottom);
+        bannerAdBottom.setVisibility(View.VISIBLE);
+        adRequest = new AdRequest.Builder().build();
+        bannerAdBottom.loadAd(adRequest);
+
+    }
 
     @Override
     public void mainMenuFragmentToSettingsFragment() {
@@ -155,9 +173,10 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
 
     private void playButtonClick() {
         removeStoreFragment();
-        Intent intent = new Intent(this, MainGameActivity.class);
-        intent.putExtra(Constants.GAME_MODE_TAG, "classic");
-        this.startActivityForResult(intent, 1);
+        displayMainGameFragment();
+        //Intent intent = new Intent(this, MainGameActivity.class);
+        //intent.putExtra(Constants.GAME_MODE_TAG, "classic");
+        //this.startActivityForResult(intent, 1);
     }
 
     public void displayPaidShieldsFragment() {
@@ -209,6 +228,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         } else {
             ft.add(R.id.main_fragment, mainMenuFragment, Constants.MAIN_TAG);
         }
+        if (mainGameFragment.isAdded()) { ft.hide(mainGameFragment); }
         if (storeFragment.isAdded()) { ft.hide(storeFragment); }
         if (paidUnlocksFragment.isAdded()) { ft.hide(paidUnlocksFragment); }
         if (paidShieldsFragment.isAdded()) { ft.hide(paidShieldsFragment); }
@@ -246,6 +266,20 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         ft.commit();
     }
 
+    public void displayMainGameFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        if (mainGameFragment.isAdded()) {
+            ft.show(mainGameFragment);
+        } else {
+            ft.add(R.id.main_fragment, mainGameFragment, "main game");
+        }
+        if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
+        if (paidUnlocksFragment.isAdded()) { ft.hide(paidUnlocksFragment); }
+        if (storeFragment.isAdded()) { ft.hide(storeFragment); }
+        ft.commit();
+    }
+
     private void removeStoreFragment() {
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(Constants.STORE_TAG);
         if(fragment != null) {
@@ -263,6 +297,8 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         this.paidUnlocksFragment = new PaidUnlocksFragment();
         this.paidPointsFragment = new PaidPointsFragment();
         this.paidShieldsFragment = new PaidShieldsFragment();
+        this.mainGameFragment = new MainGameFragment();
+        //ft.add(R.id.main_fragment, mainGameFragment, "main game");
         //ft.add(R.id.main_fragment, mainMenuFragment, "mainmenu");
         //ft.add(R.id.main_fragment, storeFragment,Constants.STORE_TAG);
         //ft.add(R.id.main_fragment, settingsFragment, Constants.SETTINGS_TAG);

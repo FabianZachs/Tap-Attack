@@ -23,7 +23,7 @@ public class BannerAdFragment extends Fragment {
 
         View view  = inflater.inflate(R.layout.banner_ad_fragment, container, false);
 
-        AdView adView = (AdView) view.findViewById(R.id.adView);
+        AdView adView = (AdView) view.findViewById(R.id.adViewBottom);
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
         return view;
