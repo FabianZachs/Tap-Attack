@@ -2,49 +2,23 @@ package com.thezs.fabianzachs.tapattack.MainMenu.Menu;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.R;
 
-public class StartMenuAnimation {
+class StartMenuAnimation {
 
     private static final int TITLE_TEXT_LEFT_MARGIN = 10;
     private static final int POINTS_AND_SHIELD_TOP_MARGIN= 7;
 
-    public StartMenuAnimation(View view) {
-        /*
-        final TextView textView = view.findViewById(R.id.title_text1);
-
-        final ViewTreeObserver layout = textView.getViewTreeObserver();
-        layout.addOnGlobalLayoutListener (new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                textView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int width  = textView.getMeasuredWidth();
-                int[] location = new int[2];
-                textView.getLocationOnScreen(location);
-                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)
-                        textView.getLayoutParams();
-                params.setMargins(-1 * width, 0, 0, 0);
-                textView.setLayoutParams(params);
-
-                Log.d("textviewwidth", "onGlobalLayout: " + textView.getWidth());
-                ObjectAnimator animX = ObjectAnimator.ofFloat(textView,
-                        View.TRANSLATION_X, -1* textView.getWidth(), textView.getWidth());
-                animX.setDuration(1000);
-                animX.start();
-
-            }
-        });
-        */
+    StartMenuAnimation(View view) {
+        // todo uncomment below when using on startup
+        // todo maybe use Constants.GAME_VIEW_HEIGHT GAME_VIEW_WIDTH
         final TextView titleText1 = view.findViewById(R.id.title_text1);
         final TextView titleText2 = view.findViewById(R.id.title_text2);
         final LinearLayout pointsAndShieldSection = view.findViewById(R.id.points_and_shields_section);
@@ -103,6 +77,8 @@ public class StartMenuAnimation {
         setAnimation.play(playGameSectionAnim).after(titleText2Anim);
         setAnimation.start();
 
+
+        /*
         LinearLayout parentLayout = view.findViewById(R.id.parent_layout);
         ViewTreeObserver vto = parentLayout.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -138,11 +114,11 @@ public class StartMenuAnimation {
                 ObjectAnimator storeTextAnim = ObjectAnimator.ofFloat(storeText,
                         View.TRANSLATION_X, -storeText.getWidth(), TITLE_TEXT_LEFT_MARGIN);
                 ObjectAnimator settingsTextAnim = ObjectAnimator.ofFloat(settingsText,
-                        View.TRANSLATION_X, Constants.SCREEN_WIDTH, TITLE_TEXT_LEFT_MARGIN/*Constants.SCREEN_WIDTH - (TITLE_TEXT_LEFT_MARGIN + settingsText.getWidth())*/);
+                        View.TRANSLATION_X, Constants.SCREEN_WIDTH, TITLE_TEXT_LEFT_MARGIN);
                 ObjectAnimator presentImageAnim = ObjectAnimator.ofFloat(presentImage,
-                        View.TRANSLATION_Y, Constants.SCREEN_HEIGHT, -10/*Constants.SCREEN_WIDTH - (TITLE_TEXT_LEFT_MARGIN + settingsText.getWidth())*/);
+                        View.TRANSLATION_Y, Constants.SCREEN_HEIGHT, -10);
                 ObjectAnimator playGameSectionAnim = ObjectAnimator.ofFloat(playGameSection,
-                        View.ALPHA, 0, 255/*Constants.SCREEN_WIDTH - (TITLE_TEXT_LEFT_MARGIN + settingsText.getWidth())*/);
+                        View.ALPHA, 0, 255);
 
                 titleText1Anim.setDuration(300);
                 titleText2Anim.setDuration(300);
@@ -166,6 +142,6 @@ public class StartMenuAnimation {
                 setAnimation.start();
             }
         });
-
+*/
     }
 }

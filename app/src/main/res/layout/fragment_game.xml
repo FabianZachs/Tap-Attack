@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_game_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/game_panel_surface"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/warning_component"
@@ -13,7 +22,7 @@
         android:layout_centerHorizontal="true"
         android:minWidth="500dp"
         android:src="@drawable/warningcomponent2"
-        />
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/warning_color_change_button_left"
@@ -22,7 +31,8 @@
         android:layout_alignParentBottom="true"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:src="@drawable/warningcolorchangebuttonleft"/>
+        android:src="@drawable/warningcolorchangebuttonleft"
+        tools:ignore="ContentDescription" />
     <ImageView
         android:id="@+id/warning_color_change_button_right"
         android:layout_alignParentRight="true"
@@ -30,19 +40,26 @@
         android:layout_alignParentBottom="true"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:src="@drawable/warningcolorchangebuttonright"/>
+        android:src="@drawable/warningcolorchangebuttonright"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:padding="8sp"
-        android:onClick="pauseClick"
         android:soundEffectsEnabled="false"
         android:src="@drawable/pausebutton"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        tools:ignore="ContentDescription" />
 
-        />
+    <ImageView
+        android:id="@+id/bottom_image"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="50sp"
+        android:src="@drawable/bottom_game_rectangle"
+        tools:ignore="ContentDescription" />
 
 
 </RelativeLayout>

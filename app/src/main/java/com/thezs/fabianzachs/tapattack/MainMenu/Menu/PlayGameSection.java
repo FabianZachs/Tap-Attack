@@ -1,5 +1,6 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Menu;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.view.View;
@@ -74,6 +75,7 @@ public class PlayGameSection {
         playButton.clearAnimation();
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setOnTouch() {
         playButton.setOnTouchListener(new ButtonOnTouchListener(activity, playButton, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override

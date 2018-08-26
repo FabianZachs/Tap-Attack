@@ -1,36 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@drawable/background_test"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/main_fragment"
+    <LinearLayout
+        android:id="@+id/canvas_view"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0sp"
-        android:layout_weight="5">
+        android:layout_height="match_parent">
 
-    </FrameLayout>
-    <!--
-    <fragment
-        android:name="com.thezs.fabianzachs.tapattack.MainMenu.BannerAdFragment"
-        android:id="@+id/menu_banner_ad"
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </fragment>
-    -->
+        android:layout_height="match_parent">
 
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adViewBottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+        <FrameLayout
+            android:id="@+id/main_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="5">
 
-    </com.google.android.gms.ads.AdView>
+        </FrameLayout>
 
-</LinearLayout>
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adViewBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+
+        </com.google.android.gms.ads.AdView>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

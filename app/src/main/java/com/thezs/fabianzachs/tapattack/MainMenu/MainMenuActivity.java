@@ -12,12 +12,17 @@ import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.GameFragment.GamePanel;
 import com.thezs.fabianzachs.tapattack.GameFragment.MainGameFragment;
+import com.thezs.fabianzachs.tapattack.GameFragment.MainThread;
 import com.thezs.fabianzachs.tapattack.MainMenu.Menu.MainMenuFragment2;
 import com.thezs.fabianzachs.tapattack.MainMenu.Menu.PaidUnlockSection.PaidItemType;
 import com.thezs.fabianzachs.tapattack.MainMenu.Menu.PaidUnlockSection.PaidPointsFragment;
@@ -51,6 +56,8 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     private AdView bannerAdBottom;
     private AdRequest adRequest;
 
+    private GamePanel gamePanel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +73,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
             }
 
             createAndAddFragments();
-            displayMainMenuFragment();
+//            displayMainMenuFragment();
         }
 
 
@@ -75,7 +82,16 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
 
 
         setupBannerAd();
+        setupGamePanel();
 
+    }
+
+    private void setupGamePanel() {
+
+        LinearLayout gamePanelView = findViewById(R.id.canvas_view);
+        gamePanel= new GamePanel(this);
+        gamePanel.addGame(mainGameFragment);
+        gamePanelView.addView(gamePanel);
     }
 
     private void setupBannerAd() {
@@ -298,8 +314,9 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         this.paidPointsFragment = new PaidPointsFragment();
         this.paidShieldsFragment = new PaidShieldsFragment();
         this.mainGameFragment = new MainGameFragment();
-        //ft.add(R.id.main_fragment, mainGameFragment, "main game");
-        //ft.add(R.id.main_fragment, mainMenuFragment, "mainmenu");
+        ft.add(R.id.main_fragment, mainGameFragment, "main game");
+        ft.hide(mainGameFragment);
+        ft.add(R.id.main_fragment, mainMenuFragment, "mainmenu");
         //ft.add(R.id.main_fragment, storeFragment,Constants.STORE_TAG);
         //ft.add(R.id.main_fragment, settingsFragment, Constants.SETTINGS_TAG);
         ft.commit();
@@ -335,11 +352,21 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     private void initializeConstants() {
 
         Constants.CURRENT_CONTEXT = this;
+        final FrameLayout layout = (FrameLayout) findViewById(R.id.main_fragment);
+        final ViewTreeObserver observer= layout.getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        Constants.GAME_VIEW_HEIGHT = layout.getHeight();
+                        Constants.GAME_VIEW_WIDTH = layout.getWidth();
+                    }
+                });
+
 
         Point screenDimension = screenResolution();
         // get screen dimensions stored
         Constants.SCREEN_WIDTH = screenDimension.x;
-        // TODO bug: screen height from dm is incorrect for pixel
         Constants.SCREEN_HEIGHT = screenDimension.y;
         //Log.d("height", "initializeConstants: height: " + Constants.SCREEN_HEIGHT );
 
@@ -367,8 +394,6 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         Constants.SHAPE_CLICK_AREA = new Rect(Constants.SCREEN_WIDTH/20, 0, Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT - 1);
         Constants.SHAPE_CREATION_AREA = new Rect(Constants.SCREEN_WIDTH/20 + Constants.SHAPE_WIDTH/2, -Constants.SHAPE_HEIGHT -50, Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH/20 - Constants.SHAPE_WIDTH/2,0 );
 
-        Constants.WARNING_COLOR_CLICK_AREA_LEFT = new Rect(0,30 + (Constants.SCREEN_HEIGHT/40 +25) + 20 + Constants.SCREEN_WIDTH/15 + 10 + Constants.SHAPE_HEIGHT/2,Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT);
-        Constants.WARNING_COLOR_CLICK_AREA_RIGHT = new Rect(Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH/20,30 + (Constants.SCREEN_HEIGHT/40 +25) + 20 + Constants.SCREEN_WIDTH/15 + 10 + Constants.SHAPE_HEIGHT/2,Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
     }
 
 

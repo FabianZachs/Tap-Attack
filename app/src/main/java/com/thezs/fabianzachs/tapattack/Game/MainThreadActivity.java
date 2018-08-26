@@ -11,7 +11,7 @@ import android.view.SurfaceHolder;
  * Created by fabianzachs on 07/02/18.
  */
 
-public class MainThread extends Thread {
+public class MainThreadActivity extends Thread {
 
     public static final int MAX_FPS = 30;
     private double averageFPS;
@@ -24,7 +24,7 @@ public class MainThread extends Thread {
     public boolean isPaused = false;
 
 
-    public MainThread(SurfaceHolder surfaceHolder, GamePanel gamePanel) {
+    public MainThreadActivity(SurfaceHolder surfaceHolder, GamePanel gamePanel) {
         super();
         this.surfaceHolder = surfaceHolder;
         this.gamePanel = gamePanel;

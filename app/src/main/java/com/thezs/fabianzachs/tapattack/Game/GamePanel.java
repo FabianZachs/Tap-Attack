@@ -2,7 +2,6 @@ package com.thezs.fabianzachs.tapattack.Game;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -17,7 +16,7 @@ import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
-    private MainThread thread;
+    private MainThreadActivity thread;
     private SceneManager sceneManager;
 
     //private SceneManager manager;
@@ -39,14 +38,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
 
-        thread = new MainThread(getHolder(),this);
+        thread = new MainThreadActivity(getHolder(),this);
 
         thread.setRunning(true); // for us later (to start thread)
         thread.start();          // method in Thread class
     }
 
     public void startNewThread() {
-        thread = new MainThread(getHolder(), this);
+        thread = new MainThreadActivity(getHolder(), this);
 
         thread.setRunning(true);
         thread.start();

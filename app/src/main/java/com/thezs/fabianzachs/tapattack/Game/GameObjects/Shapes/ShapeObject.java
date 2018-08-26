@@ -1,30 +1,15 @@
 package com.thezs.fabianzachs.tapattack.Game.GameObjects.Shapes;
 
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.support.v4.view.GestureDetectorCompat;
-import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 
-import com.muddzdev.styleabletoastlibrary.StyleableToast;
-import com.thezs.fabianzachs.tapattack.Animation.Themes.ThemesManager;
 import com.thezs.fabianzachs.tapattack.Constants;
-import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.ProgressBar;
-import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Score;
-import com.thezs.fabianzachs.tapattack.Game.GameUIComponents.Streak;
 import com.thezs.fabianzachs.tapattack.Game.Mediator.CentralGameCommunication;
-import com.thezs.fabianzachs.tapattack.R;
-
-import static com.thezs.fabianzachs.tapattack.Game.MainThread.canvas;
 
 /**
  * Created by fabianzachs on 07/02/18.

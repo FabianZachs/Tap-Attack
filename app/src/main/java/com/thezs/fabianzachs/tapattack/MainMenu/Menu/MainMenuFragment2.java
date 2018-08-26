@@ -70,7 +70,6 @@ public class MainMenuFragment2 extends Fragment {
         setListeners();
 
 
-
         return view;
     }
 

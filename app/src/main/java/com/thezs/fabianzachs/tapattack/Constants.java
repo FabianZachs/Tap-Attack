@@ -27,6 +27,9 @@ LOGOS BY NICK on youtube for inkscape tutorials
 
 
 public class Constants {
+    public static int GAME_VIEW_HEIGHT;
+    public static int GAME_VIEW_WIDTH;
+
     public static int SCREEN_HEIGHT;
     public static int SCREEN_WIDTH;
     public static int SHAPE_HEIGHT;
