@@ -160,9 +160,10 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return getListOfLockedItems(category).length;
     }
 
+    /*
     public HashMap<String, Boolean> getMapOFItemsWithUnlockStatus(String category) {
         HashMap<String, Boolean> itemsAndUnlockedStatus = new HashMap<>();
-        String query = "SELECT ";
+        String query = "SELECT";
 
         SQLiteDatabase db = getWritableDatabase();
         Cursor pointer = db.rawQuery(query, null);
@@ -179,7 +180,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         return itemsAndUnlockedStatus;
 
-    }
+    }*/
 
     public void unlockItemViaName(String name) {
         getWritableDatabase().execSQL("UPDATE " + TABLE_STOREITEMS + " SET " + COLUMN_UNLOCKED + " = 1 WHERE " + COLUMN_NAME + " = '" + name + "';");
@@ -279,6 +280,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         return file;
     }
+
 
     // todo this and top thing are very similar, just different item section so refactor
     public String getCurrentGamemodeFile() {

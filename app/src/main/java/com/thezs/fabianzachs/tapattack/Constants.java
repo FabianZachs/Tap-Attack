@@ -108,8 +108,8 @@ public class Constants {
             R.drawable.backgroundtriangleart2, R.drawable.backgroundtrianglesky, R.drawable.skybackground, R.drawable.background_test};
     public static int[] BACKGROUNDS_PRICE_POINTS = {5000, 5000, 5000, 5000,5000, 5000,5000, 5000,5000, 5000,5000,5000};
     public static int[] BACKGROUNDS_PRICE_MONEY = {1, 1,  1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    public static Integer[] BACKGROUND_WARNINGCOLOR_1 = {0xff0040ff, 0xffffffff, 0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff, 0xffffffff};
-    public static Integer[] BACKGROUND_WARNINGCOLOR_2 =  {0xff00bcfe, 0xffffffff, 0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff, 0xffffffff};
+    public static Integer[] BACKGROUND_WARNINGCOLOR_1 = {0xff0040ff, 0xffffffff, 0xffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff, 0xffffffff};
+    public static Integer[] BACKGROUND_WARNINGCOLOR_2 =  {0xff00bcfe, 0xffffffff, 0xffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff, 0xffffffff};
     public static int BACKGROUND_POINTS_COST = 2000;
 
     public static Map<String, String[]> COLORS; // theme -> [] of colors

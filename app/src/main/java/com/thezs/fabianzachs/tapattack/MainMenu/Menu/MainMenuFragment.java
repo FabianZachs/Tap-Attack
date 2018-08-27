@@ -121,7 +121,7 @@ public class MainMenuFragment extends Fragment {
         //gameTheme = themesManager.buildTheme("vibrant", "curved");
         //themesManager.setCurrentGameConstants(themesManager.buildTheme(Constants.CURRENT_THEME,Constants.CURRENT_SHAPE_TYPE));
 
-        //this.backgroundManager = new BackgroundManager(prefs.getString("background","backgroundtriangleblue"));
+        //this.backgroundManager = new Background(prefs.getString("background","backgroundtriangleblue"));
 
 
         //initMusic(R.raw.mainmenu);
@@ -271,7 +271,7 @@ public class MainMenuFragment extends Fragment {
         //gameTheme = themesManager.buildTheme("vibrant", "curved");
         //themesManager.setCurrentGameConstants(themesManager.buildTheme(Constants.CURRENT_THEME,Constants.CURRENT_SHAPE_TYPE));
 
-        //this.backgroundManager = new BackgroundManager(prefs.getString("background","backgroundtriangleblue"));
+        //this.backgroundManager = new Background(prefs.getString("background","backgroundtriangleblue"));
 
 
         //initMusic(R.raw.mainmenu);

@@ -54,11 +54,11 @@ public class ClassicGameScene implements Scene {
         Constants.NEONCOLORS = RandomizeArray(Constants.NEONCOLORS); // TODO make this responsive to any theme
 
         this.shapesManager = new ShapesManager(mediator);
-        //this.backgroundManager = new BackgroundManager("backgroundtriangleblue");
-        //this.backgroundManager = new BackgroundManager(Constants.CURRENT_BACKGROUND);
+        //this.backgroundManager = new Background("backgroundtriangleblue");
+        //this.backgroundManager = new Background(Constants.CURRENT_BACKGROUND);
         this.backgroundManager = new BackgroundManager();
         this.warningColor = new WarningColor(mediator,ThemesManager.getStrColors(Constants.CURRENT_THEME), ThemesManager.getIntColors(Constants.CURRENT_THEME));
-        //this.backgroundManager = new BackgroundManager(Constants.CURRENT_BACKGROUND);
+        //this.backgroundManager = new Background(Constants.CURRENT_BACKGROUND);
         //this.backgroundHandler = new BackgroundHandler(Constants.CURRENT_THEME);
 
         //this.warningColorHolder = new WarningColorHolder(backgroundHandler);

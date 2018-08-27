@@ -190,6 +190,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     private void playButtonClick() {
         removeStoreFragment();
         displayMainGameFragment();
+        mainGameFragment.onShow();
         //Intent intent = new Intent(this, MainGameActivity.class);
         //intent.putExtra(Constants.GAME_MODE_TAG, "classic");
         //this.startActivityForResult(intent, 1);

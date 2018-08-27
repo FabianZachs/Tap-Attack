@@ -29,7 +29,7 @@ class MenuAnimation {
 
     }
 
-    public void startMenuAnimation() {
+    private void startMenuAnimation() {
         // todo maybe use Constants.GAME_VIEW_HEIGHT GAME_VIEW_WIDTH
         final TextView titleText1 = menuView.findViewById(R.id.title_text1);
         final TextView titleText2 = menuView.findViewById(R.id.title_text2);
@@ -67,19 +67,19 @@ class MenuAnimation {
 
 
                 ObjectAnimator titleText1Anim = ObjectAnimator.ofFloat(titleText1,
-                        View.TRANSLATION_X, TITLE_TEXT_LEFT_MARGIN);
+                        View.TRANSLATION_X, 0);
                 ObjectAnimator titleText2Anim = ObjectAnimator.ofFloat(titleText2,
-                        View.TRANSLATION_X, TITLE_TEXT_LEFT_MARGIN);
+                        View.TRANSLATION_X, 0);
                 ObjectAnimator pointsAndShieldAnim = ObjectAnimator.ofFloat(pointsAndShieldSection,
-                        View.TRANSLATION_Y, POINTS_AND_SHIELD_TOP_MARGIN);
+                        View.TRANSLATION_Y, 0);
                 ObjectAnimator percentUnlockedAnim = ObjectAnimator.ofFloat(unlockPercentText,
-                        View.TRANSLATION_X, TITLE_TEXT_LEFT_MARGIN);
+                        View.TRANSLATION_X, 0);
                 ObjectAnimator storeTextAnim = ObjectAnimator.ofFloat(storeText,
-                        View.TRANSLATION_X,  TITLE_TEXT_LEFT_MARGIN);
+                        View.TRANSLATION_X,  0);
                 ObjectAnimator settingsTextAnim = ObjectAnimator.ofFloat(settingsText,
-                        View.TRANSLATION_X, 10);
+                        View.TRANSLATION_X, 0);
                 ObjectAnimator presentImageAnim = ObjectAnimator.ofFloat(presentImage,
-                        View.TRANSLATION_Y, -10);
+                        View.TRANSLATION_Y, 0);
                 ObjectAnimator playGameSectionAnim = ObjectAnimator.ofFloat(playGameSection,
                         View.ALPHA, 255);
 
@@ -137,6 +137,7 @@ class MenuAnimation {
                 super.onAnimationEnd(animation);
                 //todo add local listener on calling this  to tell animation over so displayGameFragment
                 listener.animationComplete();
+                // todo then put views all back
             }
         });
         animatorSet.play(topAnimation).with(middleAnimation).with(bottomAnimation);

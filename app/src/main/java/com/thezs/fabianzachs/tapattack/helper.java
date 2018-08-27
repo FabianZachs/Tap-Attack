@@ -3,9 +3,11 @@ package com.thezs.fabianzachs.tapattack;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -22,6 +24,13 @@ import com.google.android.gms.ads.MobileAds;
  */
 
 public class helper {
+
+    public static Drawable getDrawableFromFileName(Activity activity, String fileName) {
+        Resources resources = activity.getResources();
+        final int resourceId = resources.getIdentifier(fileName, "drawable",
+                activity.getPackageName());
+        return resources.getDrawable(resourceId);
+    }
 
 
     public static View getAlertView(Activity activity, Integer resID) {
