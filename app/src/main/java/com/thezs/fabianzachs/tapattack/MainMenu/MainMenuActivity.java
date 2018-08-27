@@ -22,7 +22,6 @@ import com.google.android.gms.ads.AdView;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.GamePanel;
 import com.thezs.fabianzachs.tapattack.GameFragment.MainGameFragment;
-import com.thezs.fabianzachs.tapattack.GameFragment.MainThread;
 import com.thezs.fabianzachs.tapattack.MainMenu.Menu.MainMenuFragment2;
 import com.thezs.fabianzachs.tapattack.MainMenu.Menu.PaidUnlockSection.PaidItemType;
 import com.thezs.fabianzachs.tapattack.MainMenu.Menu.PaidUnlockSection.PaidPointsFragment;
@@ -35,7 +34,7 @@ import com.thezs.fabianzachs.tapattack.R;
 import java.util.HashMap;
 
 public class MainMenuActivity extends GeneralParent implements StoreFragment.StoreListener,
-        SettingsFragment.SettingsListener, MainMenuFragment2.MainMenuListener,
+        SettingsFragment.SettingsListener, MainMenuFragment2.MainMenuFragmentListener,
         PaidUnlocksFragment.PaidUnlocksListener, PaidItemType.PaidItemTypeListener {
 
     private SharedPreferences prefs;
@@ -124,6 +123,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
 
     @Override
     public void playGameClick() {
+        //mainMenuFragment.
         playButtonClick();
     }
 

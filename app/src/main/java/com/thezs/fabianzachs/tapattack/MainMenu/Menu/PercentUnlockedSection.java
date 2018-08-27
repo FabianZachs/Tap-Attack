@@ -1,11 +1,9 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Menu;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.muddzdev.styleabletoastlibrary.StyleableToast;
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
@@ -25,13 +23,6 @@ public class PercentUnlockedSection {
         this.activity = activity;
         this.myDBHandler = myDBHandler;
         this.percentUnlockedText = view.findViewById(R.id.percent_unlocked_text);
-
-        percentUnlockedText.setOnTouchListener(new ButtonOnTouchListener(activity, percentUnlockedText, new ButtonOnTouchListener.ButtonExecuteListener() {
-            @Override
-            public void buttonAction() {
-                new StartMenuAnimation(view);
-            }
-        }));
     }
 
     public void updatePercentUnlockedText() {

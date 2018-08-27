@@ -23,11 +23,11 @@ public class PointsAndShieldSection {
     private TextView pointsText;
     private ImageView pointsImage;
     private TextView shieldsText;
-    private MainMenuFragment2.MainMenuListener mainMenuListener;
+    private MainMenuFragment2.MainMenuFragmentListener mainMenuFragmentListener;
 
-    public PointsAndShieldSection(Activity activity, MainMenuFragment2.MainMenuListener mainMenuListener, View view, SharedPreferences prefs) {
+    public PointsAndShieldSection(Activity activity, MainMenuFragment2.MainMenuFragmentListener mainMenuFragmentListener, View view, SharedPreferences prefs) {
         this.activity = activity;
-        this.mainMenuListener = mainMenuListener;
+        this.mainMenuFragmentListener = mainMenuFragmentListener;
         this.prefs = prefs;
         this.pointsAndShieldSection = view.findViewById(R.id.points_and_shields_section);
         this.pointsText = view.findViewById(R.id.points_text);
@@ -55,7 +55,7 @@ public class PointsAndShieldSection {
         pointsAndShieldSection.setOnTouchListener(new ButtonOnTouchListener(activity, pointsAndShieldSection, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
             public void buttonAction() {
-                mainMenuListener.mainMenuFragmentToMorePointsFragment();
+                mainMenuFragmentListener.mainMenuFragmentToMorePointsFragment();
             }
         }));
     }

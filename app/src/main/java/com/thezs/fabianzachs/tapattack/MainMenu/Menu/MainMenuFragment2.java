@@ -1,25 +1,19 @@
 package com.thezs.fabianzachs.tapattack.MainMenu.Menu;
 
-import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
 import com.thezs.fabianzachs.tapattack.R;
-
-import java.awt.font.TextAttribute;
 
 /**
  * Created by fabianzachs on 18/08/18.
@@ -27,10 +21,10 @@ import java.awt.font.TextAttribute;
 
 public class MainMenuFragment2 extends Fragment {
 
-    private MainMenuListener mainMenuListener;
+    private MainMenuFragmentListener mainMenuFragmentListener;
 
 
-    public interface MainMenuListener{
+    public interface MainMenuFragmentListener {
         void mainMenuFragmentToSettingsFragment();
         void mainMenuFragmentToStoreFragment();
         void mainMenuFragmentToMorePointsFragment();
@@ -46,6 +40,7 @@ public class MainMenuFragment2 extends Fragment {
     private EquipedShieldSection equipedShieldSection;
     private TimedPresent timedPresent;
 
+    private MenuAnimation menuAnimation;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,7 +54,7 @@ public class MainMenuFragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.view = inflater.inflate(R.layout.main_menu_fragment2, container, false);
-        this.pointsSection = new PointsAndShieldSection(getActivity(), mainMenuListener, view, prefs);
+        this.pointsSection = new PointsAndShieldSection(getActivity(), mainMenuFragmentListener, view, prefs);
         this.percentUnlockedSection = new PercentUnlockedSection(getActivity(), myDBHandler, view);
         this.playGameSection = new PlayGameSection(getActivity(),view, prefs, myDBHandler);
         this.equipedShieldSection = new EquipedShieldSection(getActivity(), view, prefs);
@@ -69,6 +64,7 @@ public class MainMenuFragment2 extends Fragment {
 
         setListeners();
 
+        this.menuAnimation = new MenuAnimation(view);
 
         return view;
     }
@@ -90,8 +86,8 @@ public class MainMenuFragment2 extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof MainMenuListener) {
-            mainMenuListener = (MainMenuListener) context;
+        if (context instanceof MainMenuFragmentListener) {
+            mainMenuFragmentListener = (MainMenuFragmentListener) context;
         } else {
             throw new ClassCastException(context.toString()
                     + " must implement MyListFragment.OnItemSelectedListener");
@@ -102,7 +98,12 @@ public class MainMenuFragment2 extends Fragment {
         playGameSection.setListener(new PlayGameSection.PlayGameListener() {
             @Override
             public void playButtonPress() {
-                mainMenuListener.playGameClick();
+                menuAnimation.closeMenuStartGameAnimation(new MenuAnimation.OnAnimationCompleteListener() {
+                    @Override
+                    public void animationComplete() {
+                        mainMenuFragmentListener.playGameClick();
+                    }
+                });
             }
         });
     }
@@ -113,7 +114,7 @@ public class MainMenuFragment2 extends Fragment {
         storeText.setOnTouchListener(new ButtonOnTouchListener(getActivity(), storeText, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
             public void buttonAction() {
-                mainMenuListener.mainMenuFragmentToStoreFragment();
+                mainMenuFragmentListener.mainMenuFragmentToStoreFragment();
             }
         }));
 
@@ -121,7 +122,7 @@ public class MainMenuFragment2 extends Fragment {
         settingsText.setOnTouchListener(new ButtonOnTouchListener(getActivity(), settingsText, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
             public void buttonAction() {
-                mainMenuListener.mainMenuFragmentToSettingsFragment();
+                mainMenuFragmentListener.mainMenuFragmentToSettingsFragment();
             }
         }));
     }
