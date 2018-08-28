@@ -1,17 +1,12 @@
 package com.thezs.fabianzachs.tapattack.GameFragment.GameComponents.GameModes;
 
-import android.app.Activity;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.thezs.fabianzachs.tapattack.Constants;
-import com.thezs.fabianzachs.tapattack.GameFragment.GameAnimation;
-import com.thezs.fabianzachs.tapattack.GameFragment.GameUI;
+import com.thezs.fabianzachs.tapattack.GameFragment.ShapeBitmapManager;
+import com.thezs.fabianzachs.tapattack.GameFragment.ThemeManager;
 
 public abstract class GameMode {
 

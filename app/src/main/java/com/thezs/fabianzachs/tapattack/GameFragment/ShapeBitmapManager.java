@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack.GameFragment.GameComponents.GameModes;
+package com.thezs.fabianzachs.tapattack.GameFragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
