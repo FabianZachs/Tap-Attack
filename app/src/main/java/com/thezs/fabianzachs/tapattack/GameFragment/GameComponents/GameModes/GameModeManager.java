@@ -33,7 +33,7 @@ public class GameModeManager {
     }
 
     public void recieveTouch(MotionEvent event) {
-        if (touchisAboveAdSection(event))
+        if (touchIsAboveAdSection(event))
             currentGameMode.recieveTouch(event);
     }
 
@@ -57,7 +57,7 @@ public class GameModeManager {
         return null;
     }
 
-    private boolean touchisAboveAdSection(MotionEvent event) {
+    private boolean touchIsAboveAdSection(MotionEvent event) {
         return event.getY() < view.findViewById(R.id.bottom_image).getBottom();
     }
 

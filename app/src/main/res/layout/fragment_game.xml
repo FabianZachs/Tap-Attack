@@ -16,17 +16,13 @@
         android:minWidth="500dp"
         android:src="@drawable/warningcomponent2"
         tools:ignore="ContentDescription" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/menu"
-        android:text="efwefewfwefw"/>
 
     <ImageView
         android:id="@+id/warning_color_change_button_left"
         android:paddingRight="5sp"
         android:paddingEnd="5sp"
+        android:paddingStart="0sp"
+        android:paddingLeft="0sp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
@@ -38,6 +34,8 @@
         android:id="@+id/warning_color_change_button_right"
         android:paddingLeft="5sp"
         android:paddingStart="5sp"
+        android:paddingEnd="0sp"
+        android:paddingRight="0sp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
