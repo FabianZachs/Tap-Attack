@@ -20,8 +20,6 @@ public class WarningColorComponent {
     private int currentWarningColorIndex;
     private GradientDrawable warningDrawable;
 
-    // todo needs Integer[] colors on construct
-    // todo view to get warning color, left button, right buttton
     public WarningColorComponent(View view, Integer[] colors) {
         this.colors = colors;
         currentWarningColorIndex = 0;
@@ -30,19 +28,30 @@ public class WarningColorComponent {
         warningDrawable = ((GradientDrawable) ((LayerDrawable) warningImage.getDrawable()).getDrawable(1));
         setupLeftWarningColorChanger(view);
         setupRightWarningColorChanger(view);
+        updateCurrentWarningColor();
 
+    }
+
+    private void updateCurrentWarningColor() {
+        warningDrawable.setColor(colors[currentWarningColorIndex]);
+        // todo tell observers
     }
 
     public Integer getCurrentWarningColor() {
-        return null;
+        return colors[currentWarningColorIndex];
     }
 
     private void setNextWarningColor() {
+        currentWarningColorIndex ++;
+        currentWarningColorIndex = currentWarningColorIndex >= colors.length ? 0 : currentWarningColorIndex;
+        updateCurrentWarningColor();
 
     }
 
     private void setPreviousWarningColor() {
-
+        currentWarningColorIndex--;
+        currentWarningColorIndex = currentWarningColorIndex < 0 ? colors.length - 1 : currentWarningColorIndex;
+        updateCurrentWarningColor();
     }
 
     private void newWarningColorNotification() {
@@ -60,7 +69,7 @@ public class WarningColorComponent {
                 animation1, animation2, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
             public void buttonAction() {
-
+                setPreviousWarningColor();
             }
         }));
 
@@ -75,7 +84,7 @@ public class WarningColorComponent {
                 animation1, animation2, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
             public void buttonAction() {
-
+                setNextWarningColor();
             }
         }));
     }
