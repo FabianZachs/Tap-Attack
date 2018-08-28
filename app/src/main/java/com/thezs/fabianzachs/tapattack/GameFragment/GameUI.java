@@ -3,14 +3,10 @@ package com.thezs.fabianzachs.tapattack.GameFragment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
-import android.provider.Contacts;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -22,13 +18,35 @@ public class GameUI {
 
     private View view;
 
-    GameUI(Activity activity, View view) {
+    public GameUI(Activity activity, View view, boolean warningUI) {
         this.view = view;
-        setupUI(activity);
+        if (warningUI)
+            setupWarningColorUI(activity);
+        else setupNonWarningUI(activity);
 
     }
 
-    private void setupUI(Activity activity) {
+    private void setupNonWarningUI(Activity activity) {
+        final ImageView warningColorChangeButtonLeft = view.findViewById(R.id.warning_color_change_button_left);
+        warningColorChangeButtonLeft.setVisibility(View.GONE);
+        final ImageView warningColorChangeButtonRight = view.findViewById(R.id.warning_color_change_button_right);
+        warningColorChangeButtonRight.setVisibility(View.GONE);
+        ImageView warningComponent = view.findViewById(R.id.warning_component);
+        warningComponent.setVisibility(View.GONE);
+
+        final ImageView bottom = view.findViewById(R.id.bottom_image);
+        RelativeLayout.LayoutParams bottomParams = new RelativeLayout.LayoutParams
+                (Constants.SCREEN_WIDTH, 20);
+        bottomParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        bottom.setLayoutParams(bottomParams);
+
+        SharedPreferences prefs = activity.getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
+        int[] UIComponentColors = getCurrentWarningColorHolderColors(prefs.getString(Constants.BACKGROUND_TAG, Constants.BACKGROUNDS[0]));
+        ((GradientDrawable)bottom.getDrawable()).setColors(new int[] {UIComponentColors[0], activity.getResources().getColor(R.color.gameshieldcolor), UIComponentColors[0]});
+
+    }
+
+    private void setupWarningColorUI(Activity activity) {
         SharedPreferences prefs = activity.getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
         int[] UIComponentColors = getCurrentWarningColorHolderColors(prefs.getString(Constants.BACKGROUND_TAG, Constants.BACKGROUNDS[0]));
 

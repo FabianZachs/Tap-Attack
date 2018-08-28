@@ -76,6 +76,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         }
 
 
+
         new MyItemDatabase(this, prefs);
         initializeConstants();
 
@@ -315,8 +316,8 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         this.paidPointsFragment = new PaidPointsFragment();
         this.paidShieldsFragment = new PaidShieldsFragment();
         this.mainGameFragment = new MainGameFragment();
-        ft.add(R.id.main_fragment, mainGameFragment, "main game");
-        ft.hide(mainGameFragment);
+        //ft.add(R.id.main_fragment, mainGameFragment, "main game");
+        //ft.hide(mainGameFragment);
         ft.add(R.id.main_fragment, mainMenuFragment, "mainmenu");
         //ft.add(R.id.main_fragment, storeFragment,Constants.STORE_TAG);
         //ft.add(R.id.main_fragment, settingsFragment, Constants.SETTINGS_TAG);

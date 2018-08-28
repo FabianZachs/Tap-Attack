@@ -287,7 +287,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
         SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", MODE_PRIVATE);
         String backgroundName = prefs.getString(Constants.GAME_MODE_TAG, Constants.GAMEMODES[0]);
         Log.d("background", "getCurrentGamemodeFile: "+backgroundName);
-        Log.d("backgroundstuff", "getCurrentGamemodeFile: " + databaseToString());
         String file;
 
         String query = "SELECT " + COLUMN_FILE + " FROM " + TABLE_STOREITEMS + " WHERE " + COLUMN_NAME + " = '" + backgroundName+ "';";

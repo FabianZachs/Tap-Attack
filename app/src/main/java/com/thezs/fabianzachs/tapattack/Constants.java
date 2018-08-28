@@ -70,7 +70,7 @@ public class Constants {
     public static int[] MULTIPLIERS_PRICE_MONEY = {0, 1, 2, 3, 4, 5};
 */
 
-    public static String[] GAMEMODES = {"tutorial", "classic", "circle", "square", "arrow", "discrete"};
+    public static final String[] GAMEMODES = {"tutorial", "classic", "circle", "square", "arrow", "discrete"};
     public static Integer[] GAMEMODES_IDS = {R.drawable.instructionsgamemode,R.drawable.startbluebluered, R.drawable.circlestart, R.drawable.squarestart, R.drawable.arrowstart, R.drawable.discretestart};
     public static String[] GAMEMODES_FILES = {"instructionsgamemode", "startbluebluered", "circlestart", "squarestart", "arrowstart", "discretestart"};
     public static int[] GAMEMODES_PRICE_POINTS = {0, 0, 0, 0, 0, 0};

@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.GameFragment.GameComponents.GameModes.GameModeManager;
 import com.thezs.fabianzachs.tapattack.MainMenu.Menu.PaidUnlockSection.PaidUnlockAdapter;
 import com.thezs.fabianzachs.tapattack.R;
 
@@ -32,6 +33,7 @@ public class MainGameFragment extends Fragment {
     public GameUI gameUI;
     private boolean gameShowing = false;
     private View view;
+    private GameModeManager gameModeManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,19 +44,8 @@ public class MainGameFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_game, container, false);
+        view = inflater.inflate(R.layout.fragment_game, container, false);
 
-        gameUI = new GameUI(getActivity(), view);
-
-        this.gameAnimation = new GameAnimation(view);
-
-        ImageView warningLeft = view.findViewById(R.id.warning_color_change_button_left);
-        warningLeft.setOnTouchListener(new ButtonOnTouchListener(getActivity(), warningLeft, new ButtonOnTouchListener.ButtonExecuteListener() {
-            @Override
-            public void buttonAction() {
-                Log.d("sidebartouch", "buttonAction: ");
-            }
-        }));
 
         return view;
     }
@@ -62,11 +53,16 @@ public class MainGameFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        gameModeManager = new GameModeManager(view);
+        gameShowing = true;
+
+        gameUI = new GameUI(getActivity(), view, gameModeManager.warningUIVisible());
+        this.gameAnimation = new GameAnimation(view);
+        gameAnimation.startGameAnimation();
     }
 
     public void onShow() {
-        gameShowing = true;
-        gameAnimation.startGameAnimation();
+
     }
 
     public void onHide() {
@@ -74,7 +70,6 @@ public class MainGameFragment extends Fragment {
     }
 
 
-    private Paint paint = new Paint();
 
     @Override
     public void onAttach(Context context) {
@@ -82,25 +77,21 @@ public class MainGameFragment extends Fragment {
     }
 
     public void draw(Canvas canvas) {
-        paint.setColor(Color.RED);
-        if (gameShowing) {
-            canvas.drawRect(Constants.SHAPE_CLICK_AREA, paint);
-
+        if (gameShowing && gameModeManager != null) {
+            gameModeManager.draw(canvas);
         }
 
     }
 
-    public boolean onTouchEvent(MotionEvent event) {
-        if (gameShowing) {
-
+    public void onTouchEvent(MotionEvent event) {
+        if (gameShowing && gameModeManager != null) {
+            gameModeManager.recieveTouch(event);
         }
-
-        return true;
     }
 
     public void update() {
-        if (gameShowing) {
-
+        if (gameShowing && gameModeManager != null) {
+            gameModeManager.update();
         }
 
     }
