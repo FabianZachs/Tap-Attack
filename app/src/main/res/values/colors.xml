@@ -10,6 +10,7 @@
     <color name="selectedItem">#42b4db</color>
     <color name="shieldColor">#00e3ff</color>
     <color name="gameshieldcolor">#00e3ff</color>
+    <color name="gamenonshieldcolor">#000000</color>
     <color name="soundoff">#d93b3b</color>
     <color name="store">#fefa1b</color>
     <color name="menu">#374a4a</color>

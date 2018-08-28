@@ -16,6 +16,12 @@
         android:minWidth="500dp"
         android:src="@drawable/warningcomponent2"
         tools:ignore="ContentDescription" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/menu"
+        android:text="efwefewfwefw"/>
 
     <ImageView
         android:id="@+id/warning_color_change_button_left"

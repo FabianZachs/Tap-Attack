@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -16,12 +17,17 @@ import android.widget.TextView;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.R;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 class MenuAnimation {
 
     private static final int TITLE_TEXT_LEFT_MARGIN = 10;
     private static final int POINTS_AND_SHIELD_TOP_MARGIN= 7;
 
     private View menuView;
+    private AnimatorSet startGameAnimationSet;
+    private AnimatorSet endGameAnimationSet;
 
     MenuAnimation(View view) {
         this.menuView = view;
@@ -120,39 +126,33 @@ class MenuAnimation {
         final LinearLayout middleSection = menuView.findViewById(R.id.main_play_game_section);
         final RelativeLayout bottomSection = menuView.findViewById(R.id.bottom_fragment_changers);
 
-        ObjectAnimator topAnimation = ObjectAnimator.ofFloat(topSection,
+        final ObjectAnimator topAnimation = ObjectAnimator.ofFloat(topSection,
                 View.TRANSLATION_Y, -topSection.getHeight());
-        ObjectAnimator middleAnimation = ObjectAnimator.ofFloat(middleSection,
+        final ObjectAnimator middleAnimation = ObjectAnimator.ofFloat(middleSection,
                 View.TRANSLATION_Y, Constants.SCREEN_HEIGHT);
-        ObjectAnimator bottomAnimation = ObjectAnimator.ofFloat(bottomSection,
+        final ObjectAnimator bottomAnimation = ObjectAnimator.ofFloat(bottomSection,
                 View.TRANSLATION_Y, Constants.SCREEN_HEIGHT);
         topAnimation.setDuration(600);
         middleAnimation.setDuration(600);
         bottomAnimation.setDuration(600);
 
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.addListener(new AnimatorListenerAdapter() {
+        startGameAnimationSet = new AnimatorSet();
+        startGameAnimationSet.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
                 //todo add local listener on calling this  to tell animation over so displayGameFragment
                 listener.animationComplete();
-                // todo then put views all back
+
+                topAnimation.reverse();
+                bottomAnimation.reverse();
+                middleAnimation.reverse();
             }
         });
-        animatorSet.play(topAnimation).with(middleAnimation).with(bottomAnimation);
-        animatorSet.start();
+        startGameAnimationSet.play(topAnimation).with(middleAnimation).with(bottomAnimation);
+        startGameAnimationSet.start();
 
-
-
-
-        /*setAnimation.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                // then we want to start game. when game starts similar stuff to this happens
-            }
-        });
-*/
     }
+
+
 }

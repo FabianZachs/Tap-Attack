@@ -34,10 +34,16 @@ public class MainGameFragment extends Fragment {
     private boolean gameShowing = false;
     private View view;
     private GameModeManager gameModeManager;
+    private GameFragmentListener listener;
+
+    public interface GameFragmentListener{
+        void closeGame();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("gamecreated", "onCreate: ");
     }
 
     @Nullable
@@ -46,6 +52,15 @@ public class MainGameFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_game, container, false);
 
+        // todo remove later
+        ImageView exitButton = view.findViewById(R.id.warning_component);
+        exitButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), exitButton, new ButtonOnTouchListener.ButtonExecuteListener() {
+            @Override
+            public void buttonAction() {
+                listener.closeGame();
+            }
+        }));
+
 
         return view;
     }
@@ -53,15 +68,18 @@ public class MainGameFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        onShow();
+    }
+
+    public void onShow() {
         gameModeManager = new GameModeManager(view);
         gameShowing = true;
 
         gameUI = new GameUI(getActivity(), view, gameModeManager.warningUIVisible());
         this.gameAnimation = new GameAnimation(view);
         gameAnimation.startGameAnimation();
-    }
 
-    public void onShow() {
+        //todo set currentGameMode to null after game over since gamefragment is onShow and it wont reinitialize
 
     }
 
@@ -74,6 +92,12 @@ public class MainGameFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        if (context instanceof MainGameFragment.GameFragmentListener) {
+            listener = (GameFragmentListener) context;
+        } else {
+            throw new ClassCastException(context.toString()
+                    + " must implement MainGameFragment.GameFragmentListener");
+        }
     }
 
     public void draw(Canvas canvas) {

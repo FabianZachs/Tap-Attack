@@ -84,6 +84,7 @@ public class MainMenuFragment2 extends Fragment {
         playGameSection.startAnimation();
     }
 
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

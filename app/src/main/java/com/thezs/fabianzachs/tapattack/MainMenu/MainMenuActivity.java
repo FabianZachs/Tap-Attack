@@ -10,6 +10,7 @@ import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -35,7 +36,7 @@ import java.util.HashMap;
 
 public class MainMenuActivity extends GeneralParent implements StoreFragment.StoreListener,
         SettingsFragment.SettingsListener, MainMenuFragment2.MainMenuFragmentListener,
-        PaidUnlocksFragment.PaidUnlocksListener, PaidItemType.PaidItemTypeListener {
+        PaidUnlocksFragment.PaidUnlocksListener, PaidItemType.PaidItemTypeListener, MainGameFragment.GameFragmentListener {
 
     private SharedPreferences prefs;
     //private AdView mAdView;
@@ -129,6 +130,17 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     }
 
     @Override
+    public void closeGame() {
+        /*
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(Constants.GAME_TAG);
+        if(fragment != null) {
+            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+        }
+        */
+        displayMainMenuFragment();
+    }
+
+    @Override
     public void settingsFragmentToMenuFragment() {
         displayMainMenuFragment();
 
@@ -189,9 +201,9 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     }
 
     private void playButtonClick() {
-        removeStoreFragment();
+        //removeStoreFragment();
         displayMainGameFragment();
-        mainGameFragment.onShow();
+        //mainGameFragment.onShow();
         //Intent intent = new Intent(this, MainGameActivity.class);
         //intent.putExtra(Constants.GAME_MODE_TAG, "classic");
         //this.startActivityForResult(intent, 1);
@@ -240,6 +252,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     }
     public void displayMainMenuFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
         if (mainMenuFragment.isAdded()) {
             mainMenuFragment.onShow();
             ft.show(mainMenuFragment);
@@ -288,9 +301,12 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         if (mainGameFragment.isAdded()) {
+            Log.d("1displaygamefrag", "displayMainGameFragment: show");
             ft.show(mainGameFragment);
+            mainGameFragment.onShow();
         } else {
-            ft.add(R.id.main_fragment, mainGameFragment, "main game");
+            Log.d("1displaygamefrag", "displayMainGameFragment: added");
+            ft.add(R.id.main_fragment, mainGameFragment, Constants.GAME_TAG);
         }
         if (mainMenuFragment.isAdded()) { ft.hide(mainMenuFragment); }
         if (paidUnlocksFragment.isAdded()) { ft.hide(paidUnlocksFragment); }
@@ -318,7 +334,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         this.mainGameFragment = new MainGameFragment();
         //ft.add(R.id.main_fragment, mainGameFragment, "main game");
         //ft.hide(mainGameFragment);
-        ft.add(R.id.main_fragment, mainMenuFragment, "mainmenu");
+        ft.add(R.id.main_fragment, mainMenuFragment, Constants.MAIN_TAG);
         //ft.add(R.id.main_fragment, storeFragment,Constants.STORE_TAG);
         //ft.add(R.id.main_fragment, settingsFragment, Constants.SETTINGS_TAG);
         ft.commit();
@@ -449,6 +465,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     }
     */
 
+/*
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         ((MainMenuFragment2) getSupportFragmentManager().findFragmentByTag(Constants.MAIN_TAG)).onShow();
@@ -459,7 +476,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
             editor.apply();
         }
 
-        if (prefs.getInt("gamesSinceLastAd",0) > 2 /*&& afterGameAd.isLoaded()*/) {
+        if (prefs.getInt("gamesSinceLastAd",0) > 2 && afterGameAd.isLoaded()) {
             //afterGameAd.show();
             editor.putInt("gamesSinceLastAd", 0);
             editor.apply();
@@ -467,7 +484,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         }
 
         //super.onActivityResult(requestCode, resultCode, data);
-    }
+    }*/
 
 }
 

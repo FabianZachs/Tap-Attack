@@ -24,6 +24,7 @@ public class GameUI {
             setupWarningColorUI(activity);
         else setupNonWarningUI(activity);
 
+        setupBottomBar(activity);
     }
 
     private void setupNonWarningUI(Activity activity) {
@@ -34,15 +35,6 @@ public class GameUI {
         ImageView warningComponent = view.findViewById(R.id.warning_component);
         warningComponent.setVisibility(View.GONE);
 
-        final ImageView bottom = view.findViewById(R.id.bottom_image);
-        RelativeLayout.LayoutParams bottomParams = new RelativeLayout.LayoutParams
-                (Constants.SCREEN_WIDTH, 20);
-        bottomParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        bottom.setLayoutParams(bottomParams);
-
-        SharedPreferences prefs = activity.getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
-        int[] UIComponentColors = getCurrentWarningColorHolderColors(prefs.getString(Constants.BACKGROUND_TAG, Constants.BACKGROUNDS[0]));
-        ((GradientDrawable)bottom.getDrawable()).setColors(new int[] {UIComponentColors[0], activity.getResources().getColor(R.color.gameshieldcolor), UIComponentColors[0]});
 
     }
 
@@ -70,12 +62,6 @@ public class GameUI {
         warningColorChangeButtonRight.setLayoutParams(colorChangeParamsRight);
         ((GradientDrawable) warningColorChangeButtonRight.getDrawable()).setColors(UIComponentColors);
 
-        final ImageView bottom = view.findViewById(R.id.bottom_image);
-        RelativeLayout.LayoutParams bottomParams = new RelativeLayout.LayoutParams
-                (Constants.SCREEN_WIDTH, 20);
-        bottomParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        bottom.setLayoutParams(bottomParams);
-        ((GradientDrawable)bottom.getDrawable()).setColors(new int[] {UIComponentColors[0], activity.getResources().getColor(R.color.gameshieldcolor), UIComponentColors[0]});
 
 
         ImageView warningComponent = view.findViewById(R.id.warning_component);
@@ -85,6 +71,25 @@ public class GameUI {
         warningComponentParameters.topMargin = Constants.SCREEN_HEIGHT / 60;
         warningComponent.setLayoutParams(warningComponentParameters);
         ((GradientDrawable) ((LayerDrawable) warningComponent.getDrawable()).getDrawable(0)).setColors(UIComponentColors);
+    }
+
+    private void setupBottomBar(Activity activity) {
+        final ImageView bottom = view.findViewById(R.id.bottom_image);
+        RelativeLayout.LayoutParams bottomParams = new RelativeLayout.LayoutParams
+                (Constants.SCREEN_WIDTH, 20);
+        bottomParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        bottom.setLayoutParams(bottomParams);
+
+        SharedPreferences prefs = activity.getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
+        int[] UIComponentColors = getCurrentWarningColorHolderColors(prefs.getString(Constants.BACKGROUND_TAG, Constants.BACKGROUNDS[0]));
+        if (prefs.getBoolean("shieldEnabled", true)) {
+            ((GradientDrawable)bottom.getDrawable()).setColors(new int[] {UIComponentColors[0], activity.getResources().getColor(R.color.gameshieldcolor), UIComponentColors[0]});
+        }
+        else
+            ((GradientDrawable)bottom.getDrawable()).setColors(new int[] {UIComponentColors[0], activity.getResources().getColor(R.color.gamenonshieldcolor), UIComponentColors[0]});
+
+
+
     }
 
     private int[] getCurrentWarningColorHolderColors(String currentBackgroundName) {

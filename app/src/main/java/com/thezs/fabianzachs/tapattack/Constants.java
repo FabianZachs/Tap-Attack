@@ -47,6 +47,7 @@ public class Constants {
     public final static String SETTINGS_TAG = "settings";
     public final static String MAIN_TAG = "main";
     public final static String STORE_TAG = "store";
+    public final static String GAME_TAG = "game";
     public final static String PAID_UNLOCKS_TAG = "paid unlock";
     public final static String PAID_POINTS_TAG = "paid points";
     public final static String PAID_SHIELDS_TAG = "paid shields";
