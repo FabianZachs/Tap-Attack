@@ -17,6 +17,11 @@
         android:src="@drawable/warningcomponent2"
         tools:ignore="ContentDescription" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="423423423"/>
+
     <ImageView
         android:id="@+id/warning_color_change_button_left"
         android:paddingRight="5sp"
