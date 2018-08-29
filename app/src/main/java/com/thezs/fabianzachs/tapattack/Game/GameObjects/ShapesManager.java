@@ -82,7 +82,7 @@ public class ShapesManager {
         for (ShapeObject shape : shapes) {
             /*
             if (shape.getBitmapHolder().contains((int) event.getX(), (int) event.getY())) {
-                shape.recieveTouch(event);
+                shape.receiveTouch(event);
                 shapeInteractment = true;
             }*/
             if (shapeClickArea(shape).contains((int) event.getX(), (int) event.getY())) {

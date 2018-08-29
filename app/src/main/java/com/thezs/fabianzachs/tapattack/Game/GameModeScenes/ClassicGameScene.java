@@ -155,7 +155,7 @@ public class ClassicGameScene implements Scene {
         }
         */
         //if (!gameOver) {
-            //shapesManager.recieveTouch(event);
+            //shapesManager.receiveTouch(event);
         //}
         if (mediator.isGameOver)
             return;
@@ -166,7 +166,7 @@ public class ClassicGameScene implements Scene {
             shapesManager.recieveTouch(event);
         }
         else if (Constants.WARNING_COLOR_CLICK_AREA_LEFT.contains((int) event.getX(), (int) event.getY()))
-            //Log.d("warningtoucharea", "recieveTouch: warning");
+            //Log.d("warningtoucharea", "receiveTouch: warning");
             warningColor.recieveTouch(event, "left");
         else if(Constants.WARNING_COLOR_CLICK_AREA_RIGHT.contains((int) event.getX(), (int) event.getY()))
             warningColor.recieveTouch(event, "right");

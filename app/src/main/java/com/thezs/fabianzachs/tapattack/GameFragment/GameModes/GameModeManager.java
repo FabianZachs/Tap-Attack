@@ -32,9 +32,9 @@ public class GameModeManager {
         currentGameMode.update();
     }
 
-    public void recieveTouch(MotionEvent event) {
+    public void receiveTouch(MotionEvent event) {
         if (touchIsAboveAdSection(event))
-            currentGameMode.recieveTouch(event);
+            currentGameMode.receiveTouch(event);
     }
 
     public void draw(Canvas canvas) {

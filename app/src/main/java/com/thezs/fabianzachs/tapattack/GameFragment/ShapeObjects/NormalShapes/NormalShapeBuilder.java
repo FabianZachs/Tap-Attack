@@ -16,8 +16,6 @@ public class NormalShapeBuilder {
     public NormalShapeBuilder() {
         this.shapeBitmapManager = new ShapeBitmapManager();
         this.themeManager = new ThemeManager();
-
-
     }
 
     public ShapeObject buildShape(String shape, Integer color, Point centerLocation, Paint paint,

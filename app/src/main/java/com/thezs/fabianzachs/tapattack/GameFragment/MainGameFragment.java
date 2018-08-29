@@ -97,7 +97,7 @@ public class MainGameFragment extends Fragment {
 
     public void onTouchEvent(MotionEvent event) {
         if (gameShowing && gameModeManager != null) {
-            gameModeManager.recieveTouch(event);
+            gameModeManager.receiveTouch(event);
         }
     }
 

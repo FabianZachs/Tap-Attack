@@ -46,13 +46,10 @@ public abstract class GameMode {
 
     public void draw(Canvas canvas) {
         object.draw(canvas);
-        Log.d("gamdraw", "draw: ");
 
     }
 
-    public void recieveTouch(MotionEvent event) {
-        Log.d("touchreca", "recieveTouch: ");
-        soundEffectsManager.soundEffects.playArrowSwipe();
+    public void receiveTouch(MotionEvent event) {
 
     }
 }
