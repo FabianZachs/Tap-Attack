@@ -11,6 +11,7 @@ import android.view.View;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeBitmapManager;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.NormalShapeBuilder;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
+import com.thezs.fabianzachs.tapattack.GameFragment.SoundEffectsManager;
 import com.thezs.fabianzachs.tapattack.GameFragment.ThemeManager;
 import com.thezs.fabianzachs.tapattack.GameFragment.WarningColorComponent;
 
@@ -20,6 +21,7 @@ public abstract class GameMode {
 
 
     private ShapeObject object;
+    private SoundEffectsManager soundEffectsManager;
 
     public GameMode(View view, boolean warningColorEnabled) {
         this.warningColorEnabled = warningColorEnabled;
@@ -32,6 +34,8 @@ public abstract class GameMode {
 
         NormalShapeBuilder builder = new NormalShapeBuilder();
         object = builder.buildShape("cross", 0xffffffff, new Point(100,100), new Paint(), new Rect(0,0,0,0),100);
+
+        this.soundEffectsManager = new SoundEffectsManager();
     }
 
 
@@ -48,6 +52,7 @@ public abstract class GameMode {
 
     public void recieveTouch(MotionEvent event) {
         Log.d("touchreca", "recieveTouch: ");
+        soundEffectsManager.soundEffects.playArrowSwipe();
 
     }
 }
