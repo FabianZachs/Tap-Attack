@@ -48,13 +48,17 @@ public abstract class ShapeObject {
 
     }
 
-
     public void recieveTouch(MotionEvent event) {
         this.mDetector.onTouchEvent(event);
     }
 
     public void update() {
 
+    }
+
+    public void moveDownY(int amount) {
+        centerLocation.y += amount;
+        updateBitmapHolder();
     }
 
     public void setColor(Integer color) {
