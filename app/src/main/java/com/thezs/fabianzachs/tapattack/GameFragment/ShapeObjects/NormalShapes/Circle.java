@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects;
+package com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes;
 
 import android.graphics.Bitmap;
 import android.graphics.Paint;

@@ -87,7 +87,7 @@ public class ShapeBuilder {
 
                 return new Cross(100, color, colorInt, centerLocation,
                         themesManager.getCurrentTheme().getShapeBitmap(shape,color,false),
-                        themesManager.getCurrentTheme().getShapeBitmap(shape,color,true),
+                        /*themesManager.getCurrentTheme().getShapeBitmap(shape,color,true)*/null,
                         themesManager.getCurrentTheme().getShapePaint(paint,color), bitmapHolder, mediator);
                 /*
             case "cross":

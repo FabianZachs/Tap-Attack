@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects;
+package com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -21,6 +21,7 @@ public abstract class ShapeObject {
     private Paint paint;
     private Rect bitmapHolder;
     private int shapeRadius;
+    private int animationState;
     private GestureDetectorCompat mDetector;
 
 
@@ -36,15 +37,17 @@ public abstract class ShapeObject {
         this.paint = paint;
         this.bitmapHolder = bitmapHolder;
         this.shapeRadius = shapeRadius;
+        this.animationState = 0;
 
         updateBitmapHolder();
     }
 
 
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(currentShapeImage, null, bitmapHolder, paint);
+        canvas.drawBitmap(getCurrentShapeImg(), null, bitmapHolder, paint);
 
     }
+
 
     public void recieveTouch(MotionEvent event) {
         this.mDetector.onTouchEvent(event);
@@ -54,14 +57,47 @@ public abstract class ShapeObject {
 
     }
 
+    public void setColor(Integer color) {
+        this.color = color;
+    }
+
+    Paint getPaint() {
+        return paint;
+    }
+
     void reduceLives() {
         lives--;
     }
 
+    void increaseLives() {
+        lives++;
+    }
     protected abstract void playDeathSoundEffect();
 
-    protected void setCurrentShapeImage(int index) {
-        currentShapeImage = shapeImages[index];
+
+    private Bitmap getCurrentShapeImg() {
+        return this.shapeImages[getAnimationState()];
+    }
+
+    void setAnimationState(int index) {
+        animationState = index;
+    }
+
+    int getAnimationState() {
+        return animationState;
+    }
+
+    void setIncorrectTouchAndReason(String reason) {
+        this.incorrectTouch = true;
+        this.typeOfIncorrectTouch = reason;
+    }
+
+    public boolean wasIncorrectTouch() {
+        return this.incorrectTouch;
+    }
+
+    public String getTypeOfIncorrectTouch() {
+        return this.typeOfIncorrectTouch;
     }
 
     private void updateBitmapHolder() {

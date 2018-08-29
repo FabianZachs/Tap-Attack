@@ -54,7 +54,6 @@ public class Star extends ShapeObject {
         setGraveAble(false);
         setLives(1);
         setPoints(10);
-        setGraveAble(false);
         this.intColors = intColors;
         this.strColors = strColors;
 
