@@ -61,8 +61,16 @@ public abstract class ShapeObject {
         this.color = color;
     }
 
-    Paint getPaint() {
+    public Paint getPaint() {
         return paint;
+    }
+
+    public Bitmap getGraveImage() {
+        return shapeImages[shapeImages.length - 1];
+    }
+
+    public Rect getBitmapHolder() {
+        return bitmapHolder;
     }
 
     void reduceLives() {
@@ -109,6 +117,10 @@ public abstract class ShapeObject {
     public void updateCenterLocation(Point point) {
         // todo or relative, so like updateXCenterLocation/ updateYCenterLocation
         updateBitmapHolder();
+    }
+
+    public int getShapeRadius() {
+        return shapeRadius;
     }
 
     void setmDetector(GestureDetectorCompat mDetector) {

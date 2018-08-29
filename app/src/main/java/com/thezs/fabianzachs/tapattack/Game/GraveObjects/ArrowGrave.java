@@ -55,25 +55,25 @@ public class ArrowGrave extends GraveObject {
         int y = 0;
 
         switch (movementDirection) {
-            case "UP":
+            case "up":
                 x = startPoint.x;
                 y = startPoint.y - TRAVEL_DISTANCE;
                 TRAVEL_VECTOR[0] = 0;
                 TRAVEL_VECTOR[1] = -TRAVEL_DISTANCE;
                 break;
-            case "DOWN":
+            case "down":
                 x = startPoint.x;
                 y = startPoint.y + TRAVEL_DISTANCE;
                 TRAVEL_VECTOR[0] = 0;
                 TRAVEL_VECTOR[1] = TRAVEL_DISTANCE;
                 break;
-            case "LEFT":
+            case "left":
                 x = startPoint.x - TRAVEL_DISTANCE;
                 y = startPoint.y;
                 TRAVEL_VECTOR[0] = -TRAVEL_DISTANCE;
                 TRAVEL_VECTOR[1] = 0;
                 break;
-            case "RIGHT":
+            case "right":
                 x = startPoint.x + TRAVEL_DISTANCE;
                 y = startPoint.y;
                 TRAVEL_VECTOR[0] = TRAVEL_DISTANCE;
