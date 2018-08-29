@@ -2,6 +2,10 @@ package com.thezs.fabianzachs.tapattack.GameFragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.ColorFilter;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 
@@ -19,6 +23,12 @@ public class ThemeManager {
 
     public Integer[] getColors() {
         return colors;
+    }
+
+    public Paint getShapePaint(Paint paint, Integer color) {
+        ColorFilter filter = new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
+        paint.setColorFilter(filter);
+        return paint;
     }
 
     private void setupCurrentTheme(String themeName) {
