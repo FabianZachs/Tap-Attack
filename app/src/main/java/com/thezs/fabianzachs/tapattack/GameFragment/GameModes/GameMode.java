@@ -1,17 +1,25 @@
-package com.thezs.fabianzachs.tapattack.GameFragment.GameComponents.GameModes;
+package com.thezs.fabianzachs.tapattack.GameFragment.GameModes;
 
 import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeBitmapManager;
+import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.NormalShapeBuilder;
+import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.GameFragment.ThemeManager;
 import com.thezs.fabianzachs.tapattack.GameFragment.WarningColorComponent;
 
 public abstract class GameMode {
 
     protected boolean warningColorEnabled;
+
+
+    private ShapeObject object;
 
     public GameMode(View view, boolean warningColorEnabled) {
         this.warningColorEnabled = warningColorEnabled;
@@ -21,6 +29,9 @@ public abstract class GameMode {
             new WarningColorComponent(view,themeManager.getColors());
 
         ShapeBitmapManager shapeBitmapManager = new ShapeBitmapManager();
+
+        NormalShapeBuilder builder = new NormalShapeBuilder();
+        object = builder.buildShape("cross", 0xffffffff, new Point(100,100), new Paint(), new Rect(0,0,0,0),100);
     }
 
 
@@ -30,6 +41,8 @@ public abstract class GameMode {
     }
 
     public void draw(Canvas canvas) {
+        object.draw(canvas);
+        Log.d("gamdraw", "draw: ");
 
     }
 

@@ -2,29 +2,17 @@ package com.thezs.fabianzachs.tapattack.GameFragment;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
-import com.thezs.fabianzachs.tapattack.Constants;
-import com.thezs.fabianzachs.tapattack.GameFragment.GameComponents.GameModes.GameModeManager;
-import com.thezs.fabianzachs.tapattack.MainMenu.Menu.PaidUnlockSection.PaidUnlockAdapter;
+import com.thezs.fabianzachs.tapattack.GameFragment.GameModes.GameModeManager;
 import com.thezs.fabianzachs.tapattack.R;
 
 public class MainGameFragment extends Fragment {
@@ -56,6 +44,7 @@ public class MainGameFragment extends Fragment {
         exitButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), exitButton, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
             public void buttonAction() {
+                gameShowing = false;
                 listener.closeGame();
             }
         }));
