@@ -25,11 +25,9 @@ public class DiscreteShapeMover implements ShapeMover {
     @Override
     public void update(ArrayList<ShapeObject> shapes) {
 
-        if (shapes.size()!=0 && getFurthestDownShape(shapes).getBitmapHolder().bottom < yAxisShapeLocations.get(0)) {
-            Log.d("movedownhappened", "update: moved down");
+        if (shapes.size()!=0 && missingShapeInFurthestDownSlot(shapes)) {
             moveAllShapesDownAStep(shapes);
         }
-
     }
 
     private void setyStepSize(int shapeRadius, int shapeSpacing) {
@@ -44,7 +42,10 @@ public class DiscreteShapeMover implements ShapeMover {
             yAxisShapeLocations.add(y);
             y = y - yStepSize;
         }
+    }
 
+    private boolean missingShapeInFurthestDownSlot(ArrayList<ShapeObject> shapes) {
+       return  getFurthestDownShape(shapes).getBitmapHolder().bottom < yAxisShapeLocations.get(0);
     }
 
     private ShapeObject getFurthestDownShape(ArrayList<ShapeObject> shapes) {
