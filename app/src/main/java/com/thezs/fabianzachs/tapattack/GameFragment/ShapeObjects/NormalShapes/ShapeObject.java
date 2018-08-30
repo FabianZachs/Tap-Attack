@@ -128,6 +128,14 @@ public abstract class ShapeObject {
         return shapeRadius;
     }
 
+    public Point getCenterLocation() {
+        return centerLocation;
+    }
+
+    public Integer getColor() {
+        return color;
+    }
+
     void setmDetector(GestureDetectorCompat mDetector) {
         this.mDetector = mDetector;
     }

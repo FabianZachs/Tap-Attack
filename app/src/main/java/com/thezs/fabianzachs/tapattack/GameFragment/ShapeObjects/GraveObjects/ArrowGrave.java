@@ -15,7 +15,7 @@ public class ArrowGrave extends GraveObject {
         super(shape, 0.3f);
         this.TRAVEL_VECTOR = new int[2];
         this.shapeRadius = shape.getShapeRadius();
-        Point startPoint = new Point(shape.getBitmapHolder().centerX(), shape.getBitmapHolder().centerY());
+        Point startPoint = shape.getCenterLocation();
         setupEndPointAndTRAVELVECTOR(startPoint, shape.getIntendedFlickDirectionString());
     }
 
