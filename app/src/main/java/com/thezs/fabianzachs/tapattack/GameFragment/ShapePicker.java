@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack.GameFragment.ShapePickers;
+package com.thezs.fabianzachs.tapattack.GameFragment;
 
 import java.util.Random;
 
