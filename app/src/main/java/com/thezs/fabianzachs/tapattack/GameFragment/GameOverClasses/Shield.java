@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack.GameFragment;
+package com.thezs.fabianzachs.tapattack.GameFragment.GameOverClasses;
 
 import android.content.Context;
 import android.content.SharedPreferences;
