@@ -11,10 +11,9 @@ import android.view.View;
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeBitmapManager;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers.ContinuousShapeMover;
-import com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers.DiscreteShapeMover;
-import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.Circle;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.NormalShapeBuilder;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
+import com.thezs.fabianzachs.tapattack.GameFragment.ShapePickers.ShapePicker;
 import com.thezs.fabianzachs.tapattack.GameFragment.SoundEffectsManager;
 import com.thezs.fabianzachs.tapattack.GameFragment.ThemeManager;
 import com.thezs.fabianzachs.tapattack.GameFragment.WarningColorComponent;
@@ -62,9 +61,12 @@ public abstract class GameMode {
 
 
         this.soundEffectsManager = new SoundEffectsManager();
+
+        picker = new ShapePicker(1,1,1,1,1);
     }
     private ContinuousShapeMover mover;
     private long startTime = System.currentTimeMillis();
+    private ShapePicker picker;
 
 
 
@@ -72,6 +74,7 @@ public abstract class GameMode {
         mover.update(shapes);
         if (System.currentTimeMillis() - startTime > 1000)
             mover.setSpeed(mover.new ConstantSlowSpeed());
+        Log.d("shapepicker", "update: " + picker.getShape());
 
     }
 
