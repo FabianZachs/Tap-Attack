@@ -82,7 +82,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         initializeConstants();
 
 
-        setupBannerAd();
+        //setupBannerAd();
         setupGamePanel();
 
     }

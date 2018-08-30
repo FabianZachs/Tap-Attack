@@ -1,5 +1,6 @@
 package com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers;
 
+import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
 
 import java.util.ArrayList;
@@ -7,16 +8,27 @@ import java.util.ArrayList;
 public class ContinuousShapeMover implements ShapeMover {
 
     private long startTime;
-    private long timeOfLastUpdate;
+    private long timeAtLastUpdate;
     private Speed speed;
 
-    public ContinuousShapeMover(Speed speed) {
+    public ContinuousShapeMover() {
         resetStartTime();
+        timeAtLastUpdate = System.currentTimeMillis();
+    }
+
+    public void setSpeed(Speed speed) {
         this.speed = speed;
     }
 
     @Override
     public void update(ArrayList<ShapeObject> shapes) {
+        int timeSinceLastFrame = (int) (System.currentTimeMillis() - timeAtLastUpdate);
+        timeAtLastUpdate = System.currentTimeMillis();
+
+        for (ShapeObject shape : shapes) {
+            shape.incrementY(speed.getCurrentSpeed()*timeSinceLastFrame);
+        }
+
 
     }
 
@@ -24,50 +36,66 @@ public class ContinuousShapeMover implements ShapeMover {
         this.startTime = System.currentTimeMillis();
     }
 
+    private long timeSinceStart() {
+        return System.currentTimeMillis() - startTime;
+    }
+
+
     public interface Speed {
-        double getCurrentSpeed(int elapsedTime);
+        float getCurrentSpeed();
     }
 
     public class ConstantSlowSpeed implements Speed {
 
+        float speed = Constants.GAME_VIEW_HEIGHT/3500.0f;
+
         @Override
-        public double getCurrentSpeed(int elapsedTime) {
-            return 0;
+        public float getCurrentSpeed() {
+            return speed;
         }
     }
 
     public class ConstantMediumSpeed implements Speed {
 
+        float speed = Constants.GAME_VIEW_HEIGHT/2800.0f;
+
         @Override
-        public double getCurrentSpeed(int elapsedTime) {
-            return 0;
+        public float getCurrentSpeed() {
+            return speed;
         }
     }
     public class ConstantFastSpeed implements Speed {
+        float speed = Constants.GAME_VIEW_HEIGHT/1500.0f;
 
         @Override
-        public double getCurrentSpeed(int elapsedTime) {
-            return 0;
+        public float getCurrentSpeed() {
+            return speed;
         }
     }
     public class GrowingSlowSpeed implements Speed {
 
+        private int TIME_UNTIL_MAX_SPEED = 2000;
+        private int MIN_DENOMINATOR= 500;
+        private int MAX_DENOMINATOR = 3500;
+        private boolean maxSpeedReached = false;
+
         @Override
-        public double getCurrentSpeed(int elapsedTime) {
-            return 0;
+        public float getCurrentSpeed() {
+            float denominator = (float) (((MAX_DENOMINATOR - MIN_DENOMINATOR)/(-TIME_UNTIL_MAX_SPEED)) *timeSinceStart()+MAX_DENOMINATOR);
+            return Constants.GAME_VIEW_HEIGHT/denominator;
         }
     }
     public class GrowingMediumSpeed implements Speed {
 
         @Override
-        public double getCurrentSpeed(int elapsedTime) {
+        public float getCurrentSpeed() {
             return 0;
         }
     }
     public class GrowingFastSpeed implements Speed {
 
         @Override
-        public double getCurrentSpeed(int elapsedTime) {
+        public float getCurrentSpeed() {
             return 0;
         }
     }

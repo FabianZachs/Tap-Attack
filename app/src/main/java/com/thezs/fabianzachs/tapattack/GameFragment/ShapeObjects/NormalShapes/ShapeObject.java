@@ -56,9 +56,10 @@ public abstract class ShapeObject {
 
     }
 
-    public void moveDownY(int amount) {
+    public void incrementY(float amount) {
         centerLocation.y += amount;
-        updateBitmapHolder();
+        bitmapHolder.bottom += amount;
+        bitmapHolder.top += amount;
     }
 
     public void setColor(Integer color) {

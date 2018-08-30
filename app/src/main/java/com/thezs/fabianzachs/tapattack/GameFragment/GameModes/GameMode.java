@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeBitmapManager;
+import com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers.ContinuousShapeMover;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers.DiscreteShapeMover;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.Circle;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.NormalShapeBuilder;
@@ -41,25 +42,36 @@ public abstract class GameMode {
 
 
         NormalShapeBuilder builder = new NormalShapeBuilder();
-        int shapeRadius = Constants.SCREEN_WIDTH/10;
-        mover = new DiscreteShapeMover(shapeRadius, Constants.SCREEN_WIDTH/10);
-        ArrayList<Integer> yspots = mover.getyAxisShapeLocations();
+        int shapeRadius = Constants.SCREEN_WIDTH/9;
+        mover = new ContinuousShapeMover();
+        mover.setSpeed(mover.new GrowingSlowSpeed());
+        //mover = new DiscreteShapeMover(shapeRadius, Constants.SCREEN_WIDTH/10);
+        //ArrayList<Integer> yspots = mover.getyAxisShapeLocations();
         shapes = new ArrayList<>();
 
-        for (Integer y : yspots) {
-            ShapeObject object = builder.buildShape("circle", 0xffffffff, new Point(100, y), new Paint(), new Rect(0,0,0,0),shapeRadius);
-            shapes.add(0,object);
-        }
+        ShapeObject object = builder.buildShape("circle", 0xffffffff, new Point(100, 5), new Paint(), new Rect(0,0,0,0),shapeRadius);
+        shapes.add(0,object);
+        ShapeObject object2 = builder.buildShape("circle", 0xffffffff, new Point(300,-300), new Paint(), new Rect(0,0,0,0),shapeRadius);
+        shapes.add(0,object2);
+        ShapeObject object3 = builder.buildShape("circle", 0xffffffff, new Point(100, -650), new Paint(), new Rect(0,0,0,0),shapeRadius);
+        shapes.add(0,object3);
+        ShapeObject object4 = builder.buildShape("circle", 0xffffffff, new Point(200, -900), new Paint(), new Rect(0,0,0,0),shapeRadius);
+        shapes.add(0,object4);
+        ShapeObject object5 = builder.buildShape("circle", 0xffffffff, new Point(300, -1250), new Paint(), new Rect(0,0,0,0),shapeRadius);
+        shapes.add(0,object5);
 
 
         this.soundEffectsManager = new SoundEffectsManager();
     }
-    private DiscreteShapeMover mover;
+    private ContinuousShapeMover mover;
+    private long startTime = System.currentTimeMillis();
 
 
 
     public void update() {
         mover.update(shapes);
+        if (System.currentTimeMillis() - startTime > 1000)
+            mover.setSpeed(mover.new ConstantSlowSpeed());
 
     }
 
@@ -71,8 +83,8 @@ public abstract class GameMode {
     }
 
     public void receiveTouch(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN)
-            shapes.remove(shapes.size()-1);
+        if (event.getAction() == MotionEvent.ACTION_DOWN);
+            //shapes.remove(shapes.size()-1);
 
     }
 }

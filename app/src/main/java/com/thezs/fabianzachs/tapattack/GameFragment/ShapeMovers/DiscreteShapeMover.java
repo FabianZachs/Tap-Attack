@@ -1,7 +1,5 @@
 package com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers;
 
-import android.util.Log;
-
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
 
@@ -54,7 +52,7 @@ public class DiscreteShapeMover implements ShapeMover {
 
     private void moveAllShapesDownAStep(ArrayList<ShapeObject> shapes) {
         for (ShapeObject shape : shapes) {
-            shape.moveDownY(yStepSize);
+            shape.incrementY(yStepSize);
         }
     }
 }
