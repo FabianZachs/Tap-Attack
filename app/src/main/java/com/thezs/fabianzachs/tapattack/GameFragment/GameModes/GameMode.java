@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.ColorPicker;
+import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeBitmapManager;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers.ContinuousShapeMover;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.NormalShapeBuilder;
@@ -43,7 +44,8 @@ public abstract class GameMode {
 
         NormalShapeBuilder builder = new NormalShapeBuilder();
         int shapeRadius = Constants.SCREEN_WIDTH/9;
-        mover = new ContinuousShapeMover();
+        Mediator mediator = new Mediator();
+        mover = new ContinuousShapeMover(mediator);
         mover.setSpeed(mover.new GrowingSlowSpeed());
         //mover = new DiscreteShapeMover(shapeRadius, Constants.SCREEN_WIDTH/10);
         //ArrayList<Integer> yspots = mover.getyAxisShapeLocations();
@@ -62,7 +64,6 @@ public abstract class GameMode {
 
 
         this.soundEffectsManager = new SoundEffectsManager();
-        picker = new ColorPicker(0.8f);
 
     }
     private ContinuousShapeMover mover;
@@ -72,23 +73,16 @@ public abstract class GameMode {
 
 
     public void update() {
-        mover.update(shapes);
-        if (System.currentTimeMillis() - startTime > 1000)
-            mover.setSpeed(mover.new ConstantSlowSpeed());
-        Log.d("shapepicker", "update: " + picker.getColor());
 
     }
 
     public void draw(Canvas canvas) {
-        for (ShapeObject shape : shapes) {
-            shape.draw(canvas);
-        }
+        // todo if not game over, draw shapesmanager
+        // todo if gameover draw gameOver.drawGameOver(shapesMaanger.getShapes, shapesManger.getShapeToBlink)
 
     }
 
     public void receiveTouch(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN);
-            //shapes.remove(shapes.size()-1);
 
     }
 }

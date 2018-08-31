@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
 
 import java.util.ArrayList;
@@ -10,8 +11,10 @@ public class ContinuousShapeMover implements ShapeMover {
     private long startTime;
     private long timeAtLastUpdate;
     private Speed speed;
+    private Mediator mediator;
 
-    public ContinuousShapeMover() {
+    public ContinuousShapeMover(Mediator mediator) {
+        this.mediator = mediator;
         resetStartTime();
         timeAtLastUpdate = System.currentTimeMillis();
     }
@@ -36,9 +39,6 @@ public class ContinuousShapeMover implements ShapeMover {
         this.startTime = System.currentTimeMillis();
     }
 
-    private long timeSinceStart() {
-        return System.currentTimeMillis() - startTime;
-    }
 
 
     public interface Speed {
@@ -48,6 +48,9 @@ public class ContinuousShapeMover implements ShapeMover {
     public class ConstantSlowSpeed implements Speed {
 
         float speed = Constants.GAME_VIEW_HEIGHT/3500.0f;
+        public ConstantSlowSpeed(){
+
+        }
 
         @Override
         public float getCurrentSpeed() {
@@ -81,7 +84,8 @@ public class ContinuousShapeMover implements ShapeMover {
 
         @Override
         public float getCurrentSpeed() {
-            float denominator = (float) (((MAX_DENOMINATOR - MIN_DENOMINATOR)/(-TIME_UNTIL_MAX_SPEED)) *timeSinceStart()+MAX_DENOMINATOR);
+            float denominator = (float) (((MAX_DENOMINATOR - MIN_DENOMINATOR)/(-TIME_UNTIL_MAX_SPEED))
+                    *mediator.getElapsedGameTime()+MAX_DENOMINATOR);
             return Constants.GAME_VIEW_HEIGHT/denominator;
         }
     }

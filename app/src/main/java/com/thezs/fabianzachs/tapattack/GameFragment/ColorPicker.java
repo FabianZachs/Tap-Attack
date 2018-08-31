@@ -5,33 +5,40 @@ import java.util.Random;
 
 public class ColorPicker {
 
+    private Mediator mediator;
     private ColorGetter colorGetter;
 
-    private int NUMBER_OF_COLORS = 5;
     private ArrayList<Integer> colors;
-    private Integer warningColor;
     private Random random = new Random();
-    private boolean maxProbabilityReached;
 
-    public ColorPicker(float probabilityOfWarningColor) {
+    public ColorPicker(Mediator mediator, ArrayList<Integer> colors, float probabilityOfWarningColor) {
+        this.mediator = mediator;
+        this.colors = colors;
         this.colorGetter = new SimpleColorGetter(probabilityOfWarningColor);
+    }
 
+    public ColorPicker(Mediator mediator, ArrayList<Integer> colors, float maxProbability, int timeUntilMaxWarningColorProb) {
+        this.mediator = mediator;
+        this.colors = colors;
+        this.colorGetter = new CustomColorGetter(maxProbability, timeUntilMaxWarningColorProb);
     }
 
     public Integer getWarningColor() {
-        return 0x00000000;
-        //return warningColor;
+        return mediator.getWarningColor();
     }
 
     public Integer getNonWarningColor() {
         return 0xffffffff;
+        /*
+        ArrayList<String> selectableColors = new ArrayList<>(colors);
+        selectableColors.remove(warningColor);
+        return  selectableColors.get(randGenerator.nextInt(4));
+         */
     }
 
     public Integer getColor() {
         return colorGetter.getColor();
     }
-
-
 
 
     private interface ColorGetter {
@@ -58,9 +65,32 @@ public class ColorPicker {
 
     private class CustomColorGetter implements ColorGetter {
 
+        private float maxProbability;
+        private int timeUntilMaxWarningColorProb;
+        private boolean maxProbabilityReached;
+
+        private CustomColorGetter(float maxProbability, int timeUntilMaxWarningColorProb) {
+            this.maxProbability = maxProbability;
+            this.timeUntilMaxWarningColorProb = timeUntilMaxWarningColorProb;
+        }
+
+        private float getWarningColorProbability() {
+            if (maxProbabilityReached)
+                return maxProbability;
+            float currentProbabilityOfWarningColor = ((maxProbability/timeUntilMaxWarningColorProb) *
+                mediator.getElapsedGameTime());
+
+            maxProbabilityReached = currentProbabilityOfWarningColor >= maxProbability;
+
+            return currentProbabilityOfWarningColor;
+        }
+
         @Override
         public Integer getColor() {
-            return null;
+            if (random.nextFloat() <= getWarningColorProbability())
+                return getWarningColor();
+            else
+                return getNonWarningColor();
         }
     }
 }

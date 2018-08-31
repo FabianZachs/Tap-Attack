@@ -1,5 +1,7 @@
 package com.thezs.fabianzachs.tapattack.GameFragment.GameOverClasses;
 
+import android.graphics.Canvas;
+
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.Arrow;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
@@ -7,7 +9,7 @@ import com.thezs.fabianzachs.tapattack.R;
 
 import java.util.ArrayList;
 
-public class GameOverChecker {
+public class GameOver {
 
     /*
     // todo : LIST OF THINGS THAT TRIGGER GAME OVERShapeBuilder
@@ -30,6 +32,9 @@ public class GameOverChecker {
 
 
 
+    public void drawGameOver(Canvas canvas, ArrayList<ShapeObject> shapes, ShapeObject shapeToBlink) {
+
+    }
 
 
 
