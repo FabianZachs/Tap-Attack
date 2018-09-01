@@ -8,6 +8,7 @@ import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.Sh
 import com.thezs.fabianzachs.tapattack.R;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class GameOver {
 
@@ -25,7 +26,7 @@ public class GameOver {
     // todo make a gameover drawer
     // todo where to put shield class
 
-    public void checkForGameOver(ArrayList<ShapeObject> shapes) {
+    public void checkForGameOver(CopyOnWriteArrayList<ShapeObject> shapes) {
         // todo run through all tests
     }
 

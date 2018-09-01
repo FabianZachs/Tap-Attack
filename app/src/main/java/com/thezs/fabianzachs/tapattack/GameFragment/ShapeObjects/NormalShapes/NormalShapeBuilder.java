@@ -19,7 +19,7 @@ public class NormalShapeBuilder {
     }
 
     public ShapeObject buildShape(String shape, Integer color, Point centerLocation, Paint paint,
-                                  Rect bitmapHolder, int shapeRadius) {
+                                  Rect bitmapHolder, int shapeRadius, String direction) {
 
         switch (shape) {
 
@@ -48,17 +48,6 @@ public class NormalShapeBuilder {
                 },
                         color, themeManager.getColors(), themeManager.getShapePaint(paint, color),
                         bitmapHolder, shapeRadius);
-        }
-
-        throw new IllegalArgumentException("unknown shape to build");
-    }
-
-
-    public ShapeObject buildShape(String shape, Integer color, Point centerLocation, Paint paint,
-                                  Rect bitmapHolder, int shapeRadius, String direction) {
-
-        switch (shape) {
-
             case "arrow":
                 return new Arrow(centerLocation, new Bitmap[] {
                         shapeBitmapManager.getBitmap(shape+direction, false),

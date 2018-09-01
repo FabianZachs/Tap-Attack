@@ -34,7 +34,6 @@ public class WarningColorComponent {
 
     private void updateCurrentWarningColor() {
         warningDrawable.setColor(colors[currentWarningColorIndex]);
-        // todo tell observers
     }
 
     public Integer getCurrentWarningColor() {

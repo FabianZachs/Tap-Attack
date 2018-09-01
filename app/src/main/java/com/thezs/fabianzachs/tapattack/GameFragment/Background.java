@@ -16,7 +16,7 @@ public class Background {
 
     public Background(Activity activity) {
         SharedPreferences preferences = activity.getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
-        preferences.edit().putString(Constants.BACKGROUND_TAG, Constants.BACKGROUNDS[0]).apply();
+        //preferences.edit().putString(Constants.BACKGROUND_TAG, Constants.BACKGROUNDS[0]).apply();
         MyDBHandler dbHandler = new MyDBHandler(activity, null, null, 1);
 
         String backgroundFile = dbHandler.getCurrentBackgroundFile();

@@ -1,5 +1,7 @@
 package com.thezs.fabianzachs.tapattack.GameFragment.GameModes;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
@@ -33,9 +35,14 @@ public abstract class GameMode {
     public GameMode(View view, boolean warningColorEnabled) {
         this.warningColorEnabled = warningColorEnabled;
 
+        SharedPreferences preferences = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
+        preferences.edit().putString(Constants.GAME_MODE_TAG, "classic").apply();
+
         ThemeManager themeManager = new ThemeManager();
+        /*
         if (warningColorEnabled)
             new WarningColorComponent(view,themeManager.getColors());
+        */
 
         ShapeBitmapManager shapeBitmapManager = new ShapeBitmapManager();
 
@@ -46,7 +53,7 @@ public abstract class GameMode {
         int shapeRadius = Constants.SCREEN_WIDTH/9;
         Mediator mediator = new Mediator();
         mover = new ContinuousShapeMover(mediator);
-        mover.setSpeed(mover.new GrowingSlowSpeed());
+        mover.setSpeed(mover.new ConstantSlowSpeed());
         //mover = new DiscreteShapeMover(shapeRadius, Constants.SCREEN_WIDTH/10);
         //ArrayList<Integer> yspots = mover.getyAxisShapeLocations();
         shapes = new ArrayList<>();
@@ -62,6 +69,7 @@ public abstract class GameMode {
         ShapeObject object5 = builder.buildShape("circle", 0xffffffff, new Point(300, -1250), new Paint(), new Rect(0,0,0,0),shapeRadius);
         shapes.add(0,object5);
 
+        lastBottom = shapes.get(0).getBitmapHolder().bottom;
 
         this.soundEffectsManager = new SoundEffectsManager();
 
@@ -73,12 +81,23 @@ public abstract class GameMode {
 
 
     public void update() {
+        mover.update(shapes);
 
     }
 
+    int lastBottom;
+
     public void draw(Canvas canvas) {
+        for (ShapeObject shape : shapes) {
+            shape.draw(canvas);
+        }
+
+        if (lastBottom>shapes.get(0).getBitmapHolder().bottom)
+            Log.d("errorstuff", "draw: BAD");
+        lastBottom = shapes.get(0).getBitmapHolder().bottom;
         // todo if not game over, draw shapesmanager
         // todo if gameover draw gameOver.drawGameOver(shapesMaanger.getShapes, shapesManger.getShapeToBlink)
+        // todo if not yet started, draw StartGame class
 
     }
 
