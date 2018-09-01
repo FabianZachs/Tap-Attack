@@ -32,6 +32,18 @@ public abstract class GameMode {
     private ArrayList<ShapeObject> shapes;
     private SoundEffectsManager soundEffectsManager;
 
+    private int numberOfShapesCreated;
+
+
+
+
+
+
+
+
+
+
+
     public GameMode(View view, boolean warningColorEnabled) {
         this.warningColorEnabled = warningColorEnabled;
 
@@ -53,23 +65,21 @@ public abstract class GameMode {
         int shapeRadius = Constants.SCREEN_WIDTH/9;
         Mediator mediator = new Mediator();
         mover = new ContinuousShapeMover(mediator);
-        mover.setSpeed(mover.new ConstantSlowSpeed());
+        mover.setSpeed(mover.new ConstantMediumSpeed());
         //mover = new DiscreteShapeMover(shapeRadius, Constants.SCREEN_WIDTH/10);
         //ArrayList<Integer> yspots = mover.getyAxisShapeLocations();
         shapes = new ArrayList<>();
 
-        ShapeObject object = builder.buildShape("circle", 0xffffffff, new Point(100, 5), new Paint(), new Rect(0,0,0,0),shapeRadius);
+        ShapeObject object = builder.buildShape("circle", 0xffffffff, new Point(100, 5), new Paint(), new Rect(0,0,0,0),shapeRadius, "up");
         shapes.add(0,object);
-        ShapeObject object2 = builder.buildShape("circle", 0xffffffff, new Point(300,-300), new Paint(), new Rect(0,0,0,0),shapeRadius);
+        ShapeObject object2 = builder.buildShape("circle", 0xffffffff, new Point(300,-300), new Paint(), new Rect(0,0,0,0),shapeRadius, "up");
         shapes.add(0,object2);
-        ShapeObject object3 = builder.buildShape("circle", 0xffffffff, new Point(100, -650), new Paint(), new Rect(0,0,0,0),shapeRadius);
+        ShapeObject object3 = builder.buildShape("circle", 0xffffffff, new Point(100, -650), new Paint(), new Rect(0,0,0,0),shapeRadius, "up");
         shapes.add(0,object3);
-        ShapeObject object4 = builder.buildShape("circle", 0xffffffff, new Point(200, -900), new Paint(), new Rect(0,0,0,0),shapeRadius);
+        ShapeObject object4 = builder.buildShape("circle", 0xffffffff, new Point(200, -900), new Paint(), new Rect(0,0,0,0),shapeRadius, "up");
         shapes.add(0,object4);
-        ShapeObject object5 = builder.buildShape("circle", 0xffffffff, new Point(300, -1250), new Paint(), new Rect(0,0,0,0),shapeRadius);
+        ShapeObject object5 = builder.buildShape("circle", 0xffffffff, new Point(300, -1250), new Paint(), new Rect(0,0,0,0),shapeRadius, "up");
         shapes.add(0,object5);
-
-        lastBottom = shapes.get(0).getBitmapHolder().bottom;
 
         this.soundEffectsManager = new SoundEffectsManager();
 
@@ -85,16 +95,12 @@ public abstract class GameMode {
 
     }
 
-    int lastBottom;
 
     public void draw(Canvas canvas) {
         for (ShapeObject shape : shapes) {
             shape.draw(canvas);
         }
 
-        if (lastBottom>shapes.get(0).getBitmapHolder().bottom)
-            Log.d("errorstuff", "draw: BAD");
-        lastBottom = shapes.get(0).getBitmapHolder().bottom;
         // todo if not game over, draw shapesmanager
         // todo if gameover draw gameOver.drawGameOver(shapesMaanger.getShapes, shapesManger.getShapeToBlink)
         // todo if not yet started, draw StartGame class

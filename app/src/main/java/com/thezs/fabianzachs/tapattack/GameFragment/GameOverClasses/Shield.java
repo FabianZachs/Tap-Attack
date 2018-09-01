@@ -34,7 +34,7 @@ public class Shield {
             ShapeObject star = shapeBuilder.buildShape("star",
                     shapes.get(shapeIndex).getColor(), shapes.get(shapeIndex).getCenterLocation(),
                     shapes.get(shapeIndex).getPaint(), shapes.get(shapeIndex).getBitmapHolder(),
-                    shapes.get(shapeIndex).getShapeRadius() );
+                    shapes.get(shapeIndex).getShapeRadius(),"up" );
             shapes.set(shapeIndex, star);
         }
 

@@ -7,18 +7,24 @@ import java.util.ArrayList;
 
 public class DiscreteShapeMover implements ShapeMover {
 
-    private  ArrayList<Integer> yAxisShapeLocations;
+    //private  ArrayList<Integer> yAxisShapeLocations;
     private int yStepSize;
+    private int furtherDownCenterLocation;
 
-    public DiscreteShapeMover(int shapeRadius, int shapeSpacing) {
-        setyStepSize(shapeRadius, shapeSpacing);
-        setyAxisShapeLocations(shapeRadius, shapeSpacing);
+    public DiscreteShapeMover(int yStepSize, int furtherDownCenterLocation/*, int shapeRadius, int shapeSpacing*/) {
+        this.yStepSize = yStepSize;
+        this.furtherDownCenterLocation = furtherDownCenterLocation;
+        // todo use shapepopulator.getYstepSize and furthestDownCenterLocation
+        //setyStepSize(shapeRadius, shapeSpacing);
+        //setyAxisShapeLocations(/*shapeRadius, shapeSpacing*/);
 
     }
 
+    /*
     public ArrayList<Integer> getyAxisShapeLocations() {
         return yAxisShapeLocations;
     }
+    */
 
     @Override
     public void update(ArrayList<ShapeObject> shapes) {
@@ -28,22 +34,16 @@ public class DiscreteShapeMover implements ShapeMover {
         }
     }
 
+    /*
     private void setyStepSize(int shapeRadius, int shapeSpacing) {
         yStepSize = 2*shapeRadius + shapeSpacing;
     }
+    */
 
-    private void setyAxisShapeLocations(int shapeRadius, int shapeSpacing) {
-        yAxisShapeLocations = new ArrayList<>();
-        Integer y = Constants.GAME_VIEW_HEIGHT;
-        y = y - (2*shapeSpacing + shapeRadius);
-        while (y > shapeRadius) {
-            yAxisShapeLocations.add(y);
-            y = y - yStepSize;
-        }
-    }
 
     private boolean missingShapeInFurthestDownSlot(ArrayList<ShapeObject> shapes) {
-       return  getFurthestDownShape(shapes).getBitmapHolder().bottom < yAxisShapeLocations.get(0);
+       //return  getFurthestDownShape(shapes).getBitmapHolder().bottom < yAxisShapeLocations.get(0);
+        return  getFurthestDownShape(shapes).getBitmapHolder().bottom < furtherDownCenterLocation;
     }
 
     private ShapeObject getFurthestDownShape(ArrayList<ShapeObject> shapes) {
