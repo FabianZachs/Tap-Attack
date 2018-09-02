@@ -66,6 +66,9 @@
   <string name="wrongFlingDirectionGameOver">WRONG FLING DIRECTION FOR THE ARROW</string>
   <string name="wrongShapeActionGameOver">DON\'T %1$s THE %2$s  </string>
 
+    <!-- Game -->
+    <string name="startGame">TOUCH TO START</string>
+
 
 
     <!--StoreFragmentOLDment -->

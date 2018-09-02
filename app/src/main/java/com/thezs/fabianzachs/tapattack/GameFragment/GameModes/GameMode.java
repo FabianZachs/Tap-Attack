@@ -1,16 +1,23 @@
 package com.thezs.fabianzachs.tapattack.GameFragment.GameModes;
 
 import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.ColorPicker;
+import com.thezs.fabianzachs.tapattack.GameFragment.GameOverClasses.GameOver;
 import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers.ShapeMover;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapePicker;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapesManager;
 import com.thezs.fabianzachs.tapattack.GameFragment.SoundEffectsManager;
+import com.thezs.fabianzachs.tapattack.GameFragment.StartGame;
+import com.thezs.fabianzachs.tapattack.GameFragment.WarningColorComponent;
+import com.thezs.fabianzachs.tapattack.R;
 
 import java.util.ArrayList;
 
@@ -19,6 +26,7 @@ public abstract class GameMode {
     protected boolean warningColorEnabled;
     private Mediator mediator;
     private ShapesManager shapesManager;
+    private StartGame startGame = new StartGame();
 
 
     private ArrayList<ShapeObject> shapes;
@@ -31,34 +39,47 @@ public abstract class GameMode {
         this.mediator = new Mediator();
         this.shapesManager = new ShapesManager(shapeMover, shapePicker, colorPicker,
                 shapeRadius, shapeSpacing);
-        /*
-        if (warningColorEnabled)
+        if (warningColorEnabled) {
             new WarningColorComponent(view,themeManager.getColors());
-        */
-        // todo set shapeClick/Creattion area depending on whether warning color enabled
+            Constants.SHAPE_CREATION_AREA = new Rect(
+                    view.findViewById(R.id.warning_color_change_button_left).getWidth() + shapeRadius,
+                    0,Constants.GAME_VIEW_WIDTH - view.findViewById(R.id.warning_color_change_button_right).getWidth() - shapeRadius,
+                    0);
 
+        }
+        else
+            Constants.SHAPE_CREATION_AREA = new Rect(shapeRadius,0,Constants.GAME_VIEW_WIDTH - shapeRadius, 0);
 
     }
 
 
 
     public void update() {
-        changeGameComponent();
-        shapesManager.update();
+        if (!mediator.isGameOver()) {
+            changeGameComponent();
+            shapesManager.update();
+        }
     }
 
 
     public void draw(Canvas canvas) {
-        shapesManager.draw(canvas);
+        if (!mediator.isGameOver()) {
+            shapesManager.draw(canvas);
+        }
+        else
+            GameOver.drawGameOver(canvas, shapesManager.getShapes(), shapesManager.getShapeToBlink());
 
-        // todo if not game over, draw shapesmanager
-        // todo if gameover draw gameOver.drawGameOver(shapesMaanger.getShapes, shapesManger.getShapeToBlink)
-        // todo if not yet started, draw StartGame class
+        if (!mediator.hasGameStarted()) {
+            startGame.draw(canvas);
+        }
 
     }
 
     public void receiveTouch(MotionEvent event) {
-        // todo if touch is in touch section
+        if (mediator.isGameOver())
+            return;
+
+        initializeGameMovement();
         shapesManager.receiveTouch(event);
 
     }
@@ -70,6 +91,13 @@ public abstract class GameMode {
                 break;
             case 1:
 
+        }
+    }
+
+    private void initializeGameMovement() {
+        if (!mediator.hasGameStarted()) {
+            mediator.startGameMotion();
+            mediator.resetInitTime();
         }
     }
 }
