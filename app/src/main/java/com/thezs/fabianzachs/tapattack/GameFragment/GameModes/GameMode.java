@@ -1,105 +1,55 @@
 package com.thezs.fabianzachs.tapattack.GameFragment.GameModes;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Point;
-import android.graphics.Rect;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.ColorPicker;
 import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
-import com.thezs.fabianzachs.tapattack.GameFragment.ShapeBitmapManager;
-import com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers.ContinuousShapeMover;
-import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.NormalShapeBuilder;
+import com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers.ShapeMover;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapePicker;
+import com.thezs.fabianzachs.tapattack.GameFragment.ShapesManager;
 import com.thezs.fabianzachs.tapattack.GameFragment.SoundEffectsManager;
-import com.thezs.fabianzachs.tapattack.GameFragment.ThemeManager;
-import com.thezs.fabianzachs.tapattack.GameFragment.WarningColorComponent;
 
 import java.util.ArrayList;
 
 public abstract class GameMode {
 
     protected boolean warningColorEnabled;
+    private Mediator mediator;
+    private ShapesManager shapesManager;
 
 
     private ArrayList<ShapeObject> shapes;
     private SoundEffectsManager soundEffectsManager;
 
-    private int numberOfShapesCreated;
 
-
-
-
-
-
-
-
-
-
-
-    public GameMode(View view, boolean warningColorEnabled) {
+    public GameMode(View view, boolean warningColorEnabled, ShapeMover shapeMover,
+                    ShapePicker shapePicker, ColorPicker colorPicker, int shapeRadius, int shapeSpacing) {
         this.warningColorEnabled = warningColorEnabled;
-
-        SharedPreferences preferences = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
-        preferences.edit().putString(Constants.GAME_MODE_TAG, "classic").apply();
-
-        ThemeManager themeManager = new ThemeManager();
+        this.mediator = new Mediator();
+        this.shapesManager = new ShapesManager(shapeMover, shapePicker, colorPicker,
+                shapeRadius, shapeSpacing);
         /*
         if (warningColorEnabled)
             new WarningColorComponent(view,themeManager.getColors());
         */
+        // todo set shapeClick/Creattion area depending on whether warning color enabled
 
-        ShapeBitmapManager shapeBitmapManager = new ShapeBitmapManager();
-
-
-
-
-        NormalShapeBuilder builder = new NormalShapeBuilder();
-        int shapeRadius = Constants.SCREEN_WIDTH/9;
-        Mediator mediator = new Mediator();
-        mover = new ContinuousShapeMover(mediator);
-        mover.setSpeed(mover.new ConstantMediumSpeed());
-        //mover = new DiscreteShapeMover(shapeRadius, Constants.SCREEN_WIDTH/10);
-        //ArrayList<Integer> yspots = mover.getyAxisShapeLocations();
-        shapes = new ArrayList<>();
-
-        ShapeObject object = builder.buildShape("circle", 0xffffffff, new Point(100, 5), new Paint(), new Rect(0,0,0,0),shapeRadius, "up");
-        shapes.add(0,object);
-        ShapeObject object2 = builder.buildShape("circle", 0xffffffff, new Point(300,-300), new Paint(), new Rect(0,0,0,0),shapeRadius, "up");
-        shapes.add(0,object2);
-        ShapeObject object3 = builder.buildShape("circle", 0xffffffff, new Point(100, -650), new Paint(), new Rect(0,0,0,0),shapeRadius, "up");
-        shapes.add(0,object3);
-        ShapeObject object4 = builder.buildShape("circle", 0xffffffff, new Point(200, -900), new Paint(), new Rect(0,0,0,0),shapeRadius, "up");
-        shapes.add(0,object4);
-        ShapeObject object5 = builder.buildShape("circle", 0xffffffff, new Point(300, -1250), new Paint(), new Rect(0,0,0,0),shapeRadius, "up");
-        shapes.add(0,object5);
-
-        this.soundEffectsManager = new SoundEffectsManager();
 
     }
-    private ContinuousShapeMover mover;
-    private long startTime = System.currentTimeMillis();
-    private ColorPicker picker;
 
 
 
     public void update() {
-        mover.update(shapes);
-
+        changeGameComponent();
+        shapesManager.update();
     }
 
 
     public void draw(Canvas canvas) {
-        for (ShapeObject shape : shapes) {
-            shape.draw(canvas);
-        }
+        shapesManager.draw(canvas);
 
         // todo if not game over, draw shapesmanager
         // todo if gameover draw gameOver.drawGameOver(shapesMaanger.getShapes, shapesManger.getShapeToBlink)
@@ -108,6 +58,18 @@ public abstract class GameMode {
     }
 
     public void receiveTouch(MotionEvent event) {
+        // todo if touch is in touch section
+        shapesManager.receiveTouch(event);
 
+    }
+
+    private void changeGameComponent() {
+        switch (shapesManager.getNumberOfDestroyedShapes()) {
+            case 0:
+                // todo put specific gamemode code
+                break;
+            case 1:
+
+        }
     }
 }

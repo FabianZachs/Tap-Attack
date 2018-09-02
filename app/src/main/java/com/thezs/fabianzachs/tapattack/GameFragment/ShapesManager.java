@@ -5,9 +5,11 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 
-import com.thezs.fabianzachs.tapattack.Game.SharedResources.SharedPaint;
 import com.thezs.fabianzachs.tapattack.Game.SharedResources.SharedRect;
 import com.thezs.fabianzachs.tapattack.GameFragment.GameOverClasses.GameOver;
+import com.thezs.fabianzachs.tapattack.GameFragment.RecycledResources.RecycledPaint;
+import com.thezs.fabianzachs.tapattack.GameFragment.RecycledResources.RecycledRect;
+import com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers.ShapeMover;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.GraveObjects.GraveObject;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
 
@@ -18,11 +20,29 @@ public class ShapesManager {
 
     private CopyOnWriteArrayList<ShapeObject> shapes = new CopyOnWriteArrayList<>();
     private ArrayList<GraveObject> graves = new ArrayList<>();
+    private ShapesPopulator shapesPopulator;
+    private ShapeMover shapeMover;
+
     private ShapeObject shapeToBlink;
     private GameOver gameOver = new GameOver();
-    private SharedPaint sharedPaint = new SharedPaint();
-    private SharedRect sharedRect = new SharedRect();
+    private RecycledPaint recycledPaint = new RecycledPaint();
+    private RecycledRect recycledRect = new RecycledRect();
+    private int numberOfDesttroyedShapes= 0;
+    // todo ^ maybe work with number of shapes destroyed -- that way we know easly when game is over
+    // todo and makes more sense since it more directly measures progress of player
 
+
+    public ShapesManager(ShapeMover shapeMover, ShapePicker shapePicker, ColorPicker colorPicker,
+                         int shapeRadius, int shapeSpacing) {
+
+        this.shapesPopulator = new ShapesPopulator(shapes, recycledRect, recycledPaint, colorPicker,
+                shapePicker, shapeRadius, shapeSpacing);
+
+        this.shapeMover = shapeMover;
+
+
+
+    }
 
     public void receiveTouch(MotionEvent event) {
 
@@ -51,8 +71,13 @@ public class ShapesManager {
         return shapeToBlink;
     }
 
-    private void freeResources(Paint paint, Rect bitmapHolder) {
-        sharedPaint.freePaint(paint);
-        sharedRect.freeRect(bitmapHolder);
+    public int getNumberOfDestroyedShapes() {
+        return numberOfDesttroyedShapes;
     }
+
+    private void freeResources(Paint paint, Rect bitmapHolder) {
+        recycledPaint.freePaint(paint);
+        recycledRect.freeRect(bitmapHolder);
+    }
+
 }

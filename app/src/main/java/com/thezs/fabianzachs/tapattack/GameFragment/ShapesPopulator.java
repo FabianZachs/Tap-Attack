@@ -1,6 +1,5 @@
 package com.thezs.fabianzachs.tapattack.GameFragment;
 
-import android.graphics.Paint;
 import android.graphics.Point;
 
 import com.thezs.fabianzachs.tapattack.Constants;
@@ -25,7 +24,9 @@ public class ShapesPopulator {
     private int yStepSize;
     private Random random;
 
-    public ShapesPopulator(CopyOnWriteArrayList<ShapeObject> shapes, RecycledRect recycledRect, RecycledPaint recycledPaint, ColorPicker colorPicker, ShapePicker shapePicker, int shapeRadius, int shapeSpacing) {
+    public ShapesPopulator(CopyOnWriteArrayList<ShapeObject> shapes, RecycledRect recycledRect,
+                           RecycledPaint recycledPaint, ColorPicker colorPicker, ShapePicker shapePicker,
+                           int shapeRadius, int shapeSpacing) {
         this.shapeBuilder = new NormalShapeBuilder();
         this.recycledRect = recycledRect;
         this.recycledPaint = recycledPaint;
@@ -55,7 +56,6 @@ public class ShapesPopulator {
         return shapes;
 
 
-        // todo use listener to tell gamemode when another shape is created
 
     }
 
@@ -70,6 +70,7 @@ public class ShapesPopulator {
         ArrayList<Integer> yLocations = getInitialYAxisShapeLocations();
 
         for (Integer y : yLocations) {
+            // todo add to shapes a shape at the point(x,y) centerlocation
 
         }
     }
@@ -91,7 +92,6 @@ public class ShapesPopulator {
     }
 
     private String getDirection() {
-        // todo use random to get a
         int i = random.nextInt(2);
 
         switch (i) {

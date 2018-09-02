@@ -26,7 +26,7 @@ public class RecycledRect {
 
     }
 
-    public void freePaint(Rect rect) {
+    public void freeRect(Rect rect) {
         unusedRect.add(rect);
         usedRect.remove(rect);
 
