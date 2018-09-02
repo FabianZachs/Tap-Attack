@@ -79,7 +79,9 @@ public abstract class GameMode {
         if (mediator.isGameOver())
             return;
 
-        initializeGameMovement();
+        if (!mediator.hasGameStarted())
+            mediator.startGame();
+
         shapesManager.receiveTouch(event);
 
     }
@@ -94,10 +96,4 @@ public abstract class GameMode {
         }
     }
 
-    private void initializeGameMovement() {
-        if (!mediator.hasGameStarted()) {
-            mediator.startGameMotion();
-            mediator.resetInitTime();
-        }
-    }
 }

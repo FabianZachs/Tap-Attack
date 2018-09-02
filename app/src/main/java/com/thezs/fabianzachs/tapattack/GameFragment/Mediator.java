@@ -4,6 +4,7 @@ public class Mediator {
 
     private long gameStartTime;
     private boolean isGameOver = false;
+    private boolean hasGameStarted = false;
     private WarningColorComponent warningColorComponent;
 
     public Mediator() {
@@ -12,6 +13,16 @@ public class Mediator {
 
     public void setGameOver() {
         isGameOver = true;
+    }
+
+    public void startGame() {
+        hasGameStarted = true;
+        resetStartTime();
+        // todo do whatever needs to be done when we start game, like reset inittime and tell shapemover .. look at old code
+    }
+
+    public boolean hasGameStarted() {
+        return hasGameStarted;
     }
 
     public boolean isGameOver() {

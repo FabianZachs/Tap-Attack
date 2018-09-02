@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.R;
 
 public class StartGame {
 
@@ -19,7 +20,7 @@ public class StartGame {
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawText("TOUCH TO START", xPos, yPos, paint);
+        canvas.drawText(Constants.CURRENT_CONTEXT.getString(R.string.startGame), xPos, yPos, paint);
     }
 
     private void setupPaint() {

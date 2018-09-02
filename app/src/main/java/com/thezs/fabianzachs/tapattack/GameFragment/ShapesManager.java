@@ -52,6 +52,7 @@ public class ShapesManager {
     public void update() {
         gameOver.checkForGameOver(shapes);
         //removeKilledShapes and create graves if gravableI
+        // todo move if game is movign
 
 
     }

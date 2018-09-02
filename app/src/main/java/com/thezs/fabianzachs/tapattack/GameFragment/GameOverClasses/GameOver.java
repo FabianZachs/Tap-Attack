@@ -26,14 +26,14 @@ public class GameOver {
     // todo make a gameover drawer
     // todo where to put shield class
 
-    public static void checkForGameOver(CopyOnWriteArrayList<ShapeObject> shapes) {
+    public void checkForGameOver(CopyOnWriteArrayList<ShapeObject> shapes) {
         // todo run through all tests
     }
 
 
 
 
-    public static void drawGameOver(Canvas canvas, CopyOnWriteArrayList<ShapeObject> shapes, ShapeObject shapeToBlink) {
+    public void drawGameOver(Canvas canvas, CopyOnWriteArrayList<ShapeObject> shapes, ShapeObject shapeToBlink) {
 
     }
 
