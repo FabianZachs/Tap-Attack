@@ -11,6 +11,7 @@ import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.No
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Shield {
 
@@ -21,14 +22,14 @@ public class Shield {
         executable = prefs.getBoolean("shieldEnabled", true);
     }
 
-    public void execute(ArrayList<ShapeObject> shapes) {
+    public void execute(CopyOnWriteArrayList<ShapeObject> shapes) {
         executable = false;
         turnShapesIntoStars(shapes);
         // todo update buttom view bar to black USE MEDIATOR
 
     }
 
-    private void turnShapesIntoStars(ArrayList<ShapeObject> shapes) {
+    private void turnShapesIntoStars(CopyOnWriteArrayList<ShapeObject> shapes) {
         NormalShapeBuilder shapeBuilder = new NormalShapeBuilder();
         for (int shapeIndex = 0; shapeIndex < shapes.size(); shapeIndex++) {
             ShapeObject star = shapeBuilder.buildShape("star",

@@ -15,7 +15,6 @@ import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.GraveObjects.Gr
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ShapesManager {
@@ -31,8 +30,6 @@ public class ShapesManager {
     private RecycledPaint recycledPaint = new RecycledPaint();
     private RecycledRect recycledRect = new RecycledRect();
     private int numberOfDesttroyedShapes= 0;
-    // todo ^ maybe work with number of shapes destroyed -- that way we know easly when game is over
-    // todo and makes more sense since it more directly measures progress of player
 
 
     public ShapesManager(Mediator mediator, GameOver gameOver, ShapeMover shapeMover, ShapePicker shapePicker, ColorPicker colorPicker,
@@ -45,9 +42,6 @@ public class ShapesManager {
                 shapePicker, shapeRadius, shapeSpacing);
 
         this.shapeMover = shapeMover;
-
-
-
     }
 
 
@@ -123,7 +117,8 @@ public class ShapesManager {
     private void handleShapesUpdate() {
         for (ShapeObject shape : shapes) {
             if (isShapeDead(shape)) {
-                shape.playDeathSound();
+                numberOfDesttroyedShapes++;
+                // todo shape.playDeathSound();
                 handleGraveAndResources(shape);
                 shapes.remove(shape);
                 // todo increase score if there is one (mediator should haave score interface)
@@ -138,7 +133,7 @@ public class ShapesManager {
     }
 
     private void handleGravesUpdate() {
-        List gravesToRemove = new ArrayList();
+        ArrayList<GraveObject> gravesToRemove = new ArrayList<>();
         for (GraveObject grave : graves) {
             if (grave.isGraveDestroyed()) {
                 gravesToRemove.add(grave);
