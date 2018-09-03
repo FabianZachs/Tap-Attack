@@ -73,7 +73,7 @@ public class ShapesPopulator {
     }
 
     private boolean readyToAddAnotherShape(CopyOnWriteArrayList<ShapeObject> shapes) {
-        return shapes.get(0).getBitmapHolder().top>0;
+        return (shapes.size() == 0 ) || (shapes.get(0).getBitmapHolder().top>0);
     }
 
     private String getDirection() {

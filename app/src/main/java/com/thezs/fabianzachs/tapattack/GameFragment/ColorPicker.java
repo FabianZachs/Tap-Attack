@@ -8,16 +8,16 @@ public class ColorPicker {
     private Mediator mediator;
     private ColorGetter colorGetter;
 
-    private ArrayList<Integer> colors;
+    private Integer[] colors;
     private Random random = new Random();
 
-    public ColorPicker(Mediator mediator, ArrayList<Integer> colors, float probabilityOfWarningColor) {
+    public ColorPicker(Mediator mediator, Integer[] colors, float probabilityOfWarningColor) {
         this.mediator = mediator;
         this.colors = colors;
         this.colorGetter = new SimpleColorGetter(probabilityOfWarningColor);
     }
 
-    public ColorPicker(Mediator mediator, ArrayList<Integer> colors, float maxProbability, int timeUntilMaxWarningColorProb) {
+    public ColorPicker(Mediator mediator, Integer[] colors, float maxProbability, int timeUntilMaxWarningColorProb) {
         this.mediator = mediator;
         this.colors = colors;
         this.colorGetter = new CustomColorGetter(maxProbability, timeUntilMaxWarningColorProb);
@@ -28,12 +28,11 @@ public class ColorPicker {
     }
 
     public Integer getNonWarningColor() {
-        return 0xffffffff;
-        /*
-        ArrayList<String> selectableColors = new ArrayList<>(colors);
-        selectableColors.remove(warningColor);
-        return  selectableColors.get(randGenerator.nextInt(4));
-         */
+        ArrayList<Integer> selectableColors = new ArrayList<>();
+        for (Integer color : colors) selectableColors.add(color);
+
+        selectableColors.remove(mediator.getWarningColor());
+        return selectableColors.get(random.nextInt(4));
     }
 
     public Integer getColor() {

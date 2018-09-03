@@ -16,6 +16,7 @@ import com.thezs.fabianzachs.tapattack.GameFragment.ShapePicker;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapesManager;
 import com.thezs.fabianzachs.tapattack.GameFragment.SoundEffectsManager;
 import com.thezs.fabianzachs.tapattack.GameFragment.StartGame;
+import com.thezs.fabianzachs.tapattack.GameFragment.ThemeManager;
 import com.thezs.fabianzachs.tapattack.GameFragment.WarningColorComponent;
 import com.thezs.fabianzachs.tapattack.R;
 
@@ -24,24 +25,23 @@ import java.util.ArrayList;
 public abstract class GameMode {
 
     protected boolean warningColorEnabled;
-    private Mediator mediator;
-    private ShapesManager shapesManager;
+    Mediator mediator;
+    ShapesManager shapesManager;
     private StartGame startGame = new StartGame();
-    private GameOver gameOver = new GameOver();
+    GameOver gameOver;
 
 
-    private ArrayList<ShapeObject> shapes;
-    private SoundEffectsManager soundEffectsManager;
-
-
-    public GameMode(View view, boolean warningColorEnabled, ShapeMover shapeMover,
-                    ShapePicker shapePicker, ColorPicker colorPicker, int shapeRadius, int shapeSpacing) {
+    public GameMode(View view, Mediator mediator, boolean warningColorEnabled, int shapeRadius) {
+        this.mediator = mediator;
         this.warningColorEnabled = warningColorEnabled;
-        this.mediator = new Mediator();
-        this.shapesManager = new ShapesManager(mediator, gameOver,shapeMover, shapePicker, colorPicker,
-                shapeRadius, shapeSpacing);
+
+
+
+
+
         if (warningColorEnabled) {
-            new WarningColorComponent(view,themeManager.getColors());
+            WarningColorComponent warningColorComponent = new WarningColorComponent(view,(new ThemeManager()).getColors());
+            mediator.addObject(warningColorComponent);
             Constants.SHAPE_CREATION_AREA = new Rect(
                     view.findViewById(R.id.warning_color_change_button_left).getWidth() + shapeRadius,
                     0,Constants.GAME_VIEW_WIDTH - view.findViewById(R.id.warning_color_change_button_right).getWidth() - shapeRadius,
@@ -68,7 +68,7 @@ public abstract class GameMode {
             shapesManager.draw(canvas);
         }
         else
-            gameOver.drawGameOver(canvas, shapesManager.getShapes(), shapesManager.getShapeToBlink());
+            gameOver.drawGameOver(canvas, shapesManager.getShapes());
 
         if (!mediator.hasGameStarted()) {
             startGame.draw(canvas);

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
 import com.thezs.fabianzachs.tapattack.R;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -47,7 +48,7 @@ public class GameModeManager {
 
         switch (gamemode) {
             case "classic":
-               return new Endless(view);
+               return new Endless(view, new Mediator());
 
         }
 

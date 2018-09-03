@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.GameFragment.RecycledResources;
 
 import android.graphics.Paint;
+import android.util.Log;
 
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class RecycledPaint {
 
     private Paint getNewPaint() {
 
-        if (unusedPaint.size() + usedPaint.size() >= 10)
+        if (unusedPaint.size() + usedPaint.size() >= 15)
             throw new IllegalStateException("Initiallized more than 10 paints");
 
         return new Paint();

@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack.GameFragment;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
@@ -25,7 +26,7 @@ public class ShapesManager {
     private ShapeMover shapeMover;
     private Mediator mediator;
 
-    private ShapeObject shapeToBlink;
+    private int shapeRadius;
     private GameOver gameOver;
     private RecycledPaint recycledPaint = new RecycledPaint();
     private RecycledRect recycledRect = new RecycledRect();
@@ -35,6 +36,7 @@ public class ShapesManager {
     public ShapesManager(Mediator mediator, GameOver gameOver, ShapeMover shapeMover, ShapePicker shapePicker, ColorPicker colorPicker,
                          int shapeRadius, int shapeSpacing) {
 
+        this.shapeRadius = shapeRadius;
         this.gameOver = gameOver;
         this.mediator = mediator;
 
@@ -73,8 +75,8 @@ public class ShapesManager {
         }
 
         if (!shapeInteractment && event.getAction() == MotionEvent.ACTION_DOWN) {
-            // todo shapeToBlink = getFurthestDownShape
-            mediator.setGameOver(GameOver.backgroundTapReason()); // todo pass in reason
+            if (gameOver.executeShield(shapes))
+                mediator.setGameOver(GameOver.backgroundTapReason());
         }
 
     }
@@ -88,10 +90,6 @@ public class ShapesManager {
 
     public CopyOnWriteArrayList<ShapeObject> getShapes() {
         return shapes;
-    }
-
-    public ShapeObject getShapeToBlink() {
-        return shapeToBlink;
     }
 
     public int getNumberOfDestroyedShapes() {
@@ -146,7 +144,7 @@ public class ShapesManager {
     }
 
     private boolean shapeTouchArea(MotionEvent event, ShapeObject shape) {
-        int EXTRA_PIXEL_TOUCH_AREA = Constants.GAME_VIEW_WIDTH/10;
+        int EXTRA_PIXEL_TOUCH_AREA = shapeRadius/3;
         Rect shapeClickArea = new Rect(shape.getBitmapHolder());
         shapeClickArea.left = shapeClickArea.left - EXTRA_PIXEL_TOUCH_AREA;
         shapeClickArea.right = shapeClickArea.right + EXTRA_PIXEL_TOUCH_AREA;

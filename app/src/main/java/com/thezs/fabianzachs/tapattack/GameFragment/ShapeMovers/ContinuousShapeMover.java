@@ -15,7 +15,15 @@ public class ContinuousShapeMover implements ShapeMover {
 
     public ContinuousShapeMover(Mediator mediator) {
         this.mediator = mediator;
+        mediator.addObject(this);
         timeAtLastUpdate = System.currentTimeMillis();
+    }
+
+    public ContinuousShapeMover(Mediator mediator, float secondsToMoveEntireScreen) {
+        this.mediator = mediator;
+        timeAtLastUpdate = System.currentTimeMillis();
+        mediator.addObject(this);
+        speed = new ConstantSpeed(secondsToMoveEntireScreen);
     }
 
     public void setSpeed(Speed speed) {
@@ -31,11 +39,27 @@ public class ContinuousShapeMover implements ShapeMover {
             shape.incrementY(speed.getCurrentSpeed()*timeSinceLastFrame);
         }
 
+    }
 
+    public void resetTimeAtLastUpdate() {
+        this.timeAtLastUpdate = System.currentTimeMillis();
     }
 
     public interface Speed {
         float getCurrentSpeed();
+    }
+
+    public class ConstantSpeed implements Speed {
+        float speed;
+
+        public ConstantSpeed(float secondsToMoveEntireScreen) {
+            this.speed = Constants.GAME_VIEW_HEIGHT/secondsToMoveEntireScreen;
+        }
+
+        @Override
+        public float getCurrentSpeed() {
+            return speed;
+        }
     }
 
     public class ConstantSlowSpeed implements Speed {

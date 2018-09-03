@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.GameFragment.GameOverClasses;
 
 import android.graphics.Canvas;
+import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
@@ -27,6 +28,8 @@ public class GameOver {
     private boolean blinkOn = true;
 
     public void drawGameOver(Canvas canvas, CopyOnWriteArrayList<ShapeObject> shapes) {
+        if (shapeToBlink == null)
+            shapeToBlink = shapes.get(getIndexOfFurthestDownNormalShape(shapes));
         blink(canvas, shapeToBlink);
         for (ShapeObject shape : shapes) {
             if (!shape.equals(shapeToBlink))
@@ -52,22 +55,29 @@ public class GameOver {
         if (wrongShapeTouched(shapes)) {
             gameOverTestFailed = true;
             reason = wrongShapeTapReason();
+            Log.d("gameoverreason", "checkForGameOver: " +reason);
+
         }
 
         for(ShapeObject shape : shapes) {
-            if (shape.getLives() <= 0) {
 
-                if (incorrectTouch(shape))  {
-                    gameOverTestFailed = true;
-                    reason = wrongShapeActionReason(shape, shape.getTypeOfIncorrectTouch(),null);
-                }
+            if (incorrectTouch(shape))  {
+                gameOverTestFailed = true;
+                reason = wrongShapeActionReason(shape, shape.getTypeOfIncorrectTouch(),null);
+                Log.d("gameoverreason", "checkForGameOver: " +reason);
+            }
+
+            else if (shape.getLives() <= 0) {
+
                 if (shapeIsWarningColor(shape)) {
                     gameOverTestFailed = true;
                     reason = warningColorTapReason(shape);
+                    Log.d("gameoverreason", "checkForGameOver: " +reason);
                 }
                 if (shapeIsCross(shape)) {
                     gameOverTestFailed = true;
                     reason = xTapReason();
+                    Log.d("gameoverreason", "checkForGameOver: " +reason);
                 }
             }
 
@@ -75,6 +85,7 @@ public class GameOver {
            if (shapeLeftScreen(shape)) {
                gameOverTestFailed = true;
                reason = shapeLeftScreenReason(shape);
+               Log.d("gameoverreason", "checkForGameOver: " +reason);
            }
 
 
@@ -93,13 +104,21 @@ public class GameOver {
         return false;
     }
 
+    public boolean executeShield(CopyOnWriteArrayList<ShapeObject> shapes) {
+        if (shield.executable) {
+            shield.execute(shapes);
+            return false;
+        }
+        return true;
+    }
+
     private boolean wrongShapeTouched(CopyOnWriteArrayList<ShapeObject> shapes) {
 
         int indexOfFurthestDownNormalShape = getIndexOfFurthestDownNormalShape(shapes);
 
         for (int i = indexOfFurthestDownNormalShape-1; i >= 0; i--)
             if (shapes.get(i).getLives()<=0) {
-                shapeToBlink = shapes.get(i);
+                shapeToBlink = shapes.get(indexOfFurthestDownNormalShape);
                 return true;
             }
 

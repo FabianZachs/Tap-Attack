@@ -53,10 +53,6 @@ public class WarningColorComponent {
         updateCurrentWarningColor();
     }
 
-    private void newWarningColorNotification() {
-        // todo tell mediator
-    }
-
 
     @SuppressLint("ClickableViewAccessibility")
     private void setupLeftWarningColorChanger(View view) {
