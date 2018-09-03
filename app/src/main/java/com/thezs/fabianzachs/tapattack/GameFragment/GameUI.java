@@ -44,7 +44,7 @@ public class GameUI {
 
         final ImageView warningColorChangeButtonLeft = view.findViewById(R.id.warning_color_change_button_left);
         final RelativeLayout.LayoutParams colorChangeParamsLeft = new RelativeLayout.LayoutParams
-                (Constants.SCREEN_WIDTH / 15, 3 * (Constants.SCREEN_HEIGHT / 4));
+                (Constants.GAME_VIEW_WIDTH/15, 3 * (Constants.GAME_VIEW_HEIGHT/4));
         colorChangeParamsLeft.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         colorChangeParamsLeft.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         colorChangeParamsLeft.bottomMargin = 20;
@@ -55,7 +55,7 @@ public class GameUI {
 
         final ImageView warningColorChangeButtonRight = view.findViewById(R.id.warning_color_change_button_right);
         RelativeLayout.LayoutParams colorChangeParamsRight = new RelativeLayout.LayoutParams
-                (Constants.SCREEN_WIDTH / 15, 3 * (Constants.SCREEN_HEIGHT / 4));
+                (Constants.GAME_VIEW_WIDTH/15, 3 * (Constants.GAME_VIEW_HEIGHT/ 4));
         colorChangeParamsRight.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         colorChangeParamsRight.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         colorChangeParamsRight.bottomMargin = 20;
@@ -68,7 +68,7 @@ public class GameUI {
         RelativeLayout.LayoutParams warningComponentParameters = new RelativeLayout.LayoutParams(Constants.SCREEN_WIDTH / 2, Constants.SCREEN_WIDTH / 15);
         warningComponentParameters.addRule(RelativeLayout.CENTER_HORIZONTAL);
         warningComponentParameters.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        warningComponentParameters.topMargin = Constants.SCREEN_HEIGHT / 60;
+        warningComponentParameters.topMargin = Constants.GAME_VIEW_HEIGHT/ 60;
         warningComponent.setLayoutParams(warningComponentParameters);
         ((GradientDrawable) ((LayerDrawable) warningComponent.getDrawable()).getDrawable(0)).setColors(UIComponentColors);
     }
@@ -76,7 +76,7 @@ public class GameUI {
     private void setupBottomBar(Activity activity) {
         final ImageView bottom = view.findViewById(R.id.bottom_image);
         RelativeLayout.LayoutParams bottomParams = new RelativeLayout.LayoutParams
-                (Constants.SCREEN_WIDTH, 20);
+                (Constants.GAME_VIEW_WIDTH, 20);
         bottomParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         bottom.setLayoutParams(bottomParams);
 

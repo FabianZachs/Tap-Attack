@@ -43,8 +43,8 @@ public abstract class GameMode {
             WarningColorComponent warningColorComponent = new WarningColorComponent(view,(new ThemeManager()).getColors());
             mediator.addObject(warningColorComponent);
             Constants.SHAPE_CREATION_AREA = new Rect(
-                    view.findViewById(R.id.warning_color_change_button_left).getWidth() + shapeRadius,
-                    0,Constants.GAME_VIEW_WIDTH - view.findViewById(R.id.warning_color_change_button_right).getWidth() - shapeRadius,
+                    Constants.GAME_VIEW_WIDTH/15+ shapeRadius,
+                    0,Constants.GAME_VIEW_WIDTH - Constants.GAME_VIEW_WIDTH/15 - shapeRadius,
                     0);
 
         }

@@ -100,17 +100,17 @@ public class Constants {
     public static int SHAPE_THEME_POINTS_COST = 1000;
 
     //public static String[] BACKGROUNDS  = {"backgroundtriangleblue"};
-    public static String[] BACKGROUNDS  = {"tri-blue", "tri-point", "tri-old", "tri-gold", "tri-edge", "tri-red", "tri-green", "tri-art1", "tri-art2","tri-sky","sky","fade1"};
-    public static String[] BACKGROUNDS_FILES = {"backgroundtriangleblue", "backgroundtrianglepointy", "backgroundtriangleblackandwhite",
+    public static String[] BACKGROUNDS  = {"tri-blue", /*"tri-point", "tri-old", "tri-gold", "tri-edge", "tri-red", "tri-green", "tri-art1", "tri-art2","tri-sky",*/"sky","fade1"};
+    public static String[] BACKGROUNDS_FILES = {"backgroundtriangleblue", /*"backgroundtrianglepointy", "backgroundtriangleblackandwhite",
             "backgroundtrianglecaramel", "backgroundtriangleedge", "backgroundtrianglered", "backgroundtrianglegreen", "backgroundtriangleart1",
-            "backgroundtriangleart2", "backgroundtrianglesky", "skybackground", "background_test"};
-    public static Integer[] BACKGROUNDS_ID = {R.drawable.backgroundtriangleblue, R.drawable.backgroundtrianglepointy, R.drawable.backgroundtriangleblackandwhite,
+            "backgroundtriangleart2", "backgroundtrianglesky", */"skybackground", "background_test"};
+    public static Integer[] BACKGROUNDS_ID = {R.drawable.backgroundtriangleblue, /*R.drawable.backgroundtrianglepointy, R.drawable.backgroundtriangleblackandwhite,
             R.drawable.backgroundtrianglecaramel, R.drawable.backgroundtriangleedge, R.drawable.backgroundtrianglered, R.drawable.backgroundtrianglegreen, R.drawable.backgroundtriangleart1,
-            R.drawable.backgroundtriangleart2, R.drawable.backgroundtrianglesky, R.drawable.skybackground, R.drawable.background_test};
-    public static int[] BACKGROUNDS_PRICE_POINTS = {5000, 5000, 5000, 5000,5000, 5000,5000, 5000,5000, 5000,5000,5000};
-    public static int[] BACKGROUNDS_PRICE_MONEY = {1, 1,  1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    public static Integer[] BACKGROUND_WARNINGCOLOR_1 = {0xff0040ff, 0xffffffff, 0xffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff, 0xffffffff};
-    public static Integer[] BACKGROUND_WARNINGCOLOR_2 =  {0xff00bcfe, 0xffffffff, 0xffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff, 0xffffffff};
+            R.drawable.backgroundtriangleart2, R.drawable.backgroundtrianglesky, */R.drawable.skybackground, R.drawable.background_test};
+    public static int[] BACKGROUNDS_PRICE_POINTS = {5000, /*5000, 5000, 5000,5000, 5000,5000, 5000,5000, 5000,*/5000,5000};
+    public static int[] BACKGROUNDS_PRICE_MONEY = {1, /*1,  1, 1, 1, 1, 1, 1, 1, 1, */1, 1};
+    public static Integer[] BACKGROUND_WARNINGCOLOR_1 = {0xff0040ff, /*0xffffffff, 0xffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,*/0xffffffff, 0xffffffff};
+    public static Integer[] BACKGROUND_WARNINGCOLOR_2 =  {0xff00bcfe, /*0xffffffff, 0xffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,*/0xffffffff, 0xffffffff};
     public static int BACKGROUND_POINTS_COST = 2000;
 
     public static Map<String, String[]> COLORS; // theme -> [] of colors

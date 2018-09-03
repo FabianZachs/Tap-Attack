@@ -45,6 +45,7 @@ public class MainGameFragment extends Fragment {
             @Override
             public void buttonAction() {
                 gameShowing = false;
+                gameModeManager = null;
                 listener.closeGame();
             }
         }));

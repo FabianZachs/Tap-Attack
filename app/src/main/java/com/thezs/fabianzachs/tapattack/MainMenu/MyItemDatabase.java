@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.MainMenu;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.Database.MyDBHandler;
@@ -16,7 +17,7 @@ public class MyItemDatabase {
     private MyDBHandler myDBHandler;
 
     public MyItemDatabase(Activity activity, SharedPreferences prefs) {
-        //prefs.edit().putBoolean("firstTime", true).apply(); // for testing
+        prefs.edit().putBoolean("firstTime", true).apply(); // for testing
 
         if (prefs.getBoolean("firstTime", true)) {
             myDBHandler = new MyDBHandler(activity, null, null, 2);

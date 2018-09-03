@@ -84,8 +84,9 @@ public class ShapesManager {
     public void draw(Canvas canvas) {
         for (ShapeObject shape : shapes)
             shape.draw(canvas);
-        for (GraveObject grave : graves)
+        for (GraveObject grave : graves){
             grave.draw(canvas);
+        }
     }
 
     public CopyOnWriteArrayList<ShapeObject> getShapes() {

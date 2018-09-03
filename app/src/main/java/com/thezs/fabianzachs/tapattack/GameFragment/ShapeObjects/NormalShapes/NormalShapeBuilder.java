@@ -51,8 +51,7 @@ public class NormalShapeBuilder {
             case "arrow":
                 return new Arrow(centerLocation, new Bitmap[] {
                         shapeBitmapManager.getBitmap(shape+direction, false),
-                        null
-                },
+                        },
                         color, themeManager.getShapePaint(paint, color), bitmapHolder, shapeRadius,
                         direction);
         }

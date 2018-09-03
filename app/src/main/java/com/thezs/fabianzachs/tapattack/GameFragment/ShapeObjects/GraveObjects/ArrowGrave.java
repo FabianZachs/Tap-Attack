@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.GraveObjects;
 
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.Arrow;
 
@@ -13,6 +14,7 @@ public class ArrowGrave extends GraveObject {
 
     public ArrowGrave(Arrow shape) {
         super(shape, 0.3f);
+        //Log.d("arrowgrave", "ArrowGrave: ");
         this.TRAVEL_VECTOR = new int[2];
         this.shapeRadius = shape.getShapeRadius();
         Point startPoint = shape.getCenterLocation();
@@ -37,8 +39,7 @@ public class ArrowGrave extends GraveObject {
 
     private Paint getAlphaPaint(Paint paint) {
         paint.setAlpha(255);
-        int alpha = (int) ((255/GRAVE_DURATION) * getTimeLeft());
-        paint.setAlpha(alpha);
+        paint.setAlpha((int) ((255 * getTimeLeft()) / 1000));
         return paint;
     }
 
