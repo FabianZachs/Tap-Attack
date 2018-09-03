@@ -11,7 +11,7 @@ public class Mediator {
         resetStartTime();
     }
 
-    public void setGameOver() {
+    public void setGameOver(final String gameOverReason) {
         isGameOver = true;
     }
 

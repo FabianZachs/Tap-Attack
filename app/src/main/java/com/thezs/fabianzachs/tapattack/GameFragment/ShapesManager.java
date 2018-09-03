@@ -74,7 +74,7 @@ public class ShapesManager {
 
         if (!shapeInteractment && event.getAction() == MotionEvent.ACTION_DOWN) {
             // todo shapeToBlink = getFurthestDownShape
-            mediator.setGameOver(); // todo pass in reason
+            mediator.setGameOver(GameOver.backgroundTapReason()); // todo pass in reason
         }
 
     }

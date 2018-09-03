@@ -38,7 +38,6 @@ public class ShapesPopulator {
 
         this.yStepSize = 2*shapeRadius + shapeSpacing;
 
-        // todo populateInitialShapes
         populateInitialShapes(shapes);
 
 
@@ -46,7 +45,7 @@ public class ShapesPopulator {
 
     public void update(CopyOnWriteArrayList<ShapeObject> shapes) {
 
-        if (!readyToAddAnotherShape())
+        if (!readyToAddAnotherShape(shapes))
             return;
 
 
@@ -55,36 +54,26 @@ public class ShapesPopulator {
         shapes.add(0,newShape);
     }
 
-    /* TODO: PUT PUBLIC SETTERS FOR SHAPERADIUS SHAPEPICKER COLORPICKER to change during game
-     TODO: actually better if we do this in the gamemode class, since this is a reference it will do the same
-
-     */
-
-
-
     private void populateInitialShapes(CopyOnWriteArrayList<ShapeObject> shapes) {
         ArrayList<Integer> yLocations = getInitialYAxisShapeLocations();
 
         for (Integer y : yLocations) {
-            // todo add to shapes a shape at the point(x,y) centerlocation
-
+            ShapeObject newShape = shapeBuilder.buildShape(shapePicker.getShape(), colorPicker.getColor(),
+                    new Point(getValidNewShapeLocation().x, y), recycledPaint.getUnusedPaint(), recycledRect.getUnusedRect(), shapeRadius, getDirection());
+            shapes.add(0,newShape);
         }
     }
 
     private Point getValidNewShapeLocation() {
+        int yLevelOfShapeCreation = -(shapeSpacing+shapeRadius);
 
-        return null;
+        int x = random.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left;
+
+        return new Point(x,yLevelOfShapeCreation);
     }
 
-    private boolean readyToAddAnotherShape() {
-        // todo use to manually ask if we should add another shape
-        return true;
-    }
-
-    public void setListOfShapesToAdd() {
-        // todo lists of shapes, colors, shaperadius, direction etc. if element i is null, use function
-        // todo like shapePicker.getShape()
-        // todo or add the lists to the shapePicker directly <-- better
+    private boolean readyToAddAnotherShape(CopyOnWriteArrayList<ShapeObject> shapes) {
+        return shapes.get(0).getBitmapHolder().top>0;
     }
 
     private String getDirection() {

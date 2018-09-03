@@ -61,7 +61,7 @@
   <string name="xTapGameOver">DON\'T TAP THE X</string>
   <string name="warningColorTapGameOver">THE %1$s HAD THE WARNING COLOR</string>
   <string name="shapeLeftScreenGameOver">LOOKS LIKE A %1$s LEFT THE SCREEN</string>
-  <string name="wrongShapeTapGameOver">YOU FORGOT TO TAP THE %1$s FURTHEST DOWN</string>
+  <string name="wrongShapeTapGameOver">YOU FORGOT TO TAP THE SHAPE FURTHEST DOWN</string>
   <string name="backgroundTapGameOver">YOU MISSED THE SHAPE</string>
   <string name="wrongFlingDirectionGameOver">WRONG FLING DIRECTION FOR THE ARROW</string>
   <string name="wrongShapeActionGameOver">DON\'T %1$s THE %2$s  </string>

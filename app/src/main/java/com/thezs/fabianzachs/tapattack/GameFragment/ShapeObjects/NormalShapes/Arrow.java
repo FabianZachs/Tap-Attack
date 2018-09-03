@@ -90,7 +90,7 @@ public class Arrow extends ShapeObject {
                     reduceLives();
                 }
                 else {
-                    setIncorrectTouchAndReason("fling" + Math.atan2(event1.getY()-event2.getY(),event2.getX()-event1.getX()) );
+                    setIncorrectTouchAndReason("fling" /*+ Math.atan2(event1.getY()-event2.getY(),event2.getX()-event1.getX()) */);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
