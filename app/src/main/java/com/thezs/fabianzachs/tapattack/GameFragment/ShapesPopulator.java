@@ -44,19 +44,15 @@ public class ShapesPopulator {
 
     }
 
-    public CopyOnWriteArrayList<ShapeObject> update(CopyOnWriteArrayList<ShapeObject> shapes) {
+    public void update(CopyOnWriteArrayList<ShapeObject> shapes) {
 
         if (!readyToAddAnotherShape())
-            return shapes;
+            return;
 
 
         ShapeObject newShape = shapeBuilder.buildShape(shapePicker.getShape(), colorPicker.getColor(),
                 getValidNewShapeLocation(), recycledPaint.getUnusedPaint(), recycledRect.getUnusedRect(), shapeRadius, getDirection());
         shapes.add(0,newShape);
-        return shapes;
-
-
-
     }
 
     /* TODO: PUT PUBLIC SETTERS FOR SHAPERADIUS SHAPEPICKER COLORPICKER to change during game

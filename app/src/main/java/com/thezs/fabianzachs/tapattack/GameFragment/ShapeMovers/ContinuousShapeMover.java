@@ -5,17 +5,16 @@ import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ContinuousShapeMover implements ShapeMover {
 
-    private long startTime;
     private long timeAtLastUpdate;
     private Speed speed;
     private Mediator mediator;
 
     public ContinuousShapeMover(Mediator mediator) {
         this.mediator = mediator;
-        resetStartTime();
         timeAtLastUpdate = System.currentTimeMillis();
     }
 
@@ -24,7 +23,7 @@ public class ContinuousShapeMover implements ShapeMover {
     }
 
     @Override
-    public void update(ArrayList<ShapeObject> shapes) {
+    public void update(CopyOnWriteArrayList<ShapeObject> shapes) {
         int timeSinceLastFrame = (int) (System.currentTimeMillis() - timeAtLastUpdate);
         timeAtLastUpdate = System.currentTimeMillis();
 
@@ -34,12 +33,6 @@ public class ContinuousShapeMover implements ShapeMover {
 
 
     }
-
-    public void resetStartTime() {
-        this.startTime = System.currentTimeMillis();
-    }
-
-
 
     public interface Speed {
         float getCurrentSpeed();

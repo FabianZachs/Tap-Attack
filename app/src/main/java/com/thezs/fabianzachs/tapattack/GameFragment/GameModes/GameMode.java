@@ -27,6 +27,7 @@ public abstract class GameMode {
     private Mediator mediator;
     private ShapesManager shapesManager;
     private StartGame startGame = new StartGame();
+    private GameOver gameOver = new GameOver();
 
 
     private ArrayList<ShapeObject> shapes;
@@ -37,7 +38,7 @@ public abstract class GameMode {
                     ShapePicker shapePicker, ColorPicker colorPicker, int shapeRadius, int shapeSpacing) {
         this.warningColorEnabled = warningColorEnabled;
         this.mediator = new Mediator();
-        this.shapesManager = new ShapesManager(shapeMover, shapePicker, colorPicker,
+        this.shapesManager = new ShapesManager(mediator, gameOver,shapeMover, shapePicker, colorPicker,
                 shapeRadius, shapeSpacing);
         if (warningColorEnabled) {
             new WarningColorComponent(view,themeManager.getColors());
@@ -67,7 +68,7 @@ public abstract class GameMode {
             shapesManager.draw(canvas);
         }
         else
-            GameOver.drawGameOver(canvas, shapesManager.getShapes(), shapesManager.getShapeToBlink());
+            gameOver.drawGameOver(canvas, shapesManager.getShapes(), shapesManager.getShapeToBlink());
 
         if (!mediator.hasGameStarted()) {
             startGame.draw(canvas);

@@ -74,8 +74,16 @@ public abstract class ShapeObject {
         return shapeImages[shapeImages.length - 1];
     }
 
+    public boolean isGraveable() {
+        return graveable;
+    }
+
     public Rect getBitmapHolder() {
         return bitmapHolder;
+    }
+
+    public int getLives() {
+        return lives;
     }
 
     void reduceLives() {

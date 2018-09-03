@@ -4,6 +4,7 @@ import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class DiscreteShapeMover implements ShapeMover {
 
@@ -27,7 +28,7 @@ public class DiscreteShapeMover implements ShapeMover {
     */
 
     @Override
-    public void update(ArrayList<ShapeObject> shapes) {
+    public void update(CopyOnWriteArrayList<ShapeObject> shapes) {
 
         if (shapes.size()!=0 && missingShapeInFurthestDownSlot(shapes)) {
             moveAllShapesDownAStep(shapes);
@@ -41,16 +42,16 @@ public class DiscreteShapeMover implements ShapeMover {
     */
 
 
-    private boolean missingShapeInFurthestDownSlot(ArrayList<ShapeObject> shapes) {
+    private boolean missingShapeInFurthestDownSlot(CopyOnWriteArrayList<ShapeObject> shapes) {
        //return  getFurthestDownShape(shapes).getBitmapHolder().bottom < yAxisShapeLocations.get(0);
         return  getFurthestDownShape(shapes).getBitmapHolder().bottom < furtherDownCenterLocation;
     }
 
-    private ShapeObject getFurthestDownShape(ArrayList<ShapeObject> shapes) {
+    private ShapeObject getFurthestDownShape(CopyOnWriteArrayList<ShapeObject> shapes) {
         return shapes.get(shapes.size()-1);
     }
 
-    private void moveAllShapesDownAStep(ArrayList<ShapeObject> shapes) {
+    private void moveAllShapesDownAStep(CopyOnWriteArrayList<ShapeObject> shapes) {
         for (ShapeObject shape : shapes) {
             shape.incrementY(yStepSize);
         }
