@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
+import com.thezs.fabianzachs.tapattack.GameFragment.SoundEffectsManager;
 import com.thezs.fabianzachs.tapattack.R;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -46,9 +47,12 @@ public class GameModeManager {
         SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", MODE_PRIVATE);
         String gamemode = prefs.getString(Constants.GAME_MODE_TAG, Constants.GAMEMODES[0]);
 
+        Mediator mediator = new Mediator();
+        mediator.addObject(new SoundEffectsManager());
+
         switch (gamemode) {
             case "classic":
-               return new Endless(view, new Mediator());
+               return new Endless(view, mediator);
 
         }
 

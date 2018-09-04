@@ -40,7 +40,7 @@ public class ShapesManager {
         this.gameOver = gameOver;
         this.mediator = mediator;
 
-        this.shapesPopulator = new ShapesPopulator(shapes, recycledRect, recycledPaint, colorPicker,
+        this.shapesPopulator = new ShapesPopulator(mediator, shapes, recycledRect, recycledPaint, colorPicker,
                 shapePicker, shapeRadius, shapeSpacing);
 
         this.shapeMover = shapeMover;

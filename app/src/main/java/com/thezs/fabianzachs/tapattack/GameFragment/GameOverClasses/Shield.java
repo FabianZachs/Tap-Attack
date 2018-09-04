@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapeBuilder;
+import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.NormalShapeBuilder;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
 import com.thezs.fabianzachs.tapattack.R;
@@ -18,9 +20,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Shield {
 
     public boolean executable;
+    private Mediator mediator;
     private View view;
 
-    public Shield(View view) {
+    public Shield(Mediator mediator, View view) {
+        this.mediator = mediator;
         this.view = view;
         SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
         executable = prefs.getBoolean("shieldEnabled", true);
@@ -38,7 +42,7 @@ public class Shield {
     }
 
     private void turnShapesIntoStars(CopyOnWriteArrayList<ShapeObject> shapes) {
-        NormalShapeBuilder shapeBuilder = new NormalShapeBuilder();
+        NormalShapeBuilder shapeBuilder = new NormalShapeBuilder(mediator);
         for (int shapeIndex = 0; shapeIndex < shapes.size(); shapeIndex++) {
             ShapeObject star = shapeBuilder.buildShape("star",
                     shapes.get(shapeIndex).getColor(), shapes.get(shapeIndex).getCenterLocation(),

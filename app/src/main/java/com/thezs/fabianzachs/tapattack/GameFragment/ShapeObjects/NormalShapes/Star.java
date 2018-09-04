@@ -12,6 +12,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -23,8 +24,8 @@ public class Star extends ShapeObject {
     private Integer[] intColors;
     private int colorIndex;
 
-    public Star(Point centerLocation, Bitmap[] shapeImages, Integer color, Integer[] intColors, Paint paint, Rect bitmapHolder, int shapeRadius) {
-        super(centerLocation, shapeImages, false, 1, color, paint, bitmapHolder, shapeRadius);
+    public Star(Mediator mediator, Point centerLocation, Bitmap[] shapeImages, Integer color, Integer[] intColors, Paint paint, Rect bitmapHolder, int shapeRadius) {
+        super(mediator, centerLocation, shapeImages, false, 1, color, paint, bitmapHolder, shapeRadius);
         this.timeOfLastColorChange = 0;
         this.intColors = intColors;
         Random randIndex = new Random();
@@ -47,6 +48,7 @@ public class Star extends ShapeObject {
 
     @Override
     protected void playDeathSoundEffect() {
+        mediator.playStarSoundEffect();
 
     }
 
@@ -55,6 +57,7 @@ public class Star extends ShapeObject {
         @Override
         public boolean onDown(MotionEvent e) {
             reduceLives();
+            playDeathSoundEffect();
             return true;
         }
     }

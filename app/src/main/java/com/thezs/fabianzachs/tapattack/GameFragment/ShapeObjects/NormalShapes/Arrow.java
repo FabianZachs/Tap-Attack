@@ -9,6 +9,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
 
 
 public class Arrow extends ShapeObject {
@@ -16,8 +17,8 @@ public class Arrow extends ShapeObject {
     private String intendedFlickDirectionString;
     private double intendedFlickDirectionRadians;
 
-    public Arrow(Point centerLocation, Bitmap[] shapeImages, Integer color, Paint paint, Rect bitmapHolder, int shapeRadius, String intendedFlickDirectionString) {
-        super(centerLocation, shapeImages, true, 1, color, paint, bitmapHolder, shapeRadius);
+    public Arrow(Mediator mediator, Point centerLocation, Bitmap[] shapeImages, Integer color, Paint paint, Rect bitmapHolder, int shapeRadius, String intendedFlickDirectionString) {
+        super(mediator, centerLocation, shapeImages, true, 1, color, paint, bitmapHolder, shapeRadius);
         this.intendedFlickDirectionString = intendedFlickDirectionString;
         intendedFlickDirectionRadians = getIntendedFlickDirectionRadians(intendedFlickDirectionString);
 
@@ -26,7 +27,7 @@ public class Arrow extends ShapeObject {
 
     @Override
     protected void playDeathSoundEffect() {
-
+        mediator.playArrowSoundEffect();
     }
 
     public String getIntendedFlickDirectionString() {
@@ -88,6 +89,8 @@ public class Arrow extends ShapeObject {
             try {
                 if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY())) {
                     reduceLives();
+                    if (getLives()>=0)
+                        playDeathSoundEffect();
                 }
                 else {
                     setIncorrectTouchAndReason("fling" /*+ Math.atan2(event1.getY()-event2.getY(),event2.getX()-event1.getX()) */);

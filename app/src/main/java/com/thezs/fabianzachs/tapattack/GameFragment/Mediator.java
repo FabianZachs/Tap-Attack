@@ -12,6 +12,7 @@ public class Mediator {
     private boolean hasGameStarted = false;
     private WarningColorComponent warningColorComponent;
     private ShapeMover shapeMover;
+    private SoundEffectsManager soundEffectsManager;
 
     public Mediator() {
         resetStartTime();
@@ -55,6 +56,30 @@ public class Mediator {
 
     public void addObject(ShapeMover shapeMover) {
         this.shapeMover = shapeMover;
+    }
+
+    public void addObject(SoundEffectsManager soundEffectsManager) {
+        this.soundEffectsManager = soundEffectsManager;
+    }
+
+    public void playCircleSoundEffect() {
+        soundEffectsManager.soundEffects.playCircleTap();
+    }
+
+    public void playArrowSoundEffect() {
+        soundEffectsManager.soundEffects.playArrowSwipe();
+    }
+
+    public void playSquare1SoundEffect() {
+        soundEffectsManager.soundEffects.playSquareTapOne();
+    }
+
+    public void playSquare2SoundEffect() {
+        soundEffectsManager.soundEffects.playSquareTapTwo();
+    }
+
+    public void playStarSoundEffect() {
+        soundEffectsManager.soundEffects.playStarTap();
     }
 
 }

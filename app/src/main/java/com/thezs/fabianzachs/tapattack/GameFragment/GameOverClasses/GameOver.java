@@ -22,7 +22,7 @@ public class GameOver {
     private ShapeObject shapeToBlink;
 
     public GameOver(View view, Mediator mediator) {
-        this.shield = new Shield(view);
+        this.shield = new Shield(mediator, view);
         this.mediator = mediator;
     }
 

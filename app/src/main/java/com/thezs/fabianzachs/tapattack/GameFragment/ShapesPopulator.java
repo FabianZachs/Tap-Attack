@@ -1,7 +1,6 @@
 package com.thezs.fabianzachs.tapattack.GameFragment;
 
 import android.graphics.Point;
-import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.RecycledResources.RecycledPaint;
@@ -21,29 +20,24 @@ public class ShapesPopulator {
     private ColorPicker colorPicker;
     private ShapePicker shapePicker;
     private int shapeRadius;
-    private int shapeSpacing;
-    private int yStepSize;
     private int yLevelOfShapeCreation;
     private int yLevelToTriggerShapeCreation;
     private Random random;
 
-    public ShapesPopulator(CopyOnWriteArrayList<ShapeObject> shapes, RecycledRect recycledRect,
+    public ShapesPopulator(Mediator mediator, CopyOnWriteArrayList<ShapeObject> shapes, RecycledRect recycledRect,
                            RecycledPaint recycledPaint, ColorPicker colorPicker, ShapePicker shapePicker,
                            int shapeRadius, int shapeSpacing) {
-        this.shapeBuilder = new NormalShapeBuilder();
+        this.shapeBuilder = new NormalShapeBuilder(mediator);
         this.recycledRect = recycledRect;
         this.recycledPaint = recycledPaint;
         this.colorPicker = colorPicker;
         this.shapePicker = shapePicker;
         this.shapeRadius = shapeRadius;
-        this.shapeSpacing = shapeSpacing;
         this.random = new Random();
 
-        this.yStepSize = 2*shapeRadius + shapeSpacing;
+        int yStepSize = 2*shapeRadius + shapeSpacing;
 
-        populateInitialShapes(shapes);
-
-
+        populateInitialShapes(shapes, yStepSize);
     }
 
     public void update(CopyOnWriteArrayList<ShapeObject> shapes) {
@@ -57,8 +51,8 @@ public class ShapesPopulator {
         shapes.add(0,newShape);
     }
 
-    private void populateInitialShapes(CopyOnWriteArrayList<ShapeObject> shapes) {
-        ArrayList<Integer> yLocations = getInitialYAxisShapeLocations();
+    private void populateInitialShapes(CopyOnWriteArrayList<ShapeObject> shapes, int yStepSize) {
+        ArrayList<Integer> yLocations = getInitialYAxisShapeLocations(yStepSize);
 
         for (Integer y : yLocations) {
             ShapeObject newShape = shapeBuilder.buildShape(shapePicker.getShape(), colorPicker.getColor(),
@@ -90,7 +84,7 @@ public class ShapesPopulator {
         throw new RuntimeException("getDirection failed");
     }
 
-    private ArrayList<Integer> getInitialYAxisShapeLocations() {
+    private ArrayList<Integer> getInitialYAxisShapeLocations(int yStepSize) {
         ArrayList<Integer> yLocations = new ArrayList<>();
         Integer y = Constants.GAME_VIEW_HEIGHT;
         y = y - yStepSize;

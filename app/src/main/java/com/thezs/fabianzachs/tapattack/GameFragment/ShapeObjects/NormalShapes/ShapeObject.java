@@ -8,9 +8,11 @@ import android.graphics.Rect;
 import android.support.v4.view.GestureDetectorCompat;
 import android.view.MotionEvent;
 
+import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
+
 public abstract class ShapeObject {
 
-    //private Mediator mediator; //todo for sound effect
+    protected Mediator mediator; //todo for sound effect
 
     private Point centerLocation;
     private Bitmap[] shapeImages;
@@ -28,7 +30,8 @@ public abstract class ShapeObject {
     private boolean incorrectTouch;
     private String typeOfIncorrectTouch;
 
-    public ShapeObject(Point centerLocation, Bitmap[] shapeImages, boolean graveable, int lives, Integer color, Paint paint, Rect bitmapHolder, int shapeRadius) {
+    public ShapeObject(Mediator mediator, Point centerLocation, Bitmap[] shapeImages, boolean graveable, int lives, Integer color, Paint paint, Rect bitmapHolder, int shapeRadius) {
+        this.mediator = mediator;
         this.centerLocation = centerLocation;
         this.shapeImages = shapeImages;
         this.graveable = graveable;

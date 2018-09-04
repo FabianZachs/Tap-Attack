@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 
+import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeBitmapManager;
 import com.thezs.fabianzachs.tapattack.GameFragment.ThemeManager;
 
@@ -12,8 +13,10 @@ public class NormalShapeBuilder {
 
     private ShapeBitmapManager shapeBitmapManager;
     private ThemeManager themeManager;
+    private Mediator mediator;
 
-    public NormalShapeBuilder() {
+    public NormalShapeBuilder(Mediator mediator) {
+        this.mediator = mediator;
         this.shapeBitmapManager = new ShapeBitmapManager();
         this.themeManager = new ThemeManager();
     }
@@ -24,32 +27,32 @@ public class NormalShapeBuilder {
         switch (shape) {
 
             case "circle":
-                return new Circle(centerLocation, new Bitmap[] {
+                return new Circle(mediator, centerLocation, new Bitmap[] {
                         shapeBitmapManager.getBitmap(shape, false),
                         shapeBitmapManager.getBitmap(shape, true)
                         },
                         color, themeManager.getShapePaint(paint, color), bitmapHolder, shapeRadius);
             case "square":
-                return new Square(centerLocation, new Bitmap[] {
+                return new Square(mediator, centerLocation, new Bitmap[] {
                         shapeBitmapManager.getBitmap(shape, false),
                         shapeBitmapManager.getBitmap(shape, true)
                 },
                         color, themeManager.getShapePaint(paint, color), bitmapHolder, shapeRadius);
             case "cross":
-                return new Cross(centerLocation, new Bitmap[] {
+                return new Cross(mediator, centerLocation, new Bitmap[] {
                         shapeBitmapManager.getBitmap(shape, false),
                         null
                 },
                         color, themeManager.getShapePaint(paint, color), bitmapHolder, shapeRadius);
             case "star":
-                return new Star(centerLocation, new Bitmap[] {
+                return new Star(mediator, centerLocation, new Bitmap[] {
                         shapeBitmapManager.getBitmap(shape, false),
                         shapeBitmapManager.getBitmap(shape, true)
                 },
                         color, themeManager.getColors(), themeManager.getShapePaint(paint, color),
                         bitmapHolder, shapeRadius);
             case "arrow":
-                return new Arrow(centerLocation, new Bitmap[] {
+                return new Arrow(mediator, centerLocation, new Bitmap[] {
                         shapeBitmapManager.getBitmap(shape+direction, false),
                         },
                         color, themeManager.getShapePaint(paint, color), bitmapHolder, shapeRadius,

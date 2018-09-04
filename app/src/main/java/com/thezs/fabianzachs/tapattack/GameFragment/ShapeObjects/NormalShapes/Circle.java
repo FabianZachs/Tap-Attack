@@ -10,18 +10,20 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
 
 public class Circle extends ShapeObject {
 
-    public Circle(Point centerLocation, Bitmap[] shapeImages, Integer color, Paint paint, Rect bitmapHolder, int shapeRadius) {
-        super(centerLocation, shapeImages, true, 1, color, paint, bitmapHolder, shapeRadius);
+    public Circle(Mediator mediator, Point centerLocation, Bitmap[] shapeImages, Integer color, Paint paint, Rect bitmapHolder, int shapeRadius) {
+        super(mediator, centerLocation, shapeImages, true, 1, color, paint, bitmapHolder, shapeRadius);
 
         setmDetector(new GestureDetectorCompat(Constants.CURRENT_CONTEXT, new MyGestureListener()));
     }
 
+
     @Override
     protected void playDeathSoundEffect() {
-        // todo hook up with mediator
+        mediator.playCircleSoundEffect();
     }
 
     class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
@@ -29,6 +31,7 @@ public class Circle extends ShapeObject {
         @Override
         public boolean onDown(MotionEvent event) {
             reduceLives();
+            playDeathSoundEffect();
             return true;
         }
     }

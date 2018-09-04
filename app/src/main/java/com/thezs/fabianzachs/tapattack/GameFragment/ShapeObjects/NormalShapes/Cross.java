@@ -9,11 +9,12 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
 
 public class Cross extends ShapeObject {
 
-    public Cross(Point centerLocation, Bitmap[] shapeImages, Integer color, Paint paint, Rect bitmapHolder, int shapeRadius) {
-        super(centerLocation, shapeImages, false, 1, color, paint, bitmapHolder, shapeRadius);
+    public Cross(Mediator mediator, Point centerLocation, Bitmap[] shapeImages, Integer color, Paint paint, Rect bitmapHolder, int shapeRadius) {
+        super(mediator, centerLocation, shapeImages, false, 1, color, paint, bitmapHolder, shapeRadius);
         setmDetector(new GestureDetectorCompat(Constants.CURRENT_CONTEXT, new MyGestureListener()));
     }
 
