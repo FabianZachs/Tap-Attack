@@ -60,6 +60,11 @@ public class helper {
     }
 
 
+    public static int[] getCurrentWarningColorHolderColors(String currentBackgroundName) {
+        int index = helper.getIndexOf(Constants.BACKGROUNDS, currentBackgroundName);
+        return new int[] {Constants.BACKGROUND_WARNINGCOLOR_1[index], Constants.BACKGROUND_WARNINGCOLOR_2[index]};
+    }
+
     public static void makeFullscreen(Activity activity) {
         // task bar
         //requestWindowFeature(Window.FEATURE_NO_TITLE);

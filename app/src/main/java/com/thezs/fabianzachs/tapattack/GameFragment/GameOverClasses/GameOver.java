@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.GameFragment.GameOverClasses;
 
 import android.graphics.Canvas;
 import android.util.Log;
+import android.view.View;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
@@ -17,10 +18,11 @@ public class GameOver {
 
 
     private Mediator mediator;
-    private Shield shield = new Shield();
+    private Shield shield;
     private ShapeObject shapeToBlink;
 
-    public GameOver(Mediator mediator) {
+    public GameOver(View view, Mediator mediator) {
+        this.shield = new Shield(view);
         this.mediator = mediator;
     }
 

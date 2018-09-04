@@ -24,7 +24,7 @@ public class GameUI {
             setupWarningColorUI(activity);
         else setupNonWarningUI(activity);
 
-        setupBottomBar(activity);
+        SharedPreferences prefs = activity.getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
     }
 
     private void setupNonWarningUI(Activity activity) {
@@ -40,7 +40,7 @@ public class GameUI {
 
     private void setupWarningColorUI(Activity activity) {
         SharedPreferences prefs = activity.getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
-        int[] UIComponentColors = getCurrentWarningColorHolderColors(prefs.getString(Constants.BACKGROUND_TAG, Constants.BACKGROUNDS[0]));
+        int[] UIComponentColors = helper.getCurrentWarningColorHolderColors(prefs.getString(Constants.BACKGROUND_TAG, Constants.BACKGROUNDS[0]));
 
         final ImageView warningColorChangeButtonLeft = view.findViewById(R.id.warning_color_change_button_left);
         final RelativeLayout.LayoutParams colorChangeParamsLeft = new RelativeLayout.LayoutParams
@@ -73,27 +73,4 @@ public class GameUI {
         ((GradientDrawable) ((LayerDrawable) warningComponent.getDrawable()).getDrawable(0)).setColors(UIComponentColors);
     }
 
-    private void setupBottomBar(Activity activity) {
-        final ImageView bottom = view.findViewById(R.id.bottom_image);
-        RelativeLayout.LayoutParams bottomParams = new RelativeLayout.LayoutParams
-                (Constants.GAME_VIEW_WIDTH, 20);
-        bottomParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        bottom.setLayoutParams(bottomParams);
-
-        SharedPreferences prefs = activity.getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
-        int[] UIComponentColors = getCurrentWarningColorHolderColors(prefs.getString(Constants.BACKGROUND_TAG, Constants.BACKGROUNDS[0]));
-        if (prefs.getBoolean("shieldEnabled", true)) {
-            ((GradientDrawable)bottom.getDrawable()).setColors(new int[] {UIComponentColors[0], activity.getResources().getColor(R.color.gameshieldcolor), UIComponentColors[0]});
-        }
-        else
-            ((GradientDrawable)bottom.getDrawable()).setColors(new int[] {UIComponentColors[0], activity.getResources().getColor(R.color.gamenonshieldcolor), UIComponentColors[0]});
-
-
-
-    }
-
-    private int[] getCurrentWarningColorHolderColors(String currentBackgroundName) {
-        int index = helper.getIndexOf(Constants.BACKGROUNDS, currentBackgroundName);
-        return new int[] {Constants.BACKGROUND_WARNINGCOLOR_1[index], Constants.BACKGROUND_WARNINGCOLOR_2[index]};
-    }
 }

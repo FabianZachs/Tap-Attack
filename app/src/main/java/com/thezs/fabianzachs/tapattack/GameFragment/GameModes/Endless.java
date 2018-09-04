@@ -27,7 +27,7 @@ public class Endless extends GameMode {
         super(view, mediator, true, Constants.GAME_VIEW_WIDTH/10);
 
 
-        gameOver = new GameOver(mediator);
+        gameOver = new GameOver(view, mediator);
         ShapeMover shapeMover = new ContinuousShapeMover(mediator,3500f);
         //ShapeMover shapeMover = new DiscreteShapeMover(yStepSize, Constants.GAME_VIEW_HEIGHT - yStepSize);
         ShapePicker shapePicker = new ShapePicker("arrow");

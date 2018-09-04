@@ -29,7 +29,6 @@ public class RecycledPaint {
     }
 
     public void freePaint(Paint paint) {
-        Log.d("paintsize", "freePaint: " + (unusedPaint.size() + usedPaint.size()));
         paint.setAlpha(255);
         unusedPaint.add(paint);
         usedPaint.remove(paint);

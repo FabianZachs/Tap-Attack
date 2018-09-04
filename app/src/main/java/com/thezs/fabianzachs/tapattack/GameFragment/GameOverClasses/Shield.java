@@ -2,30 +2,39 @@ package com.thezs.fabianzachs.tapattack.GameFragment.GameOverClasses;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.drawable.shapes.Shape;
+import android.graphics.drawable.GradientDrawable;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.thezs.fabianzachs.tapattack.Constants;
-import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapeBuilder;
-import com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers.ContinuousShapeMover;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.NormalShapeBuilder;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
+import com.thezs.fabianzachs.tapattack.R;
+import com.thezs.fabianzachs.tapattack.helper;
 
-import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Shield {
 
     public boolean executable;
+    private View view;
 
-    public Shield() {
+    public Shield(View view) {
+        this.view = view;
         SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
         executable = prefs.getBoolean("shieldEnabled", true);
+        updateShieldUILayout();
+        updateShieldUIColor();
     }
+
+
 
     public void execute(CopyOnWriteArrayList<ShapeObject> shapes) {
         executable = false;
         turnShapesIntoStars(shapes);
-        // todo update buttom view bar to black USE MEDIATOR
+        updateShieldUIColor();
 
     }
 
@@ -38,6 +47,25 @@ public class Shield {
                     shapes.get(shapeIndex).getShapeRadius(),"up" );
             shapes.set(shapeIndex, star);
         }
+    }
 
+    private void updateShieldUILayout() {
+        final ImageView bottom = view.findViewById(R.id.bottom_image);
+        RelativeLayout.LayoutParams bottomParams = new RelativeLayout.LayoutParams
+                (Constants.GAME_VIEW_WIDTH, 20);
+        bottomParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        bottom.setLayoutParams(bottomParams);
+
+    }
+
+    private void updateShieldUIColor() {
+        final ImageView bottom = view.findViewById(R.id.bottom_image);
+        SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
+        int[] UIComponentColors = helper.getCurrentWarningColorHolderColors(prefs.getString(Constants.BACKGROUND_TAG, Constants.BACKGROUNDS[0]));
+        if (executable) {
+            ((GradientDrawable)bottom.getDrawable()).setColors(new int[] {UIComponentColors[0], Constants.CURRENT_CONTEXT.getResources().getColor(R.color.gameshieldcolor), UIComponentColors[0]});
+        }
+        else
+            ((GradientDrawable)bottom.getDrawable()).setColors(new int[] {UIComponentColors[0], Constants.CURRENT_CONTEXT.getResources().getColor(R.color.gamenonshieldcolor), UIComponentColors[0]});
     }
 }
