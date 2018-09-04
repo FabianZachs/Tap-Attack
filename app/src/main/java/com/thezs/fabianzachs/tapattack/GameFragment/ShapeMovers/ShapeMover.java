@@ -10,5 +10,7 @@ public interface ShapeMover {
 
     void update(CopyOnWriteArrayList<ShapeObject> shapes);
 
+    void resetTimeAtLastUpdate();
+
 
 }

@@ -7,7 +7,7 @@ import android.view.SurfaceHolder;
 
 public class MainThread extends Thread {
 
-    private static final int MAX_FPS = 40;
+    private static final int MAX_FPS = 30;
 
     private SurfaceHolder surfaceHolder;
     private GamePanel gamePanel;

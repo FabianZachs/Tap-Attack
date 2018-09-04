@@ -54,7 +54,7 @@ public class ColorPicker {
 
         @Override
         public Integer getColor() {
-            if (random.nextFloat() <= probabilityOfWarningColor)
+            if (random.nextFloat() < probabilityOfWarningColor)
                 return getWarningColor();
             else
                 return getNonWarningColor();
@@ -79,14 +79,14 @@ public class ColorPicker {
             float currentProbabilityOfWarningColor = ((maxProbability/timeUntilMaxWarningColorProb) *
                 mediator.getElapsedGameTime());
 
-            maxProbabilityReached = currentProbabilityOfWarningColor >= maxProbability;
+            maxProbabilityReached = currentProbabilityOfWarningColor > maxProbability;
 
             return currentProbabilityOfWarningColor;
         }
 
         @Override
         public Integer getColor() {
-            if (random.nextFloat() <= getWarningColorProbability())
+            if (random.nextFloat() < getWarningColorProbability())
                 return getWarningColor();
             else
                 return getNonWarningColor();

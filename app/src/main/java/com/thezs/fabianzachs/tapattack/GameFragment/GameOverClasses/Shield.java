@@ -3,7 +3,6 @@ package com.thezs.fabianzachs.tapattack.GameFragment.GameOverClasses;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;

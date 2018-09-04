@@ -87,14 +87,7 @@ public abstract class GameMode {
 
     }
 
-    private void changeGameComponent() {
-        switch (shapesManager.getNumberOfDestroyedShapes()) {
-            case 0:
-                // todo put specific gamemode code
-                break;
-            case 1:
+    abstract void changeGameComponent();
 
-        }
-    }
 
 }

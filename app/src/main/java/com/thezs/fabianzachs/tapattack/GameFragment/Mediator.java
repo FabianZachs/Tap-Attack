@@ -3,6 +3,7 @@ package com.thezs.fabianzachs.tapattack.GameFragment;
 import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers.ContinuousShapeMover;
+import com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers.ShapeMover;
 
 public class Mediator {
 
@@ -10,7 +11,7 @@ public class Mediator {
     private boolean isGameOver = false;
     private boolean hasGameStarted = false;
     private WarningColorComponent warningColorComponent;
-    private ContinuousShapeMover continuousShapeMover;
+    private ShapeMover shapeMover;
 
     public Mediator() {
         resetStartTime();
@@ -23,8 +24,7 @@ public class Mediator {
     public void startGame() {
         hasGameStarted = true;
         resetStartTime();
-        continuousShapeMover.resetTimeAtLastUpdate();
-        // todo do whatever needs to be done when we start game, like reset inittime and tell shapemover .. look at old code
+        shapeMover.resetTimeAtLastUpdate();
     }
 
     public boolean hasGameStarted() {
@@ -44,6 +44,8 @@ public class Mediator {
     }
 
     public Integer getWarningColor() {
+        if (warningColorComponent == null)
+            throw new IllegalArgumentException("this game mode has no warning color");
         return warningColorComponent.getCurrentWarningColor();
     }
 
@@ -51,9 +53,8 @@ public class Mediator {
         this.warningColorComponent = warningColorComponent;
     }
 
-    public void addObject(ContinuousShapeMover continuousShapeMover) {
-        Log.d("moveradded", "addObject: added");
-        this.continuousShapeMover= continuousShapeMover;
+    public void addObject(ShapeMover shapeMover) {
+        this.shapeMover = shapeMover;
     }
 
 }

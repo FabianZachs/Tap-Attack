@@ -59,7 +59,6 @@ public class CustomGridAdapter extends BaseAdapter {
     }
 
     public void setSelectedItemPosition(int position) {
-        Log.d("purchaseunlock", "setSelectedItemPosition: " + position);
         selectedItemPosition = position;
     }
 

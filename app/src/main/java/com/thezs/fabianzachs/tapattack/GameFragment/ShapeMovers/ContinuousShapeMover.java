@@ -13,10 +13,12 @@ public class ContinuousShapeMover implements ShapeMover {
     private Speed speed;
     private Mediator mediator;
 
-    public ContinuousShapeMover(Mediator mediator) {
+    public ContinuousShapeMover(Mediator mediator, float startSecondsToMoveEntireScreen,
+                                float finalSecondsToMoveEntireScreen, int timeUntilFinal) {
         this.mediator = mediator;
-        mediator.addObject(this);
         timeAtLastUpdate = System.currentTimeMillis();
+        mediator.addObject(this);
+        speed = new GrowingSpeed(startSecondsToMoveEntireScreen, finalSecondsToMoveEntireScreen, timeUntilFinal);
     }
 
     public ContinuousShapeMover(Mediator mediator, float secondsToMoveEntireScreen) {
@@ -26,6 +28,7 @@ public class ContinuousShapeMover implements ShapeMover {
         speed = new ConstantSpeed(secondsToMoveEntireScreen);
     }
 
+    // todo fix to setting current constant speed to the new one
     public void setSpeed(Speed speed) {
         this.speed = speed;
     }
@@ -41,6 +44,7 @@ public class ContinuousShapeMover implements ShapeMover {
 
     }
 
+    @Override
     public void resetTimeAtLastUpdate() {
         this.timeAtLastUpdate = System.currentTimeMillis();
     }
@@ -62,62 +66,31 @@ public class ContinuousShapeMover implements ShapeMover {
         }
     }
 
-    public class ConstantSlowSpeed implements Speed {
+    public class GrowingSpeed implements Speed {
 
-        float speed = Constants.GAME_VIEW_HEIGHT/3500.0f;
-        public ConstantSlowSpeed(){
+        private int TIME_UNTIL_MAX_SPEED;
+        private float startSecondsToMoveEntireScreen;
+        private float finalSecondsToMoveEntireScreen;
 
+        public GrowingSpeed(float startSecondsToMoveEntireScreen, float finalSecondsToMoveEntireScreen,
+                            int timeUntilFinal) {
+
+            this.TIME_UNTIL_MAX_SPEED = timeUntilFinal;
+            this.startSecondsToMoveEntireScreen = startSecondsToMoveEntireScreen;
+            this.finalSecondsToMoveEntireScreen = finalSecondsToMoveEntireScreen;
         }
 
         @Override
         public float getCurrentSpeed() {
-            return speed;
-        }
-    }
 
-    public class ConstantMediumSpeed implements Speed {
 
-        float speed = Constants.GAME_VIEW_HEIGHT/2800.0f;
+            if (mediator.getElapsedGameTime()>TIME_UNTIL_MAX_SPEED)
+                return Constants.GAME_VIEW_HEIGHT/finalSecondsToMoveEntireScreen;
 
-        @Override
-        public float getCurrentSpeed() {
-            return speed;
-        }
-    }
-    public class ConstantFastSpeed implements Speed {
-        float speed = Constants.GAME_VIEW_HEIGHT/1500.0f;
+            float denominator = ((finalSecondsToMoveEntireScreen - startSecondsToMoveEntireScreen)/TIME_UNTIL_MAX_SPEED)
+                    * mediator.getElapsedGameTime() + startSecondsToMoveEntireScreen;
 
-        @Override
-        public float getCurrentSpeed() {
-            return speed;
-        }
-    }
-    public class GrowingSlowSpeed implements Speed {
-
-        private int TIME_UNTIL_MAX_SPEED = 2000;
-        private int MIN_DENOMINATOR= 500;
-        private int MAX_DENOMINATOR = 3500;
-        private boolean maxSpeedReached = false;
-
-        @Override
-        public float getCurrentSpeed() {
-            float denominator = (float) (((MAX_DENOMINATOR - MIN_DENOMINATOR)/(-TIME_UNTIL_MAX_SPEED))
-                    *mediator.getElapsedGameTime()+MAX_DENOMINATOR);
             return Constants.GAME_VIEW_HEIGHT/denominator;
-        }
-    }
-    public class GrowingMediumSpeed implements Speed {
-
-        @Override
-        public float getCurrentSpeed() {
-            return 0;
-        }
-    }
-    public class GrowingFastSpeed implements Speed {
-
-        @Override
-        public float getCurrentSpeed() {
-            return 0;
         }
     }
 }

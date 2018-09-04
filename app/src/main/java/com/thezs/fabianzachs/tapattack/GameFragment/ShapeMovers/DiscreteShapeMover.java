@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers;
 
 import com.thezs.fabianzachs.tapattack.Constants;
+import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
 
 import java.util.ArrayList;
@@ -12,7 +13,8 @@ public class DiscreteShapeMover implements ShapeMover {
     private int yStepSize;
     private int furtherDownCenterLocation;
 
-    public DiscreteShapeMover(int yStepSize, int furtherDownCenterLocation/*, int shapeRadius, int shapeSpacing*/) {
+    public DiscreteShapeMover(Mediator mediator, int yStepSize, int furtherDownCenterLocation/*, int shapeRadius, int shapeSpacing*/) {
+        mediator.addObject(this);
         this.yStepSize = yStepSize;
         this.furtherDownCenterLocation = furtherDownCenterLocation;
         // todo use shapepopulator.getYstepSize and furthestDownCenterLocation
@@ -33,6 +35,10 @@ public class DiscreteShapeMover implements ShapeMover {
         if (shapes.size()!=0 && missingShapeInFurthestDownSlot(shapes)) {
             moveAllShapesDownAStep(shapes);
         }
+    }
+
+    @Override
+    public void resetTimeAtLastUpdate() {
     }
 
     /*
