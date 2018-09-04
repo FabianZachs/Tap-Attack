@@ -28,9 +28,8 @@ public class ContinuousShapeMover implements ShapeMover {
         speed = new ConstantSpeed(secondsToMoveEntireScreen);
     }
 
-    // todo fix to setting current constant speed to the new one
-    public void setSpeed(Speed speed) {
-        this.speed = speed;
+    public void setConstantSpeed(float secondsToMoveEntireScreen) {
+        speed.setSpeed(secondsToMoveEntireScreen);
     }
 
     @Override
@@ -51,12 +50,17 @@ public class ContinuousShapeMover implements ShapeMover {
 
     public interface Speed {
         float getCurrentSpeed();
+        void setSpeed(float secondsToMoveEntireScreen);
     }
 
     public class ConstantSpeed implements Speed {
         float speed;
 
         public ConstantSpeed(float secondsToMoveEntireScreen) {
+            this.speed = Constants.GAME_VIEW_HEIGHT/secondsToMoveEntireScreen;
+        }
+
+        public void setSpeed(float secondsToMoveEntireScreen) {
             this.speed = Constants.GAME_VIEW_HEIGHT/secondsToMoveEntireScreen;
         }
 
@@ -91,6 +95,10 @@ public class ContinuousShapeMover implements ShapeMover {
                     * mediator.getElapsedGameTime() + startSecondsToMoveEntireScreen;
 
             return Constants.GAME_VIEW_HEIGHT/denominator;
+        }
+
+        @Override
+        public void setSpeed(float secondsToMoveEntireScreen) {
         }
     }
 }

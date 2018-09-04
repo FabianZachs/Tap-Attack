@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.GameFragment;
 
 import android.graphics.Point;
+import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.RecycledResources.RecycledPaint;
@@ -22,6 +23,8 @@ public class ShapesPopulator {
     private int shapeRadius;
     private int shapeSpacing;
     private int yStepSize;
+    private int yLevelOfShapeCreation;
+    private int yLevelToTriggerShapeCreation;
     private Random random;
 
     public ShapesPopulator(CopyOnWriteArrayList<ShapeObject> shapes, RecycledRect recycledRect,
@@ -65,15 +68,13 @@ public class ShapesPopulator {
     }
 
     private Point getValidNewShapeLocation() {
-        int yLevelOfShapeCreation = -(shapeSpacing+shapeRadius);
-
         int x = random.nextInt(Constants.SHAPE_CREATION_AREA.right - Constants.SHAPE_CREATION_AREA.left) + Constants.SHAPE_CREATION_AREA.left;
 
         return new Point(x,yLevelOfShapeCreation);
     }
 
     private boolean readyToAddAnotherShape(CopyOnWriteArrayList<ShapeObject> shapes) {
-        return (shapes.size() == 0 ) || (shapes.get(0).getBitmapHolder().top>0);
+        return (shapes.size() == 0 ) || (shapes.get(0).getCenterLocation().y>=yLevelToTriggerShapeCreation);
     }
 
     private String getDirection() {
@@ -92,17 +93,15 @@ public class ShapesPopulator {
     private ArrayList<Integer> getInitialYAxisShapeLocations() {
         ArrayList<Integer> yLocations = new ArrayList<>();
         Integer y = Constants.GAME_VIEW_HEIGHT;
-        y = y - yStepSize; // todo use this for furthestdownyCenterLocation for discrete mover
+        y = y - yStepSize;
 
-        while (y>0) {
+        while (y>-(yStepSize)) {
             yLocations.add(y);
             y = y - yStepSize;
         }
+        yLevelToTriggerShapeCreation = y+yStepSize;
+        yLevelOfShapeCreation = y;
         return yLocations;
-    }
-
-    public int getyStepSize() {
-        return yStepSize;
     }
 
 }

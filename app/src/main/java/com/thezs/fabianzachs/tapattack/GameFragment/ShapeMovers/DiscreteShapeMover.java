@@ -9,25 +9,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class DiscreteShapeMover implements ShapeMover {
 
-    //private  ArrayList<Integer> yAxisShapeLocations;
     private int yStepSize;
     private int furtherDownCenterLocation;
 
-    public DiscreteShapeMover(Mediator mediator, int yStepSize, int furtherDownCenterLocation/*, int shapeRadius, int shapeSpacing*/) {
+    public DiscreteShapeMover(Mediator mediator, int yStepSize) {
         mediator.addObject(this);
         this.yStepSize = yStepSize;
-        this.furtherDownCenterLocation = furtherDownCenterLocation;
-        // todo use shapepopulator.getYstepSize and furthestDownCenterLocation
-        //setyStepSize(shapeRadius, shapeSpacing);
-        //setyAxisShapeLocations(/*shapeRadius, shapeSpacing*/);
-
+        this.furtherDownCenterLocation = Constants.GAME_VIEW_HEIGHT - yStepSize;
     }
-
-    /*
-    public ArrayList<Integer> getyAxisShapeLocations() {
-        return yAxisShapeLocations;
-    }
-    */
 
     @Override
     public void update(CopyOnWriteArrayList<ShapeObject> shapes) {
@@ -41,15 +30,8 @@ public class DiscreteShapeMover implements ShapeMover {
     public void resetTimeAtLastUpdate() {
     }
 
-    /*
-    private void setyStepSize(int shapeRadius, int shapeSpacing) {
-        yStepSize = 2*shapeRadius + shapeSpacing;
-    }
-    */
-
 
     private boolean missingShapeInFurthestDownSlot(CopyOnWriteArrayList<ShapeObject> shapes) {
-       //return  getFurthestDownShape(shapes).getBitmapHolder().bottom < yAxisShapeLocations.get(0);
         return  getFurthestDownShape(shapes).getBitmapHolder().bottom < furtherDownCenterLocation;
     }
 

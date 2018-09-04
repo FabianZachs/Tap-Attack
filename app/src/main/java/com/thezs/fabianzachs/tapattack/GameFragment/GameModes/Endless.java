@@ -31,8 +31,8 @@ public class Endless extends GameMode {
 
         gameOver = new GameOver(view, mediator);
         //shapeMover = new ContinuousShapeMover(mediator,3500f);
-        shapeMover = new ContinuousShapeMover(mediator,5500f,1000f,3000);
-        //ShapeMover shapeMover = new DiscreteShapeMover(mediator, yStepSize, Constants.GAME_VIEW_HEIGHT - yStepSize);
+        //shapeMover = new ContinuousShapeMover(mediator,5500f,1000f,3000);
+        ShapeMover shapeMover = new DiscreteShapeMover(mediator, yStepSize);
         ShapePicker shapePicker = new ShapePicker("circle");
         ColorPicker colorPicker = new ColorPicker(mediator, (new ThemeManager()).getColors(), 1.0f);
 
