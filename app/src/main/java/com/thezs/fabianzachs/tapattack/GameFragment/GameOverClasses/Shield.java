@@ -39,6 +39,8 @@ public class Shield {
         turnShapesIntoStars(shapes);
         updateShieldUIColor();
 
+        SharedPreferences prefs = Constants.CURRENT_CONTEXT.getSharedPreferences("playerInfo", Context.MODE_PRIVATE);
+        prefs.edit().putInt("shields", prefs.getInt("shields",0)-1).apply();
     }
 
     private void turnShapesIntoStars(CopyOnWriteArrayList<ShapeObject> shapes) {

@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.R;
 
+import java.io.InputStream;
 import java.net.URI;
 
 /**
