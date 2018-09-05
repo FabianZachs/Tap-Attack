@@ -74,6 +74,24 @@ public class IntroLevels extends GameMode {
                 return new IntroLevels(view, mediator, 30, "square", 2500f, true,.2f);
             case 12:
                 return new IntroLevels(view, mediator, 30, "arrow", 2500f, true,.2f);
+            case 13:
+                return new IntroLevels(view, mediator, 50, "circle", 1000f,false,0f);
+            case 14:
+                return new IntroLevels(view, mediator, 100, "circle", 1000f,false,0f);
+            case 15:
+                return new IntroLevels(view, mediator, 50, "circle", 1200f,true,1f);
+            case 16:
+                return new IntroLevels(view, mediator, 50, "circle", 1500f,true,.2f);
+            case 17:
+                return new IntroLevels(view, mediator, 50, "circle", 1500f,true,.4f);
+            case 18:
+                return new IntroLevels(view, mediator, 50, "arrow", 1500f,false,0f);
+            case 19:
+                return new IntroLevels(view, mediator, 25, "arrow", 1700f,true,1f);
+            case 20:
+                return new IntroLevels(view, mediator, 25, "arrow", 2000f,true,.2f);
+            case 21:
+                return new IntroLevels(view, mediator, 25, "arrow", 2000f,true,.4f);
         }
         throw new IllegalArgumentException("unknown intro level");
     }
