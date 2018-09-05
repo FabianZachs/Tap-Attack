@@ -52,8 +52,8 @@ public class GameModeManager {
 
         switch (gamemode) {
             case "classic":
-                //return IntroLevels.buildIntroLevel(view, mediator,1);
-                return new Endless(view, mediator);
+                return IntroLevels.buildIntroLevel(view, mediator,12);
+                //return new Endless(view, mediator);
                //return new Story2(view, mediator);
 
         }

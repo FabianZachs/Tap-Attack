@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.support.v4.view.GestureDetectorCompat;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -52,7 +53,6 @@ public abstract class ShapeObject extends View {
     public void draw(Canvas canvas) {
         super.draw(canvas);
         canvas.drawBitmap(getCurrentShapeImg(), null, bitmapHolder, paint);
-        invalidate(getBitmapHolder());
 
     }
 
@@ -64,7 +64,7 @@ public abstract class ShapeObject extends View {
 
     }
 
-    public void incrementY(float amount) {
+    public void incrementY(double amount) {
         centerLocation.y += amount;
         //bitmapHolder.bottom += amount;
         //bitmapHolder.top += amount;

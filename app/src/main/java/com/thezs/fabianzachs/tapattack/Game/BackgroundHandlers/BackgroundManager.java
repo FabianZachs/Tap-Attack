@@ -2,6 +2,7 @@ package com.thezs.fabianzachs.tapattack.Game.BackgroundHandlers;
 
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
@@ -65,8 +66,9 @@ public class BackgroundManager {
         return gameBackground.getBackground();
     }
 
+    private Bitmap background = BitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(),R.drawable.backgroundtriangleblue);
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(gameBackground.getBackground(), null,
+        canvas.drawBitmap(background,null,
                 entireScreenRect, null);
     }
 }

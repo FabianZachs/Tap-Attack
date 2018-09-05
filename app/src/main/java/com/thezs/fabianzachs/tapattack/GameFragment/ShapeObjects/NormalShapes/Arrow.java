@@ -18,7 +18,7 @@ public class Arrow extends ShapeObject {
     private double intendedFlickDirectionRadians;
 
     public Arrow(Mediator mediator, Point centerLocation, Bitmap[] shapeImages, Integer color, Paint paint, Rect bitmapHolder, int shapeRadius, String intendedFlickDirectionString) {
-        super(mediator, centerLocation, shapeImages, false, 1, color, paint, bitmapHolder, shapeRadius);
+        super(mediator, centerLocation, shapeImages, true, 1, color, paint, bitmapHolder, shapeRadius);
         this.intendedFlickDirectionString = intendedFlickDirectionString;
         intendedFlickDirectionRadians = getIntendedFlickDirectionRadians(intendedFlickDirectionString);
 

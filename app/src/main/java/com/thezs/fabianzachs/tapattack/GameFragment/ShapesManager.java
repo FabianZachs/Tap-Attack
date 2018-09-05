@@ -52,8 +52,8 @@ public class ShapesManager {
 
 
     public void update() {
-        //if (gameOver.checkForGameOver(shapes))
-        //    return;
+        if (gameOver.checkForGameOver(shapes))
+            return;
 
         handleShapesUpdate();
         handleGravesUpdate();

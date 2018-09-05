@@ -1,5 +1,7 @@
 package com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers;
 
+import android.util.Log;
+
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
@@ -36,9 +38,11 @@ public class ContinuousShapeMover implements ShapeMover {
     public void update(CopyOnWriteArrayList<ShapeObject> shapes) {
         int timeSinceLastFrame = (int) (System.currentTimeMillis() - timeAtLastUpdate);
         timeAtLastUpdate = System.currentTimeMillis();
+        double incAmount = (double) speed.getCurrentSpeed()*timeSinceLastFrame;
 
         for (ShapeObject shape : shapes) {
-            shape.incrementY(speed.getCurrentSpeed()*timeSinceLastFrame);
+            //shape.incrementY( (double) speed.getCurrentSpeed()*timeSinceLastFrame);
+            shape.incrementY(incAmount);
         }
 
     }
