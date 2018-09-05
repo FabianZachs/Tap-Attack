@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.thezs.fabianzachs.tapattack.Constants;
@@ -54,7 +55,6 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     private MusicPlayer musicPlayer;
 
     private AdView bannerAdBottom;
-    private AdRequest adRequest;
 
     private GamePanel gamePanel;
 
@@ -82,7 +82,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
         initializeConstants();
 
 
-        //setupBannerAd();
+        setupBannerAd();
         setupGamePanel();
 
     }
@@ -96,9 +96,16 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     }
 
     private void setupBannerAd() {
-        bannerAdBottom = findViewById(R.id.adViewBottom);
-        bannerAdBottom.setVisibility(View.VISIBLE);
-        adRequest = new AdRequest.Builder().build();
+        final AdView bannerAdBottom = findViewById(R.id.adViewBottom);
+        bannerAdBottom.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                bannerAdBottom.setVisibility(View.VISIBLE);
+            }
+        });
+        //bannerAdBottom.setVisibility(View.VISIBLE);
+        AdRequest adRequest = new AdRequest.Builder().build();
         bannerAdBottom.loadAd(adRequest);
 
     }
@@ -126,6 +133,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
     @Override
     public void playGameClick() {
         //mainMenuFragment.
+        //bannerAdBottom.setVisibility(View.GONE);
         playButtonClick();
     }
 
@@ -137,6 +145,7 @@ public class MainMenuActivity extends GeneralParent implements StoreFragment.Sto
             getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         }
         */
+        //bannerAdBottom.setVisibility(View.VISIBLE);
         displayMainMenuFragment();
     }
 

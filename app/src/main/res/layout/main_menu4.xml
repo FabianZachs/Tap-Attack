@@ -29,8 +29,9 @@
         <com.google.android.gms.ads.AdView
             xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/adViewBottom"
-            android:background="@color/menu"
             android:layout_width="match_parent"
+            android:visibility="gone"
+            android:background="@color/transparent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             ads:adSize="BANNER"
