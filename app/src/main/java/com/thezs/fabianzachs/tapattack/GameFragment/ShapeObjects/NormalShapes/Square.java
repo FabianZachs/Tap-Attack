@@ -34,7 +34,7 @@ public class Square extends ShapeObject {
     }
 
     @Override
-    protected void playDeathSoundEffect() {
+    public void playDeathSoundEffect() {
         mediator.playSquare2SoundEffect();
     }
     private void playFirstSquareSoundEffect() {
@@ -48,8 +48,6 @@ public class Square extends ShapeObject {
             reduceLives();
             if (getLives() > 0)
                 playFirstSquareSoundEffect();
-            else if (getLives()<=0)
-                playDeathSoundEffect();
             setAnimationState(1);
             timeSetState = System.currentTimeMillis();
             return true;

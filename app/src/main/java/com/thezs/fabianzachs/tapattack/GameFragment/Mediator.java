@@ -18,6 +18,13 @@ public class Mediator {
         resetStartTime();
     }
 
+
+    public void levelComplete() {
+        // todo implement later
+        isGameOver = true;
+        Log.d("islevel", "levelComplete: ");
+    }
+
     public void setGameOver(final String gameOverReason) {
         isGameOver = true;
     }
@@ -46,7 +53,7 @@ public class Mediator {
 
     public Integer getWarningColor() {
         if (warningColorComponent == null)
-            throw new IllegalArgumentException("this game mode has no warning color");
+            return null;
         return warningColorComponent.getCurrentWarningColor();
     }
 

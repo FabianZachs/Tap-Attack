@@ -19,7 +19,7 @@ public class Cross extends ShapeObject {
     }
 
     @Override
-    protected void playDeathSoundEffect() {
+    public void playDeathSoundEffect() {
 
     }
 

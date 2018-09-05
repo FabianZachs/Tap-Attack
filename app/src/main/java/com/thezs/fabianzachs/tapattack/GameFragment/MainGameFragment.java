@@ -7,9 +7,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.thezs.fabianzachs.tapattack.ButtonOnTouchListener;
 import com.thezs.fabianzachs.tapattack.GameFragment.GameModes.GameModeManager;
@@ -23,6 +25,7 @@ public class MainGameFragment extends Fragment {
     private View view;
     private GameModeManager gameModeManager;
     private GameFragmentListener listener;
+
 
     public interface GameFragmentListener{
         void closeGame();
@@ -40,7 +43,7 @@ public class MainGameFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_game, container, false);
 
         // todo remove later
-        ImageView exitButton = view.findViewById(R.id.warning_component);
+        TextView exitButton = view.findViewById(R.id.random_text);
         exitButton.setOnTouchListener(new ButtonOnTouchListener(getActivity(), exitButton, new ButtonOnTouchListener.ButtonExecuteListener() {
             @Override
             public void buttonAction() {
@@ -88,6 +91,7 @@ public class MainGameFragment extends Fragment {
                     + " must implement MainGameFragment.GameFragmentListener");
         }
     }
+
 
     public void draw(Canvas canvas) {
         if (gameShowing && gameModeManager != null) {

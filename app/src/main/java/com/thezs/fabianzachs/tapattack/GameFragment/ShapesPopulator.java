@@ -1,6 +1,7 @@
 package com.thezs.fabianzachs.tapattack.GameFragment;
 
 import android.graphics.Point;
+import android.util.Log;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.RecycledResources.RecycledPaint;
@@ -14,6 +15,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ShapesPopulator {
 
+    private final int TOTAL_NUMBER_OF_SHAPES;
+    private int currentNumberOfCreatedShapes=0;
     private NormalShapeBuilder shapeBuilder;
     private RecycledPaint recycledPaint;
     private RecycledRect recycledRect;
@@ -26,7 +29,8 @@ public class ShapesPopulator {
 
     public ShapesPopulator(Mediator mediator, CopyOnWriteArrayList<ShapeObject> shapes, RecycledRect recycledRect,
                            RecycledPaint recycledPaint, ColorPicker colorPicker, ShapePicker shapePicker,
-                           int shapeRadius, int shapeSpacing) {
+                           int shapeRadius, int shapeSpacing, int TOTAL_NUMBER_OF_SHAPES) {
+        this.TOTAL_NUMBER_OF_SHAPES = TOTAL_NUMBER_OF_SHAPES;
         this.shapeBuilder = new NormalShapeBuilder(mediator);
         this.recycledRect = recycledRect;
         this.recycledPaint = recycledPaint;
@@ -40,6 +44,10 @@ public class ShapesPopulator {
         populateInitialShapes(shapes, yStepSize);
     }
 
+    public int getCurrentNumberOfCreatedShapes() {
+        return currentNumberOfCreatedShapes;
+    }
+
     public void update(CopyOnWriteArrayList<ShapeObject> shapes) {
 
         if (!readyToAddAnotherShape(shapes))
@@ -49,6 +57,7 @@ public class ShapesPopulator {
         ShapeObject newShape = shapeBuilder.buildShape(shapePicker.getShape(), colorPicker.getColor(),
                 getValidNewShapeLocation(), recycledPaint.getUnusedPaint(), recycledRect.getUnusedRect(), shapeRadius, getDirection());
         shapes.add(0,newShape);
+        currentNumberOfCreatedShapes++;
     }
 
     private void populateInitialShapes(CopyOnWriteArrayList<ShapeObject> shapes, int yStepSize) {
@@ -58,6 +67,7 @@ public class ShapesPopulator {
             ShapeObject newShape = shapeBuilder.buildShape(shapePicker.getShape(), colorPicker.getColor(),
                     new Point(getValidNewShapeLocation().x, y), recycledPaint.getUnusedPaint(), recycledRect.getUnusedRect(), shapeRadius, getDirection());
             shapes.add(0,newShape);
+            currentNumberOfCreatedShapes++;
         }
     }
 
@@ -68,7 +78,8 @@ public class ShapesPopulator {
     }
 
     private boolean readyToAddAnotherShape(CopyOnWriteArrayList<ShapeObject> shapes) {
-        return (shapes.size() == 0 ) || (shapes.get(0).getCenterLocation().y>=yLevelToTriggerShapeCreation);
+        return (currentNumberOfCreatedShapes < TOTAL_NUMBER_OF_SHAPES) &&
+                ((shapes.size() == 0 ) || (shapes.get(0).getCenterLocation().y>=yLevelToTriggerShapeCreation));
     }
 
     private String getDirection() {

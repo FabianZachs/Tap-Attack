@@ -18,7 +18,7 @@ public class Arrow extends ShapeObject {
     private double intendedFlickDirectionRadians;
 
     public Arrow(Mediator mediator, Point centerLocation, Bitmap[] shapeImages, Integer color, Paint paint, Rect bitmapHolder, int shapeRadius, String intendedFlickDirectionString) {
-        super(mediator, centerLocation, shapeImages, true, 1, color, paint, bitmapHolder, shapeRadius);
+        super(mediator, centerLocation, shapeImages, false, 1, color, paint, bitmapHolder, shapeRadius);
         this.intendedFlickDirectionString = intendedFlickDirectionString;
         intendedFlickDirectionRadians = getIntendedFlickDirectionRadians(intendedFlickDirectionString);
 
@@ -26,7 +26,7 @@ public class Arrow extends ShapeObject {
     }
 
     @Override
-    protected void playDeathSoundEffect() {
+    public void playDeathSoundEffect() {
         mediator.playArrowSoundEffect();
     }
 
@@ -89,8 +89,6 @@ public class Arrow extends ShapeObject {
             try {
                 if (isCorrectFlick(event1.getX(), event1.getY(), event2.getX(), event2.getY())) {
                     reduceLives();
-                    if (getLives()>=0)
-                        playDeathSoundEffect();
                 }
                 else {
                     setIncorrectTouchAndReason("fling" /*+ Math.atan2(event1.getY()-event2.getY(),event2.getX()-event1.getX()) */);

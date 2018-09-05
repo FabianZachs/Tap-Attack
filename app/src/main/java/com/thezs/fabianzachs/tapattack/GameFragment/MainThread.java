@@ -8,6 +8,7 @@ import android.view.SurfaceHolder;
 public class MainThread extends Thread {
 
     private static final int MAX_FPS = 30;
+    private double averageFPS;
 
     private SurfaceHolder surfaceHolder;
     private GamePanel gamePanel;
@@ -31,6 +32,8 @@ public class MainThread extends Thread {
         long startTime;
         long timeMillis;
         long waitTime;
+        int frameCount = 0;
+        long totalTime = 0;
         long targetTime = 1000/MAX_FPS;
 
         while (running) {
@@ -64,6 +67,7 @@ public class MainThread extends Thread {
 
             }
 
+
             // wait if finished early
             timeMillis = (System.nanoTime() - startTime) / 1000000;
             waitTime = targetTime - timeMillis;
@@ -73,6 +77,16 @@ public class MainThread extends Thread {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            // output frames
+            totalTime += System.nanoTime() - startTime;
+            frameCount++;
+            if (frameCount == MAX_FPS) {
+                averageFPS = 1000 / ((totalTime / frameCount) / 1000000);
+                frameCount = 0;
+                totalTime = 0;
+                System.out.println(averageFPS);
+            }
+
 
         }
     }

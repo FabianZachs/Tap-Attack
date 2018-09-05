@@ -47,7 +47,7 @@ public class Star extends ShapeObject {
     }
 
     @Override
-    protected void playDeathSoundEffect() {
+    public void playDeathSoundEffect() {
         mediator.playStarSoundEffect();
 
     }
@@ -57,7 +57,6 @@ public class Star extends ShapeObject {
         @Override
         public boolean onDown(MotionEvent e) {
             reduceLives();
-            playDeathSoundEffect();
             return true;
         }
     }

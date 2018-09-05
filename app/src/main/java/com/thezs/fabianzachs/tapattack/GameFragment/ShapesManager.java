@@ -30,27 +30,30 @@ public class ShapesManager {
     private GameOver gameOver;
     private RecycledPaint recycledPaint = new RecycledPaint();
     private RecycledRect recycledRect = new RecycledRect();
-    private int numberOfDesttroyedShapes= 0;
 
 
     public ShapesManager(Mediator mediator, GameOver gameOver, ShapeMover shapeMover, ShapePicker shapePicker, ColorPicker colorPicker,
-                         int shapeRadius, int shapeSpacing) {
+                         int shapeRadius, int shapeSpacing, int TOTAL_NUMBER_OF_SHAPES) {
 
         this.shapeRadius = shapeRadius;
         this.gameOver = gameOver;
         this.mediator = mediator;
 
         this.shapesPopulator = new ShapesPopulator(mediator, shapes, recycledRect, recycledPaint, colorPicker,
-                shapePicker, shapeRadius, shapeSpacing);
+                shapePicker, shapeRadius, shapeSpacing, TOTAL_NUMBER_OF_SHAPES);
 
         this.shapeMover = shapeMover;
+    }
+
+    public int getCurrentNumberOfCreatedShapes() {
+        return shapesPopulator.getCurrentNumberOfCreatedShapes();
     }
 
 
 
     public void update() {
-        if (gameOver.checkForGameOver(shapes))
-            return;
+        //if (gameOver.checkForGameOver(shapes))
+        //    return;
 
         handleShapesUpdate();
         handleGravesUpdate();
@@ -60,8 +63,6 @@ public class ShapesManager {
 
         shapesPopulator.update(shapes);
 
-
-        // todo in start of testing note how many shape objects and how many paints/rects are present
     }
 
     public void receiveTouch(MotionEvent event) {
@@ -73,6 +74,7 @@ public class ShapesManager {
                 shapeInteractment = true;
             }
         }
+
 
         if (!shapeInteractment && event.getAction() == MotionEvent.ACTION_DOWN) {
             if (gameOver.executeShield(shapes))
@@ -93,9 +95,6 @@ public class ShapesManager {
         return shapes;
     }
 
-    public int getNumberOfDestroyedShapes() {
-        return numberOfDesttroyedShapes;
-    }
 
     private boolean isShapeDead(ShapeObject shape) {
         return shape.getLives() <= 0;
@@ -116,8 +115,7 @@ public class ShapesManager {
     private void handleShapesUpdate() {
         for (ShapeObject shape : shapes) {
             if (isShapeDead(shape)) {
-                numberOfDesttroyedShapes++;
-                // todo shape.playDeathSound();
+                shape.playDeathSoundEffect();
                 handleGraveAndResources(shape);
                 shapes.remove(shape);
                 // todo increase score if there is one (mediator should haave score interface)

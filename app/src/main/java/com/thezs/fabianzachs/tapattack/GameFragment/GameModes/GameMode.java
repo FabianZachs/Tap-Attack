@@ -35,10 +35,6 @@ public abstract class GameMode {
         this.mediator = mediator;
         this.warningColorEnabled = warningColorEnabled;
 
-
-
-
-
         if (warningColorEnabled) {
             WarningColorComponent warningColorComponent = new WarningColorComponent(view,(new ThemeManager()).getColors());
             mediator.addObject(warningColorComponent);
@@ -59,6 +55,7 @@ public abstract class GameMode {
         if (!mediator.isGameOver()) {
             changeGameComponent();
             shapesManager.update();
+            checkLevelPassed();
         }
     }
 
@@ -88,6 +85,7 @@ public abstract class GameMode {
     }
 
     abstract void changeGameComponent();
+    abstract void checkLevelPassed();
 
 
 }

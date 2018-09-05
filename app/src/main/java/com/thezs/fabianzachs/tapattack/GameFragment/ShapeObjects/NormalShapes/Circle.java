@@ -22,7 +22,7 @@ public class Circle extends ShapeObject {
 
 
     @Override
-    protected void playDeathSoundEffect() {
+    public void playDeathSoundEffect() {
         mediator.playCircleSoundEffect();
     }
 
@@ -31,7 +31,6 @@ public class Circle extends ShapeObject {
         @Override
         public boolean onDown(MotionEvent event) {
             reduceLives();
-            playDeathSoundEffect();
             return true;
         }
     }

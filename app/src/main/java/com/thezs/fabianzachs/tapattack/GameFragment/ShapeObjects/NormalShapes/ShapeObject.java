@@ -7,10 +7,12 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.support.v4.view.GestureDetectorCompat;
 import android.view.MotionEvent;
+import android.view.View;
 
+import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
 
-public abstract class ShapeObject {
+public abstract class ShapeObject extends View {
 
     protected Mediator mediator; //todo for sound effect
 
@@ -31,6 +33,7 @@ public abstract class ShapeObject {
     private String typeOfIncorrectTouch;
 
     public ShapeObject(Mediator mediator, Point centerLocation, Bitmap[] shapeImages, boolean graveable, int lives, Integer color, Paint paint, Rect bitmapHolder, int shapeRadius) {
+        super(Constants.CURRENT_CONTEXT);
         this.mediator = mediator;
         this.centerLocation = centerLocation;
         this.shapeImages = shapeImages;
@@ -47,7 +50,9 @@ public abstract class ShapeObject {
 
 
     public void draw(Canvas canvas) {
+        super.draw(canvas);
         canvas.drawBitmap(getCurrentShapeImg(), null, bitmapHolder, paint);
+        invalidate(getBitmapHolder());
 
     }
 
@@ -97,7 +102,7 @@ public abstract class ShapeObject {
     void increaseLives() {
         lives++;
     }
-    protected abstract void playDeathSoundEffect();
+    public abstract void playDeathSoundEffect();
 
 
     private Bitmap getCurrentShapeImg() {
@@ -129,11 +134,6 @@ public abstract class ShapeObject {
         bitmapHolder.set(centerLocation.x - shapeRadius, centerLocation.y - shapeRadius,
                 centerLocation.x + shapeRadius, centerLocation.y + shapeRadius);
 
-    }
-
-    public void updateCenterLocation(Point point) {
-        // todo or relative, so like updateXCenterLocation/ updateYCenterLocation
-        updateBitmapHolder();
     }
 
     public int getShapeRadius() {
