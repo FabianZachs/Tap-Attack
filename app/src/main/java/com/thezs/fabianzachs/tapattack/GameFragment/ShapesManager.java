@@ -3,11 +3,10 @@ package com.thezs.fabianzachs.tapattack.GameFragment;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import com.thezs.fabianzachs.tapattack.Constants;
-import com.thezs.fabianzachs.tapattack.GameFragment.GameOverClasses.GameOver;
+import com.thezs.fabianzachs.tapattack.GameFragment.GameOver.GameOver;
 import com.thezs.fabianzachs.tapattack.GameFragment.RecycledResources.RecycledPaint;
 import com.thezs.fabianzachs.tapattack.GameFragment.RecycledResources.RecycledRect;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers.ShapeMover;

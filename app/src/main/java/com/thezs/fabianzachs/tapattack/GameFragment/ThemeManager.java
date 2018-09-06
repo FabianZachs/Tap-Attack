@@ -35,7 +35,7 @@ public class ThemeManager {
 
         switch (themeName) {
             case "neon":
-                colors = new Integer[] {};
+                colors = new Integer[] {0xff00ffff,0xff00ff00,0xffffff00,0xffff0000,0xffcc00ff};
                 break;
             case "flat":
                 colors = new Integer[] {0xff231123,0xff82204A,0xff558C8C,0xffE8DB7D,0xffEFF7FF};

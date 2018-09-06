@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack.GameFragment.GameOverClasses;
+package com.thezs.fabianzachs.tapattack.GameFragment.GameOver;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.thezs.fabianzachs.tapattack.Constants;
-import com.thezs.fabianzachs.tapattack.Game.GameObjects.ShapeBuilder;
 import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.NormalShapeBuilder;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;

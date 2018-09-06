@@ -4,7 +4,7 @@ import android.view.View;
 
 import com.thezs.fabianzachs.tapattack.Constants;
 import com.thezs.fabianzachs.tapattack.GameFragment.ColorPicker;
-import com.thezs.fabianzachs.tapattack.GameFragment.GameOverClasses.GameOver;
+import com.thezs.fabianzachs.tapattack.GameFragment.GameOver.GameOver;
 import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers.ContinuousShapeMover;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers.ShapeMover;

@@ -2,25 +2,16 @@ package com.thezs.fabianzachs.tapattack.GameFragment.GameModes;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.thezs.fabianzachs.tapattack.Constants;
-import com.thezs.fabianzachs.tapattack.GameFragment.ColorPicker;
-import com.thezs.fabianzachs.tapattack.GameFragment.GameOverClasses.GameOver;
+import com.thezs.fabianzachs.tapattack.GameFragment.GameOver.GameOver;
 import com.thezs.fabianzachs.tapattack.GameFragment.Mediator;
-import com.thezs.fabianzachs.tapattack.GameFragment.ShapeMovers.ShapeMover;
-import com.thezs.fabianzachs.tapattack.GameFragment.ShapeObjects.NormalShapes.ShapeObject;
-import com.thezs.fabianzachs.tapattack.GameFragment.ShapePicker;
 import com.thezs.fabianzachs.tapattack.GameFragment.ShapesManager;
-import com.thezs.fabianzachs.tapattack.GameFragment.SoundEffectsManager;
 import com.thezs.fabianzachs.tapattack.GameFragment.StartGame;
 import com.thezs.fabianzachs.tapattack.GameFragment.ThemeManager;
 import com.thezs.fabianzachs.tapattack.GameFragment.WarningColorComponent;
-import com.thezs.fabianzachs.tapattack.R;
-
-import java.util.ArrayList;
 
 public abstract class GameMode {
 

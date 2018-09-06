@@ -1,4 +1,4 @@
-package com.thezs.fabianzachs.tapattack.GameFragment.GameOverClasses;
+package com.thezs.fabianzachs.tapattack.GameFragment.GameOver;
 
 import android.graphics.Canvas;
 import android.util.Log;
